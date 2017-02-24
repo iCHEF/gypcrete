@@ -1,0 +1,20 @@
+{
+  "name": "gypcrete",
+  "version": "0.1.0",
+  "description": "iCHEF web components library, built with React.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iCHEF/gypcrete.git"
+  },
+  "contributors": [
+    "CJies Tan (https://github.com/cjies)",
+    "Teng-hao Chang (https://github.com/zhusee2)"
+  ],
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": "^6.9.1",
+    "npm": "^3.10.10"
+  }
+}
