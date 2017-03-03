@@ -1,0 +1,21 @@
+{
+    "presets": [
+        ["latest", { "es2015": { "modules": false } }],
+        "react",
+        "stage-2"
+    ],
+
+    "plugins": [
+        "transform-runtime"
+    ],
+
+    "env": {
+        "es5":{
+            "presets": [
+                ["latest", { "es2015": { "modules": "commonjs" } }],
+                "react",
+                "stage-2"
+            ]
+        }
+    }
+}

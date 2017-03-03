@@ -18,10 +18,20 @@
     "npm": "^3.10.10"
   },
   "scripts": {
-    "build": "webpack --config ./config/webpack.base.js --color"
+    "build": "npm run build:dist && npm run build:lib && npm run build:es5",
+    "build:dist": "webpack -p --config ./config/webpack.base.js --color",
+    "build:lib": "babel src --out-dir lib",
+    "build:es5": "BABEL_ENV=es5 babel src --out-dir es5"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.6",
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-2": "^6.22.0",
     "css-loader": "^0.26.2",
     "extract-text-webpack-plugin": "^2.0.0",
     "node-sass": "^4.5.0",
