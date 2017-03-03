@@ -2,7 +2,8 @@
   "name": "gypcrete",
   "version": "0.1.0",
   "description": "iCHEF web components library, built with React.",
-  "main": "index.js",
+  "main": "dist/bundle.js",
+  "module": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/iCHEF/gypcrete.git"
