@@ -12,7 +12,17 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.jsx?$/,
+                include: [
+                    path.resolve(__dirname, '../src')
+                ],
+                use: ['babel-loader']
+            },
+            {
                 test: /\.scss$/,
+                include: [
+                    path.resolve(__dirname, '../src')
+                ],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
