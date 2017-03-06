@@ -1,8 +1,8 @@
 {
     "presets": [
         ["latest", { "es2015": { "modules": false } }],
-        "react",
-        "stage-2"
+        "stage-2",
+        "react"
     ],
 
     "plugins": [
@@ -14,8 +14,8 @@
             // The presets here will be run first, then go back to non-env presets.
             "presets": [
                 "latest",
-                "react",
-                "stage-2"
+                "stage-2",
+                "react"
             ],
             "plugins": [
                 "strip-css-imports"
