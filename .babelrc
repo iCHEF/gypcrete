@@ -6,15 +6,24 @@
     ],
 
     "plugins": [
-        "transform-runtime"
+        "transform-runtime",
     ],
 
     "env": {
         "es5":{
+            // The presets here will be run first, then go back to non-env presets.
             "presets": [
-                ["latest", { "es2015": { "modules": "commonjs" } }],
+                "latest",
                 "react",
                 "stage-2"
+            ],
+            "plugins": [
+                "strip-css-imports"
+            ]
+        },
+        "lib": {
+            "plugins": [
+                "strip-css-imports"
             ]
         }
     }
