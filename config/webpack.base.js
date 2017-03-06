@@ -10,16 +10,13 @@ module.exports = {
         library: 'gypcrete'
     },
 
-    externals : {
-        react: 'React'
-    },
-
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
                 include: [
-                    path.resolve(__dirname, '../src')
+                    path.resolve(__dirname, '../src'),
+                    path.resolve(__dirname, '../doc')
                 ],
                 use: ['babel-loader']
             },
