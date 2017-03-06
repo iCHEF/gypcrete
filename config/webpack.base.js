@@ -10,6 +10,10 @@ module.exports = {
         library: 'gypcrete'
     },
 
+    externals : {
+        react: 'React'
+    },
+
     module: {
         rules: [
             {

@@ -1,4 +1,10 @@
+import React from 'react';
+
 import './css/index.scss';
 import { increment } from './test';
 
-console.log('Hello world', increment());
+function App() {
+    return <div>Hello World {increment()}!</div>;
+}
+
+export default App;
