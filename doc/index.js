@@ -1,8 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../src';
+import { AppContainer } from 'react-hot-loader'
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('root')
-);
+import DocApp from './DocApp';
+
+function renderApp(App) {
+    const wrappedApp = (
+        <AppContainer>
+            <App />
+        </AppContainer>
+    );
+
+    ReactDOM.render(wrappedApp, document.getElementById('root'));
+}
+
+if (module.hot) {
+    module.hot.accept('./DocApp', () => renderApp(DocApp));
+}
+
+renderApp(DocApp);

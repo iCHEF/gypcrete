@@ -18,7 +18,7 @@
     "npm": "^3.10.10"
   },
   "scripts": {
-    "start": "webpack-dev-server --config ./config/webpack.dev.js",
+    "start": "BABEL_ENV=server webpack-dev-server --config ./config/webpack.dev.js",
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
     "build:dist": "webpack -p --config ./config/webpack.prod.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",

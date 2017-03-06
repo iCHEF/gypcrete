@@ -19,3 +19,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add Babel plugin to strip CSS import lines from `lib/` and `es5/` modules.
 
 - Add `webpack-dev-server` hosting documents from `doc/` folder, manually sepecify `doc/index.html` as dev server root.
+
+- Add `react-hot-loader` to enable HOT on React components.

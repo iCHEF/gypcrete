@@ -1,8 +1,19 @@
 const path = require('path');
+const webpack = require('webpack');
+
 const baseConfig = require('./webpack.base');
+const devPlugins = baseConfig.plugins.slice();
+
+devPlugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
+);
 
 module.exports = Object.assign({}, baseConfig, {
-    entry: './doc/index.js',
+    entry: [
+        'react-hot-loader/patch',
+        './doc/index.js'
+    ],
 
     output: {
         filename: 'bundle.js',
@@ -10,9 +21,12 @@ module.exports = Object.assign({}, baseConfig, {
         publicPath: '/'
     },
 
+    devtool: 'inline-source-map',
+
     devServer: {
         compress: true,
         contentBase: false,
+        hotOnly: true,
         port: 3100,
         publicPath: '/',
         setup: (app) => {
@@ -21,5 +35,7 @@ module.exports = Object.assign({}, baseConfig, {
                 response.sendFile(indexFile);
             });
         }
-    }
+    },
+
+    plugins: devPlugins
 });
