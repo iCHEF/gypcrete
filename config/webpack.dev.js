@@ -29,6 +29,13 @@ module.exports = Object.assign({}, baseConfig, {
         hotOnly: true,
         port: 3100,
         publicPath: '/',
+        stats: {
+            assets: false,
+            children: false,
+            chunkModules: false,
+            hash: false,
+            version: false
+        },
         setup: (app) => {
             app.get('/', (request, response) => {
                 const indexFile = path.resolve(__dirname, '../doc/index.html');
