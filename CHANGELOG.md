@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.1.0]
 ### Added
 - Basic Webpack 2 configs, working with the following loaders:
   * Babel (ES2015, 2016, 2017 & Stage-2)
