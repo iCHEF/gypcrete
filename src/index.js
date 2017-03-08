@@ -1,10 +1,9 @@
 import React from 'react';
 
 import './css/index.scss';
-import { increment } from './test';
 
 function App() {
-    return <div>Hello World {increment()}!</div>;
+    return <div>Hello World!</div>;
 }
 
 export default App;
