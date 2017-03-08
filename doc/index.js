@@ -1,6 +1,9 @@
+// Document components are not used in production.
+/* eslint-disable import/no-extraneous-dependencies */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader'
+import { AppContainer } from 'react-hot-loader';
 
 import DocApp from './DocApp';
 

@@ -1,5 +1,9 @@
+// This file is not used in production.
+/* eslint-disable import/no-extraneous-dependencies */
+
 const path = require('path');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
@@ -37,9 +41,7 @@ module.exports = {
                         {
                             loader: 'postcss-loader',
                             options: {
-                                plugins: () => [
-                                    require('autoprefixer')
-                                ]
+                                plugins: () => [autoprefixer]
                             }
                         },
                         {
