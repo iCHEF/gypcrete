@@ -1,2 +1,8 @@
-.DS_Store
 node_modules/
+lib/
+dist/
+es5/
+build/
+tmp/
+.DS_Store
+npm-debug.log

@@ -1,0 +1,35 @@
+{
+    "presets": [
+        ["latest", { "es2015": { "modules": false } }],
+        "stage-2",
+        "react"
+    ],
+
+    "plugins": [
+        "transform-runtime",
+    ],
+
+    "env": {
+        "es5":{
+            // The presets here will be run first, then go back to non-env presets.
+            "presets": [
+                "latest",
+                "stage-2",
+                "react"
+            ],
+            "plugins": [
+                "strip-css-imports"
+            ]
+        },
+        "lib": {
+            "plugins": [
+                "strip-css-imports"
+            ]
+        },
+        "server": {
+            "plugins": [
+                "react-hot-loader/babel"
+            ]
+        }
+    }
+}

@@ -1,0 +1,8 @@
+.foo {
+    &__bar {
+        color: red;
+    }
+
+    hyphens: auto;
+    display: flex;
+}
