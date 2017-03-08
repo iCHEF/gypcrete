@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add `eslint` and `eslint-config-ichef` rules for linting JS codes.
 - Setup `.eslintrc.yml` to sepecify ESLint env and source type.
 - Add `eslint-loader` to show linter results ASAP during development.
+- Add `.sublimelinterrc` to exclude folders from being linted in SublimeText.
 
 ## [0.1.0]
 ### Added
