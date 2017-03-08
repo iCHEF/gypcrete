@@ -1,7 +1,10 @@
+// This file is not used in production.
+/* eslint-disable import/no-extraneous-dependencies */
+
 const path = require('path');
 const webpack = require('webpack');
-
 const baseConfig = require('./webpack.base');
+
 const devPlugins = baseConfig.plugins.slice();
 
 devPlugins.push(
