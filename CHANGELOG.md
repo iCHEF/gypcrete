@@ -5,8 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.2.0]
 ### Added
 - Add `eslint` and `eslint-config-ichef` rules for linting JS codes.
+- Setup `.eslintrc.yml` to sepecify ESLint env and source type.
 - Add `eslint-loader` to show linter results ASAP during development.
 
 ## [0.1.0]
