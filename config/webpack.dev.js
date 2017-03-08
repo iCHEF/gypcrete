@@ -3,25 +3,43 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 
-const devPlugins = baseConfig.plugins.slice();
-
-devPlugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
-);
-
-module.exports = Object.assign({}, baseConfig, {
+module.exports = webpackMerge(baseConfig, {
     entry: [
         'react-hot-loader/patch',
         './doc/index.js'
     ],
 
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, '../build'),
         publicPath: '/'
+    },
+
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                include: [
+                    path.resolve(__dirname, '../src'),
+                    path.resolve(__dirname, '../doc')
+                ],
+                enforce: 'pre',
+                loader: 'eslint-loader',
+                options: {
+                    /**
+                     * Report every eslint error as a warning.
+                     *
+                     * This prevents Webpack dev-server from blocking HMR updates only because
+                     * eslint fails. `create-react-app` also chooses to use only warnings,
+                     * since `eslint-loader` has already make warnings “very visible”.
+                     *
+                     * Ref: https://git.io/vyu8d
+                     */
+                    emitWarning: true
+                }
+            },
+        ]
     },
 
     devtool: 'inline-source-map',
@@ -39,6 +57,9 @@ module.exports = Object.assign({}, baseConfig, {
             hash: false,
             version: false
         },
+        watchOptions: {
+            ignored: /node_modules/
+        },
         setup: (app) => {
             app.get('/', (request, response) => {
                 const indexFile = path.resolve(__dirname, '../doc/index.html');
@@ -47,5 +68,8 @@ module.exports = Object.assign({}, baseConfig, {
         }
     },
 
-    plugins: devPlugins
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin()
+    ]
 });

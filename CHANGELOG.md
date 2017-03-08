@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Add `eslint` and `eslint-config-ichef` rules for linting JS codes.
+- Add `eslint-loader` to show linter results ASAP during development.
 
 ## [0.1.0]
 ### Added
