@@ -19,12 +19,14 @@
             "plugins": [
                 "strip-css-imports",
                 "transform-es2015-modules-commonjs"
-            ]
+            ],
+            "ignore": ["__tests__"]
         },
         "lib": {
             "plugins": [
                 "strip-css-imports"
-            ]
+            ],
+            "ignore": ["__tests__"]
         },
         "server": {
             "plugins": [
