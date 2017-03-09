@@ -27,3 +27,8 @@ git commit -m "Built at ${BUILD_TAG}"
 
 # Push to dist branch
 git push origin dist
+
+# Publish to npm (only in master)
+if [ "$GIT_BRANCH" = "origin/master" ]; then
+    npm publish || exit 1
+fi
