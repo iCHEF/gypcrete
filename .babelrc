@@ -10,15 +10,15 @@
     ],
 
     "env": {
-        "es5":{
-            // The presets here will be run first, then go back to non-env presets.
-            "presets": [
-                "latest",
-                "stage-2",
-                "react"
-            ],
+        "test": {
             "plugins": [
-                "strip-css-imports"
+                "transform-es2015-modules-commonjs"
+            ]
+        },
+        "es5":{
+            "plugins": [
+                "strip-css-imports",
+                "transform-es2015-modules-commonjs"
             ]
         },
         "lib": {
