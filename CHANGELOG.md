@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.0]
+### Added
+- Add deploy script to work with Jenkins. It'll deploy to:
+  * New commits in `develop` --> `dist` branch
+  * New commits in `master` --> npm
+- Add Jest for running tests.
+- Add first test file for `src/index.js`
+
+### Changed
+- Update `.babelrc` to ignore test files on build and transform modules on test.
+
 ## [0.2.0]
 ### Added
 - Add `eslint` and `eslint-config-ichef` rules for linting JS codes.
