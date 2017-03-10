@@ -23,7 +23,7 @@ cp ./package.json ./deploy/package.json
 # Commit built files
 cd deploy
 git add .
-git commit -m "Built at ${BUILD_TAG}"
+git commit -m "Built at ${BUILD_TAG}" --author="ichefbot <developer@ichef.com.tw>"
 
 # Push to dist branch
 git push origin dist
