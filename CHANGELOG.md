@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Update `.babelrc` to ignore test files on build and transform modules on test.
+- Switch Babel preset to `babel-preset-env` from `babel-preset-latest`, since Babel recommends the former.
 
 ## [0.2.0]
 ### Added
