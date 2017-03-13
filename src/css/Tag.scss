@@ -1,0 +1,52 @@
+@import "./mixins";
+
+//   <Tag>
+//   =====
+//   Tags doesn't have their own colors, instead they follow the color of
+//   the state of their parent components.
+
+
+// -------------------------------------
+//   Component Block
+// -------------------------------------
+
+.#{$prefix}-tag {
+    background-color: $c-black;
+    color: $c-white;
+    font-size: rem($tag-font-size); // 12px
+    line-height: 1em;
+    padding: rem(2px) rem(4px);
+    border: rem(1px) solid transparent;
+    border-radius: rem(6px);
+    background-clip: padding-box;
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+// -------------------------------------
+//   Component Colors
+// -------------------------------------
+
+.#{$prefix}-tag {
+    .#{$prefix-state}-editable & {
+        background-color: $c-text-editable;
+    }
+
+    .#{$prefix-state}-error & {
+        background-color: $c-text-error;
+    }
+
+    .#{$prefix-state}-highlight & {
+        background-color: $c-white;
+        color: $c-row-bg-highlight;
+    }
+
+    .#{$prefix-state}-highlight .#{$prefix-state}-error & {
+        color: $c-text-error;
+    }
+
+    [disabled] &,
+    .#{$prefix-state}-disabled & {
+        background-color: $c-text-disabled;
+    }
+}
