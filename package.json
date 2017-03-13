@@ -1,5 +1,5 @@
 {
-  "name": "gypcrete",
+  "name": "@ichef/gypcrete",
   "version": "0.3.0",
   "description": "iCHEF web components library, built with React.",
   "main": "lib/index.js",
