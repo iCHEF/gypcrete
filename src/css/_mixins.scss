@@ -1,0 +1,9 @@
+@import "./variables";
+
+@function relative($target-size, $base-size: $component-base-font-size, $unit: 1em) {
+    @return ($target-size / $base-size * $unit);
+}
+
+@function rem($target-size) {
+    @return relative($target-size, $root-font-size, 1rem);
+}

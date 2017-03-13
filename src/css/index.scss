@@ -1,8 +1,9 @@
-.foo {
-    &__bar {
-        color: red;
-    }
+@import "./mixins";
 
-    hyphens: auto;
-    display: flex;
+html {
+    font-size: $root-font-size;
+}
+
+body {
+    font-size: rem($component-base-font-size);
 }
