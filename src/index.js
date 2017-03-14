@@ -1,9 +1,15 @@
-import React from 'react';
-
 import './css/index.scss';
 
-function App() {
-    return <div>Hello World!</div>;
-}
+// Visual elements
+import Tag from './Tag';
 
-export default App;
+// Layout helpers
+import FlexCell from './FlexCell';
+import TextEllipsis from './TextEllipsis';
+
+export {
+    Tag,
+
+    FlexCell,
+    TextEllipsis,
+};
