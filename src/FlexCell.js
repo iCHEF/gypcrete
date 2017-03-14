@@ -1,4 +1,9 @@
 import React, { PropTypes } from 'react';
+import icBEM from './utils/icBEM';
+import './css/FlexCell.scss';
+
+const COMPONENT_NAME = 'ic-flex-cell';
+const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 function FlexCell({ shrink, grow, basis, children }) {
     const flexStyles = {
@@ -7,7 +12,11 @@ function FlexCell({ shrink, grow, basis, children }) {
         flexBasis: basis,
     };
 
-    return <div style={flexStyles}>{children}</div>;
+    return (
+        <div className={ROOT_BEM} style={flexStyles}>
+            {children}
+        </div>
+    );
 }
 
 FlexCell.propTypes = {
