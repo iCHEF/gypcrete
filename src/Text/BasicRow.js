@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 
 import FlexCell from '../FlexCell';
 import Tag from '../Tag';
+import TextEllipsis from '../TextEllipsis';
 
 function wrapIfNotElement(content, { with: Wrapper }) {
     if (React.isValidElement(content)) {
@@ -19,7 +20,9 @@ function BasicRow({ basic, tag, stateIcon, ...otherProps }) {
 
     return (
         <div {...otherProps}>
-            <FlexCell shrink>{basic}</FlexCell>
+            <FlexCell shrink>
+                <TextEllipsis>{basic}</TextEllipsis>
+            </FlexCell>
 
             {tag && wrapIfNotElement(tag, { with: Tag })}
             {stateIcon && wrapIfNotElement(stateIcon, { with: MockedStateIcon })}
