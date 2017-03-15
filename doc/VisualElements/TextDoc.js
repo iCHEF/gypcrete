@@ -1,7 +1,8 @@
 import React from 'react';
 
+import Text from 'src/Text';
+import StatusIcon from 'src/StatusIcon';
 import DebugBox from '../DebugBox';
-import Text from '../../src/Text';
 
 function TextDoc() {
     return (
@@ -17,7 +18,7 @@ function TextDoc() {
                     basic="A Long Long Long Basic Text"
                     aside="I am left-aligned"
                     tag="Tag"
-                    stateIcon={<span>O</span>} />
+                    stateIcon={<StatusIcon status="loading" />} />
             </DebugBox>
 
             <DebugBox>
@@ -26,7 +27,7 @@ function TextDoc() {
                     basic="Basic Text"
                     aside="I am center-aligned"
                     tag="Tag"
-                    stateIcon={<span>O</span>} />
+                    stateIcon={<StatusIcon status="success" autohide={false} />} />
             </DebugBox>
 
             <DebugBox>
@@ -35,7 +36,7 @@ function TextDoc() {
                     basic="A Long Long Long Basic Text"
                     aside="I am right-aligned"
                     tag="Tag"
-                    stateIcon={<span>O</span>} />
+                    stateIcon={<StatusIcon status="error" />} />
             </DebugBox>
         </div>
     );
