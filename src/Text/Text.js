@@ -38,6 +38,7 @@ class Text extends PureComponent {
     static propTypes = {
         align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
         aside: PropTypes.node,
+        basicRow: PropTypes.element,
 
         ...BasicRow.propTypes,
         // basic,
@@ -48,7 +49,25 @@ class Text extends PureComponent {
     static defaultProps = {
         align: LEFT,
         aside: null,
+        basicRow: null,
     };
+
+    renderBasicRow() {
+        const { basicRow, basic, tag, stateIcon } = this.props;
+        const basicRowProps = { basic, tag, stateIcon };
+
+        if (React.isValidElement(basicRow)) {
+            // Inject { basic, tag, stateIcon } to passed-in custom row.
+            return React.cloneElement(basicRow, basicRowProps);
+        }
+
+        // else return pre-configured row
+        return (
+            <BasicRow
+                className={classNames(`${BEM.row}`, `${BEM.basic}`)}
+                {...basicRowProps} />
+        );
+    }
 
     renderAsideRow() {
         if (!this.props.aside) return null;
@@ -61,16 +80,11 @@ class Text extends PureComponent {
     }
 
     render() {
-        const { align, basic, tag, stateIcon } = this.props;
-        const basicRowProps = { basic, tag, stateIcon };
-
-        const rootClassName = BEM.root.modifier(align);
+        const rootClassName = BEM.root.modifier(this.props.align);
 
         return (
             <div className={rootClassName}>
-                <BasicRow
-                    className={classNames(`${BEM.row}`, `${BEM.basic}`)}
-                    {...basicRowProps} />
+                {this.renderBasicRow()}
                 {this.renderAsideRow()}
             </div>
         );
