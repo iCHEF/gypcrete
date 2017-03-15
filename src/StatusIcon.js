@@ -16,6 +16,8 @@ export const STATUS_POSITION = { INLINE, CORNER };
 const COMPONENT_NAME = 'ic-status-icon';
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
+const ICON_HIDE_TIMEOUT = 2 * 1000;
+
 class StatusIcon extends PureComponent {
     static propTypes = {
         status: PropTypes.oneOf(Object.values(STATUS_CODE)),
@@ -38,6 +40,54 @@ class StatusIcon extends PureComponent {
         this.state = {
             hideIcon: false
         };
+    }
+
+    componentWillMount() {
+        this.autoToggleStatusIcon(this.props.status);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.status !== this.props.status) {
+            this.autoToggleStatusIcon(nextProps.status);
+        }
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.hideIconTimeout);
+    }
+
+    /**
+     * Auto hides status icon after being SUCCESS for 2 secs,
+     * or shows icon when component leaves SUCCESS state.
+     *
+     * Scenario:
+     *   - LOADING -> SUCCESS -> (2s) ==> hide
+     *   - LOADING -> SUCCESS -> (1s) -> LOADING|ERROR|null ==> clear timeout
+     *   - LOADING -> SUCCESS -> (1s) -> (render) -> SUCCESS ==> keep timeout
+     *   - SUCCESS -> LOADING|ERROR|null ==> clear timeout & show icon
+     *
+     * @param {String} status - current or next 'status'
+     */
+    autoToggleStatusIcon(status = this.props.status) {
+        // Ignore if autohide === false
+        if (!this.props.autohide && this.state.hideIcon) {
+            this.setState({ hideIcon: false });
+            return;
+        }
+
+        // LOADING|ERROR|null -> SUCCESS
+        if (status === SUCCESS) {
+            this.hideIconTimeout = setTimeout(() => {
+                this.setState({ hideIcon: true });
+                this.hideIconTimeout = null;
+            }, ICON_HIDE_TIMEOUT);
+
+            return;
+        }
+
+        // SUCCESS -> LOADING|ERROR|null
+        clearTimeout(this.hideIconTimeout);
+        this.setState({ hideIcon: false });
     }
 
     render() {
