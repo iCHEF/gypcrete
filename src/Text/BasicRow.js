@@ -11,10 +11,6 @@ function wrapIfNotElement(content, { with: Wrapper }) {
     return <Wrapper>{content}</Wrapper>;
 }
 
-function MockedStateIcon({ children }) {
-    return <span className="ic-state">{children}</span>;
-}
-
 function BasicRow({ basic, tag, stateIcon, ...otherProps }) {
     if (!basic) return null;
 
@@ -25,7 +21,7 @@ function BasicRow({ basic, tag, stateIcon, ...otherProps }) {
             </FlexCell>
 
             {tag && wrapIfNotElement(tag, { with: Tag })}
-            {stateIcon && wrapIfNotElement(stateIcon, { with: MockedStateIcon })}
+            {stateIcon && wrapIfNotElement(stateIcon, { with: 'span' })}
         </div>
     );
 }

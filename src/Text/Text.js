@@ -27,8 +27,6 @@ export const BEM = {
     row: ROOT_BEM.element('row'),
     basic: ROOT_BEM.element('basic'),
     aside: ROOT_BEM.element('aside'),
-    tag: ROOT_BEM.element('tag'),
-    state: ROOT_BEM.element('state')
 };
 
 const LEFT = 'left';
@@ -40,18 +38,16 @@ class Text extends PureComponent {
     static propTypes = {
         align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
         aside: PropTypes.node,
-        // <BasicRow> props
-        basic: PropTypes.node,
-        tag: PropTypes.node,
-        stateIcon: PropTypes.node,
+
+        ...BasicRow.propTypes,
+        // basic,
+        // tag,
+        // stateIcon,
     };
 
     static defaultProps = {
         align: LEFT,
         aside: null,
-        basic: null,
-        tag: null,
-        stateIcon: null
     };
 
     renderAsideRow() {
