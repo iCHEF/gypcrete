@@ -5,7 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
+### Added
+- Migrated the following components:
+  * `<Icon>`
+  * `<Tag>`
+  * `<TextEllipsis>` 
+  * `<FlexCell>` (with modifications)
+  * `<StatusIcon>` (with modifications)
+  
 ## [0.3.0]
 ### Added
 - Add deploy script to work with Jenkins. It'll deploy to:
