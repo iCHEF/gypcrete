@@ -70,8 +70,10 @@ class StatusIcon extends PureComponent {
      */
     autoToggleStatusIcon(status = this.props.status) {
         // Ignore if autohide === false
-        if (!this.props.autohide && this.state.hideIcon) {
-            this.setState({ hideIcon: false });
+        if (!this.props.autohide) {
+            if (this.state.hideIcon) {
+                this.setState({ hideIcon: false });
+            }
             return;
         }
 
