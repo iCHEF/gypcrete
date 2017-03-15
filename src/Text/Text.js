@@ -31,8 +31,14 @@ export const BEM = {
     state: ROOT_BEM.element('state')
 };
 
+const LEFT = 'left';
+const CENTER = 'center';
+const RIGHT = 'right';
+export const TEXT_ALIGN = { LEFT, CENTER, RIGHT };
+
 class Text extends PureComponent {
     static propTypes = {
+        align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
         aside: PropTypes.node,
         // <BasicRow> props
         basic: PropTypes.node,
@@ -41,8 +47,9 @@ class Text extends PureComponent {
     };
 
     static defaultProps = {
-        basic: null,
+        align: LEFT,
         aside: null,
+        basic: null,
         tag: null,
         stateIcon: null
     };
@@ -58,11 +65,13 @@ class Text extends PureComponent {
     }
 
     render() {
-        const { basic, tag, stateIcon } = this.props;
+        const { align, basic, tag, stateIcon } = this.props;
         const basicRowProps = { basic, tag, stateIcon };
 
+        const rootClassName = BEM.root.modifier(align);
+
         return (
-            <div className={BEM.root}>
+            <div className={rootClassName}>
                 <BasicRow
                     className={classNames(`${BEM.row}`, `${BEM.basic}`)}
                     {...basicRowProps} />

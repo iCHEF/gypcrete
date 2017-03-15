@@ -41,3 +41,20 @@
     }
 }
 
+
+// ===============
+//  Modifiers
+// ===============
+
+.#{$prefix}-text {
+    &--center {
+        .#{$prefix}-text__row {
+            justify-content: center;
+        }
+    }
+    &--right {
+        .#{$prefix}-text__row {
+            flex-direction: row-reverse;
+        }
+    }
+}
