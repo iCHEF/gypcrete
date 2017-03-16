@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import icBEM from './utils/icBEM';
-import './css/FlexCell.scss';
+import './styles/FlexCell.scss';
 
 const COMPONENT_NAME = 'ic-flex-cell';
 const ROOT_BEM = icBEM(COMPONENT_NAME);

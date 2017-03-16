@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import './css/Tag.scss';
+import './styles/Tag.scss';
 
 import icBEM from './utils/icBEM';
 

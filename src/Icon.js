@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import icBEM from './utils/icBEM';
-import './css/Icon.scss';
+import './styles/Icon.scss';
 
 const COMPONENT_NAME = 'ic-icon';
 const ROOT_BEM = icBEM(COMPONENT_NAME);

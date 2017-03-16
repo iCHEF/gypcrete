@@ -1,6 +1,6 @@
 import React from 'react';
 import icBEM from './utils/icBEM';
-import './css/TextEllipsis.scss';
+import './styles/TextEllipsis.scss';
 
 const COMPONENT_NAME = 'ic-text-ellipsis';
 const ROOT_BEM = icBEM(COMPONENT_NAME);

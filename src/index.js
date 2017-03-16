@@ -1,4 +1,4 @@
-import './css/index.scss';
+import './styles/index.scss';
 
 // Visual elements
 import Icon from './Icon';
