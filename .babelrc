@@ -7,6 +7,12 @@
 
     "plugins": [
         "transform-runtime",
+        ["module-resolver", {
+            "alias": {
+                "src": "./src",
+                "doc": "./doc"
+            }
+        }]
     ],
 
     "env": {
