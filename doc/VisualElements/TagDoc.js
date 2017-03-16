@@ -1,5 +1,5 @@
 import React from 'react';
-import Tag from '../../src/Tag';
+import Tag from 'src/Tag';
 
 function TagDoc() {
     return (

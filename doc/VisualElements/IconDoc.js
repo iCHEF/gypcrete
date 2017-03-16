@@ -1,8 +1,8 @@
 import React from 'react';
 
+import Icon from 'src/Icon';
+import StatusIcon from 'src/StatusIcon';
 import DebugBox from '../DebugBox';
-import Icon from '../../src/Icon';
-import StatusIcon from '../../src/StatusIcon';
 
 function IconDoc() {
     return (

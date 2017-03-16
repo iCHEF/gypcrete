@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   * `<TextEllipsis>` 
   * `<FlexCell>` (with modifications)
   * `<StatusIcon>` (with modifications)
+
+- Add `babel-plugin-module-resolver` and `eslint-import-resolver-babel-module` to config module alias.
   
 ## [0.3.0]
 ### Added

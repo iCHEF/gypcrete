@@ -1,5 +1,5 @@
 import React from 'react';
-import '../src/css/index.scss';
+import 'src/css/index.scss';
 
 import VisualElements from './VisualElements';
 
