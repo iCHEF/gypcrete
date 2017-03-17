@@ -12,11 +12,6 @@ it('renders without crashing', () => {
     ReactDOM.render(element, div);
 });
 
-it('renders nothing if status not recognized', () => {
-    const wrapper = shallow(<StatusIcon status="foo-bar" />);
-    expect(wrapper.children()).toHaveLength(0);
-});
-
 it('renders success icon', () => {
     const wrapper = shallow(<StatusIcon status="success" />);
     expect(wrapper.find(Icon).prop('type')).toBe('inline-success');

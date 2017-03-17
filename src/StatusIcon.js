@@ -20,7 +20,7 @@ const ICON_HIDE_TIMEOUT = 2 * 1000;
 
 class StatusIcon extends PureComponent {
     static propTypes = {
-        status: PropTypes.oneOf(Object.values(STATUS_CODE)),
+        status: PropTypes.oneOf(Object.values(STATUS_CODE)).isRequired,
         position: PropTypes.oneOf(Object.values(STATUS_POSITION)),
         autohide: PropTypes.bool,
     };
