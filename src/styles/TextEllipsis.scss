@@ -1,0 +1,5 @@
+@import "./mixins";
+
+.#{$prefix}-text-ellipsis {
+    @include overflow-ellipsis;
+}

@@ -8,6 +8,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     entry: './src/index.js',
 
+    context: path.resolve(__dirname, '..'),
+
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, '../dist'),
@@ -52,6 +54,22 @@ module.exports = {
                         }
                     ]
                 })
+            },
+            {
+                test: /\.(woff|woff2|otf|ttf|eot|svg)$/,
+                include: [
+                    path.resolve(__dirname, '../src/fonts')
+                ],
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name]-[hash:6].[ext]',
+                            outputPath: 'fonts/',
+                            publicPath: 'fonts/'
+                        }
+                    }
+                ]
             }
         ]
     },

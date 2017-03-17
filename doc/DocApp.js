@@ -1,8 +1,14 @@
 import React from 'react';
-import App from '../src';
+import 'src/styles/index.scss';
+
+import VisualElements from './VisualElements';
 
 function DocApp() {
-    return <App />;
+    return (
+        <div>
+            <VisualElements />
+        </div>
+    );
 }
 
 export default DocApp;

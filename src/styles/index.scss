@@ -1,0 +1,10 @@
+@import "./mixins";
+@import "./animations";
+
+html {
+    font-size: $root-font-size;
+}
+
+body {
+    font-size: rem($component-base-font-size);
+}

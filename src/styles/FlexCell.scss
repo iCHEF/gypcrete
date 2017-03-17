@@ -1,0 +1,7 @@
+@import "./variables";
+
+.#{$prefix}-flex-cell {
+    flex: 0 0 auto;
+    display: flex;
+    overflow: hidden;
+}

@@ -1,0 +1,26 @@
+@import "./colors";
+
+$prefix: 'ic';
+$prefix-state: 'ic-state';
+
+// Chrome bug: if root font-size < 12px, 1rem will = 12px.
+$root-font-size: 12px;
+
+$basic-text-font-size: 16px;
+$basic-text-line-height: 18px;
+$aside-text-font-size: 12px;
+$aside-text-line-height: 14px;
+
+$component-base-font-size: 16px;
+$component-base-height: 48px;
+$element-base-height: 32px;
+
+$row-base-height: $component-base-height;
+
+$tag-font-size: 12px;
+
+$icon-base-size: 32px;
+$icon-large-size: 96px;
+
+$status-icon-inline-size: $basic-text-line-height;
+$status-icon-corner-size: 16px;
