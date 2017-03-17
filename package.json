@@ -24,6 +24,7 @@
     "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
     "lint": "eslint ./ && echo \"eslint: no lint errors\"",
     "test": "jest ./src --config=config/jest.config.json --coverage",
+    "test:watch": "jest ./src --config=config/jest.config.json --coverage --watch",
     "clean": "rm -rf ./dist ./lib ./es5 ./deploy",
     "deploy": "npm run clean && npm run build && sh deploy.sh"
   },
