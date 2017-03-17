@@ -50,6 +50,12 @@ class StatusIcon extends PureComponent {
         if (nextProps.status !== this.props.status) {
             this.autoToggleStatusIcon(nextProps.status);
         }
+
+        if (nextProps.autohide !== this.props.autohide) {
+            if (this.state.hideIcon) {
+                this.setState({ hideIcon: false });
+            }
+        }
     }
 
     componentWillUnmount() {
@@ -71,9 +77,6 @@ class StatusIcon extends PureComponent {
     autoToggleStatusIcon(status = this.props.status) {
         // Ignore if autohide === false
         if (!this.props.autohide) {
-            if (this.state.hideIcon) {
-                this.setState({ hideIcon: false });
-            }
             return;
         }
 
