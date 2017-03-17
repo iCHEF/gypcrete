@@ -124,10 +124,7 @@ function icBEM(blockName) {
     if (typeof blockName === 'string') {
         return new BEMFactory({ block: blockName });
     }
-    if (blockName instanceof BEMFactory) {
-        return blockName;
-    }
-    throw new Error('blockName should be a valid String or a BEMFactory instance.');
+    throw new Error('blockName should be a non-valid String.');
 }
 
 export default icBEM;
