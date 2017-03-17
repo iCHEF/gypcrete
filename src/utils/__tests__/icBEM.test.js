@@ -1,4 +1,4 @@
-import icBEM, { BEMFactory } from '../icBEM';
+import icBEM from '../icBEM';
 
 describe('icBEM() helper', () => {
     it('can be initialized by a base block string', () => {
