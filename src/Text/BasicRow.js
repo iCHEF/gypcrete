@@ -22,7 +22,7 @@ function BasicRow({ basic, tag, stateIcon, ...otherProps }) {
 }
 
 BasicRow.propTypes = {
-    basic: PropTypes.node,
+    basic: PropTypes.node.isRequired,
     tag: PropTypes.node,
     stateIcon: PropTypes.node,
 };
