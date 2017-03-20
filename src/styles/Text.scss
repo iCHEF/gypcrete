@@ -1,0 +1,60 @@
+@import "./mixins";
+
+// Visual element to be put inside a Component.
+
+// ===============
+//  Element Block
+// ===============
+
+.#{$prefix}-text {
+    min-height: rem($element-base-height);
+    font-size: rem($basic-text-font-size);
+    line-height: rem($basic-text-line-height);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    overflow: hidden;
+}
+
+
+// ===============
+//  Element Parts
+// ===============
+
+.#{$prefix}-text {
+    &__row {
+        flex: 0 0 100%;
+        display: flex;
+        align-items: flex-start;
+        overflow: hidden;
+    }
+
+    &__basic {
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+    &__aside {
+        font-size: rem($aside-text-font-size);
+        line-height: rem($aside-text-line-height);
+    }
+}
+
+
+// ===============
+//  Modifiers
+// ===============
+
+.#{$prefix}-text {
+    &--center {
+        .#{$prefix}-text__row {
+            justify-content: center;
+        }
+    }
+    &--right {
+        .#{$prefix}-text__row {
+            flex-direction: row-reverse;
+        }
+    }
+}

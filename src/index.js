@@ -4,6 +4,7 @@ import './styles/index.scss';
 import Icon from './Icon';
 import StatusIcon from './StatusIcon';
 import Tag from './Tag';
+import Text from './Text';
 
 // Layout helpers
 import FlexCell from './FlexCell';
@@ -13,6 +14,7 @@ export {
     Icon,
     StatusIcon,
     Tag,
+    Text,
 
     FlexCell,
     TextEllipsis,
