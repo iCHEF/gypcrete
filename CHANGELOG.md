@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   * `<StatusIcon>` (with modifications)
 
 - Migrate `icBEM()` helper, but now it doesn't take an `BEMFactory` instance.
-
+- Add `wrapIfNotElement()` helper to ensure output will always be an HTML tag.
 - Add `babel-plugin-module-resolver` and `eslint-import-resolver-babel-module` to config module alias.
   
 ## [0.3.0]
