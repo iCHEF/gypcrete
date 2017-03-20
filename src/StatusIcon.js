@@ -20,7 +20,7 @@ const ICON_HIDE_TIMEOUT = 2 * 1000;
 
 class StatusIcon extends PureComponent {
     static propTypes = {
-        status: PropTypes.oneOf(Object.values(STATUS_CODE)),
+        status: PropTypes.oneOf(Object.values(STATUS_CODE)).isRequired,
         position: PropTypes.oneOf(Object.values(STATUS_POSITION)),
         autohide: PropTypes.bool,
     };
@@ -50,6 +50,12 @@ class StatusIcon extends PureComponent {
         if (nextProps.status !== this.props.status) {
             this.autoToggleStatusIcon(nextProps.status);
         }
+
+        if (nextProps.autohide !== this.props.autohide) {
+            if (this.state.hideIcon) {
+                this.setState({ hideIcon: false });
+            }
+        }
     }
 
     componentWillUnmount() {
@@ -71,9 +77,6 @@ class StatusIcon extends PureComponent {
     autoToggleStatusIcon(status = this.props.status) {
         // Ignore if autohide === false
         if (!this.props.autohide) {
-            if (this.state.hideIcon) {
-                this.setState({ hideIcon: false });
-            }
             return;
         }
 

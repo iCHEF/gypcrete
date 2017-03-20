@@ -6,12 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Migrated the following components:
+- Migrate the following components:
   * `<Icon>`
   * `<Tag>`
   * `<TextEllipsis>` 
   * `<FlexCell>` (with modifications)
   * `<StatusIcon>` (with modifications)
+
+- Migrate `icBEM()` helper, but now it doesn't take an `BEMFactory` instance.
 
 - Add `babel-plugin-module-resolver` and `eslint-import-resolver-babel-module` to config module alias.
   
