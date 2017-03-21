@@ -17,7 +17,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add `wrapIfNotElement()` helper to ensure output will always be an HTML tag.
 - Add `babel-plugin-module-resolver` and `eslint-import-resolver-babel-module` to config module alias.
 - Add Helpers:
-  *  `icState()`
+  * `icState()` for prefixing state class names.
+  * `getComponentName()` for reading name of a React Component.
   
 ## [0.3.0]
 ### Added
