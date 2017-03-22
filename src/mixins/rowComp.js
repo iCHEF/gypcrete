@@ -14,6 +14,7 @@ import { STATUS_CODE } from '../StatusIcon';
 
 export const COMPONENT_NAME = 'ic-row-comp';
 const ROOT_BEM = icBEM(COMPONENT_NAME);
+export const ROW_COMP_BODY = ROOT_BEM.element('body');
 
 // State class names
 const CLASS_ACTIVE = icState('active');
@@ -126,7 +127,10 @@ const rowComp = ({
                 ...otherProps
             } = this.props;
 
-            const bemClass = ROOT_BEM.modifier('minified', minified);
+            const bemClass = ROOT_BEM
+                .modifier('minified', minified)
+                .modifier(align);
+
             const wrapperClassName = classNames(className, `${bemClass}`, {
                 [CLASS_ACTIVE]: active,
                 [CLASS_HIGHLIGHT]: highlight,
@@ -136,11 +140,9 @@ const rowComp = ({
             });
 
             return (
-                <div className={wrapperClassName}>
-                    <WrappedComponent {...otherProps}>
-                        {children || this.renderContent()}
-                    </WrappedComponent>
-                </div>
+                <WrappedComponent className={wrapperClassName} {...otherProps}>
+                    {children || this.renderContent()}
+                </WrappedComponent>
             );
         }
     }

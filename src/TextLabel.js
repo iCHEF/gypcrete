@@ -1,14 +1,21 @@
 import React, { PureComponent, PropTypes } from 'react';
+import classNames from 'classnames';
 import rowComp from './mixins/rowComp';
 import './styles/TextLabel.scss';
+
+import RowCompBody from './RowCompBody';
 
 export const COMPONENT_NAME = 'ic-text-label';
 
 class TextLabel extends PureComponent {
     render() {
+        const rootClassName = classNames(this.props.className, COMPONENT_NAME);
+
         return (
-            <div className={COMPONENT_NAME}>
-                {this.props.children}
+            <div className={rootClassName}>
+                <RowCompBody>
+                    {this.props.children}
+                </RowCompBody>
             </div>
         );
     }
