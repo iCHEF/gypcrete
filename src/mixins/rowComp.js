@@ -30,6 +30,13 @@ const RIGHT = 'right';
 const REVERSE = 'reverse';
 export const ROW_COMP_ALIGN = { LEFT, CENTER, RIGHT, REVERSE };
 
+// Status context types
+export const statusPropTypes = {
+    status: PropTypes.oneOf(Object.values(STATUS_CODE)),
+    statusOptions: PropTypes.object,
+    errorMsg: PropTypes.string,
+};
+
 /**
  * Determine alignment for pre-configured <Text> based on
  * <RowComp> align and icon existence.
@@ -72,15 +79,28 @@ const rowComp = ({
             highlight: PropTypes.bool,
             disabled: PropTypes.bool,
 
-            // Status props
-            status: PropTypes.oneOf(Object.values(STATUS_CODE)),
-            statusOptions: PropTypes.object,
-            errorMsg: PropTypes.string,
+            ...statusPropTypes,
+            // status,
+            // statusOptions,
+            // errorMsg,
         };
 
         static defaultProps = {
             align: defaultAlign
         };
+
+        static childContextTypes = {
+            ...statusPropTypes,
+            // status,
+            // statusOptions,
+            // errorMsg,
+        };
+
+        getChildContext() {
+            const { status, statusOptions, errorMsg } = this.props;
+
+            return { status, statusOptions, errorMsg };
+        }
 
         renderContent() {
             const {
