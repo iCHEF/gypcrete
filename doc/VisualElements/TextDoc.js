@@ -10,7 +10,7 @@ function TextDoc() {
             <h2>&lt;Text&gt;</h2>
 
             <DebugBox>
-                <Text basic="Basic Text" aside="Aside Text" />
+                <Text basic="Basic Text" />
             </DebugBox>
 
             <DebugBox>
