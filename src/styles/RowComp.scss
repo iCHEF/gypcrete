@@ -1,1 +1,14 @@
 @import "./mixins";
+
+.ic-row-comp {
+    min-height: rem($component-base-height);
+    font-size: rem($basic-text-font-size);
+    line-height: rem($basic-text-line-height);
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+
+    &--minified {
+        flex: 0 0 auto;
+    }
+}

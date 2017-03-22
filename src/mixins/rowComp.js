@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import classNames from 'classnames';
 
 import getComponentName from '../utils/getComponentName';
+import icBEM from '../utils/icBEM';
 import icState from '../utils/icState';
 import wrapIfNotElement from '../utils/wrapIfNotElement';
 import '../styles/RowComp.scss';
@@ -12,6 +13,7 @@ import Text from '../Text';
 import { STATUS_CODE } from '../StatusIcon';
 
 export const COMPONENT_NAME = 'ic-row-comp';
+const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 // State class names
 const CLASS_ACTIVE = icState('active');
@@ -20,7 +22,7 @@ const CLASS_ERROR = icState('error');
 const CLASS_DISABLED = icState('disabled');
 const CLASS_UNTOUCHABLE = icState('untouchable');
 
-function rowComp(WrappedComponent) {
+const rowComp = ({ minified = false } = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
 
     class RowComp extends PureComponent {
@@ -85,7 +87,8 @@ function rowComp(WrappedComponent) {
                 ...otherProps
             } = this.props;
 
-            const wrapperClassName = classNames(className, `${COMPONENT_NAME}`, {
+            const bemClass = ROOT_BEM.modifier('minified', minified);
+            const wrapperClassName = classNames(className, `${bemClass}`, {
                 [CLASS_ACTIVE]: active,
                 [CLASS_HIGHLIGHT]: highlight,
                 [CLASS_ERROR]: status === STATUS_CODE.ERROR,

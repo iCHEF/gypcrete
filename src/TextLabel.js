@@ -13,4 +13,4 @@ class TextLabel extends PureComponent {
     }
 }
 
-export default rowComp(TextLabel);
+export default rowComp()(TextLabel);
