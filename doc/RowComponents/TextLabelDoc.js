@@ -12,6 +12,13 @@ function TextLabelDoc() {
                     icon="printer"
                     basic="Basic text"
                     tag="Tag"
+                    aside="Aside text" />
+            </DebugBox>
+
+            <DebugBox>
+                <TextLabel
+                    basic="Basic text"
+                    tag="Tag"
                     aside="Aside text"
                     align="center" />
             </DebugBox>

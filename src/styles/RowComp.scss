@@ -7,7 +7,30 @@
     display: flex;
     flex: 1 1 auto;
     align-items: center;
+    overflow: hidden;
 
+    // --------------------
+    //  <RowComp> elements
+    // --------------------
+    &__body {
+        display: flex;
+        flex: 1 1 100%;
+        overflow: hidden;
+        align-items: flex-start;
+
+        @at-root {
+            .ic-row-comp--center & {
+                justify-content: center;
+            }
+            .ic-row-comp--reverse & {
+                flex-direction: column-reverse;
+            }
+        }
+    }
+
+    // ---------------------
+    //  <RowComp> modifiers
+    // ---------------------
     &--minified {
         flex: 0 0 auto;
     }

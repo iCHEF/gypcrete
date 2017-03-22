@@ -47,6 +47,10 @@
 // ===============
 
 .#{$prefix}-text {
+    &--no-grow {
+        flex-grow: 0;
+    }
+    
     &--center {
         .#{$prefix}-text__row {
             justify-content: center;

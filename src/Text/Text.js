@@ -39,6 +39,7 @@ class Text extends PureComponent {
         align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
         aside: PropTypes.node,
         basicRow: PropTypes.element,
+        noGrow: PropTypes.bool,
 
         ...BasicRow.propTypes,
         // basic,
@@ -50,6 +51,7 @@ class Text extends PureComponent {
         align: LEFT,
         aside: null,
         basicRow: null,
+        noGrow: false,
     };
 
     renderBasicRow() {
@@ -80,7 +82,11 @@ class Text extends PureComponent {
     }
 
     render() {
-        const rootClassName = BEM.root.modifier(this.props.align);
+        const { align, noGrow } = this.props;
+
+        const rootClassName = BEM.root
+            .modifier(align)
+            .modifier('no-grow', noGrow);
 
         return (
             <div className={rootClassName}>

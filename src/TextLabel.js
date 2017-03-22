@@ -1,5 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import rowComp from './mixins/rowComp';
+import './styles/TextLabel.scss';
 
 export const COMPONENT_NAME = 'ic-text-label';
 

@@ -22,7 +22,37 @@ const CLASS_ERROR = icState('error');
 const CLASS_DISABLED = icState('disabled');
 const CLASS_UNTOUCHABLE = icState('untouchable');
 
-const rowComp = ({ minified = false } = {}) => (WrappedComponent) => {
+// Alignments
+const LEFT = 'left';
+const CENTER = 'center';
+const RIGHT = 'right';
+const REVERSE = 'reverse';
+export const ROW_COMP_ALIGN = { LEFT, CENTER, RIGHT, REVERSE };
+
+/**
+ * Determine alignment for pre-configured <Text> based on
+ * <RowComp> align and icon existence.
+ *
+ * @param  {String} compAlign
+ * @param  {Bool}   hasIcon
+ * @return {String} textAlign
+ */
+function determineTextAlign(compAlign, hasIcon) {
+    switch (compAlign) {
+        case RIGHT:
+        case REVERSE:
+            return RIGHT;
+        case CENTER:
+            if (!hasIcon) return CENTER;
+        default: // eslint-disable-line no-fallthrough
+            return LEFT;
+    }
+}
+
+const rowComp = ({
+    minified = false,
+    defaultAlign = 'left'
+} = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
 
     class RowComp extends PureComponent {
@@ -30,7 +60,7 @@ const rowComp = ({ minified = false } = {}) => (WrappedComponent) => {
 
         static propTypes = {
             // Text label props
-            align: PropTypes.oneOf(['left', 'center', 'right', 'reverse']),
+            align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
             icon: PropTypes.node,
             basic: PropTypes.node,
             aside: PropTypes.node,
@@ -47,6 +77,10 @@ const rowComp = ({ minified = false } = {}) => (WrappedComponent) => {
             errorMsg: PropTypes.string,
         };
 
+        static defaultProps = {
+            align: defaultAlign
+        };
+
         renderContent() {
             const {
                 align,
@@ -57,10 +91,15 @@ const rowComp = ({ minified = false } = {}) => (WrappedComponent) => {
             } = this.props;
 
             const textProps = { basic, aside, tag };
+            const textAlign = determineTextAlign(align, !!icon);
 
             return [
                 icon && <Icon key="comp-icon" type={icon} />,
-                <Text key="comp-text" {...textProps} />
+                <Text
+                    key="comp-text"
+                    align={textAlign}
+                    noGrow={align === CENTER}
+                    {...textProps} />
             ];
         }
 
