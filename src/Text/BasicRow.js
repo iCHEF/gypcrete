@@ -6,7 +6,7 @@ import TextEllipsis from '../TextEllipsis';
 
 import wrapIfNotElement from '../utils/wrapIfNotElement';
 
-function BasicRow({ basic, tag, stateIcon, ...otherProps }) {
+function BasicRow({ basic, tag, statusIcon, ...otherProps }) {
     if (!basic) return null;
 
     return (
@@ -16,7 +16,7 @@ function BasicRow({ basic, tag, stateIcon, ...otherProps }) {
             </FlexCell>
 
             {tag && wrapIfNotElement(tag, { with: Tag })}
-            {stateIcon && wrapIfNotElement(stateIcon, { with: 'span' })}
+            {statusIcon && wrapIfNotElement(statusIcon, { with: 'span' })}
         </div>
     );
 }
@@ -24,13 +24,13 @@ function BasicRow({ basic, tag, stateIcon, ...otherProps }) {
 BasicRow.propTypes = {
     basic: PropTypes.node.isRequired,
     tag: PropTypes.node,
-    stateIcon: PropTypes.node,
+    statusIcon: PropTypes.node,
 };
 
 BasicRow.defaultProps = {
     basic: null,
     tag: null,
-    stateIcon: null,
+    statusIcon: null,
 };
 
 export default BasicRow;

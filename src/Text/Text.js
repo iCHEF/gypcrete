@@ -44,7 +44,7 @@ class Text extends PureComponent {
         ...BasicRow.propTypes,
         // basic,
         // tag,
-        // stateIcon,
+        // statusIcon,
     };
 
     static defaultProps = {
@@ -55,11 +55,11 @@ class Text extends PureComponent {
     };
 
     renderBasicRow() {
-        const { basicRow, basic, tag, stateIcon } = this.props;
-        const basicRowProps = { basic, tag, stateIcon };
+        const { basicRow, basic, tag, statusIcon } = this.props;
+        const basicRowProps = { basic, tag, statusIcon };
 
         if (React.isValidElement(basicRow)) {
-            // Inject { basic, tag, stateIcon } to passed-in custom row.
+            // Inject { basic, tag, statusIcon } to passed-in custom row.
             return React.cloneElement(basicRow, basicRowProps);
         }
 

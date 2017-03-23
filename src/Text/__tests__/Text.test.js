@@ -29,19 +29,19 @@ it('renders using <BasicRow> with BEM className', () => {
     expect(rowWrapper.hasClass('ic-text__basic')).toBeTruthy();
 });
 
-it('passing "basic", "tag" and "stateIcon" to <BasicRow>', () => {
+it('passing "basic", "tag" and "statusIcon" to <BasicRow>', () => {
     const icon = <StatusIcon status="loading" />;
     const wrapper = shallow(
         <Text
             basic="Basic text"
             tag="Tag"
-            stateIcon={icon} />
+            statusIcon={icon} />
     );
     const rowWrapper = wrapper.find(BasicRow);
 
     expect(rowWrapper.prop('basic')).toBe('Basic text');
     expect(rowWrapper.prop('tag')).toBe('Tag');
-    expect(rowWrapper.prop('stateIcon')).toEqual(icon);
+    expect(rowWrapper.prop('statusIcon')).toEqual(icon);
 });
 
 it('takes custom <BasicRow> and passes the same props to it', () => {
@@ -54,14 +54,14 @@ it('takes custom <BasicRow> and passes the same props to it', () => {
         <Text
             basic="Basic text"
             tag="Tag"
-            stateIcon={icon}
+            statusIcon={icon}
             basicRow={customRow} />
     );
     const rowWrapper = wrapper.find(FooRow);
 
     expect(rowWrapper.prop('basic')).toBe('Basic text');
     expect(rowWrapper.prop('tag')).toBe('Tag');
-    expect(rowWrapper.prop('stateIcon')).toEqual(icon);
+    expect(rowWrapper.prop('statusIcon')).toEqual(icon);
 });
 
 it('renders aside text', () => {

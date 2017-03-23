@@ -18,7 +18,7 @@ function TextDoc() {
                     basic="A Long Long Long Basic Text"
                     aside="I am left-aligned"
                     tag="Tag"
-                    stateIcon={<StatusIcon status="loading" />} />
+                    statusIcon={<StatusIcon status="loading" />} />
             </DebugBox>
 
             <DebugBox>
@@ -27,7 +27,7 @@ function TextDoc() {
                     basic="Basic Text"
                     aside="I am center-aligned"
                     tag="Tag"
-                    stateIcon={<StatusIcon status="success" autohide={false} />} />
+                    statusIcon={<StatusIcon status="success" autohide={false} />} />
             </DebugBox>
 
             <DebugBox>
@@ -36,7 +36,7 @@ function TextDoc() {
                     basic="A Long Long Long Basic Text"
                     aside="I am right-aligned"
                     tag="Tag"
-                    stateIcon={<StatusIcon status="error" />} />
+                    statusIcon={<StatusIcon status="error" />} />
             </DebugBox>
         </div>
     );
