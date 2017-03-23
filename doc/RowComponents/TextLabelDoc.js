@@ -40,7 +40,8 @@ function TextLabelDoc() {
                     tag="Tag"
                     aside="Aside text"
                     align="right"
-                    status="loading" />
+                    status="success"
+                    statusOptions={{ autohide: false }} />
             </DebugBox>
 
             <DebugBox>

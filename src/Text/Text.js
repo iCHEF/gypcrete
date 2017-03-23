@@ -5,6 +5,9 @@
  * Usually contains 2 lines, with **Basic text**, **Tag**, **State** at the first line
  * and **Aside text** at the second line.
  *
+ * <Text> is wrapped with a HOC mixin `withStatus()`, which automatically
+ * handles `statusIcon` and `errorMsg` from context.
+ *
  * ┌╌╌╌╌╌╌╌╌╌╌╌┬╌╌╌┬╌╌╌╌╌┐
  * ╎Basic text ╎Tag╎State╎
  * ├╌╌╌╌╌╌╌╌╌╌╌┴╌╌╌┴╌╌╌╌╌┴╌╌╌┐
@@ -15,6 +18,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import classNames from 'classnames';
 import icBEM from '../utils/icBEM';
+import withStatus from '../mixins/withStatus';
 import '../styles/Text.scss';
 
 import BasicRow from './BasicRow';
@@ -34,12 +38,16 @@ const CENTER = 'center';
 const RIGHT = 'right';
 export const TEXT_ALIGN = { LEFT, CENTER, RIGHT };
 
-class Text extends PureComponent {
+export class Text extends PureComponent {
     static propTypes = {
         align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
         aside: PropTypes.node,
         basicRow: PropTypes.element,
         noGrow: PropTypes.bool,
+
+        // from withStatus()
+        errorMsg: PropTypes.string,
+        // statusIcon: PropTypes.node,
 
         ...BasicRow.propTypes,
         // basic,
@@ -52,6 +60,7 @@ class Text extends PureComponent {
         aside: null,
         basicRow: null,
         noGrow: false,
+        errorMsg: null,
     };
 
     renderBasicRow() {
@@ -72,11 +81,16 @@ class Text extends PureComponent {
     }
 
     renderAsideRow() {
-        if (!this.props.aside) return null;
+        const { aside, errorMsg } = this.props;
+        const displayText = errorMsg || aside;
+
+        if (!displayText) {
+            return null;
+        }
 
         return (
             <div className={classNames(`${BEM.row}`, `${BEM.aside}`)}>
-                {this.props.aside}
+                {displayText}
             </div>
         );
     }
@@ -97,4 +111,4 @@ class Text extends PureComponent {
     }
 }
 
-export default Text;
+export default withStatus()(Text);
