@@ -1,4 +1,5 @@
 import React from 'react';
+import Text from 'src/Text';
 import TextLabel from 'src/TextLabel';
 import DebugBox from '../DebugBox';
 
@@ -45,8 +46,8 @@ function TextLabelDoc() {
             </DebugBox>
 
             <DebugBox>
-                <TextLabel>
-                    foo
+                <TextLabel status="error">
+                    <Text basic="foo" />
                 </TextLabel>
             </DebugBox>
         </div>
