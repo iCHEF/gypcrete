@@ -1,9 +1,16 @@
 import React, { PropTypes } from 'react';
 import getComponentName from '../utils/getComponentName';
-import { statusPropTypes } from './rowComp';
 
-import StatusIcon from '../StatusIcon';
+import StatusIcon, { STATUS_CODE } from '../StatusIcon';
 
+// Status context types
+export const statusPropTypes = {
+    status: PropTypes.oneOf(Object.values(STATUS_CODE)),
+    statusOptions: PropTypes.object,
+    errorMsg: PropTypes.string,
+};
+
+// prop types for what's going to set on wrapped component
 export const withStatusPropTypes = {
     statusIcon: PropTypes.node,
     errorMsg: PropTypes.string,

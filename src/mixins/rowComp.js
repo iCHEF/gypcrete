@@ -1,10 +1,11 @@
 import React, { PureComponent, PropTypes } from 'react';
 import classNames from 'classnames';
+import '../styles/RowComp.scss';
 
 import getComponentName from '../utils/getComponentName';
 import icBEM from '../utils/icBEM';
 import icState from '../utils/icState';
-import '../styles/RowComp.scss';
+import { statusPropTypes } from './withStatus';
 
 import Icon from '../Icon';
 import Text from '../Text';
@@ -28,13 +29,6 @@ const CENTER = 'center';
 const RIGHT = 'right';
 const REVERSE = 'reverse';
 export const ROW_COMP_ALIGN = { LEFT, CENTER, RIGHT, REVERSE };
-
-// Status context types
-export const statusPropTypes = {
-    status: PropTypes.oneOf(Object.values(STATUS_CODE)),
-    statusOptions: PropTypes.object,
-    errorMsg: PropTypes.string,
-};
 
 /**
  * Determine alignment for pre-configured <Text> based on
