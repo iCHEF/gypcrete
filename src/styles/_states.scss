@@ -1,0 +1,26 @@
+@import "./variables";
+
+// Styles for shared states
+
+.#{$prefix-state}-editable {
+    color: $c-text-editable;
+}
+
+.#{$prefix-state}-error {
+    color: $c-text-error;
+}
+
+.#{$prefix-state}-untouchable {
+    pointer-events: none !important;
+}
+
+[disabled],
+.#{$prefix-state}-disabled {
+    opacity: .3 !important;
+    pointer-events: none !important;
+}
+
+[hidden]
+.#{$prefix-state}-hidden {
+    display: none;
+}

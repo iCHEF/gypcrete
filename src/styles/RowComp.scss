@@ -1,17 +1,19 @@
 @import "./mixins";
 
-.ic-row-comp {
+.#{$prefix}-row-comp {
     min-height: rem($component-base-height);
     font-size: rem($basic-text-font-size);
     line-height: rem($basic-text-line-height);
+    padding: rem($component-padding);
+    box-sizing: border-box;
     display: flex;
     flex: 1 1 auto;
     align-items: center;
     overflow: hidden;
 
-    // --------------------
+    // ----------------------
     //  <RowComp> elements
-    // --------------------
+    // ----------------------
     &__body {
         display: flex;
         flex: 1 1 100%;
@@ -28,9 +30,16 @@
         }
     }
 
-    // ---------------------
+    // ----------------------
+    //  <RowComp> states
+    // ----------------------
+    &.#{$prefix-state}-active {
+        background: $c-comp-bg-active;
+    }
+
+    // ----------------------
     //  <RowComp> modifiers
-    // ---------------------
+    // ----------------------
     &--minified {
         flex: 0 0 auto;
     }
