@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
 import StatusIcon from 'src/StatusIcon';
-import { Text } from '../Text';
+import Text, { PureText } from '../Text';
 import BasicRow from '../BasicRow';
 
-describe('Pure <Text>', () => {
+describe('<withStatus(Text)>', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div');
         const element = (
@@ -19,9 +19,11 @@ describe('Pure <Text>', () => {
 
         ReactDOM.render(element, div);
     });
+});
 
+describe('Pure <Text>', () => {
     it('renders using <BasicRow> with BEM className', () => {
-        const wrapper = shallow(<Text basic="text" />);
+        const wrapper = shallow(<PureText basic="text" />);
         const rowWrapper = wrapper.find(BasicRow);
 
         expect(wrapper.children()).toHaveLength(1);
@@ -33,7 +35,7 @@ describe('Pure <Text>', () => {
     it('passing "basic", "tag" and "statusIcon" to <BasicRow>', () => {
         const icon = <StatusIcon status="loading" />;
         const wrapper = shallow(
-            <Text
+            <PureText
                 basic="Basic text"
                 tag="Tag"
                 statusIcon={icon} />
@@ -52,7 +54,7 @@ describe('Pure <Text>', () => {
         const icon = <StatusIcon status="loading" />;
 
         const wrapper = shallow(
-            <Text
+            <PureText
                 basic="Basic text"
                 tag="Tag"
                 statusIcon={icon}
@@ -66,7 +68,7 @@ describe('Pure <Text>', () => {
     });
 
     it('renders aside text', () => {
-        const wrapper = shallow(<Text basic="Basic" aside="Aside" />);
+        const wrapper = shallow(<PureText basic="Basic" aside="Aside" />);
 
         expect(wrapper.children()).toHaveLength(2);
         expect(wrapper.childAt(1).hasClass('ic-text__aside')).toBeTruthy();
@@ -74,12 +76,12 @@ describe('Pure <Text>', () => {
     });
 
     it('renders errorMsg and ignores aside text', () => {
-        const wrapper = shallow(<Text errorMsg="Error" />);
+        const wrapper = shallow(<PureText errorMsg="Error" />);
 
         expect(wrapper.children()).toHaveLength(1);
         expect(wrapper.childAt(0).text()).toBe('Error');
 
-        const wrapperWithAside = shallow(<Text aside="Aside" errorMsg="Error" />);
+        const wrapperWithAside = shallow(<PureText aside="Aside" errorMsg="Error" />);
 
         expect(wrapperWithAside.children()).toHaveLength(1);
         expect(wrapperWithAside.childAt(0).text()).toBe('Error');

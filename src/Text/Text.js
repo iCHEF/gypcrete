@@ -38,7 +38,7 @@ const CENTER = 'center';
 const RIGHT = 'right';
 export const TEXT_ALIGN = { LEFT, CENTER, RIGHT };
 
-export class Text extends PureComponent {
+class Text extends PureComponent {
     static propTypes = {
         align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
         aside: PropTypes.node,
@@ -117,3 +117,4 @@ export class Text extends PureComponent {
 }
 
 export default withStatus()(Text);
+export { Text as PureText };
