@@ -44,3 +44,7 @@ it('reads name from components with custom name', () => {
     expect(getComponentName(OldCompRev)).toBe('Rev(OldComp)');
     expect(getComponentName(FooRev)).toBe('Rev(Foo)');
 });
+
+it('throws if no Component passed in', () => {
+    expect(() => getComponentName()).toThrow();
+});
