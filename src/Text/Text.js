@@ -50,7 +50,7 @@ export class Text extends PureComponent {
         // statusIcon: PropTypes.node,
 
         ...BasicRow.propTypes,
-        // basic,
+        basic: PropTypes.node,
         // tag,
         // statusIcon,
     };
@@ -61,11 +61,16 @@ export class Text extends PureComponent {
         basicRow: null,
         noGrow: false,
         errorMsg: null,
+        basic: null,
     };
 
     renderBasicRow() {
         const { basicRow, basic, tag, statusIcon } = this.props;
         const basicRowProps = { basic, tag, statusIcon };
+
+        if (!(basic || basicRow)) {
+            return null;
+        }
 
         if (React.isValidElement(basicRow)) {
             // Inject { basic, tag, statusIcon } to passed-in custom row.

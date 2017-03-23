@@ -72,4 +72,16 @@ describe('Pure <Text>', () => {
         expect(wrapper.childAt(1).hasClass('ic-text__aside')).toBeTruthy();
         expect(wrapper.childAt(1).text()).toBe('Aside');
     });
+
+    it('renders errorMsg and ignores aside text', () => {
+        const wrapper = shallow(<Text errorMsg="Error" />);
+
+        expect(wrapper.children()).toHaveLength(1);
+        expect(wrapper.childAt(0).text()).toBe('Error');
+
+        const wrapperWithAside = shallow(<Text aside="Aside" errorMsg="Error" />);
+
+        expect(wrapperWithAside.children()).toHaveLength(1);
+        expect(wrapperWithAside.childAt(0).text()).toBe('Error');
+    });
 });
