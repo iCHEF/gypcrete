@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import getComponentName from '../utils/getComponentName';
 import icBEM from '../utils/icBEM';
 import icState from '../utils/icState';
-import wrapIfNotElement from '../utils/wrapIfNotElement';
 import '../styles/RowComp.scss';
 
 import Icon from '../Icon';
@@ -69,7 +68,7 @@ const rowComp = ({
         static propTypes = {
             // Text label props
             align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
-            icon: PropTypes.node,
+            icon: PropTypes.string,
             basic: PropTypes.node,
             aside: PropTypes.node,
             tag: PropTypes.node,
@@ -86,7 +85,19 @@ const rowComp = ({
         };
 
         static defaultProps = {
-            align: defaultAlign
+            align: defaultAlign,
+            icon: null,
+            basic: null,
+            aside: null,
+            tag: null,
+
+            active: false,
+            highlight: false,
+            disabled: false,
+
+            status: null,
+            statusOptions: {},
+            errorMsg: null,
         };
 
         static childContextTypes = {
@@ -168,6 +179,6 @@ const rowComp = ({
     }
 
     return RowComp;
-}
+};
 
 export default rowComp;
