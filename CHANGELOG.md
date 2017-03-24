@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+
+## [0.4.0]
+### Added
 - Migrate the following components:
   * `<Icon>`
   * `<Tag>`
