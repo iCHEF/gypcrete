@@ -33,6 +33,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Migrate `icBEM()` helper, but now it doesn't take an `BEMFactory` instance.
 - Add `babel-plugin-module-resolver` and `eslint-import-resolver-babel-module` to config module alias.
 
+### Change
+- Move `babel-runtime` (required by `babel-plugin-tranform-runtime`) to `peerDependencies` instead of `devDependencies`. Because our Babel-transformed ES2015 modules **does** require it.
+
   
 ## [0.3.0]
 ### Added
