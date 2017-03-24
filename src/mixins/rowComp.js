@@ -1,3 +1,34 @@
+/**
+ * rowComp() HOC mixin
+ * ===================
+ * A Component that goes into a row container is a **Row Component**,
+ * and normally should be wrapped with the `rowComp()` mixin to share
+ * common appearance and behaviors.
+ *
+ * By default, `rowComp()` renders a set of label contents into the wrapped
+ * Component, including an <Icon> and a <Text>.
+ *
+ * Usage
+ * -----
+ * A **Row Component** can be used in 2 ways:
+ *
+ * ### Use pre-configured layout by passing everything via props
+ * <TextLabel
+ *     basic="Basic Text"
+ *     tag="Tag"
+ *     aside="Aside Text"
+ *     align="center"
+ *     status"loading" />
+ *
+ * ### Customize layout via children
+ * <TextLabel status="error">
+ *     <Icon type="star" />
+ *     <Text basic="Announcements" />
+ *     <Icon type="star" />
+ * </TextLabel>
+ *
+ */
+
 import React, { PureComponent, PropTypes } from 'react';
 import classNames from 'classnames';
 import '../styles/RowComp.scss';
