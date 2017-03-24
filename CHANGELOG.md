@@ -13,12 +13,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   * `<FlexCell>` (with modifications)
   * `<StatusIcon>` (with modifications)
 
-- Migrate `icBEM()` helper, but now it doesn't take an `BEMFactory` instance.
-- Add `wrapIfNotElement()` helper to ensure output will always be an HTML tag.
-- Add `babel-plugin-module-resolver` and `eslint-import-resolver-babel-module` to config module alias.
+- Add new components:
+  * `<Text>`: the text part of a row component, pre-wrapped with `withStatus()` mixin.
+  * `<TextLabel>`: the very basic row component containing an `<Icon>` and a `<Text>`.
+  * `<RowCompBody>`: a layout wrapper.
+
 - Add Helpers:
   * `icState()` for prefixing state class names.
   * `getComponentName()` for reading name of a React Component.
+  * `wrapIfNotElement()` to ensure output will always be an HTML tag.
+
+- Add HOC mixins:
+  * `rowComp()`: handle shared appearance and behaviors for row components.
+  * `withStatus()`: render `<StatusIcon>` and error msgs from context.
+
+- Migrate `icBEM()` helper, but now it doesn't take an `BEMFactory` instance.
+- Add `babel-plugin-module-resolver` and `eslint-import-resolver-babel-module` to config module alias.
+
   
 ## [0.3.0]
 ### Added
