@@ -17,9 +17,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Babel-transformed files in `lib/` and `es5/` no longer contain comments.
 - `<BasicRow>` no longer handles the null-basic-prop situation, as `basic` prop was marked as required.
 - Fixes Jest running on environments under a dot-directory.
-- Rename `doc/` folder and related webpack config, babel env to `demo`.
-- Rename bundled JS library and CSS file to `gypcrete.js` and `gypcrete.css`.
-- serve source map individually in demo.
+- Renaming
+  * `doc/` folder -> `demo/`.
+  * `config/webpack.doc.js` -> `config/webpack.demo.js`.
+  *  BABEL-ENV, `server` -> `demo`.
+  * bundled assets in dist, `bundle.(js|css)` -> `gypcrete.(js|css)`.
+- Start the demo server with `npm run demo`, now the `start` script is an alias of `demo`.
 
 
 ## [0.4.0]
