@@ -19,4 +19,7 @@ function TextLabel({ className, children }) {
     );
 }
 
+// export for tests
+export { TextLabel as PureTextLabel };
+
 export default rowComp()(TextLabel);
