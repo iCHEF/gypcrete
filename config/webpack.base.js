@@ -2,6 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 const path = require('path');
+const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -74,6 +75,7 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.ProgressPlugin(),
         new ExtractTextPlugin('gypcrete.css')
     ]
 };
