@@ -4,6 +4,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const baseConfig = require('./webpack.base');
 
 module.exports = webpackMerge(baseConfig, {
@@ -59,17 +61,19 @@ module.exports = webpackMerge(baseConfig, {
         },
         watchOptions: {
             ignored: /node_modules/
-        },
-        setup: (app) => {
-            app.get('/', (request, response) => {
-                const indexFile = path.resolve(__dirname, '../doc/index.html');
-                response.sendFile(indexFile);
-            });
         }
     },
 
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './demo/index.html',
+            hash: false,
+            minify: {
+                collapseWhitespace: true
+            }
+        })
     ]
 });
