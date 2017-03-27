@@ -4,7 +4,7 @@ import 'src/styles/index.scss';
 import VisualElements from './VisualElements';
 import RowComponents from './RowComponents';
 
-function DocApp() {
+function DemoApp() {
     return (
         <div>
             <VisualElements />
@@ -13,4 +13,4 @@ function DocApp() {
     );
 }
 
-export default DocApp;
+export default DemoApp;

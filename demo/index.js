@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
-import DocApp from './DocApp';
+import DemoApp from './DemoApp';
 
 function renderApp(App) {
     const wrappedApp = (
@@ -18,7 +18,7 @@ function renderApp(App) {
 }
 
 if (module.hot) {
-    module.hot.accept('./DocApp', () => renderApp(DocApp));
+    module.hot.accept('./DemoApp', () => renderApp(DemoApp));
 }
 
-renderApp(DocApp);
+renderApp(DemoApp);
