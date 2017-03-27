@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 
-import FlexCell from '../FlexCell';
-import Tag from '../Tag';
-import TextEllipsis from '../TextEllipsis';
+import FlexCell from './FlexCell';
+import Tag from './Tag';
+import TextEllipsis from './TextEllipsis';
 
-import wrapIfNotElement from '../utils/wrapIfNotElement';
+import wrapIfNotElement from './utils/wrapIfNotElement';
 
 function BasicRow({ basic, tag, statusIcon, ...otherProps }) {
     return (

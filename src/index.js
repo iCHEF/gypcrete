@@ -1,6 +1,7 @@
 import './styles/index.scss';
 
 // Visual elements
+import BasicRow from './BasicRow';
 import Icon from './Icon';
 import StatusIcon from './StatusIcon';
 import Tag from './Tag';
@@ -15,6 +16,7 @@ import TextEllipsis from './TextEllipsis';
 import TextLabel from './TextLabel';
 
 export {
+    BasicRow,
     Icon,
     StatusIcon,
     Tag,

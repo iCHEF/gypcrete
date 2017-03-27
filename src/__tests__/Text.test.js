@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
-import StatusIcon from 'src/StatusIcon';
-import Text, { PureText } from '../Text';
 import BasicRow from '../BasicRow';
+import StatusIcon from '../StatusIcon';
+import Text, { PureText } from '../Text';
 
 describe('<withStatus(Text)>', () => {
     it('renders without crashing', () => {
