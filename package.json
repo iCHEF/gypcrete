@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "iCHEF web components library, built with React.",
   "main": "lib/index.js",
   "repository": {
@@ -29,6 +29,7 @@
     "deploy": "npm run clean && npm run build && sh deploy.sh"
   },
   "peerDependencies": {
+    "babel-runtime": "^6.18.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },

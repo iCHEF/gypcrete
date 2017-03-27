@@ -37,17 +37,17 @@ it('renders with custom tag', () => {
     expect(wrapper.contains(tag)).toBeTruthy();
 });
 
-it('renders with stateIcon', () => {
+it('renders with statusIcon', () => {
     const icon = <StatusIcon status="loading" />;
-    const wrapper = shallow(<BasicRow basic="foo" stateIcon={icon} />);
+    const wrapper = shallow(<BasicRow basic="foo" statusIcon={icon} />);
 
     expect(wrapper.children()).toHaveLength(2);
     expect(wrapper.contains(icon)).toBeTruthy();
 });
 
-it('renders with both tag and stateIcon', () => {
+it('renders with both tag and statusIcon', () => {
     const icon = <StatusIcon status="loading" />;
-    const wrapper = shallow(<BasicRow basic="foo" tag="bar" stateIcon={icon} />);
+    const wrapper = shallow(<BasicRow basic="foo" tag="bar" statusIcon={icon} />);
 
     expect(wrapper.children()).toHaveLength(3);
     expect(wrapper.find(Tag).shallow().text()).toBe('bar');

@@ -5,6 +5,9 @@
  * Usually contains 2 lines, with **Basic text**, **Tag**, **State** at the first line
  * and **Aside text** at the second line.
  *
+ * <Text> is wrapped with a HOC mixin `withStatus()`, which automatically
+ * handles `statusIcon` and `errorMsg` from context.
+ *
  * ┌╌╌╌╌╌╌╌╌╌╌╌┬╌╌╌┬╌╌╌╌╌┐
  * ╎Basic text ╎Tag╎State╎
  * ├╌╌╌╌╌╌╌╌╌╌╌┴╌╌╌┴╌╌╌╌╌┴╌╌╌┐
@@ -15,6 +18,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import classNames from 'classnames';
 import icBEM from '../utils/icBEM';
+import withStatus from '../mixins/withStatus';
 import '../styles/Text.scss';
 
 import BasicRow from './BasicRow';
@@ -39,25 +43,37 @@ class Text extends PureComponent {
         align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
         aside: PropTypes.node,
         basicRow: PropTypes.element,
+        noGrow: PropTypes.bool,
+
+        // from withStatus()
+        errorMsg: PropTypes.string,
+        // statusIcon: PropTypes.node,
 
         ...BasicRow.propTypes,
-        // basic,
+        basic: PropTypes.node,
         // tag,
-        // stateIcon,
+        // statusIcon,
     };
 
     static defaultProps = {
         align: LEFT,
         aside: null,
         basicRow: null,
+        noGrow: false,
+        errorMsg: null,
+        basic: null,
     };
 
     renderBasicRow() {
-        const { basicRow, basic, tag, stateIcon } = this.props;
-        const basicRowProps = { basic, tag, stateIcon };
+        const { basicRow, basic, tag, statusIcon } = this.props;
+        const basicRowProps = { basic, tag, statusIcon };
+
+        if (!(basic || basicRow)) {
+            return null;
+        }
 
         if (React.isValidElement(basicRow)) {
-            // Inject { basic, tag, stateIcon } to passed-in custom row.
+            // Inject { basic, tag, statusIcon } to passed-in custom row.
             return React.cloneElement(basicRow, basicRowProps);
         }
 
@@ -70,17 +86,26 @@ class Text extends PureComponent {
     }
 
     renderAsideRow() {
-        if (!this.props.aside) return null;
+        const { aside, errorMsg } = this.props;
+        const displayText = errorMsg || aside;
+
+        if (!displayText) {
+            return null;
+        }
 
         return (
             <div className={classNames(`${BEM.row}`, `${BEM.aside}`)}>
-                {this.props.aside}
+                {displayText}
             </div>
         );
     }
 
     render() {
-        const rootClassName = BEM.root.modifier(this.props.align);
+        const { align, noGrow } = this.props;
+
+        const rootClassName = BEM.root
+            .modifier(align)
+            .modifier('no-grow', noGrow);
 
         return (
             <div className={rootClassName}>
@@ -91,4 +116,5 @@ class Text extends PureComponent {
     }
 }
 
-export default Text;
+export default withStatus()(Text);
+export { Text as PureText };

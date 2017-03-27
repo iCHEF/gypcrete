@@ -40,9 +40,9 @@ $c-row-bg-active:    hsba(0, 0, 0, 20);
 $c-row-bg-highlight: $c-blue;
 
 // Component backgrounds
-$c-row-bg:        $c-row-bg;
-$c-row-bg-hover:  $c-row-bg-hover;
-$c-row-bg-active: $c-row-bg-active;
+$c-comp-bg:        $c-row-bg;
+$c-comp-bg-hover:  $c-row-bg-hover;
+$c-comp-bg-active: $c-row-bg-active;
 
 // Divider lines
 $c-divider-row:             hsba(0, 0, 0, 10);

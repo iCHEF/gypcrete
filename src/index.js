@@ -8,7 +8,11 @@ import Text from './Text';
 
 // Layout helpers
 import FlexCell from './FlexCell';
+import RowCompBody from './RowCompBody';
 import TextEllipsis from './TextEllipsis';
+
+// Row components
+import TextLabel from './TextLabel';
 
 export {
     Icon,
@@ -17,5 +21,8 @@ export {
     Text,
 
     FlexCell,
+    RowCompBody,
     TextEllipsis,
+
+    TextLabel,
 };
