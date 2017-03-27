@@ -11,10 +11,11 @@ const baseConfig = require('./webpack.base');
 module.exports = webpackMerge(baseConfig, {
     entry: [
         'react-hot-loader/patch',
-        './doc/index.js'
+        './demo/index.js'
     ],
 
     output: {
+        filename: 'gypcrete-demo.js',
         publicPath: '/'
     },
 
@@ -24,7 +25,7 @@ module.exports = webpackMerge(baseConfig, {
                 test: /\.jsx?$/,
                 include: [
                     path.resolve(__dirname, '../src'),
-                    path.resolve(__dirname, '../doc')
+                    path.resolve(__dirname, '../demo')
                 ],
                 enforce: 'pre',
                 loader: 'eslint-loader',
@@ -41,10 +42,17 @@ module.exports = webpackMerge(baseConfig, {
                     emitWarning: true
                 }
             },
+            {
+                test: /\.jsx?$/,
+                include: [
+                    path.resolve(__dirname, '../demo')
+                ],
+                use: ['babel-loader']
+            }
         ]
     },
 
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
 
     devServer: {
         compress: true,
