@@ -7,8 +7,6 @@ import TextEllipsis from '../TextEllipsis';
 import wrapIfNotElement from '../utils/wrapIfNotElement';
 
 function BasicRow({ basic, tag, statusIcon, ...otherProps }) {
-    if (!basic) return null;
-
     return (
         <div {...otherProps}>
             <FlexCell shrink>
@@ -28,7 +26,6 @@ BasicRow.propTypes = {
 };
 
 BasicRow.defaultProps = {
-    basic: null,
     tag: null,
     statusIcon: null,
 };
