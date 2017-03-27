@@ -36,7 +36,7 @@
             ],
             "ignore": ["__tests__"]
         },
-        "server": {
+        "demo": {
             "plugins": [
                 "react-hot-loader/babel"
             ]
