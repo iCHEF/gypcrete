@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 
+### Changed
+- `src/Text/*` is moved out to just `src/` to maintain a simple, flat directory structure and prevent import confusion. (See 542c7b9)
+- Babel-transformed files in `lib/` and `es5/` no longer contain comments.
+- `<BasicRow>` no longer handles the null-basic-prop situation, as `basic` prop was marked as required.
+- Fixes Jest running on environments under a dot-directory.
+
 ## [0.4.0]
 ### Added
 - Migrate the following components:
