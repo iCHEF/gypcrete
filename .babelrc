@@ -12,7 +12,7 @@
         ["module-resolver", {
             "alias": {
                 "src": "./src",
-                "doc": "./doc"
+                "demo": "./demo"
             }
         }]
     ],
