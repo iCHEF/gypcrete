@@ -7,11 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 
+## [0.5.0]
+### Added
+- Add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) to serve demo bundles.
+- Add webpack `ProgressPlugin` to show build progress.
+
 ### Changed
 - `src/Text/*` is moved out to just `src/` to maintain a simple, flat directory structure and prevent import confusion. (See 542c7b9)
 - Babel-transformed files in `lib/` and `es5/` no longer contain comments.
 - `<BasicRow>` no longer handles the null-basic-prop situation, as `basic` prop was marked as required.
 - Fixes Jest running on environments under a dot-directory.
+- Rename `doc/` folder and related webpack config, babel env to `demo`.
+- Rename bundled JS library and CSS file to `gypcrete.js` and `gypcrete.css`.
+- serve source map individually in demo.
+
 
 ## [0.4.0]
 ### Added
