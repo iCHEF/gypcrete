@@ -17,9 +17,9 @@
 
 import React, { PureComponent, PropTypes } from 'react';
 import classNames from 'classnames';
-import icBEM from '../utils/icBEM';
-import withStatus from '../mixins/withStatus';
-import '../styles/Text.scss';
+import icBEM from './utils/icBEM';
+import withStatus from './mixins/withStatus';
+import './styles/Text.scss';
 
 import BasicRow from './BasicRow';
 

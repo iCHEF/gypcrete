@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
-import StatusIcon from 'src/StatusIcon';
-import Tag from 'src/Tag';
 import BasicRow from '../BasicRow';
+import StatusIcon from '../StatusIcon';
+import Tag from '../Tag';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');

@@ -1,14 +1,12 @@
 import React, { PropTypes } from 'react';
 
-import FlexCell from '../FlexCell';
-import Tag from '../Tag';
-import TextEllipsis from '../TextEllipsis';
+import FlexCell from './FlexCell';
+import Tag from './Tag';
+import TextEllipsis from './TextEllipsis';
 
-import wrapIfNotElement from '../utils/wrapIfNotElement';
+import wrapIfNotElement from './utils/wrapIfNotElement';
 
 function BasicRow({ basic, tag, statusIcon, ...otherProps }) {
-    if (!basic) return null;
-
     return (
         <div {...otherProps}>
             <FlexCell shrink>
@@ -28,7 +26,6 @@ BasicRow.propTypes = {
 };
 
 BasicRow.defaultProps = {
-    basic: null,
     tag: null,
     statusIcon: null,
 };
