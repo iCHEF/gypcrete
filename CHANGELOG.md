@@ -5,7 +5,56 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
 
+## [0.5.0]
+### Added
+- Add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) to serve demo bundles.
+- Add webpack `ProgressPlugin` to show build progress.
+
+### Changed
+- `src/Text/*` is moved out to just `src/` to maintain a simple, flat directory structure and prevent import confusion. (See 542c7b9)
+- Babel-transformed files in `lib/` and `es5/` no longer contain comments.
+- `<BasicRow>` no longer handles the null-basic-prop situation, as `basic` prop was marked as required.
+- Fixes Jest running on environments under a dot-directory.
+- Renaming
+  * `doc/` folder -> `demo/`.
+  * `config/webpack.doc.js` -> `config/webpack.demo.js`.
+  *  BABEL-ENV, `server` -> `demo`.
+  * bundled assets in dist, `bundle.(js|css)` -> `gypcrete.(js|css)`.
+- Start the demo server with `npm run demo`, now the `start` script is an alias of `demo`.
+
+
+## [0.4.0]
+### Added
+- Migrate the following components:
+  * `<Icon>`
+  * `<Tag>`
+  * `<TextEllipsis>` 
+  * `<FlexCell>` (with modifications)
+  * `<StatusIcon>` (with modifications)
+
+- Add new components:
+  * `<Text>`: the text part of a row component, pre-wrapped with `withStatus()` mixin.
+  * `<TextLabel>`: the very basic row component containing an `<Icon>` and a `<Text>`.
+  * `<RowCompBody>`: a layout wrapper.
+
+- Add Helpers:
+  * `icState()` for prefixing state class names.
+  * `getComponentName()` for reading name of a React Component.
+  * `wrapIfNotElement()` to ensure output will always be an HTML tag.
+
+- Add HOC mixins:
+  * `rowComp()`: handle shared appearance and behaviors for row components.
+  * `withStatus()`: render `<StatusIcon>` and error msgs from context.
+
+- Migrate `icBEM()` helper, but now it doesn't take an `BEMFactory` instance.
+- Add `babel-plugin-module-resolver` and `eslint-import-resolver-babel-module` to config module alias.
+
+### Change
+- Move `babel-runtime` (required by `babel-plugin-tranform-runtime`) to `peerDependencies` instead of `devDependencies`. Because our Babel-transformed ES2015 modules **does** require it.
+
+  
 ## [0.3.0]
 ### Added
 - Add deploy script to work with Jenkins. It'll deploy to:

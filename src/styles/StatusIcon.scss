@@ -1,0 +1,37 @@
+@import "./mixins";
+
+// -----------------
+//   Element Block
+// -----------------
+
+.#{$prefix}-status-icon {
+    background-color: $c-white;
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+
+    .#{$prefix}-icon {
+        font-size: inherit;
+        vertical-align: top;
+    }
+}
+
+// -------------
+//   Modifiers
+// -------------
+
+.#{$prefix}-status-icon {
+    &--inline {
+        font-size: rem($status-icon-inline-size);
+    }
+
+    &--corner {
+        font-size: rem($status-icon-corner-size);
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}

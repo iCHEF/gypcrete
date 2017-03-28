@@ -1,0 +1,163 @@
+// *************************************
+//
+//   Animation
+//   -> 動畫庫
+//
+// *************************************
+
+// -------------------------------------
+//   Spin
+//   Ref: https://github.com/FortAwesome/Font-Awesome/blob/master/scss/_animated.scss
+//   (MIT License)
+// -------------------------------------
+
+@keyframes anim-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(359deg);
+    }
+}
+
+// -------------------------------------
+//   Blink
+// -------------------------------------
+
+@keyframes anim-blink {
+    0% {
+        opacity: 1;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    45% {
+        opacity: .2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+// -------------------------------------
+//   Fade In & Out
+// -------------------------------------
+
+@keyframes anim-fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes anim-fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+// -------------------------------------
+//   Bounce In & Out
+//   @REF: https://daneden.github.io/animate.css/
+// -------------------------------------
+
+@keyframes anim-bounce-in {
+    0%,
+    20%,
+    40%,
+    60%,
+    80%,
+    100% {
+        animation-timing-function: cubic-bezier(.215, .61, .355, 1);
+    }
+
+    0% {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3);
+    }
+
+    20% {
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40% {
+        transform: scale3d(.9, .9, .9);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+
+    80% {
+        transform: scale3d(.97, .97, .97);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+// -------------------------------------
+//   Slide Down
+// -------------------------------------
+
+@keyframes anim-slide-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-5%);
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// -------------------------------------
+//   Shake
+//   Ref: https://github.com/daneden/animate.css
+//   (MIT License)
+// -------------------------------------
+
+@keyframes anim-shake {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translate3d(10px, 0, 0);
+    }
+}

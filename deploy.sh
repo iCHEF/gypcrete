@@ -13,10 +13,13 @@ fi
 # Git clone
 git clone -b dist --single-branch git@github.com:iCHEF/gypcrete.git deploy
 
+# Clean up files from last build
+rm -rf ./deploy/dist ./deploy/lib ./deploy/es5
+
 # Copy built files
-cp -r ./dist/ ./deploy/dist
-cp -r ./lib/ ./deploy/lib
-cp -r ./es5/ ./deploy/es5
+cp -R ./dist ./deploy/dist
+cp -R ./lib ./deploy/lib
+cp -R ./es5 ./deploy/es5
 cp ./README.md ./deploy/README.md
 cp ./package.json ./deploy/package.json
 

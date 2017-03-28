@@ -4,15 +4,18 @@
 const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const baseConfig = require('./webpack.base');
 
 module.exports = webpackMerge(baseConfig, {
     entry: [
         'react-hot-loader/patch',
-        './doc/index.js'
+        './demo/index.js'
     ],
 
     output: {
+        filename: 'gypcrete-demo.js',
         publicPath: '/'
     },
 
@@ -22,7 +25,7 @@ module.exports = webpackMerge(baseConfig, {
                 test: /\.jsx?$/,
                 include: [
                     path.resolve(__dirname, '../src'),
-                    path.resolve(__dirname, '../doc')
+                    path.resolve(__dirname, '../demo')
                 ],
                 enforce: 'pre',
                 loader: 'eslint-loader',
@@ -39,10 +42,17 @@ module.exports = webpackMerge(baseConfig, {
                     emitWarning: true
                 }
             },
+            {
+                test: /\.jsx?$/,
+                include: [
+                    path.resolve(__dirname, '../demo')
+                ],
+                use: ['babel-loader']
+            }
         ]
     },
 
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
 
     devServer: {
         compress: true,
@@ -59,17 +69,19 @@ module.exports = webpackMerge(baseConfig, {
         },
         watchOptions: {
             ignored: /node_modules/
-        },
-        setup: (app) => {
-            app.get('/', (request, response) => {
-                const indexFile = path.resolve(__dirname, '../doc/index.html');
-                response.sendFile(indexFile);
-            });
         }
     },
 
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './demo/index.html',
+            hash: false,
+            minify: {
+                collapseWhitespace: true
+            }
+        })
     ]
 });

@@ -1,4 +1,6 @@
 {
+    "comments": false,
+    
     "presets": [
         ["env", { "modules": false }],
         "stage-2",
@@ -7,6 +9,12 @@
 
     "plugins": [
         "transform-runtime",
+        ["module-resolver", {
+            "alias": {
+                "src": "./src",
+                "demo": "./demo"
+            }
+        }]
     ],
 
     "env": {
@@ -28,7 +36,7 @@
             ],
             "ignore": ["__tests__"]
         },
-        "server": {
+        "demo": {
             "plugins": [
                 "react-hot-loader/babel"
             ]
