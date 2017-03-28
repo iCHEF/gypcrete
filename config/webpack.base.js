@@ -2,6 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 const path = require('path');
+const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -11,7 +12,7 @@ module.exports = {
     context: path.resolve(__dirname, '..'),
 
     output: {
-        filename: 'bundle.js',
+        filename: 'gypcrete.js',
         path: path.resolve(__dirname, '../dist'),
         library: 'gypcrete'
     },
@@ -21,8 +22,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 include: [
-                    path.resolve(__dirname, '../src'),
-                    path.resolve(__dirname, '../doc')
+                    path.resolve(__dirname, '../src')
                 ],
                 use: ['babel-loader']
             },
@@ -75,6 +75,7 @@ module.exports = {
     },
 
     plugins: [
-        new ExtractTextPlugin('bundle.css')
+        new webpack.ProgressPlugin(),
+        new ExtractTextPlugin('gypcrete.css')
     ]
 };
