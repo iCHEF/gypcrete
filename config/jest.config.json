@@ -1,4 +1,5 @@
 {
+    "coverageReporters": ["cobertura", "lcov", "text"],
     "moduleNameMapper": {
          "\\.(css|scss|sass|md|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|)$": "<rootDir>/__mocks__/fileMock.js"
     },
