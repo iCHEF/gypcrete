@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 
+### Changed
+- Improve interaction on Jenkins:
+  * Generate jUnit test report.
+  * Generate Cobertura coverage report.
+  * Run `npm publish` with `NPM_TOKEN` env variables in `deploy.sh`.
+
 ## [0.5.0]
 ### Added
 - Add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) to serve demo bundles.
