@@ -3271,9 +3271,9 @@ jest-jasmine2@^19.0.2:
     jest-message-util "^19.0.0"
     jest-snapshot "^19.0.2"
 
-jest-junit@^1.4.0:
+jest-junit@zhusee2/jest-junit#update_format:
   version "1.4.0"
-  resolved "https://registry.yarnpkg.com/jest-junit/-/jest-junit-1.4.0.tgz#983eca042f2db2d76d09b96064dbb55d83bf685c"
+  resolved "https://codeload.github.com/zhusee2/jest-junit/tar.gz/df09e52562db8664214772231265390ec1046d39"
   dependencies:
     mkdirp "^0.5.1"
     xml "^1.0.1"
