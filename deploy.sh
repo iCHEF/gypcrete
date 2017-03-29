@@ -30,3 +30,9 @@ git commit -m "Built at ${BUILD_TAG}" --author="ichefbot <developer@ichef.com.tw
 
 # Push to dist branch
 git push origin dist
+
+# Publish to npm (only in master)
+if [ "$GIT_BRANCH" = "origin/master" ]; then
+    echo //registry.npmjs.org/:_authToken="${NPM_TOKEN}" > "${WORKSPACE}"/.npmrc
+    npm publish || exit 1
+fi
