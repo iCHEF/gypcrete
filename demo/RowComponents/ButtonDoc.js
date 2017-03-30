@@ -6,6 +6,10 @@ function FlexRow({ children }) {
     return <div style={{ display: 'flex' }}>{children}</div>;
 }
 
+function handleButtonClick() {
+    console.log('Button clicked'); // eslint-disable-line no-console
+}
+
 function ButtonDoc() {
     return (
         <div>
@@ -16,7 +20,8 @@ function ButtonDoc() {
                     basic="Blue Button"
                     aside="Default color"
                     tag="Tag"
-                    icon="add" />
+                    icon="add"
+                    onClick={handleButtonClick} />
 
                 <Button
                     color="red"

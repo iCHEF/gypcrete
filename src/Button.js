@@ -21,14 +21,15 @@ function Button(props) {
 
         // React props
         className,
-        children
+        children,
+        ...otherProps
     } = props;
 
     const bemClass = ROOT_BEM.modifier(color);
     const rootClassName = classNames(className, `${bemClass}`);
 
     return (
-        <button type="button" className={rootClassName}>
+        <button type="button" className={rootClassName} {...otherProps}>
             <RowCompBody>
                 {children}
             </RowCompBody>
