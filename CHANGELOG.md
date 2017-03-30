@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   * Generate jUnit test report.
   * Generate Cobertura coverage report.
   * Run `npm publish` with `NPM_TOKEN` env variables in `deploy.sh`.
+- `<Tag>` now adapts to the color of its parent more actively.
 
 ## [0.5.0]
 ### Added

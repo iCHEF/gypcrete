@@ -10,7 +10,11 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 function Tag({ className, children }) {
     const rootClass = classNames(`${ROOT_BEM}`, className);
 
-    return <span className={rootClass}>{children}</span>;
+    return (
+        <span className={rootClass}>
+            <span>{children}</span>
+        </span>
+    );
 }
 
 export default Tag;
