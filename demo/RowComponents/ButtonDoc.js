@@ -2,8 +2,13 @@ import React from 'react';
 
 import Button from 'src/Button';
 
+const flexRowStyle = {
+    display: 'flex',
+    marginBottom: 10
+};
+
 function FlexRow({ children }) {
-    return <div style={{ display: 'flex' }}>{children}</div>;
+    return <div style={flexRowStyle}>{children}</div>;
 }
 
 function handleButtonClick() {
@@ -49,6 +54,60 @@ function ButtonDoc() {
                     aside="Disabled"
                     tag="Tag"
                     icon="add"
+                    disabled />
+            </FlexRow>
+
+            <FlexRow>
+                <Button
+                    solid
+                    basic="Blue"
+                    tag="Solid" />
+
+                <Button
+                    solid
+                    color="red"
+                    basic="Red"
+                    tag="Solid" />
+
+                <Button
+                    solid
+                    color="white"
+                    basic="White"
+                    tag="Solid" />
+
+                <Button
+                    solid
+                    color="black"
+                    basic="Black"
+                    tag="Solid" />
+            </FlexRow>
+
+            <FlexRow>
+                <Button
+                    solid
+                    basic="Blue"
+                    tag="Solid"
+                    disabled />
+
+                <Button
+                    solid
+                    color="red"
+                    basic="Red"
+                    tag="Solid"
+                    disabled />
+
+                <Button
+                    solid
+                    color="white"
+                    basic="White"
+                    tag="Solid"
+                    disabled />
+
+                <Button
+                    solid
+                    color="black"
+                    basic="Black"
+                    tag="Solid"
                     disabled />
             </FlexRow>
         </div>

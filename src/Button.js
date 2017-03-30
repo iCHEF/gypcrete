@@ -18,6 +18,7 @@ export const BUTTON_COLOR = { BLUE, RED, WHITE, BLACK };
 function Button(props) {
     const {
         color,
+        solid,
 
         // React props
         className,
@@ -25,7 +26,10 @@ function Button(props) {
         ...otherProps
     } = props;
 
-    const bemClass = ROOT_BEM.modifier(color);
+    const bemClass = ROOT_BEM
+        .modifier(color)
+        .modifier('solid', solid);
+
     const rootClassName = classNames(className, `${bemClass}`);
 
     return (
@@ -38,11 +42,13 @@ function Button(props) {
 }
 
 Button.propTypes = {
-    color: PropTypes.oneOf(Object.values(BUTTON_COLOR))
+    color: PropTypes.oneOf(Object.values(BUTTON_COLOR)),
+    solid: PropTypes.bool,
 };
 
 Button.defaultProps = {
-    color: BLUE
+    color: BLUE,
+    solid: false,
 };
 
 // export for tests
