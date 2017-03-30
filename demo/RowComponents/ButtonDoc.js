@@ -110,6 +110,21 @@ function ButtonDoc() {
                     tag="Solid"
                     disabled />
             </FlexRow>
+
+            <FlexRow>
+                <Button
+                    solid
+                    basic="Expanded Button"
+                    align="center"
+                    minified={false} />
+
+                <Button
+                    solid
+                    color="red"
+                    basic="Expanded Button"
+                    align="center"
+                    minified={false} />
+            </FlexRow>
         </div>
     );
 }
