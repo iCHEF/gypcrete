@@ -1,0 +1,34 @@
+@import "./mixins";
+
+.#{$prefix}-button {
+    @include remove-button-appearance;
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    // ----------------------
+    //  <Button> states
+    // ----------------------
+    &:hover, &:focus {
+        background-color: $c-comp-bg-hover;
+    }
+    &:active {
+        background-color: $c-comp-bg-active;
+    }
+
+    // ----------------------
+    //  <Button> variants
+    // ----------------------
+    &--blue {
+        color: $c-blue;
+    }
+    &--red {
+        color: $c-red;
+    }
+    &--white {
+        color: $c-white;
+    }
+    &--black {
+        color: $c-black;
+    }
+}

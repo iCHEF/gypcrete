@@ -17,3 +17,14 @@
         width: $_width;
     }
 }
+
+@mixin remove-button-appearance {
+    color: inherit;
+    background: transparent;
+    border: 0;
+    margin: 0;
+    outline: 0;
+    text-align: inherit;
+    appearance: none;
+    user-select: none;
+}

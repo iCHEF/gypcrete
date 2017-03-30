@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TextLabelDoc from './TextLabelDoc';
+import ButtonDoc from './ButtonDoc';
 
 function RowComponents() {
     return (
@@ -8,6 +9,7 @@ function RowComponents() {
             <h1>Row Components</h1>
 
             <TextLabelDoc />
+            <ButtonDoc />
         </div>
     );
 }

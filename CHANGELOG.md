@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Migrate `<Button>`
 
 ### Changed
 - Improve interaction on Jenkins:

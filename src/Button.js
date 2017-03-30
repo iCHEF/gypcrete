@@ -1,0 +1,50 @@
+import React, { PropTypes } from 'react';
+import classNames from 'classnames';
+import icBEM from './utils/icBEM';
+import rowComp from './mixins/rowComp';
+import './styles/Button.scss';
+
+import RowCompBody from './RowCompBody';
+
+export const COMPONENT_NAME = 'ic-button';
+const ROOT_BEM = icBEM(COMPONENT_NAME);
+
+const BLUE = 'blue';
+const RED = 'red';
+const WHITE = 'white';
+const BLACK = 'black';
+export const BUTTON_COLOR = { BLUE, RED, WHITE, BLACK };
+
+function Button(props) {
+    const {
+        color,
+
+        // React props
+        className,
+        children
+    } = props;
+
+    const bemClass = ROOT_BEM.modifier(color);
+    const rootClassName = classNames(className, `${bemClass}`);
+
+    return (
+        <button type="button" className={rootClassName}>
+            <RowCompBody>
+                {children}
+            </RowCompBody>
+        </button>
+    );
+}
+
+Button.propTypes = {
+    color: PropTypes.oneOf(Object.values(BUTTON_COLOR))
+};
+
+Button.defaultProps = {
+    color: BLUE
+};
+
+// export for tests
+export { Button as PureButton };
+
+export default rowComp({ defaultMinified: true })(Button);
