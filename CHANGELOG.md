@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Migrate `<Button>`
+- Migrate row components:
+  * `<Button>`
+- Migrate visual elements:
+  * `<Tooltip>` (now limits to top and bottom placements only)
 
 - `<IconLayout>` for displaying status on an `<Icon>`.
 - `<IconButton>` as an icon-only variant of `<Button>`.

@@ -1,0 +1,43 @@
+import React, { PropTypes } from 'react';
+import classNames from 'classnames';
+import icBEM from './utils/icBEM';
+import './styles/Tooltip.scss';
+
+export const COMPONENT_NAME = 'ic-tooltip';
+const ROOT_BEM = icBEM(COMPONENT_NAME);
+const BEM = {
+    root: ROOT_BEM,
+    arrow: ROOT_BEM.element('arrow')
+};
+
+const TOP = 'top';
+const BOTTOM = 'bottom';
+export const TOOLTIP_PLACEMENT = { TOP, BOTTOM };
+
+function Tooltip({
+    placement,
+    // React props
+    className,
+    ...otherProps,
+}) {
+    const bemClass = BEM.root.modifier(placement);
+    const rootClassName = classNames(className, `${bemClass}`);
+
+    return (
+        <span className={rootClassName} {...otherProps}>
+            content
+
+            <span className={BEM.arrow} />
+        </span>
+    );
+}
+
+Tooltip.propTypes = {
+    placement: PropTypes.oneOf(Object.values(TOOLTIP_PLACEMENT)),
+};
+
+Tooltip.defaultProps = {
+    placement: TOP,
+};
+
+export default Tooltip;
