@@ -1,0 +1,97 @@
+@import "./mixins";
+
+@mixin solid-button($color) {
+    background-color: $color;
+
+    &:hover, &:focus {
+        background-color: lighten($color, 7%);
+    }
+    &:active {
+        background-color: darken($color, 5%);
+    }
+
+    .#{$prefix}-tag > span {
+        color: $color;
+    }
+}
+
+.#{$prefix}-button {
+    @include remove-button-appearance;
+    
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    // ----------------------
+    //  <Button> states
+    // ----------------------
+    &:hover, &:focus {
+        background-color: $c-comp-bg-hover;
+    }
+    &:active {
+        background-color: $c-comp-bg-active;
+    }
+
+    // ----------------------
+    //  <Button> variants
+    // ----------------------
+    &--blue {
+        color: $c-blue;
+    }
+    &--red {
+        color: $c-red;
+    }
+    &--white {
+        color: $c-white;
+    }
+    &--black {
+        color: $c-black;
+    }
+}
+
+// ----------------------
+//  Solid <Button>
+// ----------------------
+.#{$prefix}-button--solid {
+    color: $c-white;
+    border-radius: rem($button-border-radius);
+    box-shadow: inset 0 0 1px $c-black;
+
+    // ----------------------
+    //  Color variants
+    // ----------------------
+
+    &.#{$prefix}-button--blue {
+        @include solid-button($c-blue);
+    }
+    
+    &.#{$prefix}-button--red {
+        @include solid-button($c-red);
+    }
+
+    &.#{$prefix}-button--white {
+        background-color: $c-white;
+        color: $c-black;
+
+        &:hover, &:focus {
+            background-color: $c-comp-bg-hover;
+        }
+        &:active {
+            background-color: $c-comp-bg-active;
+        }
+    }
+
+    &.#{$prefix}-button--black {
+        background-color: $c-black;
+
+        &:hover, &:focus {
+            background-color: lighten($c-black, 20%);
+        }
+        &:active {
+            background-color: darken($c-black, 10%);
+        }
+
+        .#{$prefix}-tag > span {
+            color: $c-black;
+        }
+    }
+}

@@ -47,7 +47,7 @@ function TextLabelDoc() {
 
             <DebugBox>
                 <TextLabel status="error">
-                    <Text basic="foo" />
+                    <Text basic="foo" tag="Tag" />
                 </TextLabel>
             </DebugBox>
         </div>

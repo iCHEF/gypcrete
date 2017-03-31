@@ -11,6 +11,12 @@
     align-items: center;
     overflow: hidden;
 
+    @at-root {
+        button#{&} {
+            padding: rem($component-padding);
+        }
+    }
+
     // ----------------------
     //  <RowComp> elements
     // ----------------------

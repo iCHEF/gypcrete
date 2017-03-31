@@ -82,7 +82,7 @@ function determineTextAlign(compAlign, hasIcon) {
 }
 
 const rowComp = ({
-    minified = false,
+    defaultMinified = false,
     defaultAlign = 'left'
 } = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
@@ -91,6 +91,8 @@ const rowComp = ({
         static displayName = `rowComp(${componentName})`;
 
         static propTypes = {
+            minified: PropTypes.bool,
+
             // Text label props
             align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
             icon: PropTypes.string,
@@ -110,6 +112,8 @@ const rowComp = ({
         };
 
         static defaultProps = {
+            minified: defaultMinified,
+
             align: defaultAlign,
             icon: null,
             basic: null,
@@ -162,6 +166,8 @@ const rowComp = ({
 
         render() {
             const {
+                minified,
+
                 align,
                 icon,
                 basic,

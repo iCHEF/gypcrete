@@ -7,11 +7,11 @@ import RowCompBody from './RowCompBody';
 
 export const COMPONENT_NAME = 'ic-text-label';
 
-function TextLabel({ className, children }) {
+function TextLabel({ className, children, ...otherProps }) {
     const rootClassName = classNames(className, COMPONENT_NAME);
 
     return (
-        <div className={rootClassName}>
+        <div className={rootClassName} {...otherProps}>
             <RowCompBody>
                 {children}
             </RowCompBody>
