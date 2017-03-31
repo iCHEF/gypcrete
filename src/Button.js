@@ -15,17 +15,15 @@ const WHITE = 'white';
 const BLACK = 'black';
 export const BUTTON_COLOR = { BLUE, RED, WHITE, BLACK };
 
-function Button(props) {
-    const {
-        color,
-        solid,
+function Button({
+    color,
+    solid,
 
-        // React props
-        className,
-        children,
-        ...otherProps
-    } = props;
-
+    // React props
+    className,
+    children,
+    ...otherProps,
+}) {
     const bemClass = ROOT_BEM
         .modifier(color)
         .modifier('solid', solid);
