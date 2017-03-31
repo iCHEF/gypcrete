@@ -14,6 +14,7 @@ import TextEllipsis from './TextEllipsis';
 
 // Row components
 import TextLabel from './TextLabel';
+import Button from './Button';
 
 export {
     BasicRow,
@@ -27,4 +28,5 @@ export {
     TextEllipsis,
 
     TextLabel,
+    Button,
 };
