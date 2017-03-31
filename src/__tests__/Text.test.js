@@ -19,6 +19,16 @@ describe('<withStatus(Text)>', () => {
 
         ReactDOM.render(element, div);
     });
+
+    it('works with withStatus() mixin', () => {
+        const wrapper = shallow(
+            <Text basic="Foo" />,
+            { context: { status: 'error', errorMsg: 'bar' } }
+        );
+
+        expect(wrapper.prop('statusIcon').type).toBe(StatusIcon);
+        expect(wrapper.prop('errorMsg')).toBe('bar');
+    });
 });
 
 describe('Pure <Text>', () => {
