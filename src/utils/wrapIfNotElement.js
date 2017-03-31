@@ -6,14 +6,20 @@ import React from 'react';
  *
  * @param {Any} content
  * @param {Component} Wrapper
+ * @param {String} prop - pass `content` into specified `prop`. Default via 'children'.
  *
  * @return {Element}
  */
-function wrapIfNotElement(content, { with: Wrapper }) {
+function wrapIfNotElement(content, { with: Wrapper, via: prop = 'children' }) {
     if (React.isValidElement(content)) {
         return content;
     }
-    return <Wrapper>{content}</Wrapper>;
+
+    const wrapperProps = {
+        [prop]: content
+    };
+
+    return <Wrapper {...wrapperProps} />;
 }
 
 export default wrapIfNotElement;
