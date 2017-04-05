@@ -9,6 +9,7 @@ import Text from './Text';
 
 // Layout helpers
 import FlexCell from './FlexCell';
+import IconLayout from './IconLayout';
 import RowCompBody from './RowCompBody';
 import TextEllipsis from './TextEllipsis';
 
@@ -24,6 +25,7 @@ export {
     Text,
 
     FlexCell,
+    IconLayout,
     RowCompBody,
     TextEllipsis,
 

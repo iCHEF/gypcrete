@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Migrate `<Button>`
 
+- `<IconLayout>` for displaying status on an `<Icon>`.
+
 ### Changed
 - Improve interaction on Jenkins:
   * Generate jUnit test report.
