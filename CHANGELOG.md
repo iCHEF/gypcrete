@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `<Tag>` now adapts to the color of its parent more actively.
 - Fix `<Button>` should turn red on error state
 - `wrapIfNotElement()` helper now takes an extra `via` param to change how `content` is passed to the `Wrapper` component.
+- You can now strip the BEM block from output by calling `bem.toString({ stripBlock: true })`.
 
 ## [0.5.0]
 ### Added

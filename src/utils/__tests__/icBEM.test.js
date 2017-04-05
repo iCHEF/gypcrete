@@ -63,6 +63,20 @@ describe('icBEM() helper', () => {
         expect(bem.toString()).toBe('ic-comp__body ic-comp__body--large foo-bar');
     });
 
+    it('can strip BEM block from toString() output', () => {
+        let bem = icBEM('ic-comp').modifier('foo');
+        let output = bem.toString({ stripBlock: true });
+
+        expect(output).toBe('ic-comp--foo');
+
+        bem = icBEM('ic-comp')
+            .element('body')
+            .modifier('bar');
+        output = bem.toString({ stripBlock: true });
+
+        expect(output).toBe('ic-comp__body--bar');
+    });
+
     it('ignores empty mutation calls', () => {
         const bem = icBEM('ic-comp')
             .element()
