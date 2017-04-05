@@ -75,7 +75,8 @@
     "webpack-merge": "^4.0.0"
   },
   "dependencies": {
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "document-offset": "^1.0.4"
   },
   "jest-junit": {
     "output": "./coverage/junit.xml"
