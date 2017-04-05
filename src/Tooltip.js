@@ -16,6 +16,7 @@ export const TOOLTIP_PLACEMENT = { TOP, BOTTOM };
 
 function Tooltip({
     placement,
+    arrowPosition,
     // React props
     className,
     ...otherProps,
@@ -27,17 +28,19 @@ function Tooltip({
         <span className={rootClassName} {...otherProps}>
             content
 
-            <span className={BEM.arrow} />
+            <span className={BEM.arrow} style={arrowPosition} />
         </span>
     );
 }
 
 Tooltip.propTypes = {
     placement: PropTypes.oneOf(Object.values(TOOLTIP_PLACEMENT)),
+    arrowPosition: PropTypes.objectOf(PropTypes.number),
 };
 
 Tooltip.defaultProps = {
     placement: TOP,
+    arrowPosition: {},
 };
 
 export default Tooltip;
