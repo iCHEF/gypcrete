@@ -95,3 +95,15 @@
         }
     }
 }
+
+// ----------------------
+//  Icon-only <Button>
+// ----------------------
+.#{$prefix}-button--icon-only {
+    color: $c-icon-header;
+
+    // #TODO: Row class to be determined.
+    .#{$prefix}-row {
+        color: $c-icon-row;
+    }
+}

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Migrate `<Button>`
 
 - `<IconLayout>` for displaying status on an `<Icon>`.
+- `<IconButton>` as an icon-only variant of `<Button>`.
 
 ### Changed
 - Improve interaction on Jenkins:
