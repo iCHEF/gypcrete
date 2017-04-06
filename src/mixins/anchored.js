@@ -62,7 +62,11 @@ const anchored = (options = {}) => (WrappedComponent) => {
             anchor: PropTypes.oneOfType([
                 PropTypes.instanceOf(window.Node),
                 PropTypes.instanceOf(Component)
-            ]).isRequired
+            ])
+        };
+
+        static defaultProps = {
+            anchor: null,
         };
 
         state = {
@@ -75,6 +79,12 @@ const anchored = (options = {}) => (WrappedComponent) => {
             this.adjustPosition();
         }
 
+        componentWillReceiveProps(nextProps) {
+            if (nextProps.anchor !== this.props.anchor) {
+                this.adjustPosition(nextProps.anchor);
+            }
+        }
+
 
         // -------------------------------------
         //   Get DOM elements
@@ -84,19 +94,17 @@ const anchored = (options = {}) => (WrappedComponent) => {
          * Find the underlying DOM node of `props.anchor` for its size and position.
          * `findDOMNode()` is required for this.
          */
-        getAnchorDOMNode() {
-            const { anchor } = this.props;
-
-            if (anchor instanceof window.Node) {
-                return anchor;
+        getAnchorDOMNode(fromAnchor = this.props.anchor) {
+            if (fromAnchor instanceof window.Node) {
+                return fromAnchor;
             }
 
-            if (anchor instanceof Component) {
+            if (fromAnchor instanceof Component) {
                 // eslint-disable-next-line react/no-find-dom-node
-                return ReactDOM.findDOMNode(anchor);
+                return ReactDOM.findDOMNode(fromAnchor);
             }
 
-            throw new Error('Unable to locate anchor element on DOM.');
+            return null;
         }
 
         /**
@@ -122,9 +130,13 @@ const anchored = (options = {}) => (WrappedComponent) => {
          * ClientRect: element's positions related to viewport.
          * Offset: element's position related to document.
          */
-        adjustPosition() {
-            const anchorNode = this.getAnchorDOMNode();
+        adjustPosition(nextAnchor = this.props.anchor) {
+            const anchorNode = this.getAnchorDOMNode(nextAnchor);
             const selfNode = this.getSelfDOMNode();
+
+            if (!anchorNode) {
+                return;
+            }
 
             const anchorRect = anchorNode.getBoundingClientRect();
             const anchorOffset = documentOffset(anchorNode); // offset = { top,left }
@@ -209,6 +221,10 @@ const anchored = (options = {}) => (WrappedComponent) => {
                 ...this.state.position,
                 ...style,
             };
+
+            if (!anchor) {
+                return null;
+            }
 
             return (
                 <WrappedComponent
