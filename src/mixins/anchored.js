@@ -214,7 +214,7 @@ const anchored = (options = {}) => (WrappedComponent) => {
                 <WrappedComponent
                     {...otherProps}
                     placement={this.state.placement}
-                    arrowPosition={this.state.arrowPosition}
+                    arrowStyle={this.state.arrowPosition}
                     style={mergedStyle} />
             );
         }
