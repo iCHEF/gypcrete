@@ -5,6 +5,11 @@
  * based on specified **anchor** node.
  *
  * Usually used along with `renderToLayer()` mixin.
+ *
+ * Usage
+ * -----
+ * const AnchoredComponent = anchored(options)(Component);
+ * return <AnchoredComponent anchor={fooRef} />
  */
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
@@ -14,6 +19,12 @@ import getComponentName from '../utils/getComponentName';
 
 const TOP = 'top';
 const BOTTOM = 'bottom';
+export const ANCHORED_PLACEMENT = { TOP, BOTTOM };
+
+export const anchoredPropTypes = {
+    placement: PropTypes.oneOf(Object.values(ANCHORED_PLACEMENT)),
+    arrowStyle: PropTypes.objectOf(PropTypes.number),
+};
 
 const DEFAULT_OPTIONS = {
     padding: 16,
