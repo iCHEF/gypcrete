@@ -14,6 +14,7 @@ function CheckboxDoc() {
 
             <DebugBox>
                 <Checkbox
+                    defaultChecked
                     basic="Join pilot program"
                     aside="Secondary helps"
                     tag="New" />
@@ -21,12 +22,14 @@ function CheckboxDoc() {
 
             <DebugBox>
                 <Checkbox
+                    defaultChecked
                     basic="Count me in"
                     status="loading" />
             </DebugBox>
 
             <DebugBox>
                 <Checkbox
+                    defaultChecked
                     basic="Count me in"
                     status="success"
                     statusOptions={{ autohide: false }} />
@@ -37,6 +40,14 @@ function CheckboxDoc() {
                     basic="Count me in"
                     status="error"
                     errorMsg="Unauthorized" />
+            </DebugBox>
+
+            <DebugBox>
+                <Checkbox
+                    disabled
+                    basic="Join pilot program"
+                    aside="Secondary helps"
+                    tag="New" />
             </DebugBox>
         </div>
     );

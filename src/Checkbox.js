@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import prefixClass from './utils/prefixClass';
 import icBEM from './utils/icBEM';
@@ -18,30 +19,70 @@ const BEM = {
 };
 
 class Checkbox extends PureComponent {
-    renderCheckboxInput() {
+    static propTypes = {
+        /**
+         * Use `input` to inject props to the underlying <input>
+         */
+        input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+
+        // <input type="checkbox" /> props
+        checked: PropTypes.bool,
+        defaultChecked: PropTypes.bool,
+        disabled: PropTypes.bool,
+        onChange: PropTypes.func,
+    };
+
+    static defaultProps = {
+        input: {},
+
+        checked: undefined,
+        defaultChecked: undefined,
+        disabled: false,
+        onChange: undefined
+    };
+
+    renderCheckboxInput(inputProps) {
         return (
             <span className={BEM.iconWrapper}>
                 <input
                     ref={(ref) => { this.inputRef = ref; }}
                     type="checkbox"
                     className={BEM.input}
-                    checked={undefined /* #TODO */}
-                    defaultChecked={undefined /* #TODO */}
-                    onChange={null /* #TODO */}
-                    disabled={false /* #TODO */} />
+                    {...inputProps} />
+
                 <Icon type="empty" className={`${BEM.button}`} />
             </span>
         );
     }
 
     render() {
-        const { className, children, ...otherProps } = this.props;
+        const {
+            input,
+            // <input> props
+            checked,
+            defaultChecked,
+            disabled,
+            onChange,
+            // React props
+            className,
+            children,
+            ...otherProps,
+        } = this.props;
+
+        const inputProps = {
+            checked,
+            defaultChecked,
+            disabled,
+            onChange,
+            ...input,
+        };
+
         const rootClassName = classNames(className, COMPONENT_NAME);
 
         return (
             <div className={rootClassName} {...otherProps}>
                 <RowCompBody>
-                    {this.renderCheckboxInput()}
+                    {this.renderCheckboxInput(inputProps)}
                     {children}
                 </RowCompBody>
             </div>
