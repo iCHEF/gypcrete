@@ -19,6 +19,7 @@ import TextEllipsis from './TextEllipsis';
 import TextLabel from './TextLabel';
 import Button from './Button';
 import IconButton from './IconButton';
+import Checkbox from './Checkbox';
 import SearchInput from './SearchInput';
 
 export {
@@ -38,5 +39,6 @@ export {
     TextLabel,
     Button,
     IconButton,
+    Checkbox,
     SearchInput,
 };
