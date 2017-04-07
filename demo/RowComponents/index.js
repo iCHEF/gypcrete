@@ -2,6 +2,7 @@ import React from 'react';
 
 import TextLabelDoc from './TextLabelDoc';
 import ButtonDoc from './ButtonDoc';
+import IconButtonDoc from './IconButtonDoc';
 
 function RowComponents() {
     return (
@@ -10,6 +11,7 @@ function RowComponents() {
 
             <TextLabelDoc />
             <ButtonDoc />
+            <IconButtonDoc />
         </div>
     );
 }

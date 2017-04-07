@@ -8,12 +8,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Migrate `<Button>`
 
+- `<IconLayout>` for displaying status on an `<Icon>`.
+- `<IconButton>` as an icon-only variant of `<Button>`.
+
 ### Changed
 - Improve interaction on Jenkins:
   * Generate jUnit test report.
   * Generate Cobertura coverage report.
   * Run `npm publish` with `NPM_TOKEN` env variables in `deploy.sh`.
 - `<Tag>` now adapts to the color of its parent more actively.
+- Fix `<Button>` should turn red on error state
+- `wrapIfNotElement()` helper now takes an extra `via` param to change how `content` is passed to the `Wrapper` component.
+- You can now strip the BEM block from output by calling `bem.toString({ stripBlock: true })`.
 
 ## [0.5.0]
 ### Added

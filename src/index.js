@@ -9,11 +9,14 @@ import Text from './Text';
 
 // Layout helpers
 import FlexCell from './FlexCell';
+import IconLayout from './IconLayout';
 import RowCompBody from './RowCompBody';
 import TextEllipsis from './TextEllipsis';
 
 // Row components
 import TextLabel from './TextLabel';
+import Button from './Button';
+import IconButton from './IconButton';
 
 export {
     BasicRow,
@@ -23,8 +26,11 @@ export {
     Text,
 
     FlexCell,
+    IconLayout,
     RowCompBody,
     TextEllipsis,
 
     TextLabel,
+    Button,
+    IconButton,
 };

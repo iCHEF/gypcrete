@@ -125,6 +125,33 @@ function ButtonDoc() {
                     align="center"
                     minified={false} />
             </FlexRow>
+
+            <FlexRow>
+                <Button
+                    basic="Button"
+                    tag="Tag"
+                    icon="add" />
+
+                <Button
+                    basic="Button"
+                    tag="Tag"
+                    icon="add"
+                    status="loading" />
+
+                <Button
+                    basic="Button"
+                    tag="Tag"
+                    icon="add"
+                    status="success"
+                    statusOptions={{ autohide: false }} />
+
+                <Button
+                    basic="Button"
+                    tag="Tag"
+                    icon="add"
+                    status="error"
+                    errorMsg="Save failed" />
+            </FlexRow>
         </div>
     );
 }
