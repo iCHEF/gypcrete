@@ -95,7 +95,7 @@ const anchored = (options = {}) => (WrappedComponent) => {
          * `findDOMNode()` is required for this.
          */
         getAnchorDOMNode(fromAnchor = this.props.anchor) {
-            if (fromAnchor instanceof window.Node) {
+            if (fromAnchor instanceof window.HTMLElement) {
                 return fromAnchor;
             }
 
