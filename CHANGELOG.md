@@ -10,9 +10,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   * `<Button>`
 - Migrate visual elements:
   * `<Tooltip>` (now limits to top and bottom placements only)
+  * `<AnchoredToolip>` (simplified to be more passive)
+- Migrate HOC mixins:
+  * `anchored()`: place Component near a given anchor. DOM offset calculated by `document-offset` package.
+  * `renderToLayer()`: renders Component to another DOM node outside of React root.
 
 - `<IconLayout>` for displaying status on an `<Icon>`.
 - `<IconButton>` as an icon-only variant of `<Button>`.
+- `randId()` helper for generating a random String to used on DOM nodes.
 
 ### Changed
 - Improve interaction on Jenkins:
