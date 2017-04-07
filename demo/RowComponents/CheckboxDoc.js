@@ -23,6 +23,7 @@ function CheckboxDoc() {
             <DebugBox>
                 <Checkbox
                     defaultChecked
+                    align="center"
                     basic="Count me in"
                     status="loading" />
             </DebugBox>
@@ -30,6 +31,7 @@ function CheckboxDoc() {
             <DebugBox>
                 <Checkbox
                     defaultChecked
+                    align="reverse"
                     basic="Count me in"
                     status="success"
                     statusOptions={{ autohide: false }} />
