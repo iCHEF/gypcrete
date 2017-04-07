@@ -22,7 +22,7 @@ function CheckboxDoc() {
 
             <DebugBox>
                 <Checkbox
-                    defaultChecked
+                    indeterminate
                     align="center"
                     basic="Count me in"
                     status="loading" />

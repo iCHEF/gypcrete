@@ -24,6 +24,7 @@ class Checkbox extends PureComponent {
          * Use `input` to inject props to the underlying <input>
          */
         input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+        indeterminate: PropTypes.bool,
 
         // <input type="checkbox" /> props
         checked: PropTypes.bool,
@@ -34,12 +35,27 @@ class Checkbox extends PureComponent {
 
     static defaultProps = {
         input: {},
+        indeterminate: false,
 
         checked: undefined,
         defaultChecked: undefined,
         disabled: false,
         onChange: undefined
     };
+
+    componentDidMount() {
+        this.updateInputIndeterminate();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.indeterminate !== this.props.indeterminate) {
+            this.updateInputIndeterminate();
+        }
+    }
+
+    updateInputIndeterminate() {
+        this.inputRef.indeterminate = this.props.indeterminate;
+    }
 
     renderCheckboxInput(inputProps) {
         return (
