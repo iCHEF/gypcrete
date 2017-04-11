@@ -3,9 +3,11 @@
 @mixin solid-button($color) {
     background-color: $color;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background-color: lighten($color, 7%);
     }
+
     &:active {
         background-color: darken($color, 5%);
     }
@@ -17,16 +19,18 @@
 
 .#{$prefix}-button {
     @include remove-button-appearance;
-    
+
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 
     // ----------------------
     //  <Button> states
     // ----------------------
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         background-color: $c-comp-bg-hover;
     }
+
     &:active {
         background-color: $c-comp-bg-active;
     }
@@ -37,12 +41,15 @@
     &--blue {
         color: $c-blue;
     }
+
     &--red {
         color: $c-red;
     }
+
     &--white {
         color: $c-white;
     }
+
     &--black {
         color: $c-black;
     }
@@ -59,11 +66,10 @@
     // ----------------------
     //  Color variants
     // ----------------------
-
     &.#{$prefix}-button--blue {
         @include solid-button($c-blue);
     }
-    
+
     &.#{$prefix}-button--red {
         @include solid-button($c-red);
     }
@@ -72,9 +78,11 @@
         background-color: $c-white;
         color: $c-black;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: $c-comp-bg-hover;
         }
+
         &:active {
             background-color: $c-comp-bg-active;
         }
@@ -83,9 +91,11 @@
     &.#{$prefix}-button--black {
         background-color: $c-black;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: lighten($c-black, 20%);
         }
+
         &:active {
             background-color: darken($c-black, 10%);
         }
