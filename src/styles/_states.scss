@@ -20,7 +20,7 @@
     pointer-events: none !important;
 }
 
-[hidden]
+[hidden],
 .#{$prefix-state}-hidden {
     display: none;
 }
