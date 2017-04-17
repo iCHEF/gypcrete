@@ -6,6 +6,8 @@ import Icon from './Icon';
 import StatusIcon from './StatusIcon';
 import Tag from './Tag';
 import Text from './Text';
+import Tooltip from './Tooltip';
+import AnchoredTooltip from './AnchoredTooltip';
 
 // Layout helpers
 import FlexCell from './FlexCell';
@@ -24,6 +26,8 @@ export {
     StatusIcon,
     Tag,
     Text,
+    Tooltip,
+    AnchoredTooltip,
 
     FlexCell,
     IconLayout,

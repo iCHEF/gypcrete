@@ -16,9 +16,9 @@
     color: inherit;
     font-size: rem($tag-font-size); // 12px
     line-height: 1em;
-    padding: rem(2px) rem(4px);
+    padding: rem($tag-vertical-padding) rem($tag-horizontal-padding);
     border: rem(1px) solid transparent;
-    border-radius: rem(6px);
+    border-radius: rem($tag-border-radius);
     background-clip: padding-box;
     display: inline-block;
     vertical-align: text-top;
