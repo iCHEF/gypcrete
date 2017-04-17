@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- N/A
+- Install `prop-types` package in `dependencies` as official recommended.
 
 ### Changed
 - Upgrade `react` & `react-dom` to v15.5.
