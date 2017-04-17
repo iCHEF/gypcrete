@@ -112,7 +112,7 @@ it('renders without crashing', () => {
     ReactDOM.render(element, div);
 });
 
-it('renders on top of anchor when possible or needed', () => {
+it('renders above when anchor placed near bottom of viewport', () => {
     const anchorWrapper = mount(<Anchor top={700} left={100} />, { attachTo: anchorRoot });
 
     let boxWrapper = mount(
@@ -132,7 +132,7 @@ it('renders on top of anchor when possible or needed', () => {
     expect(boxWrapper.prop('style').top).toBe(700 - BOX_SIZE);
 });
 
-it('renders below anchor when possible or needed', () => {
+it('renders below when anchor placed near top of viewport', () => {
     const anchorWrapper = mount(<Anchor top={50} left={100} />, { attachTo: anchorRoot });
 
     let boxWrapper = mount(
@@ -169,7 +169,7 @@ it('renders and aligns to the center line of anchor', () => {
 });
 
 
-it('renders on the left side of anchor when not enough space on the right', () => {
+it('renders on the left when anchor placed on the right of viewport', () => {
     const anchorWrapper = mount(<Anchor top={20} left={1000} />, { attachTo: anchorRoot });
     const boxWrapper = mount(
         <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
@@ -185,7 +185,7 @@ it('renders on the left side of anchor when not enough space on the right', () =
     );
 });
 
-it('renders on the right side of anchor when not enough space on the left', () => {
+it('renders on the right when anchor placed on the left of viewport', () => {
     const anchorWrapper = mount(<Anchor top={20} left={10} />, { attachTo: anchorRoot });
     const boxWrapper = mount(
         <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
