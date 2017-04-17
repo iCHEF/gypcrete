@@ -33,6 +33,6 @@ git push origin dist
 
 # Publish to npm (only in master)
 if [ "$GIT_BRANCH" = "origin/master" ]; then
-    echo //registry.npmjs.org/:_authToken="${NPM_TOKEN}" > "${WORKSPACE}"/.npmrc
+    echo //registry.npmjs.org/:_authToken="${NPM_TOKEN}" > "${WORKSPACE}"/deploy/.npmrc
     npm publish || exit 1
 fi
