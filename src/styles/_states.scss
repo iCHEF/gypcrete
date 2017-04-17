@@ -3,11 +3,11 @@
 // Styles for shared states
 
 .#{$prefix-state}-editable {
-    color: $c-text-editable;
+    color: $c-text-editable !important;
 }
 
 .#{$prefix-state}-error {
-    color: $c-text-error;
+    color: $c-text-error !important;
 }
 
 .#{$prefix-state}-untouchable {
@@ -20,7 +20,7 @@
     pointer-events: none !important;
 }
 
-[hidden]
+[hidden],
 .#{$prefix-state}-hidden {
     display: none;
 }

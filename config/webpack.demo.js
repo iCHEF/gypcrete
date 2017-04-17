@@ -73,6 +73,7 @@ module.exports = webpackMerge(baseConfig, {
     },
 
     plugins: [
+        new webpack.ProgressPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin({

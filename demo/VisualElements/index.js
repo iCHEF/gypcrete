@@ -3,6 +3,7 @@ import React from 'react';
 import TextDoc from './TextDoc';
 import IconDoc from './IconDoc';
 import TagDoc from './TagDoc';
+import TooltipDoc from './TooltipDoc';
 
 function VisualElements() {
     return (
@@ -12,6 +13,7 @@ function VisualElements() {
             <TextDoc />
             <IconDoc />
             <TagDoc />
+            <TooltipDoc />
         </div>
     );
 }

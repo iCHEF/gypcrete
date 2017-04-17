@@ -17,3 +17,8 @@ it('wraps non-element input with specified component', () => {
     expect(wrapIfNotElement('foo', { with: 'span' })).toEqual(<span>foo</span>);
     expect(wrapIfNotElement(22, { with: Bar })).toEqual(<Bar>{22}</Bar>);
 });
+
+
+it('can render content in given Component via certain prop', () => {
+    expect(wrapIfNotElement(22, { with: Bar, via: 'foo' })).toEqual(<Bar foo={22} />);
+});

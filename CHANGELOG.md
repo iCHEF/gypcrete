@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 
+## [0.6.0]
+### Added
+- Migrate row components:
+  * `<Button>`
+- Migrate visual elements:
+  * `<Tooltip>` (now limits to top and bottom placements only)
+  * `<AnchoredToolip>` (simplified to be more passive)
+- Migrate HOC mixins:
+  * `anchored()`: place Component near a given anchor. DOM offset calculated by `document-offset` package.
+  * `renderToLayer()`: renders Component to another DOM node outside of React root.
+
+- `<IconLayout>` for displaying status on an `<Icon>`.
+- `<IconButton>` as an icon-only variant of `<Button>`.
+- `randId()` helper for generating a random String to used on DOM nodes.
+- Add stylelint to enforce consistent conventions and avoid errors in our stylesheets.
+
+### Changed
+- Improve interaction on Jenkins:
+  * Generate jUnit test report.
+  * Generate Cobertura coverage report.
+  * Run `npm publish` with `NPM_TOKEN` env variables in `deploy.sh`.
+- `<Tag>` now adapts to the color of its parent more actively.
+- Fix `<Button>` should turn red on error state
+- `wrapIfNotElement()` helper now takes an extra `via` param to change how `content` is passed to the `Wrapper` component.
+- You can now strip the BEM block from output by calling `bem.toString({ stripBlock: true })`.
+
 ## [0.5.0]
 ### Added
 - Add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) to serve demo bundles.

@@ -5,22 +5,26 @@
 //   Tags doesn't have their own colors, instead they follow the color of
 //   the state of their parent components.
 
-
 // -------------------------------------
 //   Component Block
 // -------------------------------------
 
 .#{$prefix}-tag {
     background-color: $c-black;
-    color: $c-white;
+    background-color: currentColor;
+    color: inherit;
     font-size: rem($tag-font-size); // 12px
     line-height: 1em;
-    padding: rem(2px) rem(4px);
+    padding: rem($tag-vertical-padding) rem($tag-horizontal-padding);
     border: rem(1px) solid transparent;
-    border-radius: rem(6px);
+    border-radius: rem($tag-border-radius);
     background-clip: padding-box;
     display: inline-block;
     vertical-align: text-top;
+
+    & > span {
+        color: $c-white;
+    }
 }
 
 // -------------------------------------
@@ -28,25 +32,11 @@
 // -------------------------------------
 
 .#{$prefix}-tag {
-    .#{$prefix-state}-editable & {
-        background-color: $c-text-editable;
-    }
-
-    .#{$prefix-state}-error & {
-        background-color: $c-text-error;
-    }
-
     .#{$prefix-state}-highlight & {
-        background-color: $c-white;
         color: $c-row-bg-highlight;
     }
 
     .#{$prefix-state}-highlight .#{$prefix-state}-error & {
         color: $c-text-error;
-    }
-
-    [disabled] &,
-    .#{$prefix-state}-disabled & {
-        background-color: $c-text-disabled;
     }
 }

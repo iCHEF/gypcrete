@@ -93,3 +93,10 @@ it('passes down other props to wrapped component', () => {
 
     expect(wrapper.find(Foo).prop('bar')).toBeTruthy();
 });
+
+it('takes defaults to its <RowComp> wrapper-component', () => {
+    const Comp = rowComp({ defaultAlign: 'center', defaultMinified: true })(Foo);
+
+    expect(Comp.defaultProps.align).toBe('center');
+    expect(Comp.defaultProps.minified).toBeTruthy();
+});

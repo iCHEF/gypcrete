@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "iCHEF web components library, built with React.",
   "main": "lib/index.js",
   "repository": {
@@ -23,7 +23,9 @@
     "build:dist": "webpack --config ./config/webpack.prod.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
     "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
-    "lint": "eslint ./ && echo \"eslint: no lint errors\"",
+    "lint": "npm run lint:eslint && npm run lint:stylelint",
+    "lint:eslint": "eslint ./ && echo \"eslint: no lint errors\"",
+    "lint:stylelint": "stylelint **/*.scss && echo \"stylelint: no lint errors\"",
     "test": "jest ./src --config=config/jest.config.json --coverage",
     "test:watch": "jest ./src --config=config/jest.config.json --coverage --watch",
     "clean": "rm -rf ./dist ./lib ./es5 ./deploy",
@@ -61,6 +63,7 @@
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
     "jest": "^19.0.2",
+    "jest-junit": "zhusee2/jest-junit#update_format",
     "node-sass": "^4.5.0",
     "postcss-loader": "^1.3.3",
     "react": "^15.4.2",
@@ -69,11 +72,17 @@
     "react-hot-loader": "^3.0.0-beta.6",
     "sass-loader": "^6.0.2",
     "style-loader": "^0.13.2",
+    "stylelint": "^7.10.1",
+    "stylelint-config-standard": "^16.0.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1",
     "webpack-merge": "^4.0.0"
   },
   "dependencies": {
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "document-offset": "^1.0.4"
+  },
+  "jest-junit": {
+    "output": "./coverage/junit.xml"
   }
 }

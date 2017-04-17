@@ -86,9 +86,10 @@ export class BEMFactory {
     /**
      * Render BEM chain as full class name string
      *
+     * @param {Bool} stripBlock - Should remove Block from output.
      * @return {String}
      */
-    toString() {
+    toString({ stripBlock = false } = {}) {
         const { _block, _element, _modifiers, _nonBemClasses } = this;
 
         const baseClass = (typeof _element !== 'undefined')
@@ -100,6 +101,8 @@ export class BEMFactory {
             ..._modifiers.map(modifier => `${baseClass}${MODIFIER_SEPARATOR}${modifier}`),
             ..._nonBemClasses
         ];
+
+        if (stripBlock) classes.shift();
 
         return classes.join(' ');
     }

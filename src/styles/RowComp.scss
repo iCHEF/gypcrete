@@ -11,6 +11,12 @@
     align-items: center;
     overflow: hidden;
 
+    @at-root {
+        button#{&} {
+            padding: rem($component-padding);
+        }
+    }
+
     // ----------------------
     //  <RowComp> elements
     // ----------------------
@@ -24,6 +30,7 @@
             .ic-row-comp--center & {
                 justify-content: center;
             }
+
             .ic-row-comp--reverse & {
                 flex-direction: column-reverse;
             }

@@ -18,7 +18,6 @@
     align-items: stretch;
 }
 
-
 // ===============
 //  Element Parts
 // ===============
@@ -41,7 +40,6 @@
     }
 }
 
-
 // ===============
 //  Modifiers
 // ===============
@@ -50,12 +48,13 @@
     &--no-grow {
         flex-grow: 0;
     }
-    
+
     &--center {
         .#{$prefix}-text__row {
             justify-content: center;
         }
     }
+
     &--right {
         .#{$prefix}-text__row {
             flex-direction: row-reverse;
