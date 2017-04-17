@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import createReactClass from 'create-react-class';
+
 import getComponentName from '../getComponentName';
 
 /* eslint-disable */
@@ -12,14 +14,14 @@ function Bar() {
     return <div />;
 }
 
-const OldComp = React.createClass({
+const OldComp = createReactClass({
     render: function() {
         return <div />;
     }
 });
 
-const OldCompRev = React.createClass({
-    displayName: 'Rev(OldComp)',
+const OldCompRev = createReactClass({
+    displayName: 'Rev(OldComponent)',
     render: function() {
         return <div />;
     }
@@ -37,11 +39,11 @@ class FooRev extends Component {
 it('reads name from React components', () => {
     expect(getComponentName(Foo)).toBe('Foo');
     expect(getComponentName(Bar)).toBe('Bar');
-    expect(getComponentName(OldComp)).toBe('OldComp');
+    expect(getComponentName(OldComp)).toBe('Component');
 });
 
 it('reads name from components with custom name', () => {
-    expect(getComponentName(OldCompRev)).toBe('Rev(OldComp)');
+    expect(getComponentName(OldCompRev)).toBe('Rev(OldComponent)');
     expect(getComponentName(FooRev)).toBe('Rev(Foo)');
 });
 
