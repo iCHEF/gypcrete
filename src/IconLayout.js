@@ -1,4 +1,6 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+
 import withStatus, { withStatusPropTypes } from './mixins/withStatus';
 import wrapIfNotElement from './utils/wrapIfNotElement';
 import './styles/IconLayout.scss';

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const defaultBoxStyle = {
     boxShadow: '0 0 1px red',
