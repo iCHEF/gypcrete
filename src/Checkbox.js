@@ -74,6 +74,7 @@ class Checkbox extends PureComponent {
     render() {
         const {
             input,
+            indeterminate,
             // <input> props
             checked,
             defaultChecked,
