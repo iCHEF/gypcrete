@@ -1,0 +1,6 @@
+extends: stylelint-config-standard
+
+rules:
+    indentation: 4
+    number-leading-zero: never
+    selector-pseudo-element-colon-notation: single

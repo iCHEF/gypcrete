@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `<IconLayout>` for displaying status on an `<Icon>`.
 - `<IconButton>` as an icon-only variant of `<Button>`.
 - `randId()` helper for generating a random String to used on DOM nodes.
+- Add stylelint to enforce consistent conventions and avoid errors in our stylesheets.
 
 ### Changed
 - Improve interaction on Jenkins:
