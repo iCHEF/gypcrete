@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 
+## [0.6.1]
+### Changed
+- Fix deploy script that affects `npm publish`
+- Deprecates `0.6.0` on npm, since that was published with wrong contents by accident.
+
 ## [0.6.0]
 ### Added
 - Migrate row components:
