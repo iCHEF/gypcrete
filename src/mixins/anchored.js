@@ -11,8 +11,9 @@
  * const AnchoredComponent = anchored(options)(Component);
  * return <AnchoredComponent anchor={fooRef} />
  */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import documentOffset from 'document-offset';
 
 import getComponentName from '../utils/getComponentName';

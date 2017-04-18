@@ -15,8 +15,9 @@
  * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
  */
 
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import anchored, { ANCHORED_PLACEMENT } from '../anchored';

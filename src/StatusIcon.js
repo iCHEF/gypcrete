@@ -1,4 +1,6 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+
 import icBEM from './utils/icBEM';
 import './styles/StatusIcon.scss';
 

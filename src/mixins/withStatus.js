@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import getComponentName from '../utils/getComponentName';
 
 import StatusIcon, { STATUS_CODE } from '../StatusIcon';
