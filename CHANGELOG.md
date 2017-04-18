@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Install `prop-types` package in `dependencies` as official recommended.
 - Add new search and CRM icons.
+- Add new `<SearchInput>`.
 
 ### Changed
 - Upgrade `react` & `react-dom` to v15.5.
