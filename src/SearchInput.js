@@ -19,10 +19,17 @@ export const BEM = {
 
 class SearchInput extends PureComponent {
     static propTypes = {
+        /**
+         * Use `input` to inject props to the underlying <input>
+         */
+        input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+        placeholder: PropTypes.string,
         onSearch: PropTypes.func,
     };
 
     static defaultProps = {
+        input: {},
+        placeholder: 'Search',
         onSearch: () => {},
     };
 
@@ -66,7 +73,7 @@ class SearchInput extends PureComponent {
     }
 
     render() {
-        const { className } = this.props;
+        const { input: inputProps, placeholder, className } = this.props;
         const { inputValue } = this.state;
 
         const rootClassName = classNames(className, `${BEM.root}`);
@@ -79,11 +86,12 @@ class SearchInput extends PureComponent {
                     <input
                         type="text"
                         className={`${BEM.input}`}
-                        placeholder="搜尋"
+                        placeholder={placeholder}
                         value={inputValue}
                         onChange={this.handleInputChange}
                         onBlur={this.handleInputBlur}
-                        onKeyUp={this.handleInputKeyup} />
+                        onKeyUp={this.handleInputKeyup}
+                        {...inputProps} />
 
                     {inputValue && this.renderResetButton()}
                 </RowCompBody>
