@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
 import icBEM from './utils/icBEM';
 import rowComp from './mixins/rowComp';
 import './styles/SearchInput.scss';
@@ -16,17 +18,38 @@ export const BEM = {
 };
 
 class SearchInput extends PureComponent {
+    static propTypes = {
+        onSearch: PropTypes.func,
+    };
+
+    static defaultProps = {
+        onSearch: () => {},
+    };
+
     state = {
         inputValue: ''
     };
 
+    notifySearch() {
+        this.props.onSearch(this.state.inputValue);
+    }
+
     handleInputChange = (event) => {
-        const newValue = event.target.value;
-        this.setState({ inputValue: newValue });
+        this.setState({ inputValue: event.target.value });
     }
 
     handleResetButtonClick = () => {
         this.setState({ inputValue: '' });
+    }
+
+    handleInputBlur = () => {
+        this.notifySearch();
+    }
+
+    handleInputKeyup = (event) => {
+        if (event.key === 'Enter') {
+            this.notifySearch();
+        }
     }
 
     renderResetButton() {
@@ -58,7 +81,9 @@ class SearchInput extends PureComponent {
                         className={`${BEM.input}`}
                         placeholder="搜尋"
                         value={inputValue}
-                        onChange={this.handleInputChange} />
+                        onChange={this.handleInputChange}
+                        onBlur={this.handleInputBlur}
+                        onKeyUp={this.handleInputKeyup} />
 
                     {inputValue && this.renderResetButton()}
                 </RowCompBody>
