@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -19,7 +19,8 @@ export const BEM = {
     resetBtn: ROOT_BEM.element('reset-button'),
 };
 
-class SearchInput extends PureComponent {
+// a React.Component ensures it can be re-rendered when context changes
+class SearchInput extends Component {
     static propTypes = {
         /**
          * Use `input` to inject props to the underlying <input>
@@ -103,7 +104,7 @@ class SearchInput extends PureComponent {
                         {...inputProps} />
 
                     {isLoading && <Icon type="loading" spinning color="gray" />}
-                    {inputValue && this.renderResetButton()}
+                    {inputValue && !isLoading && this.renderResetButton()}
                 </RowCompBody>
             </div>
         );
