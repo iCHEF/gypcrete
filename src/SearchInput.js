@@ -24,17 +24,19 @@ class SearchInput extends PureComponent {
          */
         input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
         placeholder: PropTypes.string,
+        defaultValue: PropTypes.string,
         onSearch: PropTypes.func,
     };
 
     static defaultProps = {
         input: {},
         placeholder: 'Search',
+        defaultValue: '',
         onSearch: () => {},
     };
 
     state = {
-        inputValue: ''
+        inputValue: this.props.defaultValue,
     };
 
     notifySearch() {
