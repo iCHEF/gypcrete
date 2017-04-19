@@ -9,6 +9,8 @@ import './styles/SearchInput.scss';
 import Icon from './Icon';
 import RowCompBody from './RowCompBody';
 
+import { STATUS_CODE } from './StatusIcon';
+
 const COMPONENT_NAME = 'ic-search-input';
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
@@ -33,6 +35,10 @@ class SearchInput extends PureComponent {
         placeholder: 'Search',
         defaultValue: '',
         onSearch: () => {},
+    };
+
+    static contextTypes = {
+        status: PropTypes.oneOf(Object.values(STATUS_CODE)),
     };
 
     state = {
@@ -79,6 +85,7 @@ class SearchInput extends PureComponent {
         const { inputValue } = this.state;
 
         const rootClassName = classNames(className, `${BEM.root}`);
+        const isLoading = this.context.status === STATUS_CODE.LOADING;
 
         return (
             <div className={rootClassName}>
@@ -95,6 +102,7 @@ class SearchInput extends PureComponent {
                         onKeyUp={this.handleInputKeyup}
                         {...inputProps} />
 
+                    {isLoading && <Icon type="loading" spinning color="gray" />}
                     {inputValue && this.renderResetButton()}
                 </RowCompBody>
             </div>

@@ -15,6 +15,10 @@ function SearchInputDoc() {
             <DebugBox>
                 <SearchInput defaultValue="Monkey King" />
             </DebugBox>
+
+            <DebugBox>
+                <SearchInput defaultValue="Monkey King" status="loading" />
+            </DebugBox>
         </div>
     );
 }
