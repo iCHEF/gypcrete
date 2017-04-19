@@ -16,22 +16,51 @@ export const BEM = {
 };
 
 class SearchInput extends PureComponent {
+    state = {
+        inputValue: ''
+    };
+
+    handleInputChange = (event) => {
+        const newValue = event.target.value;
+        this.setState({ inputValue: newValue });
+    }
+
+    handleResetButtonClick = () => {
+        this.setState({ inputValue: '' });
+    }
+
+    renderResetButton() {
+        return (
+            <button
+                type="button"
+                className={`${BEM.resetBtn}`}
+                aria-label="Reset"
+                tabIndex="-1"
+                onClick={this.handleResetButtonClick}>
+                <Icon type="delete" color="gray" />
+            </button>
+        );
+    }
+
     render() {
         const { className } = this.props;
+        const { inputValue } = this.state;
+
         const rootClassName = classNames(className, `${BEM.root}`);
 
         return (
             <div className={rootClassName}>
                 <RowCompBody>
                     <Icon type="search" />
-                    <input type="text" className={`${BEM.input}`} placeholder="搜尋" />
-                    <button
-                        type="button"
-                        className={`${BEM.resetBtn}`}
-                        aria-label="Reset"
-                        tabIndex="-1">
-                        <Icon type="delete" color="gray" />
-                    </button>
+
+                    <input
+                        type="text"
+                        className={`${BEM.input}`}
+                        placeholder="搜尋"
+                        value={inputValue}
+                        onChange={this.handleInputChange} />
+
+                    {inputValue && this.renderResetButton()}
                 </RowCompBody>
             </div>
         );
