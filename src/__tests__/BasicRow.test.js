@@ -11,8 +11,7 @@ it('renders without crashing', () => {
     const element = (
         <BasicRow
             basic="Basic text"
-            tag="Tag"
-            className="ic-text__row ic-text__basic" />
+            tag="Tag" />
     );
 
     ReactDOM.render(element, div);

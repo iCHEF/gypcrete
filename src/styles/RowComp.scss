@@ -27,11 +27,11 @@
         align-items: flex-start;
 
         @at-root {
-            .ic-row-comp--center & {
+            .#{$prefix}-row-comp--center & {
                 justify-content: center;
             }
 
-            .ic-row-comp--reverse & {
+            .#{$prefix}-row-comp--reverse & {
                 flex-direction: column-reverse;
             }
         }

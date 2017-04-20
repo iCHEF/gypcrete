@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import icBEM from './utils/icBEM';
+import prefixClass from './utils/prefixClass';
 import './styles/FlexCell.scss';
 
-const COMPONENT_NAME = 'ic-flex-cell';
+const COMPONENT_NAME = prefixClass('flex-cell');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 function FlexCell({ shrink, grow, basis, children }) {

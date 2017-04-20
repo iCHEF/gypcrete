@@ -1,7 +1,7 @@
 @import "./mixins";
 
 @font-face {
-    font-family: "ic-icon";
+    font-family: "gyp-icon";
     src: url("../fonts/ic-icon.eot?67010214");
     src:
         url("../fonts/ic-icon.eot?67010214#iefix") format("embedded-opentype"),
@@ -23,7 +23,7 @@
     height: 1em;
     line-height: 1em;
     font-size: rem($icon-base-size);
-    font-family: "ic-icon";
+    font-family: "gyp-icon";
     font-style: normal;
     font-weight: normal;
     text-align: center;

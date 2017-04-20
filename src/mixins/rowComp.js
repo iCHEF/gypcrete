@@ -36,6 +36,7 @@ import '../styles/RowComp.scss';
 
 import getComponentName from '../utils/getComponentName';
 import icBEM from '../utils/icBEM';
+import prefixClass from '../utils/prefixClass';
 import prefixState from '../utils/prefixState';
 import { statusPropTypes } from './withStatus';
 
@@ -44,7 +45,7 @@ import Text from '../Text';
 
 import { STATUS_CODE } from '../StatusIcon';
 
-export const COMPONENT_NAME = 'ic-row-comp';
+export const COMPONENT_NAME = prefixClass('row-comp');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const ROW_COMP_BODY = ROOT_BEM.element('body');
 

@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Migrate `React.createClass` to `createReactClass` from `create-react-class` package.
 - Upgrade `enzyme` to 2.8.2 to support React v15.5, also install `react-test-renderer`.
 - `icState()` is renamed to `prefixState()` and add prefix with `prefixClass()` helper.
+- ClassName and component prefixes are now `gyp-`
 
 ### Removed
 - Remove deprecated `react-addons-test-utils` package.
