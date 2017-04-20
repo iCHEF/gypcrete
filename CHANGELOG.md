@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Migrate `PropTypes` to `prop-types` package instead of import it from main `React` object.
 - Migrate `React.createClass` to `createReactClass` from `create-react-class` package.
 - Upgrade `enzyme` to 2.8.2 to support React v15.5, also install `react-test-renderer`.
+- `icState()` is renamed to `prefixState()` and add prefix with `prefixClass()` helper.
 
 ### Removed
 - Remove deprecated `react-addons-test-utils` package.
