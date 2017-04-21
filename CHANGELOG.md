@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 
+## [0.7.1]
+### Changed
+- Root `font-size` is changed to 16px to maintain compatibility with iC-framework.
+
+
 ## [0.7.0]
 ### Added
 - Install `prop-types` package in `dependencies` as official recommended.

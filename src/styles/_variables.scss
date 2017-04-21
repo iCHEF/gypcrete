@@ -3,8 +3,8 @@
 $prefix: 'gyp';
 $prefix-state: 'gyp-state';
 
-// Chrome bug: if root font-size < 12px, 1rem will = 12px.
-$root-font-size: 12px;
+// Compatibility with ic-framework
+$root-font-size: 16px;
 
 $basic-text-font-size: 16px;
 $basic-text-line-height: 18px;
