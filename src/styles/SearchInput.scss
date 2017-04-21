@@ -1,0 +1,33 @@
+@import "./mixins";
+
+.#{$prefix}-search-input {
+
+    // ----------------------
+    //  SearchInput Elements
+    // ----------------------
+    ::placeholder {
+        color: $c-text-disabled;
+    }
+
+    &__input {
+        height: rem($element-base-height);
+        font-size: rem($basic-text-font-size);
+        border: none;
+        padding: 0;
+        flex: 1 1 auto;
+        outline: none;
+    }
+
+    &__reset-button {
+        @include remove-button-appearance;
+    }
+
+    // ----------------------
+    //  Other Elements
+    // ----------------------
+    .#{$prefix}-row-comp__body {
+        border: 1px solid $search-input-border-color;
+        border-radius: $search-input-border-radius;
+        box-sizing: content-box;
+    }
+}

@@ -39,6 +39,7 @@ function IconDoc() {
                 <Icon type="printer" />
                 <Icon type="pause" />
                 <Icon type="play" />
+                <Icon type="search" />
             </div>
 
             <div>
@@ -49,6 +50,20 @@ function IconDoc() {
                 <Icon type="ctbc-direct" />
                 <Icon type="ctbc-mpos" />
                 <Icon type="custom-pay" />
+            </div>
+
+            <div>
+                <p>CRM icons</p>
+
+                <Icon type="crm-address" />
+                <Icon type="crm-age" />
+                <Icon type="crm-birthday" />
+                <Icon type="crm-email" />
+                <Icon type="crm-gender" />
+                <Icon type="crm-member-name" />
+                <Icon type="crm-member-note" />
+                <Icon type="crm-phone-land" />
+                <Icon type="crm-phone-mobile" />
             </div>
 
             <div>

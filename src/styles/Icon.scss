@@ -203,5 +203,35 @@
 .#{$prefix}-icon-play:before {
     content: '\e824'; /* '' */
 }
+.#{$prefix}-icon-search:before {
+    content: '\e825'; /* '' */
+}
+.#{$prefix}-icon-crm-address:before {
+    content: '\e826'; /* '' */
+}
+.#{$prefix}-icon-crm-age:before {
+    content: '\e827'; /* '' */
+}
+.#{$prefix}-icon-crm-birthday:before {
+    content: '\e828'; /* '' */
+}
+.#{$prefix}-icon-crm-email:before {
+    content: '\e829'; /* '' */
+}
+.#{$prefix}-icon-crm-gender:before {
+    content: '\e82a'; /* '' */
+}
+.#{$prefix}-icon-crm-member-name:before {
+    content: '\e82b'; /* '' */
+}
+.#{$prefix}-icon-crm-member-note:before {
+    content: '\e82c'; /* '' */
+}
+.#{$prefix}-icon-crm-phone-land:before {
+    content: '\e82d'; /* '' */
+}
+.#{$prefix}-icon-crm-phone-mobile:before {
+    content: '\e82e'; /* '' */
+}
 
 /* stylelint-enable */
