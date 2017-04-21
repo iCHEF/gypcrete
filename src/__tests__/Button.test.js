@@ -30,21 +30,21 @@ describe('Pure <Button>', () => {
 
     it('handles color modifiers', () => {
         let wrapper = shallow(<PureButton>Label</PureButton>);
-        expect(wrapper.hasClass('ic-button--blue')).toBeTruthy();
+        expect(wrapper.hasClass('gyp-button--blue')).toBeTruthy();
 
         wrapper = shallow(<PureButton color="red">Label</PureButton>);
-        expect(wrapper.hasClass('ic-button--red')).toBeTruthy();
+        expect(wrapper.hasClass('gyp-button--red')).toBeTruthy();
 
         wrapper = shallow(<PureButton color="white">Label</PureButton>);
-        expect(wrapper.hasClass('ic-button--white')).toBeTruthy();
+        expect(wrapper.hasClass('gyp-button--white')).toBeTruthy();
 
         wrapper = shallow(<PureButton color="black">Label</PureButton>);
-        expect(wrapper.hasClass('ic-button--black')).toBeTruthy();
+        expect(wrapper.hasClass('gyp-button--black')).toBeTruthy();
     });
 
     it('handles solid modifier', () => {
         const wrapper = shallow(<PureButton solid>Label</PureButton>);
 
-        expect(wrapper.hasClass('ic-button--solid')).toBeTruthy();
+        expect(wrapper.hasClass('gyp-button--solid')).toBeTruthy();
     });
 });

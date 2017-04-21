@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
+import prefixClass from './utils/prefixClass';
 import rowComp from './mixins/rowComp';
 import './styles/SearchInput.scss';
 
@@ -11,7 +12,7 @@ import RowCompBody from './RowCompBody';
 
 import { STATUS_CODE } from './StatusIcon';
 
-const COMPONENT_NAME = 'ic-search-input';
+const COMPONENT_NAME = prefixClass('search-input');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
     root: ROOT_BEM,

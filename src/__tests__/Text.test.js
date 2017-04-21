@@ -38,8 +38,8 @@ describe('Pure <Text>', () => {
 
         expect(wrapper.children()).toHaveLength(1);
         expect(rowWrapper.exists()).toBeTruthy();
-        expect(rowWrapper.hasClass('ic-text__row')).toBeTruthy();
-        expect(rowWrapper.hasClass('ic-text__basic')).toBeTruthy();
+        expect(rowWrapper.hasClass('gyp-text__row')).toBeTruthy();
+        expect(rowWrapper.hasClass('gyp-text__basic')).toBeTruthy();
     });
 
     it('passing "basic", "tag" and "statusIcon" to <BasicRow>', () => {
@@ -81,7 +81,7 @@ describe('Pure <Text>', () => {
         const wrapper = shallow(<PureText basic="Basic" aside="Aside" />);
 
         expect(wrapper.children()).toHaveLength(2);
-        expect(wrapper.childAt(1).hasClass('ic-text__aside')).toBeTruthy();
+        expect(wrapper.childAt(1).hasClass('gyp-text__aside')).toBeTruthy();
         expect(wrapper.childAt(1).text()).toBe('Aside');
     });
 

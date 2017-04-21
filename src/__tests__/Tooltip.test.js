@@ -12,8 +12,8 @@ it('renders without crashing', () => {
 
 it('can be placed top or bottom', () => {
     let wrapper = shallow(<Tooltip placement="top">Content</Tooltip>);
-    expect(wrapper.hasClass('ic-tooltip--top')).toBeTruthy();
+    expect(wrapper.hasClass('gyp-tooltip--top')).toBeTruthy();
 
     wrapper = shallow(<Tooltip placement="bottom">Content</Tooltip>);
-    expect(wrapper.hasClass('ic-tooltip--bottom')).toBeTruthy();
+    expect(wrapper.hasClass('gyp-tooltip--bottom')).toBeTruthy();
 });

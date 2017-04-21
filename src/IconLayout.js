@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import withStatus, { withStatusPropTypes } from './mixins/withStatus';
 import wrapIfNotElement from './utils/wrapIfNotElement';
+import prefixClass from './utils/prefixClass';
 import './styles/IconLayout.scss';
 
 import AnchoredTooltip from './AnchoredTooltip';
@@ -10,7 +11,7 @@ import Icon from './Icon';
 
 import { STATUS_POSITION } from './StatusIcon';
 
-export const COMPONENT_NAME = 'ic-iconlayout'; // Prevent from affected by 'ic-icon-*' styles
+export const COMPONENT_NAME = prefixClass('iconlayout'); // Prevent from affected by 'gyp-icon-*' styles
 
 /**
  * <IconLayout> needs to be a valid React Component to maintain a ref
