@@ -1,9 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
 import icBEM from './utils/icBEM';
+import prefixClass from './utils/prefixClass';
 import './styles/Icon.scss';
 
-const COMPONENT_NAME = 'ic-icon';
+const COMPONENT_NAME = prefixClass('icon');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 const GRAY = 'gray';
@@ -20,7 +23,7 @@ function Icon({ type, color, large, spinning, className, ...otherProps }) {
     const rootClassName = classNames(
         className,
         `${bemClass}`,
-        `ic-icon-${type}`
+        `gyp-icon-${type}`
     );
 
     return (

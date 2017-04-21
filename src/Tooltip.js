@@ -1,9 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
 import icBEM from './utils/icBEM';
+import prefixClass from './utils/prefixClass';
 import './styles/Tooltip.scss';
 
-export const COMPONENT_NAME = 'ic-tooltip';
+export const COMPONENT_NAME = prefixClass('tooltip');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 const BEM = {
     root: ROOT_BEM,

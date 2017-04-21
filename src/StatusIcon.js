@@ -1,5 +1,8 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+
 import icBEM from './utils/icBEM';
+import prefixClass from './utils/prefixClass';
 import './styles/StatusIcon.scss';
 
 import Icon from './Icon';
@@ -13,7 +16,7 @@ const INLINE = 'inline';
 const CORNER = 'corner';
 export const STATUS_POSITION = { INLINE, CORNER };
 
-const COMPONENT_NAME = 'ic-status-icon';
+const COMPONENT_NAME = prefixClass('status-icon');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 const ICON_HIDE_TIMEOUT = 2 * 1000;

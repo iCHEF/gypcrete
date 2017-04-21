@@ -7,10 +7,31 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 
+
+## [0.7.0]
+### Added
+- Install `prop-types` package in `dependencies` as official recommended.
+- Add new search and CRM icons.
+- Add new `<SearchInput>`.
+- Prefix component class names with `prefixClass()` helper.
+
+### Changed
+- Upgrade `react` & `react-dom` to v15.5.
+- Migrate `PropTypes` to `prop-types` package instead of import it from main `React` object.
+- Migrate `React.createClass` to `createReactClass` from `create-react-class` package.
+- Upgrade `enzyme` to 2.8.2 to support React v15.5, also install `react-test-renderer`.
+- `icState()` is renamed to `prefixState()` and add prefix with `prefixClass()` helper.
+- ClassName and component prefixes are now `gyp-`
+
+### Removed
+- Remove deprecated `react-addons-test-utils` package.
+
+
 ## [0.6.1]
 ### Changed
 - Fix deploy script that affects `npm publish`
 - Deprecates `0.6.0` on npm, since that was published with wrong contents by accident.
+
 
 ## [0.6.0]
 ### Added
@@ -37,6 +58,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Fix `<Button>` should turn red on error state
 - `wrapIfNotElement()` helper now takes an extra `via` param to change how `content` is passed to the `Wrapper` component.
 - You can now strip the BEM block from output by calling `bem.toString({ stripBlock: true })`.
+
 
 ## [0.5.0]
 ### Added

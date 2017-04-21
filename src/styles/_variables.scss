@@ -1,7 +1,7 @@
 @import "./colors";
 
-$prefix: 'ic';
-$prefix-state: 'ic-state';
+$prefix: 'gyp';
+$prefix-state: 'gyp-state';
 
 // Chrome bug: if root font-size < 12px, 1rem will = 12px.
 $root-font-size: 12px;
@@ -33,3 +33,6 @@ $status-icon-inline-size: $basic-text-line-height;
 $status-icon-corner-size: 16px;
 
 $button-border-radius: 4px;
+
+$search-input-border-color: $c-gray;
+$search-input-border-radius: 6px;

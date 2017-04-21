@@ -15,15 +15,18 @@
  * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
  */
 
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
 import icBEM from './utils/icBEM';
+import prefixClass from './utils/prefixClass';
 import withStatus from './mixins/withStatus';
 import './styles/Text.scss';
 
 import BasicRow from './BasicRow';
 
-export const COMPONENT_NAME = 'ic-text';
+export const COMPONENT_NAME = prefixClass('text');
 export const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 export const BEM = {

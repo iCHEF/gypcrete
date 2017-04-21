@@ -1,12 +1,15 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
 import icBEM from './utils/icBEM';
+import prefixClass from './utils/prefixClass';
 import rowComp from './mixins/rowComp';
 import './styles/Button.scss';
 
 import RowCompBody from './RowCompBody';
 
-export const COMPONENT_NAME = 'ic-button';
+export const COMPONENT_NAME = prefixClass('button');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 const BLUE = 'blue';
