@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+
+
+## [0.7.0]
+### Added
 - Install `prop-types` package in `dependencies` as official recommended.
 - Add new search and CRM icons.
 - Add new `<SearchInput>`.
