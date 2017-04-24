@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 
+## [0.7.2]
+### Changed
+- Fix `<SearchInput>` was not included in distribution bundle.
+
 
 ## [0.7.1]
 ### Changed
