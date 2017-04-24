@@ -19,6 +19,7 @@ import TextEllipsis from './TextEllipsis';
 import TextLabel from './TextLabel';
 import Button from './Button';
 import IconButton from './IconButton';
+import SearchInput from './SearchInput';
 
 export {
     BasicRow,
@@ -37,4 +38,5 @@ export {
     TextLabel,
     Button,
     IconButton,
+    SearchInput,
 };
