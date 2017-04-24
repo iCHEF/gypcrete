@@ -30,6 +30,7 @@
             .#{$prefix}-row-comp--center & {
                 justify-content: center;
             }
+
             .#{$prefix}-row-comp--reverse & {
                 flex-direction: row-reverse;
             }
