@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `<SearchInput>` now caches last-notified search value inside to prevent duplicated notifications.
 - `<SearchInput>` now tries to notify search upon reset button click.
 - Fix reversed flex alignment for `<RowComp>`.
+- Fix `<Tooltip>` not showing its content.
 
 
 ## [0.7.2]
