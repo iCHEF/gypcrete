@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Add `<Checkbox>` with `indeterminate` prop support.
+- Add `<IconCheckbox>` for icon-only checkbox.
 
 ### Changed
 - `<SearchInput>` now caches last-notified search value inside to prevent duplicated notifications.

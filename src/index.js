@@ -20,6 +20,7 @@ import TextLabel from './TextLabel';
 import Button from './Button';
 import IconButton from './IconButton';
 import Checkbox from './Checkbox';
+import IconCheckbox from './IconCheckbox';
 import SearchInput from './SearchInput';
 
 export {
@@ -40,5 +41,6 @@ export {
     Button,
     IconButton,
     Checkbox,
+    IconCheckbox,
     SearchInput,
 };
