@@ -57,6 +57,7 @@ class SearchInput extends Component {
 
     handleResetButtonClick = () => {
         this.setState({ inputValue: '' });
+        this.notifySearch();
     }
 
     handleInputBlur = () => {
