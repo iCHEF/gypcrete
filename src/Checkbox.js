@@ -18,6 +18,8 @@ const BEM = {
     iconWrapper: ROOT_BEM.element('icon-wrapper'),
 };
 
+export const CHECKBOX_BUTTON = <Icon type="empty" className={`${BEM.button}`} />;
+
 class Checkbox extends PureComponent {
     static propTypes = {
         /**
@@ -25,6 +27,7 @@ class Checkbox extends PureComponent {
          */
         input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
         indeterminate: PropTypes.bool,
+        overrideButton: PropTypes.element,
 
         // <input type="checkbox" /> props
         checked: PropTypes.bool,
@@ -36,6 +39,7 @@ class Checkbox extends PureComponent {
     static defaultProps = {
         input: {},
         indeterminate: false,
+        overrideButton: null,
 
         checked: undefined,
         defaultChecked: undefined,
@@ -57,7 +61,7 @@ class Checkbox extends PureComponent {
         this.inputRef.indeterminate = this.props.indeterminate;
     }
 
-    renderCheckboxInput(inputProps) {
+    renderCheckboxInput(inputProps, overrideButton) {
         return (
             <span className={BEM.iconWrapper}>
                 <input
@@ -66,7 +70,7 @@ class Checkbox extends PureComponent {
                     className={BEM.input}
                     {...inputProps} />
 
-                <Icon type="empty" className={`${BEM.button}`} />
+                {overrideButton || CHECKBOX_BUTTON}
             </span>
         );
     }
@@ -75,6 +79,7 @@ class Checkbox extends PureComponent {
         const {
             input,
             indeterminate,
+            overrideButton,
             // <input> props
             checked,
             defaultChecked,
@@ -99,7 +104,7 @@ class Checkbox extends PureComponent {
         return (
             <div className={rootClassName} {...otherProps}>
                 <RowCompBody>
-                    {this.renderCheckboxInput(inputProps)}
+                    {this.renderCheckboxInput(inputProps, overrideButton)}
                     {children}
                 </RowCompBody>
             </div>
