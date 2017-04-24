@@ -2,8 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 
-import Checkbox, { PureCheckbox } from '../Checkbox';
+import Checkbox, { PureCheckbox, BEM } from '../Checkbox';
 import RowCompBody from '../RowCompBody';
+
+function BarButton() {
+    return <div>bar</div>;
+}
 
 describe('rowComp(Checkbox)', () => {
     it('renders without crashing', () => {
@@ -69,5 +73,16 @@ describe('Pure <Checkbox>', () => {
 
         expect(inputWrapper.prop('readonly')).toBeTruthy();
         expect(inputWrapper.prop('id')).toBe('foo-checkbox');
+    });
+
+    it('can override checkbox button via overrideButton prop', () => {
+        const wrapper = shallow(
+            <PureCheckbox overrideButton={<BarButton />}>
+                Foo children
+            </PureCheckbox>
+        );
+
+        expect(wrapper.find(BarButton).exists()).toBeTruthy();
+        expect(wrapper.find(BarButton).parent().hasClass(BEM.iconWrapper.toString())).toBeTruthy();
     });
 });

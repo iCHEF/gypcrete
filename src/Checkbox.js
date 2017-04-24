@@ -11,7 +11,7 @@ import RowCompBody from './RowCompBody';
 
 export const COMPONENT_NAME = prefixClass('checkbox');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
-const BEM = {
+export const BEM = {
     root: ROOT_BEM,
     input: ROOT_BEM.element('input'),
     button: ROOT_BEM.element('button'),
