@@ -25,11 +25,13 @@
         }
     }
 
-    &__input:checked + &__button:before {
+    &__input:checked + &__button:before,
+    &__input:checked + .#{$prefix}-iconlayout > &__button:before {
         content: "\e816"; // radio-selected
     }
 
-    &__input:indeterminate + &__button:before {
+    &__input:indeterminate + &__button:before,
+    &__input:indeterminate + .#{$prefix}-iconlayout > &__button:before {
         content: "\e815"; // radio-half
     }
 }

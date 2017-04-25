@@ -7,6 +7,10 @@ function IconCheckboxDoc() {
             <h2>&lt;IconCheckbox&gt;</h2>
 
             <div style={{ display: 'flex' }}>
+                <IconCheckbox />
+
+                <IconCheckbox indeterminate />
+
                 <IconCheckbox status="loading" />
 
                 <IconCheckbox
