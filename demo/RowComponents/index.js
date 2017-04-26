@@ -3,6 +3,8 @@ import React from 'react';
 import TextLabelDoc from './TextLabelDoc';
 import ButtonDoc from './ButtonDoc';
 import IconButtonDoc from './IconButtonDoc';
+import CheckboxDoc from './CheckboxDoc';
+import IconCheckboxDoc from './IconCheckboxDoc';
 import SearchInputDoc from './SearchInputDoc';
 
 function RowComponents() {
@@ -13,6 +15,8 @@ function RowComponents() {
             <TextLabelDoc />
             <ButtonDoc />
             <IconButtonDoc />
+            <CheckboxDoc />
+            <IconCheckboxDoc />
             <SearchInputDoc />
         </div>
     );

@@ -5,9 +5,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Change
+### Added
+- Add `<Checkbox>` with `indeterminate` prop support.
+- Add `<IconCheckbox>` for icon-only checkbox.
+- Add test of `/index.js` to check if every component under `src/` is exported.
+
+### Changed
 - `<SearchInput>` now caches last-notified search value inside to prevent duplicated notifications.
 - `<SearchInput>` now tries to notify search upon reset button click.
+- Fix reversed flex alignment for `<RowComp>`.
+- Fix `<Tooltip>` not showing its content.
 
 
 ## [0.7.2]
