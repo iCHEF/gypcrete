@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+
+
+## [0.8.0]
+### Added
 - Add `<Checkbox>` with `indeterminate` prop support.
 - Add `<IconCheckbox>` for icon-only checkbox.
 - Add test of `/index.js` to check if every component under `src/` is exported.
