@@ -1,6 +1,7 @@
 @import "./mixins";
 
 .#{$prefix}-search-input {
+    padding: rem($search-input-padding - 1px);
 
     // ----------------------
     //  SearchInput Elements
