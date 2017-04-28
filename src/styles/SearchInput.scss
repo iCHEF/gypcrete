@@ -23,13 +23,14 @@
         @include remove-button-appearance;
     }
 
-    // ----------------------
-    //  Other Elements
-    // ----------------------
-    .#{$prefix}-row-comp__body {
+    &__input-wrapper {
         background-color: $search-input-background-color;
         border: 1px solid $search-input-border-color;
         border-radius: $search-input-border-radius;
         box-sizing: content-box;
+        overflow: hidden;
+        flex: 1 1 100%;
+        display: flex;
+        align-content: flex-start;
     }
 }

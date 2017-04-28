@@ -7,7 +7,6 @@ import rowComp from './mixins/rowComp';
 import './styles/Checkbox.scss';
 
 import Icon from './Icon';
-import RowCompBody from './RowCompBody';
 
 export const COMPONENT_NAME = prefixClass('checkbox');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -103,10 +102,8 @@ class Checkbox extends PureComponent {
 
         return (
             <div className={rootClassName} {...otherProps}>
-                <RowCompBody>
-                    {this.renderCheckboxInput(inputProps, overrideButton)}
-                    {children}
-                </RowCompBody>
+                {this.renderCheckboxInput(inputProps, overrideButton)}
+                {children}
             </div>
         );
     }

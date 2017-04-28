@@ -8,7 +8,6 @@ import rowComp from './mixins/rowComp';
 import './styles/SearchInput.scss';
 
 import Icon from './Icon';
-import RowCompBody from './RowCompBody';
 
 import { STATUS_CODE } from './StatusIcon';
 
@@ -17,6 +16,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
     root: ROOT_BEM,
     input: ROOT_BEM.element('input'),
+    inputWrapper: ROOT_BEM.element('input-wrapper'),
     resetBtn: ROOT_BEM.element('reset-button'),
 };
 
@@ -97,7 +97,7 @@ class SearchInput extends Component {
 
         return (
             <div className={rootClassName}>
-                <RowCompBody>
+                <div className={BEM.inputWrapper}>
                     <Icon type="search" />
 
                     <input
@@ -112,7 +112,7 @@ class SearchInput extends Component {
 
                     {isLoading && <Icon type="loading" spinning color="gray" />}
                     {inputValue && !isLoading && this.renderResetButton()}
-                </RowCompBody>
+                </div>
             </div>
         );
     }
