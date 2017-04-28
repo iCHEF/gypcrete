@@ -45,8 +45,15 @@ describe('Pure <SearchInput>', () => {
         expect(wrapper.find(`.${BEM.resetBtn}`)).toHaveLength(1);
     });
 
-    it('clears input value on reset button click', () => {
-        const wrapper = shallow(<PureSearchInput />);
+    it('takes defaultValue for input', () => {
+        const wrapper = shallow(<PureSearchInput defaultValue="foo" />);
+
+        expect(wrapper.state(INPUT_VALUE)).toBe('foo');
+    });
+
+    it('clears input value and calls onSearch() on reset button click', () => {
+        const handleSearch = jest.fn();
+        const wrapper = shallow(<PureSearchInput onSearch={handleSearch} />);
         const inputWrapper = wrapper.find('input');
 
         inputWrapper.simulate('change', { target: { value: 'foo' } });
@@ -54,12 +61,7 @@ describe('Pure <SearchInput>', () => {
 
         wrapper.find(`.${BEM.resetBtn}`).simulate('click');
         expect(wrapper.state(INPUT_VALUE)).toBe('');
-    });
-
-    it('takes defaultValue for input', () => {
-        const wrapper = shallow(<PureSearchInput defaultValue="foo" />);
-
-        expect(wrapper.state(INPUT_VALUE)).toBe('foo');
+        expect(handleSearch).toHaveBeenLastCalledWith('');
     });
 
     it('calls onSearch() prop with input value on Enter', () => {
@@ -88,6 +90,20 @@ describe('Pure <SearchInput>', () => {
         wrapper.find(`.${BEM.resetBtn}`).simulate('click');
         inputWrapper.simulate('blur');
         expect(handleSearch).toHaveBeenLastCalledWith('');
+    });
+
+    it('only calls onSearch() if input value different from cached value', () => {
+        const handleSearch = jest.fn();
+        const wrapper = shallow(<PureSearchInput onSearch={handleSearch} />);
+        const inputWrapper = wrapper.find('input');
+
+        inputWrapper.simulate('change', { target: { value: 'foo' } });
+        inputWrapper.simulate('keyup', { key: 'Enter' });
+        expect(handleSearch).toHaveBeenCalledWith('foo');
+        expect(handleSearch).toHaveBeenCalledTimes(1);
+
+        inputWrapper.simulate('blur');
+        expect(handleSearch).toHaveBeenCalledTimes(1);
     });
 
     it('renders loading icon when status is loading', () => {

@@ -22,6 +22,7 @@ function Tooltip({
     arrowStyle,
     // React props
     className,
+    children,
     ...otherProps,
 }) {
     const bemClass = BEM.root.modifier(placement);
@@ -29,8 +30,7 @@ function Tooltip({
 
     return (
         <span className={rootClassName} {...otherProps}>
-            content
-
+            {children}
             <span className={BEM.arrow} style={arrowStyle} />
         </span>
     );

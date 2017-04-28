@@ -45,10 +45,16 @@ class SearchInput extends Component {
 
     state = {
         inputValue: this.props.defaultValue,
+        lastNotifiedValue: null,
     };
 
     notifySearch() {
-        this.props.onSearch(this.state.inputValue);
+        const { inputValue, lastNotifiedValue } = this.state;
+
+        if (inputValue !== lastNotifiedValue) {
+            this.setState({ lastNotifiedValue: inputValue });
+            this.props.onSearch(inputValue);
+        }
     }
 
     handleInputChange = (event) => {
@@ -56,7 +62,7 @@ class SearchInput extends Component {
     }
 
     handleResetButtonClick = () => {
-        this.setState({ inputValue: '' });
+        this.setState({ inputValue: '' }, () => this.notifySearch());
     }
 
     handleInputBlur = () => {

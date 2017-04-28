@@ -11,6 +11,7 @@
 
     &__input {
         height: rem($element-base-height);
+        background-color: $search-input-background-color;
         font-size: rem($basic-text-font-size);
         border: none;
         padding: 0;
@@ -26,6 +27,7 @@
     //  Other Elements
     // ----------------------
     .#{$prefix}-row-comp__body {
+        background-color: $search-input-background-color;
         border: 1px solid $search-input-border-color;
         border-radius: $search-input-border-radius;
         box-sizing: content-box;
