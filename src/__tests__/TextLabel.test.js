@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
-import RowCompBody from '../RowCompBody';
 import TextLabel, { PureTextLabel } from '../TextLabel';
 
 describe('rowComp(TextLabel)', () => {
@@ -26,11 +25,9 @@ describe('rowComp(TextLabel)', () => {
 });
 
 describe('Pure <TextLabel>', () => {
-    it('renders everything in <RowCompBody>', () => {
+    it('renders its children', () => {
         const wrapper = shallow(<PureTextLabel>Hello World</PureTextLabel>);
 
-        expect(wrapper.children()).toHaveLength(1);
-        expect(wrapper.find(RowCompBody).exists()).toBeTruthy();
-        expect(wrapper.find(RowCompBody).shallow().text()).toBe('Hello World');
+        expect(wrapper.text()).toBe('Hello World');
     });
 });
