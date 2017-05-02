@@ -7,8 +7,6 @@ import prefixClass from './utils/prefixClass';
 import rowComp from './mixins/rowComp';
 import './styles/Button.scss';
 
-import RowCompBody from './RowCompBody';
-
 export const COMPONENT_NAME = prefixClass('button');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
@@ -35,9 +33,7 @@ function Button({
 
     return (
         <button type="button" className={rootClassName} {...otherProps}>
-            <RowCompBody>
-                {children}
-            </RowCompBody>
+            {children}
         </button>
     );
 }

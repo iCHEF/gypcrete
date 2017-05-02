@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 
+## [0.8.1]
+### Changed
+- Vertical padding for row components are now `8px` instead of `4px`.
+- Padding for `<SearchInput>` is `8px` both vertically and horizontally.
+
+### Removed
+- `<RowCompBody>` is removed due to padding change. [[ref]](https://github.com/iCHEF/gypcrete/commit/1bb5d0baf6).
+
 
 ## [0.8.0]
 ### Added

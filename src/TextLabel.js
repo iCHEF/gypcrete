@@ -4,8 +4,6 @@ import prefixClass from './utils/prefixClass';
 import rowComp from './mixins/rowComp';
 import './styles/TextLabel.scss';
 
-import RowCompBody from './RowCompBody';
-
 export const COMPONENT_NAME = prefixClass('text-label');
 
 function TextLabel({ className, children, ...otherProps }) {
@@ -13,9 +11,7 @@ function TextLabel({ className, children, ...otherProps }) {
 
     return (
         <div className={rootClassName} {...otherProps}>
-            <RowCompBody>
-                {children}
-            </RowCompBody>
+            {children}
         </div>
     );
 }
