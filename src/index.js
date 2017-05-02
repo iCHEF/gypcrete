@@ -12,7 +12,6 @@ import AnchoredTooltip from './AnchoredTooltip';
 // Layout helpers
 import FlexCell from './FlexCell';
 import IconLayout from './IconLayout';
-import RowCompBody from './RowCompBody';
 import TextEllipsis from './TextEllipsis';
 
 // Row components
@@ -34,7 +33,6 @@ export {
 
     FlexCell,
     IconLayout,
-    RowCompBody,
     TextEllipsis,
 
     TextLabel,

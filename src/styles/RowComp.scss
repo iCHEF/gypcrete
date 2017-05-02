@@ -4,36 +4,25 @@
     min-height: rem($component-base-height);
     font-size: rem($basic-text-font-size);
     line-height: rem($basic-text-line-height);
-    padding: rem($component-padding);
     box-sizing: border-box;
+    overflow: hidden;
     display: flex;
     flex: 1 1 auto;
-    align-items: center;
-    overflow: hidden;
+    align-items: flex-start;
+    justify-content: flex-start;
 
-    @at-root {
-        button#{&} {
-            padding: rem($component-padding);
-        }
+    &--center {
+        justify-content: center;
     }
 
-    // ----------------------
-    //  <RowComp> elements
-    // ----------------------
-    &__body {
-        display: flex;
-        flex: 1 1 100%;
-        overflow: hidden;
-        align-items: flex-start;
+    &--reverse {
+        flex-direction: row-reverse;
+    }
 
-        @at-root {
-            .#{$prefix}-row-comp--center & {
-                justify-content: center;
-            }
-
-            .#{$prefix}-row-comp--reverse & {
-                flex-direction: row-reverse;
-            }
+    @at-root {
+        &,
+        button#{&} {
+            padding: rem($component-padding-vertical) rem($component-padding-horizontal);
         }
     }
 

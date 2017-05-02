@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 
 import Checkbox, { PureCheckbox, BEM } from '../Checkbox';
-import RowCompBody from '../RowCompBody';
 
 function BarButton() {
     return <div>bar</div>;
@@ -23,19 +22,15 @@ describe('Pure <Checkbox>', () => {
         const wrapper = shallow(
             <PureCheckbox>Foo children</PureCheckbox>
         );
-        const bodyWrapper = wrapper.find(RowCompBody);
-
-        expect(bodyWrapper.contains(<input type="checkbox" />));
+        expect(wrapper.contains(<input type="checkbox" />));
     });
 
     it('renders <input> in icon wrapper before rowComp parts', () => {
         const wrapper = shallow(
             <PureCheckbox>Foo children</PureCheckbox>
         );
-        const bodyWrapper = wrapper.find(RowCompBody);
-
-        expect(bodyWrapper.childAt(0).hasClass('ic-checkbox__icon-wrapper'));
-        expect(bodyWrapper.childAt(0).find('input').exists()).toBeTruthy();
+        expect(wrapper.childAt(0).hasClass('ic-checkbox__icon-wrapper'));
+        expect(wrapper.childAt(0).find('input').exists()).toBeTruthy();
     });
 
     it('updates indeterminate prop on <input type=checkbox>', () => {
