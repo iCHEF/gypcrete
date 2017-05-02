@@ -8,6 +8,7 @@ import Tag from './Tag';
 import Text from './Text';
 import Tooltip from './Tooltip';
 import AnchoredTooltip from './AnchoredTooltip';
+import SwitchIcon from './SwitchIcon';
 
 // Layout helpers
 import FlexCell from './FlexCell';
@@ -30,6 +31,7 @@ export {
     Text,
     Tooltip,
     AnchoredTooltip,
+    SwitchIcon,
 
     FlexCell,
     IconLayout,
