@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+
+## [0.8.1]
 ### Changed
 - Vertical padding for row components are now `8px` instead of `4px`.
 - Padding for `<SearchInput>` is `8px` both vertically and horizontally.
