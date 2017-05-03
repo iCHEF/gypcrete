@@ -53,7 +53,7 @@ class Switch extends PureComponent {
                     className={BEM.input}
                     {...inputProps} />
 
-                <IconLayout icon={button} />
+                <IconLayout icon={button} tooltip={false} />
             </span>
         );
     }

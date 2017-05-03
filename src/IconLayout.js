@@ -23,10 +23,15 @@ class IconLayout extends PureComponent {
             PropTypes.string,
             PropTypes.element
         ]).isRequired,
+        tooltip: PropTypes.bool,
 
         ...withStatusPropTypes,
         // statusIcon,
         // errorMsg,
+    };
+
+    static defaultProps = {
+        tooltip: true,
     };
 
     state = {
@@ -42,9 +47,9 @@ class IconLayout extends PureComponent {
     }
 
     renderTooltip() {
-        const { errorMsg } = this.props;
+        const { tooltip, errorMsg } = this.props;
 
-        if (!errorMsg) {
+        if (!errorMsg || !tooltip) {
             return null;
         }
 
