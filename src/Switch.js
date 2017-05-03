@@ -7,6 +7,7 @@ import icBEM from './utils/icBEM';
 import rowComp from './mixins/rowComp';
 import './styles/Switch.scss';
 
+import SwitchIcon from './SwitchIcon';
 import IconLayout from './IconLayout';
 
 export const COMPONENT_NAME = prefixClass('switch');
@@ -42,7 +43,7 @@ class Switch extends PureComponent {
     };
 
     renderSwitchButton(inputProps = {}) {
-        const button = <span className={BEM.button} />;
+        const button = <SwitchIcon />;
 
         return (
             <span className={BEM.iconWrapper}>
@@ -70,6 +71,7 @@ class Switch extends PureComponent {
             // React props
             className,
             children,
+            ...otherProps,
         } = this.props;
 
         const rootClassName = classNames(className, `${BEM.root}`);
@@ -82,7 +84,7 @@ class Switch extends PureComponent {
         };
 
         return (
-            <div className={rootClassName}>
+            <div className={rootClassName} {...otherProps}>
                 {this.renderSwitchButton(inputProps)}
                 {children}
             </div>

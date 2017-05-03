@@ -28,7 +28,9 @@
         }
     }
 
-    &--on &__inner {
+    &--on &__inner,
+    input:checked ~ & &__inner,
+    input:checked ~ .#{$prefix}-iconlayout &__inner, {
         background-color: $c-switch-bg-on;
 
         &:before {

@@ -67,7 +67,7 @@ class IconLayout extends PureComponent {
         const iconElement = wrapIfNotElement(icon, { with: Icon, via: 'type' });
 
         return (
-            <span
+            <div
                 ref={(ref) => { this.nodeRef = ref; }}
                 className={COMPONENT_NAME}
                 onMouseEnter={this.handleMouseEnter}
@@ -75,7 +75,7 @@ class IconLayout extends PureComponent {
                 {iconElement}
                 {showTooltip && this.renderTooltip()}
                 {statusIcon}
-            </span>
+            </div>
         );
     }
 }
