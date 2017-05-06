@@ -29,7 +29,8 @@
     "test": "jest ./src --config=config/jest.config.json --coverage",
     "test:watch": "jest ./src --config=config/jest.config.json --coverage --watch",
     "clean": "rm -rf ./dist ./lib ./es5 ./deploy",
-    "deploy": "npm run clean && npm run build && sh deploy.sh"
+    "deploy": "npm run clean && npm run build && sh deploy.sh",
+    "storybook": "start-storybook -p 8100 -c .storybook"
   },
   "peerDependencies": {
     "babel-runtime": "^6.18.0",
@@ -37,6 +38,7 @@
     "react-dom": "^15.3.0"
   },
   "devDependencies": {
+    "@kadira/storybook": "^2.35.3",
     "autoprefixer": "^6.7.6",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
