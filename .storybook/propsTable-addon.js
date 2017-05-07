@@ -8,6 +8,20 @@ const DEFAULT_OPTIONS = {
     propTables: []
 };
 
+class PropsTableStory extends Story {
+    // override render method
+    render() {
+        return (
+            <div style={this.state.stylesheet.infoPage}>
+                <div style={this.state.stylesheet.infoBody}>
+                    {this._getPropTables()}
+                    {this._getInfoContent()}
+                </div>
+            </div>
+        );
+    }
+}
+
 export default {
     addPropsTable(storyFn, info, extraPropTables = []) {
         const storyName = 'propTypes';
@@ -35,11 +49,9 @@ export default {
             };
 
             return (
-                <Story {...props}>
-                    <div style={{ display: 'none' }}>
-                        {storyFn(context)}
-                    </div>
-                </Story>
+                <PropsTableStory {...props}>
+                    {storyFn(context)}
+                </PropsTableStory>
             );
         });
     }
