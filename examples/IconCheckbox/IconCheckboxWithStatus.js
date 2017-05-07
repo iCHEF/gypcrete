@@ -1,14 +1,11 @@
 import React from 'react';
 
 import IconCheckbox from 'src/IconCheckbox';
-
-const flexRowStyle = {
-    display: 'flex'
-};
+import FlexRow from '../FlexRow';
 
 function IconCheckboxWithStatusExample() {
     return (
-        <div style={flexRowStyle}>
+        <FlexRow>
             <IconCheckbox
                 defaultChecked
                 status="loading" />
@@ -20,7 +17,7 @@ function IconCheckboxWithStatusExample() {
             <IconCheckbox
                 status="error"
                 errorMsg="Cannot add printer." />
-        </div>
+        </FlexRow>
     );
 }
 
