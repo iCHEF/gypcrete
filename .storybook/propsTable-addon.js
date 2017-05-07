@@ -9,12 +9,17 @@ const DEFAULT_OPTIONS = {
 };
 
 export default {
-    addPropsTable(storyFn, info = '', _options = {}) {
+    addPropsTable(storyFn, info, extraPropTables = []) {
         const storyName = 'propTypes';
+
+        if (Array.isArray(info)) {
+            extraPropTables = info;
+            info = '';
+        }
 
         const options = {
             ...DEFAULT_OPTIONS,
-            ..._options
+            propTables: extraPropTables
         };
 
         // Modified from @kadira/react-storybook-addon-info
