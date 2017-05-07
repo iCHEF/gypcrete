@@ -8,6 +8,11 @@ const genDefaultConfig =
 module.exports = (defaultConfig, configType) => {
     const storybookConfig = genDefaultConfig(defaultConfig, configType);
 
+    // Inject gypcrete common styles into preview entry
+    storybookConfig.entry.preview.push(
+        path.resolve(__dirname, '../src/styles/index.scss')
+    );
+
     // Loaders
     storybookConfig.module.loaders.push(
         {
@@ -19,7 +24,7 @@ module.exports = (defaultConfig, configType) => {
                 'style-loader',
                 'css-loader?importLoaders=1',
                 'postcss-loader',
-                'sass'
+                'sass-loader?outputStyle=expanded'
             ]
         }
     );
