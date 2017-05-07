@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Add [@kadira/storybook](https://github.com/storybooks/storybook/) to replace `demo/`.
+- Create `examples/` folder and migrate component docs to stories.
+
 
 ## [0.8.1]
 ### Changed
