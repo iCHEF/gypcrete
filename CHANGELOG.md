@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add [@kadira/storybook](https://github.com/storybooks/storybook/) to replace `demo/`.
 - Create `examples/` folder and migrate component docs to stories.
+- Create `addPropsTable()` custom addon to show component's propTypes in table, which modified from `addon-info`.
+- Add `storybook` env in babelrc, which included cjs transpiler. 
+
+### Changed
+- Ignore `public/` path in eslint.
 
 
 ## [0.8.1]
