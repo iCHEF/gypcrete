@@ -11,8 +11,7 @@
         "transform-runtime",
         ["module-resolver", {
             "alias": {
-                "src": "./src",
-                "demo": "./demo"
+                "src": "./src"
             }
         }]
     ],
@@ -35,11 +34,6 @@
                 "strip-css-imports"
             ],
             "ignore": ["__tests__"]
-        },
-        "demo": {
-            "plugins": [
-                "react-hot-loader/babel"
-            ]
         },
         "storybook": {
             "plugins": [

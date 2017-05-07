@@ -18,7 +18,6 @@
   },
   "scripts": {
     "start": "npm run storybook",
-    "demo": "BABEL_ENV=demo webpack-dev-server --config ./config/webpack.demo.js",
     "storybook": "BABEL_ENV=storybook start-storybook -p 8100 -c .storybook",
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
     "build:dist": "webpack --config ./config/webpack.prod.js --color",
@@ -30,7 +29,7 @@
     "lint:stylelint": "stylelint **/*.scss && echo \"stylelint: no lint errors\"",
     "test": "jest ./src --config=config/jest.config.json --coverage",
     "test:watch": "jest ./src --config=config/jest.config.json --coverage --watch",
-    "clean": "rm -rf ./dist ./lib ./es5 ./deploy",
+    "clean": "rm -rf ./dist ./lib ./es5 ./deploy ./public",
     "deploy": "npm run clean && npm run build && sh deploy.sh"
   },
   "peerDependencies": {
@@ -66,7 +65,6 @@
     "eslint-plugin-react": "^6.10.0",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",
-    "html-webpack-plugin": "^2.28.0",
     "jest": "^19.0.2",
     "jest-junit": "zhusee2/jest-junit#update_format",
     "node-sass": "^4.5.0",
@@ -78,9 +76,7 @@
     "style-loader": "^0.13.2",
     "stylelint": "^7.10.1",
     "stylelint-config-standard": "^16.0.0",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "2.4.4",
-    "webpack-merge": "^4.0.0"
+    "webpack": "^2.2.1"
   },
   "dependencies": {
     "classnames": "^2.2.5",
