@@ -1,14 +1,11 @@
 import React from 'react';
 
 import Button from 'src/Button';
-
-const flexRowStyle = {
-    display: 'flex'
-};
+import FlexRow from '../FlexRow';
 
 function ButtonWithStatusExample() {
     return (
-        <div style={flexRowStyle}>
+        <FlexRow>
             <Button
                 basic="Loading"
                 tag="Tag"
@@ -28,7 +25,7 @@ function ButtonWithStatusExample() {
                 icon="add"
                 status="error"
                 errorMsg="Save failed" />
-        </div>
+        </FlexRow>
     );
 }
 

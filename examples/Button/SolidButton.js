@@ -1,14 +1,11 @@
 import React from 'react';
 
 import Button from 'src/Button';
-
-const flexRowStyle = {
-    display: 'flex'
-};
+import FlexRow from '../FlexRow';
 
 function SolidButtonExample() {
     return (
-        <div style={flexRowStyle}>
+        <FlexRow>
             <Button
                 solid
                 basic="Blue"
@@ -31,7 +28,7 @@ function SolidButtonExample() {
                 color="black"
                 basic="Black"
                 tag="Solid" />
-        </div>
+        </FlexRow>
     );
 }
 

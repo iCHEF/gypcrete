@@ -1,10 +1,7 @@
 import React from 'react';
 
 import Button from 'src/Button';
-
-const flexRowStyle = {
-    display: 'flex'
-};
+import FlexRow from '../FlexRow';
 
 function handleButtonClick() {
     // eslint-disable-next-line no-console
@@ -13,7 +10,7 @@ function handleButtonClick() {
 
 function BasicButtonExample() {
     return (
-        <div style={flexRowStyle}>
+        <FlexRow>
             <Button
                 basic="Blue Button"
                 aside="Default color"
@@ -41,7 +38,7 @@ function BasicButtonExample() {
                 aside="Variants"
                 tag="Tag"
                 icon="add" />
-        </div>
+        </FlexRow>
     );
 }
 

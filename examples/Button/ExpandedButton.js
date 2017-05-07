@@ -1,15 +1,7 @@
 import React from 'react';
 
 import Button from 'src/Button';
-
-const flexRowStyle = {
-    display: 'flex',
-    marginBottom: 10
-};
-
-function FlexRow({ children }) {
-    return <div style={flexRowStyle}>{children}</div>;
-}
+import FlexRow from '../FlexRow';
 
 function ExpandedButtonExample() {
     return (

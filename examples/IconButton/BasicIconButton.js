@@ -1,20 +1,18 @@
 import React from 'react';
-import IconButton from 'src/IconButton';
 
-const flexRowStyle = {
-    display: 'flex'
-};
+import IconButton from 'src/IconButton';
+import FlexRow from '../FlexRow';
 
 function BasicIconButtonExample() {
     return (
-        <div style={flexRowStyle}>
+        <FlexRow>
             <IconButton
                 icon="printer" />
 
             <IconButton
                 solid
                 icon="edit" />
-        </div>
+        </FlexRow>
     );
 }
 

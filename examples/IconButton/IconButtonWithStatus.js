@@ -1,13 +1,11 @@
 import React from 'react';
-import IconButton from 'src/IconButton';
 
-const flexRowStyle = {
-    display: 'flex'
-};
+import IconButton from 'src/IconButton';
+import FlexRow from '../FlexRow';
 
 function IconButtonWithStatusExample() {
     return (
-        <div style={flexRowStyle}>
+        <FlexRow>
             <IconButton
                 icon="printer"
                 status="loading" />
@@ -21,7 +19,7 @@ function IconButtonWithStatusExample() {
                 icon="printer"
                 status="error"
                 errorMsg="Cannot add printer." />
-        </div>
+        </FlexRow>
     );
 }
 

@@ -1,14 +1,11 @@
 import React from 'react';
 
 import Button from 'src/Button';
-
-const flexRowStyle = {
-    display: 'flex'
-};
+import FlexRow from '../FlexRow';
 
 function DisabledButtonExample() {
     return (
-        <div style={flexRowStyle}>
+        <FlexRow>
             <Button
                 basic="Blue"
                 disabled />
@@ -19,7 +16,7 @@ function DisabledButtonExample() {
                 basic="Black"
                 tag="Solid"
                 disabled />
-        </div>
+        </FlexRow>
     );
 }
 
