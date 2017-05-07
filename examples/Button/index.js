@@ -11,10 +11,10 @@ import ExpandedButtonExample from './ExpandedButton';
 import ButtonWithStatusExample from './ButtonWithStatus';
 
 storiesOf('Button', module)
-    .addWithInfo('basic usage', () => <BasicButtonExample />)
-    .addWithInfo('solid style', () => <SolidButtonExample />)
-    .addWithInfo('disabled state', () => <DisabledButtonExample />)
-    .addWithInfo('expanded button', () => <ExpandedButtonExample />)
-    .addWithInfo('with status', () => <ButtonWithStatusExample />)
+    .addWithInfo('basic usage', BasicButtonExample)
+    .addWithInfo('solid style', SolidButtonExample)
+    .addWithInfo('disabled state', DisabledButtonExample)
+    .addWithInfo('expanded button', ExpandedButtonExample)
+    .addWithInfo('with status', ButtonWithStatusExample)
     // Props table
     .addPropsTable(() => <Button />, [PureButton]);

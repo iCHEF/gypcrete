@@ -10,10 +10,10 @@ import IconButtonWithStatusExample from './IconButtonWithStatus';
 storiesOf('IconButton', module)
     .addWithInfo(
         'basic usage',
-        'TODO: fix button color',
-        () => <BasicIconButtonExample />
+        'IconButton is a variant of `<Button>`.',
+        BasicIconButtonExample
     )
-    .addWithInfo('with status', () => <IconButtonWithStatusExample />)
+    .addWithInfo('with status', IconButtonWithStatusExample)
     // Props table
     .addPropsTable(
         () => <IconButton icon="null" />,
