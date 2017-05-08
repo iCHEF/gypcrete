@@ -67,6 +67,13 @@ function IconDoc() {
             </div>
 
             <div>
+                <p>Inventory icons</p>
+
+                <Icon type="inventory-category" />
+                <Icon type="inventory-item" />
+            </div>
+
+            <div>
                 <p>Large icons</p>
 
                 <Icon type="success" large style={{ color: '#78c878' }} />
