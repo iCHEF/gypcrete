@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Add `fontello.config.json` at project root.
+
 
 ## [0.8.1]
 ### Changed
