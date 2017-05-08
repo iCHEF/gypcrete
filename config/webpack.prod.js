@@ -1,6 +1,4 @@
-// This file is not used in production.
 /* eslint-disable import/no-extraneous-dependencies */
-
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
