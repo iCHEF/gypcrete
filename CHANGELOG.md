@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Create `examples/` folder and migrate component docs to stories.
 - Create `addPropsTable()` custom addon to show component's propTypes in table, which modified from `addon-info`.
 - Add `storybook` env in babelrc, which included cjs transpiler. 
+- Deploy built storybook to `gh-pages` branch with running `npm run ghpages`. (#35)
+- Add [demo link](http://ichef.github.io/gypcrete) in README.
 
 ### Changed
 - Ignore `public/` path in eslint.
