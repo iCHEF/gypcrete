@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Add `fontello.config.json` at project root.
-
+- Add inventory icons(`iventory-category` and `inventory-item`).
 
 ## [0.8.1]
 ### Changed
