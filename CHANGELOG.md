@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+
+
+## [0.9.0]
+### Added
 - Add `fontello.config.json` at project root.
 - Add inventory icons(`iventory-category` and `inventory-item`).
 - Add [@kadira/storybook](https://github.com/storybooks/storybook/) to replace `demo/`.
