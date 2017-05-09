@@ -5,6 +5,7 @@ dist/
 es5/
 build/
 deploy/
+public/
 tmp/
 .DS_Store
 npm-debug.log

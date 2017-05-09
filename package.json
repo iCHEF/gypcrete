@@ -17,12 +17,14 @@
     "npm": "^3.10.10"
   },
   "scripts": {
-    "start": "npm run demo",
+    "start": "npm run storybook",
     "demo": "BABEL_ENV=demo webpack-dev-server --config ./config/webpack.demo.js",
+    "storybook": "BABEL_ENV=storybook start-storybook -p 8100 -c .storybook",
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
     "build:dist": "webpack --config ./config/webpack.prod.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
     "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
+    "build:storybook": "BABEL_ENV=storybook build-storybook -o ./public",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint ./ && echo \"eslint: no lint errors\"",
     "lint:stylelint": "stylelint **/*.scss && echo \"stylelint: no lint errors\"",
@@ -37,6 +39,9 @@
     "react-dom": "^15.3.0"
   },
   "devDependencies": {
+    "@kadira/react-storybook-addon-info": "^3.4.0",
+    "@kadira/storybook": "^2.35.3",
+    "@kadira/storybook-addon-options": "^1.0.2",
     "autoprefixer": "^6.7.6",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
