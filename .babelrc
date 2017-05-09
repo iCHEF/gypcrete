@@ -11,8 +11,7 @@
         "transform-runtime",
         ["module-resolver", {
             "alias": {
-                "src": "./src",
-                "demo": "./demo"
+                "src": "./src"
             }
         }]
     ],
@@ -36,9 +35,9 @@
             ],
             "ignore": ["__tests__"]
         },
-        "demo": {
+        "storybook": {
             "plugins": [
-                "react-hot-loader/babel"
+                "transform-es2015-modules-commonjs"
             ]
         }
     }

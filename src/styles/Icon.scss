@@ -233,5 +233,11 @@
 .#{$prefix}-icon-crm-phone-mobile:before {
     content: '\e82e'; /* '' */
 }
+.#{$prefix}-icon-inventory-category:before {
+    content: '\e833'; /* '' */
+}
+.#{$prefix}-icon-inventory-item:before {
+    content: '\e834'; /* '' */
+}
 
 /* stylelint-enable */
