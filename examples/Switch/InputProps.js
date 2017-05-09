@@ -1,0 +1,20 @@
+import React from 'react';
+import Switch from 'src/Switch';
+import DebugBox from '../DebugBox';
+
+function InputProps() {
+    return (
+        <div>
+            <DebugBox>
+                <Switch
+                    input={{
+                        id: 'dom-id',
+                        title: 'Tooltip for <input>',
+                        'data-prop': true,
+                    }} />
+            </DebugBox>
+        </div>
+    );
+}
+
+export default InputProps;

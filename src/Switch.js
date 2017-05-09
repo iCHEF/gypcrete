@@ -93,3 +93,4 @@ class Switch extends PureComponent {
 }
 
 export default rowComp({ defaultAlign: 'reverse' })(Switch);
+export { Switch as PureSwitch };
