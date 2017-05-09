@@ -3,11 +3,9 @@ import React from 'react';
 import SearchInput from 'src/SearchInput';
 import DebugBox from '../DebugBox';
 
-function SearchInputDoc() {
+function BasicSearchInputExample() {
     return (
         <div>
-            <h2>&lt;SeachInput&gt;</h2>
-
             <DebugBox>
                 <SearchInput />
             </DebugBox>
@@ -23,4 +21,4 @@ function SearchInputDoc() {
     );
 }
 
-export default SearchInputDoc;
+export default BasicSearchInputExample;

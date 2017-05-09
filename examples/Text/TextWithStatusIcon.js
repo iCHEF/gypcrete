@@ -2,17 +2,12 @@ import React from 'react';
 
 import Text from 'src/Text';
 import StatusIcon from 'src/StatusIcon';
+
 import DebugBox from '../DebugBox';
 
-function TextDoc() {
+function TextWithStatusIconExample() {
     return (
         <div>
-            <h2>&lt;Text&gt;</h2>
-
-            <DebugBox>
-                <Text basic="Basic Text" />
-            </DebugBox>
-
             <DebugBox>
                 <Text
                     basic="A Long Long Long Basic Text"
@@ -42,4 +37,4 @@ function TextDoc() {
     );
 }
 
-export default TextDoc;
+export default TextWithStatusIconExample;

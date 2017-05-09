@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Ignore `public/` path in eslint.
 
+### Removed
+- Remove `demo/` folder, all examples migrated to `examples/`.
+- Remove webpack base & demo config, only leave `config/webpack.prod`.
+- Remove demo related dev dependencies and `react-hot-loader`.
+
 
 ## [0.8.1]
 ### Changed
