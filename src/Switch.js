@@ -25,8 +25,8 @@ class Switch extends PureComponent {
          * Use `input` to inject props to the underlying <input>
          */
         input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-        turnedOn: PropTypes.bool,
-        defaultTurnedOn: PropTypes.bool,
+        checked: PropTypes.bool,
+        defaultChecked: PropTypes.bool,
 
         // <input type="checkbox" /> props
         disabled: PropTypes.bool,
@@ -35,8 +35,8 @@ class Switch extends PureComponent {
 
     static defaultProps = {
         input: {},
-        turnedOn: undefined,
-        defaultTurnedOn: undefined,
+        checked: undefined,
+        defaultChecked: undefined,
 
         disabled: false,
         onChange: undefined,
@@ -61,8 +61,8 @@ class Switch extends PureComponent {
     render() {
         const {
             input,
-            turnedOn,
-            defaultTurnedOn,
+            checked,
+            defaultChecked,
 
             // <input> props
             disabled,
@@ -76,8 +76,8 @@ class Switch extends PureComponent {
 
         const rootClassName = classNames(className, `${BEM.root}`);
         const inputProps = {
-            checked: turnedOn,
-            defaultChecked: defaultTurnedOn,
+            checked,
+            defaultChecked,
             disabled,
             onChange,
             ...input,

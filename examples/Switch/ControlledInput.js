@@ -11,13 +11,13 @@ function ControlledInput() {
 
             <DebugBox>
                 <Switch
-                    defaultTurnedOn
+                    defaultChecked
                     basic="Uncontrolled"
                     aside="with defaults" />
             </DebugBox>
             <DebugBox>
                 <Switch
-                    turnedOn
+                    checked
                     basic="Controlled"
                     onChange={() => {}} />
             </DebugBox>

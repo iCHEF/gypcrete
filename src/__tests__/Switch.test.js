@@ -55,8 +55,8 @@ describe('Pure <Switch>', () => {
         const handleChange = jest.fn();
         const wrapper = shallow(
             <PureSwitch
-                turnedOn
-                defaultTurnedOn
+                checked
+                defaultChecked
                 disabled
                 onChange={handleChange} />
         );
