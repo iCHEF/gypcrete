@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import classNames from 'classnames';
 import './styles/Tag.scss';
@@ -8,8 +9,13 @@ import prefixClass from './utils/prefixClass';
 const COMPONENT_NAME = prefixClass('tag');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
-function Tag({ className, children }) {
-    const rootClass = classNames(`${ROOT_BEM}`, className);
+type Props = {
+    className: string,
+    children: any,
+};
+
+function Tag({ className, children }: Props) {
+    const rootClass: string = classNames(`${ROOT_BEM.toString()}`, className);
 
     return (
         <span className={rootClass}>
