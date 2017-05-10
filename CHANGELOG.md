@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Add vscode workspace settings, included `search.exclude` option. (#48)
+- Add Flow type configs.
 
 ### Changed
 - Change jest `testRegex` pattern, run test files in any `__tests__` folder with `.test` or `.spec` suffix only. (#48)
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     * `.eslintignore`
     * `.stylelintrc.yml`
     * `fontello.config.json`
+- `<Tag>`, `icBEM()` and `prefixClass()` are now typed by Flow.
 
 
 ## [0.11.1]
