@@ -62,6 +62,7 @@
     "eslint-config-ichef": "^1.1.2",
     "eslint-import-resolver-babel-module": "^3.0.0",
     "eslint-loader": "^1.6.3",
+    "eslint-plugin-flowtype": "^2.32.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
