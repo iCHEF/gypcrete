@@ -11,6 +11,7 @@ function BasicIconButtonExample() {
 
             <IconButton
                 solid
+                color="blue"
                 icon="edit" />
         </FlexRow>
     );

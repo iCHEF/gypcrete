@@ -25,4 +25,8 @@ IconButton.propTypes = {
     ]).isRequired,
 };
 
+IconButton.defaultProps = {
+    color: 'black'
+};
+
 export default IconButton;
