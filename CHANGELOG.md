@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `<IconLayout>` can now be tooltip-free by turning it off.
 - Fix tests in `<Checkbox>`.
 - `<BasicRow>` can now take `children` to render extra content.
+- Remove default icon color in `<IconButton>`, it should inherit parent's color. (#38)
+- Change the default color of `<IconButton>` to `black`. (#38)
+- Lighten hover & active background color of row components. (#38)
 
 
 ## [0.9.0]
