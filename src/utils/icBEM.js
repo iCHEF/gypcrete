@@ -15,12 +15,10 @@
 // -------------------------------------
 
 /* eslint-disable no-underscore-dangle */
+import isNonEmptyString from './isNonEmptyString';
+
 const ELEMENT_SEPARATOR = '__';
 const MODIFIER_SEPARATOR = '--';
-
-function isValidString(string: string): boolean {
-    return !!(typeof string === 'string' && string.length);
-}
 
 type FactoryParams = {
     block: string,
@@ -55,7 +53,7 @@ export class BEMFactory {
      * @return {BEMFactory}
      */
     element(elementIdentifier: string): BEMFactory {
-        if (isValidString(elementIdentifier)) {
+        if (isNonEmptyString(elementIdentifier)) {
             return new BEMFactory({
                 ...this.toHash(),
                 element: elementIdentifier
@@ -71,7 +69,7 @@ export class BEMFactory {
      * @return {BEMFactory}
      */
     modifier(modifierIdentifier: string, isOn: boolean = true): BEMFactory {
-        if (isOn && isValidString(modifierIdentifier)) {
+        if (isOn && isNonEmptyString(modifierIdentifier)) {
             return new BEMFactory({
                 ...this.toHash(),
                 modifiers: [...this._modifiers, modifierIdentifier]
@@ -87,7 +85,7 @@ export class BEMFactory {
      * @return {BEMFactory}
      */
     add(className: string): BEMFactory {
-        if (isValidString(className)) {
+        if (isNonEmptyString(className)) {
             return new BEMFactory({
                 ...this.toHash(),
                 nonBemClasses: [...this._nonBemClasses, className]
