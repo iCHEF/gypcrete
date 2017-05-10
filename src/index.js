@@ -8,6 +8,7 @@ import Tag from './Tag';
 import Text from './Text';
 import Tooltip from './Tooltip';
 import AnchoredTooltip from './AnchoredTooltip';
+import SwitchIcon from './SwitchIcon';
 
 // Layout helpers
 import FlexCell from './FlexCell';
@@ -20,6 +21,7 @@ import Button from './Button';
 import IconButton from './IconButton';
 import Checkbox from './Checkbox';
 import IconCheckbox from './IconCheckbox';
+import Switch from './Switch';
 import SearchInput from './SearchInput';
 
 export {
@@ -30,6 +32,7 @@ export {
     Text,
     Tooltip,
     AnchoredTooltip,
+    SwitchIcon,
 
     FlexCell,
     IconLayout,
@@ -40,5 +43,6 @@ export {
     IconButton,
     Checkbox,
     IconCheckbox,
+    Switch,
     SearchInput,
 };

@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Add `<SwitchIcon>` to be used as a 64x32 icon.
+- Add `<Switch>` row component.
+
+### Changed
+- `<IconLayout>` can now be tooltip-free by turning it off.
+- Fix tests in `<Checkbox>`.
 
 
 ## [0.9.0]

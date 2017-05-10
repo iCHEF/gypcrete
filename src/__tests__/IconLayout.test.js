@@ -69,4 +69,12 @@ describe('Pure <IconLayout>', () => {
         wrapper.simulate('mouseenter');
         expect(wrapper.find(AnchoredTooltip).exists()).toBeFalsy();
     });
+
+    it('renders no tooltip if explicitly turned off', () => {
+        const wrapper = shallow(<PureIconLayout icon="add" tooltip={false} />);
+        expect(wrapper.find(AnchoredTooltip).exists()).toBeFalsy();
+
+        wrapper.simulate('mouseenter');
+        expect(wrapper.find(AnchoredTooltip).exists()).toBeFalsy();
+    });
 });
