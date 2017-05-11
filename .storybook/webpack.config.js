@@ -37,26 +37,29 @@ module.exports = (defaultConfig, configType) => {
                 path.resolve(__dirname, '../src'),
                 path.resolve(__dirname, '../examples')
             ],
-            loader: 'eslint-loader',
-            options: {
-                /**
-                 * Report every eslint error as a warning.
-                 *
-                 * This prevents Webpack dev-server from blocking HMR updates only because
-                 * eslint fails. `create-react-app` also chooses to use only warnings,
-                 * since `eslint-loader` has already make warnings “very visible”.
-                 *
-                 * Ref: https://git.io/vyu8d
-                 */
-                emitWarning: true
-            }
+            /**
+             * Report every eslint error as a warning.
+             *
+             * This prevents Webpack dev-server from blocking HMR updates only because
+             * eslint fails. `create-react-app` also chooses to use only warnings,
+             * since `eslint-loader` has already make warnings “very visible”.
+             *
+             * Ref: https://git.io/vyu8d
+             */
+            loader: 'eslint-loader?{emitWarning:true}'
         }
     ];
 
-    // Postcss plugins
-    storybookConfig.postcss = () => [
-        autoprefixer
-    ];
+    // Not working now, but should be effective on next Storybook release.
+    storybookConfig.devServer = {
+        stats: {
+            assets: false,
+            children: false,
+            chunkModules: false,
+            hash: false,
+            version: false
+        }
+    };
 
     return storybookConfig;
 };
