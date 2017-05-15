@@ -44,8 +44,18 @@ class EditableText extends PureComponent {
         currentValue: this.props.value || this.props.defaultValue || ''
     };
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
+            this.setState({ currentValue: nextProps.value });
+        }
+    }
+
     handleInputChange = (event) => {
-        this.setState({ currentValue: event.target.value });
+        // Only update if <input> isn't controlled
+        if (!this.props.value) {
+            this.setState({ currentValue: event.target.value });
+        }
+
         this.props.onChange(event);
     }
 
