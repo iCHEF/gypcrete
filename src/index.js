@@ -6,6 +6,7 @@ import Icon from './Icon';
 import StatusIcon from './StatusIcon';
 import Tag from './Tag';
 import Text from './Text';
+import EditableText from './EditableText';
 import Tooltip from './Tooltip';
 import AnchoredTooltip from './AnchoredTooltip';
 import SwitchIcon from './SwitchIcon';
@@ -30,6 +31,7 @@ export {
     StatusIcon,
     Tag,
     Text,
+    EditableText,
     Tooltip,
     AnchoredTooltip,
     SwitchIcon,
