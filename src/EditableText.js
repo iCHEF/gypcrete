@@ -4,10 +4,11 @@ import classNames from 'classnames';
 
 import prefixClass from './utils/prefixClass';
 import icBEM from './utils/icBEM';
+import withStatus from './mixins/withStatus';
 import './styles/EditableText.scss';
 
 import BasicRow from './BasicRow';
-import Text, { BEM as TEXT_BEM } from './Text';
+import { PureText, BEM as TEXT_BEM } from './Text';
 
 export const COMPONENT_NAME = prefixClass('editable-text');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -25,9 +26,14 @@ class EditableText extends PureComponent {
         defaultValue: PropTypes.string,
         placeholder: PropTypes.string,
         disabled: PropTypes.bool,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
         onChange: PropTypes.func,
         // Use `input` to inject props to the underlying <input>
         input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+        // withStatus() props,
+        errorMsg: PropTypes.string,
+        statusIcon: PropTypes.node,
     };
 
     static defaultProps = {
@@ -36,18 +42,33 @@ class EditableText extends PureComponent {
         defaultValue: undefined,
         placeholder: 'Unset',
         disabled: false,
+        onFocus: () => {},
+        onBlur: () => {},
         onChange: () => {},
         input: {},
+        errorMsg: undefined,
+        statusIcon: undefined,
     };
 
     state = {
-        currentValue: this.props.value || this.props.defaultValue || ''
+        currentValue: this.props.value || this.props.defaultValue || '',
+        focused: false,
     };
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
             this.setState({ currentValue: nextProps.value });
         }
+    }
+
+    handleInputFocus = (event) => {
+        this.setState({ focused: true });
+        this.props.onFocus(event);
+    }
+
+    handleInputBlur = (event) => {
+        this.setState({ focused: false });
+        this.props.onBlur(event);
     }
 
     handleInputChange = (event) => {
@@ -61,19 +82,10 @@ class EditableText extends PureComponent {
 
     renderBasicRow() {
         const {
-            value,
-            defaultValue,
             placeholder,
             disabled,
             input: extraInputProps,
         } = this.props;
-
-        const inputProps = {
-            value,
-            defaultValue,
-            placeholder,
-            disabled,
-        };
 
         const className = classNames(
             TEXT_BEM.row.toString(),
@@ -81,14 +93,19 @@ class EditableText extends PureComponent {
             BEM.basicRow.toString(),
         );
 
+        // 'basic' is required for <BasicRow>, but will be set inside <Text>
         return (
-            <BasicRow className={className}>
+            <BasicRow basic="" className={className}>
                 <input
                     ref={(ref) => { this.inputNode = ref; }}
                     type="text"
                     className={BEM.input}
+                    value={this.state.currentValue}
+                    placeholder={placeholder}
+                    disabled={disabled}
+                    onFocus={this.handleInputFocus}
+                    onBlur={this.handleInputBlur}
                     onChange={this.handleInputChange}
-                    {...inputProps}
                     {...extraInputProps} />
             </BasicRow>
         );
@@ -102,15 +119,19 @@ class EditableText extends PureComponent {
             disabled,
             onChange,
             input,
+            // status props
+            statusIcon,
+            errorMsg,
             // React props,
             className,
             ...textProps,
         } = this.props;
 
-        const { currentValue } = this.state;
+        const { currentValue, focused } = this.state;
 
         const bemClass = BEM.root
-            .modifier('empty', !currentValue);
+            .modifier('empty', !currentValue)
+            .modifier('focused', focused);
 
         const rootClassName = classNames(`${bemClass}`, className);
 
@@ -120,14 +141,18 @@ class EditableText extends PureComponent {
             </span>
         );
 
+        const statusProps = focused ? {} : { statusIcon, errorMsg };
+
         return (
-            <Text
+            <PureText
                 className={rootClassName}
                 basic={basicLabel}
                 basicRow={this.renderBasicRow()}
+                {...statusProps}
                 {...textProps} />
         );
     }
 }
 
-export default EditableText;
+export default withStatus()(EditableText);
+export { EditableText as PureEditableText };

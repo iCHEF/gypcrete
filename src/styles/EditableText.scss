@@ -1,6 +1,8 @@
 @import "./mixins";
 
 .#{$prefix}-editable-text {
+    cursor: pointer;
+
     // ---------------------
     //  Elements
     // ---------------------
@@ -23,14 +25,11 @@
         padding: 0;
         opacity: 0;
         z-index: 6;
+        cursor: inherit;
         position: absolute;
         top: 0;
         left: 0;
         will-change: opacity;
-
-        &:focus {
-            opacity: 1;
-        }
     }
     ::placeholder {
         color: $c-input-placeholder;
@@ -41,6 +40,23 @@
     // ---------------------
     &--empty &__basic-label {
         color: $c-input-placeholder;
+    }
+
+    &--focused {
+        cursor: auto;
+    }
+
+    &--focused &__input {
+        opacity: 1;
+        outline: none;
+        cursor: text;
+    }
+    
+    &--focused &__basic-row {
+        box-shadow: 0 2px 0 $c-input-border;
+    }
+    &--focused &__basic-label {
+        opacity: 0;
     }
 
     // ---------------------
