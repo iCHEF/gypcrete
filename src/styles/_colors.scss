@@ -15,6 +15,7 @@ $c-text-error:    $c-red;
 $c-text-editable: $c-blue;
 $c-text-disabled: hsba(0, 0, 0, 30);
 $c-text-readonly: $c-gray;
+$c-text-placeholder: hsba(0, 0, 0, 30);
 
 // Icon-only buttons
 $c-icon-header: $c-black;
@@ -58,3 +59,6 @@ $c-switch-knob:   $c-white;
 // Slider colors
 $c-slider-track: hsba(0, 0, 0, 30);
 $c-slider-thumb-border: hsba(0, 0, 0, 20);
+
+$c-input-text: $c-text-editable;
+$c-input-placeholder: $c-text-placeholder;

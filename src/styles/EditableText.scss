@@ -1,0 +1,61 @@
+@import "./mixins";
+
+.#{$prefix}-editable-text {
+    // ---------------------
+    //  Elements
+    // ---------------------
+    &__basic-label {
+        color: $c-input-text;
+    }
+
+    &__basic-row {
+        position: relative;
+    }
+
+    &__input {
+        width: 100%;
+        height: 100%;
+        background: none;
+        color: $c-input-text;
+        font: inherit;
+        border: none;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+        z-index: 6;
+        position: absolute;
+        top: 0;
+        left: 0;
+        will-change: opacity;
+
+        &:focus {
+            opacity: 1;
+        }
+    }
+    ::placeholder {
+        color: $c-input-placeholder;
+    }
+
+    // ---------------------
+    //  Modifiers
+    // ---------------------
+    &--empty &__basic-label {
+        color: $c-input-placeholder;
+    }
+
+    // ---------------------
+    //  States/Interactions
+    // ---------------------
+    &.#{$prefix}-text--center &__input {
+        text-align: center;
+    }
+
+    &.#{$prefix}-text--right &__input {
+        text-align: right;
+    }
+
+    .#{$prefix-state}-error &__basic-label {
+        color: inherit;
+    }
+}
+
