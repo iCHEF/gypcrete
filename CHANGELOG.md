@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add `<SwitchIcon>` to be used as a 64x32 icon.
 - Add `<Switch>` row component.
 - Add `<EditableText>` visual element which has an `<input type="text" />` inside.
+- Add `<TextInput>` which contains `<EditableText>` and ignores normal text props like `basic`, `tag` and `aside`.
 
 ### Changed
 - `<IconLayout>` can now be tooltip-free by turning it off.
