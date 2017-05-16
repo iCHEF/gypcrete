@@ -74,6 +74,7 @@
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4",
     "sass-loader": "^6.0.2",
+    "sinon": "^2.2.0",
     "style-loader": "^0.13.2",
     "stylelint": "^7.10.1",
     "stylelint-config-standard": "^16.0.0",
