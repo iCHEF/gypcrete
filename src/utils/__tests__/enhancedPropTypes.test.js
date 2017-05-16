@@ -1,4 +1,4 @@
-import enhancedPropTypes from '../enhancedPropTypes';
+import EnhancedPropTypes from '../enhancedPropTypes';
 
 function validatePropTypes(propTypes, props) {
     Object.keys(propTypes).forEach((propName) => {
@@ -11,8 +11,8 @@ function validatePropTypes(propTypes, props) {
     return true;
 }
 
-describe('enhanced propTypes: empty', () => {
-    const propTypes = { foo: enhancedPropTypes.empty };
+describe('EnhancedPropTypes: empty', () => {
+    const propTypes = { foo: EnhancedPropTypes.empty };
 
     it('invalid if foo prop is non-empty', () => {
         const props = { foo: 'hello world' };

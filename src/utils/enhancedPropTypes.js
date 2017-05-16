@@ -2,7 +2,7 @@
 //   Enhanced PropTypes Validator
 // -------------------------------------
 
-const enhancedPropTypes = {
+const EnhancedPropTypes = {
     /**
      * Check prop should be empty
      *
@@ -19,4 +19,4 @@ const enhancedPropTypes = {
     }
 };
 
-export default enhancedPropTypes;
+export default EnhancedPropTypes;
