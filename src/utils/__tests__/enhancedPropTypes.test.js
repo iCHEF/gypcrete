@@ -12,7 +12,7 @@ function validatePropTypes(propTypes, props) {
 }
 
 describe('EnhancedPropTypes: empty', () => {
-    const propTypes = { foo: EnhancedPropTypes.empty };
+    const propTypes = { foo: EnhancedPropTypes.isEmpty };
 
     it('invalid if foo prop is non-empty', () => {
         const props = { foo: 'hello world' };

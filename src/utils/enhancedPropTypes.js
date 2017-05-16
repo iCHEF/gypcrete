@@ -11,7 +11,7 @@ const EnhancedPropTypes = {
      * @param  {String} componentName
      * @return {NULL}
      */
-    empty: (props, propName, componentName) => {
+    isEmpty: (props, propName, componentName) => {
         if (props[propName]) {
             return new Error(`<${componentName}> must not contains ${propName}.`);
         }

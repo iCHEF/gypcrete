@@ -26,8 +26,8 @@ IconButton.propTypes = {
         PropTypes.string,
         PropTypes.element
     ]).isRequired,
-    color: EnhancedPropTypes.empty,
-    solid: EnhancedPropTypes.empty
+    color: EnhancedPropTypes.isEmpty,
+    solid: EnhancedPropTypes.isEmpty
 };
 
 IconButton.defaultProps = {
