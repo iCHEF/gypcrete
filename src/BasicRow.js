@@ -7,7 +7,7 @@ import TextEllipsis from './TextEllipsis';
 
 import wrapIfNotElement from './utils/wrapIfNotElement';
 
-function BasicRow({ basic, tag, statusIcon, ...otherProps }) {
+function BasicRow({ basic, tag, statusIcon, children, ...otherProps }) {
     return (
         <div {...otherProps}>
             <FlexCell shrink>
@@ -16,6 +16,7 @@ function BasicRow({ basic, tag, statusIcon, ...otherProps }) {
 
             {tag && wrapIfNotElement(tag, { with: Tag })}
             {statusIcon && wrapIfNotElement(statusIcon, { with: 'span' })}
+            {children}
         </div>
     );
 }
