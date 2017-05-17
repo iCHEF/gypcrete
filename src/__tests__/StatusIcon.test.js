@@ -12,19 +12,20 @@ it('renders without crashing', () => {
     ReactDOM.render(element, div);
 });
 
-it('renders success icon', () => {
+it('renders icon corresponding to status', () => {
     const wrapper = shallow(<StatusIcon status="success" />);
     expect(wrapper.find(Icon).prop('type')).toBe('inline-success');
-});
 
-it('renders loading icon', () => {
-    const wrapper = shallow(<StatusIcon status="loading" />);
+    wrapper.setProps({ status: 'loading' });
     expect(wrapper.find(Icon).prop('type')).toBe('inline-loading');
+
+    wrapper.setProps({ status: 'error' });
+    expect(wrapper.find(Icon).prop('type')).toBe('inline-error');
 });
 
-it('renders error icon', () => {
-    const wrapper = shallow(<StatusIcon status="error" />);
-    expect(wrapper.find(Icon).prop('type')).toBe('inline-error');
+it('renders nothing when status not valid', () => {
+    const wrapper = shallow(<StatusIcon />);
+    expect(wrapper.equals(null));
 });
 
 it('hides success icon after 2 secs', () => {

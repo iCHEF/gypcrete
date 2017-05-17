@@ -42,7 +42,7 @@ class Switch extends PureComponent {
         onChange: undefined,
     };
 
-    renderSwitchButton(inputProps = {}) {
+    renderSwitchButton(inputProps) {
         const button = <SwitchIcon />;
 
         return (
