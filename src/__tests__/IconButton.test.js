@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
+import { stub, assert } from 'sinon';
 
 import Button from '../Button';
 import IconButton from '../IconButton';
@@ -34,7 +34,7 @@ describe('<IconButton>', () => {
     describe('invalid propTypes', () => {
         let consoleStub;
         beforeEach(() => {
-            consoleStub = sinon.stub(console, 'error');
+            consoleStub = stub(console, 'error');
         });
 
         afterEach(() => {
@@ -43,12 +43,12 @@ describe('<IconButton>', () => {
 
         it('color must be empty', () => {
             shallow(<IconButton icon="printer" color="red" />);
-            sinon.assert.calledWithMatch(consoleStub, /Failed prop type: <IconButton> must not contains color./);
+            assert.calledWithMatch(consoleStub, /Failed prop type: <IconButton> must not contains color./);
         });
 
         it('solid must be empty', () => {
             shallow(<IconButton icon="printer" solid />);
-            sinon.assert.calledWithMatch(consoleStub, /Failed prop type: <IconButton> must not contains solid./);
+            assert.calledWithMatch(consoleStub, /Failed prop type: <IconButton> must not contains solid./);
         });
     });
 });
