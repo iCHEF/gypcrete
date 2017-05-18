@@ -1,25 +1,24 @@
 import React from 'react';
 import { action } from '@kadira/storybook';
 
-import EditableText from 'src/EditableText';
+import TextInput from 'src/TextInput';
 import DebugBox from '../DebugBox';
 
 function BasicUsage() {
     return (
         <div>
             <DebugBox>
-                <EditableText />
+                <TextInput />
             </DebugBox>
 
             <DebugBox>
-                <EditableText
+                <TextInput
                     value="Controlled input"
                     onChange={action('change')} />
             </DebugBox>
 
             <DebugBox>
-                <EditableText
-                    defaultValue="Uncontrolled input" />
+                <TextInput defaultValue="Uncontrolled input" />
             </DebugBox>
         </div>
     );

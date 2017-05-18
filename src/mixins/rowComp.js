@@ -83,6 +83,21 @@ function determineTextAlign(compAlign, hasIcon) {
     }
 }
 
+/**
+ * Get 'align' and 'noGrow' layout props for <Text>
+ * as it would receive if rendered by rowComp().
+ *
+ * @param  {String} compAlign
+ * @param  {Bool}   hasIcon
+ * @return {Object} layoutProps
+ */
+export function getTextLayoutProps(compAlign, hasIcon) {
+    return {
+        align: determineTextAlign(compAlign, hasIcon),
+        noGrow: compAlign === CENTER,
+    };
+}
+
 const rowComp = ({
     defaultMinified = false,
     defaultAlign = 'left'
@@ -132,6 +147,7 @@ const rowComp = ({
         };
 
         static childContextTypes = {
+            align: RowComp.propTypes.align,
             ...statusPropTypes,
             // status,
             // statusOptions,
@@ -139,9 +155,9 @@ const rowComp = ({
         };
 
         getChildContext() {
-            const { status, statusOptions, errorMsg } = this.props;
+            const { align, status, statusOptions, errorMsg } = this.props;
 
-            return { status, statusOptions, errorMsg };
+            return { align, status, statusOptions, errorMsg };
         }
 
         renderContent() {
@@ -154,15 +170,14 @@ const rowComp = ({
             } = this.props;
 
             const textProps = { basic, aside, tag };
-            const textAlign = determineTextAlign(align, !!icon);
+            const textLayoutProps = getTextLayoutProps(align, !!icon);
 
             return [
                 icon && <Icon key="comp-icon" type={icon} />,
                 <Text
                     key="comp-text"
-                    align={textAlign}
-                    noGrow={align === CENTER}
-                    {...textProps} />
+                    {...textProps}
+                    {...textLayoutProps} />
             ];
         }
 

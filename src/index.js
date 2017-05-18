@@ -23,6 +23,7 @@ import IconButton from './IconButton';
 import Checkbox from './Checkbox';
 import IconCheckbox from './IconCheckbox';
 import Switch from './Switch';
+import TextInput from './TextInput';
 import SearchInput from './SearchInput';
 
 export {
@@ -46,5 +47,6 @@ export {
     Checkbox,
     IconCheckbox,
     Switch,
+    TextInput,
     SearchInput,
 };
