@@ -61,7 +61,7 @@ class EditableText extends PureComponent {
     };
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.props.value) {
+        if (nextProps.value) {
             this.setState({ currentValue: nextProps.value });
         }
     }
@@ -105,6 +105,7 @@ class EditableText extends PureComponent {
             default:
                 break;
         }
+        this.props.onKeyDown(event);
     }
 
     renderBasicRow() {

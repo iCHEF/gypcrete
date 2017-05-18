@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
+import keycode from 'keycode';
 
 import EditableText, { PureEditableText } from '../EditableText';
 import { PureText } from '../Text';
@@ -99,5 +100,51 @@ describe('pure <PureEditableText>', () => {
             target: { value: 'Bar' },
         });
         expect(input.prop('value')).toBe('Bar');
+    });
+
+    it('notifies edit end on input blur', () => {
+        const handleEditEnd = jest.fn();
+        const wrapper = mount(<PureEditableText onEditEnd={handleEditEnd} />);
+        const input = wrapper.find('input');
+
+        input.simulate('blur', { target: { value: 'Foo' } });
+        expect(handleEditEnd).toHaveBeenLastCalledWith({ value: 'Foo', reset: false });
+    });
+
+    it('notifies edit end on Enter key', () => {
+        const handleEditEnd = jest.fn();
+        const wrapper = mount(<PureEditableText onEditEnd={handleEditEnd} />);
+        const input = wrapper.find('input');
+
+        input.simulate('keydown', {
+            target: { value: 'Bar' },
+            keyCode: keycode('Enter'),
+        });
+        expect(handleEditEnd).toHaveBeenLastCalledWith({ value: 'Bar', reset: false });
+        expect(handleEditEnd).toHaveBeenCalledTimes(1);
+    });
+
+    it('notifies edit end and reminds to reset on Escape key', () => {
+        const handleEditEnd = jest.fn();
+        const wrapper = mount(<PureEditableText onEditEnd={handleEditEnd} />);
+        const input = wrapper.find('input');
+
+        input.simulate('keydown', {
+            target: { value: 'Bar' },
+            keyCode: keycode('Escape'),
+        });
+        expect(handleEditEnd).toHaveBeenLastCalledWith({ value: 'Bar', reset: true });
+    });
+
+    it('does not interupt user input on non-Enter/Esc keys', () => {
+        const handleEditEnd = jest.fn();
+        const wrapper = mount(<PureEditableText onEditEnd={handleEditEnd} />);
+        const input = wrapper.find('input');
+
+        input.simulate('keydown', {
+            target: { value: 'Foo' },
+            keyCode: keycode('B'),
+        });
+        expect(handleEditEnd).not.toHaveBeenCalled();
     });
 });
