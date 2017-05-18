@@ -42,13 +42,17 @@ describe('<IconButton>', () => {
         });
 
         it('color must be empty', () => {
-            shallow(<IconButton icon="printer" color="red" />);
+            const wrapper = shallow(<IconButton icon="printer" color="red" />);
+
             assert.calledWithMatch(consoleStub, /Failed prop type: <IconButton> must not contains color./);
+            expect(wrapper.find(Button).prop('color')).toBeUndefined();
         });
 
         it('solid must be empty', () => {
-            shallow(<IconButton icon="printer" solid />);
+            const wrapper = shallow(<IconButton icon="printer" solid />);
+
             assert.calledWithMatch(consoleStub, /Failed prop type: <IconButton> must not contains solid./);
+            expect(wrapper.find(Button).prop('solid')).toBeUndefined();
         });
     });
 });
