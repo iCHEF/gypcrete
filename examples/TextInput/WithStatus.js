@@ -1,4 +1,5 @@
 import React from 'react';
+import { action } from '@kadira/storybook';
 
 import TextInput from 'src/TextInput';
 import DebugBox from '../DebugBox';
@@ -21,7 +22,8 @@ function WithStatus() {
                 <TextInput
                     value="Kitchen Printer"
                     status="error"
-                    errorMsg="Network failure" />
+                    errorMsg="Network failure"
+                    onChange={action('change')} />
             </DebugBox>
         </div>
     );

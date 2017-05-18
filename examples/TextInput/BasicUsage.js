@@ -1,4 +1,5 @@
 import React from 'react';
+import { action } from '@kadira/storybook';
 
 import TextInput from 'src/TextInput';
 import DebugBox from '../DebugBox';
@@ -11,7 +12,9 @@ function BasicUsage() {
             </DebugBox>
 
             <DebugBox>
-                <TextInput value="Controlled input" />
+                <TextInput
+                    value="Controlled input"
+                    onChange={action('change')} />
             </DebugBox>
 
             <DebugBox>
