@@ -1,4 +1,6 @@
 import React from 'react';
+import { action } from '@kadira/storybook';
+
 import EditableTextLabel from 'src/EditableTextLabel';
 import DebugBox from '../DebugBox';
 
@@ -10,7 +12,8 @@ function Editable() {
                     icon="printer"
                     basic="Kitchen Printer A"
                     aside="00:11:22:33"
-                    tag="Online" />
+                    tag="Online"
+                    onEditRequest={action('editRequest')} />
             </DebugBox>
 
             <DebugBox>
