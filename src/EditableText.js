@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import keycode from 'keycode';
 
 import prefixClass from './utils/prefixClass';
 import icBEM from './utils/icBEM';
@@ -21,6 +22,7 @@ export const BEM = {
 
 class EditableText extends PureComponent {
     static propTypes = {
+        onEditEnd: PropTypes.func,
         // <input type="text" /> props
         value: PropTypes.string,
         defaultValue: PropTypes.string,
@@ -29,6 +31,7 @@ class EditableText extends PureComponent {
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onChange: PropTypes.func,
+        onKeyDown: PropTypes.func,
         // Use `input` to inject props to the underlying <input>
         input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
         // withStatus() props,
@@ -37,6 +40,7 @@ class EditableText extends PureComponent {
     };
 
     static defaultProps = {
+        onEditEnd: () => {}, // ({ value: string|number, reset: boolean}) => {}
         // <input> props
         value: undefined,
         defaultValue: undefined,
@@ -45,6 +49,7 @@ class EditableText extends PureComponent {
         onFocus: () => {},
         onBlur: () => {},
         onChange: () => {},
+        onKeyDown: () => {},
         input: {},
         errorMsg: undefined,
         statusIcon: undefined,
@@ -61,6 +66,13 @@ class EditableText extends PureComponent {
         }
     }
 
+    notifiyEditEnd(event, { reset = false } = {}) {
+        this.props.onEditEnd({
+            reset,
+            value: event.target.value,
+        });
+    }
+
     handleInputFocus = (event) => {
         this.setState({ focused: true });
         this.props.onFocus(event);
@@ -68,6 +80,8 @@ class EditableText extends PureComponent {
 
     handleInputBlur = (event) => {
         this.setState({ focused: false });
+        this.notifiyEditEnd(event);
+
         this.props.onBlur(event);
     }
 
@@ -78,6 +92,19 @@ class EditableText extends PureComponent {
         }
 
         this.props.onChange(event);
+    }
+
+    handleInputKeyDown = (event) => {
+        switch (event.keyCode) {
+            case keycode('Enter'):
+                this.notifiyEditEnd(event);
+                break;
+            case keycode('Escape'):
+                this.notifiyEditEnd(event, { reset: true });
+                break;
+            default:
+                break;
+        }
     }
 
     renderBasicRow() {
@@ -106,6 +133,7 @@ class EditableText extends PureComponent {
                     onFocus={this.handleInputFocus}
                     onBlur={this.handleInputBlur}
                     onChange={this.handleInputChange}
+                    onKeyDown={this.handleInputKeyDown}
                     {...extraInputProps} />
             </BasicRow>
         );
@@ -113,11 +141,16 @@ class EditableText extends PureComponent {
 
     render() {
         const {
+            onEditEnd,
+            // <input> props
             value,
             defaultValue,
             placeholder,
             disabled,
+            onFocus,
+            onBlur,
             onChange,
+            onKeyDown,
             input,
             // status props
             statusIcon,

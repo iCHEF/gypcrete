@@ -22,7 +22,8 @@ function Editable() {
                     icon="printer"
                     basic="Kitchen Printer A"
                     aside="00:11:22:33"
-                    tag="Online" />
+                    tag="Online"
+                    onEditEnd={action('editEnd')} />
             </DebugBox>
 
             <DebugBox>

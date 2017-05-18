@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { getTextLayoutProps } from './mixins/rowComp';
 
-import EditableText from './EditableText';
+import EditableText, { PureEditableText } from './EditableText';
 import Icon from './Icon';
 import TextLabel from './TextLabel';
 
@@ -12,8 +12,9 @@ import { STATUS_CODE as STATUS } from './StatusIcon';
 class EditableTextLabel extends PureComponent {
     static propTypes = {
         inEdit: PropTypes.bool,
-        // Custom callbacks
         onEditRequest: PropTypes.func,
+        // <EditableText> callbacks
+        onEditEnd: PureEditableText.propTypes.onEditEnd,
         // <TextLabel> props
         icon: TextLabel.propTypes.icon,
         basic: TextLabel.propTypes.basic,
@@ -24,6 +25,7 @@ class EditableTextLabel extends PureComponent {
     static defaultProps = {
         inEdit: false,
         onEditRequest: () => {},
+        onEditEnd: PureEditableText.defaultProps.onEditEnd,
         icon: TextLabel.defaultProps.icon,
         basic: TextLabel.defaultProps.basic,
         align: TextLabel.defaultProps.align,
@@ -50,6 +52,7 @@ class EditableTextLabel extends PureComponent {
         const {
             inEdit,
             onEditRequest,
+            onEditEnd,
             ...labelProps,
         } = this.props;
         const { icon, basic, align, status } = labelProps;
@@ -69,6 +72,7 @@ class EditableTextLabel extends PureComponent {
                 {icon && <Icon type={icon} />}
                 <EditableText
                     defaultValue={basic}
+                    onEditEnd={onEditEnd}
                     {...layoutProps} />
             </TextLabel>
         );
