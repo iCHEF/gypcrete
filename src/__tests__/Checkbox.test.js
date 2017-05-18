@@ -43,6 +43,16 @@ describe('Pure <Checkbox>', () => {
         expect(wrapper.find('input').getNode().indeterminate).toBeTruthy();
     });
 
+    it('should not touch input.indeterminate when prop not changed', () => {
+        const wrapper = mount(
+            <PureCheckbox indeterminate>Foo children</PureCheckbox>
+        );
+        expect(wrapper.find('input').getNode().indeterminate).toBeTruthy();
+
+        wrapper.setProps({ disabled: true });
+        expect(wrapper.find('input').getNode().indeterminate).toBeTruthy();
+    });
+
     it('passes whitelisted props to <input>', () => {
         const handleChange = jest.fn();
         const wrapper = shallow(

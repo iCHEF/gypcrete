@@ -46,6 +46,18 @@ it('creates layer on mount and removes on unmount', () => {
     expect(document.getElementById(layerId)).toBeNull();
 });
 
+it('should give up removing layer if reference to layer lost', () => {
+    const wrapper = mount(<LayerFoo />);
+    const layerId = wrapper.instance().baseLayer.id;
+
+    // Mock reference lost
+    wrapper.instance().baseLayer = null;
+    wrapper.unmount();
+
+    // Expect unmount to abort
+    expect(document.getElementById(layerId)).not.toBeNull();
+});
+
 it('renders wrapped Component outside React root', () => {
     const wrapper = mount(<LayerFoo />);
     const layerWrapper = new ReactWrapper(wrapper.instance().componentRef, true);

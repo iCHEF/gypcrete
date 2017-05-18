@@ -44,7 +44,7 @@ function renderToLayer(WrappedComponent) {
 
         componentDidMount() {
             this.createBaseLayer();
-            this.renderComponentToLayer({ withProps: this.props });
+            this.renderComponentToLayer();
         }
 
         componentWillReceiveProps(nextProps) {
@@ -52,6 +52,8 @@ function renderToLayer(WrappedComponent) {
         }
 
         componentWillUnmount() {
+            if (!this.baseLayer) return;
+
             ReactDOM.unmountComponentAtNode(this.baseLayer);
             this.removeBaseLayer();
         }
@@ -75,8 +77,6 @@ function renderToLayer(WrappedComponent) {
          * Remove base layer from <body>
          */
         removeBaseLayer() {
-            if (!this.baseLayer) return;
-
             document.body.removeChild(this.baseLayer);
             this.baseLayer = null;
         }
