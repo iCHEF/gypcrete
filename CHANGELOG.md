@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add `<TextInput>` which contains `<EditableText>` and ignores normal text props like `basic`, `tag` and `aside`.
 - Add `sinon` testing package to handling stub tests. (#38)
 - Add `EnhancedPropTypes` helper. (#38)
+- Add `<EditableTextLabel>` which can be turned into edit mode with `inEdit` prop.
 
 ### Changed
 - `<IconLayout>` can now be tooltip-free by turning it off.
