@@ -147,7 +147,7 @@ const rowComp = ({
         };
 
         static childContextTypes = {
-            align: RowComp.propTypes.align,
+            align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
             ...statusPropTypes,
             // status,
             // statusOptions,
