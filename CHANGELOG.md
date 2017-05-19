@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Lighten hover & active background color of row components. (#38)
 - Filter out color and solid props in `<IconButton>`, they should be empty. (#38)
 - Non-minified row components now take equal space in a flex row.
+- `withStatus()` mixin now takes `withRef` option to hold ref to rendered component.
 
 ## [0.9.0]
 ### Added
