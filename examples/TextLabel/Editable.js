@@ -7,6 +7,7 @@ import DebugBox from '../DebugBox';
 class EditableExample extends PureComponent {
     state = {
         isEditing: false,
+        status: null,
         currentBasic: 'Kitchen Printer',
     };
 
@@ -18,9 +19,17 @@ class EditableExample extends PureComponent {
     handleEditEnd = (event) => {
         if (!event.reset) {
             this.setState({ currentBasic: event.value });
+
+            setTimeout(
+                () => this.setState({ status: 'success' }),
+                600
+            );
         }
 
-        this.setState({ isEditing: false });
+        this.setState({
+            isEditing: false,
+            status: event.reset ? null : 'loading',
+        });
         action('editEnd')(event);
     }
 
@@ -34,7 +43,8 @@ class EditableExample extends PureComponent {
                     aside="00:11:22:33"
                     tag="Online"
                     onEditRequest={this.handleEditRequest}
-                    onEditEnd={this.handleEditEnd} />
+                    onEditEnd={this.handleEditEnd}
+                    status={this.state.status} />
             </DebugBox>
         );
     }
