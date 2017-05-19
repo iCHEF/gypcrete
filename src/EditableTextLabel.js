@@ -32,6 +32,12 @@ class EditableTextLabel extends PureComponent {
         status: TextLabel.defaultProps.status,
     };
 
+    componentDidUpdate() {
+        if (this.props.inEdit) {
+            this.editableTextRef.getRenderedComponent().focusInputNode();
+        }
+    }
+
     handleDoubleClick = () => {
         /**
          * Request edit via double-click is not favored,
@@ -71,6 +77,7 @@ class EditableTextLabel extends PureComponent {
             <TextLabel {...labelProps}>
                 {icon && <Icon type={icon} />}
                 <EditableText
+                    ref={(ref) => { this.editableTextRef = ref; }}
                     defaultValue={basic}
                     onEditEnd={onEditEnd}
                     {...layoutProps} />

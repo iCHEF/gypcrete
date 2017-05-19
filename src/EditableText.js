@@ -66,6 +66,10 @@ class EditableText extends PureComponent {
         }
     }
 
+    focusInputNode() {
+        this.inputNode.focus();
+    }
+
     notifiyEditEnd(event, { reset = false } = {}) {
         this.props.onEditEnd({
             reset,
@@ -188,5 +192,5 @@ class EditableText extends PureComponent {
     }
 }
 
-export default withStatus()(EditableText);
+export default withStatus({ withRef: true })(EditableText);
 export { EditableText as PureEditableText };

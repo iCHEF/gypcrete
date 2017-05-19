@@ -147,4 +147,14 @@ describe('pure <PureEditableText>', () => {
         });
         expect(handleEditEnd).not.toHaveBeenCalled();
     });
+
+    it('can manually focus its <input> on DOM', () => {
+        const wrapper = mount(<PureEditableText />);
+        const input = wrapper.instance().inputNode;
+
+        const spy = jest.spyOn(input, 'focus');
+        wrapper.instance().focusInputNode();
+
+        expect(spy).toHaveBeenCalled();
+    });
 });

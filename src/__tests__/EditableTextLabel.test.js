@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import { getTextLayoutProps, ROW_COMP_ALIGN } from '../mixins/rowComp';
 
@@ -77,4 +77,33 @@ it('renders <EditableText> with layout props the same as rowComp() in edit mode'
         expect(wrapper.prop('children')[1].props.align).toBe(layoutProps.align);
         expect(wrapper.prop('children')[1].props.noGrow).toBe(layoutProps.noGrow);
     });
+});
+
+it('calls <EditableText> to focus its <input> when going edit mode', () => {
+    const wrapper = mount(<EditableTextLabel basic="Foo" />);
+
+    const instance = wrapper.instance();
+    const originalDidUpdate = instance.componentDidUpdate;
+
+    const focusInputNode = jest.fn();
+    const getRenderedComponent = jest.fn(() => ({ focusInputNode }));
+
+    // Mock `componentDidUpdate` so we can apply more mocking on refs.
+    instance.componentDidUpdate = (...args) => {
+        if (instance.props.inEdit) {
+            instance.editableTextRef.getRenderedComponent = getRenderedComponent;
+        }
+        originalDidUpdate.apply(instance, args);
+    };
+
+    // Component updated without `inEdit`
+    wrapper.setProps({ basic: 'Bar' });
+    expect(getRenderedComponent).not.toHaveBeenCalled();
+    expect(focusInputNode).not.toHaveBeenCalled();
+
+
+    // Component updated **with** `inEdit`
+    wrapper.setProps({ inEdit: true });
+    expect(getRenderedComponent).toHaveBeenCalled();
+    expect(focusInputNode).toHaveBeenCalled();
 });
