@@ -58,6 +58,7 @@ class EditableText extends PureComponent {
     state = {
         currentValue: this.props.value || this.props.defaultValue || '',
         focused: false,
+        lastNotified: 0,
     };
 
     componentWillReceiveProps(nextProps) {
@@ -71,10 +72,27 @@ class EditableText extends PureComponent {
     }
 
     notifiyEditEnd(event, { reset = false } = {}) {
+        const currentTimestamp = Date.now();
+        const timeDiffMilliseconds = currentTimestamp - this.state.lastNotified;
+
+        /**
+         * Prevent <EditableText> from notifying edit end within a short time interval.
+         *
+         * This way we can blur the <input> after edit end without incorrectly firing an
+         * additional notification.
+         */
+        if (timeDiffMilliseconds < 200) {
+            return;
+        }
+
         this.props.onEditEnd({
             reset,
             value: event.target.value,
         });
+        this.setState(
+            { lastNotified: Date.now() },
+            () => this.inputNode.blur()
+        );
     }
 
     handleInputFocus = (event) => {

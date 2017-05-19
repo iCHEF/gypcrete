@@ -6,6 +6,10 @@ import keycode from 'keycode';
 import EditableText, { PureEditableText } from '../EditableText';
 import { PureText } from '../Text';
 
+function delayForMilliseconds(millisecond) {
+    return new Promise(resolve => setTimeout(resolve, millisecond));
+}
+
 describe('withStatus(EditableText)', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div');
@@ -90,6 +94,16 @@ describe('pure <PureEditableText>', () => {
         expect(input.prop('value')).toBe('Bar');
     });
 
+    it('does not clear cached input value when goes from controlled input to uncontrolled', () => {
+        const wrapper = mount(<PureEditableText value="Foo" />);
+        const input = wrapper.find('input');
+
+        expect(input.prop('value')).toBe('Foo');
+
+        wrapper.setProps({ value: null });
+        expect(input.prop('value')).toBe('Foo');
+    });
+
     it('can have a default value', () => {
         const wrapper = mount(<PureEditableText defaultValue="Foo" />);
         const input = wrapper.find('input');
@@ -134,6 +148,23 @@ describe('pure <PureEditableText>', () => {
             keyCode: keycode('Escape'),
         });
         expect(handleEditEnd).toHaveBeenLastCalledWith({ value: 'Bar', reset: true });
+        expect(handleEditEnd).toHaveBeenCalledTimes(1);
+    });
+
+    it('prevents another notifiying edit end within short time interval', async () => {
+        const handleEditEnd = jest.fn();
+        const wrapper = mount(<PureEditableText onEditEnd={handleEditEnd} />);
+        const input = wrapper.find('input');
+
+        input.simulate('keydown', {
+            keyCode: keycode('Escape'),
+        });
+        expect(handleEditEnd).toHaveBeenCalledTimes(1);
+
+        await delayForMilliseconds(100);
+
+        input.simulate('blur');
+        expect(handleEditEnd).toHaveBeenCalledTimes(1);
     });
 
     it('does not interupt user input on non-Enter/Esc keys', () => {
