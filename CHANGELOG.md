@@ -10,12 +10,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add `<Switch>` row component.
 - Add `<EditableText>` visual element which has an `<input type="text" />` inside.
 - Add `<TextInput>` which contains `<EditableText>` and ignores normal text props like `basic`, `tag` and `aside`.
+- Add `sinon` testing package to handling stub tests. (#38)
+- Add `EnhancedPropTypes` helper. (#38)
 
 ### Changed
 - `<IconLayout>` can now be tooltip-free by turning it off.
 - Fix tests in `<Checkbox>`.
 - `<BasicRow>` can now take `children` to render extra content.
-
+- Lighten hover & active background color of row components. (#38)
+- Filter out color and solid props in `<IconButton>`, they should be empty. (#38)
 
 ## [0.9.0]
 ### Added
