@@ -90,7 +90,7 @@ class EditableText extends PureComponent {
             value: event.target.value,
         });
         this.setState(
-            { lastNotified: Date.now() },
+            { lastNotified: currentTimestamp },
             () => this.inputNode.blur()
         );
     }
