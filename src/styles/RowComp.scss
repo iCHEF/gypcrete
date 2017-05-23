@@ -7,7 +7,7 @@
     box-sizing: border-box;
     overflow: hidden;
     display: flex;
-    flex: 1 1 auto;
+    flex: 1 1 $component-flex-basis;
     align-items: flex-start;
     justify-content: flex-start;
 
