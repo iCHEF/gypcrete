@@ -15,6 +15,7 @@ $c-text-error:    $c-red;
 $c-text-editable: $c-blue;
 $c-text-disabled: hsba(0, 0, 0, 30);
 $c-text-readonly: $c-gray;
+$c-text-placeholder: hsba(0, 0, 0, 30);
 
 // Icon-only buttons
 $c-icon-header: $c-black;
@@ -35,8 +36,8 @@ $c-section-bg-list:    hsba(0, 0, 0, 0);
 
 // Row backgrounds
 $c-row-bg:           hsba(0, 0, 0, 0);
-$c-row-bg-hover:     hsba(0, 0, 0, 10);
-$c-row-bg-active:    hsba(0, 0, 0, 20);
+$c-row-bg-hover:     hsba(0, 0, 0, 2);
+$c-row-bg-active:    hsba(0, 0, 0, 4);
 $c-row-bg-highlight: $c-blue;
 
 // Component backgrounds
@@ -58,3 +59,7 @@ $c-switch-knob:   $c-white;
 // Slider colors
 $c-slider-track: hsba(0, 0, 0, 30);
 $c-slider-thumb-border: hsba(0, 0, 0, 20);
+
+$c-input-text: $c-text-editable;
+$c-input-border: $c-text-editable;
+$c-input-placeholder: $c-text-placeholder;

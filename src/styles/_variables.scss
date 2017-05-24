@@ -11,6 +11,7 @@ $basic-text-line-height: 18px;
 $aside-text-font-size: 12px;
 $aside-text-line-height: 14px;
 
+$component-flex-basis: 15rem;
 $component-base-font-size: 16px;
 $component-base-height: 48px;
 $component-padding-vertical: 8px;
@@ -30,6 +31,12 @@ $tooltip-arrow-size: 6px;
 $icon-base-size: $element-base-height;
 $icon-large-size: 96px;
 
+$switch-icon-width: 48px;
+$switch-icon-height: 24px;
+$switch-icon-border-width: 2px;
+$switch-padding-vertical: 4px;
+$switch-padding-horizontal: 8px;
+
 $status-icon-inline-size: $basic-text-line-height;
 $status-icon-corner-size: 16px;
 
@@ -39,3 +46,13 @@ $search-input-background-color: $c-white;
 $search-input-border-color: $c-gray;
 $search-input-border-radius: 6px;
 $search-input-padding: 8px;
+
+// -------------------------------------
+// Timing Functions
+//
+// Retrived from: https://matthewlein.com/ceaser/
+// License granted on webpage.
+// -------------------------------------
+
+$ease-out-quad: cubic-bezier(.25, .46, .45, .94);
+$ease-out-cubic: cubic-bezier(.215, .61, .355, 1);

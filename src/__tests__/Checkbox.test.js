@@ -22,14 +22,14 @@ describe('Pure <Checkbox>', () => {
         const wrapper = shallow(
             <PureCheckbox>Foo children</PureCheckbox>
         );
-        expect(wrapper.contains(<input type="checkbox" />));
+        expect(wrapper.containsMatchingElement(<input type="checkbox" />)).toBeTruthy();
     });
 
     it('renders <input> in icon wrapper before rowComp parts', () => {
         const wrapper = shallow(
             <PureCheckbox>Foo children</PureCheckbox>
         );
-        expect(wrapper.childAt(0).hasClass('ic-checkbox__icon-wrapper'));
+        expect(wrapper.childAt(0).hasClass('gyp-checkbox__icon-wrapper')).toBeTruthy();
         expect(wrapper.childAt(0).find('input').exists()).toBeTruthy();
     });
 
@@ -40,6 +40,16 @@ describe('Pure <Checkbox>', () => {
         expect(wrapper.find('input').getNode().indeterminate).toBeFalsy();
 
         wrapper.setProps({ indeterminate: true });
+        expect(wrapper.find('input').getNode().indeterminate).toBeTruthy();
+    });
+
+    it('should not touch input.indeterminate when prop not changed', () => {
+        const wrapper = mount(
+            <PureCheckbox indeterminate>Foo children</PureCheckbox>
+        );
+        expect(wrapper.find('input').getNode().indeterminate).toBeTruthy();
+
+        wrapper.setProps({ disabled: true });
         expect(wrapper.find('input').getNode().indeterminate).toBeTruthy();
     });
 

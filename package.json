@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "iCHEF web components library, built with React.",
   "main": "lib/index.js",
   "repository": {
@@ -74,6 +74,7 @@
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4",
     "sass-loader": "^6.0.2",
+    "sinon": "^2.2.0",
     "style-loader": "^0.13.2",
     "stylelint": "^7.10.1",
     "stylelint-config-standard": "^16.0.0",
@@ -82,6 +83,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "document-offset": "^1.0.4",
+    "keycode": "^2.1.9",
     "prop-types": "^15.5.8"
   },
   "jest-junit": {

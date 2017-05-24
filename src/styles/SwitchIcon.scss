@@ -1,0 +1,40 @@
+@import "./mixins";
+
+.#{$prefix}-switch-icon {
+    display: inline-block;
+    padding: rem($switch-padding-vertical) rem($switch-padding-horizontal);
+
+    &__inner {
+        width: rem($switch-icon-width);
+        height: rem($switch-icon-height);
+        background-color: $c-switch-bg-off;
+        border-radius: rem($switch-icon-height / 2);
+        padding: rem($switch-icon-border-width);
+        display: block;
+        box-sizing: border-box;
+
+        &:before {
+            $knob-size: ($switch-icon-height - $switch-icon-border-width * 2);
+
+            content: "";
+            width: rem($knob-size);
+            height: rem($knob-size);
+            background-color: $c-switch-knob;
+            border-radius: 50%;
+            display: block;
+            box-shadow: 0 rem(3px) rem(9px) rgba(0, 0, 0, .3);
+            will-change: transform;
+            transition: transform 300ms $ease-out-cubic;
+        }
+    }
+
+    &--on &__inner,
+    input:checked ~ & &__inner,
+    input:checked ~ .#{$prefix}-iconlayout &__inner, {
+        background-color: $c-switch-bg-on;
+
+        &:before {
+            transform: translateX(rem($switch-icon-height));
+        }
+    }
+}

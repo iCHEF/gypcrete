@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 
+## [0.10.0]
+### Added
+- Add `<SwitchIcon>` to be used as a 64x32 icon.
+- Add `<Switch>` row component.
+- Add `<EditableText>` visual element which has an `<input type="text" />` inside.
+- Add `<TextInput>` which contains `<EditableText>` and ignores normal text props like `basic`, `tag` and `aside`.
+- Add `sinon` testing package to handling stub tests. (#38)
+- Add `EnhancedPropTypes` helper. (#38)
+- Add `<EditableTextLabel>` which can be turned into edit mode with `inEdit` prop.
+
+### Changed
+- `<IconLayout>` can now be tooltip-free by turning it off.
+- Fix tests in `<Checkbox>`.
+- `<BasicRow>` can now take `children` to render extra content.
+- Lighten hover & active background color of row components. (#38)
+- Filter out color and solid props in `<IconButton>`, they should be empty. (#38)
+- Non-minified row components now take equal space in a flex row.
+- `withStatus()` mixin now takes `withRef` option to hold ref to rendered component.
 
 ## [0.9.0]
 ### Added
@@ -15,7 +33,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add [@kadira/storybook](https://github.com/storybooks/storybook/) to replace `demo/`.
 - Create `examples/` folder and migrate component docs to stories.
 - Create `addPropsTable()` custom addon to show component's propTypes in table, which modified from `addon-info`.
-- Add `storybook` env in babelrc, which included cjs transpiler. 
+- Add `storybook` env in babelrc, which included cjs transpiler.
 - Deploy built storybook to `gh-pages` branch with running `npm run ghpages`. (#35)
 - Add [demo link](http://ichef.github.io/gypcrete) in README.
 
@@ -135,7 +153,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Migrate the following components:
   * `<Icon>`
   * `<Tag>`
-  * `<TextEllipsis>` 
+  * `<TextEllipsis>`
   * `<FlexCell>` (with modifications)
   * `<StatusIcon>` (with modifications)
 
@@ -159,7 +177,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Change
 - Move `babel-runtime` (required by `babel-plugin-tranform-runtime`) to `peerDependencies` instead of `devDependencies`. Because our Babel-transformed ES2015 modules **does** require it.
 
-  
+
 ## [0.3.0]
 ### Added
 - Add deploy script to work with Jenkins. It'll deploy to:

@@ -10,7 +10,7 @@ import propsTableAddon from './propsTable-addon';
 setOptions({
   name: 'iCHEF gypcrete',
   url: 'https://github.com/iCHEF/gypcrete',
-  showDownPanel: false
+  showDownPanel: true,
 });
 
 setDefaults({

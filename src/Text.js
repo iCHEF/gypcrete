@@ -27,7 +27,7 @@ import './styles/Text.scss';
 import BasicRow from './BasicRow';
 
 export const COMPONENT_NAME = prefixClass('text');
-export const ROOT_BEM = icBEM(COMPONENT_NAME);
+const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 export const BEM = {
     root: ROOT_BEM,
@@ -104,11 +104,13 @@ class Text extends PureComponent {
     }
 
     render() {
-        const { align, noGrow } = this.props;
+        const { align, noGrow, className } = this.props;
 
-        const rootClassName = BEM.root
+        const bemClass = BEM.root
             .modifier(align)
             .modifier('no-grow', noGrow);
+
+        const rootClassName = classNames(`${bemClass}`, className);
 
         return (
             <div className={rootClassName}>

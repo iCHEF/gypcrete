@@ -1,12 +1,8 @@
 import React from 'react';
+import { action } from '@kadira/storybook';
 
 import Button from 'src/Button';
 import FlexRow from '../FlexRow';
-
-function handleButtonClick() {
-    // eslint-disable-next-line no-console
-    console.log('Button clicked');
-}
 
 function BasicButtonExample() {
     return (
@@ -16,7 +12,7 @@ function BasicButtonExample() {
                 aside="Default color"
                 tag="Tag"
                 icon="add"
-                onClick={handleButtonClick} />
+                onClick={action('clicked')} />
 
             <Button
                 color="red"
