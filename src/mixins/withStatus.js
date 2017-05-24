@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import getComponentName from '../utils/getComponentName';
@@ -18,34 +18,49 @@ export const withStatusPropTypes = {
     errorMsg: PropTypes.string,
 };
 
-const withStatus = (defaultOptions = {}) => (WrappedComponent) => {
+const withStatus = ({
+    withRef = false,
+    ...defaultStatusOptions,
+} = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
 
-    function WithStatus(props, context) {
-        const { status, statusOptions = {}, errorMsg } = context;
+    class WithStatus extends Component {
+        static displayName = `withStatus(${componentName})`;
 
-        const statusIcon = status && (
-            <StatusIcon
-                status={status}
-                {...defaultOptions}
-                {...statusOptions} />
-        );
+        static contextTypes = {
+            ...statusPropTypes,
+            // status,
+            // statusOptions,
+            // errorMsg,
+        };
 
-        return (
-            <WrappedComponent
-                {...props}
-                statusIcon={statusIcon}
-                errorMsg={errorMsg} />
-        );
+        getRenderedComponent() {
+            return this.renderedComponentRef;
+        }
+
+        render() {
+            const { status, statusOptions = {}, errorMsg } = this.context;
+
+            const statusIcon = status && (
+                <StatusIcon
+                    status={status}
+                    {...defaultStatusOptions}
+                    {...statusOptions} />
+            );
+
+            const refProps = !withRef ? {} : {
+                ref: (ref) => { this.renderedComponentRef = ref; },
+            };
+
+            return (
+                <WrappedComponent
+                    {...refProps}
+                    {...this.props}
+                    statusIcon={statusIcon}
+                    errorMsg={errorMsg} />
+            );
+        }
     }
-    WithStatus.displayName = `withStatus(${componentName})`;
-
-    WithStatus.contextTypes = {
-        ...statusPropTypes,
-        // status,
-        // statusOptions,
-        // errorMsg,
-    };
 
     return WithStatus;
 };

@@ -18,6 +18,7 @@ import TextEllipsis from './TextEllipsis';
 
 // Row components
 import TextLabel from './TextLabel';
+import EditableTextLabel from './EditableTextLabel';
 import Button from './Button';
 import IconButton from './IconButton';
 import Checkbox from './Checkbox';
@@ -42,6 +43,7 @@ export {
     TextEllipsis,
 
     TextLabel,
+    EditableTextLabel,
     Button,
     IconButton,
     Checkbox,

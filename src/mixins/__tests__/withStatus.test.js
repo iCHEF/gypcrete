@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import StatusIcon from 'src/StatusIcon';
 
@@ -18,8 +18,16 @@ Foo.propTypes = {
     ...withStatusPropTypes
 };
 
+// eslint-disable-next-line react/prefer-stateless-function
+class Bar extends PureComponent {
+    render() {
+        return <div />;
+    }
+}
+
 const FooWithStatus = withStatus()(Foo);
 const FooWithStatusOptions = withStatus({ autohide: false })(Foo);
+const BarWithRef = withStatus({ withRef: true })(Bar);
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -71,4 +79,12 @@ it('passes down other props to wrapped component', () => {
     );
 
     expect(wrapper.find(Foo).prop('bar')).toBeTruthy();
+});
+
+it('can hold ref to the rendered component, and can be retrieved', () => {
+    const wrapper = mount(<BarWithRef />);
+    const ref = wrapper.instance().getRenderedComponent();
+
+    expect(ref).not.toBeNull();
+    expect(ref).toBeInstanceOf(Bar);
 });

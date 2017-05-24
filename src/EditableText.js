@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import keycode from 'keycode';
 
 import prefixClass from './utils/prefixClass';
 import icBEM from './utils/icBEM';
@@ -21,6 +22,7 @@ export const BEM = {
 
 class EditableText extends PureComponent {
     static propTypes = {
+        onEditEnd: PropTypes.func,
         // <input type="text" /> props
         value: PropTypes.string,
         defaultValue: PropTypes.string,
@@ -29,6 +31,7 @@ class EditableText extends PureComponent {
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         onChange: PropTypes.func,
+        onKeyDown: PropTypes.func,
         // Use `input` to inject props to the underlying <input>
         input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
         // withStatus() props,
@@ -37,6 +40,7 @@ class EditableText extends PureComponent {
     };
 
     static defaultProps = {
+        onEditEnd: () => {}, // ({ value: string|number, reset: boolean}) => {}
         // <input> props
         value: undefined,
         defaultValue: undefined,
@@ -45,6 +49,7 @@ class EditableText extends PureComponent {
         onFocus: () => {},
         onBlur: () => {},
         onChange: () => {},
+        onKeyDown: () => {},
         input: {},
         errorMsg: undefined,
         statusIcon: undefined,
@@ -53,12 +58,41 @@ class EditableText extends PureComponent {
     state = {
         currentValue: this.props.value || this.props.defaultValue || '',
         focused: false,
+        lastNotified: 0,
     };
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.value !== this.props.value) {
+        if (nextProps.value) {
             this.setState({ currentValue: nextProps.value });
         }
+    }
+
+    focusInputNode() {
+        this.inputNode.focus();
+    }
+
+    notifiyEditEnd(event, { reset = false } = {}) {
+        const currentTimestamp = Date.now();
+        const timeDiffMilliseconds = currentTimestamp - this.state.lastNotified;
+
+        /**
+         * Prevent <EditableText> from notifying edit end within a short time interval.
+         *
+         * This way we can blur the <input> after edit end without incorrectly firing an
+         * additional notification.
+         */
+        if (timeDiffMilliseconds < 200) {
+            return;
+        }
+
+        this.props.onEditEnd({
+            reset,
+            value: event.target.value,
+        });
+        this.setState(
+            { lastNotified: currentTimestamp },
+            () => this.inputNode.blur()
+        );
     }
 
     handleInputFocus = (event) => {
@@ -68,6 +102,8 @@ class EditableText extends PureComponent {
 
     handleInputBlur = (event) => {
         this.setState({ focused: false });
+        this.notifiyEditEnd(event);
+
         this.props.onBlur(event);
     }
 
@@ -78,6 +114,20 @@ class EditableText extends PureComponent {
         }
 
         this.props.onChange(event);
+    }
+
+    handleInputKeyDown = (event) => {
+        switch (event.keyCode) {
+            case keycode('Enter'):
+                this.notifiyEditEnd(event);
+                break;
+            case keycode('Escape'):
+                this.notifiyEditEnd(event, { reset: true });
+                break;
+            default:
+                break;
+        }
+        this.props.onKeyDown(event);
     }
 
     renderBasicRow() {
@@ -106,6 +156,7 @@ class EditableText extends PureComponent {
                     onFocus={this.handleInputFocus}
                     onBlur={this.handleInputBlur}
                     onChange={this.handleInputChange}
+                    onKeyDown={this.handleInputKeyDown}
                     {...extraInputProps} />
             </BasicRow>
         );
@@ -113,11 +164,16 @@ class EditableText extends PureComponent {
 
     render() {
         const {
+            onEditEnd,
+            // <input> props
             value,
             defaultValue,
             placeholder,
             disabled,
+            onFocus,
+            onBlur,
             onChange,
+            onKeyDown,
             input,
             // status props
             statusIcon,
@@ -154,5 +210,5 @@ class EditableText extends PureComponent {
     }
 }
 
-export default withStatus()(EditableText);
+export default withStatus({ withRef: true })(EditableText);
 export { EditableText as PureEditableText };

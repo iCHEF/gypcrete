@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add `<TextInput>` which contains `<EditableText>` and ignores normal text props like `basic`, `tag` and `aside`.
 - Add `sinon` testing package to handling stub tests. (#38)
 - Add `EnhancedPropTypes` helper. (#38)
+- Add `<EditableTextLabel>` which can be turned into edit mode with `inEdit` prop.
 
 ### Changed
 - `<IconLayout>` can now be tooltip-free by turning it off.
@@ -20,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Lighten hover & active background color of row components. (#38)
 - Filter out color and solid props in `<IconButton>`, they should be empty. (#38)
 - Non-minified row components now take equal space in a flex row.
+- `withStatus()` mixin now takes `withRef` option to hold ref to rendered component.
 
 ## [0.9.0]
 ### Added

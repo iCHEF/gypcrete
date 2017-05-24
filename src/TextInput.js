@@ -23,6 +23,7 @@ const filterOutStatusProps = (props) => {
 function TextInput(props, { align }) {
     const {
         // <EditableText> props
+        onEditEnd,
         value,
         defaultValue,
         placeholder,
@@ -30,6 +31,7 @@ function TextInput(props, { align }) {
         onFocus,
         onBlur,
         onChange,
+        onKeyDown,
         input,
         // React props
         className,
