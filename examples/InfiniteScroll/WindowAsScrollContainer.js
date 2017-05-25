@@ -3,7 +3,7 @@ import { action } from '@kadira/storybook';
 
 import InfiniteScroll from 'src/InfiniteScroll';
 
-const defaultItemsCount = 50;
+const defaultItemsCount = 20;
 
 class WindowAsScrollContainerExample extends PureComponent {
     state = {
@@ -53,7 +53,8 @@ class WindowAsScrollContainerExample extends PureComponent {
                 useWindowAsScrollContainer
                 onInfiniteLoad={this.loadMore}
                 isLoading={isLoading}
-                hasMore={hasMore}>
+                hasMore={hasMore}
+                showMoreButton="Show more">
                 <ul>
                     {this.renderListItems()}
                 </ul>

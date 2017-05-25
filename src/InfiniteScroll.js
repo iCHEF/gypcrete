@@ -6,11 +6,11 @@
 //
 // *************************************
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import TextLabel from './TextLabel';
+import Button from './Button';
 import Icon from './Icon';
 
 import icBEM from './utils/icBEM';
@@ -19,39 +19,36 @@ import './styles/InfiniteScroll.scss';
 
 const COMPONENT_NAME = prefixClass('infinite-scroll');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
-const BEM = {
+export const BEM = {
     root: ROOT_BEM,
     footer: ROOT_BEM.element('footer')
 };
-
-export const DefaultLoadingSpinner = () => (
-    <TextLabel
-        icon={<Icon type="loading" color="gray" spinning />}
-        align="center" />
-);
 
 class InfiniteScroll extends PureComponent {
     static propTypes = {
         onInfiniteLoad: PropTypes.func.isRequired,
         scrollThreshold: PropTypes.number,  // Distance in px before the end of items
-        loadingSpinner: PropTypes.node,     // Loading spinner element
-        endMessage: PropTypes.node,
-
         isLoading: PropTypes.bool,
         hasMore: PropTypes.bool,
         disabled: PropTypes.bool,
-        useWindowAsScrollContainer: PropTypes.bool
+        useWindowAsScrollContainer: PropTypes.bool,
+
+        // Footer children
+        loadingButton: PropTypes.node,
+        showMoreButton: PropTypes.node,
+        noNewestButton: PropTypes.node
     };
 
     static defaultProps = {
         scrollThreshold: 100,
-        loadingSpinner: <DefaultLoadingSpinner />,
-        endMessage: null,
-
         isLoading: false,
         hasMore: true,
         disabled: false,
-        useWindowAsScrollContainer: false
+        useWindowAsScrollContainer: false,
+
+        loadingButton: null,
+        showMoreButton: null,
+        noNewestButton: null
     }
 
     componentDidMount() {
@@ -157,33 +154,66 @@ class InfiniteScroll extends PureComponent {
     }
 
     // -------------------------------------
-    //   Renderer
+    //   Render footer
     // -------------------------------------
 
-    /**
-     * Render footer,
-     * whether loadingSpinner or endMessage as child
-     */
-    renderFooter() {
-        const {
-            loadingSpinner,
-            endMessage,
-            isLoading,
-            hasMore,
-            disabled
-        } = this.props;
-        let footerChild = null;
+    renderLoadingButton() {
+        const { loadingButton } = this.props;
 
-        if (disabled) {
+        if (isValidElement(loadingButton)) {
+            return loadingButton;
+        }
+
+        return (
+            <Button
+                disabled
+                color="black"
+                align="center"
+                icon={<Icon type="loading" spinning />}
+                basic={loadingButton}
+                minified={false} />
+        );
+    }
+
+    renderFooterButton(buttonItem) {
+        const { onInfiniteLoad } = this.props;
+
+        if (!buttonItem) {
             return null;
         }
 
+        if (isValidElement(buttonItem)) {
+            return buttonItem;
+        }
+
+        return (
+            <Button
+                color="black"
+                align="center"
+                basic={buttonItem}
+                minified={false}
+                onClick={onInfiniteLoad} />
+        );
+    }
+
+    /**
+     * Render footer child
+     */
+    renderFooter() {
+        const {
+            isLoading,
+            hasMore,
+            showMoreButton,
+            noNewestButton
+        } = this.props;
+        let footerChild = null;
+
         if (isLoading) {
-            footerChild = loadingSpinner;
-        } else if (!hasMore && endMessage) {
-            footerChild = endMessage;
+            footerChild = this.renderLoadingButton();
+        } else if (hasMore) {
+            footerChild = this.renderFooterButton(showMoreButton);
         } else {
-            return null;
+            footerChild = this.renderFooterButton(noNewestButton);
         }
 
         return (
@@ -193,24 +223,30 @@ class InfiniteScroll extends PureComponent {
         );
     }
 
+    // -------------------------------------
+    //   Renderer
+    // -------------------------------------
+
     render() {
         const {
             onInfiniteLoad,
             scrollThreshold,
-            loadingSpinner,
-            endMessage,
-
             isLoading,
             hasMore,
             disabled,
             useWindowAsScrollContainer,
+            // Footer children
+            loadingButton,
+            showMoreButton,
+            noNewestButton,
+
             children,
             className,
             style,
             ...rootProps
         } = this.props;
 
-        // Get classnames and styles
+        // Get classnames and styles`
         const rootClassName = classNames(`${BEM.root}`, className);
 
         return (
@@ -219,7 +255,7 @@ class InfiniteScroll extends PureComponent {
                 ref={(ref) => { this.scrollNode = ref; }}
                 className={rootClassName}>
                 {children}
-                {this.renderFooter()}
+                {!disabled && this.renderFooter()}
             </div>
         );
     }

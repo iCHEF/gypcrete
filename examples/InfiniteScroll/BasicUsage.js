@@ -2,9 +2,6 @@ import React, { PureComponent } from 'react';
 import { action } from '@kadira/storybook';
 
 import InfiniteScroll from 'src/InfiniteScroll';
-import TextLabel from 'src/TextLabel';
-import Icon from 'src/Icon';
-import Button from 'src/Button';
 
 const defaultItemsCount = 50;
 const rootContainerStyle = {
@@ -12,13 +9,6 @@ const rootContainerStyle = {
     overflow: 'auto',
     border: '1px solid #efefef'
 };
-
-const loadingSpinner = (
-    <TextLabel
-        icon={<Icon type="loading" spinning />}
-        basic="LOADING...."
-        align="center" />
-);
 
 class BasicUsageExample extends PureComponent {
     state = {
@@ -73,16 +63,6 @@ class BasicUsageExample extends PureComponent {
         return listItems;
     }
 
-    renderLoadMoreButton() {
-        return (
-            <Button
-                basic="Load more"
-                align="center"
-                minified={false}
-                onClick={this.loadMoreByClick} />
-        );
-    }
-
     render() {
         const { isLoading, hasMore } = this.state;
 
@@ -90,10 +70,11 @@ class BasicUsageExample extends PureComponent {
             <div style={rootContainerStyle}>
                 <InfiniteScroll
                     onInfiniteLoad={this.loadMore}
-                    loadingSpinner={loadingSpinner}
-                    endMessage={this.renderLoadMoreButton()}
                     isLoading={isLoading}
-                    hasMore={hasMore}>
+                    hasMore={hasMore}
+                    loadingButton="Loading..."
+                    showMoreButton="Show more"
+                    noNewestButton="All items displayed">
                     <ul>
                         {this.renderListItems()}
                     </ul>

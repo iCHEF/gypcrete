@@ -10,7 +10,7 @@ import WindowAsScrollContainerExample from './WindowAsScrollContainer';
 storiesOf('InfiniteScroll', module)
     .addWithInfo(
         'basic usage',
-        'placed in a fixed height container and apply custom `loadingSpinner` and `endMessage`',
+        'placed in a fixed height container',
         () => <BasicUsageExample />,
     )
     .addWithInfo('window as scroll container',
