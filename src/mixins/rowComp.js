@@ -29,7 +29,11 @@
  *
  */
 
-import React, { PureComponent } from 'react';
+import React, {
+    PureComponent,
+    isValidElement,
+    cloneElement
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import '../styles/RowComp.scss';
@@ -112,7 +116,10 @@ const rowComp = ({
 
             // Text label props
             align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
-            icon: PropTypes.string,
+            icon: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.element
+            ]),
             basic: PropTypes.node,
             aside: PropTypes.node,
             tag: PropTypes.node,
@@ -160,6 +167,18 @@ const rowComp = ({
             return { align, status, statusOptions, errorMsg };
         }
 
+        renderIconElement() {
+            const { icon } = this.props;
+
+            if (!icon) {
+                return null;
+            }
+
+            return isValidElement(icon)
+                ? cloneElement(icon, { key: 'comp-icon' })
+                : <Icon key="comp-icon" type={icon} />;
+        }
+
         renderContent() {
             const {
                 align,
@@ -168,12 +187,14 @@ const rowComp = ({
                 aside,
                 tag,
             } = this.props;
-
             const textProps = { basic, aside, tag };
             const textLayoutProps = getTextLayoutProps(align, !!icon);
 
+            // Render icon element
+            const iconElement = this.renderIconElement();
+
             return [
-                icon && <Icon key="comp-icon" type={icon} />,
+                iconElement,
                 <Text
                     key="comp-text"
                     {...textProps}
