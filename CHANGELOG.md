@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+
+## [0.10.0]
+### Added
 - Add `<SwitchIcon>` to be used as a 64x32 icon.
 - Add `<Switch>` row component.
 - Add `<EditableText>` visual element which has an `<input type="text" />` inside.
