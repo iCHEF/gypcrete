@@ -1,9 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 
-// load the default config generator.
+// Load default config generator
 const genDefaultConfig =
-    require('@kadira/storybook/dist/server/config/defaults/webpack.config.js');
+    require('@storybook/react/dist/server/config/defaults/webpack.config.js');
 
 module.exports = (defaultConfig, configType) => {
     const storybookConfig = genDefaultConfig(defaultConfig, configType);
@@ -14,43 +15,60 @@ module.exports = (defaultConfig, configType) => {
     );
 
     // Loaders
-    storybookConfig.module.loaders.push(
+    storybookConfig.module.rules.push(
         {
             test: /\.scss$/,
             include: [
                 path.resolve(__dirname, '../src')
             ],
-            loaders: [
-                'style-loader',
-                'css-loader?importLoaders=1',
-                'postcss-loader',
-                'sass-loader?outputStyle=expanded'
+            use: [
+                {
+                    loader: 'style-loader'
+                },
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 1
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: () => [autoprefixer]
+                    }
+                },
+                {
+                    loader: 'sass-loader',
+                    options: {
+                        outputStyle: 'expanded'
+                    }
+                }
             ]
-        }
-    );
-
-    // Pre-loaders
-    storybookConfig.module.preLoaders = [
+        },
         {
             test: /\.jsx?$/,
             include: [
                 path.resolve(__dirname, '../src'),
                 path.resolve(__dirname, '../examples')
             ],
-            /**
-             * Report every eslint error as a warning.
-             *
-             * This prevents Webpack dev-server from blocking HMR updates only because
-             * eslint fails. `create-react-app` also chooses to use only warnings,
-             * since `eslint-loader` has already make warnings “very visible”.
-             *
-             * Ref: https://git.io/vyu8d
-             */
-            loader: 'eslint-loader?{emitWarning:true}'
+            enforce: 'pre',
+            loader: 'eslint-loader',
+            options: {
+                /**
+                 * Report every eslint error as a warning.
+                 *
+                 * This prevents Webpack dev-server from blocking HMR updates only because
+                 * eslint fails. `create-react-app` also chooses to use only warnings,
+                 * since `eslint-loader` has already make warnings “very visible”.
+                 *
+                 * Ref: https://git.io/vyu8d
+                 */
+                emitWarning: true
+            }
         }
-    ];
+    );
 
-    // Not working now, but should be effective on next Storybook release.
+    // webpack-dev-server
     storybookConfig.devServer = {
         stats: {
             assets: false,
