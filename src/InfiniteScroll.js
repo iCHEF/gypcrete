@@ -77,29 +77,44 @@ class InfiniteScroll extends PureComponent {
     // -------------------------------------
 
     /**
-     * Get the offset while scrolling
+     * Get remaining bottom offset
+     *
+     *      scrollHeight
+     *    |-------------|
+     *    |             |   <= scrollTop
+     *  __|_____________|__
+     *  | |             | |
+     *  | |             | | <= clientHeight || innerHeight
+     *  | |             | |
+     *  |_|_____________|_|
+     *    |             |   <= remainingBottomOffset
+     *    |_____________|
      *
      * @return {Number}
      */
-    getScrollOffset = () => {
-        if (this.props.useWindowAsScrollContainer) {
+    getRemainingBottomOffset = () => {
+        const scrollNode = this.scrollNode;
+        const { useWindowAsScrollContainer } = this.props;
+
+        if (useWindowAsScrollContainer) {
             const windowBodyElement = document.documentElement
                 || document.body.parentNode
                 || document.body;
-            const scrollTop = window.pageYOffset
-                || windowBodyElement.scrollTop;
 
-            /* eslint-disable no-mixed-operators */
-            return this.calculateElementTopPosition(this.scrollNode)
-                + this.scrollNode.offsetHeight
-                - scrollTop
-                - window.innerHeight;
-            /* eslint-enable */
+            // Get window scrollHeight and scrollTop
+            const totalScrollHeight = this.calculateElementTopPosition(scrollNode)
+                + scrollNode.offsetHeight;
+            const scrollTop = window.pageYOffset || windowBodyElement.scrollTop;
+
+            return totalScrollHeight
+                - (scrollTop + window.innerHeight);
         }
 
-        return this.scrollNode.scrollHeight
-            - this.scrollNode.parentNode.scrollTop
-            - this.scrollNode.parentNode.clientHeight;
+        // Get parent node
+        const parentNode = this.scrollNode.parentNode;
+
+        return scrollNode.scrollHeight
+            - (parentNode.scrollTop + parentNode.clientHeight);
     }
 
     /**
@@ -112,7 +127,8 @@ class InfiniteScroll extends PureComponent {
             return 0;
         }
 
-        return element.offsetTop + this.calculateElementTopPosition(element.offsetParent);
+        return element.offsetTop
+            + this.calculateElementTopPosition(element.offsetParent);
     }
 
     /**
@@ -120,13 +136,13 @@ class InfiniteScroll extends PureComponent {
      */
     handleScrollListener = (event) => {
         const { onLoadMore, threshold, hasMore, isLoading } = this.props;
-        const scrollOffset = this.getScrollOffset();
+        const remainingBottomOffset = this.getRemainingBottomOffset();
 
         if (!isLoading
                 && hasMore
-                && threshold > scrollOffset
+                && threshold > remainingBottomOffset
                 && typeof onLoadMore === 'function') {
-            onLoad(event);
+            onLoadMore(event);
         }
     }
 
