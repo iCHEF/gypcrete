@@ -1,5 +1,5 @@
 import React from 'react';
-import { action } from '@kadira/storybook';
+import { action } from '@storybook/addon-actions';
 
 import EditableText from 'src/EditableText';
 import DebugBox from '../DebugBox';

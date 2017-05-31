@@ -1,5 +1,5 @@
 import React from 'react';
-import { action } from '@kadira/storybook';
+import { action } from '@storybook/addon-actions';
 
 import Button from 'src/Button';
 import FlexRow from '../FlexRow';
