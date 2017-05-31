@@ -39,9 +39,10 @@
     "react-dom": "^15.3.0"
   },
   "devDependencies": {
-    "@kadira/react-storybook-addon-info": "^3.4.0",
-    "@kadira/storybook": "^2.35.3",
-    "@kadira/storybook-addon-options": "^1.0.2",
+    "@storybook/addon-actions": "^3.0.0",
+    "@storybook/addon-info": "^3.0.0",
+    "@storybook/addon-options": "3.0.0",
+    "@storybook/react": "3.0.0",
     "autoprefixer": "^6.7.6",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
