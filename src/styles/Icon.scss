@@ -239,5 +239,8 @@
 .#{$prefix}-icon-inventory-item:before {
     content: '\e834'; /* '' */
 }
+.#{$prefix}-icon-download:before {
+    content: '\e860'; /* '' */
+}
 
 /* stylelint-enable */

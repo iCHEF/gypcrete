@@ -33,6 +33,7 @@ function BasicIconsSet() {
             <Icon type="pause" />
             <Icon type="play" />
             <Icon type="search" />
+            <Icon type="download" />
         </div>
     );
 }
