@@ -1,5 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { Story } from '@kadira/react-storybook-addon-info';
+import { Story } from '@storybook/addon-info';
 
 const DEFAULT_OPTIONS = {
     inline: true,
@@ -8,6 +9,7 @@ const DEFAULT_OPTIONS = {
     propTables: []
 };
 
+/* eslint-disable no-underscore-dangle */
 class PropsTableStory extends Story {
     // override render method
     render() {
@@ -21,11 +23,18 @@ class PropsTableStory extends Story {
         );
     }
 }
+/* eslint-enable */
 
 export default {
-    addPropsTable(storyFn, info, extraPropTables = []) {
+    addPropsTable(storyFn, defaultInfo, defaultExtraPropTables = []) {
         const storyName = 'propTypes';
+        let info = defaultInfo;
+        let extraPropTables = defaultExtraPropTables;
 
+        /**
+         * If second param is an array,
+         * take it as extraPropTables
+         */
         if (Array.isArray(info)) {
             extraPropTables = info;
             info = '';
@@ -36,8 +45,8 @@ export default {
             propTables: extraPropTables
         };
 
-        // Modified from @kadira/react-storybook-addon-info
-        return this.add(storyName, context => {
+        // Modified from @storybook/addon-info
+        return this.add(storyName, (context) => {
             const props = {
                 info,
                 context,

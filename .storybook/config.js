@@ -1,6 +1,7 @@
-import { configure, setAddon } from '@kadira/storybook';
-import { setOptions } from '@kadira/storybook-addon-options';
-import infoAddon, { setDefaults } from '@kadira/react-storybook-addon-info';
+/* eslint-disable import/no-extraneous-dependencies */
+import { configure, setAddon } from '@storybook/react';
+import { setOptions } from '@storybook/addon-options';
+import infoAddon, { setDefaults } from '@storybook/addon-info';
 import propsTableAddon from './propsTable-addon';
 
 // -------------------------------------
@@ -8,9 +9,9 @@ import propsTableAddon from './propsTable-addon';
 // -------------------------------------
 
 setOptions({
-  name: 'iCHEF gypcrete',
-  url: 'https://github.com/iCHEF/gypcrete',
-  showDownPanel: true,
+    name: 'iCHEF gypcrete',
+    url: 'https://github.com/iCHEF/gypcrete',
+    showDownPanel: true,
 });
 
 setDefaults({
