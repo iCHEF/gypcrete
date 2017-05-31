@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+(N/A)
+
+## [0.10.1]
+### Added
+- Add new `download` icon.
 
 ## [0.10.0]
 ### Added
@@ -16,7 +21,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add `sinon` testing package to handling stub tests. (#38)
 - Add `EnhancedPropTypes` helper. (#38)
 - Add `<EditableTextLabel>` which can be turned into edit mode with `inEdit` prop.
-- Add new `download` icon.
 
 ### Changed
 - `<IconLayout>` can now be tooltip-free by turning it off.
