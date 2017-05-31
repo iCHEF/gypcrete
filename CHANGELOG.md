@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+(N/A)
+
+## [0.10.1]
+### Added
+- Add new `download` icon.
 
 ## [0.10.0]
 ### Added
