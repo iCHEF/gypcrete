@@ -27,7 +27,7 @@ export const BEM = {
 class InfiniteScroll extends PureComponent {
     static propTypes = {
         onInfiniteLoad: PropTypes.func.isRequired,
-        scrollThreshold: PropTypes.number,  // Distance in px before the end of items
+        threshold: PropTypes.number,  // Distance in px before the end of items
         isLoading: PropTypes.bool,
         hasMore: PropTypes.bool,
         disabled: PropTypes.bool,
@@ -40,7 +40,7 @@ class InfiniteScroll extends PureComponent {
     };
 
     static defaultProps = {
-        scrollThreshold: 100,
+        threshold: 100,
         isLoading: false,
         hasMore: true,
         disabled: false,
@@ -86,9 +86,8 @@ class InfiniteScroll extends PureComponent {
             const windowBodyElement = document.documentElement
                 || document.body.parentNode
                 || document.body;
-            const scrollTop = (window.pageYOffset !== undefined)
-                ? window.pageYOffset
-                : windowBodyElement.scrollTop;
+            const scrollTop = window.pageYOffset
+                || windowBodyElement.scrollTop;
 
             /* eslint-disable no-mixed-operators */
             return this.calculateElementTopPosition(this.scrollNode)
@@ -120,14 +119,14 @@ class InfiniteScroll extends PureComponent {
      * Scroll listener
      */
     handleScrollListener = (event) => {
-        const { onInfiniteLoad, scrollThreshold, hasMore, isLoading } = this.props;
+        const { onInfiniteLoad, threshold, hasMore, isLoading } = this.props;
         const scrollOffset = this.getScrollOffset();
 
         if (!isLoading
                 && hasMore
-                && Number(scrollThreshold) > scrollOffset
-                && typeof onInfiniteLoad === 'function') {
-            onInfiniteLoad(event);
+                && threshold > scrollOffset
+                && typeof onLoad === 'function') {
+            onLoad(event);
         }
     }
 
@@ -230,7 +229,7 @@ class InfiniteScroll extends PureComponent {
     render() {
         const {
             onInfiniteLoad,
-            scrollThreshold,
+            threshold,
             isLoading,
             hasMore,
             disabled,
