@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Migrate `@kadira/storybook` to `@storybook/react`. (#52)
+- Add `<InfiniteScroll>` to perform an action when scrolls a specified distance from the bottom of page. (#45)
+
+## Changed
+- Support react element in `rowComp()`'s icon prop. (#45)
 
 
 ## [0.10.1]
