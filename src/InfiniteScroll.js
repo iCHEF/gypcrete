@@ -9,6 +9,7 @@
 import React, { PureComponent, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import documentOffset from 'document-offset';
 
 import Button from './Button';
 import TextLabel from './TextLabel';
@@ -102,9 +103,11 @@ class InfiniteScroll extends PureComponent {
                 || document.body.parentNode
                 || document.body;
 
-            // Get window scrollHeight and scrollTop
-            const totalScrollHeight = this.calculateElementTopPosition(scrollNode)
-                + scrollNode.offsetHeight;
+            const scrollNodeOffset = documentOffset(scrollNode) || {};
+            const scrollNodeTopOffset = scrollNodeOffset.top || 0;
+
+            // Get total scrollHeight and scrollTop
+            const totalScrollHeight = scrollNodeTopOffset + scrollNode.offsetHeight;
             const scrollTop = window.pageYOffset || windowBodyElement.scrollTop;
 
             return totalScrollHeight
@@ -116,20 +119,6 @@ class InfiniteScroll extends PureComponent {
 
         return scrollNode.scrollHeight
             - (parentNode.scrollTop + parentNode.clientHeight);
-    }
-
-    /**
-     * Calculate top position of selected element
-     *
-     * @param {Element} element
-     */
-    calculateElementTopPosition = (element) => {
-        if (!element) {
-            return 0;
-        }
-
-        return element.offsetTop
-            + this.calculateElementTopPosition(element.offsetParent);
     }
 
     /**

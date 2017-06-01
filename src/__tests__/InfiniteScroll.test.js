@@ -4,6 +4,7 @@ import { shallow, mount } from 'enzyme';
 
 import InfiniteScroll, { BEM } from '../InfiniteScroll';
 import Button from '../Button';
+import TextLabel from '../TextLabel';
 
 const footerClassName = `.${BEM.footer}`;
 const SCROLL_EVENT = new Event('scroll');
@@ -39,17 +40,17 @@ describe('InfiniteScroll', () => {
         );
 
         // show loading icon in default
-        expect(wrapper.find(footerClassName).find(Button).prop('icon').props.type).toBe('loading');
-        expect(wrapper.find(footerClassName).find(Button).prop('basic')).toBe(null);
+        expect(wrapper.find(footerClassName).find(TextLabel).prop('icon').props.type).toBe('loading');
+        expect(wrapper.find(footerClassName).find(TextLabel).prop('basic')).toBe(null);
 
         // loadingLabel as string
         wrapper.setProps({ loadingLabel: 'loading...' });
-        expect(wrapper.find(footerClassName).find(Button).prop('basic')).toBe('loading...');
+        expect(wrapper.find(footerClassName).find(TextLabel).prop('basic')).toBe('loading...');
 
         // loadingLabel as element
-        const CustomLoadingButton = () => (<div>Loading...</div>);
-        wrapper.setProps({ loadingLabel: <CustomLoadingButton /> });
-        expect(wrapper.find(footerClassName).find(CustomLoadingButton).exists()).toBeTruthy();
+        const CustomLoadingLabel = () => (<div>Loading...</div>);
+        wrapper.setProps({ loadingLabel: <CustomLoadingLabel /> });
+        expect(wrapper.find(footerClassName).find(CustomLoadingLabel).exists()).toBeTruthy();
     });
 
     it('should render show more button', () => {
