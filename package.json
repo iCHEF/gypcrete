@@ -88,9 +88,11 @@
     "prop-types": "^15.5.8"
   },
   "babel": {
+    "root": true,
     "extends": "./config/.babelrc"
   },
   "eslintConfig": {
+    "root": true,
     "extends": "./config/.eslintrc.yml"
   },
   "stylelint": {
