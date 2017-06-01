@@ -87,6 +87,9 @@
     "keycode": "^2.1.9",
     "prop-types": "^15.5.8"
   },
+  "babel": {
+      "extends": "./config/.babelrc"
+  },
   "jest-junit": {
     "output": "./coverage/junit.xml"
   }
