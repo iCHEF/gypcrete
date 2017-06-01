@@ -20,7 +20,7 @@
     "start": "npm run storybook",
     "storybook": "BABEL_ENV=storybook start-storybook -p 8100 -c .storybook",
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
-    "build:dist": "webpack --config ./config/webpack.prod.js --color",
+    "build:dist": "webpack --config ./config/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
     "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
     "build:storybook": "BABEL_ENV=storybook build-storybook -o ./public",
