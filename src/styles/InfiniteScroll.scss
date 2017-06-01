@@ -1,0 +1,11 @@
+@import "./variables";
+
+.#{$prefix}-infinite-scroll {
+    &--overflow {
+        overflow: auto;
+    }
+
+    &__footer {
+        display: flex;
+    }
+}

@@ -6,11 +6,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-(N/A)
+- N/A
+
+
+## [0.11.0]
+### Added
+- Migrate `@kadira/storybook` to `@storybook/react`. (#52)
+- Add `<InfiniteScroll>` to perform an action when scrolls a specified distance from the bottom of page. (#45)
+
+## Changed
+- Support react element in `rowComp()`'s icon prop. (#45)
+
 
 ## [0.10.1]
 ### Added
 - Add new `download` icon.
+
 
 ## [0.10.0]
 ### Added
@@ -30,6 +41,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Filter out color and solid props in `<IconButton>`, they should be empty. (#38)
 - Non-minified row components now take equal space in a flex row.
 - `withStatus()` mixin now takes `withRef` option to hold ref to rendered component.
+
 
 ## [0.9.0]
 ### Added
