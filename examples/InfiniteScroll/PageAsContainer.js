@@ -5,7 +5,7 @@ import InfiniteScroll from 'src/InfiniteScroll';
 
 const defaultItemsCount = 20;
 
-class WindowAsScrollContainerExample extends PureComponent {
+class PageAsContainerExample extends PureComponent {
     state = {
         lastPage: 1,
         isLoading: false,
@@ -50,7 +50,7 @@ class WindowAsScrollContainerExample extends PureComponent {
 
         return (
             <InfiniteScroll
-                useWindowAsScrollContainer
+                usePageAsContainer
                 onLoadMore={this.loadMore}
                 isLoading={isLoading}
                 hasMore={hasMore}
@@ -63,4 +63,4 @@ class WindowAsScrollContainerExample extends PureComponent {
     }
 }
 
-export default WindowAsScrollContainerExample;
+export default PageAsContainerExample;

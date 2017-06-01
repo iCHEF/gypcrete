@@ -5,7 +5,7 @@ import { storiesOf } from '@kadira/storybook';
 import InfiniteScroll from 'src/InfiniteScroll';
 
 import BasicUsageExample from './BasicUsage';
-import WindowAsScrollContainerExample from './WindowAsScrollContainer';
+import PageAsContainerExample from './PageAsContainer';
 
 storiesOf('InfiniteScroll', module)
     .addWithInfo(
@@ -13,8 +13,8 @@ storiesOf('InfiniteScroll', module)
         'placed in a fixed height container',
         () => <BasicUsageExample />,
     )
-    .addWithInfo('window as scroll container',
-        () => <WindowAsScrollContainerExample />,
+    .addWithInfo('page as scroll container',
+        () => <PageAsContainerExample />,
         { source: false }
     )
     // Props table

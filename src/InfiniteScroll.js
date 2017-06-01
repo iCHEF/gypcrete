@@ -32,7 +32,7 @@ class InfiniteScroll extends PureComponent {
         isLoading: PropTypes.bool,
         hasMore: PropTypes.bool,
         disabled: PropTypes.bool,
-        useWindowAsScrollContainer: PropTypes.bool,
+        usePageAsContainer: PropTypes.bool,
 
         // Footer children
         loadingLabel: PropTypes.node,
@@ -45,7 +45,7 @@ class InfiniteScroll extends PureComponent {
         isLoading: false,
         hasMore: true,
         disabled: false,
-        useWindowAsScrollContainer: false,
+        usePageAsContainer: false,
 
         loadingLabel: null,
         showMoreButton: null,
@@ -95,9 +95,9 @@ class InfiniteScroll extends PureComponent {
      */
     getRemainingBottomOffset = () => {
         const scrollNode = this.scrollNode;
-        const { useWindowAsScrollContainer } = this.props;
+        const { usePageAsContainer } = this.props;
 
-        if (useWindowAsScrollContainer) {
+        if (usePageAsContainer) {
             const windowBodyElement = document.documentElement
                 || document.body.parentNode
                 || document.body;
@@ -152,8 +152,8 @@ class InfiniteScroll extends PureComponent {
     // -------------------------------------
 
     attachScrollListener = () => {
-        const { useWindowAsScrollContainer } = this.props;
-        const scrollContainer = useWindowAsScrollContainer
+        const { usePageAsContainer } = this.props;
+        const scrollContainer = usePageAsContainer
             ? window
             : this.scrollNode.parentNode;
 
@@ -161,8 +161,8 @@ class InfiniteScroll extends PureComponent {
     }
 
     detachScrollListener = () => {
-        const { useWindowAsScrollContainer } = this.props;
-        const scrollContainer = useWindowAsScrollContainer
+        const { usePageAsContainer } = this.props;
+        const scrollContainer = usePageAsContainer
             ? window
             : this.scrollNode.parentNode;
 
@@ -248,7 +248,7 @@ class InfiniteScroll extends PureComponent {
             isLoading,
             hasMore,
             disabled,
-            useWindowAsScrollContainer,
+            usePageAsContainer,
             // Footer children
             loadingLabel,
             showMoreButton,
