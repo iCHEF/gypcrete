@@ -1,5 +1,5 @@
-root: true
 extends: ichef
+
 env:
     browser: true
     es6: true
