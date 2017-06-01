@@ -7,6 +7,6 @@
         "coverage/": true
     },
     "eslint.options": {
-        "ignorePath": "config/.eslintignore"
+        "ignorePath": "configs/.eslintignore"
     }
 }
