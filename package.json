@@ -30,8 +30,8 @@
     "test": "jest ./src --config=config/jest.config.json --coverage",
     "test:watch": "jest ./src --config=config/jest.config.json --coverage --watch",
     "clean": "rm -rf ./dist ./lib ./es5 ./deploy ./public",
-    "deploy": "npm run clean && npm run build && sh deploy.sh",
-    "ghpages": "npm run clean && npm run build:storybook && sh ghpages.sh"
+    "deploy": "npm run clean && npm run build && sh ./scripts/deploy.sh",
+    "ghpages": "npm run clean && npm run build:storybook && sh ./scripts/ghpages.sh"
   },
   "peerDependencies": {
     "babel-runtime": "^6.18.0",
