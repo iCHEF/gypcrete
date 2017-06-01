@@ -4,3 +4,4 @@ dist/
 es5/
 lib/
 public/
+!.storybook/
