@@ -92,6 +92,9 @@
   "eslintConfig": {
     "extends": "./config/.eslintrc.yml"
   },
+  "stylelint": {
+    "extends": "./config/.stylelintrc.yml"
+  },
   "jest-junit": {
     "output": "./coverage/junit.xml"
   }
