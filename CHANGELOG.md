@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - N/A
 
 
+## [0.11.1]
+### Changed
+- Use `>=` for versioning in `engines` fields.
+
+
 ## [0.11.0]
 ### Added
 - Migrate `@kadira/storybook` to `@storybook/react`. (#52)
