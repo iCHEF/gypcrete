@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Button from './Button';
+import TextLabel from './TextLabel';
 import Icon from './Icon';
 
 import icBEM from './utils/icBEM';
@@ -34,7 +35,7 @@ class InfiniteScroll extends PureComponent {
         useWindowAsScrollContainer: PropTypes.bool,
 
         // Footer children
-        loadingButton: PropTypes.node,
+        loadingLabel: PropTypes.node,
         showMoreButton: PropTypes.node,
         noNewestButton: PropTypes.node
     };
@@ -46,7 +47,7 @@ class InfiniteScroll extends PureComponent {
         disabled: false,
         useWindowAsScrollContainer: false,
 
-        loadingButton: null,
+        loadingLabel: null,
         showMoreButton: null,
         noNewestButton: null
     }
@@ -172,21 +173,19 @@ class InfiniteScroll extends PureComponent {
     //   Render footer
     // -------------------------------------
 
-    renderLoadingButton() {
-        const { loadingButton } = this.props;
+    renderLoadingLabel() {
+        const { loadingLabel } = this.props;
 
-        if (isValidElement(loadingButton)) {
-            return loadingButton;
+        if (isValidElement(loadingLabel)) {
+            return loadingLabel;
         }
 
         return (
-            <Button
+            <TextLabel
                 disabled
-                color="black"
                 align="center"
                 icon={<Icon type="loading" spinning />}
-                basic={loadingButton}
-                minified={false} />
+                basic={loadingLabel} />
         );
     }
 
@@ -224,7 +223,7 @@ class InfiniteScroll extends PureComponent {
         let footerChild = null;
 
         if (isLoading) {
-            footerChild = this.renderLoadingButton();
+            footerChild = this.renderLoadingLabel();
         } else if (hasMore) {
             footerChild = this.renderFooterButton(showMoreButton);
         } else {
@@ -251,7 +250,7 @@ class InfiniteScroll extends PureComponent {
             disabled,
             useWindowAsScrollContainer,
             // Footer children
-            loadingButton,
+            loadingLabel,
             showMoreButton,
             noNewestButton,
 

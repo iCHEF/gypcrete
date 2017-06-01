@@ -72,7 +72,7 @@ class BasicUsageExample extends PureComponent {
                     onLoadMore={this.loadMore}
                     isLoading={isLoading}
                     hasMore={hasMore}
-                    loadingButton="Loading..."
+                    loadingLabel="Loading..."
                     showMoreButton="Show more"
                     noNewestButton="All items displayed">
                     <ul>

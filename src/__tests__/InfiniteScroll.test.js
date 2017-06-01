@@ -42,13 +42,13 @@ describe('InfiniteScroll', () => {
         expect(wrapper.find(footerClassName).find(Button).prop('icon').props.type).toBe('loading');
         expect(wrapper.find(footerClassName).find(Button).prop('basic')).toBe(null);
 
-        // loadingButton as string
-        wrapper.setProps({ loadingButton: 'loading...' });
+        // loadingLabel as string
+        wrapper.setProps({ loadingLabel: 'loading...' });
         expect(wrapper.find(footerClassName).find(Button).prop('basic')).toBe('loading...');
 
-        // loadingButton as element
+        // loadingLabel as element
         const CustomLoadingButton = () => (<div>Loading...</div>);
-        wrapper.setProps({ loadingButton: <CustomLoadingButton /> });
+        wrapper.setProps({ loadingLabel: <CustomLoadingButton /> });
         expect(wrapper.find(footerClassName).find(CustomLoadingButton).exists()).toBeTruthy();
     });
 
