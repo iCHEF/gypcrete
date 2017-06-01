@@ -9,9 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add vscode workspace settings, included `search.exclude` option. (#48)
 
 ### Changed
-- Move `jsconfig.json` and `fontello.config.json` to `config/` folder. (#48)
 - Change jest `testRegex` pattern, run test files in any `__tests__` folder with `.test` or `.spec` suffix only. (#48)
 - Rename webpack config from `webpack.prod` to `webpack.dist`. (#48)
+- The following config files are moved to `configs/` folder: (#48)(#55)
+    * `.babelrc`
+    * `.eslintrc.yml`
+    * `.eslintignore`
+    * `.stylelintrc.yml`
+    * `fontello.config.json`
 
 
 ## [0.11.1]
