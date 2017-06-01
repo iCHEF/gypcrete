@@ -27,6 +27,9 @@ import Switch from './Switch';
 import TextInput from './TextInput';
 import SearchInput from './SearchInput';
 
+// Containers
+import InfiniteScroll from './InfiniteScroll';
+
 export {
     BasicRow,
     Icon,
@@ -51,4 +54,6 @@ export {
     Switch,
     TextInput,
     SearchInput,
+
+    InfiniteScroll,
 };
