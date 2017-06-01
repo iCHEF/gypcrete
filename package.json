@@ -13,8 +13,8 @@
   ],
   "license": "UNLICENSED",
   "engines": {
-    "node": "^6.9.1",
-    "npm": "^3.10.10"
+    "node": ">= 6.9.1",
+    "npm": ">= 3.10.10"
   },
   "scripts": {
     "start": "npm run storybook",
