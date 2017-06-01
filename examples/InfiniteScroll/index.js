@@ -19,5 +19,5 @@ storiesOf('InfiniteScroll', module)
     )
     // Props table
     .addPropsTable(
-        () => <InfiniteScroll onInfiniteLoad={null} />
+        () => <InfiniteScroll onLoadMore={null} />
     );

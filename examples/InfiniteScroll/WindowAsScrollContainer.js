@@ -14,7 +14,7 @@ class WindowAsScrollContainerExample extends PureComponent {
 
     loadMore = (event) => {
         this.setState({ isLoading: true });
-        action('onInfiniteLoad')(event);
+        action('onLoadMore')(event);
 
         setTimeout(() => {
             const { lastPage } = this.state;
@@ -50,8 +50,13 @@ class WindowAsScrollContainerExample extends PureComponent {
 
         return (
             <InfiniteScroll
+<<<<<<< HEAD:examples/InfiniteScroll/WindowAsScrollContainer.js
                 useWindowAsScrollContainer
                 onInfiniteLoad={this.loadMore}
+=======
+                usePageAsContainer
+                onLoadMore={this.loadMore}
+>>>>>>> 87f9b17... [InfiniteScroll] Rename `onLoad` prop to `onLoadMore`:examples/InfiniteScroll/PageAsContainer.js
                 isLoading={isLoading}
                 hasMore={hasMore}
                 showMoreButton="Show more">

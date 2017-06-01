@@ -26,7 +26,7 @@ export const BEM = {
 
 class InfiniteScroll extends PureComponent {
     static propTypes = {
-        onInfiniteLoad: PropTypes.func.isRequired,
+        onLoadMore: PropTypes.func.isRequired,
         threshold: PropTypes.number,  // Distance in px before the end of items
         isLoading: PropTypes.bool,
         hasMore: PropTypes.bool,
@@ -119,13 +119,13 @@ class InfiniteScroll extends PureComponent {
      * Scroll listener
      */
     handleScrollListener = (event) => {
-        const { onInfiniteLoad, threshold, hasMore, isLoading } = this.props;
+        const { onLoadMore, threshold, hasMore, isLoading } = this.props;
         const scrollOffset = this.getScrollOffset();
 
         if (!isLoading
                 && hasMore
                 && threshold > scrollOffset
-                && typeof onLoad === 'function') {
+                && typeof onLoadMore === 'function') {
             onLoad(event);
         }
     }
@@ -175,7 +175,7 @@ class InfiniteScroll extends PureComponent {
     }
 
     renderFooterButton(buttonItem) {
-        const { onInfiniteLoad } = this.props;
+        const { onLoadMore } = this.props;
 
         if (!buttonItem) {
             return null;
@@ -191,7 +191,7 @@ class InfiniteScroll extends PureComponent {
                 align="center"
                 basic={buttonItem}
                 minified={false}
-                onClick={onInfiniteLoad} />
+                onClick={onLoadMore} />
         );
     }
 
@@ -228,7 +228,7 @@ class InfiniteScroll extends PureComponent {
 
     render() {
         const {
-            onInfiniteLoad,
+            onLoadMore,
             threshold,
             isLoading,
             hasMore,

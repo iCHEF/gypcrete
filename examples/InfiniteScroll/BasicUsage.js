@@ -19,7 +19,7 @@ class BasicUsageExample extends PureComponent {
 
     loadMore = (event) => {
         this.setState({ isLoading: true });
-        action('onInfiniteLoad')(event);
+        action('onLoadMore')(event);
 
         setTimeout(() => {
             const { lastPage } = this.state;
@@ -69,7 +69,7 @@ class BasicUsageExample extends PureComponent {
         return (
             <div style={rootContainerStyle}>
                 <InfiniteScroll
-                    onInfiniteLoad={this.loadMore}
+                    onLoadMore={this.loadMore}
                     isLoading={isLoading}
                     hasMore={hasMore}
                     loadingButton="Loading..."

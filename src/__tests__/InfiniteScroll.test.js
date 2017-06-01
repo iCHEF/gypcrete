@@ -19,7 +19,7 @@ describe('InfiniteScroll', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div');
         const element = (
-            <InfiniteScroll onInfiniteLoad={() => {}}>
+            <InfiniteScroll onLoadMore={() => {}}>
                 {FAKE_LIST}
             </InfiniteScroll>
         );
@@ -35,7 +35,7 @@ describe('InfiniteScroll', () => {
         const wrapper = shallow(
             <InfiniteScroll
                 isLoading
-                onInfiniteLoad={() => {}} />
+                onLoadMore={() => {}} />
         );
 
         // show loading icon in default
@@ -56,7 +56,7 @@ describe('InfiniteScroll', () => {
         const wrapper = shallow(
             <InfiniteScroll
                 showMoreButton="show more"
-                onInfiniteLoad={() => {}} />
+                onLoadMore={() => {}} />
         );
 
         // showMoreButton as string
@@ -77,7 +77,7 @@ describe('InfiniteScroll', () => {
             <InfiniteScroll
                 showMoreButton="show more"
                 noNewestButton="all displayed"
-                onInfiniteLoad={() => {}} />
+                onLoadMore={() => {}} />
         );
 
         // Render showMoreButton if hasMore is true
@@ -102,7 +102,7 @@ describe('InfiniteScroll', () => {
     // -------------------------------------
 
     it('should attach and detach scroll listeners', () => {
-        const wrapper = shallow(<InfiniteScroll onInfiniteLoad={() => {}} />);
+        const wrapper = shallow(<InfiniteScroll onLoadMore={() => {}} />);
         const instance = wrapper.instance();
         instance.attachScrollListener = jest.fn();
         instance.detachScrollListener = jest.fn();
@@ -117,7 +117,7 @@ describe('InfiniteScroll', () => {
     });
 
     it('should not attach scroll listener when set as disabled', () => {
-        const wrapper = shallow(<InfiniteScroll disabled onInfiniteLoad={() => {}} />);
+        const wrapper = shallow(<InfiniteScroll disabled onLoadMore={() => {}} />);
         const instance = wrapper.instance();
         instance.attachScrollListener = jest.fn();
 
@@ -127,7 +127,7 @@ describe('InfiniteScroll', () => {
     });
 
     it('should attach or detach scroll listeners if disabled prop was updated', () => {
-        const wrapper = shallow(<InfiniteScroll onInfiniteLoad={() => {}} />);
+        const wrapper = shallow(<InfiniteScroll onLoadMore={() => {}} />);
         const instance = wrapper.instance();
         instance.attachScrollListener = jest.fn();
         instance.detachScrollListener = jest.fn();
@@ -145,41 +145,41 @@ describe('InfiniteScroll', () => {
         expect(instance.attachScrollListener).toHaveBeenCalledTimes(1);
     });
 
-    it('should trigger onInfiniteLoad while scrolling its container', () => {
-        const onInfiniteLoad = jest.fn();
+    it('should trigger onLoadMore while scrolling its container', () => {
+        const onLoadMore = jest.fn();
         const wrapperNode = mount(
             <div style={{ overflow: 'auto', height: 300 }}>
                 <InfiniteScroll
-                    onInfiniteLoad={onInfiniteLoad}>
+                    onLoadMore={onLoadMore}>
                     {FAKE_LIST}
                 </InfiniteScroll>
             </div>
         ).getDOMNode();
 
         // Before trigger scroll event
-        expect(onInfiniteLoad).not.toHaveBeenCalled();
+        expect(onLoadMore).not.toHaveBeenCalled();
 
         // Dispatch scroll event
         wrapperNode.dispatchEvent(SCROLL_EVENT);
-        expect(onInfiniteLoad).toHaveBeenCalledTimes(1);
+        expect(onLoadMore).toHaveBeenCalledTimes(1);
     });
 
-    it('should trigger onInfiniteLoad while scrolling window', () => {
-        const onInfiniteLoad = jest.fn();
+    it('should trigger onLoadMore while scrolling window', () => {
+        const onLoadMore = jest.fn();
 
         mount(
             <InfiniteScroll
-                useWindowAsScrollContainer
-                onInfiniteLoad={onInfiniteLoad}>
+                usePageAsContainer
+                onLoadMore={onLoadMore}>
                 {FAKE_LIST}
             </InfiniteScroll>
         );
 
         // Before trigger scroll event
-        expect(onInfiniteLoad).not.toHaveBeenCalled();
+        expect(onLoadMore).not.toHaveBeenCalled();
 
         // Dispatch window scroll event
         global.window.dispatchEvent(SCROLL_EVENT);
-        expect(onInfiniteLoad).toHaveBeenCalledTimes(1);
+        expect(onLoadMore).toHaveBeenCalledTimes(1);
     });
 });
