@@ -1,5 +1,9 @@
 @import "./variables";
 
+// -------------------------------------
+//   Relative size calculator
+// -------------------------------------
+
 @function relative($target-size, $base-size: $component-base-font-size, $unit: 1em) {
     @return ($target-size / $base-size * $unit);
 }
@@ -7,6 +11,10 @@
 @function rem($target-size) {
     @return relative($target-size, $root-font-size, 1rem);
 }
+
+// -------------------------------------
+//   Text overflow Ellipsis
+// -------------------------------------
 
 @mixin overflow-ellipsis($_width: null) {
     overflow: hidden;
@@ -18,6 +26,10 @@
     }
 }
 
+// -------------------------------------
+//   Remove button default appearance
+// -------------------------------------
+
 @mixin remove-button-appearance {
     color: inherit;
     background: transparent;
@@ -28,4 +40,35 @@
     text-align: inherit;
     appearance: none;
     user-select: none;
+}
+
+// -------------------------------------
+//   z-index helper
+// -------------------------------------
+
+@function map-has-nested-keys($map, $keys...) {
+    @each $key in $keys {
+        @if not map-has-key($map, $key) {
+            @return false;
+        }
+        $map: map-get($map, $key);
+    }
+
+    @return true;
+}
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+
+    @return $map;
+}
+
+@function z($layers...) {
+    @if not map-has-nested-keys($z-layers, $layers...) {
+        @warn "No layer found for `#{inspect($layers...)}` in $z-layers map. Property omitted.";
+    }
+
+    @return map-deep-get($z-layers, $layers...);
 }

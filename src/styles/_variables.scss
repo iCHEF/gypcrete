@@ -66,3 +66,19 @@ $column-body-padding: 16px;
 
 $ease-out-quad: cubic-bezier(.25, .46, .45, .94);
 $ease-out-cubic: cubic-bezier(.215, .61, .355, 1);
+
+// -------------------------------------
+//   z-index layers
+// -------------------------------------
+
+$z-layers: (
+    "popup":        1000,
+    "modal":        999,
+    "popover":      100,
+    "top":          99,
+    "front":        9,
+    "base":         1,
+    "default":      0,
+    "below":        -1,
+    "hidden":       -9999,
+);
