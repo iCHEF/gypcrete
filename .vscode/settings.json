@@ -6,7 +6,12 @@
         "lib/": true ,
         "coverage/": true
     },
+
     "eslint.options": {
         "ignorePath": "configs/.eslintignore"
-    }
+    },
+
+    "flow.enabled": true,
+    "flow.useNPMPackagedFlow": true,
+    "javascript.validate.enable": false
 }
