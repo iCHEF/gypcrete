@@ -1,0 +1,12 @@
+// vscode workspace for gypcrete
+{
+    "search.exclude": {
+        "dist/": true,
+        "es5/": true,
+        "lib/": true ,
+        "coverage/": true
+    },
+    "eslint.options": {
+        "ignorePath": "configs/.eslintignore"
+    }
+}

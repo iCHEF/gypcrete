@@ -20,18 +20,18 @@
     "start": "npm run storybook",
     "storybook": "BABEL_ENV=storybook start-storybook -p 8100 -c .storybook",
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
-    "build:dist": "webpack --config ./config/webpack.prod.js --color",
+    "build:dist": "webpack --config ./configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
     "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
     "build:storybook": "BABEL_ENV=storybook build-storybook -o ./public",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
-    "lint:eslint": "eslint ./ && echo \"eslint: no lint errors\"",
+    "lint:eslint": "eslint --ignore-path=configs/.eslintignore ./ && echo \"eslint: no lint errors\"",
     "lint:stylelint": "stylelint **/*.scss && echo \"stylelint: no lint errors\"",
-    "test": "jest ./src --config=config/jest.config.json --coverage",
-    "test:watch": "jest ./src --config=config/jest.config.json --coverage --watch",
+    "test": "jest ./src --config=configs/jest.config.json --coverage",
+    "test:watch": "jest ./src --config=configs/jest.config.json --coverage --watch",
     "clean": "rm -rf ./dist ./lib ./es5 ./deploy ./public",
-    "deploy": "npm run clean && npm run build && sh deploy.sh",
-    "ghpages": "npm run clean && npm run build:storybook && sh ghpages.sh"
+    "deploy": "npm run clean && npm run build && sh ./scripts/deploy.sh",
+    "ghpages": "npm run clean && npm run build:storybook && sh ./scripts/ghpages.sh"
   },
   "peerDependencies": {
     "babel-runtime": "^6.18.0",
@@ -86,6 +86,16 @@
     "document-offset": "^1.0.4",
     "keycode": "^2.1.9",
     "prop-types": "^15.5.8"
+  },
+  "babel": {
+    "extends": "./configs/.babelrc"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": "./configs/.eslintrc.yml"
+  },
+  "stylelint": {
+    "extends": "./configs/.stylelintrc.yml"
   },
   "jest-junit": {
     "output": "./coverage/junit.xml"
