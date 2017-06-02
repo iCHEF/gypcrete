@@ -88,7 +88,6 @@
     "prop-types": "^15.5.8"
   },
   "babel": {
-    "root": true,
     "extends": "./configs/.babelrc"
   },
   "eslintConfig": {
