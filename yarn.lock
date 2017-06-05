@@ -2934,9 +2934,9 @@ eslint-config-airbnb@^14.1.0:
   dependencies:
     eslint-config-airbnb-base "^11.1.0"
 
-eslint-config-ichef@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-ichef/-/eslint-config-ichef-1.1.2.tgz#dd065c0e3ab5bc268fa6434ab0951b69c3246b8a"
+eslint-config-ichef@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/eslint-config-ichef/-/eslint-config-ichef-1.1.4.tgz#5d8fc72bfb55adf2e445119b643daa5171fb501d"
 
 eslint-import-resolver-babel-module@^3.0.0:
   version "3.0.0"

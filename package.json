@@ -60,7 +60,7 @@
     "enzyme": "^2.8.2",
     "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
-    "eslint-config-ichef": "^1.1.2",
+    "eslint-config-ichef": "^1.1.4",
     "eslint-import-resolver-babel-module": "^3.0.0",
     "eslint-loader": "^1.6.3",
     "eslint-plugin-flowtype": "^2.32.1",
