@@ -69,7 +69,7 @@
     "eslint-plugin-react": "^6.10.0",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",
-    "flow-bin": "^0.45.0",
+    "flow-bin": "^0.47.0",
     "jest": "^19.0.2",
     "jest-junit": "zhusee2/jest-junit#update_format",
     "node-sass": "^4.5.0",
