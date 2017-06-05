@@ -5845,6 +5845,10 @@ react-dom@^15.5.4:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
+react-flow-types@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-flow-types/-/react-flow-types-0.1.1.tgz#e7a2f7784d5c234f73dd1173b354f1c86be23179"
+
 react-inspector@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-2.0.0.tgz#c945932f2c2bf2fab7873c6e07d83881404b9313"

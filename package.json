@@ -88,7 +88,8 @@
     "classnames": "^2.2.5",
     "document-offset": "^1.0.4",
     "keycode": "^2.1.9",
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.5.8",
+    "react-flow-types": "^0.1.1"
   },
   "babel": {
     "extends": "./configs/.babelrc"
