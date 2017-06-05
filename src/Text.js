@@ -1,3 +1,5 @@
+// @flow
+
 /**
  * <Text>
  * ======
@@ -18,13 +20,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import type { AnyReactElement, ReactChildren } from 'react-flow-types';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
-import withStatus from './mixins/withStatus';
+import withStatus, { withStatusPropTypes } from './mixins/withStatus';
 import './styles/Text.scss';
 
 import BasicRow from './BasicRow';
+import type { Props as BasicRowProps } from './BasicRow';
 
 export const COMPONENT_NAME = prefixClass('text');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -41,51 +45,66 @@ const CENTER = 'center';
 const RIGHT = 'right';
 export const TEXT_ALIGN = { LEFT, CENTER, RIGHT };
 
+export type Props = {
+    align: typeof LEFT | typeof CENTER | typeof RIGHT,
+    aside: ReactChildren,
+    basicRow: AnyReactElement,
+    noGrow: boolean,
+    errorMsg: string,
+    statusIcon: ReactChildren, // #FIXME: use type from withStatus()
+    basic: $PropertyType<BasicRowProps, 'basic'>,
+    tag: $PropertyType<BasicRowProps, 'tag'>,
+    className: string,
+};
+
 class Text extends PureComponent {
+    props: Props;
+
     static propTypes = {
         align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
         aside: PropTypes.node,
         basicRow: PropTypes.element,
         noGrow: PropTypes.bool,
 
-        // from withStatus()
-        errorMsg: PropTypes.string,
-        // statusIcon: PropTypes.node,
+        ...withStatusPropTypes,
+        // errorMsg: string,
+        // statusIcon: node,
 
         ...BasicRow.propTypes,
-        basic: PropTypes.node,
-        // tag,
-        // statusIcon,
+        // basic: node,
+        // tag: node,
+        // statusIcon: node,
     };
 
     static defaultProps = {
         align: LEFT,
-        aside: null,
-        basicRow: null,
+        aside: undefined,
+        basicRow: (
+            <BasicRow
+                className={classNames(
+                    BEM.row.toString(),
+                    BEM.basic.toString()
+                )} />
+        ),
         noGrow: false,
-        errorMsg: null,
-        basic: null,
+        errorMsg: undefined,
+        statusIcon: undefined,
+        ...BasicRow.defaultProps,
+        // basic,
+        // tag,
+        // statusIcon,
     };
 
     renderBasicRow() {
         const { basicRow, basic, tag, statusIcon } = this.props;
         const basicRowProps = { basic, tag, statusIcon };
 
-        if (!(basic || basicRow)) {
-            return null;
-        }
-
-        if (React.isValidElement(basicRow)) {
-            // Inject { basic, tag, statusIcon } to passed-in custom row.
+        if (basicRow && React.isValidElement(basicRow)) {
+            // Inject { basic, tag, statusIcon } to default or custom row.
             return React.cloneElement(basicRow, basicRowProps);
         }
 
-        // else return pre-configured row
-        return (
-            <BasicRow
-                className={classNames(`${BEM.row}`, `${BEM.basic}`)}
-                {...basicRowProps} />
-        );
+        return null;
     }
 
     renderAsideRow() {
@@ -97,7 +116,7 @@ class Text extends PureComponent {
         }
 
         return (
-            <div className={classNames(`${BEM.row}`, `${BEM.aside}`)}>
+            <div className={classNames(BEM.row.toString(), BEM.aside.toString())}>
                 {displayText}
             </div>
         );
@@ -110,7 +129,7 @@ class Text extends PureComponent {
             .modifier(align)
             .modifier('no-grow', noGrow);
 
-        const rootClassName = classNames(`${bemClass}`, className);
+        const rootClassName = classNames(bemClass.toString(), className);
 
         return (
             <div className={rootClassName}>

@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - The `basic` prop of `<BasicRow>` is no longer required. (#58)
 - The following modules are now type-annotated by Flow: (#39, #58)
     * All helpers under `/utils`
-    * Visual elements of `<BasicRow>`, `<Icon>`, `<StatusIcon>` & `<Tag>`.
+    * Visual elements of `<BasicRow>`, `<Icon>`, `<StatusIcon>`, `<Tag>`, `<Text>`.
 
 
 ## [0.11.1]
