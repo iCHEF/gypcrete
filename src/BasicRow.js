@@ -17,15 +17,16 @@ export type Props = {
 };
 
 function BasicRow({ basic, tag, statusIcon, children, ...otherProps }: Props) {
-    const basicCell = (
-        <FlexCell shrink>
-            <TextEllipsis>{basic}</TextEllipsis>
-        </FlexCell>
-    );
+    if (!basic) {
+        return null;
+    }
 
     return (
         <div {...otherProps}>
-            {basic && basicCell}
+            <FlexCell shrink>
+                <TextEllipsis>{basic}</TextEllipsis>
+            </FlexCell>
+
             {tag && wrapIfNotElement(tag, { with: Tag })}
             {statusIcon && wrapIfNotElement(statusIcon, { with: 'span' })}
             {children}
