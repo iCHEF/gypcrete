@@ -1,8 +1,10 @@
+// @flow
+
 // -------------------------------------
 //   Enhanced PropTypes Validator
 // -------------------------------------
 
-const EnhancedPropTypes = {
+const EnhancedPropTypes: { [string]: ReactPropsCheckType } = {
     /**
      * Check prop should be empty
      *
@@ -15,7 +17,7 @@ const EnhancedPropTypes = {
         if (props[propName]) {
             return new Error(`<${componentName}> must not contains ${propName}.`);
         }
-        return null;
+        return undefined;
     }
 };
 

@@ -1,3 +1,9 @@
+// @flow
+type Params = {
+    length?: number,
+    prefix?: string,
+};
+
 /**
  * Generates a random String at specific length to be used as IDs.
  *
@@ -5,7 +11,7 @@
  * @param {String} prefix
  * @return {String} result
  */
-function randId({ length = 10, prefix = 'node' } = {}) {
+function randId({ length = 10, prefix = 'node' }: Params = {}): string {
     const randHash = Math.random().toString(16).substr(2, length);
     return `${prefix}-${randHash}`;
 }
