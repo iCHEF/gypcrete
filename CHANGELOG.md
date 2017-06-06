@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     * `.stylelintrc.yml`
     * `fontello.config.json`
 - `<Tag>`, `icBEM()` and `prefixClass()` are now typed by Flow.
+- Add `autoLoadMore` prop in `<InfiniteScroll>`, it will auto trigger `onLoadMore` callback if its height is smaller than 2 times of container's height. (#57)
 
 
 ## [0.11.1]
