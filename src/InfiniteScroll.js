@@ -56,12 +56,12 @@ class InfiniteScroll extends PureComponent {
 
     componentDidMount() {
         this.attachScrollListener();
-        this.handleAutoLoadMore();
+        this.loadMoreToFillSpace();
     }
 
     componentDidUpdate() {
         // Auto trigger onLoadMore
-        this.handleAutoLoadMore();
+        this.loadMoreToFillSpace();
     }
 
     componentWillUnmount() {
@@ -158,7 +158,7 @@ class InfiniteScroll extends PureComponent {
      * Auto trigger onLoadMore if scrollNode's height
      * smaller than 2 times of its container's height
      */
-    handleAutoLoadMore = (event) => {
+    loadMoreToFillSpace = (event) => {
         const { onLoadMore, hasMore, isLoading, autoLoadMore } = this.props;
 
         if (!isLoading && autoLoadMore && hasMore) {
