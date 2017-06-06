@@ -183,4 +183,26 @@ describe('InfiniteScroll', () => {
         global.window.dispatchEvent(SCROLL_EVENT);
         expect(onLoadMore).toHaveBeenCalledTimes(1);
     });
+
+    it('should auto trigger onLoadMore when its height smaller than container height', () => {
+        const onLoadMore = jest.fn();
+
+        const wrapper = mount(
+            <InfiniteScroll
+                usePageAsContainer
+                autoLoadMore
+                onLoadMore={onLoadMore}>
+                {FAKE_LIST}
+            </InfiniteScroll>
+        );
+
+        expect(onLoadMore).toHaveBeenCalledTimes(1);
+
+        wrapper.setProps({ isLoading: true });
+        expect(onLoadMore).toHaveBeenCalledTimes(1);
+
+        // Continue to load next
+        wrapper.setProps({ isLoading: false });
+        expect(onLoadMore).toHaveBeenCalledTimes(2);
+    });
 });
