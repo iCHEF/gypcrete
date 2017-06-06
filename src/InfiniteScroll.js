@@ -38,10 +38,7 @@ class InfiniteScroll extends PureComponent {
         isLoading: PropTypes.bool,
         hasMore: PropTypes.bool,
         usePageAsContainer: PropTypes.bool,
-        fillSpace: PropTypes.oneOf([
-            FILL_SPACE_TYPE.AUTO,
-            FILL_SPACE_TYPE.MANUAL
-        ]),
+        fillSpace: PropTypes.oneOf(Object.values(FILL_SPACE_TYPE)),
 
         // Footer children
         loadingLabel: PropTypes.node,
