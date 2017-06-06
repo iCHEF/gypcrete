@@ -51,7 +51,7 @@ class PageAsContainerExample extends PureComponent {
         return (
             <InfiniteScroll
                 usePageAsContainer
-                autoLoadMore
+                fillSpace="auto"
                 onLoadMore={this.loadMore}
                 isLoading={isLoading}
                 hasMore={hasMore}

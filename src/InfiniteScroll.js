@@ -26,6 +26,11 @@ export const BEM = {
     footer: ROOT_BEM.element('footer')
 };
 
+const FILL_SPACE_TYPE = {
+    AUTO: 'auto',
+    MANUAL: 'manual'
+};
+
 class InfiniteScroll extends PureComponent {
     static propTypes = {
         onLoadMore: PropTypes.func.isRequired,
@@ -33,7 +38,10 @@ class InfiniteScroll extends PureComponent {
         isLoading: PropTypes.bool,
         hasMore: PropTypes.bool,
         usePageAsContainer: PropTypes.bool,
-        autoLoadMore: PropTypes.bool,
+        fillSpace: PropTypes.oneOf([
+            FILL_SPACE_TYPE.AUTO,
+            FILL_SPACE_TYPE.MANUAL
+        ]),
 
         // Footer children
         loadingLabel: PropTypes.node,
@@ -47,7 +55,7 @@ class InfiniteScroll extends PureComponent {
         isLoading: false,
         hasMore: true,
         usePageAsContainer: false,
-        autoLoadMore: false,
+        fillSpace: FILL_SPACE_TYPE.MANUAL,
 
         loadingLabel: null,
         showMoreButton: null,
@@ -159,9 +167,11 @@ class InfiniteScroll extends PureComponent {
      * smaller than 2 times of its container's height
      */
     loadMoreToFillSpace = (event) => {
-        const { onLoadMore, hasMore, isLoading, autoLoadMore } = this.props;
+        const { onLoadMore, hasMore, isLoading, fillSpace } = this.props;
 
-        if (!isLoading && autoLoadMore && hasMore) {
+        if (!isLoading
+                && hasMore
+                && fillSpace === FILL_SPACE_TYPE.AUTO) {
             const scrollNodeHeight = this.getScrollNodeHeight();
             const containerHeight = this.getContainerHeight();
             const idealContainerHeight = 2 * containerHeight;
@@ -282,7 +292,7 @@ class InfiniteScroll extends PureComponent {
             isLoading,
             hasMore,
             usePageAsContainer,
-            autoLoadMore,
+            fillSpace,
             // Footer children
             loadingLabel,
             showMoreButton,

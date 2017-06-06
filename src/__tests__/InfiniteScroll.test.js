@@ -161,7 +161,7 @@ describe('InfiniteScroll', () => {
         const wrapper = mount(
             <InfiniteScroll
                 usePageAsContainer
-                autoLoadMore
+                fillSpace="auto"
                 onLoadMore={onLoadMore}>
                 {FAKE_LIST}
             </InfiniteScroll>
