@@ -117,35 +117,6 @@ describe('InfiniteScroll', () => {
         expect(instance.detachScrollListener).toHaveBeenCalledTimes(1);
     });
 
-    it('should not attach scroll listener when set as disabled', () => {
-        const wrapper = shallow(<InfiniteScroll disabled onLoadMore={() => {}} />);
-        const instance = wrapper.instance();
-        instance.attachScrollListener = jest.fn();
-
-        // Check attach event
-        instance.componentDidMount();
-        expect(instance.attachScrollListener).not.toHaveBeenCalled();
-    });
-
-    it('should attach or detach scroll listeners if disabled prop was updated', () => {
-        const wrapper = shallow(<InfiniteScroll onLoadMore={() => {}} />);
-        const instance = wrapper.instance();
-        instance.attachScrollListener = jest.fn();
-        instance.detachScrollListener = jest.fn();
-
-        // Update disabled prop to true
-        let prevProps = wrapper.props();
-        wrapper.setProps({ disabled: true });
-        instance.componentDidUpdate(prevProps);
-        expect(instance.detachScrollListener).toHaveBeenCalledTimes(1);
-
-        // Update disabled prop to false
-        prevProps = wrapper.props();
-        wrapper.setProps({ disabled: false });
-        instance.componentDidUpdate(prevProps);
-        expect(instance.attachScrollListener).toHaveBeenCalledTimes(1);
-    });
-
     it('should trigger onLoadMore while scrolling its container', () => {
         const onLoadMore = jest.fn();
         const wrapperNode = mount(

@@ -32,7 +32,6 @@ class InfiniteScroll extends PureComponent {
         threshold: PropTypes.number, // Distance in px before the end of items
         isLoading: PropTypes.bool,
         hasMore: PropTypes.bool,
-        disabled: PropTypes.bool,
         usePageAsContainer: PropTypes.bool,
         autoLoadMore: PropTypes.bool,
 
@@ -47,7 +46,6 @@ class InfiniteScroll extends PureComponent {
         threshold: 100,
         isLoading: false,
         hasMore: true,
-        disabled: false,
         usePageAsContainer: false,
         autoLoadMore: false,
 
@@ -57,28 +55,13 @@ class InfiniteScroll extends PureComponent {
     }
 
     componentDidMount() {
-        // If disabled, do nothing
-        if (!this.props.disabled) {
-            this.attachScrollListener();
-            this.handleAutoLoadMore();
-        }
+        this.attachScrollListener();
+        this.handleAutoLoadMore();
     }
 
-    componentDidUpdate(prevProps) {
-        const { disabled } = this.props;
-
-        if (disabled !== prevProps.disabled) {
-            if (disabled) {
-                this.detachScrollListener();
-            } else {
-                this.attachScrollListener();
-            }
-        }
-
+    componentDidUpdate() {
         // Auto trigger onLoadMore
-        if (!disabled) {
-            this.handleAutoLoadMore();
-        }
+        this.handleAutoLoadMore();
     }
 
     componentWillUnmount() {
@@ -298,7 +281,6 @@ class InfiniteScroll extends PureComponent {
             threshold,
             isLoading,
             hasMore,
-            disabled,
             usePageAsContainer,
             autoLoadMore,
             // Footer children
@@ -321,7 +303,7 @@ class InfiniteScroll extends PureComponent {
                 ref={(ref) => { this.scrollNode = ref; }}
                 className={rootClassName}>
                 {children}
-                {!disabled && this.renderFooter()}
+                {this.renderFooter()}
             </div>
         );
     }
