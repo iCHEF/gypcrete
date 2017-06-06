@@ -75,18 +75,71 @@ class InfiniteScroll extends PureComponent {
     }
 
     // -------------------------------------
-    //   Scroll listener
+    //   Calculate remaining bottom offset
+    //   while scrolling
     // -------------------------------------
+
+    /**
+     * Get scrollNode's height
+     *
+     * @return {Number}
+     */
+    getScrollNodeHeight = () => {
+        const scrollNode = this.scrollNode;
+        const { usePageAsContainer } = this.props;
+
+        if (usePageAsContainer) {
+            const scrollNodeOffset = documentOffset(scrollNode) || {};
+            const scrollNodeTopOffset = scrollNodeOffset.top || 0;
+
+            return scrollNodeTopOffset + scrollNode.offsetHeight;
+        }
+
+        return scrollNode.scrollHeight;
+    }
+
+    /**
+     * Get container's height
+     *
+     * @return {Number}
+     */
+    getContainerHeight = () => {
+        const { usePageAsContainer } = this.props;
+
+        if (usePageAsContainer) {
+            return window.innerHeight;
+        }
+
+        return this.scrollNode.parentNode.clientHeight;
+    }
+
+    /**
+     * Get container's scrollTop
+     *
+     * @return {Number}
+     */
+    getContainerScrollTop = () => {
+        const { usePageAsContainer } = this.props;
+
+        if (usePageAsContainer) {
+            const windowBodyElement = document.documentElement
+                || document.body.parentNode
+                || document.body;
+            return window.pageYOffset || windowBodyElement.scrollTop;
+        }
+
+        return this.scrollNode.parentNode.scrollTop;
+    }
 
     /**
      * Get remaining bottom offset
      *
-     *      scrollHeight
+     *    scrollNodeHeight
      *    |-------------|
      *    |             |   <= scrollTop
      *  __|_____________|__
      *  | |             | |
-     *  | |             | | <= clientHeight || innerHeight
+     *  | |             | | <= containerHeight
      *  | |             | |
      *  |_|_____________|_|
      *    |             |   <= remainingBottomOffset
@@ -95,31 +148,17 @@ class InfiniteScroll extends PureComponent {
      * @return {Number}
      */
     getRemainingBottomOffset = () => {
-        const scrollNode = this.scrollNode;
-        const { usePageAsContainer } = this.props;
+        const scrollNodeHeight = this.getScrollNodeHeight();
+        const containerHeight = this.getContainerHeight();
+        const containerScrollTop = this.getContainerScrollTop();
 
-        if (usePageAsContainer) {
-            const windowBodyElement = document.documentElement
-                || document.body.parentNode
-                || document.body;
-
-            const scrollNodeOffset = documentOffset(scrollNode) || {};
-            const scrollNodeTopOffset = scrollNodeOffset.top || 0;
-
-            // Get total scrollHeight and scrollTop
-            const totalScrollHeight = scrollNodeTopOffset + scrollNode.offsetHeight;
-            const scrollTop = window.pageYOffset || windowBodyElement.scrollTop;
-
-            return totalScrollHeight
-                - (scrollTop + window.innerHeight);
-        }
-
-        // Get parent node
-        const parentNode = this.scrollNode.parentNode;
-
-        return scrollNode.scrollHeight
-            - (parentNode.scrollTop + parentNode.clientHeight);
+        return scrollNodeHeight
+            - (containerScrollTop + containerHeight);
     }
+
+    // -------------------------------------
+    //   Attach and detach listener
+    // -------------------------------------
 
     /**
      * Scroll listener
@@ -136,26 +175,21 @@ class InfiniteScroll extends PureComponent {
         }
     }
 
-    // -------------------------------------
-    //   Attach and detach listener
-    // -------------------------------------
-
     attachScrollListener = () => {
         const { usePageAsContainer } = this.props;
-        const scrollContainer = usePageAsContainer
+        this.scrollContainer = usePageAsContainer
             ? window
             : this.scrollNode.parentNode;
 
-        scrollContainer.addEventListener('scroll', this.handleScrollListener);
+        this.scrollContainer
+            .addEventListener('scroll', this.handleScrollListener);
     }
 
     detachScrollListener = () => {
-        const { usePageAsContainer } = this.props;
-        const scrollContainer = usePageAsContainer
-            ? window
-            : this.scrollNode.parentNode;
-
-        scrollContainer.removeEventListener('scroll', this.handleScrollListener);
+        if (this.scrollContainer) {
+            this.scrollContainer
+                .removeEventListener('scroll', this.handleScrollListener);
+        }
     }
 
     // -------------------------------------
