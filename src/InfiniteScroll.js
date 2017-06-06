@@ -29,11 +29,12 @@ export const BEM = {
 class InfiniteScroll extends PureComponent {
     static propTypes = {
         onLoadMore: PropTypes.func.isRequired,
-        threshold: PropTypes.number,  // Distance in px before the end of items
+        threshold: PropTypes.number, // Distance in px before the end of items
         isLoading: PropTypes.bool,
         hasMore: PropTypes.bool,
         disabled: PropTypes.bool,
         usePageAsContainer: PropTypes.bool,
+        autoLoadMore: PropTypes.bool,
 
         // Footer children
         loadingLabel: PropTypes.node,
@@ -42,11 +43,13 @@ class InfiniteScroll extends PureComponent {
     };
 
     static defaultProps = {
+        onLoadMore: () => {},
         threshold: 100,
         isLoading: false,
         hasMore: true,
         disabled: false,
         usePageAsContainer: false,
+        autoLoadMore: false,
 
         loadingLabel: null,
         showMoreButton: null,
@@ -57,16 +60,24 @@ class InfiniteScroll extends PureComponent {
         // If disabled, do nothing
         if (!this.props.disabled) {
             this.attachScrollListener();
+            this.handleAutoLoadMore();
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.disabled !== prevProps.disabled) {
-            if (this.props.disabled) {
+        const { disabled } = this.props;
+
+        if (disabled !== prevProps.disabled) {
+            if (disabled) {
                 this.detachScrollListener();
             } else {
                 this.attachScrollListener();
             }
+        }
+
+        // Auto trigger onLoadMore
+        if (!disabled) {
+            this.handleAutoLoadMore();
         }
     }
 
@@ -157,8 +168,26 @@ class InfiniteScroll extends PureComponent {
     }
 
     // -------------------------------------
-    //   Attach and detach listener
+    //   Attach and detach scroll listener
     // -------------------------------------
+
+    /**
+     * Auto trigger onLoadMore if scrollNode's height
+     * smaller than 2 times of its container's height
+     */
+    handleAutoLoadMore = (event) => {
+        const { onLoadMore, hasMore, isLoading, autoLoadMore } = this.props;
+
+        if (!isLoading && autoLoadMore && hasMore) {
+            const scrollNodeHeight = this.getScrollNodeHeight();
+            const containerHeight = this.getContainerHeight();
+            const idealContainerHeight = 2 * containerHeight;
+
+            if (scrollNodeHeight <= idealContainerHeight) {
+                onLoadMore(event);
+            }
+        }
+    }
 
     /**
      * Scroll listener
@@ -169,8 +198,7 @@ class InfiniteScroll extends PureComponent {
 
         if (!isLoading
                 && hasMore
-                && threshold > remainingBottomOffset
-                && typeof onLoadMore === 'function') {
+                && threshold > remainingBottomOffset) {
             onLoadMore(event);
         }
     }
@@ -272,6 +300,7 @@ class InfiniteScroll extends PureComponent {
             hasMore,
             disabled,
             usePageAsContainer,
+            autoLoadMore,
             // Footer children
             loadingLabel,
             showMoreButton,
