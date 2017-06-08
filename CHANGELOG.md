@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- N/A
+
+
+## [0.12.0]
+### Added
 - Add vscode workspace settings, included `search.exclude` option. (#48)
 - Add Flow type configs.
 
