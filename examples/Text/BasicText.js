@@ -24,6 +24,10 @@ function BasicTextExample() {
                     aside="I am right-aligned"
                     tag="Tag" />
             </DebugBox>
+
+            <DebugBox>
+                <Text aside="Aside Only Text" />
+            </DebugBox>
         </div>
     );
 }

@@ -60,7 +60,7 @@
     "enzyme": "^2.8.2",
     "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
-    "eslint-config-ichef": "^1.1.2",
+    "eslint-config-ichef": "^1.1.4",
     "eslint-import-resolver-babel-module": "^3.0.0",
     "eslint-loader": "^1.6.3",
     "eslint-plugin-flowtype": "^2.32.1",
@@ -69,7 +69,7 @@
     "eslint-plugin-react": "^6.10.0",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",
-    "flow-bin": "^0.45.0",
+    "flow-bin": "^0.47.0",
     "jest": "^19.0.2",
     "jest-junit": "zhusee2/jest-junit#update_format",
     "node-sass": "^4.5.0",
@@ -88,7 +88,8 @@
     "classnames": "^2.2.5",
     "document-offset": "^1.0.4",
     "keycode": "^2.1.9",
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.5.8",
+    "react-flow-types": "^0.1.1"
   },
   "babel": {
     "extends": "./configs/.babelrc"

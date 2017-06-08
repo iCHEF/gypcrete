@@ -62,7 +62,7 @@ it('should restore hidden icon when status changes', () => {
     wrapper.setProps({ status: 'loading' });
 
     expect(wrapper.state('hideIcon')).toBeFalsy();
-    expect(wrapper.instance().autoHideTimeout).toBeNull();
+    expect(wrapper.instance().hideIconTimeout).toBeNull();
 });
 
 it('should restore hidden icon when autohide changed to false', () => {
@@ -74,7 +74,7 @@ it('should restore hidden icon when autohide changed to false', () => {
     wrapper.setProps({ autohide: false });
 
     expect(wrapper.state('hideIcon')).toBeFalsy();
-    expect(wrapper.instance().autoHideTimeout).toBeNull();
+    expect(wrapper.instance().hideIconTimeout).toBeNull();
 });
 
 it('should ignore to hide icon if autohide is false', () => {

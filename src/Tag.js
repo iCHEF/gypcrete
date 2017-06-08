@@ -9,7 +9,7 @@ import prefixClass from './utils/prefixClass';
 const COMPONENT_NAME = prefixClass('tag');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
-type Props = {
+export type Props = {
     className: string,
     children: any,
 };

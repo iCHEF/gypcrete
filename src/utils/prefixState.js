@@ -1,3 +1,4 @@
+// @flow
 import prefixClass from './prefixClass';
 
 /**
@@ -6,7 +7,7 @@ import prefixClass from './prefixClass';
  * @param {String} state
  * @return {String} result
  */
-function prefixState(state) {
+function prefixState(state: string): string {
     if (!(typeof state === 'string') || !state.length) {
         throw new Error('state should be a non-empty string.');
     }
