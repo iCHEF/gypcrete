@@ -1,0 +1,11 @@
+[ignore]
+.*/__tests__/.*
+<PROJECT_ROOT>/node_modules/stylelint/*
+
+[include]
+src
+
+[libs]
+
+[options]
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/__mocks__/fileMock.js'

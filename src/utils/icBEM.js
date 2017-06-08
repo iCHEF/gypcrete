@@ -1,3 +1,5 @@
+// @flow
+
 // -------------------------------------
 //   icBEM Helper
 //   @ref https://github.com/14islands/bem-helper-js
@@ -13,16 +15,25 @@
 // -------------------------------------
 
 /* eslint-disable no-underscore-dangle */
+import isNonEmptyString from './isNonEmptyString';
 
 const ELEMENT_SEPARATOR = '__';
 const MODIFIER_SEPARATOR = '--';
 
-function stringNotEmpty(string) {
-    return (typeof string === 'string' && string.length);
-}
+type FactoryParams = {
+    block: string,
+    element?: string,
+    modifiers?: string[],
+    nonBemClasses?: string[],
+};
 
 export class BEMFactory {
-    constructor({ block, element, modifiers = [], nonBemClasses = [] } = {}) {
+    _block: string;
+    _element: string | void;
+    _modifiers: string[];
+    _nonBemClasses: string[];
+
+    constructor({ block, element, modifiers = [], nonBemClasses = [] }: FactoryParams = {}) {
         if (!block) {
             throw new Error('block is required.');
         }
@@ -41,8 +52,8 @@ export class BEMFactory {
      * @param {String}
      * @return {BEMFactory}
      */
-    element(elementIdentifier) {
-        if (stringNotEmpty(elementIdentifier)) {
+    element(elementIdentifier: string): BEMFactory {
+        if (isNonEmptyString(elementIdentifier)) {
             return new BEMFactory({
                 ...this.toHash(),
                 element: elementIdentifier
@@ -57,8 +68,8 @@ export class BEMFactory {
      * @param {String}
      * @return {BEMFactory}
      */
-    modifier(modifierIdentifier, isOn = true) {
-        if (isOn && stringNotEmpty(modifierIdentifier)) {
+    modifier(modifierIdentifier: string, isOn: boolean = true): BEMFactory {
+        if (isOn && isNonEmptyString(modifierIdentifier)) {
             return new BEMFactory({
                 ...this.toHash(),
                 modifiers: [...this._modifiers, modifierIdentifier]
@@ -73,8 +84,8 @@ export class BEMFactory {
      * @param {String}
      * @return {BEMFactory}
      */
-    add(className) {
-        if (stringNotEmpty(className)) {
+    add(className: string): BEMFactory {
+        if (isNonEmptyString(className)) {
             return new BEMFactory({
                 ...this.toHash(),
                 nonBemClasses: [...this._nonBemClasses, className]
@@ -89,7 +100,7 @@ export class BEMFactory {
      * @param {Bool} stripBlock - Should remove Block from output.
      * @return {String}
      */
-    toString({ stripBlock = false } = {}) {
+    toString({ stripBlock = false }: { stripBlock: boolean } = {}): string {
         const { _block, _element, _modifiers, _nonBemClasses } = this;
 
         const baseClass = (typeof _element !== 'undefined')
@@ -112,7 +123,7 @@ export class BEMFactory {
      *
      * @return {Hash}
      */
-    toHash() {
+    toHash(): FactoryParams {
         return {
             block: this._block,
             element: this._element,
@@ -120,10 +131,14 @@ export class BEMFactory {
             nonBemClasses: this._nonBemClasses.slice(0)
         };
     }
+
+    valueOf(): string {
+        return this.toString();
+    }
 }
 
 // Creates BEM chain based on context type
-function icBEM(blockName) {
+function icBEM(blockName: string): BEMFactory {
     if (typeof blockName === 'string') {
         return new BEMFactory({ block: blockName });
     }

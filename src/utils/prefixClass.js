@@ -1,15 +1,13 @@
+// @flow
+import isNonEmptyString from './isNonEmptyString';
+
 export const PREFIX = 'gyp';
 
-/**
- * Prefix every className with `gyp-` to prevent collision.
- * @param {String} className
- * @return {String} result
- */
-function prefixClass(className) {
-    if (!(typeof className === 'string') || !className.length) {
+// Prefix every className with `gyp-` to prevent collision.
+function prefixClass(className: string) {
+    if (!isNonEmptyString(className)) {
         throw new Error('className should be a non-empty string.');
     }
-
     return `${PREFIX}-${className}`;
 }
 

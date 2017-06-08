@@ -88,12 +88,10 @@ describe('Pure <Text>', () => {
     it('renders errorMsg and ignores aside text', () => {
         const wrapper = shallow(<PureText errorMsg="Error" />);
 
-        expect(wrapper.children()).toHaveLength(1);
-        expect(wrapper.childAt(0).text()).toBe('Error');
+        expect(wrapper.children()).toHaveLength(2);
+        expect(wrapper.childAt(1).text()).toBe('Error');
 
-        const wrapperWithAside = shallow(<PureText aside="Aside" errorMsg="Error" />);
-
-        expect(wrapperWithAside.children()).toHaveLength(1);
-        expect(wrapperWithAside.childAt(0).text()).toBe('Error');
+        wrapper.setProps({ aside: 'Aside' });
+        expect(wrapper.childAt(1).text()).toBe('Error');
     });
 });

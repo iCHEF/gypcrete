@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - N/A
 
 
+## [0.12.0]
+### Added
+- Add vscode workspace settings, included `search.exclude` option. (#48)
+- Add Flow type configs.
+
+### Changed
+- Change jest `testRegex` pattern, run test files in any `__tests__` folder with `.test` or `.spec` suffix only. (#48)
+- Rename webpack config from `webpack.prod` to `webpack.dist`. (#48)
+- The following config files are moved to `configs/` folder: (#48, #55)
+    * `.babelrc`
+    * `.eslintrc.yml`
+    * `.eslintignore`
+    * `.stylelintrc.yml`
+    * `fontello.config.json`
+- Add `fillSpace` prop in `<InfiniteScroll>`, auto fill spaces with `onLoadMore` callback if its height is smaller than 2 times of container's height. (#57)
+- Remove `disabled` prop in `<InfiniteScroll>`. (#57)
+- The `basic` prop of `<BasicRow>` is no longer required. (#58)
+- The following modules are now type-annotated by Flow: (#39, #58)
+    * All helpers under `/utils`
+    * Visual elements of `<BasicRow>`, `<Icon>`, `<StatusIcon>`, `<Tag>`, `<Text>`.
+
+
 ## [0.11.1]
 ### Changed
 - Use `>=` for versioning in `engines` fields.

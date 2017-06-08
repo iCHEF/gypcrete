@@ -1,5 +1,7 @@
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
+import type { ReactChildren } from 'react-flow-types';
 
 import FlexCell from './FlexCell';
 import Tag from './Tag';
@@ -7,7 +9,18 @@ import TextEllipsis from './TextEllipsis';
 
 import wrapIfNotElement from './utils/wrapIfNotElement';
 
-function BasicRow({ basic, tag, statusIcon, children, ...otherProps }) {
+export type Props = {
+    basic?: ReactChildren,
+    tag?: ReactChildren,
+    statusIcon?: ReactChildren,
+    children?: ReactChildren, // eslint-disable-line react/require-default-props
+};
+
+function BasicRow({ basic, tag, statusIcon, children, ...otherProps }: Props) {
+    if (!basic) {
+        return null;
+    }
+
     return (
         <div {...otherProps}>
             <FlexCell shrink>
@@ -22,14 +35,15 @@ function BasicRow({ basic, tag, statusIcon, children, ...otherProps }) {
 }
 
 BasicRow.propTypes = {
-    basic: PropTypes.node.isRequired,
+    basic: PropTypes.node,
     tag: PropTypes.node,
     statusIcon: PropTypes.node,
 };
 
 BasicRow.defaultProps = {
-    tag: null,
-    statusIcon: null,
+    basic: undefined,
+    tag: undefined,
+    statusIcon: undefined,
 };
 
 export default BasicRow;
