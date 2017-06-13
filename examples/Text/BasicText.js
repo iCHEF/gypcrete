@@ -3,6 +3,10 @@ import React from 'react';
 import Text from 'src/Text';
 import DebugBox from '../DebugBox';
 
+const LONG_LABEL =
+    `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+     Proin at pellentesque dui. Vivamus non egestas ante. Integer a egestas dui.`;
+
 function BasicTextExample() {
     return (
         <div>
@@ -20,9 +24,16 @@ function BasicTextExample() {
             <DebugBox>
                 <Text
                     align="right"
-                    basic="A Long Long Long Basic Text"
-                    aside="I am right-aligned"
-                    tag="Tag" />
+                    basic="Basic Text"
+                    tag="Tag"
+                    aside="I am right-aligned" />
+            </DebugBox>
+
+            <DebugBox>
+                <Text
+                    basic={LONG_LABEL}
+                    tag="Tag"
+                    aside="Multi-line basic" />
             </DebugBox>
 
             <DebugBox>
