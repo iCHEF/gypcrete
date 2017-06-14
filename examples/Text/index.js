@@ -5,10 +5,12 @@ import { storiesOf } from '@storybook/react';
 import Text, { PureText } from 'src/Text';
 
 import BasicTextExample from './BasicText';
+import EllipsisExample from './Ellipsis';
 import TextWithStatusIconExample from './TextWithStatusIcon';
 
 storiesOf('Text', module)
     .addWithInfo('basic usage', BasicTextExample)
+    .addWithInfo('ellipsis-cropped', EllipsisExample)
     .addWithInfo('with statusIcon', TextWithStatusIconExample)
     // Props table
     .addPropsTable(() => <Text />, [PureText]);

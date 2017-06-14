@@ -5,7 +5,6 @@ import type { ReactChildren } from 'react-flow-types';
 
 import FlexCell from './FlexCell';
 import Tag from './Tag';
-import TextEllipsis from './TextEllipsis';
 
 import wrapIfNotElement from './utils/wrapIfNotElement';
 
@@ -23,9 +22,7 @@ function BasicRow({ basic, tag, statusIcon, children, ...otherProps }: Props) {
 
     return (
         <div {...otherProps}>
-            <FlexCell shrink>
-                <TextEllipsis>{basic}</TextEllipsis>
-            </FlexCell>
+            <FlexCell shrink>{basic}</FlexCell>
 
             {tag && wrapIfNotElement(tag, { with: Tag })}
             {statusIcon && wrapIfNotElement(statusIcon, { with: 'span' })}
