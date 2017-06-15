@@ -5,8 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- N/A
+
+
+## [0.12.1]
 ### Changed
 - `<Text>` now displays `basic` label in multiple lines. If you want to truncate it to single line with ellipsis, pass `<TextEllipsis>` instead. (#60)
+
 
 ## [0.12.0]
 ### Added
