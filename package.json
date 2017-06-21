@@ -11,7 +11,7 @@
     "CJies Tan (https://github.com/cjies)",
     "Teng-hao Chang (https://github.com/zhusee2)"
   ],
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "engines": {
     "node": ">= 6.9.1",
     "npm": ">= 3.10.10"
