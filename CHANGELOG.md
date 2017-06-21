@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- N/A
+- Add Apache License 2.0 for open-source.
+
+### Changed
+- Add `Installation` and `Usage` contents in README.
 
 
 ## [0.12.1]
