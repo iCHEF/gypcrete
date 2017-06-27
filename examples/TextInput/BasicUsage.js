@@ -20,6 +20,18 @@ function BasicUsage() {
             <DebugBox>
                 <TextInput defaultValue="Uncontrolled input" />
             </DebugBox>
+
+            <DebugBox>
+                <TextInput
+                    readOnly
+                    value="Read-only input" />
+            </DebugBox>
+
+            <DebugBox>
+                <TextInput
+                    disabled
+                    value="Disabled input" />
+            </DebugBox>
         </div>
     );
 }

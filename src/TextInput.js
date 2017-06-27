@@ -4,74 +4,42 @@ import classNames from 'classnames';
 
 import prefixClass from './utils/prefixClass';
 import rowComp, { getTextLayoutProps, ROW_COMP_ALIGN } from './mixins/rowComp';
-import './styles/TextLabel.scss';
 
-import EditableText, { PureEditableText } from './EditableText';
+import EditableText from './EditableText';
 
 export const COMPONENT_NAME = prefixClass('text-input');
 
-const filterOutStatusProps = (props) => {
-    const {
-        statusIcon,
-        errorMsg,
-        ...filteredProps
-    } = props;
-
-    return filteredProps;
-};
-
 function TextInput(props, { align }) {
     const {
-        // <EditableText> props
-        onEditEnd,
-        value,
-        defaultValue,
-        placeholder,
-        disabled,
-        onFocus,
-        onBlur,
-        onChange,
-        onKeyDown,
-        input,
+        wrapperProps,
         // React props
         className,
-        ...otherProps
+        ...editableRowProps,
     } = props;
-
-    const editableTextProps = {
-        value,
-        defaultValue,
-        placeholder,
-        disabled,
-        onFocus,
-        onBlur,
-        onChange,
-        input,
-    };
 
     const rootClassName = classNames(className, COMPONENT_NAME);
     const textLayoutProps = getTextLayoutProps(align, false);
 
     return (
-        <div className={rootClassName} {...otherProps}>
+        <div className={rootClassName} {...wrapperProps}>
             <EditableText
-                {...editableTextProps}
-                {...textLayoutProps} />
+                {...textLayoutProps}
+                {...editableRowProps} />
         </div>
     );
 }
 
-TextInput.propTypes =
-    filterOutStatusProps(PureEditableText.propTypes);
+TextInput.propTypes = {
+    wrapperProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+};
 
-TextInput.defaultProps =
-    filterOutStatusProps(PureEditableText.defaultProps);
+TextInput.defaultProps = {
+    wrapperProps: {},
+};
 
 TextInput.contextTypes = {
     align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
 };
 
-// export for tests
 export { TextInput as PureTextInput };
-
 export default rowComp({ defaultAlign: ROW_COMP_ALIGN.REVERSE })(TextInput);
