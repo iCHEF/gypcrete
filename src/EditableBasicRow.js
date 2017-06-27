@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -17,7 +18,25 @@ export const BEM = {
     basicLabel: ROOT_BEM.element('basic-label'),
 };
 
-class EditableBasicRow extends PureComponent {
+type EventWithInput = Event & { currentTarget: HTMLInputElement };
+
+export type Props = {
+    status?: any,
+    value?: string,
+    defaultValue?: string,
+    readOnly: boolean,
+    disabled: boolean,
+    placeholder: string,
+    onChange: (event?: Event) => void,
+    onFocus: (event?: Event) => void,
+    onBlur: (event?: Event) => void,
+    input: { [string]: any },
+    className?: string, // eslint-disable-line react/require-default-props
+};
+
+class EditableBasicRow extends PureComponent<Props, Props, any> {
+    inputNode: ?HTMLInputElement;
+
     static propTypes = {
         status: PropTypes.string,
         value: PropTypes.string,
@@ -41,7 +60,6 @@ class EditableBasicRow extends PureComponent {
         disabled: false,
         placeholder: 'Unset',
         onChange: () => {},
-        onKeyDown: () => {},
         onFocus: () => {},
         onBlur: () => {},
         input: {},
@@ -52,26 +70,26 @@ class EditableBasicRow extends PureComponent {
         focused: false,
     };
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: Props) {
         if (this.inputNode && nextProps.status !== this.props.status) {
-            this.inputNode.onBlur();
+            this.inputNode.blur();
         }
     }
 
-    handleInputFocus = (event) => {
+    handleInputFocus = (event: Event) => {
         this.setState({ focused: true });
         this.props.onFocus(event);
     }
 
-    handleInputBlur = (event) => {
+    handleInputBlur = (event: Event) => {
         this.setState({ focused: false });
         this.props.onBlur(event);
     }
 
-    handleInputChange = (event) => {
+    handleInputChange = (event: EventWithInput) => {
         // Only update if <input> isn't controlled
         if (!this.props.value) {
-            this.setState({ currentValue: event.target.value });
+            this.setState({ currentValue: event.currentTarget.value });
         }
 
         this.props.onChange(event);
@@ -79,6 +97,7 @@ class EditableBasicRow extends PureComponent {
 
     render() {
         const {
+            status,
             value,
             defaultValue,
             readOnly,

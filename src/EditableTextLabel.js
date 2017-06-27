@@ -1,6 +1,9 @@
+// @flow
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
+
+import type { ReactChildren } from 'react-flow-types';
 
 import { getTextLayoutProps } from './mixins/rowComp';
 
@@ -10,7 +13,18 @@ import TextLabel from './TextLabel';
 
 import { STATUS_CODE as STATUS } from './StatusIcon';
 
-class EditableTextLabel extends PureComponent {
+export type Props = {
+    inEdit: boolean,
+    onEditRequest: () => void,
+    onEditEnd: (payload?: { value: string | null, event: Event }) => void,
+    // #FIXME: use exported Flow types
+    icon?: string,
+    basic?: ReactChildren,
+    align?: string,
+    status?: string | null,
+};
+
+class EditableTextLabel extends PureComponent<Props, Props, any> {
     static propTypes = {
         inEdit: PropTypes.bool,
         onEditRequest: PropTypes.func,
@@ -49,14 +63,14 @@ class EditableTextLabel extends PureComponent {
         this.props.onEditRequest();
     }
 
-    handleInputBlur = (event) => {
+    handleInputBlur = (event: Event & { currentTarget: HTMLInputElement }) => {
         this.props.onEditEnd({
             value: event.currentTarget.value,
             event,
         });
     }
 
-    handleInputKeyDown = (event) => {
+    handleInputKeyDown = (event: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
         switch (event.keyCode) {
             case keycode('Enter'):
                 // Blur the input, and trigger `onEditEnd` in blur handler

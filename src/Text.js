@@ -47,14 +47,14 @@ export const TEXT_ALIGN = { LEFT, CENTER, RIGHT };
 
 export type Props = {
     align: typeof LEFT | typeof CENTER | typeof RIGHT,
-    aside: ReactChildren,
+    aside?: ReactChildren,
     basicRow: AnyReactElement,
     noGrow: boolean,
-    errorMsg: string,
-    statusIcon: ReactChildren, // #FIXME: use type from withStatus()
+    errorMsg?: string,
+    statusIcon?: ReactChildren, // #FIXME: use type from withStatus()
     basic: $PropertyType<BasicRowProps, 'basic'>,
     tag: $PropertyType<BasicRowProps, 'tag'>,
-    className: string,
+    className?: string,
 };
 
 class Text extends PureComponent {
