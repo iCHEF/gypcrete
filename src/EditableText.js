@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import withStatus, { withStatusPropTypes } from './mixins/withStatus';
+import withStatus, { withStatusPropTypes, STATUS_CODE } from './mixins/withStatus';
 
 import EditableBasicRow from './EditableBasicRow';
 import { PureText } from './Text';
@@ -14,6 +14,7 @@ class EditableText extends PureComponent {
         align: PureText.propTypes.align,
         noGrow: PureText.propTypes.noGrow,
         ...withStatusPropTypes,
+        // status,
         // statusIcon,
         // errorMsg,
     };
@@ -25,6 +26,7 @@ class EditableText extends PureComponent {
         align: PureText.defaultProps.align,
         noGrow: PureText.defaultProps.noGrow,
         // Status props
+        status: undefined,
         statusIcon: undefined,
         errorMsg: undefined,
     };
@@ -49,6 +51,7 @@ class EditableText extends PureComponent {
             align,
             noGrow,
             // status props
+            status,
             statusIcon,
             errorMsg,
             // React props,
@@ -62,6 +65,8 @@ class EditableText extends PureComponent {
         const basicRow = (
             <EditableBasicRow
                 {...editableRowProps}
+                status={status}
+                readOnly={status === STATUS_CODE.LOADING}
                 onFocus={this.handleInputFocus}
                 onBlur={this.handleInputBlur} />
         );
@@ -75,5 +80,5 @@ class EditableText extends PureComponent {
     }
 }
 
-export default withStatus({ withRef: true })(EditableText);
+export default withStatus({ withRawStatus: true })(EditableText);
 export { EditableText as PureEditableText };

@@ -19,6 +19,7 @@ export const BEM = {
 
 class EditableBasicRow extends PureComponent {
     static propTypes = {
+        status: PropTypes.string,
         value: PropTypes.string,
         defaultValue: PropTypes.string,
         readOnly: PropTypes.bool,
@@ -33,6 +34,7 @@ class EditableBasicRow extends PureComponent {
     };
 
     static defaultProps = {
+        status: undefined,
         value: undefined,
         defaultValue: undefined,
         readOnly: false,
@@ -49,6 +51,12 @@ class EditableBasicRow extends PureComponent {
         currentValue: this.props.value || this.props.defaultValue || '',
         focused: false,
     };
+
+    componentWillReceiveProps(nextProps) {
+        if (this.inputNode && nextProps.status !== this.props.status) {
+            this.inputNode.onBlur();
+        }
+    }
 
     handleInputFocus = (event) => {
         this.setState({ focused: true });
