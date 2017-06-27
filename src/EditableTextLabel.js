@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import keycode from 'keycode';
 
 import { getTextLayoutProps } from './mixins/rowComp';
 
-import EditableText, { PureEditableText } from './EditableText';
+import EditableText from './EditableText';
 import Icon from './Icon';
 import TextLabel from './TextLabel';
 
@@ -13,8 +14,7 @@ class EditableTextLabel extends PureComponent {
     static propTypes = {
         inEdit: PropTypes.bool,
         onEditRequest: PropTypes.func,
-        // <EditableText> callbacks
-        onEditEnd: PureEditableText.propTypes.onEditEnd,
+        onEditEnd: PropTypes.func,
         // <TextLabel> props
         icon: TextLabel.propTypes.icon,
         basic: TextLabel.propTypes.basic,
@@ -25,18 +25,13 @@ class EditableTextLabel extends PureComponent {
     static defaultProps = {
         inEdit: false,
         onEditRequest: () => {},
-        onEditEnd: PureEditableText.defaultProps.onEditEnd,
+        onEditEnd: () => {},
+        // <TextLabel> props
         icon: TextLabel.defaultProps.icon,
         basic: TextLabel.defaultProps.basic,
         align: TextLabel.defaultProps.align,
         status: TextLabel.defaultProps.status,
     };
-
-    componentDidUpdate() {
-        if (this.props.inEdit) {
-            this.editableTextRef.getRenderedComponent().focusInputNode();
-        }
-    }
 
     handleDoubleClick = () => {
         /**
@@ -52,6 +47,30 @@ class EditableTextLabel extends PureComponent {
          * We should rely on visible buttons or menus to trigger edit.
          */
         this.props.onEditRequest();
+    }
+
+    handleInputBlur = (event) => {
+        this.props.onEditEnd({
+            value: event.currentTarget.value,
+            event,
+        });
+    }
+
+    handleInputKeyDown = (event) => {
+        switch (event.keyCode) {
+            case keycode('Enter'):
+                // Blur the input, and trigger `onEditEnd` in blur handler
+                event.currentTarget.blur();
+                break;
+            case keycode('Escape'):
+                this.props.onEditEnd({
+                    value: null,
+                    event,
+                });
+                break;
+            default:
+                break;
+        }
     }
 
     render() {
@@ -77,9 +96,12 @@ class EditableTextLabel extends PureComponent {
             <TextLabel {...labelProps}>
                 {icon && <Icon type={icon} />}
                 <EditableText
-                    ref={(ref) => { this.editableTextRef = ref; }}
                     defaultValue={basic}
-                    onEditEnd={onEditEnd}
+                    onBlur={this.handleInputBlur}
+                    input={{
+                        autoFocus: true,
+                        onKeyDown: this.handleInputKeyDown,
+                    }}
                     {...layoutProps} />
             </TextLabel>
         );
