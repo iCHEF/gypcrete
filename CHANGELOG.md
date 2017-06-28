@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Add Apache License 2.0 for open-source.
-
-### Changed
 - Add `Installation` and `Usage` contents in README.
 - A new `<EditableBasicRow>` containing input logics is split from `<EditableText>`. (#63)
 
