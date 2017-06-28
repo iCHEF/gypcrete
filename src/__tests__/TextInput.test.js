@@ -28,6 +28,17 @@ describe('pure <TextInput>', () => {
         expect(wrapper.hasClass('gyp-text-input')).toBeTruthy();
     });
 
+    it('can set props to div-wrapper via wrapperProps', () => {
+        const wrapper = shallow(
+            <PureTextInput
+                wrapperProps={{ disabled: true, 'data-foo': 'bar' }} />
+        );
+
+        expect(wrapper.is('div')).toBeTruthy();
+        expect(wrapper.prop('disabled')).toBeTruthy();
+        expect(wrapper.prop('data-foo')).toBe('bar');
+    });
+
     it('renders <EditableText> and ignores chidlren from parent mixin', () => {
         const wrapper = shallow(
             <PureTextInput>
@@ -52,34 +63,10 @@ describe('pure <TextInput>', () => {
         });
     });
 
-    it('passes only white-listed props to <EditableText>', () => {
-        const handleFocus = jest.fn();
-        const handleBlur = jest.fn();
-        const handleChange = jest.fn();
+    it('passes unknown props to <EditableText>', () => {
+        const wrapper = shallow(<PureTextInput className="foo" foo="bar" />);
 
-        const whitelistedProps = {
-            value: 'Foo',
-            defaultValue: 'Bar',
-            placeholder: 'john.appleseed@example.com',
-            disabled: false,
-            onFocus: handleFocus,
-            onBlur: handleBlur,
-            onChange: handleChange,
-        };
-
-        const wrapper = shallow(
-            <PureTextInput
-                {...whitelistedProps}
-                input={{ id: 'foo-dom-id' }}
-                data-unsupported-prop />
-        );
-        const textWrapper = wrapper.childAt(0);
-
-        Object.entries(whitelistedProps).forEach(([key, value]) => {
-            expect(textWrapper.prop(key)).toBe(value);
-        });
-
-        expect(textWrapper.prop('input')).toEqual({ id: 'foo-dom-id' });
-        expect(textWrapper.prop('data-unsupported-prop')).toBeUndefined();
+        expect(wrapper.find(EditableText).prop('className')).toBeUndefined();
+        expect(wrapper.find(EditableText).prop('foo')).toBe('bar');
     });
 });

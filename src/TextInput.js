@@ -14,7 +14,8 @@ function TextInput(props, { align }) {
         wrapperProps,
         // React props
         className,
-        ...editableRowProps,
+        children, // strip out from component
+        ...editableTextProps,
     } = props;
 
     const rootClassName = classNames(className, COMPONENT_NAME);
@@ -24,7 +25,7 @@ function TextInput(props, { align }) {
         <div className={rootClassName} {...wrapperProps}>
             <EditableText
                 {...textLayoutProps}
-                {...editableRowProps} />
+                {...editableTextProps} />
         </div>
     );
 }
