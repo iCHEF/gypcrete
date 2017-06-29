@@ -146,7 +146,7 @@ class EditableBasicRow extends PureComponent<Props, Props, any> {
         const basicLabel = (
             <span className={BEM.basicLabel}>
                 {currentValue || placeholder}
-                {'\n'}
+                {InputTag === TAG_TEXTAREA && '\n'}
             </span>
         );
 
