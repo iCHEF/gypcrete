@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Add Apache License 2.0 for open-source.
 - Add `Installation` and `Usage` contents in README.
-- A new `<EditableBasicRow>` containing input logics is split from `<EditableText>`. (#63)
+- A new `<EditableBasicRow>` containing input logics is split from `<EditableText>`. (#63) Also supports choosing from `input` or `textarea` for its inner tag. (#64)
 
 ### Changed
 - `<EditableText>` is simplified to only hold status-related logic. (#63)
