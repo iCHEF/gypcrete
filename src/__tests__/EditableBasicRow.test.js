@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 
-import EditableBasicRow from '../EditableBasicRow';
+import EditableBasicRow, { BEM } from '../EditableBasicRow';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -11,11 +11,16 @@ it('renders without crashing', () => {
     ReactDOM.render(element, div);
 });
 
-it('renders an <input> inside a <BasicRow>', () => {
+it('renders an <input> or <textarea> inside a <BasicRow>', () => {
     const wrapper = shallow(<EditableBasicRow />);
 
     expect(wrapper.find('BasicRow')).toHaveLength(1);
     expect(wrapper.find('BasicRow').find('input')).toHaveLength(1);
+    expect(wrapper.find('BasicRow').find('textarea')).toHaveLength(0);
+
+    wrapper.setProps({ inputTag: 'textarea' });
+    expect(wrapper.find('BasicRow').find('input')).toHaveLength(0);
+    expect(wrapper.find('BasicRow').find('textarea')).toHaveLength(1);
 });
 
 it('updates state on input focus/blur', () => {
@@ -87,13 +92,25 @@ it('freezes input value when controlled via prop', () => {
 
 it('renders basic label with the same visual text from input', () => {
     const wrapper = mount(<EditableBasicRow value="Foo" placeholder="Unset" />);
-    expect(wrapper.text()).toBe('Foo');
+    const labelClass = `.${BEM.basicLabel}`;
+    expect(wrapper.find(labelClass).text()).toBe('Foo');
 
     wrapper.setProps({ value: 'Bar' });
-    expect(wrapper.text()).toBe('Bar');
+    expect(wrapper.find(labelClass).text()).toBe('Bar');
 
     wrapper.setProps({ value: '' });
-    expect(wrapper.text()).toBe('Unset');
+    expect(wrapper.find(labelClass).text()).toBe('Unset');
+});
+
+it('renders basic label with additional line-break when tag is textarea', () => {
+    const wrapper = mount(
+        <EditableBasicRow inputTag="textarea" value="Foo" placeholder="Unset" />
+    );
+    const labelClass = `.${BEM.basicLabel}`;
+    expect(wrapper.find(labelClass).text()).toBe('Foo\n');
+
+    wrapper.setProps({ value: 'Foo\n' });
+    expect(wrapper.find(labelClass).text()).toBe('Foo\n\n');
 });
 
 it('blurs input when status changes', () => {

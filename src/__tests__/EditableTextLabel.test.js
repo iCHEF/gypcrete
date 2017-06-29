@@ -80,7 +80,7 @@ it('requests to go edit mode when double-clicked in normal mode', () => {
 });
 
 it('fires onEditEnd with input value on input blurs', () => {
-    const handleEditEnd = jest.fn();
+    const handleEditEnd = jest.fn(() => EditableTextLabel.defaultProps.onEditEnd());
     const wrapper = mount(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
     const input = wrapper.find('input').node;
 
