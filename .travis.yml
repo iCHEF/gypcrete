@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+    - "node"
+
+install:
+    - yarn
+
+script:
+    - yarn lint
+    - yarn test
+    # Deploy package to dist branch or npm
+    - "if [ ${TRAVIS_PULL_REQUEST} = 'false']; then yarn deploy; fi"
+    # Publish storybook to gh-pages branch
+    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master']; then yarn gppages; fi"
+
+branches:
+    only:
+        - master
+        - develop
