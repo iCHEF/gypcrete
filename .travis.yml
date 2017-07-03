@@ -14,6 +14,10 @@ script:
     # Publish storybook to gh-pages branch
     - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master']; then yarn gppages; fi"
 
+# Send coverage data to Coveralls
+after_script:
+    - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+
 branches:
     only:
         - master
