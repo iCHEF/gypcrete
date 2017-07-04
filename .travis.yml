@@ -7,8 +7,10 @@ install:
     - yarn
 
 before_script:
+    - echo $TRAVIS_BUILD_DIR
     - yarn lint
     - yarn test
+
 
 script:
     # Deploy package to dist branch or npm
@@ -24,3 +26,7 @@ branches:
     only:
         - master
         - develop
+
+env:
+  global:
+    - GH_REPO: github.com/iCHEF/gypcrete.git
