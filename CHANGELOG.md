@@ -10,7 +10,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Add `Installation` and `Usage` contents in README.
+- A new `<EditableBasicRow>` containing input logics is split from `<EditableText>`. (#63)
 
+### Changed
+- `<EditableText>` is simplified to only hold status-related logic. (#63)
+- `<TextInput>` now passes all unknown props to `<EditableText>` for convenience. (#63)
+- `<EditableTextLabel>` is now the only component which manages the input value change with `onEditEnd` callback, as well as `Enter`/`Esc` key presses and input blurs. (#63)
+- Flow type annotations for `<Editable-*>` components and `<TextInput>`. (#63)
 
 ## [0.12.1]
 ### Changed

@@ -47,14 +47,14 @@ export const TEXT_ALIGN = { LEFT, CENTER, RIGHT };
 
 export type Props = {
     align: typeof LEFT | typeof CENTER | typeof RIGHT,
-    aside: ReactChildren,
+    aside?: ReactChildren,
     basicRow: AnyReactElement,
     noGrow: boolean,
-    errorMsg: string,
-    statusIcon: ReactChildren, // #FIXME: use type from withStatus()
+    errorMsg?: string,
+    statusIcon?: ReactChildren, // #FIXME: use type from withStatus()
     basic: $PropertyType<BasicRowProps, 'basic'>,
     tag: $PropertyType<BasicRowProps, 'tag'>,
-    className: string,
+    className?: string,
 };
 
 class Text extends PureComponent {
@@ -79,13 +79,7 @@ class Text extends PureComponent {
     static defaultProps = {
         align: LEFT,
         aside: undefined,
-        basicRow: (
-            <BasicRow
-                className={classNames(
-                    BEM.row.toString(),
-                    BEM.basic.toString()
-                )} />
-        ),
+        basicRow: <BasicRow />,
         noGrow: false,
         errorMsg: undefined,
         statusIcon: undefined,
@@ -97,7 +91,15 @@ class Text extends PureComponent {
 
     renderBasicRow() {
         const { basicRow, basic, tag, statusIcon } = this.props;
-        const basicRowProps = { basic, tag, statusIcon };
+        const basicRowProps = {
+            basic,
+            tag,
+            statusIcon,
+            className: classNames(
+                BEM.row.toString(),
+                BEM.basic.toString()
+            ),
+        };
 
         if (basicRow && React.isValidElement(basicRow)) {
             // Inject { basic, tag, statusIcon } to default or custom row.
