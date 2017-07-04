@@ -18,14 +18,23 @@ export const BEM = {
     basicLabel: ROOT_BEM.element('basic-label'),
 };
 
-type EventWithInput = Event & { currentTarget: HTMLInputElement };
+const TAG_INPUT = 'input';
+const TAG_TEXTAREA = 'textarea';
+export const ROW_INPUT_TAGS = {
+    INPUT: TAG_INPUT,
+    TEXTAREA: TAG_TEXTAREA
+};
+
+type AcceptedInput = HTMLInputElement | HTMLTextAreaElement;
+type EventWithInput = Event & { currentTarget: AcceptedInput };
 
 export type Props = {
-    status?: any,
+    inputTag: typeof TAG_INPUT | typeof TAG_TEXTAREA,
     value?: string,
     defaultValue?: string,
     readOnly: boolean,
     disabled: boolean,
+    status?: string | null,
     placeholder: string,
     onChange: (event?: Event) => void,
     onFocus: (event?: Event) => void,
@@ -35,14 +44,15 @@ export type Props = {
 };
 
 class EditableBasicRow extends PureComponent<Props, Props, any> {
-    inputNode: ?HTMLInputElement;
+    inputNode: ?AcceptedInput;
 
     static propTypes = {
-        status: PropTypes.string,
+        inputTag: PropTypes.oneOf(Object.values(ROW_INPUT_TAGS)),
         value: PropTypes.string,
         defaultValue: PropTypes.string,
         readOnly: PropTypes.bool,
         disabled: PropTypes.bool,
+        status: PropTypes.string,
         // <input type="text" /> props
         placeholder: PropTypes.string,
         onChange: PropTypes.func,
@@ -53,11 +63,12 @@ class EditableBasicRow extends PureComponent<Props, Props, any> {
     };
 
     static defaultProps = {
-        status: undefined,
+        inputTag: TAG_INPUT,
         value: undefined,
         defaultValue: undefined,
         readOnly: false,
         disabled: false,
+        status: undefined,
         placeholder: 'Unset',
         onChange: () => {},
         onFocus: () => {},
@@ -101,11 +112,12 @@ class EditableBasicRow extends PureComponent<Props, Props, any> {
 
     render() {
         const {
-            status,
+            inputTag: InputTag,
             value,
             defaultValue,
             readOnly,
             disabled,
+            status,
             // <input type="text" /> props
             placeholder,
             onChange,
@@ -124,11 +136,17 @@ class EditableBasicRow extends PureComponent<Props, Props, any> {
             .modifier('disabled', disabled);
         const rootClassName = classNames(bemClass.toString(), className);
 
+        const inputType = (InputTag === TAG_INPUT) ? 'text' : undefined;
         const inputTabIndex = (readOnly || disabled) ? -1 : undefined;
 
+        /**
+         * Append an extra line-break,
+         * or the last empty line in <textarea> will be invisible on browser
+         */
         const basicLabel = (
             <span className={BEM.basicLabel}>
                 {currentValue || placeholder}
+                {InputTag === TAG_TEXTAREA && '\n'}
             </span>
         );
 
@@ -137,9 +155,9 @@ class EditableBasicRow extends PureComponent<Props, Props, any> {
                 {...rowProps}
                 basic={basicLabel}
                 className={rootClassName}>
-                <input
+                <InputTag
                     ref={(ref) => { this.inputNode = ref; }}
-                    type="text"
+                    type={inputType}
                     value={currentValue}
                     placeholder={placeholder}
                     className={BEM.input.toString()}

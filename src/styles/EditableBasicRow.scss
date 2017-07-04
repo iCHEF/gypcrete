@@ -12,6 +12,7 @@ $block-name: #{$prefix}-editable-basic-row;
         color: $c-input-text;
         opacity: 1;
         will-change: opacity;
+        white-space: pre-wrap;
     }
 
     &__input {
@@ -34,9 +35,14 @@ $block-name: #{$prefix}-editable-basic-row;
 
         &:focus {
             opacity: 1;
-            box-shadow:
-                0  1px 0 $c-input-border,
-                0 -1px 0 $c-input-border inset;
+        }
+
+        @at-root textarea#{&} {
+            // Event when <textarea> has the same height of content,
+            // it can still have a scroll bar for navigating around 1~2px.
+            // This forces to remove the useless scroll bar.
+            height: calc(100% + 2px);
+            overflow: hidden;
         }
     }
 
@@ -54,6 +60,10 @@ $block-name: #{$prefix}-editable-basic-row;
     &--focused &__basic-label,
     &--disabled &__basic-label {
         opacity: 0;
+    }
+
+    &--focused {
+        box-shadow: 0 -2px 0 $c-input-border inset;
     }
 
     // ---------------------

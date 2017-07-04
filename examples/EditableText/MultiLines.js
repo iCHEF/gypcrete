@@ -4,26 +4,30 @@ import { action } from '@storybook/addon-actions';
 import EditableText from 'src/EditableText';
 import DebugBox from '../DebugBox';
 
-function BasicUsage() {
+function MultiLines() {
     return (
         <div>
             <DebugBox>
-                <EditableText onChange={action('change')} />
-            </DebugBox>
-
-            <DebugBox>
                 <EditableText
-                    value="Controlled input"
+                    inputTag="textarea"
                     onChange={action('change')} />
             </DebugBox>
 
             <DebugBox>
                 <EditableText
-                    defaultValue="Uncontrolled input"
+                    inputTag="textarea"
+                    value={'Controlled input\nin multiple lines'}
+                    onChange={action('change')} />
+            </DebugBox>
+
+            <DebugBox>
+                <EditableText
+                    inputTag="textarea"
+                    defaultValue={'Unontrolled input\nin multiple lines'}
                     onChange={action('change')} />
             </DebugBox>
         </div>
     );
 }
 
-export default BasicUsage;
+export default MultiLines;
