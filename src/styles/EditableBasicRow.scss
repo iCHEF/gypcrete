@@ -1,19 +1,18 @@
 @import "./mixins";
 
-$block-name: #{$prefix}-editable-text;
+$block-name: #{$prefix}-editable-basic-row;
 
 .#{$block-name} {
-    cursor: pointer;
+    position: relative;
 
     // ---------------------
     //  Elements
     // ---------------------
     &__basic-label {
         color: $c-input-text;
-    }
-
-    &__basic-row {
-        position: relative;
+        opacity: 1;
+        will-change: opacity;
+        white-space: pre-wrap;
     }
 
     &__input {
@@ -32,6 +31,19 @@ $block-name: #{$prefix}-editable-text;
         top: 0;
         left: 0;
         will-change: opacity;
+        outline: none;
+
+        &:focus {
+            opacity: 1;
+        }
+
+        @at-root textarea#{&} {
+            // Event when <textarea> has the same height of content,
+            // it can still have a scroll bar for navigating around 1~2px.
+            // This forces to remove the useless scroll bar.
+            height: calc(100% + 2px);
+            overflow: hidden;
+        }
     }
 
     ::placeholder {
@@ -45,32 +57,23 @@ $block-name: #{$prefix}-editable-text;
         color: $c-input-placeholder;
     }
 
+    &--focused &__basic-label,
+    &--disabled &__basic-label {
+        opacity: 0;
+    }
+
     &--focused {
-        cursor: auto;
-
-        .#{$block-name}__input {
-            opacity: 1;
-            outline: none;
-            cursor: text;
-        }
-
-        .#{$block-name}__basic-row {
-            box-shadow: 0 2px 0 $c-input-border;
-        }
-
-        .#{$block-name}__basic-label {
-            opacity: 0;
-        }
+        box-shadow: 0 -2px 0 $c-input-border inset;
     }
 
     // ---------------------
     //  States/Interactions
     // ---------------------
-    &.#{$prefix}-text--center &__input {
+    .#{$prefix}-text--center &__input {
         text-align: center;
     }
 
-    &.#{$prefix}-text--right &__input {
+    .#{$prefix}-text--right &__input {
         text-align: right;
     }
 

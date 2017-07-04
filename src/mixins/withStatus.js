@@ -5,6 +5,8 @@ import getComponentName from '../utils/getComponentName';
 
 import StatusIcon, { STATUS_CODE } from '../StatusIcon';
 
+export { STATUS_CODE };
+
 // Status context types
 export const statusPropTypes = {
     status: PropTypes.oneOf(Object.values(STATUS_CODE)),
@@ -14,12 +16,14 @@ export const statusPropTypes = {
 
 // prop types for what's going to set on wrapped component
 export const withStatusPropTypes = {
+    status: statusPropTypes.status,
     statusIcon: PropTypes.node,
-    errorMsg: PropTypes.string,
+    errorMsg: statusPropTypes.errorMsg,
 };
 
 const withStatus = ({
     withRef = false,
+    withRawStatus = false,
     ...defaultStatusOptions,
 } = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
@@ -38,6 +42,16 @@ const withStatus = ({
             return this.renderedComponentRef;
         }
 
+        getOptionalProps() {
+            const props = {};
+
+            if (withRawStatus) {
+                props.status = this.context.status;
+            }
+
+            return props;
+        }
+
         render() {
             const { status, statusOptions = {}, errorMsg } = this.context;
 
@@ -51,11 +65,13 @@ const withStatus = ({
             const refProps = !withRef ? {} : {
                 ref: (ref) => { this.renderedComponentRef = ref; },
             };
+            const optionalProps = this.getOptionalProps();
 
             return (
                 <WrappedComponent
                     {...refProps}
                     {...this.props}
+                    {...optionalProps}
                     statusIcon={statusIcon}
                     errorMsg={errorMsg} />
             );

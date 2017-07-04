@@ -2,6 +2,7 @@ import './styles/index.scss';
 
 // Visual elements
 import BasicRow from './BasicRow';
+import EditableBasicRow from './EditableBasicRow';
 import Icon from './Icon';
 import StatusIcon from './StatusIcon';
 import Tag from './Tag';
@@ -32,6 +33,7 @@ import InfiniteScroll from './InfiniteScroll';
 
 export {
     BasicRow,
+    EditableBasicRow,
     Icon,
     StatusIcon,
     Tag,
