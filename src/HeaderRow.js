@@ -2,11 +2,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import type { ReactChildren } from 'react-flow-types';
+import './styles/BasicRow.scss';
 
 import prefixClass from './utils/prefixClass';
 import icBEM from './utils/icBEM';
 
-export const COMPONENT_NAME = prefixClass('header');
+export const COMPONENT_NAME = prefixClass('header-row');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
     root: ROOT_BEM,
