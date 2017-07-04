@@ -1,0 +1,30 @@
+language: node_js
+
+node_js:
+    - "node"
+
+install:
+    - yarn
+
+before_script:
+    - yarn lint
+    - yarn test
+
+script:
+    # Deploy package to dist branch or npm
+    - "if [ ${TRAVIS_PULL_REQUEST} = 'false']; then yarn deploy; fi"
+    # Publish storybook to gh-pages branch
+    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master']; then yarn ghpages; fi"
+
+# Send coverage data to Coveralls
+after_script:
+    - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+
+branches:
+    only:
+        - master
+        - develop
+
+env:
+  global:
+    - GH_REPO: github.com/iCHEF/gypcrete.git

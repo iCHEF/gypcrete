@@ -1,7 +1,16 @@
 # gypcrete
 iCHEF web components library, built with React.
 
-[Demo](http://ichef.github.io/gypcrete)
+[![npm package](https://img.shields.io/npm/v/@ichef/gypcrete.svg)](https://www.npmjs.com/package/@ichef/gypcrete)
+[![build status](https://img.shields.io/travis/iCHEF/gypcrete/master.svg)](https://travis-ci.org/iCHEF/gypcrete)
+[![Coverage Status](https://img.shields.io/coveralls/iCHEF/gypcrete/master.svg)](https://coveralls.io/github/iCHEF/gypcrete?branch=master)
+
+[![PeerDependencies](https://img.shields.io/david/peer/iCHEF/gypcrete.svg)](https://david-dm.org/iCHEF/gypcrete?type=peer)
+[![Dependencies](https://img.shields.io/david/iCHEF/gypcrete.svg)](https://david-dm.org/iCHEF/gypcrete)
+[![DevDependencies](https://img.shields.io/david/dev/iCHEF/gypcrete.svg)](https://david-dm.org/iCHEF/gypcrete?type=dev)
+
+## Demo
+[ichef.github.io/gypcrete](https://ichef.github.io/gypcrete)
 
 ## Installation
 ```sh
