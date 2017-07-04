@@ -6,13 +6,15 @@ node_js:
 install:
     - yarn
 
-script:
+before_script:
     - yarn lint
     - yarn test
+
+script:
     # Deploy package to dist branch or npm
     - "if [ ${TRAVIS_PULL_REQUEST} = 'false']; then yarn deploy; fi"
     # Publish storybook to gh-pages branch
-    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master']; then yarn gppages; fi"
+    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master']; then yarn ghpages; fi"
 
 # Send coverage data to Coveralls
 after_script:
