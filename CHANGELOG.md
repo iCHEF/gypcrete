@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add Apache License 2.0 for open-source.
 - Add `Installation` and `Usage` contents in README.
 - A new `<EditableBasicRow>` containing input logics is split from `<EditableText>`. (#63) Also supports choosing from `input` or `textarea` for its inner tag. (#64)
+- Add shields on README. (#66)
+
+### Changed
+- Add `Installation` and `Usage` contents in README.
+- Turn CI service to TravisCI. (#66)
+- Update `deloy.sh` and `ghpages.sh` scripts to fit TravisCI.
+- Upgrade `node-sass` to v4.5.3 to fix error on Node 8.
+- Replace `jest-junit` reporter by [Coveralls](https://coveralls.io/github/iCHEF/gypcrete), send coverage data to Coveralls after CI build.
+
 
 ### Changed
 - `<EditableText>` is simplified to only hold status-related logic. (#63)
