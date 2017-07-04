@@ -11,7 +11,10 @@ git config --global user.email "developer@ichef.com.tw"
 if [ "$TRAVIS_BRANCH" = "master" ]; then
     export PACKAGE_VERSION=$(node -p -e "require('./package.json').version")
     git tag -a "${PACKAGE_VERSION}" -m "Deployed with ${BUILD_TAG}"
-    git push --tag --force origin || exit 1
+
+    # Push new tag
+    git remote add origin-pages "https://${GH_TOKEN}@${GH_REPO}" > /dev/null 2>&1
+    git push --tag --force origin-pages || exit 1
 fi
 
 # Git clone
