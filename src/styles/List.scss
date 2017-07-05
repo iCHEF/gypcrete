@@ -1,0 +1,15 @@
+@import "./mixins";
+$component: #{$prefix}-list;
+
+.#{$component} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    // Variants
+    &--setting {
+        background-color: white;
+        border: 1px solid $c-divider-row;
+        border-radius: rem($list-border-radius);
+    }
+}
