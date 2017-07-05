@@ -30,6 +30,7 @@ import SearchInput from './SearchInput';
 
 // Containers
 import InfiniteScroll from './InfiniteScroll';
+import HeaderRow from './HeaderRow';
 
 export {
     BasicRow,
@@ -58,4 +59,5 @@ export {
     SearchInput,
 
     InfiniteScroll,
+    HeaderRow,
 };
