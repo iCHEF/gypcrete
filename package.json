@@ -100,5 +100,8 @@
   },
   "stylelint": {
     "extends": "./configs/.stylelintrc.yml"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }

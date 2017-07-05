@@ -41,6 +41,8 @@ git push --set-upstream origin-pages dist
 
 # Publish to npm (only in master)
 if [ "$TRAVIS_BRANCH" = "master" ]; then
-    echo //registry.npmjs.org/:_authToken="${NPM_TOKEN}" > "${TRAVIS_BUILD_DIR}"/deploy/.npmrc
+    echo "Deploying v${PACKAGE_VERSION} to npm..."
+    echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > "${TRAVIS_BUILD_DIR}"/deploy/.npmrc
+
     npm publish || exit 1
 fi
