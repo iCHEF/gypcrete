@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - N/A
 
 
+## [0.13.1]
+### Added
+- Set publish registry with `publishConfig` option.
+
+### Fixed
+- [deploy] Fix git auth while pushing new tag.
+- [deploy] Commit files with `--all` option.
+
+
 ## [0.13.0]
 ### Added
 - Add Apache License 2.0 for open-source.
