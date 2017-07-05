@@ -7,15 +7,16 @@ const defaultBoxStyle = {
     position: 'relative',
 };
 
-function DebugBox({ width, height, children }) {
-    const style = {
+function DebugBox({ width, height, style, children }) {
+    const boxStyle = {
         ...defaultBoxStyle,
         width,
         height,
+        ...style,
     };
 
     return (
-        <div style={style}>
+        <div style={boxStyle}>
             {children}
         </div>
     );
@@ -30,11 +31,13 @@ DebugBox.propTypes = {
         PropTypes.number,
         PropTypes.string
     ]),
+    style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
 DebugBox.defaultProps = {
     width: '20rem',
     height: 'auto',
+    style: {},
 };
 
 export default DebugBox;
