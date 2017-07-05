@@ -32,7 +32,7 @@ cp ./package.json ./deploy/package.json
 
 # Commit built files
 cd deploy
-git add .
+git add -A .
 git commit -m "Built at Travis-${TRAVIS_BUILD_NUMBER} (${TRAVIS_COMMIT_RANGE})"
 
 # Push to dist branch
