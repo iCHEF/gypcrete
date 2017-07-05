@@ -20,7 +20,7 @@ if [ "$TRAVIS_BRANCH" = "master" ]; then
 
     # Commit files
     cd deploy
-    git add .
+    git add -A .
     git commit -m "Built at Travis-${TRAVIS_BUILD_NUMBER} (${TRAVIS_COMMIT_RANGE})"
 
     # Push to gh-pages
