@@ -36,5 +36,5 @@ it('uses fallback name for anonymous components', () => {
 });
 
 it('throws if no Component passed in', () => {
-    expect(() => getComponentName()).toThrow();
+    expect(() => getComponentName()).toThrowError(/Cannot read name/);
 });
