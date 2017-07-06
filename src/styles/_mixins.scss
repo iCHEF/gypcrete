@@ -27,6 +27,41 @@
 }
 
 // -------------------------------------
+//   Remove inline spacing
+// -------------------------------------
+
+@mixin remove-spacing($_children, $_font-size: $basic-text-font-size) {
+    font-size: 0;
+
+    #{$_children} {
+        font-size: $_font-size;
+    }
+}
+
+// -------------------------------------
+//   inline Vertical
+// -------------------------------------
+
+@mixin inline-vertical($_children: "> *") {
+    user-select: none;
+
+    &:before {
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 100%;
+        vertical-align: middle;
+        pointer-events: none;
+    }
+
+    #{$_children} {
+        display: inline-block;
+        vertical-align: middle;
+        user-select: auto;
+    }
+}
+
+// -------------------------------------
 //   Remove button default appearance
 // -------------------------------------
 
