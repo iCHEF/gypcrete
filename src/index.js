@@ -31,6 +31,8 @@ import SearchInput from './SearchInput';
 // Containers
 import InfiniteScroll from './InfiniteScroll';
 import HeaderRow from './HeaderRow';
+import List from './List';
+import ListRow from './ListRow';
 
 export {
     BasicRow,
@@ -60,4 +62,6 @@ export {
 
     InfiniteScroll,
     HeaderRow,
+    List,
+    ListRow,
 };
