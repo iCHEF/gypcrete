@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { isValidElement, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -18,7 +18,9 @@ const BEM = {
     root: ROOT_BEM,
     container: ROOT_BEM.element('container'),
     body: ROOT_BEM.element('body'),
-    message: ROOT_BEM.element('message')
+    message: ROOT_BEM.element('message'),
+    button: ROOT_BEM.element('button'),
+    buttonsGroup: ROOT_BEM.element('buttons-group')
 };
 
 /**
@@ -57,9 +59,41 @@ function renderPopupMessage(message) {
     );
 }
 
+/**
+ * Render popup's buttons
+ *
+ * @param  {Array} buttons
+ * @return {Array}
+ */
+function renderPopupButtons(buttons) {
+    if (!buttons || buttons.length === 0) {
+        return null;
+    }
+
+    const popupButtons = buttons.map((button) => {
+        // Render as expanded button
+        if (isValidElement(button)) {
+            return cloneElement(button, {
+                className: `${BEM.button}`,
+                align: 'center',
+                minified: false
+            });
+        }
+
+        return button;
+    });
+
+    return (
+        <div className={BEM.buttonsGroup}>
+            {popupButtons}
+        </div>
+    );
+}
+
 function Popup({
     icon,
     message,
+    buttons,
     // React props
     className,
     children,
@@ -77,6 +111,7 @@ function Popup({
                     {renderPopupMessage(message)}
                 </div>
 
+                {renderPopupButtons(buttons)}
                 {children}
             </div>
         </div>
@@ -85,12 +120,14 @@ function Popup({
 
 Popup.propTypes = {
     icon: PropTypes.node,
-    message: PropTypes.node
+    message: PropTypes.node,
+    buttons: PropTypes.arrayOf(PropTypes.element)
 };
 
 Popup.defaultProps = {
     icon: null,
-    message: null
+    message: null,
+    buttons: []
 };
 
 // export for tests

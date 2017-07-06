@@ -50,3 +50,17 @@
         line-height: 1.3em;
     }
 }
+
+// -------------------------------------
+//   Popup Button
+// -------------------------------------
+
+// Buttons group
+.#{$prefix}-popup__buttons-group {
+    display: flex;
+}
+
+// Button
+.#{$prefix}-popup__button {
+    border-top: 1px solid $c-popup-button-border;
+}
