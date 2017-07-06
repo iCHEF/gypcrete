@@ -11,7 +11,8 @@ $component: #{$prefix}-list-row;
         align-items: flex-start;
         border-bottom: 1px solid $c-divider-row;
 
-        li:last-of-type > & {
+        // Styles inside List
+        .#{$prefix}-list--setting li:last-of-type > & {
             border-bottom: none;
         }
     }

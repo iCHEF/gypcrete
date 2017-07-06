@@ -12,8 +12,8 @@ import DebugBox from '../DebugBox';
 
 function SettingList() {
     return (
-        <DebugBox width="30rem" style={{ padding: '1rem' }}>
-            <List variant="setting">
+        <DebugBox width="30rem" style={{ padding: '0 1rem' }}>
+            <List variant="setting" title="List title" desc="Help text here">
                 <ListRow>
                     <TextLabel basic="Hello World" />
                 </ListRow>

@@ -11,12 +11,12 @@ import DebugBox from '../DebugBox';
 function NormalList() {
     return (
         <DebugBox width="30rem">
-            <List variant="normal">
+            <List variant="normal" title="List title" desc="Help text here">
                 <ListRow>
-                    <TextLabel basic="Hello World" />
+                    <TextLabel icon="tickets" basic="Hello World" />
                 </ListRow>
                 <ListRow>
-                    <TextLabel basic="Row 2" />
+                    <TextLabel icon="tickets" basic="Row 2" />
                 </ListRow>
                 <ListRow>
                     <Button

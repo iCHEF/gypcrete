@@ -2,14 +2,56 @@
 $component: #{$prefix}-list;
 
 .#{$component} {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: rem($list-vertical-margin) 0;
 
-    // Variants
+    // --------------------
+    //  Elements
+    // --------------------
+    &__body {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__title,
+    &__desc {
+        font-size: rem($aside-text-font-size);
+        line-height: rem($aside-text-line-height);
+    }
+
+    &__title {
+        padding: rem(12px) 0 rem(4px);
+    }
+
+    &__desc {
+        padding-top: rem(8px);
+        margin-right: rem($list-row-left-padding);
+    }
+
+    // --------------------
+    //  Variants
+    // --------------------
+    &--normal {
+        .#{$component}__title {
+            border-bottom: 1px solid $c-divider-header;
+        }
+
+        .#{$component}__title,
+        .#{$component}__desc {
+            margin-left: rem($list-row-left-padding);
+        }
+    }
+
     &--setting {
-        background-color: white;
-        border: 1px solid $c-divider-row;
-        border-radius: rem($list-border-radius);
+        .#{$component}__body {
+            background-color: white;
+            border: 1px solid $c-divider-row;
+            border-radius: rem($list-border-radius);
+        }
+
+        .#{$component}__title,
+        .#{$component}__desc {
+            margin-left: rem($list-border-radius);
+        }
     }
 }
