@@ -8,4 +8,9 @@ html {
 
 body {
     font-size: rem($component-base-font-size);
+
+    &.#{$prefix}-has-overlay {
+        // Prevent body scrolling
+        overflow: hidden !important;
+    }
 }
