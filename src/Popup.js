@@ -35,7 +35,12 @@ function renderPopupIcon(icon) {
     }
 
     if (typeof icon === 'string') {
-        return <Icon large type={icon} />;
+        return (
+            <Icon
+                large
+                color="blue"
+                type={icon} />
+        );
     }
 
     return icon;
