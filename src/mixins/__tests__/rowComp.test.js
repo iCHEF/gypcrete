@@ -48,6 +48,15 @@ it('renders <Icon> and <Text> into wrapped component', () => {
     expect(fooWrapper.find(Text).prop('basic')).toBe('Basic');
 });
 
+it('takes a React Element as icon', () => {
+    const icon = <span data-foo="bar" />;
+    const wrapper = shallow(<RowCompFoo icon={icon} basic="Basic" />);
+    const fooWrapper = wrapper.find(Foo).shallow();
+
+    expect(fooWrapper.find(Icon).exists()).toBeFalsy();
+    expect(fooWrapper.find('[data-foo]')).toHaveLength(1);
+});
+
 it('renders <Text> with adjusted alignment', () => {
     const leftWrapper = shallow(<RowCompFoo align="left" basic="Basic" />);
     const centerWrapper = shallow(<RowCompFoo align="center" basic="Basic" />);

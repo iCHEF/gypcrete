@@ -52,7 +52,7 @@ describe('Pure <SearchInput>', () => {
     });
 
     it('clears input value and calls onSearch() on reset button click', () => {
-        const handleSearch = jest.fn();
+        const handleSearch = jest.fn(() => PureSearchInput.defaultProps.onSearch());
         const wrapper = shallow(<PureSearchInput onSearch={handleSearch} />);
         const inputWrapper = wrapper.find('input');
 
@@ -70,6 +70,12 @@ describe('Pure <SearchInput>', () => {
         const inputWrapper = wrapper.find('input');
 
         inputWrapper.simulate('change', { target: { value: 'foo' } });
+
+        // Other keys should not trigger onSearch()
+        inputWrapper.simulate('keyup', { key: 'Escape' });
+        expect(handleSearch).not.toHaveBeenCalled();
+
+        // Only Enter key should trigger
         inputWrapper.simulate('keyup', { key: 'Enter' });
         expect(handleSearch).toHaveBeenLastCalledWith('foo');
 
