@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- N/A
+- Add `<HeaderRow>` which is split into `left`, `center` and `right` tiers.
+- Add `<List>` section that supports a title and a description block.
+- Add simple `<ListRow>` with a Flexbox body for row components.
+
+### Changed
+- Improved tests coverage
 
 
 ## [0.13.1]
