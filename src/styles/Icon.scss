@@ -87,6 +87,10 @@
 // Name icon mapping
 // -------------------------------------
 
+.#{$prefix}-icon-row-padding {
+    width: rem($list-row-right-padding-small);
+}
+
 /* Direct copy from fontello */
 /* stylelint-disable rule-empty-line-before */
 

@@ -1,0 +1,19 @@
+@import "./mixins";
+$component: #{$prefix}-list-row;
+
+.#{$component} {
+    padding-left: $list-row-left-padding;
+
+    // Elements
+    &__body {
+        min-height: $row-base-height;
+        display: flex;
+        align-items: flex-start;
+        border-bottom: 1px solid $c-divider-row;
+
+        // Styles inside List
+        .#{$prefix}-list--setting li:last-of-type > & {
+            border-bottom: none;
+        }
+    }
+}

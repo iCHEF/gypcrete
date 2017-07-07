@@ -77,6 +77,12 @@ describe('Pure <Text>', () => {
         expect(rowWrapper.prop('statusIcon')).toEqual(icon);
     });
 
+    it('does not render <BasicRow> if basicRow is overriden with null', () => {
+        const wrapper = shallow(<PureText basicRow={null} />);
+
+        expect(wrapper.find(BasicRow).exists()).toBeFalsy();
+    });
+
     it('renders aside text', () => {
         const wrapper = shallow(<PureText basic="Basic" aside="Aside" />);
 
