@@ -33,6 +33,7 @@ import InfiniteScroll from './InfiniteScroll';
 import HeaderRow from './HeaderRow';
 import List from './List';
 import ListRow from './ListRow';
+import ColumnView from './ColumnView';
 
 export {
     BasicRow,
@@ -64,4 +65,5 @@ export {
     HeaderRow,
     List,
     ListRow,
+    ColumnView,
 };
