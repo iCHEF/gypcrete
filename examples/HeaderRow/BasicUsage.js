@@ -9,7 +9,7 @@ import DebugBox from '../DebugBox';
 
 function BasicUsage() {
     const leftBtn = <Button icon="prev" basic="Back" />;
-    const rightBtn = <Button basic="Save" />;
+    const rightBtn = <Button align="reverse" icon="row-padding" basic="Save" />;
     const centerLabel = (
         <TextLabel
             align="center"
