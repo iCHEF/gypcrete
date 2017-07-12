@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import type { ReactChildren } from 'react-flow-types';
+import './styles/ColumnView.scss';
 
 import prefixClass from './utils/prefixClass';
 import icBEM from './utils/icBEM';
