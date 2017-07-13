@@ -9,9 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add `<HeaderRow>` which is split into `left`, `center` and `right` tiers.
 - Add `<List>` section that supports a title and a description block.
 - Add simple `<ListRow>` with a Flexbox body for row components.
+- Add `<ColumnView>` which holds a `header` above and a `footer` below its main body area.
 
 ### Changed
 - Improved tests coverage
+- `<Button>` active/hover colors are slightly darken.
 
 
 ## [0.13.1]
