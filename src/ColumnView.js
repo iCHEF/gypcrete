@@ -27,7 +27,7 @@ export type Props = {
 };
 
 // eslint-disable-next-line react/require-default-props
-function ColumnPart({ children, ...otherProps }: { children?: ReactChildren }) {
+export function ColumnPart({ children, ...otherProps }: { children?: ReactChildren }) {
     if (!children) {
         return null;
     }
