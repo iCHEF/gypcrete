@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import type { ReactChildren } from 'react-flow-types';
-import './styles/BasicRow.scss';
+import './styles/HeaderRow.scss';
 
 import prefixClass from './utils/prefixClass';
 import icBEM from './utils/icBEM';

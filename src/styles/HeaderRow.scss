@@ -3,6 +3,9 @@ $component: #{$prefix}-header-row;
 
 .#{$component} {
     min-height: rem($row-base-height);
+    background-color: $c-header-bg;
+    border-bottom: 1px solid $c-divider-header;
+    padding: 0 rem($header-padding);
     display: flex;
 
     &__left,
