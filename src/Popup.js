@@ -1,6 +1,8 @@
+// @flow
 import React, { isValidElement, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import type { AnyReactElement, ReactChildren } from 'react-flow-types';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
@@ -14,13 +16,24 @@ import './styles/Popup.scss';
 
 export const COMPONENT_NAME = prefixClass('popup');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
-const BEM = {
+export const BEM = {
     root: ROOT_BEM,
     container: ROOT_BEM.element('container'),
     body: ROOT_BEM.element('body'),
     message: ROOT_BEM.element('message'),
     button: ROOT_BEM.element('button'),
     buttonsGroup: ROOT_BEM.element('buttons-group')
+};
+
+export type Props = {
+    icon?: string | ReactChildren,
+    message?: ReactChildren,
+    buttons?: AnyReactElement[],
+
+    /* eslint-disable react/require-default-props */
+    className?: string,
+    children?: ReactChildren,
+    /* eslint-enable react/require-default-props */
 };
 
 /**
@@ -58,7 +71,7 @@ function renderPopupMessage(message) {
     }
 
     return (
-        <div className={BEM.message}>
+        <div className={BEM.message.toString()}>
             {message}
         </div>
     );
@@ -77,9 +90,11 @@ function renderPopupButtons(buttons) {
 
     const popupButtons = buttons.map((button) => {
         // Render as expanded button
-        if (isValidElement(button)) {
+        if (button && isValidElement(button)) {
+            const buttonBemClass = BEM.button.toString();
+
             return cloneElement(button, {
-                className: `${BEM.button}`,
+                className: buttonBemClass,
                 align: 'center',
                 minified: false
             });
@@ -89,7 +104,7 @@ function renderPopupButtons(buttons) {
     });
 
     return (
-        <div className={BEM.buttonsGroup}>
+        <div className={BEM.buttonsGroup.toString()}>
             {popupButtons}
         </div>
     );
@@ -103,15 +118,15 @@ function Popup({
     className,
     children,
     ...popupProps
-}) {
-    const rootClassName = classNames(className, `${BEM.root}`);
+}: Props) {
+    const rootClassName = classNames(BEM.root.toString(), className);
 
     return (
         <div className={rootClassName} {...popupProps}>
             <Overlay />
 
-            <div className={BEM.container}>
-                <div className={BEM.body}>
+            <div className={BEM.container.toString()}>
+                <div className={BEM.body.toString()}>
                     {renderPopupIcon(icon)}
                     {renderPopupMessage(message)}
                 </div>
