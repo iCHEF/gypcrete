@@ -6,7 +6,7 @@ import getComponentName from '../utils/getComponentName';
 
 const createEscapeListener = callback => (event) => {
     if (event.keyCode === keycode('Escape')) {
-        if (typeof callback === 'function') callback(event);
+        callback(event);
     }
 };
 
