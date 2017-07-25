@@ -2,7 +2,7 @@
 import React, { isValidElement, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import type { AnyReactElement, ReactChildren } from 'react-flow-types';
+import type { ReactChildren } from 'react-flow-types';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
@@ -28,7 +28,7 @@ export const BEM = {
 export type Props = {
     icon?: string | ReactChildren,
     message?: ReactChildren,
-    buttons?: AnyReactElement[],
+    buttons?: React$Element<*>[],
 
     /* eslint-disable react/require-default-props */
     className?: string,
