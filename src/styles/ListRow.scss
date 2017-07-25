@@ -4,7 +4,9 @@ $component: #{$prefix}-list-row;
 .#{$component} {
     padding-left: $list-row-left-padding;
 
-    // Elements
+    // --------------------
+    //  Elements
+    // --------------------
     &__body {
         min-height: $row-base-height;
         display: flex;
@@ -15,5 +17,13 @@ $component: #{$prefix}-list-row;
         .#{$prefix}-list--setting li:last-of-type > & {
             border-bottom: none;
         }
+    }
+
+    // --------------------
+    //  Modifiers
+    // --------------------
+    &--highlight {
+        background-color: $c-row-bg-highlight;
+        color: $c-white;
     }
 }

@@ -16,6 +16,7 @@ export const BEM = {
 };
 
 export type Props = {
+    highlight?: boolean,
     nestedList?: ReactChildren,
     /* eslint-disable react/require-default-props */
     className?: string,
@@ -25,15 +26,18 @@ export type Props = {
 
 class ListRow extends PureComponent<Props, Props, any> {
     static propTypes = {
+        highlight: PropTypes.bool,
         nestedList: PropTypes.node,
     };
 
     static defaultProps = {
+        highlight: false,
         nestedList: undefined,
     };
 
     render() {
         const {
+            highlight,
             nestedList,
             // React props
             className,
@@ -41,7 +45,7 @@ class ListRow extends PureComponent<Props, Props, any> {
             ...wrapperProps,
         } = this.props;
 
-        const bemClass = BEM.root;
+        const bemClass = BEM.root.modifier('highlight', highlight);
         const rootClassName = classNames(bemClass.toString(), className);
 
         return (

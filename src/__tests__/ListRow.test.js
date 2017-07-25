@@ -25,6 +25,13 @@ it('renders children inside a body wrapper', () => {
     expect(wrapper.find(`.${ROW_BEM.body}`).text()).toBe('Foo');
 });
 
+it('handles highlight modifier', () => {
+    const wrapper = shallow(<ListRow highlight>Foo</ListRow>);
+    const expectedClassName = ROW_BEM.root.modifier('highlight').toString();
+
+    expect(wrapper.hasClass(expectedClassName)).toBeTruthy();
+});
+
 it('renders nested item inside <li> but outside of body wrapper', () => {
     const wrapper = shallow(
         <ListRow nestedList={<span data-test="bar" />}>

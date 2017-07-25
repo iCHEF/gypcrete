@@ -13,8 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Improved tests coverage
+- Font weight of `<body>` is now set as 400 by default.
 - `<Button>` active/hover colors are slightly darken.
-
+- `<Button>` now takes a `primary` prop to make it bolder.
 
 ## [0.13.1]
 ### Added
