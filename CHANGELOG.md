@@ -10,9 +10,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add `<List>` section that supports a title and a description block.
 - Add simple `<ListRow>` with a Flexbox body for row components.
 - Add `<ColumnView>` which holds a `header` above and a `footer` below its main body area.
+- Add z-index `z()` sass helper. (Migrate from iC-framework)
+- Add `escapable()` mixin, listening `Esc` key to trigger `onEscape` prop.
+- Add page overlay component, `<Overlay>`.
+- Add `<Popup>` component.
 
 ### Changed
-- Improved tests coverage
+- Improved tests coverage. (especially mixins & utils)
 - Font weight of `<body>` is now set as 400 by default.
 - `<Button>` active/hover colors are slightly darken.
 - `<Button>` now takes a `primary` prop to make it bolder.

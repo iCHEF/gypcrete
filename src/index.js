@@ -11,6 +11,8 @@ import EditableText from './EditableText';
 import Tooltip from './Tooltip';
 import AnchoredTooltip from './AnchoredTooltip';
 import SwitchIcon from './SwitchIcon';
+import Overlay from './Overlay';
+import Popup from './Popup';
 
 // Layout helpers
 import FlexCell from './FlexCell';
@@ -46,6 +48,8 @@ export {
     Tooltip,
     AnchoredTooltip,
     SwitchIcon,
+    Overlay,
+    Popup,
 
     FlexCell,
     IconLayout,

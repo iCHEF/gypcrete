@@ -60,6 +60,13 @@ $c-switch-knob:   $c-white;
 $c-slider-track: hsba(0, 0, 0, 30);
 $c-slider-thumb-border: hsba(0, 0, 0, 20);
 
+// Input colors
 $c-input-text: $c-text-editable;
 $c-input-border: $c-text-editable;
 $c-input-placeholder: $c-text-placeholder;
+
+// Overlay colors
+$c-overlay: hsba(0, 0, 0, 60);
+
+// Popup colors
+$c-popup-button-border: rgba(235, 230, 230, 1);

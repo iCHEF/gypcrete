@@ -9,4 +9,9 @@ html {
 body {
     font-size: rem($component-base-font-size);
     font-weight: $font-weight-base;
+
+    &.#{$prefix}-has-overlay {
+        // Prevent body scrolling
+        overflow: hidden !important;
+    }
 }
