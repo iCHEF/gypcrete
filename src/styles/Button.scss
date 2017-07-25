@@ -53,6 +53,10 @@
     &--black {
         color: $c-black;
     }
+
+    &--primary {
+        font-weight: $font-weight-bold;
+    }
 }
 
 // ----------------------
