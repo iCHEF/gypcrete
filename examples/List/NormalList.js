@@ -15,8 +15,11 @@ function NormalList() {
                 <ListRow>
                     <TextLabel icon="tickets" basic="Hello World" />
                 </ListRow>
+                <ListRow highlight>
+                    <TextLabel icon="tickets" basic="Highlighted row" />
+                </ListRow>
                 <ListRow>
-                    <TextLabel icon="tickets" basic="Row 2" />
+                    <TextLabel icon="tickets" basic="Row 3" />
                 </ListRow>
                 <ListRow>
                     <Button
