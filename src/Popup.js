@@ -43,10 +43,6 @@ export type Props = {
  * @return {Element}
  */
 function renderPopupIcon(icon) {
-    if (!icon) {
-        return null;
-    }
-
     if (typeof icon === 'string') {
         return (
             <Icon
@@ -90,7 +86,7 @@ function renderPopupButtons(buttons) {
 
     const popupButtons = buttons.map((button) => {
         // Render as expanded button
-        if (button && isValidElement(button)) {
+        if (isValidElement(button)) {
             const buttonBemClass = BEM.button.toString();
 
             return cloneElement(button, {
