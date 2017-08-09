@@ -36,8 +36,8 @@ $c-section-bg-list:    hsba(0, 0, 0, 0);
 
 // Row backgrounds
 $c-row-bg:           hsba(0, 0, 0, 0);
-$c-row-bg-hover:     hsba(0, 0, 0, 2);
-$c-row-bg-active:    hsba(0, 0, 0, 4);
+$c-row-bg-hover:     hsba(0, 0, 0, 3);
+$c-row-bg-active:    hsba(0, 0, 0, 6);
 $c-row-bg-highlight: $c-blue;
 
 // Component backgrounds
@@ -60,6 +60,13 @@ $c-switch-knob:   $c-white;
 $c-slider-track: hsba(0, 0, 0, 30);
 $c-slider-thumb-border: hsba(0, 0, 0, 20);
 
+// Input colors
 $c-input-text: $c-text-editable;
 $c-input-border: $c-text-editable;
 $c-input-placeholder: $c-text-placeholder;
+
+// Overlay colors
+$c-overlay: hsba(0, 0, 0, 60);
+
+// Popup colors
+$c-popup-button-border: rgba(235, 230, 230, 1);

@@ -11,6 +11,8 @@ import EditableText from './EditableText';
 import Tooltip from './Tooltip';
 import AnchoredTooltip from './AnchoredTooltip';
 import SwitchIcon from './SwitchIcon';
+import Overlay from './Overlay';
+import Popup from './Popup';
 
 // Layout helpers
 import FlexCell from './FlexCell';
@@ -30,6 +32,10 @@ import SearchInput from './SearchInput';
 
 // Containers
 import InfiniteScroll from './InfiniteScroll';
+import HeaderRow from './HeaderRow';
+import List from './List';
+import ListRow from './ListRow';
+import ColumnView from './ColumnView';
 
 export {
     BasicRow,
@@ -42,6 +48,8 @@ export {
     Tooltip,
     AnchoredTooltip,
     SwitchIcon,
+    Overlay,
+    Popup,
 
     FlexCell,
     IconLayout,
@@ -58,4 +66,8 @@ export {
     SearchInput,
 
     InfiniteScroll,
+    HeaderRow,
+    List,
+    ListRow,
+    ColumnView,
 };

@@ -8,7 +8,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 function TextEllipsis({ children }) {
     return (
-        <div className={ROOT_BEM}>
+        <div className={ROOT_BEM} title={children}>
             {children}
         </div>
     );

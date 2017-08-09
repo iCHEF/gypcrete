@@ -87,6 +87,10 @@
 // Name icon mapping
 // -------------------------------------
 
+.#{$prefix}-icon-row-padding {
+    width: rem($list-row-right-padding-small);
+}
+
 /* Direct copy from fontello */
 /* stylelint-disable rule-empty-line-before */
 
@@ -242,5 +246,13 @@
 .#{$prefix}-icon-download:before {
     content: '\e860'; /* '' */
 }
-
+.#{$prefix}-icon-add-item:before {
+    content: '\e832'; /* '' */
+}
+.#{$prefix}-icon-add-multi-items:before {
+    content: '\e82f'; /* '' */
+}
+.#{$prefix}-icon-clear-item:before {
+    content: '\e830'; /* '' */
+}
 /* stylelint-enable */

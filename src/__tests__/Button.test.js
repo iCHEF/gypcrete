@@ -28,6 +28,12 @@ describe('Pure <Button>', () => {
         expect(wrapper.find('button').prop('type')).toBe('button');
     });
 
+    it('handles primary modifier', () => {
+        const wrapper = shallow(<PureButton primary>Label</PureButton>);
+
+        expect(wrapper.hasClass('gyp-button--primary')).toBeTruthy();
+    });
+
     it('handles color modifiers', () => {
         let wrapper = shallow(<PureButton>Label</PureButton>);
         expect(wrapper.hasClass('gyp-button--blue')).toBeTruthy();

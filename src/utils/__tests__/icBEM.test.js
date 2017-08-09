@@ -86,6 +86,12 @@ describe('icBEM() helper', () => {
         expect(bem.toString()).toBe('ic-comp');
     });
 
+    it('reports the value of a BEM object as toString() result', () => {
+        const bem = icBEM('ic-comp');
+
+        expect(bem.valueOf()).toBe(bem.toString());
+    });
+
     it('throws when init without a non-empty String', () => {
         expect(() => icBEM()).toThrow();
         expect(() => icBEM('')).toThrow();

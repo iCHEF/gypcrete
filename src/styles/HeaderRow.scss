@@ -1,0 +1,29 @@
+@import "./mixins";
+$component: #{$prefix}-header-row;
+
+.#{$component} {
+    min-height: rem($row-base-height);
+    background-color: $c-header-bg;
+    border-bottom: 1px solid $c-divider-header;
+    padding: 0 rem($header-padding);
+    display: flex;
+
+    &__left,
+    &__right {
+        // Yield the most space for center block with a small flex-basis.
+        // But it grows at the same rate as the center block, as soon as the space is plenty.
+        flex: 1 3 2rem;
+        display: flex;
+    }
+
+    &__right {
+        justify-content: flex-end;
+    }
+
+    &__center {
+        flex: 1 1 auto;
+        display: flex;
+        overflow: hidden;
+    }
+}
+

@@ -1,0 +1,16 @@
+@import "./mixins";
+
+.#{$prefix}-overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $c-overlay;
+    z-index: z("default");
+
+    // Active animation
+    opacity: 0;
+    animation: anim-fade-in .3s forwards;
+}

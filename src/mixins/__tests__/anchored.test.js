@@ -206,12 +206,13 @@ it('can take an HTMLElement as anchor', () => {
     mount(<Anchor top={10} left={10} />, { attachTo: anchorRoot });
     const anchorNode = document.getElementById('anchor');
 
-    const boxWrapper = mount(
+    const wrapper = mount(
         <AnchoredBoxTop anchor={anchorNode} />,
         { attachTo: boxRoot }
-    ).find(Box);
+    );
 
-    expect(boxWrapper.exists()).toBeTruthy();
+    expect(wrapper.find(Box).exists()).toBeTruthy();
+    expect(wrapper.instance().getAnchorDOMNode()).toBe(anchorNode);
 });
 
 it('re-adjusts position when assigned with another anchor', () => {
@@ -223,6 +224,11 @@ it('re-adjusts position when assigned with another anchor', () => {
 
     expect(wrapper.find(Box).prop('placement')).toBe(ANCHORED_PLACEMENT.BOTTOM);
 
+    // Should not re-adjust if anchor isn't changed
+    wrapper.setProps({ foo: true });
+    expect(wrapper.find(Box).prop('placement')).toBe(ANCHORED_PLACEMENT.BOTTOM);
+
+    // Should re-adjust since anchor changes
     anchorWrapper = mount(<Anchor top={200} left={10} />, { attachTo: anchorRoot });
     wrapper.setProps({ anchor: anchorWrapper.instance() });
 

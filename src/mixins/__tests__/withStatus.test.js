@@ -27,6 +27,7 @@ class Bar extends PureComponent {
 
 const FooWithStatus = withStatus()(Foo);
 const FooWithStatusOptions = withStatus({ autohide: false })(Foo);
+const FooWithRawStatus = withStatus({ withRawStatus: true })(Foo);
 const BarWithRef = withStatus({ withRef: true })(Bar);
 
 it('renders without crashing', () => {
@@ -87,4 +88,13 @@ it('can hold ref to the rendered component, and can be retrieved', () => {
 
     expect(ref).not.toBeNull();
     expect(ref).toBeInstanceOf(Bar);
+});
+
+it('can optionally pass down raw status string from context to component', () => {
+    const wrapper = shallow(
+        <FooWithRawStatus />,
+        { context: { status: 'loading' } },
+    );
+
+    expect(wrapper.find(Foo).prop('status')).toBe('loading');
 });

@@ -31,6 +31,10 @@ it('reads name from components with custom name', () => {
     expect(getComponentName(FooRev)).toBe('Rev(Foo)');
 });
 
+it('uses fallback name for anonymous components', () => {
+    expect(getComponentName(() => <div />)).toBe('Component');
+});
+
 it('throws if no Component passed in', () => {
-    expect(() => getComponentName()).toThrow();
+    expect(() => getComponentName()).toThrowError(/Cannot read name/);
 });

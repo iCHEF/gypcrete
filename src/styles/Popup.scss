@@ -1,0 +1,67 @@
+@import "./mixins";
+
+// -------------------------------------
+//   Popup
+// -------------------------------------
+
+.#{$prefix}-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    // Align center with flexbox
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: z("popup");
+}
+
+// -------------------------------------
+//   Popup Elements
+// -------------------------------------
+
+.#{$prefix}-popup {
+    // Container
+    &__container {
+        width: 95%;
+        max-width: $popup-container-width;
+        background-color: $c-white;
+        border-radius: $popup-border-radius;
+        box-shadow: $poup-box-shadow;
+        position: relative;
+        overflow: hidden;
+        z-index: z("front");
+        transition: width .15s;
+
+        // Active animation
+        opacity: 0;
+        animation: anim-bounce-in .6s forwards;
+    }
+
+    // Body
+    &__body {
+        padding: 8px 16px 32px;
+    }
+
+    // Message
+    &__message {
+        line-height: 1.3em;
+    }
+}
+
+// -------------------------------------
+//   Popup Button
+// -------------------------------------
+
+// Buttons group
+.#{$prefix}-popup__buttons-group {
+    display: flex;
+}
+
+// Button
+.#{$prefix}-popup__button {
+    border-top: 1px solid $c-popup-button-border;
+}

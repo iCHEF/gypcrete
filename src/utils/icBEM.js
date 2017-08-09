@@ -33,7 +33,7 @@ export class BEMFactory {
     _modifiers: string[];
     _nonBemClasses: string[];
 
-    constructor({ block, element, modifiers = [], nonBemClasses = [] }: FactoryParams = {}) {
+    constructor({ block, element, modifiers = [], nonBemClasses = [] }: FactoryParams) {
         if (!block) {
             throw new Error('block is required.');
         }
@@ -142,7 +142,7 @@ function icBEM(blockName: string): BEMFactory {
     if (typeof blockName === 'string') {
         return new BEMFactory({ block: blockName });
     }
-    throw new Error('blockName should be a non-valid String.');
+    throw new Error('blockName should be a non-empty String.');
 }
 
 export default icBEM;
