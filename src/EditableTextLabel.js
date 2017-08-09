@@ -113,7 +113,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
                     defaultValue={basic}
                     onBlur={this.handleInputBlur}
                     input={{
-                        autoFocus: true,
+                        autoFocus: inEdit,
                         onKeyDown: this.handleInputKeyDown,
                     }}
                     {...layoutProps} />
