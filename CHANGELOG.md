@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add `escapable()` mixin, listening `Esc` key to trigger `onEscape` prop.
 - Add page overlay component, `<Overlay>`.
 - Add `<Popup>` component.
+- Add 3 new icons for menu page purpose.
 
 ### Changed
 - Improved tests coverage. (especially mixins & utils)
