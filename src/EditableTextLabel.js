@@ -6,6 +6,7 @@ import keycode from 'keycode';
 import type { ReactChildren } from 'react-flow-types';
 
 import { getTextLayoutProps } from './mixins/rowComp';
+import wrapIfNotElement from './utils/wrapIfNotElement';
 
 import EditableText from './EditableText';
 import Icon from './Icon';
@@ -105,10 +106,12 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         }
 
         const layoutProps = getTextLayoutProps(align, !!icon);
+        const labelIcon = icon && wrapIfNotElement(icon, { with: Icon, via: 'type' });
 
         return (
             <TextLabel {...labelProps}>
-                {icon && <Icon type={icon} />}
+                {labelIcon}
+
                 <EditableText
                     defaultValue={basic}
                     onBlur={this.handleInputBlur}
