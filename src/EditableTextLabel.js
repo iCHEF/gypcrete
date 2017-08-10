@@ -38,7 +38,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
     };
 
     static defaultProps = {
-        inEdit: false,
+        inEdit: undefined,
         onEditRequest: () => {},
         onEditEnd: () => {},
         // <TextLabel> props
@@ -47,6 +47,25 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         align: TextLabel.defaultProps.align,
         status: TextLabel.defaultProps.status,
     };
+
+    state = {
+        inEdit: this.props.inEdit || false,
+    };
+
+    componentWillReceiveProps(nextProps) {
+        /**
+         * If the edit-state of <EditableTextLabel> is *controlled* by `inEdit` prop.
+         * If the prop is `undefined`, this component became *uncontrolled*
+         * and should run itself.
+         */
+        if (this.getEditabilityControlled(nextProps)) {
+            this.setState({ inEdit: nextProps.inEdit });
+        }
+    }
+
+    getEditabilityControlled(fromProps = this.props) {
+        return fromProps.inEdit !== undefined;
+    }
 
     handleDoubleClick = () => {
         /**
@@ -61,10 +80,19 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
          *
          * We should rely on visible buttons or menus to trigger edit.
          */
+
+        if (!this.getEditabilityControlled()) {
+            this.setState({ inEdit: true });
+        }
+
         this.props.onEditRequest();
     }
 
     handleInputBlur = (event: Event & { currentTarget: HTMLInputElement }) => {
+        if (!this.getEditabilityControlled()) {
+            this.setState({ inEdit: false });
+        }
+
         this.props.onEditEnd({
             value: event.currentTarget.value,
             event,
@@ -90,14 +118,14 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
 
     render() {
         const {
-            inEdit,
+            inEdit, // not used here
             onEditRequest,
             onEditEnd,
             ...labelProps,
         } = this.props;
         const { icon, basic, align, status } = labelProps;
 
-        if (!inEdit && status !== STATUS.LOADING) {
+        if (!this.state.inEdit && status !== STATUS.LOADING) {
             return (
                 <TextLabel
                     onDoubleClick={this.handleDoubleClick}
@@ -116,7 +144,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
                     defaultValue={basic}
                     onBlur={this.handleInputBlur}
                     input={{
-                        autoFocus: inEdit,
+                        autoFocus: this.state.inEdit,
                         onKeyDown: this.handleInputKeyDown,
                     }}
                     {...layoutProps} />
