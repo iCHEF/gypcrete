@@ -14,6 +14,8 @@ import TextLabel from './TextLabel';
 
 import { STATUS_CODE as STATUS } from './StatusIcon';
 
+const TOUCH_TIMEOUT_MS = 250;
+
 export type Props = {
     inEdit?: boolean,
     onEditRequest: () => void,
@@ -50,6 +52,9 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
 
     state = {
         inEdit: this.props.inEdit || false,
+        // For simulating double-touch
+        touchCount: 0,
+        dblTouchTimeout: null,
     };
 
     componentWillReceiveProps(nextProps: Props) {
@@ -65,6 +70,13 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
 
     getEditabilityControlled(fromProps: Props = this.props) {
         return fromProps.inEdit !== undefined;
+    }
+
+    resetDblTouchSimulation = () => {
+        this.setState({
+            touchCount: 0,
+            dblTouchTimeout: null,
+        });
     }
 
     handleDoubleClick = () => {
@@ -86,6 +98,32 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         }
 
         this.props.onEditRequest();
+    }
+
+    handleTouchStart = () => {
+        const currentCount = this.state.touchCount + 1;
+
+        if (currentCount === 2) {
+            // Simulates “double touch”
+            this.handleDoubleClick();
+            this.resetDblTouchSimulation();
+            return;
+        }
+
+        /**
+         * Clears prev timeout to keep touch counts, and then
+         * create new timeout to reset touch counts.
+         */
+        global.clearTimeout(this.state.dblTouchTimeout);
+        const resetTimeout = global.setTimeout(
+            this.resetDblTouchSimulation,
+            TOUCH_TIMEOUT_MS
+        );
+
+        this.setState({
+            touchCount: currentCount,
+            dblTouchTimeout: resetTimeout,
+        });
     }
 
     handleInputBlur = (event: Event & { currentTarget: HTMLInputElement }) => {
@@ -129,6 +167,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
             return (
                 <TextLabel
                     onDoubleClick={this.handleDoubleClick}
+                    onTouchStart={this.handleTouchStart}
                     {...labelProps} />
             );
         }
