@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Added
+### Changed
+- Fix `<EditableTextLabel>` not supporting custom icon.
+- `<EditableTextLabel>` now does not fire `onEditRequest` callback, leaving users to decide when to control its editing state.
+- `<EditableTextLabel>` now simulates double-touch and then triggers `onDblClick` callback.
+- When the `inEdit` prop isn't set on `<EditableTextLabel>`, it becomes an uncontrolled component and will auto enter edit mode on double clicks.
 
 ## [1.0.0]
 ### Added
