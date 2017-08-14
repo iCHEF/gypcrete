@@ -72,6 +72,12 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         return fromProps.inEdit !== undefined;
     }
 
+    leaveEditModeIfNotControlled() {
+        if (!this.getEditabilityControlled(this.props)) {
+            this.setState({ inEdit: false });
+        }
+    }
+
     resetDblTouchSimulation = () => {
         this.setState({
             touchCount: 0,
@@ -118,11 +124,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
     }
 
     handleInputBlur = (event: Event & { currentTarget: HTMLInputElement }) => {
-        // Auto leave edit mode if `inEdit` isn't controlled.
-        if (!this.getEditabilityControlled()) {
-            this.setState({ inEdit: false });
-        }
-
+        this.leaveEditModeIfNotControlled();
         this.props.onEditEnd({
             value: event.currentTarget.value,
             event,
@@ -136,6 +138,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
                 event.currentTarget.blur();
                 break;
             case keycode('Escape'):
+                this.leaveEditModeIfNotControlled();
                 this.props.onEditEnd({
                     value: null,
                     event,
