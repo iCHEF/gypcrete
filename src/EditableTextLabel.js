@@ -15,7 +15,7 @@ import TextLabel from './TextLabel';
 import { STATUS_CODE as STATUS } from './StatusIcon';
 
 export type Props = {
-    inEdit: boolean,
+    inEdit?: boolean,
     onEditRequest: () => void,
     onEditEnd: (payload?: { value: string | null, event: Event }) => void,
     // #FIXME: use exported Flow types
@@ -52,7 +52,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         inEdit: this.props.inEdit || false,
     };
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: Props) {
         /**
          * If the edit-state of <EditableTextLabel> is *controlled* by `inEdit` prop.
          * If the prop is `undefined`, this component became *uncontrolled*
@@ -63,7 +63,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         }
     }
 
-    getEditabilityControlled(fromProps = this.props) {
+    getEditabilityControlled(fromProps: Props = this.props) {
         return fromProps.inEdit !== undefined;
     }
 
