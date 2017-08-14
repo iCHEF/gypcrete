@@ -18,8 +18,8 @@ const TOUCH_TIMEOUT_MS = 250;
 
 export type Props = {
     inEdit?: boolean,
-    onEditRequest: () => void,
     onEditEnd: (payload?: { value: string | null, event: Event }) => void,
+    onDblClick: (event?: Event) => void,
     // #FIXME: use exported Flow types
     icon?: string,
     basic?: ReactChildren,
@@ -30,8 +30,8 @@ export type Props = {
 class EditableTextLabel extends PureComponent<Props, Props, any> {
     static propTypes = {
         inEdit: PropTypes.bool,
-        onEditRequest: PropTypes.func,
         onEditEnd: PropTypes.func,
+        onDblClick: PropTypes.func,
         // <TextLabel> props
         icon: TextLabel.propTypes.icon,
         basic: TextLabel.propTypes.basic,
@@ -41,8 +41,8 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
 
     static defaultProps = {
         inEdit: undefined,
-        onEditRequest: () => {},
         onEditEnd: () => {},
+        onDblClick: () => {},
         // <TextLabel> props
         icon: TextLabel.defaultProps.icon,
         basic: TextLabel.defaultProps.basic,
@@ -79,33 +79,24 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         });
     }
 
-    handleDoubleClick = () => {
+    handleDoubleClick = (event: Event) => {
         /**
-         * Request edit via double-click is not favored,
-         * because users can hardly find out this interaction.
-         *
-         * This is kept for compatibility reasons.
-         *
-         * Currently I have no plan for supporting the simulated double-click detection
-         * on mobile devices. It's even harder for users to figure out,
-         * and it's not a common UI pattern.
-         *
-         * We should rely on visible buttons or menus to trigger edit.
+         * If `inEdit` isn't controlled, this component by default
+         * goes into edit mode on double click/touch.
          */
-
         if (!this.getEditabilityControlled()) {
             this.setState({ inEdit: true });
         }
 
-        this.props.onEditRequest();
+        this.props.onDblClick(event);
     }
 
-    handleTouchStart = () => {
+    handleTouchStart = (event: Event) => {
         const currentCount = this.state.touchCount + 1;
 
         if (currentCount === 2) {
             // Simulates “double touch”
-            this.handleDoubleClick();
+            this.handleDoubleClick(event);
             this.resetDblTouchSimulation();
             return;
         }
@@ -127,6 +118,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
     }
 
     handleInputBlur = (event: Event & { currentTarget: HTMLInputElement }) => {
+        // Auto leave edit mode if `inEdit` isn't controlled.
         if (!this.getEditabilityControlled()) {
             this.setState({ inEdit: false });
         }
@@ -157,7 +149,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
     render() {
         const {
             inEdit, // not used here
-            onEditRequest,
+            onDblClick, // also not used here
             onEditEnd,
             ...labelProps,
         } = this.props;
