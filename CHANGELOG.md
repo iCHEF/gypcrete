@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+N/A
+
+## [1.1.0]
+### Changed
+- API changes to `<EditableTextLabel>`:
+  * `inEdit` prop now defaults to `undefined`, which means the component is **uncontrolled**.
+  * When `inEdit` is set either `true` or `false`, the component is **controlled**
+  * ~`onEditRequest`~ prop is removed in favor of new `onDblClick` callback. Users can decide when to update the edit state.
+- Behavior changes to `<EditableTextLabel>`:
+  * Custom element passed via `icon` now renders correctly under edit mode
+  * Double touch on mobile devices also triggers `onDblClick` callback.
+  * If component is **uncontrolled**, it auto enters edit mode on double clicks/touches and leaves on edit ends.
 
 ## [1.0.0]
 ### Added

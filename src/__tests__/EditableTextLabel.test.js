@@ -65,20 +65,6 @@ it('renders <EditableText> with layout props the same as rowComp() in edit mode'
     });
 });
 
-it('requests to go edit mode when double-clicked in normal mode', () => {
-    const handleEditRequest = jest.fn();
-    const wrapper = shallow(
-        <EditableTextLabel basic="Foo" onEditRequest={handleEditRequest} />
-    );
-
-    wrapper.simulate('dblclick');
-    expect(handleEditRequest).toHaveBeenCalled();
-
-    // Should not break event when callback not set.
-    wrapper.setProps({ onEditRequest: undefined });
-    expect(() => wrapper.simulate('dblclick')).not.toThrowError();
-});
-
 it('fires onEditEnd with input value on input blurs', () => {
     const handleEditEnd = jest.fn(() => EditableTextLabel.defaultProps.onEditEnd());
     const wrapper = mount(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
@@ -154,4 +140,84 @@ it('does not fire onEditEnd on other keys', () => {
 
     wrapper.find('input').simulate('keydown', { keyCode: keycode('Delete') });
     expect(handleEditEnd).not.toHaveBeenCalled();
+});
+
+// Self-controlled edit mode
+it("goes edit mode on double click if 'inEdit' is uncontrolled", () => {
+    const wrapper = shallow(<EditableTextLabel basic="Foo" />);
+    expect(wrapper.state('inEdit')).toBeFalsy();
+
+    wrapper.simulate('dblclick');
+    expect(wrapper.state('inEdit')).toBeTruthy();
+});
+
+it("stays in edit mode as long as 'inEdit' is uncontrolled", () => {
+    const wrapper = shallow(<EditableTextLabel basic="Foo" />);
+    wrapper.setState({ inEdit: true });
+    wrapper.setProps({ icon: 'printer' });
+
+    expect(wrapper.state('inEdit')).toBeTruthy();
+});
+
+it("leaves edit mode on blur if 'inEdit' is uncontrolled", () => {
+    const wrapper = mount(<EditableTextLabel basic="foo" />);
+
+    wrapper.setState({ inEdit: true });
+    wrapper.find('input').simulate('blur');
+
+    expect(wrapper.state('inEdit')).toBeFalsy();
+});
+
+it("leaves edit mode on Esc if 'inEdit' is uncontrolled", () => {
+    const wrapper = mount(<EditableTextLabel basic="foo" />);
+
+    wrapper.setState({ inEdit: true });
+    wrapper.find('input').simulate('keydown', { keyCode: keycode('Escape') });
+
+    expect(wrapper.state('inEdit')).toBeFalsy();
+});
+
+it("does not go edit mode on double click if 'inEdit' is controlled", () => {
+    const wrapper = shallow(<EditableTextLabel basic="Foo" inEdit={false} />);
+    expect(wrapper.state('inEdit')).toBeFalsy();
+
+    wrapper.simulate('dblclick');
+    expect(wrapper.state('inEdit')).toBeFalsy();
+});
+
+// Double-touch simulation
+it('triggers dblClick callback when touch twice with in 250ms', () => {
+    const handleDblClick = jest.fn();
+    const wrapper = shallow(<EditableTextLabel basic="foo" onDblClick={handleDblClick} />);
+
+    expect(handleDblClick).not.toHaveBeenCalled();
+
+    return new Promise((resolve) => {
+        wrapper.simulate('touchstart');
+        expect(wrapper.state('touchCount')).toBe(1);
+
+        setTimeout(() => {
+            wrapper.simulate('touchstart');
+            resolve();
+        }, 200);
+    }).then(() => {
+        expect(handleDblClick).toHaveBeenCalledTimes(1);
+    });
+});
+
+it('does not trigger dblClick callback when touch twice in over 250ms', () => {
+    const handleDblClick = jest.fn();
+    const wrapper = shallow(<EditableTextLabel basic="foo" onDblClick={handleDblClick} />);
+
+    expect(handleDblClick).not.toHaveBeenCalled();
+
+    return new Promise((resolve) => {
+        wrapper.simulate('touchstart');
+        setTimeout(() => {
+            wrapper.simulate('touchstart');
+            resolve();
+        }, 500);
+    }).then(() => {
+        expect(handleDblClick).not.toHaveBeenCalled();
+    });
 });
