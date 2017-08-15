@@ -20,16 +20,16 @@ const cleanAction = decorateAction([
     }
 ]);
 
-class EditableExample extends PureComponent {
+class ControlledExample extends PureComponent {
     state = {
         isEditing: false,
         status: null,
         currentBasic: 'Kitchen Printer',
     };
 
-    handleEditRequest = (event) => {
+    handleDblClick = (event) => {
         this.setState({ isEditing: true });
-        action('editRequest')(event);
+        action('dblClick')(event);
     }
 
     handleEditEnd = (payload) => {
@@ -57,7 +57,7 @@ class EditableExample extends PureComponent {
                     basic={this.state.currentBasic}
                     aside="00:11:22:33"
                     tag="Online"
-                    onEditRequest={this.handleEditRequest}
+                    onDblClick={this.handleDblClick}
                     onEditEnd={this.handleEditEnd}
                     status={this.state.status} />
             </DebugBox>
@@ -68,16 +68,17 @@ class EditableExample extends PureComponent {
 function Editable() {
     return (
         <div>
+            <p>Uncontrolled (self-controlled) editable label:</p>
             <EditableTextLabel
                 icon="printer"
                 basic="Kitchen Printer"
                 aside="00:11:22:33"
                 tag="Online"
-                onEditRequest={action('editRequest')}
+                onDblClick={action('dblClick')}
                 onEditEnd={cleanAction('editEnd')} />
 
-            <p>Interactive example:</p>
-            <EditableExample />
+            <p>Controlled editable label:</p>
+            <ControlledExample />
         </div>
     );
 }

@@ -6,6 +6,7 @@ import keycode from 'keycode';
 import type { ReactChildren } from 'react-flow-types';
 
 import { getTextLayoutProps } from './mixins/rowComp';
+import wrapIfNotElement from './utils/wrapIfNotElement';
 
 import EditableText from './EditableText';
 import Icon from './Icon';
@@ -13,10 +14,12 @@ import TextLabel from './TextLabel';
 
 import { STATUS_CODE as STATUS } from './StatusIcon';
 
+const TOUCH_TIMEOUT_MS = 250;
+
 export type Props = {
-    inEdit: boolean,
-    onEditRequest: () => void,
+    inEdit?: boolean,
     onEditEnd: (payload?: { value: string | null, event: Event }) => void,
+    onDblClick: (event?: Event) => void,
     // #FIXME: use exported Flow types
     icon?: string,
     basic?: ReactChildren,
@@ -27,8 +30,8 @@ export type Props = {
 class EditableTextLabel extends PureComponent<Props, Props, any> {
     static propTypes = {
         inEdit: PropTypes.bool,
-        onEditRequest: PropTypes.func,
         onEditEnd: PropTypes.func,
+        onDblClick: PropTypes.func,
         // <TextLabel> props
         icon: TextLabel.propTypes.icon,
         basic: TextLabel.propTypes.basic,
@@ -37,9 +40,9 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
     };
 
     static defaultProps = {
-        inEdit: false,
-        onEditRequest: () => {},
+        inEdit: undefined,
         onEditEnd: () => {},
+        onDblClick: () => {},
         // <TextLabel> props
         icon: TextLabel.defaultProps.icon,
         basic: TextLabel.defaultProps.basic,
@@ -47,23 +50,81 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         status: TextLabel.defaultProps.status,
     };
 
-    handleDoubleClick = () => {
+    state = {
+        inEdit: this.props.inEdit || false,
+        // For simulating double-touch
+        touchCount: 0,
+        dblTouchTimeout: null,
+    };
+
+    componentWillReceiveProps(nextProps: Props) {
         /**
-         * Request edit via double-click is not favored,
-         * because users can hardly find out this interaction.
-         *
-         * This is kept for compatibility reasons.
-         *
-         * Currently I have no plan for supporting the simulated double-click detection
-         * on mobile devices. It's even harder for users to figure out,
-         * and it's not a common UI pattern.
-         *
-         * We should rely on visible buttons or menus to trigger edit.
+         * If the edit-state of <EditableTextLabel> is *controlled* by `inEdit` prop.
+         * If the prop is `undefined`, this component became *uncontrolled*
+         * and should run itself.
          */
-        this.props.onEditRequest();
+        if (this.getEditabilityControlled(nextProps)) {
+            this.setState({ inEdit: nextProps.inEdit });
+        }
+    }
+
+    getEditabilityControlled(fromProps: Props = this.props) {
+        return fromProps.inEdit !== undefined;
+    }
+
+    leaveEditModeIfNotControlled() {
+        if (!this.getEditabilityControlled(this.props)) {
+            this.setState({ inEdit: false });
+        }
+    }
+
+    resetDblTouchSimulation = () => {
+        this.setState({
+            touchCount: 0,
+            dblTouchTimeout: null,
+        });
+    }
+
+    handleDoubleClick = (event: Event) => {
+        /**
+         * If `inEdit` isn't controlled, this component by default
+         * goes into edit mode on double click/touch.
+         */
+        if (!this.getEditabilityControlled()) {
+            this.setState({ inEdit: true });
+        }
+
+        this.props.onDblClick(event);
+    }
+
+    handleTouchStart = (event: Event) => {
+        const currentCount = this.state.touchCount + 1;
+
+        if (currentCount === 2) {
+            // Simulates “double touch”
+            this.handleDoubleClick(event);
+            this.resetDblTouchSimulation();
+            return;
+        }
+
+        /**
+         * Clears prev timeout to keep touch counts, and then
+         * create new timeout to reset touch counts.
+         */
+        global.clearTimeout(this.state.dblTouchTimeout);
+        const resetTimeout = global.setTimeout(
+            this.resetDblTouchSimulation,
+            TOUCH_TIMEOUT_MS
+        );
+
+        this.setState({
+            touchCount: currentCount,
+            dblTouchTimeout: resetTimeout,
+        });
     }
 
     handleInputBlur = (event: Event & { currentTarget: HTMLInputElement }) => {
+        this.leaveEditModeIfNotControlled();
         this.props.onEditEnd({
             value: event.currentTarget.value,
             event,
@@ -77,6 +138,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
                 event.currentTarget.blur();
                 break;
             case keycode('Escape'):
+                this.leaveEditModeIfNotControlled();
                 this.props.onEditEnd({
                     value: null,
                     event,
@@ -89,31 +151,34 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
 
     render() {
         const {
-            inEdit,
-            onEditRequest,
+            inEdit, // not used here
+            onDblClick, // also not used here
             onEditEnd,
             ...labelProps,
         } = this.props;
         const { icon, basic, align, status } = labelProps;
 
-        if (!inEdit && status !== STATUS.LOADING) {
+        if (!this.state.inEdit && status !== STATUS.LOADING) {
             return (
                 <TextLabel
                     onDoubleClick={this.handleDoubleClick}
+                    onTouchStart={this.handleTouchStart}
                     {...labelProps} />
             );
         }
 
         const layoutProps = getTextLayoutProps(align, !!icon);
+        const labelIcon = icon && wrapIfNotElement(icon, { with: Icon, via: 'type' });
 
         return (
             <TextLabel {...labelProps}>
-                {icon && <Icon type={icon} />}
+                {labelIcon}
+
                 <EditableText
                     defaultValue={basic}
                     onBlur={this.handleInputBlur}
                     input={{
-                        autoFocus: inEdit,
+                        autoFocus: this.state.inEdit,
                         onKeyDown: this.handleInputKeyDown,
                     }}
                     {...layoutProps} />
