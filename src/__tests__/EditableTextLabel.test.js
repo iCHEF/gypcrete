@@ -194,6 +194,8 @@ it('triggers dblClick callback when touch twice with in 250ms', () => {
 
     return new Promise((resolve) => {
         wrapper.simulate('touchstart');
+        expect(wrapper.state('touchCount')).toBe(1);
+
         setTimeout(() => {
             wrapper.simulate('touchstart');
             resolve();
