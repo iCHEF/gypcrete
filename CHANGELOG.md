@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+N/A
+
+## [1.1.1]
 ### Changed
 - `<Button>` now renders a `<div>` instead of `<button>` to address a Safari bug where applies faulty Flexbox rendering to `<button>` tags.
 
