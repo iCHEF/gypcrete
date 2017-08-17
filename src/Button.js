@@ -33,6 +33,7 @@ function Button({
 
     const rootClassName = classNames(className, `${bemClass}`);
 
+    // #TODO: Restore wrapper to <button> after Safari 11 goes mainstream
     return (
         <div className={rootClassName} {...otherProps}>
             {children}
