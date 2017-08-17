@@ -20,14 +20,6 @@ describe('rowComp(Button)', () => {
 });
 
 describe('Pure <Button>', () => {
-    it('renders a <button type=button>', () => {
-        const wrapper = shallow(<PureButton solid>Label</PureButton>);
-
-        expect(wrapper.children()).toHaveLength(1);
-        expect(wrapper.find('button').exists()).toBeTruthy();
-        expect(wrapper.find('button').prop('type')).toBe('button');
-    });
-
     it('handles primary modifier', () => {
         const wrapper = shallow(<PureButton primary>Label</PureButton>);
 
