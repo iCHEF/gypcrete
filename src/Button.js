@@ -34,9 +34,9 @@ function Button({
     const rootClassName = classNames(className, `${bemClass}`);
 
     return (
-        <button type="button" className={rootClassName} {...otherProps}>
+        <div className={rootClassName} {...otherProps}>
             {children}
-        </button>
+        </div>
     );
 }
 
