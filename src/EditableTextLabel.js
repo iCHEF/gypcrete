@@ -34,7 +34,8 @@ export type Props = {
  *
  * While it's in **display mode**, it's simply a `<TextLabel>`.
  * Once it goes **edit mode**, it renders an `<EditableText>` inside
- * and behaves like an `<TextInput>`.
+ * and behaves like an `<TextInput>`. It should also filter out status props when
+ * it's in edit mode.
  *
  * The “editibility” can be either controlled or uncontrolled, depending on
  * the existance of the `inEdit` prop. An uncontrolled `<EditableTextLabel>` can
@@ -188,13 +189,15 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
             inEdit, // not used here
             onDblClick, // also not used here
             onEditEnd,
+            status,
             ...labelProps,
         } = this.props;
-        const { icon, basic, align, status } = labelProps;
+        const { icon, basic, align } = labelProps;
 
         if (!this.state.inEdit && status !== STATUS.LOADING) {
             return (
                 <TextLabel
+                    status={status}
                     onDoubleClick={this.handleDoubleClick}
                     onTouchStart={this.handleTouchStart}
                     {...labelProps} />
