@@ -9,6 +9,7 @@ import { PureText } from './Text';
 import type { Props as TextProps } from './Text';
 
 export type Props = {
+    basic?: void,
     onFocus: (event?: Event) => void,
     onBlur: (event?: Event) => void,
     align: $PropertyType<TextProps, 'align'>,
@@ -20,6 +21,32 @@ export type Props = {
     className?: string, // eslint-disable-line react/require-default-props
 };
 
+/**
+ * <EditableText>
+ * ==============
+ * The visual element which stands as an input version of `<Text>`.
+ *
+ * It actually renders a `<Text>` inside, but swaps its basic row to an editable version.
+ * Since input is the main task of this element, all unknown props are expected
+ * to be passed to the underlying input. (That is, the `<EditableBasicRow>`.)
+ *
+ * It also hides status icon when the underlying input is being focused, leaving the
+ * whole space for input.
+ *
+ * Another difference between `<EditableText>` and the traditional `<Text>` is that
+ * `<EditableText>` does not take the `basic` prop as the later. Its _basic label_
+ * are supposed to be rendered by the value of input.
+ *
+ * Besides these, it does take layout props (`align` and `noGrow`) and status props.
+ *
+ * @example
+ * ```jsx
+ * <EditableText
+ *     value="Hello world"
+ *     onChange={event => console.log(event.target.value)}
+ *     status="loading" />
+ * ```
+ */
 class EditableText extends PureComponent<Props, Props, any> {
     static propTypes = {
         onFocus: PropTypes.func,
@@ -27,6 +54,7 @@ class EditableText extends PureComponent<Props, Props, any> {
         // <PureText> props,
         align: PureText.propTypes.align,
         noGrow: PureText.propTypes.noGrow,
+
         ...withStatusPropTypes,
         // status,
         // statusIcon,
