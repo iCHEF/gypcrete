@@ -5,8 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Added
-N/A
+### Changed
+- `<EditableBasicRow>` now passes all unknown props to its underlying input.
+- `<EditableTextLabel>` filters out `status` from its inner `<TextLabel>` when it's in edit mode.
 
 ## [1.1.1]
 ### Changed
