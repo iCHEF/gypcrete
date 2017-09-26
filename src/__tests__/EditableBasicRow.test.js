@@ -135,3 +135,9 @@ it('keeps input from keyboard navigation when input looks untouchable', () => {
     expect(wrapper.find('input').prop('tabIndex')).toBe(-1);
 });
 
+it('passes unknown props to its underlying input', () => {
+    const wrapper = shallow(<EditableBasicRow autoFocus id="foo-input" />);
+
+    expect(wrapper.find('input').prop('autoFocus')).toBeTruthy();
+    expect(wrapper.find('input').prop('id')).toBe('foo-input');
+});

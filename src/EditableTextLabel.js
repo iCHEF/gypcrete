@@ -201,7 +201,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
             );
         }
 
-        const layoutProps = getTextLayoutProps(align, !!icon);
+        const layoutProps = getTextLayoutProps(align, !!icon); // { align, noGrow }
         const labelIcon = icon && wrapIfNotElement(icon, { with: Icon, via: 'type' });
 
         return (
@@ -210,11 +210,9 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
 
                 <EditableText
                     defaultValue={basic}
+                    autoFocus={this.state.inEdit}
                     onBlur={this.handleInputBlur}
-                    input={{
-                        autoFocus: this.state.inEdit,
-                        onKeyDown: this.handleInputKeyDown,
-                    }}
+                    onKeyDown={this.handleInputKeyDown}
                     {...layoutProps} />
             </TextLabel>
         );

@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import type { ReactChildren } from 'react-flow-types';
 import './styles/EditableBasicRow.scss';
 
 import prefixClass from './utils/prefixClass';
@@ -30,50 +31,93 @@ type EventWithInput = Event & { currentTarget: AcceptedInput };
 
 export type Props = {
     inputTag: typeof TAG_INPUT | typeof TAG_TEXTAREA,
+
+    // <input> props
     value?: string,
     defaultValue?: string,
+    placeholder: string,
     readOnly: boolean,
     disabled: boolean,
-    status?: string | null,
-    placeholder: string,
     onChange: (event?: Event) => void,
     onFocus: (event?: Event) => void,
     onBlur: (event?: Event) => void,
-    input: { [string]: any },
+
+    // Status props
+    status?: string | null,
+    statusIcon?: ReactChildren,
+
+    // <BasicRow> props from <Text>, should ignore
+    basic?: any,
+    tag?: any,
+
+    // React prop
     className?: string, // eslint-disable-line react/require-default-props
 };
+
+/**
+ * <EditableBasicRow>
+ * ==================
+ * The core control of input in an editable component.
+ *
+ * It renders an `<input>` by default, and can be switched to a `<textarea>`
+ * for multi-lines support.
+ *
+ * The “basic text” is updated with the current value of the underlying input,
+ * and is hidden when the input is focused. That way the label can be properly
+ * truncated and appended with ellipsis (in single-line mode), and can maintain
+ * reasonable width in a CSS Flexbox.
+ *
+ * Since the input is the core concern of this component,
+ * all unknown props should be passed to the input.
+ *
+ * @example
+ * Single-line mode (default)
+ * ```jsx
+ * <EditableBasicRow
+ *     value="Text to be edited"
+ *     onChange={(event) => console.log(event.target.value)} />
+ * ```
+ *
+ * Multi-lines mode
+ * ```jsx
+ * <EditableBasicRow
+ *     inputTag="textarea"
+ *     value="Text to be edited"
+ *     onChange={(event) => console.log(event.target.value)} />
+ * ```
+ */
 
 class EditableBasicRow extends PureComponent<Props, Props, any> {
     inputNode: ?AcceptedInput;
 
     static propTypes = {
         inputTag: PropTypes.oneOf(Object.values(ROW_INPUT_TAGS)),
+        // <input> props
         value: PropTypes.string,
         defaultValue: PropTypes.string,
+        placeholder: PropTypes.string,
         readOnly: PropTypes.bool,
         disabled: PropTypes.bool,
-        status: PropTypes.string,
-        // <input type="text" /> props
-        placeholder: PropTypes.string,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
-        // Use `input` to inject props to the underlying <input>
-        input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+        // status props
+        status: PropTypes.string,
+        statusIcon: PropTypes.element,
     };
 
     static defaultProps = {
         inputTag: TAG_INPUT,
         value: undefined,
         defaultValue: undefined,
+        placeholder: 'Unset',
         readOnly: false,
         disabled: false,
-        status: undefined,
-        placeholder: 'Unset',
         onChange: () => {},
         onFocus: () => {},
         onBlur: () => {},
-        input: {},
+        status: undefined,
+        statusIcon: undefined,
     };
 
     state = {
@@ -113,20 +157,23 @@ class EditableBasicRow extends PureComponent<Props, Props, any> {
     render() {
         const {
             inputTag: InputTag,
-            value,
-            defaultValue,
+            // <input> props
+            placeholder,
             readOnly,
             disabled,
-            status,
-            // <input type="text" /> props
-            placeholder,
+            // event handlers, should not go into <input> directly
             onChange,
             onFocus,
             onBlur,
-            input: inputProps,
+            // status props
+            status, // digested by this component and should not go into <input>
+            statusIcon,
             // React props
             className,
-            ...rowProps,
+            // <BasicRow> props from <Text>, should ignore
+            basic, // eslint-disable-line react/prop-types
+            tag, // eslint-disable-line react/prop-types
+            ...inputProps,
         } = this.props;
         const { currentValue, focused } = this.state;
 
@@ -152,9 +199,9 @@ class EditableBasicRow extends PureComponent<Props, Props, any> {
 
         return (
             <BasicRow
-                {...rowProps}
+                className={rootClassName}
                 basic={basicLabel}
-                className={rootClassName}>
+                statusIcon={statusIcon}>
                 <InputTag
                     ref={(ref) => { this.inputNode = ref; }}
                     type={inputType}
