@@ -27,6 +27,40 @@ export type Props = {
     status?: string | null,
 };
 
+/**
+ * <EditableTextLabel>
+ * ===================
+ * The row component which can either in **edit mode** or **display mode**.
+ *
+ * While it's in **display mode**, it's simply a `<TextLabel>`.
+ * Once it goes **edit mode**, it renders an `<EditableText>` inside
+ * and behaves like an `<TextInput>`.
+ *
+ * The “editibility” can be either controlled or uncontrolled, depending on
+ * the existance of the `inEdit` prop. An uncontrolled `<EditableTextLabel>` can
+ * go into edit mode automatically when you double-click on it.
+ *
+ * Unlike `<TextInput>`, you should treat `<EditableTextLabel>` like a `<TextLabel>`.
+ * It does not offer direct control to the `<input>` inside.
+ *
+ * @example
+ * (Uncontrolled)
+ * ```jsx
+ * <EditableTextLabel
+ *     basic="Text to be edited"
+ *     onEditEnd={(value, event) => console.log(value, event)} />
+ * ```
+ *
+ * (Controlled)
+ * ```jsx
+ * <EditableTextLabel
+ *     basic="Text to be edited"
+ *     inEdit={this.state.inEdit}
+ *     onDblClick={() => this.setState({ inEdit: true })}
+ *     onEditEnd={(value, event) => console.log(value, event)} />
+ * ```
+ */
+
 class EditableTextLabel extends PureComponent<Props, Props, any> {
     static propTypes = {
         inEdit: PropTypes.bool,

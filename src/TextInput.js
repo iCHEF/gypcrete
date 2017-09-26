@@ -9,6 +9,24 @@ import EditableText from './EditableText';
 
 export const COMPONENT_NAME = prefixClass('text-input');
 
+/**
+ * <TextInput>
+ * ===========
+ * The row component holding an editable `<input>` as its main part.
+ * All unknown props are expected to be passed into the underlying `<input>`.
+ *
+ * What's different from other row component is: _basic text_ is not allowed
+ * on a `<TextInput>`, since that place is occupied by an `<input>`.
+ *
+ * @example
+ * ```jsx
+ * <TextInput
+ *     value="Hello world"
+ *     placeholder="(Unset)"
+ *     onChange={event => console.log(event.target.value)} />
+ * ```
+ */
+
 function TextInput(props, { align }) {
     const {
         wrapperProps,
