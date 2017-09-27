@@ -104,7 +104,7 @@ export function getTextLayoutProps(compAlign, hasIcon) {
 
 const rowComp = ({
     defaultMinified = false,
-    defaultAlign = 'left'
+    defaultAlign = LEFT,
 } = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
 

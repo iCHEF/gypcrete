@@ -27,6 +27,41 @@ export type Props = {
     status?: string | null,
 };
 
+/**
+ * <EditableTextLabel>
+ * ===================
+ * The row component which can either in **edit mode** or **display mode**.
+ *
+ * While it's in **display mode**, it's simply a `<TextLabel>`.
+ * Once it goes **edit mode**, it renders an `<EditableText>` inside
+ * and behaves like an `<TextInput>`. It should also filter out status props when
+ * it's in edit mode.
+ *
+ * The “editibility” can be either controlled or uncontrolled, depending on
+ * the existance of the `inEdit` prop. An uncontrolled `<EditableTextLabel>` can
+ * go into edit mode automatically when you double-click on it.
+ *
+ * Unlike `<TextInput>`, you should treat `<EditableTextLabel>` like a `<TextLabel>`.
+ * It does not offer direct control to the `<input>` inside.
+ *
+ * @example
+ * (Uncontrolled)
+ * ```jsx
+ * <EditableTextLabel
+ *     basic="Text to be edited"
+ *     onEditEnd={(value, event) => console.log(value, event)} />
+ * ```
+ *
+ * (Controlled)
+ * ```jsx
+ * <EditableTextLabel
+ *     basic="Text to be edited"
+ *     inEdit={this.state.inEdit}
+ *     onDblClick={() => this.setState({ inEdit: true })}
+ *     onEditEnd={(value, event) => console.log(value, event)} />
+ * ```
+ */
+
 class EditableTextLabel extends PureComponent<Props, Props, any> {
     static propTypes = {
         inEdit: PropTypes.bool,
@@ -154,20 +189,22 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
             inEdit, // not used here
             onDblClick, // also not used here
             onEditEnd,
+            status,
             ...labelProps,
         } = this.props;
-        const { icon, basic, align, status } = labelProps;
+        const { icon, basic, align } = labelProps;
 
         if (!this.state.inEdit && status !== STATUS.LOADING) {
             return (
                 <TextLabel
+                    status={status}
                     onDoubleClick={this.handleDoubleClick}
                     onTouchStart={this.handleTouchStart}
                     {...labelProps} />
             );
         }
 
-        const layoutProps = getTextLayoutProps(align, !!icon);
+        const layoutProps = getTextLayoutProps(align, !!icon); // { align, noGrow }
         const labelIcon = icon && wrapIfNotElement(icon, { with: Icon, via: 'type' });
 
         return (
@@ -176,11 +213,9 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
 
                 <EditableText
                     defaultValue={basic}
+                    autoFocus={this.state.inEdit}
                     onBlur={this.handleInputBlur}
-                    input={{
-                        autoFocus: this.state.inEdit,
-                        onKeyDown: this.handleInputKeyDown,
-                    }}
+                    onKeyDown={this.handleInputKeyDown}
                     {...layoutProps} />
             </TextLabel>
         );
