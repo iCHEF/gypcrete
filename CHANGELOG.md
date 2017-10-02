@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - `<EditableBasicRow>` now passes all unknown props to its underlying input.
 - `<EditableTextLabel>` filters out `status` from its inner `<TextLabel>` when it's in edit mode.
+- The *basic* text is now bold in `<Text>`, while the color of *aside* text goes grey.
 
 ## [1.1.1]
 ### Changed
