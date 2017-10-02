@@ -3,18 +3,30 @@
 $prefix: 'gyp';
 $prefix-state: 'gyp-state';
 
-// Compatibility with ic-framework
-$root-font-size: 16px;
+// ----------------------
+//  Common typography
+// ----------------------
+$font-size-large: 16px;
+$font-size-base:  14px;
+$font-size-small: 12px;
 
+$line-height-large: 18px;
+$line-height-base:  16px;
+$line-height-small: 14px;
+
+// ----------------------
+//  Common font weights
+// ----------------------
 $font-weight-light: 200;
 $font-weight-base: 400;
 $font-weight-bold: 600;
 
-$basic-text-font-size: 16px;
-$basic-text-line-height: 18px;
-$aside-text-font-size: 12px;
-$aside-text-line-height: 14px;
+// Compatibility with ic-framework
+$root-font-size: 16px;
 
+// ----------------------
+//  Row components
+// ----------------------
 $component-flex-basis: auto;
 $component-base-font-size: 16px;
 $component-base-height: 48px;
@@ -23,11 +35,20 @@ $component-padding-horizontal: 4px;
 
 $header-padding: 4px;
 
+$element-base-height: 32px;
 $row-base-height: $component-base-height;
 
-$element-base-height: 32px;
+// ----------------------
+//  <Text>
+// ----------------------
+$basic-text-font-size: $font-size-large;
+$basic-text-line-height: $line-height-large;
+$aside-text-font-size: $font-size-base;
+$aside-text-line-height: $line-height-base;
 
-$tag-font-size: 12px;
+$header-padding: 4px;
+
+$tag-font-size: $font-size-small;
 $tag-border-radius: 6px;
 $tag-vertical-padding: 2px;
 $tag-horizontal-padding: 4px;
