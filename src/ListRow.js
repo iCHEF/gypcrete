@@ -73,6 +73,22 @@ class ListRow extends PureComponent<Props, Props, any> {
         };
     }
 
+    renderFooter() {
+        const { desc, errorMsg } = this.props;
+        const hasFooter = desc || errorMsg;
+
+        if (!hasFooter) {
+            return null;
+        }
+
+        return (
+            <div className={BEM.footer.toString()}>
+                {wrapIfNotElement(errorMsg, { with: 'p' })}
+                {wrapIfNotElement(desc, { with: 'p' })}
+            </div>
+        );
+    }
+
     render() {
         const {
             highlight,
@@ -97,11 +113,7 @@ class ListRow extends PureComponent<Props, Props, any> {
                     {children}
                 </div>
 
-                <div className={BEM.footer.toString()}>
-                    {wrapIfNotElement(errorMsg, { with: 'p' })}
-                    {wrapIfNotElement(desc, { with: 'p' })}
-                </div>
-
+                {this.renderFooter()}
                 {nestedList}
             </li>
         );
