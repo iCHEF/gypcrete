@@ -30,6 +30,17 @@ $component: #{$prefix}-list-row;
         }
     }
 
+    &__footer {
+        font-size: $list-row-footer-font-size;
+        line-height: $list-row-footer-line-height;
+        padding-top: $list-row-footer-padding-top;
+        padding-bottom: $list-row-footer-padding-bottom;
+
+        p {
+            margin: 0 0 $list-row-footer-padding-bottom;
+        }
+    }
+
     // --------------------
     //  Modifiers
     // --------------------
