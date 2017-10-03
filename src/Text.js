@@ -50,6 +50,7 @@ export type Props = {
     aside?: ReactChildren,
     basicRow: AnyReactElement,
     noGrow: boolean,
+    bold: boolean,
     errorMsg?: string,
     statusIcon?: ReactChildren, // #FIXME: use type from withStatus()
     basic: $PropertyType<BasicRowProps, 'basic'>,
@@ -65,6 +66,7 @@ class Text extends PureComponent {
         aside: PropTypes.node,
         basicRow: PropTypes.element,
         noGrow: PropTypes.bool,
+        bold: PropTypes.bool,
 
         ...withStatusPropTypes,
         // errorMsg: string,
@@ -81,6 +83,7 @@ class Text extends PureComponent {
         aside: undefined,
         basicRow: <BasicRow />,
         noGrow: false,
+        bold: false,
         errorMsg: undefined,
         statusIcon: undefined,
         ...BasicRow.defaultProps,
@@ -125,11 +128,12 @@ class Text extends PureComponent {
     }
 
     render() {
-        const { align, noGrow, className } = this.props;
+        const { align, noGrow, bold, className } = this.props;
 
         const bemClass = BEM.root
             .modifier(align)
-            .modifier('no-grow', noGrow);
+            .modifier('no-grow', noGrow)
+            .modifier('bold', bold);
 
         const rootClassName = classNames(bemClass.toString(), className);
 

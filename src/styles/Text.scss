@@ -31,7 +31,6 @@
     &__basic {
         font-size: inherit;
         line-height: inherit;
-        font-weight: $font-weight-bold;
     }
 
     &__aside {
@@ -52,6 +51,12 @@
 .#{$prefix}-text {
     &--no-grow {
         flex-grow: 0;
+    }
+
+    &--bold {
+        .#{$prefix}-text__basic {
+            font-weight: $font-weight-bold;
+        }
     }
 
     &--center {

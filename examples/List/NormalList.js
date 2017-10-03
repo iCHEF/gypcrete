@@ -21,6 +21,7 @@ function NormalList() {
                     status="error"
                     errorMsg="Row error message">
                     <TextLabel
+                        bold
                         icon="tickets"
                         basic="Hello World"
                         aside="Component aside" />
