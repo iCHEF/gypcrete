@@ -8,8 +8,11 @@ import type { Props as StatusIconProps } from './StatusIcon';
 import { statusPropTypes } from './mixins/withStatus';
 
 import prefixClass from './utils/prefixClass';
+import getStateClassnames from './utils/getStateClassnames';
 import icBEM from './utils/icBEM';
 import wrapIfNotElement from './utils/wrapIfNotElement';
+
+import { STATUS_CODE } from './StatusIcon';
 
 import './styles/ListRow.scss';
 
@@ -105,7 +108,11 @@ class ListRow extends PureComponent<Props, Props, any> {
         } = this.props;
 
         const bemClass = BEM.root.modifier('highlight', highlight);
-        const rootClassName = classNames(bemClass.toString(), className);
+
+        const stateClass = getStateClassnames({
+            error: status === STATUS_CODE.ERROR,
+        });
+        const rootClassName = classNames(bemClass.toString(), stateClass, className);
 
         return (
             <li className={rootClassName} {...wrapperProps}>
