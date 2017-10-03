@@ -25,7 +25,7 @@ $component: #{$prefix}-list;
 
     &__desc {
         padding-top: rem(8px);
-        margin-right: rem($list-row-left-padding);
+        margin-right: rem($list-row-padding-horizontal);
     }
 
     // --------------------
@@ -38,7 +38,7 @@ $component: #{$prefix}-list;
 
         .#{$component}__title,
         .#{$component}__desc {
-            margin-left: rem($list-row-left-padding);
+            margin-left: rem($list-row-padding-horizontal);
         }
     }
 

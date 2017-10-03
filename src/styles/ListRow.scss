@@ -2,20 +2,31 @@
 $component: #{$prefix}-list-row;
 
 .#{$component} {
-    padding-left: $list-row-left-padding;
+    min-height: $row-base-height;
+    padding: 0 $list-row-padding-horizontal;
+    box-sizing: border-box;
 
     // --------------------
     //  Elements
     // --------------------
     &__body {
-        min-height: $row-base-height;
         display: flex;
         align-items: flex-start;
-        border-bottom: 1px solid $c-divider-row;
+        padding: $list-row-padding-vertical 0;
+        // border-bottom: 1px solid $c-divider-row;
+        box-shadow: inset 0 -1px 0 $c-divider-row;
 
         // Styles inside List
         .#{$prefix}-list--setting li:last-of-type > & {
             border-bottom: none;
+        }
+
+        & > :first-child {
+            margin-left: -$component-padding;
+        }
+
+        & > :last-child {
+            margin-right: -$component-padding;
         }
     }
 
