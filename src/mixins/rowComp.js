@@ -142,8 +142,15 @@ const rowComp = ({
             disabled: false,
 
             status: null,
-            statusOptions: {},
+            statusOptions: null,
             errorMsg: null,
+        };
+
+        static contextTypes = {
+            ...statusPropTypes,
+            // status,
+            // statusOptions,
+            // errorMsg,
         };
 
         static childContextTypes = {
@@ -157,7 +164,12 @@ const rowComp = ({
         getChildContext() {
             const { align, status, statusOptions, errorMsg } = this.props;
 
-            return { align, status, statusOptions, errorMsg };
+            return {
+                status: status || this.context.status,
+                statusOptions: statusOptions || this.context.statusOptions,
+                errorMsg,
+                align,
+            };
         }
 
         renderIconElement() {
