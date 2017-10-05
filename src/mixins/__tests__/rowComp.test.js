@@ -23,6 +23,7 @@ it('renders without crashing', () => {
 it('renders <Text> into wrapped component', () => {
     const wrapper = shallow(
         <RowCompFoo
+            bold
             basic="Basic text"
             tag="Tag"
             aside="Aside text" />
@@ -30,6 +31,7 @@ it('renders <Text> into wrapped component', () => {
     const textWrapper = wrapper.find(Foo).shallow().find(Text);
 
     expect(textWrapper.exists()).toBeTruthy();
+    expect(textWrapper.prop('bold')).toBeTruthy();
     expect(textWrapper.prop('basic')).toBe('Basic text');
     expect(textWrapper.prop('tag')).toBe('Tag');
     expect(textWrapper.prop('aside')).toBe('Aside text');
