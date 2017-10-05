@@ -20,6 +20,7 @@ $component: #{$prefix}-list;
     }
 
     &__title {
+        font-weight: $font-weight-bold;
         padding: rem(12px) 0 rem(4px);
     }
 
