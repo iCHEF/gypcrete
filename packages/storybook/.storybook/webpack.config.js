@@ -6,67 +6,67 @@ const autoprefixer = require('autoprefixer');
 const genDefaultConfig =
     require('@storybook/react/dist/server/config/defaults/webpack.config.js');
 
+const includePath = path.resolve(__dirname, '../..'); // gypcrete/packages
+const excludePath = /node_modules/;
+
 module.exports = (defaultConfig, configType) => {
     const storybookConfig = genDefaultConfig(defaultConfig, configType);
 
     // Inject gypcrete common styles into preview entry
     storybookConfig.entry.preview.push(
-        path.resolve(__dirname, '../src/styles/index.scss')
+        '@ichef/gypcrete/src/styles/index.scss'
     );
 
-    // Loaders
-    storybookConfig.module.rules.push(
+    // Override loaders to control include paths.
+    storybookConfig.module.rules = [
+        {
+            test: /\.jsx?$/,
+            include: includePath,
+            exclude: excludePath,
+            use: ['babel-loader'],
+        },
         {
             test: /\.scss$/,
-            include: [
-                path.resolve(__dirname, '../src')
-            ],
+            include: includePath,
+            exclude: excludePath,
             use: [
-                {
-                    loader: 'style-loader'
-                },
+                'style-loader',
                 {
                     loader: 'css-loader',
                     options: {
-                        importLoaders: 1
-                    }
+                        importLoaders: 1,
+                    },
                 },
                 {
                     loader: 'postcss-loader',
                     options: {
-                        plugins: () => [autoprefixer]
-                    }
+                        plugins: () => [autoprefixer],
+                    },
                 },
                 {
                     loader: 'sass-loader',
                     options: {
-                        outputStyle: 'expanded'
+                        outputStyle: 'expanded',
                     }
-                }
-            ]
+                },
+            ],
         },
         {
-            test: /\.jsx?$/,
-            include: [
-                path.resolve(__dirname, '../src'),
-                path.resolve(__dirname, '../examples')
-            ],
-            enforce: 'pre',
-            loader: 'eslint-loader',
-            options: {
-                /**
-                 * Report every eslint error as a warning.
-                 *
-                 * This prevents Webpack dev-server from blocking HMR updates only because
-                 * eslint fails. `create-react-app` also chooses to use only warnings,
-                 * since `eslint-loader` has already make warnings “very visible”.
-                 *
-                 * Ref: https://git.io/vyu8d
-                 */
-                emitWarning: true
-            }
-        }
-    );
+            test: /\.json$/,
+            include: includePath,
+            exclude: excludePath,
+            loader: require.resolve('json-loader'),
+        },
+        {
+            test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+            include: includePath,
+            exclude: excludePath,
+            loader: require.resolve('file-loader'),
+            query: {
+                name: 'static/media/[name].[hash:8].[ext]',
+            },
+        },
+    ];
 
     // webpack-dev-server
     storybookConfig.devServer = {
