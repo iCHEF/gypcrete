@@ -2,11 +2,7 @@
   "name": "@ichef/gypcrete",
   "version": "1.2.0",
   "description": "iCHEF web components library, built with React.",
-  "main": "lib/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iCHEF/gypcrete.git"
-  },
+  "repository": "iCHEF/gypcrete",
   "contributors": [
     "CJies Tan (https://github.com/cjies)",
     "Teng-hao Chang (https://github.com/zhusee2)"
@@ -20,17 +16,49 @@
     "node": ">= 6.9.1",
     "npm": ">= 3.10.10"
   },
+  "main": "lib/index.js",
+  "files": [
+      "dist/",
+      "lib/",
+      "es5/",
+      "README.md",
+      "package.json"
+  ],
   "scripts": {
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
     "build:dist": "webpack --config ./configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
     "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
+
     "flow": "flow",
     "lint": "npm run flow && npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint --ignore-path=configs/.eslintignore ./ && echo \"eslint: no lint errors\"",
     "lint:stylelint": "stylelint **/*.scss && echo \"stylelint: no lint errors\"",
     "test": "jest ./src --config=configs/jest.config.json --coverage",
+
     "clean": "rm -rf ./dist ./lib ./es5 ./deploy ./public",
     "deploy": "npm run clean && npm run build && sh ./scripts/deploy.sh"
+  },
+
+  "peerDependencies": {
+    "babel-runtime": "^6.18.0",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "prop-types": "^15.5.8"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "document-offset": "^1.0.4",
+    "keycode": "^2.1.9",
+    "react-flow-types": "^0.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "eslint": "^3.17.1",
+    "eslint-plugin-flowtype": "^2.32.1",
+    "flow-bin": "^0.47.0",
+    "jest": "^19.0.2",
+    "stylelint": "^7.10.1",
+    "webpack": "^2.2.1"
   }
 }
