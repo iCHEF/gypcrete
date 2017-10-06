@@ -31,13 +31,16 @@
     &__basic {
         font-size: inherit;
         line-height: inherit;
-        font-weight: $font-weight-bold;
     }
 
     &__aside {
         color: $c-text-aside;
         font-size: rem($aside-text-font-size);
         line-height: rem($aside-text-line-height);
+
+        .#{$prefix}-state-error & {
+            color: inherit;
+        }
     }
 }
 
@@ -48,6 +51,12 @@
 .#{$prefix}-text {
     &--no-grow {
         flex-grow: 0;
+    }
+
+    &--bold {
+        .#{$prefix}-text__basic {
+            font-weight: $font-weight-bold;
+        }
     }
 
     &--center {

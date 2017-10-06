@@ -20,12 +20,13 @@ $component: #{$prefix}-list;
     }
 
     &__title {
+        font-weight: $font-weight-bold;
         padding: rem(12px) 0 rem(4px);
     }
 
     &__desc {
         padding-top: rem(8px);
-        margin-right: rem($list-row-left-padding);
+        margin-right: rem($list-row-padding-horizontal);
     }
 
     // --------------------
@@ -38,7 +39,7 @@ $component: #{$prefix}-list;
 
         .#{$component}__title,
         .#{$component}__desc {
-            margin-left: rem($list-row-left-padding);
+            margin-left: rem($list-row-padding-horizontal);
         }
     }
 

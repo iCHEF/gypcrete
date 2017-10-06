@@ -41,7 +41,7 @@ import '../styles/RowComp.scss';
 import getComponentName from '../utils/getComponentName';
 import icBEM from '../utils/icBEM';
 import prefixClass from '../utils/prefixClass';
-import prefixState from '../utils/prefixState';
+import getStateClassnames from '../utils/getStateClassnames';
 import { statusPropTypes } from './withStatus';
 
 import Icon from '../Icon';
@@ -52,13 +52,6 @@ import { STATUS_CODE } from '../StatusIcon';
 export const COMPONENT_NAME = prefixClass('row-comp');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const ROW_COMP_BODY = ROOT_BEM.element('body');
-
-// State class names
-const CLASS_ACTIVE = prefixState('active');
-const CLASS_HIGHLIGHT = prefixState('highlight');
-const CLASS_ERROR = prefixState('error');
-const CLASS_DISABLED = prefixState('disabled');
-const CLASS_UNTOUCHABLE = prefixState('untouchable');
 
 // Alignments
 const LEFT = 'left';
@@ -123,6 +116,7 @@ const rowComp = ({
             basic: PropTypes.node,
             aside: PropTypes.node,
             tag: PropTypes.node,
+            bold: PropTypes.bool,
 
             // State props
             active: PropTypes.bool,
@@ -143,14 +137,22 @@ const rowComp = ({
             basic: null,
             aside: null,
             tag: null,
+            bold: false,
 
             active: false,
             highlight: false,
             disabled: false,
 
             status: null,
-            statusOptions: {},
+            statusOptions: null,
             errorMsg: null,
+        };
+
+        static contextTypes = {
+            ...statusPropTypes,
+            // status,
+            // statusOptions,
+            // errorMsg,
         };
 
         static childContextTypes = {
@@ -164,7 +166,12 @@ const rowComp = ({
         getChildContext() {
             const { align, status, statusOptions, errorMsg } = this.props;
 
-            return { align, status, statusOptions, errorMsg };
+            return {
+                status: status || this.context.status,
+                statusOptions: statusOptions || this.context.statusOptions,
+                errorMsg,
+                align,
+            };
         }
 
         renderIconElement() {
@@ -186,8 +193,9 @@ const rowComp = ({
                 basic,
                 aside,
                 tag,
+                bold,
             } = this.props;
-            const textProps = { basic, aside, tag };
+            const textProps = { basic, aside, tag, bold };
             const textLayoutProps = getTextLayoutProps(align, !!icon);
 
             // Render icon element
@@ -211,6 +219,7 @@ const rowComp = ({
                 basic,
                 aside,
                 tag,
+                bold,
 
                 active,
                 highlight,
@@ -231,13 +240,14 @@ const rowComp = ({
                 .modifier('minified', minified)
                 .modifier(align);
 
-            const wrapperClassName = classNames(className, `${bemClass}`, {
-                [CLASS_ACTIVE]: active,
-                [CLASS_HIGHLIGHT]: highlight,
-                [CLASS_ERROR]: status === STATUS_CODE.ERROR,
-                [CLASS_DISABLED]: disabled,
-                [CLASS_UNTOUCHABLE]: status === STATUS_CODE.LOADING,
+            const stateClassNames = getStateClassnames({
+                active,
+                highlight,
+                disabled,
+                error: status === STATUS_CODE.ERROR,
+                untouchable: status === STATUS_CODE.LOADING,
             });
+            const wrapperClassName = classNames(className, stateClassNames, `${bemClass}`);
 
             return (
                 <WrappedComponent className={wrapperClassName} {...otherProps}>
