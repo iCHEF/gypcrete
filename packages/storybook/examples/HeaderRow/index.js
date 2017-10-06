@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import HeaderRow from 'src/HeaderRow';
+import HeaderRow from '@ichef/gypcrete/src/HeaderRow';
 
 import BasicUsage from './BasicUsage';
 

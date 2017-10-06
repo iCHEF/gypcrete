@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import Checkbox from 'src/Checkbox';
+import Checkbox from '@ichef/gypcrete/src/Checkbox';
 
 class CheckboxWithIndeterminateExample extends PureComponent {
     state = {

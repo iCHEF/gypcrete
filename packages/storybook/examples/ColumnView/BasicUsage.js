@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ColumnView from 'src/ColumnView';
-import HeaderRow from 'src/HeaderRow';
-import TextLabel from 'src/TextLabel';
+import ColumnView from '@ichef/gypcrete/src/ColumnView';
+import HeaderRow from '@ichef/gypcrete/src/HeaderRow';
+import TextLabel from '@ichef/gypcrete/src/TextLabel';
 
-import List from 'src/List';
-import ListRow from 'src/ListRow';
+import List from '@ichef/gypcrete/src/List';
+import ListRow from '@ichef/gypcrete/src/ListRow';
 
 function DemoRow({ label }) {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Icon from 'src/Icon';
+import Icon from '@ichef/gypcrete/src/Icon';
 
 function LargeIconExample() {
     return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import Text, { PureText } from 'src/Text';
+import Text, { PureText } from '@ichef/gypcrete/src/Text';
 
 import BasicTextExample from './BasicText';
 import EllipsisExample from './Ellipsis';

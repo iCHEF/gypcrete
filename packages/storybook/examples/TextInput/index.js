@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import TextInput, { PureTextInput } from 'src/TextInput';
+import TextInput, { PureTextInput } from '@ichef/gypcrete/src/TextInput';
 
 import BasicUsage from './BasicUsage';
 import WithStatus from './WithStatus';

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
-import Popup from 'src/Popup';
-import Button from 'src/Button';
+import Popup from '@ichef/gypcrete/src/Popup';
+import Button from '@ichef/gypcrete/src/Button';
 
 class EscapablePopupExample extends PureComponent {
     state ={

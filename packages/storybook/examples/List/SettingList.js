@@ -1,12 +1,12 @@
 import React from 'react';
 
-import List from 'src/List';
-import ListRow from 'src/ListRow';
+import List from '@ichef/gypcrete/src/List';
+import ListRow from '@ichef/gypcrete/src/ListRow';
 
-import Button from 'src/Button';
-import Icon from 'src/Icon';
-import TextLabel from 'src/TextLabel';
-import TextInput from 'src/TextInput';
+import Button from '@ichef/gypcrete/src/Button';
+import Icon from '@ichef/gypcrete/src/Icon';
+import TextLabel from '@ichef/gypcrete/src/TextLabel';
+import TextInput from '@ichef/gypcrete/src/TextInput';
 
 import DebugBox from '../DebugBox';
 

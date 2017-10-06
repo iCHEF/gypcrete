@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IconCheckbox from 'src/IconCheckbox';
+import IconCheckbox from '@ichef/gypcrete/src/IconCheckbox';
 import FlexRow from '../FlexRow';
 
 function IconCheckboxWithStatusExample() {

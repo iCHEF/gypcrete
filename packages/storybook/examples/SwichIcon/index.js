@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import SwitchIcon from 'src/SwitchIcon';
+import SwitchIcon from '@ichef/gypcrete/src/SwitchIcon';
 import BasicUsage from './BasicUsage';
 
 storiesOf('SwitchIcon', module)

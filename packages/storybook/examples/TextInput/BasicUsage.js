@@ -1,7 +1,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import TextInput from 'src/TextInput';
+import TextInput from '@ichef/gypcrete/src/TextInput';
 import DebugBox from '../DebugBox';
 
 function BasicUsage() {

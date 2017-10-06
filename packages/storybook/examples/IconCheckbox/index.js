@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import IconCheckbox from 'src/IconCheckbox';
+import IconCheckbox from '@ichef/gypcrete/src/IconCheckbox';
 
 import BasicIconCheckboxExample from './BasicIconCheckbox';
 import IconCheckboxWithStatusExample from './IconCheckboxWithStatus';

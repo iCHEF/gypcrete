@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { action, decorateAction } from '@storybook/addon-actions';
 
-import EditableTextLabel from 'src/EditableTextLabel';
+import EditableTextLabel from '@ichef/gypcrete/src/EditableTextLabel';
 import DebugBox from '../DebugBox';
 
 /**

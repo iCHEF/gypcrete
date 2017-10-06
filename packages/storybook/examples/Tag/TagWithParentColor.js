@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Tag from 'src/Tag';
+import Tag from '@ichef/gypcrete/src/Tag';
 
 function TagWithParentColorExample() {
     return (

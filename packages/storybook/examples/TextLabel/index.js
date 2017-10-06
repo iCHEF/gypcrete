@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import TextLabel, { PureTextLabel } from 'src/TextLabel';
+import TextLabel, { PureTextLabel } from '@ichef/gypcrete/src/TextLabel';
 
 import BasicTextLabelExample from './BasicTextLabel';
 import TextLabelWithStatusExample from './TextLabelWithStatus';

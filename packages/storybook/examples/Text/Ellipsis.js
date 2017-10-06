@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Text from 'src/Text';
-import TextEllipsis from 'src/TextEllipsis';
+import Text from '@ichef/gypcrete/src/Text';
+import TextEllipsis from '@ichef/gypcrete/src/TextEllipsis';
 import DebugBox from '../DebugBox';
 
 const LONG_LABEL =

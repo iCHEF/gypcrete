@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Text from 'src/Text';
-import StatusIcon from 'src/StatusIcon';
+import Text from '@ichef/gypcrete/src/Text';
+import StatusIcon from '@ichef/gypcrete/src/StatusIcon';
 
 import DebugBox from '../DebugBox';
 

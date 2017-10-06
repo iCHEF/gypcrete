@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import Tag from 'src/Tag';
+import Tag from '@ichef/gypcrete/src/Tag';
 
 import BasicTagExample from './BasicTag';
 import TagWithParentColorExample from './TagWithParentColor';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TextLabel from 'src/TextLabel';
+import TextLabel from '@ichef/gypcrete/src/TextLabel';
 import DebugBox from '../DebugBox';
 
 function TextLabelWithStatusExample() {

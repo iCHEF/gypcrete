@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { action } from '@storybook/addon-actions';
 
-import InfiniteScroll from 'src/InfiniteScroll';
+import InfiniteScroll from '@ichef/gypcrete/src/InfiniteScroll';
 
 const defaultItemsCount = 20;
 

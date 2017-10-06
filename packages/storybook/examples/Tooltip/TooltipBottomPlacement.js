@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Tooltip from 'src/Tooltip';
+import Tooltip from '@ichef/gypcrete/src/Tooltip';
 
 function TooltipBottomPlacementExample() {
     return (

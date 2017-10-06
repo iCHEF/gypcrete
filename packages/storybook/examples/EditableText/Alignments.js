@@ -1,6 +1,6 @@
 import React from 'react';
 
-import EditableText from 'src/EditableText';
+import EditableText from '@ichef/gypcrete/src/EditableText';
 import DebugBox from '../DebugBox';
 
 function Alignments() {

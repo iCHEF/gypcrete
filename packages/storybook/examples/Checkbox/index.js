@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import Checkbox, { PureCheckbox } from 'src/Checkbox';
+import Checkbox, { PureCheckbox } from '@ichef/gypcrete/src/Checkbox';
 
 import BasicCheckboxExample from './BasicCheckbox';
 import CheckboxWithIndeterminateExample from './CheckboxWithIndeterminate';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from 'src/Button';
+import Button from '@ichef/gypcrete/src/Button';
 import FlexRow from '../FlexRow';
 
 function SolidButtonExample() {

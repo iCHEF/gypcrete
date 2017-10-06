@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import StatusIcon from 'src/StatusIcon';
+import StatusIcon from '@ichef/gypcrete/src/StatusIcon';
 
 import BasicStatusIconExample from './BasicStatusIcon';
 import CornerStatusIconExample from './CornerStatusIcon';

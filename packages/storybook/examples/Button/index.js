@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import Button, { PureButton } from 'src/Button';
+import Button, { PureButton } from '@ichef/gypcrete/src/Button';
 
 import BasicButtonExample from './BasicButton';
 import SolidButtonExample from './SolidButton';

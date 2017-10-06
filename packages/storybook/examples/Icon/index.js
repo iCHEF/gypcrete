@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import Icon from 'src/Icon';
+import Icon from '@ichef/gypcrete/src/Icon';
 
 import BasicIconsSet from './BasicIcons';
 import PaymentIconsSet from './PaymentIcons';

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import Popup, { EscapablePopup, PurePopup } from 'src/Popup';
+import Popup, { EscapablePopup, PurePopup } from '@ichef/gypcrete/src/Popup';
 
 import BasicPopupExample from './BasicPopup';
 import EscapablePopupExample from './EscapablePopup';

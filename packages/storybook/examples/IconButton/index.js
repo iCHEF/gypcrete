@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import IconButton from 'src/IconButton';
+import IconButton from '@ichef/gypcrete/src/IconButton';
 
 import BasicIconButtonExample from './BasicIconButton';
 import IconButtonWithStatusExample from './IconButtonWithStatus';

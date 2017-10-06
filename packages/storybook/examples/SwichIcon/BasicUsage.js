@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SwitchIcon from 'src/SwitchIcon';
+import SwitchIcon from '@ichef/gypcrete/src/SwitchIcon';
 
 function BasicUsage() {
     return (

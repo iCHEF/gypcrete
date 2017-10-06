@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Switch, { PureSwitch } from 'src/Switch';
+import Switch, { PureSwitch } from '@ichef/gypcrete/src/Switch';
 
 import BasicUsage from './BasicUsage';
 import ControlledInput from './ControlledInput';

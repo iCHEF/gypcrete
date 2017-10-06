@@ -1,9 +1,9 @@
 import React from 'react';
 
-import HeaderRow from 'src/HeaderRow';
-import Button from 'src/Button';
-import TextLabel from 'src/TextLabel';
-import TextEllipsis from 'src/TextEllipsis';
+import HeaderRow from '@ichef/gypcrete/src/HeaderRow';
+import Button from '@ichef/gypcrete/src/Button';
+import TextLabel from '@ichef/gypcrete/src/TextLabel';
+import TextEllipsis from '@ichef/gypcrete/src/TextEllipsis';
 
 import DebugBox from '../DebugBox';
 

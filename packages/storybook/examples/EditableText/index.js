@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import EditableText from 'src/EditableText';
+import EditableText from '@ichef/gypcrete/src/EditableText';
 
 import BasicUsage from './BasicUsage';
 import Alignments from './Alignments';

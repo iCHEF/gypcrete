@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // For props table
-import Tooltip from 'src/Tooltip';
+import Tooltip from '@ichef/gypcrete/src/Tooltip';
 
 import BasicTooltipExample from './BasicTooltip';
 import TooltipBottomPlacementExample from './TooltipBottomPlacement';
