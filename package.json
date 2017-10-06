@@ -20,15 +20,9 @@
       "packages/*"
   ],
   "scripts": {
-    "start": "npm run storybook",
-    "storybook": "BABEL_ENV=storybook start-storybook -p 8100 -c .storybook",
-    "ghpages": "npm run clean && npm run build:storybook && sh ./scripts/ghpages.sh"
+    "start": "lerna run storybook --stream"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.0.0",
-    "@storybook/addon-info": "^3.0.0",
-    "@storybook/addon-options": "3.0.0",
-    "@storybook/react": "3.0.0",
     "autoprefixer": "^6.7.6",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
