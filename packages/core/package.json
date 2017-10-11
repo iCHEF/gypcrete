@@ -29,10 +29,7 @@
     "build:dist": "webpack --config ./configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
     "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
-
     "flow": "flow",
-    "test": "jest ./src --config=configs/jest.config.json --coverage",
-
     "clean": "rm -rf ./dist ./lib ./es5 ./deploy ./public",
     "deploy": "npm run clean && npm run build && sh ./scripts/deploy.sh"
   },
