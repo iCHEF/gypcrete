@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.0]
+### Breaking changes
+- `<EditableBasicRow>` now passes all unknown props to its underlying input.
+
 ### Style changes
 - Fix `<body>` to use `system-ui` font family.
 - `<List>` title is now bold.
@@ -16,7 +20,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   * 4px + 4px vertical padding of `<ListRow>`
 
 ### Component changes
-- `<EditableBasicRow>` now passes all unknown props to its underlying input.
 - `<EditableTextLabel>` filters out `status` from its inner `<TextLabel>` when it's in edit mode.
 - `<Text>` adds a `bold` prop to render its *basic text* in bolder font.
 - `<ListRow>` now has its own `desc` and `errorMsg`. It also takes status props, but mostly pass to children via context for now.
