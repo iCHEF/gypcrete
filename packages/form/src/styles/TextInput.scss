@@ -1,0 +1,48 @@
+$component-name: 'gyp-form-text-input';
+
+%main-text {
+    color: #000;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 700;
+}
+
+%aside-text {
+    color: #4d4d4d;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+}
+
+.#{$component-name} {
+    ::placeholder {
+        color: rgba(0, 0, 0, .3);
+    }
+
+    // Elements
+    &__label {
+        @extend %main-text;
+    }
+
+    &__input {
+        @extend %aside-text;
+
+        color: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        border: none;
+        padding: 0;
+        outline: none;
+    }
+
+    // Modifiers
+    &--focused {
+        .#{$component-name}__label {
+            @extend %aside-text;
+        }
+
+        .#{$component-name}__input {
+            @extend %main-text;
+        }
+    }
+}

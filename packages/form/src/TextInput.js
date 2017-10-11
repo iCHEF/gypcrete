@@ -9,10 +9,13 @@ import {
 import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
 import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
 
+import './styles/TextInput.scss';
+
 export const COMPONENT_NAME = prefixClass('form-text-input');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
     root: ROOT_BEM,
+    label: ROOT_BEM.element('label'),
     input: ROOT_BEM.element('input'),
 };
 
@@ -33,7 +36,8 @@ class TextInput extends React.PureComponent {
         return (
             <input
                 type="text"
-                value="foo"
+                defaultValue="foo"
+                placeholder="Unset"
                 className={BEM.input.toString()}
                 onFocus={this.handleInputFocus}
                 onBlur={this.handleInputBlur} />
@@ -49,11 +53,16 @@ class TextInput extends React.PureComponent {
             .modifier('focused', this.state.focused);
         const rootClassName = classNames(bemClass.toString(), className);
 
+        const keyLabel = (
+            <span className={BEM.label.toString()}>
+                Key label
+            </span>
+        );
+
         return (
             <ListRow className={rootClassName}>
                 <TextLabel
-                    bold
-                    basic={`${this.state.focused}`}
+                    basic={keyLabel}
                     aside={this.renderInput()} />
             </ListRow>
         );
