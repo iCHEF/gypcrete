@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import {
@@ -20,33 +21,52 @@ export const BEM = {
 };
 
 class TextInput extends React.PureComponent {
+    static propTypes = {
+        label: PropTypes.node.isRequired,
+        placeholder: PropTypes.string,
+        onFocus: PropTypes.func,
+        onBlur: PropTypes.func,
+    };
+
+    static defaultProps = {
+        placeholder: 'Unset',
+        onFocus: () => {},
+        onBlur: () => {},
+    };
+
     state = {
         focused: false,
     };
 
-    handleInputFocus = () => {
+    handleInputFocus = (event) => {
         this.setState({ focused: true });
+        this.props.onFocus(event);
     }
 
-    handleInputBlur = () => {
+    handleInputBlur = (event) => {
         this.setState({ focused: false });
+        this.props.onBlur(event);
     }
 
-    renderInput() {
+    renderInput(inputProps = {}) {
         return (
             <input
                 type="text"
-                defaultValue="foo"
-                placeholder="Unset"
                 className={BEM.input.toString()}
                 onFocus={this.handleInputFocus}
-                onBlur={this.handleInputBlur} />
+                onBlur={this.handleInputBlur}
+                {...inputProps} />
         );
     }
 
     render() {
         const {
+            label,
+            onFocus,
+            onBlur,
+            // React props
             className,
+            ...inputProps,
         } = this.props;
 
         const bemClass = BEM.root
@@ -55,7 +75,7 @@ class TextInput extends React.PureComponent {
 
         const keyLabel = (
             <span className={BEM.label.toString()}>
-                Key label
+                {label}
             </span>
         );
 
@@ -63,7 +83,7 @@ class TextInput extends React.PureComponent {
             <ListRow className={rootClassName}>
                 <TextLabel
                     basic={keyLabel}
-                    aside={this.renderInput()} />
+                    aside={this.renderInput(inputProps)} />
             </ListRow>
         );
     }
