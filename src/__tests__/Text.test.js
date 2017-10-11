@@ -100,4 +100,10 @@ describe('Pure <Text>', () => {
         wrapper.setProps({ aside: 'Aside' });
         expect(wrapper.childAt(1).text()).toBe('Error');
     });
+
+    it('can render in bold mode', () => {
+        const wrapper = shallow(<PureText bold basic="foo" />);
+
+        expect(wrapper.hasClass('gyp-text--bold')).toBeTruthy();
+    });
 });

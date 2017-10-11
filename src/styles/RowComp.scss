@@ -1,7 +1,6 @@
 @import "./mixins";
 
 .#{$prefix}-row-comp {
-    min-height: rem($component-base-height);
     font-size: rem($basic-text-font-size);
     line-height: rem($basic-text-line-height);
     box-sizing: border-box;
@@ -22,7 +21,7 @@
     @at-root {
         &,
         button#{&} {
-            padding: rem($component-padding-vertical) rem($component-padding-horizontal);
+            padding: rem($component-padding);
         }
     }
 

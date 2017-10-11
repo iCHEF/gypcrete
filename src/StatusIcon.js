@@ -23,8 +23,8 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 const ICON_HIDE_TIMEOUT = 2 * 1000;
 
 export type Props = {
-    status?: typeof LOADING | typeof SUCCESS | typeof ERROR,
-    position: typeof INLINE | typeof CORNER,
+    status?: 'loading' | 'success' | 'error',
+    position: 'inline' | 'corner',
     autohide: boolean,
 };
 
