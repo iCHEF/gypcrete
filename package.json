@@ -20,6 +20,7 @@
       "packages/*"
   ],
   "scripts": {
+    "prepublish": "lerna run prepublish",
     "start": "lerna run storybook --stream",
     "release": "lerna publish --yes --repo-version $PACKAGE_VERSION && lerna run ghpages",
     "canary": "lerna publish -c --yes",
