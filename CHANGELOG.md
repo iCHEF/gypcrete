@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- Gypcrete is now a multi-package mono-repo built on Lerna.
+  It's currently split into:
+    * **core** (publishes to `@ichef/gypcrete`)
+    * **storybook** (publishes to gh-pages of this repository)
+  But this should not affect the existing package, as the codes are untouched with this change. Please refers to README for details.
 
 ## [1.2.0]
 ### Breaking changes
