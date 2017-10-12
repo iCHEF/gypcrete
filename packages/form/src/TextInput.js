@@ -24,7 +24,10 @@ export const BEM = {
 class TextInput extends React.PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
+        // input props
         placeholder: PropTypes.string,
+        disabled: PropTypes.bool,
+        readOnly: PropTypes.bool,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         // row props
@@ -37,6 +40,8 @@ class TextInput extends React.PureComponent {
 
     static defaultProps = {
         placeholder: 'Unset',
+        disabled: false,
+        readOnly: false,
         onFocus: () => {},
         onBlur: () => {},
         rowDesc: undefined,
@@ -70,6 +75,10 @@ class TextInput extends React.PureComponent {
     render() {
         const {
             label,
+            // input props
+            // placeholder,
+            disabled,
+            readOnly,
             onFocus,
             onBlur,
             // row props
@@ -79,11 +88,12 @@ class TextInput extends React.PureComponent {
             errorMsg,
             // React props
             className,
-            ...inputProps,
+            ...otherInputProps,
         } = this.props;
 
         const bemClass = BEM.root
-            .modifier('focused', this.state.focused);
+            .modifier('focused', this.state.focused)
+            .modifier('ineditable', disabled || readOnly);
         const rootClassName = classNames(bemClass.toString(), className);
 
         const keyLabel = (
@@ -91,6 +101,12 @@ class TextInput extends React.PureComponent {
                 {label}
             </span>
         );
+
+        const inputProps = {
+            disabled,
+            readOnly,
+            ...otherInputProps,
+        };
 
         const rowProps = {
             desc: rowDesc,

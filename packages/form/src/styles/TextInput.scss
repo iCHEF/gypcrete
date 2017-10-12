@@ -1,17 +1,19 @@
 $component-name: 'gyp-form-text-input';
+$font-weight-base: 400;
+$font-weight-bold: 700;
 
 %main-text {
     color: #000;
     font-size: 16px;
     line-height: 18px;
-    font-weight: 700;
+    font-weight: $font-weight-bold;
 }
 
 %aside-text {
     color: #4d4d4d;
     font-size: 14px;
     line-height: 16px;
-    font-weight: 400;
+    font-weight: $font-weight-base;
 }
 
 .#{$component-name} {
@@ -43,6 +45,13 @@ $component-name: 'gyp-form-text-input';
 
         .#{$component-name}__input {
             @extend %main-text;
+        }
+    }
+
+    &--ineditable {
+        .#{$component-name}__label,
+        .#{$component-name}__input {
+            font-weight: $font-weight-base;
         }
     }
 
