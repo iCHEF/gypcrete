@@ -9,8 +9,8 @@ import {
 
 import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
 import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
-import { statusPropTypes } from '@ichef/gypcrete/lib/mixins/withStatus';
 
+import formRow, { rowPropTypes } from './mixins/formRow';
 import './styles/TextInput.scss';
 
 export const COMPONENT_NAME = prefixClass('form-text-input');
@@ -26,25 +26,17 @@ class TextInput extends React.PureComponent {
         label: PropTypes.node.isRequired,
         // input props
         placeholder: PropTypes.string,
-        disabled: PropTypes.bool,
-        readOnly: PropTypes.bool,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
-        // row props
-        rowDesc: PropTypes.node,
-        ...statusPropTypes,
-        // status
-        // statusOptions
-        // errorMsg
+        // from formRow()
+        ineditable: PropTypes.bool.isRequired,
+        rowProps: rowPropTypes.isRequired,
     };
 
     static defaultProps = {
         placeholder: 'Unset',
-        disabled: false,
-        readOnly: false,
         onFocus: () => {},
         onBlur: () => {},
-        rowDesc: undefined,
     };
 
     state = {
@@ -77,23 +69,19 @@ class TextInput extends React.PureComponent {
             label,
             // input props
             // placeholder,
-            disabled,
-            readOnly,
             onFocus,
             onBlur,
             // row props
-            rowDesc,
-            status,
-            statusOptions,
-            errorMsg,
+            ineditable,
+            rowProps,
             // React props
             className,
-            ...otherInputProps,
+            ...inputProps,
         } = this.props;
 
         const bemClass = BEM.root
             .modifier('focused', this.state.focused)
-            .modifier('ineditable', disabled || readOnly);
+            .modifier('ineditable', ineditable);
         const rootClassName = classNames(bemClass.toString(), className);
 
         const keyLabel = (
@@ -101,19 +89,6 @@ class TextInput extends React.PureComponent {
                 {label}
             </span>
         );
-
-        const inputProps = {
-            disabled,
-            readOnly,
-            ...otherInputProps,
-        };
-
-        const rowProps = {
-            desc: rowDesc,
-            status,
-            statusOptions,
-            errorMsg,
-        };
 
         return (
             <ListRow className={rootClassName} {...rowProps}>
@@ -125,4 +100,5 @@ class TextInput extends React.PureComponent {
     }
 }
 
-export default TextInput;
+export { TextInput as PureTextInput };
+export default formRow()(TextInput);
