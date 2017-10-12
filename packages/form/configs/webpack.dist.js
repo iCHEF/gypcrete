@@ -9,9 +9,9 @@ module.exports = {
     context: path.resolve(__dirname, '..'),
 
     output: {
-        filename: 'gypcrete.js',
+        filename: 'gypcrete-form.js',
         path: path.resolve(__dirname, '../dist'),
-        library: 'gypcrete'
+        library: 'gypcrete-form'
     },
 
     module: {
@@ -72,7 +72,7 @@ module.exports = {
     },
 
     plugins: [
-        new ExtractTextPlugin('gypcrete.css')
+        new ExtractTextPlugin('gypcrete-form.css')
     ],
 
     externals: {
