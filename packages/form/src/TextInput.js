@@ -9,6 +9,7 @@ import {
 
 import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
 import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
+import { statusPropTypes } from '@ichef/gypcrete/lib/mixins/withStatus';
 
 import './styles/TextInput.scss';
 
@@ -26,12 +27,19 @@ class TextInput extends React.PureComponent {
         placeholder: PropTypes.string,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
+        // row props
+        rowDesc: PropTypes.node,
+        ...statusPropTypes,
+        // status
+        // statusOptions
+        // errorMsg
     };
 
     static defaultProps = {
         placeholder: 'Unset',
         onFocus: () => {},
         onBlur: () => {},
+        rowDesc: undefined,
     };
 
     state = {
@@ -64,6 +72,11 @@ class TextInput extends React.PureComponent {
             label,
             onFocus,
             onBlur,
+            // row props
+            rowDesc,
+            status,
+            statusOptions,
+            errorMsg,
             // React props
             className,
             ...inputProps,
@@ -79,8 +92,15 @@ class TextInput extends React.PureComponent {
             </span>
         );
 
+        const rowProps = {
+            desc: rowDesc,
+            status,
+            statusOptions,
+            errorMsg,
+        };
+
         return (
-            <ListRow className={rootClassName}>
+            <ListRow className={rootClassName} {...rowProps}>
                 <TextLabel
                     basic={keyLabel}
                     aside={this.renderInput(inputProps)} />

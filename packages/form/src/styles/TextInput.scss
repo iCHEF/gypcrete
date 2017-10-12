@@ -45,4 +45,12 @@ $component-name: 'gyp-form-text-input';
             @extend %main-text;
         }
     }
+
+    // States
+    &.gyp-state-error {
+        .#{$component-name}__label,
+        .#{$component-name}__input {
+            color: inherit;
+        }
+    }
 }
