@@ -1,0 +1,34 @@
+{
+  "name": "@ichef/gypcrete-storybook",
+  "version": "1.2.0",
+  "description": "React Storybook for Gypcrete",
+  "private": true,
+  "repository": "iCHEF/gypcrete",
+  "contributors": [
+    "CJies Tan (https://github.com/cjies)",
+    "Teng-hao Chang (https://github.com/zhusee2)"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/iCHEF/gypcrete/issues"
+  },
+  "homepage": "https://github.com/iCHEF/gypcrete#readme",
+  "scripts": {
+    "storybook": "start-storybook -p 8100 -c .storybook",
+    "build:storybook": "build-storybook -o ./public",
+    "clean": "rm -rf ./public",
+    "ghpages": "npm run clean && npm run build:storybook && sh ./scripts/ghpages.sh"
+  },
+  "dependencies": {
+    "@ichef/gypcrete": "^1.2.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.0.0",
+    "@storybook/addon-info": "^3.0.0",
+    "@storybook/addon-options": "3.0.0",
+    "@storybook/react": "3.0.0",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
+}

@@ -8,4 +8,4 @@ deploy/
 public/
 tmp/
 .DS_Store
-npm-debug.log
+*-debug.log

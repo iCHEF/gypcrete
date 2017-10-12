@@ -53,5 +53,18 @@ const CustomComponent = () => (
 export default CustomComponent;
 ```
 
+## Develop
+Gypcrete is a multi-package mono-repo built on [Lerna](https://github.com/lerna/lerna). All sub-pacakges are placed inside `packages/` folder. It uses [Yarn Workspaces](https://yarnpkg.com/en/docs/workspaces) to hoist all dependencies to root level.
+
+To install dependencies and link packages, simply run `yarn install`.
+To run the Storybook locally, use the `yarn start` script.
+
+Linters and test runners are configured at repository level.
+They should check all source files across every package in the `packages/` folder.
+
+Gypcrete does not publish develop builds to the `dist` branch anymore. It now publishes to NPM instead:
+  * When pushed to `develop` branch --> publish a canary build
+  * When pushed to `master` branch --> publish a relase build
+
 ## LICENSE
 This project is licensed under the terms of the [Apache License 2.0](https://github.com/ichef/gypcrete/blob/master/LICENSE)

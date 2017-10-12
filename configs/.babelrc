@@ -1,6 +1,6 @@
 {
     "comments": false,
-    
+
     "presets": [
         ["env", { "modules": false }],
         "stage-2",
@@ -10,9 +10,8 @@
     "plugins": [
         "transform-runtime",
         ["module-resolver", {
-            "alias": {
-                "src": "./src"
-            }
+            "root": ["./"],
+            "cwd": "packagejson"
         }]
     ],
 
