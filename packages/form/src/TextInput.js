@@ -29,14 +29,16 @@ class TextInput extends React.PureComponent {
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         // from formRow()
-        ineditable: PropTypes.bool.isRequired,
-        rowProps: rowPropTypes.isRequired,
+        ineditable: PropTypes.bool,
+        rowProps: rowPropTypes,
     };
 
     static defaultProps = {
         placeholder: 'Unset',
         onFocus: () => {},
         onBlur: () => {},
+        ineditable: false,
+        rowProps: {},
     };
 
     state = {
