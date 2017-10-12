@@ -61,7 +61,7 @@ class TextInput extends React.PureComponent {
         this.props.onBlur(event);
     }
 
-    renderInput(inputProps = {}) {
+    renderInput(inputProps) {
         return (
             <input
                 type="text"
