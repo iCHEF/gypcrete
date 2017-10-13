@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import {
@@ -21,7 +21,7 @@ export const BEM = {
     input: ROOT_BEM.element('input'),
 };
 
-class TextInputRow extends React.PureComponent {
+class TextInputRow extends PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
         // input props

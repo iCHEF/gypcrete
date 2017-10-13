@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import {
     ListRow,
@@ -17,7 +17,7 @@ import formRow, { rowPropTypes } from './mixins/formRow';
  *
  * All unknown props should go to the `<Switch>` from core package inside.
  */
-class SwitchRow extends React.PureComponent {
+class SwitchRow extends PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
         asideOn: PropTypes.node,
