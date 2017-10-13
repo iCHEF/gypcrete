@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import classNames from 'classnames';
 
 import {
     ListRow,
@@ -89,10 +88,8 @@ class Switch extends React.PureComponent {
             ...switchProps,
         } = this.props;
 
-        const rootClassName = classNames('', className);
-
         return (
-            <ListRow className={rootClassName} {...rowProps}>
+            <ListRow className={className} {...rowProps}>
                 <TextLabel
                     bold={!ineditable}
                     basic={label}
