@@ -20,7 +20,8 @@
     "ghpages": "npm run clean && npm run build:storybook && sh ./scripts/ghpages.sh"
   },
   "dependencies": {
-    "@ichef/gypcrete": "^1.2.0"
+    "@ichef/gypcrete": "^1.2.0",
+    "@ichef/gypcrete-form": "^1.2.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.0.0",
