@@ -23,11 +23,7 @@ function BasicUsage() {
                 label="Disabled row" />
 
             <SwitchRow
-                readOnly
-                label="Read-only row" />
-
-
-            <SwitchRow
+                checked
                 label="World peace"
                 asideOn="There will be peace"
                 asideOff="There will be war"
