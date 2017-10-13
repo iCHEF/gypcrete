@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- N/A
+
+## [1.3.0]
 ### Added
 - Migrate and refactor `<Popover>`, exporting an anchored one by default.
 - Add new `closable()` HOC mixin to determine when to “close” on Esc key or on any key/touch on document.
