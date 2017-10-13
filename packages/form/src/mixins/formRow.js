@@ -53,7 +53,7 @@ const formRow = (/* mixin options */) => (WrappedComponent) => {
         );
     }
 
-    FormRow.displayName = getComponentName(WrappedComponent);
+    FormRow.displayName = `formRow(${getComponentName(WrappedComponent)})`;
     FormRow.propTypes = propTypes;
     FormRow.defaultProps = defaultProps;
 
