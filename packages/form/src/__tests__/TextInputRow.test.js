@@ -18,14 +18,17 @@ describe('formRow(TextInputRow)', () => {
 });
 
 describe('Pure <TextInputRow>', () => {
-    it('renders an <input> inside', () => {
+    it('renders an <input> inside with all unknown props', () => {
         const wrapper = mount(
             <PureTextInputRow
                 label="foo"
                 defaultValue="bar" />
         );
-
         expect(wrapper.find('input').exists()).toBeTruthy();
+
+        wrapper.setProps({ id: 'foo', tabIndex: 3 });
+        expect(wrapper.find('input').prop('id')).toBe('foo');
+        expect(wrapper.find('input').prop('tabIndex')).toBe(3);
     });
 
     it('enters and leaves focused state on input events', () => {
