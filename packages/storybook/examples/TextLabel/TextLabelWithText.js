@@ -2,7 +2,7 @@ import React from 'react';
 
 import TextLabel from '@ichef/gypcrete/src/TextLabel';
 import Text from '@ichef/gypcrete/src/Text';
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 function TextLabelWithTextExample() {
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SearchInput from '@ichef/gypcrete/src/SearchInput';
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 function BasicSearchInputExample() {
     return (

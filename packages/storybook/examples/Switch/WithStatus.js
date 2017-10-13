@@ -1,6 +1,6 @@
 import React from 'react';
 import Switch from '@ichef/gypcrete/src/Switch';
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 function WithStatus() {
     return (

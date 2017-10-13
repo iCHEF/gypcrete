@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Checkbox from '@ichef/gypcrete/src/Checkbox';
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 function BasicCheckboxExample() {
     return (

@@ -6,7 +6,7 @@ import ListRow from '@ichef/gypcrete/src/ListRow';
 import Button from '@ichef/gypcrete/src/Button';
 import TextLabel from '@ichef/gypcrete/src/TextLabel';
 
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 function NormalList() {
     return (

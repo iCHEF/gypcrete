@@ -2,7 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import Button from '@ichef/gypcrete/src/Button';
-import FlexRow from '../FlexRow';
+import FlexRow from 'utils/FlexRow';
 
 function BasicButtonExample() {
     return (

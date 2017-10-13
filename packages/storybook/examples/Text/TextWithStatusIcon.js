@@ -3,7 +3,7 @@ import React from 'react';
 import Text from '@ichef/gypcrete/src/Text';
 import StatusIcon from '@ichef/gypcrete/src/StatusIcon';
 
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 function TextWithStatusIconExample() {
     return (
