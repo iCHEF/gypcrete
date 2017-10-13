@@ -18,45 +18,85 @@ import formRow, { rowPropTypes } from './mixins/formRow';
  *
  * All unknown props should go to the `<SwitchButton>` inside.
  */
-function Switch({
-    label,
-    aside,
-    // from formRow()
-    ineditable,
-    rowProps,
-    // React props,
-    className,
-    ...switchProps,
-}) {
-    const rootClassName = classNames('', className);
+class Switch extends React.PureComponent {
+    static propTypes = {
+        label: PropTypes.node.isRequired,
+        aside: PropTypes.node,
+        // input props
+        checked: PropTypes.bool,
+        defaultChecked: PropTypes.bool,
+        onChange: PropTypes.func,
+        // from formRow()
+        ineditable: PropTypes.bool,
+        rowProps: rowPropTypes,
+    };
 
-    return (
-        <ListRow className={rootClassName} {...rowProps}>
-            <TextLabel
-                bold={!ineditable}
-                basic={label}
-                aside={aside} />
+    static defaultProps = {
+        aside: undefined,
+        checked: undefined,
+        defaultChecked: undefined,
+        onChange: () => {},
+        ineditable: false,
+        rowProps: {},
+    };
 
-            <SwitchButton
-                status={null}
-                {...switchProps} />
-        </ListRow>
-    );
+    state = {
+        checked: this.props.defaultChecked || this.props.checked,
+    };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.checked !== this.props.checked) {
+            this.setState({ checked: nextProps.checked });
+        }
+    }
+
+    getIsControlled() {
+        const isControlled = this.props.checked !== undefined
+            && this.props.checked !== null;
+
+        return isControlled;
+    }
+
+    handleSwitchButtonChange = (event) => {
+        if (!this.getIsControlled()) {
+            this.setState({ checked: event.target.checked });
+        }
+        this.props.onChange(event);
+    }
+
+    render() {
+        const {
+            label,
+            aside,
+            // input props
+            // checked,
+            // defaultChecked,
+            onChange,
+            // from formRow()
+            ineditable,
+            rowProps,
+            // React props
+            className,
+            ...switchProps,
+        } = this.props;
+
+        const rootClassName = classNames('', className);
+
+        return (
+            <ListRow className={rootClassName} {...rowProps}>
+                <TextLabel
+                    bold={!ineditable}
+                    basic={label}
+                    aside={aside} />
+
+                <SwitchButton
+                    status={null}
+                    onChange={this.handleSwitchButtonChange}
+                    {...switchProps} />
+            </ListRow>
+        );
+    }
 }
-
-Switch.propTypes = {
-    label: PropTypes.node.isRequired,
-    aside: PropTypes.node,
-    // from formRow()
-    ineditable: PropTypes.bool,
-    rowProps: rowPropTypes,
-};
-
-Switch.defaultProps = {
-    aside: undefined,
-    ineditable: false,
-    rowProps: {},
-};
 
 export { Switch as PureSwitch };
 export default formRow()(Switch);
