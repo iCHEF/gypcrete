@@ -20,12 +20,25 @@ setDefaults({
     propTables: false,
 
     /**
+     * Remove the header temporary.
+     *
+     * Since the inline styling is damn strange now,
+     * header and preview parts are split into separate shadowed containers.
+     *
+     * @issue https://github.com/storybooks/storybook/issues/1877
+     *
+     * #FIXME: wait for storybooks/storybook#1501
+     */
+    header: false,
+
+    /**
      * Fix <Code> styling
      *
      * #FIXME: wait for storybooks/storybook#1501
      */
     marksyConf: { code: Code }
 });
+
 setAddon(infoAddon);
 setAddon(propsTableAddon);
 
