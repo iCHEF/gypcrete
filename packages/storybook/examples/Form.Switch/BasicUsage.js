@@ -14,7 +14,8 @@ function BasicUsage() {
         <List title="Switch rows">
             <Switch
                 label="Module default state on iPad"
-                aside="Close by default"
+                asideOn="Turned on by default"
+                asideOff="Turned off by default"
                 desc={DESC} />
 
             <Switch
@@ -28,7 +29,8 @@ function BasicUsage() {
 
             <Switch
                 label="World peace"
-                aside="There will be war."
+                asideOn="There will be peace"
+                asideOff="There will be war"
                 status="error"
                 errorMsg="Cannot declare a war." />
         </List>

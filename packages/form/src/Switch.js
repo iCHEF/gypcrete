@@ -21,7 +21,8 @@ import formRow, { rowPropTypes } from './mixins/formRow';
 class Switch extends React.PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
-        aside: PropTypes.node,
+        asideOn: PropTypes.node,
+        asideOff: PropTypes.node,
         // input props
         checked: PropTypes.bool,
         defaultChecked: PropTypes.bool,
@@ -32,7 +33,8 @@ class Switch extends React.PureComponent {
     };
 
     static defaultProps = {
-        aside: undefined,
+        asideOn: 'ON',
+        asideOff: 'OFF',
         checked: undefined,
         defaultChecked: undefined,
         onChange: () => {},
@@ -57,6 +59,12 @@ class Switch extends React.PureComponent {
         return isControlled;
     }
 
+    getSwitchAside() {
+        const { asideOn, asideOff } = this.props;
+
+        return this.state.checked ? asideOn : asideOff;
+    }
+
     handleSwitchButtonChange = (event) => {
         if (!this.getIsControlled()) {
             this.setState({ checked: event.target.checked });
@@ -67,7 +75,8 @@ class Switch extends React.PureComponent {
     render() {
         const {
             label,
-            aside,
+            asideOn,
+            asideOff,
             // input props
             // checked,
             // defaultChecked,
@@ -87,7 +96,7 @@ class Switch extends React.PureComponent {
                 <TextLabel
                     bold={!ineditable}
                     basic={label}
-                    aside={aside} />
+                    aside={this.getSwitchAside()} />
 
                 <SwitchButton
                     status={null}
