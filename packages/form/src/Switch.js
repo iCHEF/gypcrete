@@ -4,12 +4,20 @@ import classNames from 'classnames';
 
 import {
     ListRow,
-    Switch as GypSwitch,
+    Switch as SwitchButton,
     TextLabel,
 } from '@ichef/gypcrete';
 
 import formRow, { rowPropTypes } from './mixins/formRow';
 
+/**
+ * <Switch>
+ * ========
+ * A row consisting a text label (on the left) and a switch button (on the right).
+ * The aside of left label can be updated with the checked state of switch.
+ *
+ * All unknown props should go to the `<SwitchButton>` inside.
+ */
 function Switch({
     label,
     aside,
@@ -29,7 +37,7 @@ function Switch({
                 basic={label}
                 aside={aside} />
 
-            <GypSwitch
+            <SwitchButton
                 status={null}
                 {...switchProps} />
         </ListRow>
