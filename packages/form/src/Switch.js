@@ -30,6 +30,7 @@ function Switch({
                 aside={aside} />
 
             <GypSwitch
+                status={null}
                 {...switchProps} />
         </ListRow>
     );

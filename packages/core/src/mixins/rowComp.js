@@ -143,9 +143,9 @@ const rowComp = ({
             highlight: false,
             disabled: false,
 
-            status: null,
-            statusOptions: null,
-            errorMsg: null,
+            status: undefined,
+            statusOptions: undefined,
+            errorMsg: undefined,
         };
 
         static contextTypes = {
@@ -167,7 +167,7 @@ const rowComp = ({
             const { align, status, statusOptions, errorMsg } = this.props;
 
             return {
-                status: status || this.context.status,
+                status: (status === undefined) ? this.context.status : status,
                 statusOptions: statusOptions || this.context.statusOptions,
                 errorMsg,
                 align,
