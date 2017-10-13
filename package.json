@@ -22,7 +22,7 @@
   "scripts": {
     "prepublish": "lerna run prepublish",
     "start": "lerna run storybook --stream",
-    "release": "lerna publish --yes --repo-version $PACKAGE_VERSION && lerna run ghpages",
+    "release": "lerna publish -m \"Lerna publish %s\" --yes --repo-version $PACKAGE_VERSION && lerna run ghpages",
     "canary": "lerna publish -c --yes",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint ./packages --ignore-path=configs/.eslintignore ./ && echo \"eslint: no lint errors\"",
