@@ -21,7 +21,7 @@ export const BEM = {
     input: ROOT_BEM.element('input'),
 };
 
-class TextInput extends React.PureComponent {
+class TextInputRow extends React.PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
         // input props
@@ -102,5 +102,5 @@ class TextInput extends React.PureComponent {
     }
 }
 
-export { TextInput as PureTextInput };
-export default formRow()(TextInput);
+export { TextInputRow as PureTextInputRow };
+export default formRow()(TextInputRow);

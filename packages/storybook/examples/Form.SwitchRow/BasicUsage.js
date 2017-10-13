@@ -1,7 +1,7 @@
 import React from 'react';
 
 import List from '@ichef/gypcrete/src/List';
-import Switch from '@ichef/gypcrete-form/src/Switch';
+import SwitchRow from '@ichef/gypcrete-form/src/SwitchRow';
 
 const DESC = `
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -12,22 +12,22 @@ const DESC = `
 function BasicUsage() {
     return (
         <List title="Switch rows">
-            <Switch
+            <SwitchRow
                 label="Module default state on iPad"
                 asideOn="Turned on by default"
                 asideOff="Turned off by default"
                 desc={DESC} />
 
-            <Switch
+            <SwitchRow
                 disabled
                 label="Disabled row" />
 
-            <Switch
+            <SwitchRow
                 readOnly
                 label="Read-only row" />
 
 
-            <Switch
+            <SwitchRow
                 label="World peace"
                 asideOn="There will be peace"
                 asideOff="There will be war"

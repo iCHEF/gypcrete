@@ -2,13 +2,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
-import TextInput, { PureTextInput, BEM } from '../TextInput';
+import TextInputRow, { PureTextInputRow, BEM } from '../TextInputRow';
 
-describe('formRow(TextInput)', () => {
+describe('formRow(TextInputRow)', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div');
         const element = (
-            <TextInput
+            <TextInputRow
                 label="foo"
                 defaultValue="bar" />
         );
@@ -17,10 +17,10 @@ describe('formRow(TextInput)', () => {
     });
 });
 
-describe('Pure <TextInput>', () => {
+describe('Pure <TextInputRow>', () => {
     it('renders an <input> inside', () => {
         const wrapper = mount(
-            <PureTextInput
+            <PureTextInputRow
                 label="foo"
                 defaultValue="bar" />
         );
@@ -34,7 +34,7 @@ describe('Pure <TextInput>', () => {
             .toString({ stripBlock: true });
 
         const wrapper = mount(
-            <PureTextInput
+            <PureTextInputRow
                 label="foo"
                 defaultValue="bar" />
         );

@@ -3,11 +3,11 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 // For props table
-import Switch from '@ichef/gypcrete-form/src/Switch';
+import SwitchRow from '@ichef/gypcrete-form/src/SwitchRow';
 
 import BasicUsage from './BasicUsage';
 
-storiesOf('[Form] Switch', module)
+storiesOf('[Form] SwitchRow', module)
     .add('basic usage', withInfo()(BasicUsage))
     // Props table
-    .addPropsTable(() => <Switch />);
+    .addPropsTable(() => <SwitchRow />);

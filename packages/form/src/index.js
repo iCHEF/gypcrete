@@ -1,7 +1,7 @@
-import TextInput from './TextInput';
-import Switch from './Switch';
+import TextInputRow from './TextInputRow';
+import SwitchRow from './SwitchRow';
 
 export {
-    TextInput,
-    Switch,
+    TextInputRow,
+    SwitchRow,
 };
