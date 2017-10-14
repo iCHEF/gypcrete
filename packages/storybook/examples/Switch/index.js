@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 
 import Switch, { PureSwitch } from '@ichef/gypcrete/src/Switch';
 
@@ -9,19 +10,23 @@ import WithStatus from './WithStatus';
 import InputProps from './InputProps';
 
 storiesOf('Switch', module)
-    .addWithInfo(
-        'Basic usage',
-        `A <Switch> is a row component which can be turned either on
-         or off, with its underlying <input type=checkbox>.`,
-        BasicUsage
+    .add('Basic usage',
+        withInfo(
+            `A <Switch> is a row component which can be turned either on
+            or off, with its underlying <input type=checkbox>.`
+        )(BasicUsage)
     )
-    .addWithInfo('Controlled input', ControlledInput)
-    .addWithInfo('With status', WithStatus)
-    .addWithInfo(
-        '<input> props',
-        `Pass additional props to the underlying <input type="checkbox">
-         via the 'input' prop.`,
-         InputProps
+    .add('Controlled input',
+        withInfo()(ControlledInput)
+    )
+    .add('With status',
+        withInfo()(WithStatus)
+    )
+    .add('<input> props',
+        withInfo(
+            `Pass additional props to the underlying <input type="checkbox">
+            via the 'input' prop.`
+        )(InputProps)
     )
     // Props table
     .addPropsTable(() => <Switch />, [PureSwitch]);

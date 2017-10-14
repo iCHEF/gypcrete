@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 
 import EditableText from '@ichef/gypcrete/src/EditableText';
 
@@ -8,8 +9,14 @@ import Alignments from './Alignments';
 import MultiLines from './MultiLines';
 
 storiesOf('EditableText', module)
-    .addWithInfo('Basic usage', BasicUsage)
-    .addWithInfo('Alignments', Alignments)
-    .addWithInfo('Mutiple lines', MultiLines)
+    .add('Basic usage',
+        withInfo()(BasicUsage)
+    )
+    .add('Alignments',
+        withInfo()(Alignments)
+    )
+    .add('Mutiple lines',
+        withInfo()(MultiLines)
+    )
     // Props table
     .addPropsTable(() => <EditableText />);

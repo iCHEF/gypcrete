@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 
 // For props table
 import IconButton from '@ichef/gypcrete/src/IconButton';
@@ -8,12 +9,14 @@ import BasicIconButtonExample from './BasicIconButton';
 import IconButtonWithStatusExample from './IconButtonWithStatus';
 
 storiesOf('IconButton', module)
-    .addWithInfo(
-        'basic usage',
-        'IconButton is a variant of `<Button>`.',
-        BasicIconButtonExample
+    .add('basic usage',
+        withInfo('IconButton is a variant of `<Button>`.')(
+            BasicIconButtonExample
+        )
     )
-    .addWithInfo('with status', IconButtonWithStatusExample)
+    .add('with status',
+        withInfo()(IconButtonWithStatusExample)
+    )
     // Props table
     .addPropsTable(
         () => <IconButton icon="null" />,
