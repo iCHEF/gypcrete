@@ -21,13 +21,11 @@
   },
   "dependencies": {
     "@ichef/gypcrete": "^1.2.0",
-    "@ichef/gypcrete-form": "^1.2.0"
-  },
-  "devDependencies": {
-    "@storybook/addon-actions": "^3.0.0",
-    "@storybook/addon-info": "^3.0.0",
-    "@storybook/addon-options": "3.0.0",
-    "@storybook/react": "3.0.0",
+    "@ichef/gypcrete-form": "^1.2.0",
+    "@storybook/addon-actions": "^3.2.12",
+    "@storybook/addon-info": "^3.2.12",
+    "@storybook/addon-options": "^3.2.12",
+    "@storybook/react": "^3.2.12",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"

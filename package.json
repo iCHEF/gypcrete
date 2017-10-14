@@ -17,7 +17,7 @@
     "npm": ">= 3.10.10"
   },
   "workspaces": [
-      "packages/*"
+    "packages/*"
   ],
   "scripts": {
     "prepublish": "lerna run prepublish",
@@ -55,8 +55,8 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
     "extract-text-webpack-plugin": "^2.0.0",
-    "flow-bin": "^0.47.0",
     "file-loader": "^0.10.1",
+    "flow-bin": "^0.47.0",
     "jest": "^19.0.2",
     "lerna": "^2.4.0",
     "node-sass": "^4.5.3",
