@@ -1,4 +1,13 @@
-/* eslint-disable import/no-extraneous-dependencies */
+// *************************************
+//
+//   Custom addon for storybook
+//
+//  #TODO: Refactor to `withPropsTable()` HOF to avoid the overwrite of `.add()`.
+//
+//  @issue https://github.com/storybooks/storybook/issues/1147#issuecomment-306409320
+//
+// *************************************
+
 import React from 'react';
 import { Story } from '@storybook/addon-info';
 
@@ -6,7 +15,11 @@ const DEFAULT_OPTIONS = {
     inline: true,
     header: false,
     source: false,
-    propTables: []
+    propTables: [],
+    maxPropsIntoLine: 3,
+    maxPropObjectKeys: 3,
+    maxPropArrayLength: 3,
+    maxPropStringLength: 50,
 };
 
 /* eslint-disable no-underscore-dangle */
@@ -54,7 +67,12 @@ export default {
                 showHeader: Boolean(options.header),
                 showSource: Boolean(options.source),
                 propTables: options.propTables,
+                propTablesExclude: options.propTablesExclude,
                 styles: typeof options.styles === 'function' ? options.styles : s => s,
+                maxPropObjectKeys: options.maxPropObjectKeys,
+                maxPropArrayLength: options.maxPropArrayLength,
+                maxPropsIntoLine: options.maxPropsIntoLine,
+                maxPropStringLength: options.maxPropStringLength,
             };
 
             return (
