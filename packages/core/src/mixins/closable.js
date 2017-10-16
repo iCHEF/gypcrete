@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 
@@ -50,6 +49,13 @@ const closable = ({
             document.removeEventListener('click', this.handleClick);
             document.removeEventListener('touchstart', this.handleTouch);
             clearTimeout(this.state.closeDelayTimeout);
+        }
+
+        getOptions() {
+            return {
+                onEscape,
+                onAnyClick,
+            };
         }
 
         // Trigger `onClose()` call on Escape keyup if turned on in options.
