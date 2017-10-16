@@ -28,6 +28,8 @@ function escapable(WrappedComponent) {
         componentDidMount() {
             this.keyUpListener = createEscapeListener(this.props.onEscape);
             document.addEventListener('keyup', this.keyUpListener);
+            // #DEPRECATED: remove in next major release
+            console.warn("'escapable()' is deprecated. Use 'closable({ onEscape: true })()' instead.");
         }
 
         componentWillUnmount() {
