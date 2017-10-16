@@ -57,7 +57,9 @@ Popover.defaultProps = {
     arrowStyle: {},
 };
 
-export const AnchoredPopover = renderToLayer(
+export { Popover as PurePopover };
+
+export default renderToLayer(
     closable({
         onEscape: true,
         onAnyClick: true,
@@ -65,5 +67,3 @@ export const AnchoredPopover = renderToLayer(
         anchored({ padding: 0 })(Popover)
     )
 );
-
-export default Popover;

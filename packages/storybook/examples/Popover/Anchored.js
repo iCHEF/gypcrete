@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
 import Button from '@ichef/gypcrete/src/Button';
-import { AnchoredPopover } from '@ichef/gypcrete/src/Popover';
+import AnchoredPopover from '@ichef/gypcrete/src/Popover';
 import DemoList from './DemoList';
 
 class AnchoredExample extends PureComponent {

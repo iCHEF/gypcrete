@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Popover from '@ichef/gypcrete/src/Popover';
+import { PurePopover as Popover } from '@ichef/gypcrete/src/Popover';
 import DemoList from './DemoList';
 
 function BasicExample() {
