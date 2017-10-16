@@ -1,7 +1,7 @@
 import React from 'react';
 
 import IconButton from '@ichef/gypcrete/src/IconButton';
-import FlexRow from '../FlexRow';
+import FlexRow from 'utils/FlexRow';
 
 function IconButtonWithStatusExample() {
     return (

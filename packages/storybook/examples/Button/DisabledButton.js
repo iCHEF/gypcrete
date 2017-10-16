@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button from '@ichef/gypcrete/src/Button';
-import FlexRow from '../FlexRow';
+import FlexRow from 'utils/FlexRow';
 
 function DisabledButtonExample() {
     return (

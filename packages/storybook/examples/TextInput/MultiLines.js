@@ -2,7 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import TextInput from '@ichef/gypcrete/src/TextInput';
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 function MultiLines() {
     return (

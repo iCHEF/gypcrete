@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 
 // For props table
 import InfiniteScroll from '@ichef/gypcrete/src/InfiniteScroll';
@@ -8,14 +9,15 @@ import BasicUsageExample from './BasicUsage';
 import PageAsContainerExample from './PageAsContainer';
 
 storiesOf('InfiniteScroll', module)
-    .addWithInfo(
-        'basic usage',
-        'placed in a fixed height container',
-        () => <BasicUsageExample />,
+    .add('basic usage',
+        withInfo('placed in a fixed height container')(
+            <BasicUsageExample />
+        )
     )
-    .addWithInfo('page as scroll container',
-        () => <PageAsContainerExample />,
-        { source: false }
+    .add('page as scroll container',
+        withInfo()(
+            () => <PageAsContainerExample />
+        )({ source: false })
     )
     // Props table
     .addPropsTable(

@@ -5,7 +5,7 @@ import Button from '@ichef/gypcrete/src/Button';
 import TextLabel from '@ichef/gypcrete/src/TextLabel';
 import TextEllipsis from '@ichef/gypcrete/src/TextEllipsis';
 
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 function BasicUsage() {
     const leftBtn = <Button icon="prev" basic="Back" />;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 
 // For props table
 import Popup, { EscapablePopup, PurePopup } from '@ichef/gypcrete/src/Popup';
@@ -8,14 +9,15 @@ import BasicPopupExample from './BasicPopup';
 import EscapablePopupExample from './EscapablePopup';
 
 storiesOf('Popup', module)
-    .addWithInfo(
-        'basic usage',
-        () => <BasicPopupExample />
+    .add('basic usage',
+        withInfo()(
+            () => <BasicPopupExample />
+        )
     )
-    .addWithInfo(
-        'escapable popup',
-        'Key `Esc` to close.',
-        () => <EscapablePopupExample />
+    .add('escapable popup',
+        withInfo('Key `Esc` to close.')(
+            () => <EscapablePopupExample />
+        )
     )
     // Props table
     .addPropsTable(() => <Popup />, [EscapablePopup, PurePopup]);

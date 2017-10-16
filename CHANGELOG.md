@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     * **core** (publishes to `@ichef/gypcrete`)
     * **storybook** (publishes to gh-pages of this repository)
   But this should not affect the existing package, as the codes are untouched with this change. Please refers to README for details.
+- Upgrade storybook libraries to v3.2.12, also fix the API changes of `storybook-addon-info`.  (#93)(#95)
+
 
 ## [1.2.0]
 ### Breaking changes

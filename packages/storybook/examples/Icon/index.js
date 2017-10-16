@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 
 // For props table
 import Icon from '@ichef/gypcrete/src/Icon';
@@ -14,12 +15,26 @@ import LargeIconExample from './LargeIcon';
 import IconColorsExample from './IconColors';
 
 storiesOf('Icon', module)
-    .addWithInfo('basic icons set', BasicIconsSet)
-    .addWithInfo('payment icons set', PaymentIconsSet)
-    .addWithInfo('CRM icons set', CRMIconsSet)
-    .addWithInfo('Inventory icons set', InventoryIconsSet)
-    .addWithInfo('Menu page icons set', MenuPageIconsSet)
-    .addWithInfo('large size', LargeIconExample)
-    .addWithInfo('color options', IconColorsExample)
+    .add('basic icons set',
+        withInfo()(BasicIconsSet)
+    )
+    .add('payment icons set',
+        withInfo()(PaymentIconsSet)
+    )
+    .add('CRM icons set',
+        withInfo()(CRMIconsSet)
+    )
+    .add('Inventory icons set',
+        withInfo()(InventoryIconsSet)
+    )
+    .add('Menu page icons set',
+        withInfo()(MenuPageIconsSet)
+    )
+    .add('large size',
+        withInfo()(LargeIconExample)
+    )
+    .add('color options',
+        withInfo()(IconColorsExample)
+    )
     // Props table
     .addPropsTable(() => <Icon />);

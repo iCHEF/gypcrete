@@ -17,6 +17,11 @@ module.exports = (defaultConfig, configType) => {
         '@ichef/gypcrete/src/styles/index.scss'
     );
 
+    // Resolve modules in storybook/ package
+    storybookConfig.resolve.modules.push(
+        path.join(__dirname, '..')
+    );
+
     // Override loaders to control include paths.
     storybookConfig.module.rules = [
         {

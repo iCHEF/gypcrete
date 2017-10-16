@@ -1,7 +1,7 @@
 import React from 'react';
 
 import StatusIcon from '@ichef/gypcrete/src/StatusIcon';
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 function CornerStatusIconExample() {
     return (

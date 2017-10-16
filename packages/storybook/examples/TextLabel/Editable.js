@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { action, decorateAction } from '@storybook/addon-actions';
 
 import EditableTextLabel from '@ichef/gypcrete/src/EditableTextLabel';
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 /**
  * The official `action` shipped with React Storybook crashes when

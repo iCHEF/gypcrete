@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Text from '@ichef/gypcrete/src/Text';
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 const LONG_LABEL =
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.

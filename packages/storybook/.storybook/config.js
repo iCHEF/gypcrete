@@ -1,6 +1,6 @@
 import { configure, setAddon } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
-import infoAddon, { setDefaults } from '@storybook/addon-info';
+import { setDefaults } from '@storybook/addon-info';
 
 import propsTableAddon from './propsTable-addon';
 import Code from './Code';
@@ -39,7 +39,6 @@ setDefaults({
     marksyConf: { code: Code }
 });
 
-setAddon(infoAddon);
 setAddon(propsTableAddon);
 
 // -------------------------------------

@@ -8,7 +8,7 @@ import Icon from '@ichef/gypcrete/src/Icon';
 import TextLabel from '@ichef/gypcrete/src/TextLabel';
 import TextInput from '@ichef/gypcrete/src/TextInput';
 
-import DebugBox from '../DebugBox';
+import DebugBox from 'utils/DebugBox';
 
 function SettingList() {
     return (
