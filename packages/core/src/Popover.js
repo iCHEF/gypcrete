@@ -1,22 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 
-import anchored from './mixins/anchored';
+import anchored, { anchoredPropTypes, ANCHORED_PLACEMENT } from './mixins/anchored';
 import closable from './mixins/closable';
 import renderToLayer from './mixins/renderToLayer';
 
 import './styles/Popover.scss';
-
-const TOP = 'top';
-const RIGHT = 'right';
-const BOTTOM = 'bottom';
-const LEFT = 'left';
-export const POPOVER_PLACEMENT = { TOP, RIGHT, BOTTOM, LEFT };
 
 export const COMPONENT_NAME = prefixClass('popover');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -27,6 +19,7 @@ export const BEM = {
 };
 
 function Popover({
+    // from anchored()
     placement,
     arrowStyle,
     // React props
@@ -48,12 +41,13 @@ function Popover({
 }
 
 Popover.propTypes = {
-    placement: PropTypes.oneOf(Object.values(POPOVER_PLACEMENT)),
-    arrowStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    ...anchoredPropTypes,
+    // placement
+    // arrowStyle
 };
 
 Popover.defaultProps = {
-    placement: BOTTOM,
+    placement: ANCHORED_PLACEMENT.BOTTOM,
     arrowStyle: {},
 };
 
