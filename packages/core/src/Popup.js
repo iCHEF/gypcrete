@@ -9,7 +9,7 @@ import prefixClass from './utils/prefixClass';
 
 import Icon from './Icon';
 import Overlay from './Overlay';
-import escapable from './mixins/escapable';
+import closable from './mixins/closable';
 import renderToLayer from './mixins/renderToLayer';
 
 import './styles/Popup.scss';
@@ -148,6 +148,6 @@ Popup.defaultProps = {
 
 // export for tests
 export { Popup as PurePopup };
-export const EscapablePopup = escapable(Popup);
+export const EscapablePopup = closable({ onEscape: true })(Popup);
 
 export default renderToLayer(EscapablePopup);
