@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Deprecate `escapable()` mixin in favor of new `closable()`.
 - The `padding` option for `anchored()` is renamed to `edgePadding` for better understanding.
 
+### Breaking
+- `<Tooltip>` now default-exports an anchored version. `<AnchoredTooltip>` is removed from bundle.
+
 ## [1.2.0]
 ### Breaking changes
 - `<EditableBasicRow>` now passes all unknown props to its underlying input.

@@ -6,7 +6,7 @@ import wrapIfNotElement from './utils/wrapIfNotElement';
 import prefixClass from './utils/prefixClass';
 import './styles/IconLayout.scss';
 
-import AnchoredTooltip from './AnchoredTooltip';
+import Tooltip from './Tooltip';
 import Icon from './Icon';
 
 import { STATUS_POSITION } from './StatusIcon';
@@ -15,7 +15,7 @@ export const COMPONENT_NAME = prefixClass('iconlayout'); // Prevent from affecte
 
 /**
  * <IconLayout> needs to be a valid React Component to maintain a ref
- * to its container node, so <AnchoredTooltip> can find its position.
+ * to its container node, so an anchored <Tooltip> can find its position.
  */
 class IconLayout extends PureComponent {
     static propTypes = {
@@ -58,11 +58,11 @@ class IconLayout extends PureComponent {
          * so it won't trigger `mouseleave` event on <IconLayout> and close itself.
          */
         return (
-            <AnchoredTooltip
+            <Tooltip
                 anchor={this.nodeRef}
                 style={{ pointerEvents: 'none' }}>
                 {this.props.errorMsg}
-            </AnchoredTooltip>
+            </Tooltip>
         );
     }
 
