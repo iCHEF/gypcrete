@@ -6,17 +6,14 @@ import keycode from 'keycode';
 import closable from '../closable';
 
 const Foo = () => (
-    <div>Foo</div>
+    <div id="foo">Foo</div>
 );
 
-const delay = delayMs => new Promise(resolve => setTimeout(resolve, delayMs));
+jest.useFakeTimers();
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
-    const ClosableFoo = closable({
-        onEscape: true,
-        onAnyClick: true,
-    })(Foo);
+    const ClosableFoo = closable()(Foo);
 
     const element = <ClosableFoo />;
 
@@ -29,7 +26,8 @@ it('has default configs', () => {
 
     expect(wrapper.instance().getOptions()).toMatchObject({
         onEscape: true,
-        onAnyClick: false,
+        onClickOutside: false,
+        onClickInside: false,
     });
 });
 
@@ -67,8 +65,8 @@ it('does not trigger onClose() call on Escape key up if turned off', () => {
     expect(handleClose).toHaveBeenCalledTimes(0);
 });
 
-it('triggers onClose() call on any click/touch if turned on', () => {
-    const ClosableFoo = closable({ onAnyClick: true })(Foo);
+it('triggers onClose() call on click/touch outside if turned on', () => {
+    const ClosableFoo = closable({ onClickOutside: true })(Foo);
     const handleClose = jest.fn();
 
     mount(<ClosableFoo onClose={handleClose} />);
@@ -81,13 +79,13 @@ it('triggers onClose() call on any click/touch if turned on', () => {
     // jsdom doesn't support constructing TouchEvent yet.
     event = new CustomEvent('touchstart');
     document.dispatchEvent(event);
-    return delay(250).then(() => {
-        expect(handleClose).toHaveBeenCalledTimes(2);
-    });
+
+    jest.runOnlyPendingTimers();
+    expect(handleClose).toHaveBeenCalledTimes(2);
 });
 
-it('does not trigger onClose() call on any click/touch if turned off', () => {
-    const ClosableFoo = closable({ onAnyClick: false })(Foo);
+it('does not trigger onClose() call on any click/touch outside if turned off', () => {
+    const ClosableFoo = closable({ onClickOutside: false })(Foo);
     const handleClose = jest.fn();
 
     mount(<ClosableFoo onClose={handleClose} />);
@@ -99,9 +97,47 @@ it('does not trigger onClose() call on any click/touch if turned off', () => {
 
     event = new CustomEvent('touchstart');
     document.dispatchEvent(event);
-    return delay(250).then(() => {
-        expect(handleClose).toHaveBeenCalledTimes(0);
-    });
+
+    jest.runOnlyPendingTimers();
+    expect(handleClose).toHaveBeenCalledTimes(0);
+});
+
+it('triggers onClose() call on click/touch inside if turned on', () => {
+    const ClosableFoo = closable({ onClickInside: true })(Foo);
+    const handleClose = jest.fn();
+
+    const wrapper = mount(<ClosableFoo onClose={handleClose} />);
+    expect(handleClose).not.toHaveBeenCalled();
+
+    let event = new MouseEvent('click');
+    wrapper.instance().nodeRef.dispatchEvent(event);
+    expect(handleClose).toHaveBeenCalledTimes(1);
+
+    // jsdom doesn't support constructing TouchEvent yet.
+    event = new CustomEvent('touchstart');
+    wrapper.instance().nodeRef.dispatchEvent(event);
+
+    jest.runOnlyPendingTimers();
+    expect(handleClose).toHaveBeenCalledTimes(2);
+});
+
+it('triggers onClose() call on click/touch inside if turned off', () => {
+    const ClosableFoo = closable({ onClickInside: false })(Foo);
+    const handleClose = jest.fn();
+
+    const wrapper = mount(<ClosableFoo onClose={handleClose} />);
+    expect(handleClose).not.toHaveBeenCalled();
+
+    let event = new MouseEvent('click');
+    wrapper.instance().nodeRef.dispatchEvent(event);
+    expect(handleClose).toHaveBeenCalledTimes(0);
+
+    // jsdom doesn't support constructing TouchEvent yet.
+    event = new CustomEvent('touchstart');
+    wrapper.instance().nodeRef.dispatchEvent(event);
+
+    jest.runOnlyPendingTimers();
+    expect(handleClose).toHaveBeenCalledTimes(0);
 });
 
 it('tears down event listeners on unmount', () => {
@@ -124,7 +160,7 @@ it('tears down event listeners on unmount', () => {
 
     event = new CustomEvent('touchstart');
     document.dispatchEvent(event);
-    return delay(250).then(() => {
-        expect(handleClose).not.toHaveBeenCalled();
-    });
+
+    jest.runAllTimers();
+    expect(handleClose).not.toHaveBeenCalled();
 });

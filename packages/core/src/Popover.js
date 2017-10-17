@@ -56,7 +56,8 @@ export { Popover as PurePopover };
 export default renderToLayer(
     closable({
         onEscape: true,
-        onAnyClick: true,
+        onClickOutside: true,
+        onClickInside: true,
     })(
         anchored()(Popover)
     )
