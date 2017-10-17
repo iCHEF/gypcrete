@@ -6,6 +6,10 @@ import classNames from 'classnames';
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 
+import anchored from './mixins/anchored';
+import closable from './mixins/closable';
+import renderToLayer from './mixins/renderToLayer';
+
 import './styles/Popover.scss';
 
 const TOP = 'top';
@@ -52,5 +56,14 @@ Popover.defaultProps = {
     placement: BOTTOM,
     arrowStyle: {},
 };
+
+export const AnchoredPopover = renderToLayer(
+    closable({
+        onEscape: true,
+        onAnyClick: true,
+    })(
+        anchored({ padding: 0 })(Popover)
+    )
+);
 
 export default Popover;
