@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
-import AnchoredTooltip from '../AnchoredTooltip';
+import Tooltip from '../Tooltip';
 import Icon from '../Icon';
 import IconLayout, { PureIconLayout } from '../IconLayout';
 import StatusIcon from '../StatusIcon';
@@ -50,31 +50,31 @@ describe('Pure <IconLayout>', () => {
         expect(wrapper.find(StatusIcon).prop('status')).toBe('loading');
     });
 
-    it('renders errorMsg inside <AnchoredTooltip> on mouse hover', () => {
+    it('renders errorMsg inside <Tooltip> on mouse hover', () => {
         const wrapper = shallow(<PureIconLayout icon="add" errorMsg="Error: foo bar" />);
-        expect(wrapper.find(AnchoredTooltip).exists()).toBeFalsy();
+        expect(wrapper.find(Tooltip).exists()).toBeFalsy();
 
         wrapper.simulate('mouseenter');
-        expect(wrapper.find(AnchoredTooltip).exists()).toBeTruthy();
-        expect(wrapper.find(AnchoredTooltip).prop('children')).toBe('Error: foo bar');
+        expect(wrapper.find(Tooltip).exists()).toBeTruthy();
+        expect(wrapper.find(Tooltip).prop('children')).toBe('Error: foo bar');
 
         wrapper.simulate('mouseleave');
-        expect(wrapper.find(AnchoredTooltip).exists()).toBeFalsy();
+        expect(wrapper.find(Tooltip).exists()).toBeFalsy();
     });
 
     it('renders no tooltip on mouse hover when errorMsg does not exists', () => {
         const wrapper = shallow(<PureIconLayout icon="add" />);
-        expect(wrapper.find(AnchoredTooltip).exists()).toBeFalsy();
+        expect(wrapper.find(Tooltip).exists()).toBeFalsy();
 
         wrapper.simulate('mouseenter');
-        expect(wrapper.find(AnchoredTooltip).exists()).toBeFalsy();
+        expect(wrapper.find(Tooltip).exists()).toBeFalsy();
     });
 
     it('renders no tooltip if explicitly turned off', () => {
         const wrapper = shallow(<PureIconLayout icon="add" tooltip={false} />);
-        expect(wrapper.find(AnchoredTooltip).exists()).toBeFalsy();
+        expect(wrapper.find(Tooltip).exists()).toBeFalsy();
 
         wrapper.simulate('mouseenter');
-        expect(wrapper.find(AnchoredTooltip).exists()).toBeFalsy();
+        expect(wrapper.find(Tooltip).exists()).toBeFalsy();
     });
 });
