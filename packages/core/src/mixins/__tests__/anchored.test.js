@@ -153,53 +153,49 @@ it('renders below when anchor placed near top of viewport', () => {
     expect(boxWrapper.prop('style').top).toBe(50 + ANCHOR_SIZE);
 });
 
-it('renders and aligns to the center line of anchor', () => {
+it('aligns to the center of anchor if space is enough on both left and right', () => {
     const anchorWrapper = mount(<Anchor top={20} left={100} />, { attachTo: anchorRoot });
     const boxWrapper = mount(
         <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
         { attachTo: boxRoot }
     ).find(Box);
 
-    expect(
-        // The center line of <Box>
-        boxWrapper.prop('style').left + (BOX_SIZE / 2)
-    ).toBe(
-        // The center line of <Anchor>
-        100 + (ANCHOR_SIZE / 2)
-    );
+    expect(boxWrapper.prop('style').left)
+        // 100 + (ANCHOR_SIZE / 2) - (BOX_SIZE / 2)
+        .toBe(60);
+
+    // Center-aligned component doesn't specify arrow style.
+    expect(boxWrapper.find(Box).prop('arrowStyle')).toEqual({});
 });
 
-
-it('renders on the left when anchor placed on the right of viewport', () => {
+it('aligns to the right side of anchor if space is not enough on right side', () => {
     const anchorWrapper = mount(<Anchor top={20} left={1000} />, { attachTo: anchorRoot });
     const boxWrapper = mount(
         <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
         { attachTo: boxRoot }
     ).find(Box);
 
-    expect(
-        // The center line of <Box>
-        boxWrapper.prop('style').left + (BOX_SIZE / 2)
-    ).toBeLessThan(
-        // The center line of <Anchor>
-        1000 + (ANCHOR_SIZE / 2)
-    );
+    expect(boxWrapper.prop('style').left)
+        // Viewport width - anchor right offset - box width
+        .toBe(920);
+    expect(boxWrapper.find(Box).prop('arrowStyle').left)
+        // anchor center x - box left
+        .toBe(90);
 });
 
-it('renders on the right when anchor placed on the left of viewport', () => {
+it('aligns to the left side of anchor if space is not enough on left side', () => {
     const anchorWrapper = mount(<Anchor top={20} left={10} />, { attachTo: anchorRoot });
     const boxWrapper = mount(
         <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
         { attachTo: boxRoot }
     ).find(Box);
 
-    expect(
-        // The center line of <Box>
-        boxWrapper.prop('style').left + (BOX_SIZE / 2)
-    ).toBeGreaterThan(
-        // The center line of <Anchor>
-        10 + (ANCHOR_SIZE / 2)
-    );
+    expect(boxWrapper.prop('style').left)
+        // anchor left
+        .toBe(10);
+    expect(boxWrapper.find(Box).prop('arrowStyle').left)
+        // anchor size / 2
+        .toBe(10);
 });
 
 it('can take an HTMLElement as anchor', () => {
