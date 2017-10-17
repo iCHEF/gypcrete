@@ -186,19 +186,18 @@ const anchored = (options = {}) => (WrappedComponent) => {
                     nextState.position.left = (anchorOffset.left + anchorHalfWidth) - selfHalfWidth;
                     break;
 
-                // Child placed on the left (right-aligned)
+                // Right-align to the anchor
                 case (hasSpaceOnLeft && !hasSpaceOnRight):
                     nextState.position.left =
-                        (anchorOffset.left + anchorRect.width + anchoredOptions.padding)
-                            - selfRect.width;
+                        anchorOffset.left + anchorRect.width - selfRect.width;
 
                     nextState.arrowPosition.left =
                         selfRect.width - anchoredOptions.padding - anchorHalfWidth;
                     break;
 
-                // Child placed on the right (left-aligned)
+                // Left-align to the anchor
                 default:
-                    nextState.position.left = anchorOffset.left - anchoredOptions.padding;
+                    nextState.position.left = anchorOffset.left;
                     nextState.arrowPosition.left = anchoredOptions.padding + anchorHalfWidth;
                     break;
             }
