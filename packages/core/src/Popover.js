@@ -58,6 +58,6 @@ export default renderToLayer(
         onEscape: true,
         onAnyClick: true,
     })(
-        anchored({ padding: 0 })(Popover)
+        anchored()(Popover)
     )
 );

@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   But this should not affect the existing package, as the codes are untouched with this change. Please refers to README for details.
 - Upgrade storybook libraries to v3.2.12, also fix the API changes of `storybook-addon-info`.  (#93)(#95)
 - Deprecate `escapable()` mixin in favor of new `closable()`.
+- The `padding` option for `anchored()` is renamed to `edgePadding` for better understanding.
 
 ## [1.2.0]
 ### Breaking changes
