@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import Tooltip, { PureTooltip } from '../Tooltip';
 
-describe('<mixed(Tooltip)>', () => {
+describe('<Tooltip> with mixins', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div');
         const element = <Tooltip>Content</Tooltip>;

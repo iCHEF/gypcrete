@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import Popover, { PurePopover, BEM } from '../Popover';
 
-describe('mixed(<Popover>)', () => {
+describe('<Popover> with mixins', () => {
     it('should render without crashing', () => {
         const div = document.createElement('div');
         const element = <Popover />;
