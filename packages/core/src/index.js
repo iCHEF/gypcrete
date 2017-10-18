@@ -9,10 +9,7 @@ import Tag from './Tag';
 import Text from './Text';
 import EditableText from './EditableText';
 import Tooltip from './Tooltip';
-import AnchoredTooltip from './AnchoredTooltip';
 import SwitchIcon from './SwitchIcon';
-import Overlay from './Overlay';
-import Popup from './Popup';
 
 // Layout helpers
 import FlexCell from './FlexCell';
@@ -36,6 +33,9 @@ import HeaderRow from './HeaderRow';
 import List from './List';
 import ListRow from './ListRow';
 import ColumnView from './ColumnView';
+import Overlay from './Overlay';
+import Popup from './Popup';
+import Popover from './Popover';
 
 export {
     BasicRow,
@@ -46,10 +46,7 @@ export {
     Text,
     EditableText,
     Tooltip,
-    AnchoredTooltip,
     SwitchIcon,
-    Overlay,
-    Popup,
 
     FlexCell,
     IconLayout,
@@ -70,4 +67,7 @@ export {
     List,
     ListRow,
     ColumnView,
+    Overlay,
+    Popup,
+    Popover,
 };

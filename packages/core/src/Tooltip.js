@@ -4,6 +4,9 @@ import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+
+import anchored, { ANCHORED_PLACEMENT } from './mixins/anchored';
+import renderToLayer from './mixins/renderToLayer';
 import './styles/Tooltip.scss';
 
 export const COMPONENT_NAME = prefixClass('tooltip');
@@ -46,4 +49,11 @@ Tooltip.defaultProps = {
     arrowStyle: {},
 };
 
-export default Tooltip;
+export { Tooltip as PureTooltip };
+
+export default renderToLayer(
+    anchored({
+        defaultPlacement: ANCHORED_PLACEMENT.TOP,
+        edgePadding: 3,
+    })(Tooltip)
+);

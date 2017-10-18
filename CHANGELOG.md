@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Migrate and refactor `<Popover>`, exporting an anchored one by default.
+- Add new `closable()` HOC mixin to determine when to “close” on Esc key or on any key/touch on document.
+
 ### Changed
 - Gypcrete is now a multi-package mono-repo built on Lerna.
   It's currently split into:
@@ -12,7 +16,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     * **storybook** (publishes to gh-pages of this repository)
   But this should not affect the existing package, as the codes are untouched with this change. Please refers to README for details.
 - Upgrade storybook libraries to v3.2.12, also fix the API changes of `storybook-addon-info`.  (#93)(#95)
+- Deprecate `escapable()` mixin in favor of new `closable()`.
+- The `padding` option for `anchored()` is renamed to `edgePadding` for better understanding.
 
+### Breaking
+- `<Tooltip>` now default-exports an anchored version. `<AnchoredTooltip>` is removed from bundle.
 
 ## [1.2.0]
 ### Breaking changes

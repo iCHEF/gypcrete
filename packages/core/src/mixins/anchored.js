@@ -1,16 +1,3 @@
-/**
- * anchored() HOC mixin
- * ====================
- * Calculate the absolute position on <body> for the wrapped component,
- * based on specified **anchor** node.
- *
- * Usually used along with `renderToLayer()` mixin.
- *
- * Usage
- * -----
- * const AnchoredComponent = anchored(options)(Component);
- * return <AnchoredComponent anchor={fooRef} />
- */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -25,11 +12,6 @@ export const ANCHORED_PLACEMENT = { TOP, BOTTOM };
 export const anchoredPropTypes = {
     placement: PropTypes.oneOf(Object.values(ANCHORED_PLACEMENT)),
     arrowStyle: PropTypes.objectOf(PropTypes.number),
-};
-
-const DEFAULT_OPTIONS = {
-    padding: 16,
-    defaultPlacement: BOTTOM
 };
 
 /**
@@ -47,13 +29,45 @@ function getVerticalPlacement(defaultPlacement, hasSpaceAbove, hasSpaceBelow) {
     return hasSpaceBelow ? BOTTOM : TOP;
 }
 
-const anchored = (options = {}) => (WrappedComponent) => {
+/**
+ * anchored() HOC mixin
+ * ====================
+ * Calculate the absolute position on <body> for the wrapped component,
+ * based on specified **anchor** node.
+ *
+ * Usually used along with `renderToLayer()` mixin.
+ *
+ * Concept
+ * -------
+ * The mixin will determine the position related to the given anchor,
+ * and tries to place an arrow pointing to the anchor node.
+ *
+ * The arrow should stay in the Component's width, deducting the
+ * “edge padding”.
+ *
+ * ```
+ *                      edge padding
+ * ╭╌┊╌╌╌╌╌╌╌/\╌╌╌╌╌╌╌╌┊╌╮
+ * ╎ ┊                 ┊ ╎
+ * ╎ ┊                 ┊ ╎
+ * ╰╌┊╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┊╌╯
+ *     arrow safe area
+ * ```
+ *
+ * @param {bool} defaultPlacement the default vertical placement
+ * @param {number} edgePadding the number to be deducted when calculating “safe area”
+ *
+ * @example
+ * ```jsx
+ * const AnchoredComponent = anchored(options)(Component);
+ * return <AnchoredComponent anchor={fooRef} />
+ * ```
+ */
+const anchored = ({
+    defaultPlacement = BOTTOM,
+    edgePadding = 16,
+} = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
-
-    const anchoredOptions = {
-        ...DEFAULT_OPTIONS,
-        ...options
-    };
 
     class Anchored extends Component {
         static displayName = `anchored(${componentName})`;
@@ -159,7 +173,7 @@ const anchored = (options = {}) => (WrappedComponent) => {
             const hasSpaceBelow = (window.innerHeight - anchorRect.bottom) >= selfRect.height;
 
             nextState.placement = getVerticalPlacement(
-                anchoredOptions.defaultPlacement,
+                defaultPlacement,
                 hasSpaceAbove,
                 hasSpaceBelow,
             );
@@ -180,26 +194,36 @@ const anchored = (options = {}) => (WrappedComponent) => {
             const hasSpaceOnLeft = anchorRect.left >= selfHalfWidth;
             const hasSpaceOnRight = (window.innerWidth - anchorRect.right) >= selfHalfWidth;
 
+            const arrowSafeAreaWidth = selfRect.width - (edgePadding * 2);
+
             switch (true) {
                 // Center-aligned
                 case (hasSpaceOnLeft && hasSpaceOnRight):
                     nextState.position.left = (anchorOffset.left + anchorHalfWidth) - selfHalfWidth;
                     break;
 
-                // Child placed on the left (right-aligned)
+                // Right-align to the anchor
                 case (hasSpaceOnLeft && !hasSpaceOnRight):
                     nextState.position.left =
-                        (anchorOffset.left + anchorRect.width + anchoredOptions.padding)
-                            - selfRect.width;
+                        anchorOffset.left + anchorRect.width - selfRect.width;
 
-                    nextState.arrowPosition.left =
-                        selfRect.width - anchoredOptions.padding - anchorHalfWidth;
+                    // Calibrate arrow position to stay in safe area
+                    nextState.arrowPosition.left = Math.max(
+                        // anchorOffset.left - nextState.position.left + anchorHalfWidth
+                        selfRect.width - anchorHalfWidth,
+                        edgePadding
+                    );
                     break;
 
-                // Child placed on the right (left-aligned)
+                // Left-align to the anchor
                 default:
-                    nextState.position.left = anchorOffset.left - anchoredOptions.padding;
-                    nextState.arrowPosition.left = anchoredOptions.padding + anchorHalfWidth;
+                    nextState.position.left = anchorOffset.left;
+
+                    // Calibrate arrow position to stay in safe area
+                    nextState.arrowPosition.left = Math.min(
+                        anchorHalfWidth,
+                        arrowSafeAreaWidth
+                    );
                     break;
             }
 
