@@ -1,27 +1,27 @@
 import React from 'react';
 
 import List from '@ichef/gypcrete/src/List';
-import TextInput from '@ichef/gypcrete-form/src/TextInput';
+import TextInputRow from '@ichef/gypcrete-form/src/TextInputRow';
 
 function BasicUsage() {
     return (
         <List title="Configs">
-            <TextInput
+            <TextInputRow
                 label="Module name"
                 defaultValue="Points module" />
 
-            <TextInput
+            <TextInputRow
                 disabled
                 label="Disabled row"
                 value="Points module" />
 
-            <TextInput
+            <TextInputRow
                 readOnly
                 label="Read-only row"
                 value="Points module" />
 
 
-            <TextInput
+            <TextInputRow
                 label="Secret code"
                 value="Foo bar"
                 status="error"

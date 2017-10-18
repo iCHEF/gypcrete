@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import getComponentName from '@ichef/gypcrete/lib/utils/getComponentName';
 import { statusPropTypes } from '@ichef/gypcrete/lib/mixins/withStatus';
@@ -53,7 +53,7 @@ const formRow = (/* mixin options */) => (WrappedComponent) => {
         );
     }
 
-    FormRow.displayName = getComponentName(WrappedComponent);
+    FormRow.displayName = `formRow(${getComponentName(WrappedComponent)})`;
     FormRow.propTypes = propTypes;
     FormRow.defaultProps = defaultProps;
 

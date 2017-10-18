@@ -3,13 +3,11 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 // For props table
-import TextInput from '@ichef/gypcrete-form/src/TextInput';
+import TextInputRow from '@ichef/gypcrete-form/src/TextInputRow';
 
 import BasicUsage from './BasicUsage';
 
-storiesOf('[Form] TextInput', module)
-    .add('basic usage',
-        withInfo()(BasicUsage)
-    )
+storiesOf('[Form] TextInputRow', module)
+    .add('basic usage', withInfo()(BasicUsage))
     // Props table
-    .addPropsTable(() => <TextInput />);
+    .addPropsTable(() => <TextInputRow />);

@@ -1,6 +1,7 @@
-/* eslint-disable import/prefer-default-export */
-import TextInput from './TextInput';
+import TextInputRow from './TextInputRow';
+import SwitchRow from './SwitchRow';
 
 export {
-    TextInput,
+    TextInputRow,
+    SwitchRow,
 };

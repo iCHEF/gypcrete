@@ -1,14 +1,14 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
-import TextInput, { PureTextInput, BEM } from '../TextInput';
+import TextInputRow, { PureTextInputRow, BEM } from '../TextInputRow';
 
-describe('formRow(TextInput)', () => {
+describe('formRow(TextInputRow)', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div');
         const element = (
-            <TextInput
+            <TextInputRow
                 label="foo"
                 defaultValue="bar" />
         );
@@ -17,15 +17,18 @@ describe('formRow(TextInput)', () => {
     });
 });
 
-describe('Pure <TextInput>', () => {
-    it('renders an <input> inside', () => {
+describe('Pure <TextInputRow>', () => {
+    it('renders an <input> inside with all unknown props', () => {
         const wrapper = mount(
-            <PureTextInput
+            <PureTextInputRow
                 label="foo"
                 defaultValue="bar" />
         );
-
         expect(wrapper.find('input').exists()).toBeTruthy();
+
+        wrapper.setProps({ id: 'foo', tabIndex: 3 });
+        expect(wrapper.find('input').prop('id')).toBe('foo');
+        expect(wrapper.find('input').prop('tabIndex')).toBe(3);
     });
 
     it('enters and leaves focused state on input events', () => {
@@ -34,7 +37,7 @@ describe('Pure <TextInput>', () => {
             .toString({ stripBlock: true });
 
         const wrapper = mount(
-            <PureTextInput
+            <PureTextInputRow
                 label="foo"
                 defaultValue="bar" />
         );
