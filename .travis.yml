@@ -3,18 +3,27 @@ language: node_js
 node_js:
     - stable
 
+before_install:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.2.0
+    - export PATH=$HOME/.yarn/bin:$PATH
+
+cache: yarn
+
 install:
     - yarn
 
 before_script:
+    - yarn flow
     - yarn lint
     - yarn test
 
 script:
-    # Deploy package to dist branch or npm
-    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ]; then yarn deploy; fi"
-    # Publish storybook to gh-pages branch
-    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master' ]; then yarn ghpages; fi"
+    # Auth NPM for later release
+    - npm config set //registry.npmjs.org/:_authToken=\${NPM_TOKEN}
+    # Publish canary builds when feature merges back to develop
+    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ]; then yarn canary ; fi"
+    # Publish release builds when merges to master
+    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master' ]; then yarn release; fi"
 
 # Send coverage data to Coveralls
 after_script:

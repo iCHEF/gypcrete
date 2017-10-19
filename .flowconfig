@@ -1,9 +1,10 @@
 [ignore]
 .*/__tests__/.*
 <PROJECT_ROOT>/node_modules/stylelint/*
+<PROJECT_ROOT>/node_modules/radium/*
 
 [include]
-src
+packages/*/src
 
 [libs]
 

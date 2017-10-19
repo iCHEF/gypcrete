@@ -1,0 +1,42 @@
+@import "./mixins";
+$component-name: #{$prefix}-popover;
+
+.#{$component-name} {
+    background-color: $c-popover-background;
+    min-width: rem($popover-min-width);
+    max-width: rem($popover-max-width);
+    padding-bottom: rem($popover-bottom-padding);
+    border-radius: $popover-border-radius;
+    filter: drop-shadow($popover-drop-shadow);
+    position: relative;
+
+    // Elements
+    &__arrow {
+        width: 0;
+        height: 0;
+        display: block;
+        border-color: transparent;
+        border-style: solid;
+        border-width: $popover-arrow-size;
+        position: absolute;
+        left: 50%;
+        margin-left: -$popover-arrow-size;
+    }
+
+    // Position
+    &--bottom {
+        .#{$component-name}__arrow {
+            top: -$popover-arrow-size;
+            border-top-width: 0;
+            border-bottom-color: $c-popover-background;
+        }
+    }
+
+    &--top {
+        .#{$component-name}__arrow {
+            bottom: -$popover-arrow-size;
+            border-bottom-width: 0;
+            border-top-color: $c-popover-background;
+        }
+    }
+}
