@@ -23,7 +23,7 @@ script:
     # Publish canary builds when feature merges back to develop
     - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'develop' ]; then yarn canary ; fi"
     # Publish release builds when merges to master
-    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master' ]; then git checkout master && yarn release; fi"
+    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master' ]; then sh ./scripts/deploy.sh ; fi"
 
 # Send coverage data to Coveralls
 after_script:
