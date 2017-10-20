@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete-form",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Form components built on Gypcrete",
   "repository": "iCHEF/gypcrete",
   "contributors": [
@@ -18,11 +18,11 @@
   },
   "main": "lib/index.js",
   "files": [
-      "dist/",
-      "lib/",
-      "es5/",
-      "README.md",
-      "package.json"
+    "dist/",
+    "lib/",
+    "es5/",
+    "README.md",
+    "package.json"
   ],
   "scripts": {
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
@@ -33,12 +33,12 @@
   },
   "peerDependencies": {
     "babel-runtime": "^6.18.0",
+    "prop-types": "^15.5.8",
     "react": "^15.3.0",
-    "react-dom": "^15.3.0",
-    "prop-types": "^15.5.8"
+    "react-dom": "^15.3.0"
   },
   "dependencies": {
-    "@ichef/gypcrete": "^1.2.0",
+    "@ichef/gypcrete": "^1.3.0",
     "classnames": "^2.2.5",
     "keycode": "^2.1.9"
   },
