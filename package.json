@@ -68,7 +68,7 @@
     "style-loader": "^0.13.2",
     "stylelint": "^7.10.1",
     "stylelint-config-standard": "^16.0.0",
-    "webpack": "^2.2.1"
+    "webpack": "^3.8.1"
   },
   "babel": {
     "extends": "./configs/.babelrc"
