@@ -31,7 +31,7 @@
     "test": "jest ./packages --config=configs/jest.config.json --coverage"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.6",
+    "autoprefixer": "^7.1.6",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
