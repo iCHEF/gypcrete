@@ -57,7 +57,9 @@ class Checkbox extends PureComponent {
     }
 
     updateInputIndeterminate() {
-        this.inputRef.indeterminate = this.props.indeterminate;
+        if (this.inputRef) {
+            this.inputRef.indeterminate = this.props.indeterminate;
+        }
     }
 
     renderCheckboxInput(inputProps, overrideButton) {
