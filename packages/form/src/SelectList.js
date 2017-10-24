@@ -106,12 +106,20 @@ class SelectList extends PureComponent {
         return options;
     }
 
+    getValues(fromCheckedState = this.state.checkedState) {
+        return fromCheckedState
+            .filter(optionValue => optionValue) // all the checked values
+            .keySeq()
+            .toArray();
+    }
+
     handleOptionChange = (optionValue, isChecked) => {
         const { checkedState } = this.state;
+        const nextState = checkedState.set(optionValue, isChecked);
+        const nextValues = this.getValues(nextState);
 
-        this.setState({
-            checkedState: checkedState.set(optionValue, isChecked),
-        });
+        this.setState({ checkedState: nextState });
+        this.props.onChange(nextValues);
     }
 
     renderOptions() {
