@@ -53,7 +53,7 @@ Option.defaultProps = {
  * @example
  * Single response:
  * ```jsx
- * <SelectList value={[1]}>
+ * <SelectList values={[1]}>
  *     <Option label="Option A" value="1" readOnly />
  *     <Option label="Option B" value="2" />
  *     <Option label="Option C" value="3" />
@@ -62,7 +62,7 @@ Option.defaultProps = {
  *
  * Multiple responses:
  * ```jsx
- * <SelectList multiple value={[1, 2]} minCheck={0}>
+ * <SelectList multiple values={[1, 2]} minCheck={0}>
  *     <Option label="Option A" value="1" readOnly />
  *     <Option label="Option B" value="2" />
  *     <Option label="Option C" value="3" />
@@ -72,12 +72,12 @@ Option.defaultProps = {
 
 class SelectList extends PureComponent {
     static propTypes = {
-        value: PropTypes.arrayOf(valueType),
+        values: PropTypes.arrayOf(valueType),
         onChange: PropTypes.func,
     };
 
     static defaultProps = {
-        value: [],
+        values: [],
         onChange: () => {},
     };
 
