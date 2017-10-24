@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Map as ImmutableMap } from 'immutable';
 
 import {
     Checkbox,
@@ -81,6 +82,18 @@ class SelectList extends PureComponent {
         onChange: () => {},
     };
 
+    state = {
+        checkedState: this.getInitialCheckedState(),
+    };
+
+    getInitialCheckedState() {
+        const checkedState = new ImmutableMap();
+
+        return checkedState.withMutations((map) => {
+            this.props.values.forEach(optionValue => map.set(optionValue, true));
+        });
+    }
+
     getOptions() {
         const options = [];
 
@@ -93,10 +106,30 @@ class SelectList extends PureComponent {
         return options;
     }
 
+    handleOptionChange = (optionValue, isChecked) => {
+        const { checkedState } = this.state;
+
+        this.setState({
+            checkedState: checkedState.set(optionValue, isChecked),
+        });
+    }
+
+    renderOptions() {
+        return React.Children.map(this.props.children, (child) => {
+            if (child && child.type === Option) {
+                return React.cloneElement(child, {
+                    checked: this.state.checkedState.get(child.props.value),
+                    onChange: this.handleOptionChange,
+                });
+            }
+            return child;
+        });
+    }
+
     render() {
         return (
             <List>
-                {this.props.children}
+                {this.renderOptions()}
             </List>
         );
     }
