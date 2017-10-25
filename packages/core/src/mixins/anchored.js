@@ -207,24 +207,21 @@ const anchored = ({
                     nextState.position.left =
                         anchorOffset.left + anchorRect.width - selfRect.width;
 
-                    // Calibrate arrow position to stay in safe area
-                    nextState.arrowPosition.left = Math.max(
-                        // anchorOffset.left - nextState.position.left + anchorHalfWidth
-                        selfRect.width - anchorHalfWidth,
-                        edgePadding
-                    );
+                    // anchorOffset.left - nextState.position.left + anchorHalfWidth
+                    nextState.arrowPosition.left = selfRect.width - anchorHalfWidth;
                     break;
 
                 // Left-align to the anchor
                 default:
                     nextState.position.left = anchorOffset.left;
-
-                    // Calibrate arrow position to stay in safe area
-                    nextState.arrowPosition.left = Math.min(
-                        anchorHalfWidth,
-                        arrowSafeAreaWidth
-                    );
+                    nextState.arrowPosition.left = anchorHalfWidth;
                     break;
+            }
+
+            // Calibrate arrow position so it stays in safe area
+            if (nextState.arrowPosition.left < edgePadding
+                || nextState.arrowPosition.left > arrowSafeAreaWidth) {
+                delete nextState.arrowPosition;
             }
 
             this.setState(nextState);
