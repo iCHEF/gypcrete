@@ -46,6 +46,7 @@ class SelectList extends PureComponent {
     static propTypes = {
         multiple: PropTypes.bool,
         minCheck: PropTypes.number,
+        allOptionLabel: PropTypes.node,
         values: PropTypes.arrayOf(valueType),
         defaultValues: PropTypes.arrayOf(valueType),
         onChange: PropTypes.func,
@@ -54,6 +55,7 @@ class SelectList extends PureComponent {
     static defaultProps = {
         multiple: false,
         minCheck: 0,
+        allOptionLabel: 'All',
         values: undefined,
         defaultValues: [],
         onChange: () => {},
@@ -177,7 +179,7 @@ class SelectList extends PureComponent {
 
         return (
             <Option
-                label="All"
+                label={this.props.allOptionLabel}
                 value={null}
                 checked={isAllChecked}
                 onChange={this.handleCheckAllOptionChange} />

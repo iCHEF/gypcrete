@@ -152,8 +152,14 @@ describe('Multiple response mode', () => {
             </SelectList>
         );
 
-        expect(wrapper.find(Option).at(0).prop('onChange'))
-            .toBe(wrapper.instance().handleCheckAllOptionChange);
+        expect(wrapper.find(Option).at(0).props()).toMatchObject({
+            label: 'All',
+            value: null,
+            onChange: wrapper.instance().handleCheckAllOptionChange,
+        });
+
+        wrapper.setProps({ allOptionLabel: 'Check All' });
+        expect(wrapper.find(Option).at(0).prop('label')).toBe('Check All');
     });
 
     it('triggers onChange with multiple values', () => {
