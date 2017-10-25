@@ -2,6 +2,7 @@ import React from 'react';
 
 import List from '@ichef/gypcrete/src/List';
 import SelectRow from '@ichef/gypcrete-form/src/SelectRow';
+import Option from '@ichef/gypcrete-form/src/SelectOption';
 
 const DESC = `
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -14,7 +15,11 @@ function BasicUsage() {
         <List title="Switch rows">
             <SelectRow
                 label="Module default state on iPad"
-                desc={DESC} />
+                desc={DESC}
+                defaultValues={['0']}>
+                <Option label="Yes" value="1" />
+                <Option label="No" value="0" />
+            </SelectRow>
 
             <SelectRow
                 disabled

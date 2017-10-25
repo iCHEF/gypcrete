@@ -13,8 +13,10 @@ import {
 } from '@ichef/gypcrete';
 
 import { PurePopover } from '@ichef/gypcrete/lib/Popover';
-
 import closable from '@ichef/gypcrete/lib/mixins/closable';
+
+import SelectList from './SelectList';
+
 import formRow, { rowPropTypes } from './mixins/formRow';
 import './styles/SelectRow.scss';
 
@@ -50,15 +52,13 @@ class SelectRow extends PureComponent {
         this.setState({ popoverOpen: false });
     }
 
-    renderPopover() {
+    renderPopover(selectListProps) {
         return (
             <Popover
                 onClose={this.handlePopoverClose}>
-                <List>
-                    <ListRow>
-                        <Checkbox basic="Hello World" />
-                    </ListRow>
-                </List>
+                <SelectList
+                    onChange={this.handleSelectChange}
+                    {...selectListProps} />
             </Popover>
         );
     }
@@ -72,6 +72,7 @@ class SelectRow extends PureComponent {
             rowProps,
             // React props
             className,
+            ...selectListProps,
         } = this.props;
         const { popoverOpen } = this.state;
 
@@ -92,7 +93,8 @@ class SelectRow extends PureComponent {
                         bold={!ineditable}
                         basic={label} />
                     <Icon type="unfold" />
-                    {popoverOpen && this.renderPopover()}
+
+                    {popoverOpen && this.renderPopover(selectListProps)}
                 </Content>
             </ListRow>
         );
