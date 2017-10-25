@@ -127,6 +127,11 @@ class SelectList extends PureComponent {
             // #TODO: implement multi-select
         } else {
             const currentCheckedOptionValue = checkedState.findKey(value => value);
+
+            if (optionValue === currentCheckedOptionValue) {
+                // Does not consider a change
+                return;
+            }
             nextState = nextState
                 .set(currentCheckedOptionValue, false)
                 .set(optionValue, isChecked);
