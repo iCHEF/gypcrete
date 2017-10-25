@@ -1,35 +1,38 @@
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 
 import List from '@ichef/gypcrete/src/List';
 import SelectRow from '@ichef/gypcrete-form/src/SelectRow';
 import Option from '@ichef/gypcrete-form/src/SelectOption';
-
-const DESC = `
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Nunc risus risus, gravida in nisl ac, iaculis aliquam dui.
-    Nunc dictum ipsum eu sapien lacinia, eu finibus nibh vestibulum.
-`;
 
 function BasicUsage() {
     return (
         <List title="Switch rows">
             <SelectRow
                 label="Module default state on iPad"
-                desc={DESC}
-                defaultValues={['0']}>
-                <Option label="Yes" value="1" />
-                <Option label="No" value="0" />
+                desc="Default is off"
+                defaultValues={['no']}
+                onChange={action('change')}>
+                <Option label="Yes" value="yes" />
+                <Option label="No" value="no" />
             </SelectRow>
 
             <SelectRow
                 disabled
-                label="Disabled row" />
+                label="Disabled row">
+                <Option label="Yes" value="yes" />
+                <Option label="No" value="no" />
+            </SelectRow>
 
             <SelectRow
                 checked
                 label="World peace"
                 status="error"
-                errorMsg="Cannot declare a war." />
+                errorMsg="Cannot declare a war."
+                values={['peace']}>
+                <Option label="Peace" value="peace" />
+                <Option label="War" value="war" />
+            </SelectRow>
         </List>
     );
 }
