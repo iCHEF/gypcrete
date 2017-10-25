@@ -42,6 +42,22 @@ it('injects props to <SelectOption> in children', () => {
     });
 });
 
+it('reads options only from <SelectOptions>', () => {
+    const wrapper = shallow(
+        <SelectList values={['foo']}>
+            <Option label="Foo" value="foo" />
+            <Option label="Bar" value="bar" />
+            <div />
+        </SelectList>
+    );
+
+    const readOptions = wrapper.instance().getOptions();
+
+    expect(readOptions).toHaveLength(2);
+    expect(readOptions[0].value).toBe('foo');
+    expect(readOptions[1].value).toBe('bar');
+});
+
 describe('Single response mode', () => {
     it('triggers onChange() with only one value', () => {
         const handleChange = jest.fn();
@@ -82,6 +98,20 @@ describe('Single response mode', () => {
         expect(wrapper.instance().getValues()).toEqual(['bar']);
     });
 
+    it('does not update options checked state when controlled', () => {
+        const wrapper = shallow(
+            <SelectList values={['foo']}>
+                <Option label="Foo" value="foo" />
+                <Option label="Bar" value="bar" />
+            </SelectList>
+        );
+        expect(wrapper.instance().getValues()).toEqual(['foo']);
+
+        wrapper.instance().handleOptionChange('bar', true);
+        expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeFalsy();
+        expect(wrapper.instance().getValues()).toEqual(['foo']);
+    });
+
     it('updates <Option checked> if is controlled and values changes', () => {
         const wrapper = shallow(
             <SelectList values={['foo']}>
@@ -95,6 +125,21 @@ describe('Single response mode', () => {
         wrapper.setProps({ values: ['bar'] });
         expect(wrapper.find({ value: 'foo' }).prop('checked')).toBeFalsy();
         expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeTruthy();
+    });
+
+    it('does not update <Option checked> if is uncontrolled and other prop changes', () => {
+        const wrapper = shallow(
+            <SelectList defaultValues={['foo']}>
+                <Option label="Foo" value="foo" />
+                <Option label="Bar" value="bar" />
+            </SelectList>
+        );
+        expect(wrapper.find({ value: 'foo' }).prop('checked')).toBeTruthy();
+        expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeFalsy();
+
+        wrapper.setProps({ defaultValues: ['bar'] });
+        expect(wrapper.find({ value: 'foo' }).prop('checked')).toBeTruthy();
+        expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeFalsy();
     });
 });
 

@@ -8,6 +8,14 @@ import {
 
 import Option, { valueType } from './SelectOption';
 
+function getInitialCheckedState(fromValues) {
+    const checkedState = new ImmutableMap();
+
+    return checkedState.withMutations((map) => {
+        fromValues.forEach(optionValue => map.set(optionValue, true));
+    });
+}
+
 /**
  * <SelectList>
  * ============
@@ -52,27 +60,19 @@ class SelectList extends PureComponent {
     };
 
     state = {
-        checkedState: this.getInitialCheckedState(this.props.values || this.props.defaultValues),
+        checkedState: getInitialCheckedState(this.props.values || this.props.defaultValues),
     };
 
     componentWillReceiveProps(nextProps) {
         if (this.getIsControlled(nextProps)) {
             this.setState({
-                checkedState: this.getInitialCheckedState(nextProps.values),
+                checkedState: getInitialCheckedState(nextProps.values),
             });
         }
     }
 
     getIsControlled(fromProps = this.props) {
         return Array.isArray(fromProps.values);
-    }
-
-    getInitialCheckedState(fromValues = this.props.values) {
-        const checkedState = new ImmutableMap();
-
-        return checkedState.withMutations((map) => {
-            fromValues.forEach(optionValue => map.set(optionValue, true));
-        });
     }
 
     getIsAllChecked() {
