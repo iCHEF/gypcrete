@@ -32,7 +32,7 @@ export function Option({ label, value, readOnly, checked, onChange }) {
 
 Option.propTypes = {
     label: PropTypes.node.isRequired,
-    value: valueType.isRequired,
+    value: valueType,
     readOnly: PropTypes.bool,
     // Set by <SelectList>
     checked: PropTypes.bool,
@@ -40,6 +40,7 @@ Option.propTypes = {
 };
 
 Option.defaultProps = {
+    value: null,
     readOnly: false,
     checked: false,
     onChange: () => {},
