@@ -73,11 +73,15 @@ Option.defaultProps = {
 
 class SelectList extends PureComponent {
     static propTypes = {
+        multiple: PropTypes.bool,
+        minCheck: PropTypes.number,
         values: PropTypes.arrayOf(valueType),
         onChange: PropTypes.func,
     };
 
     static defaultProps = {
+        multiple: false,
+        minCheck: 0,
         values: [],
         onChange: () => {},
     };
@@ -114,8 +118,20 @@ class SelectList extends PureComponent {
     }
 
     handleOptionChange = (optionValue, isChecked) => {
+        const { multiple, minCheck } = this.props;
         const { checkedState } = this.state;
-        const nextState = checkedState.set(optionValue, isChecked);
+
+        let nextState = checkedState;
+
+        if (multiple) {
+            // #TODO: implement multi-select
+        } else {
+            const currentCheckedOptionValue = checkedState.findKey(value => value);
+            nextState = nextState
+                .set(currentCheckedOptionValue, false)
+                .set(optionValue, isChecked);
+        }
+
         const nextValues = this.getValues(nextState);
 
         this.setState({ checkedState: nextState });
