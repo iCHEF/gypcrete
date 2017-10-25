@@ -5,9 +5,11 @@ import { withInfo } from '@storybook/addon-info';
 // For props table
 import SelectList from '@ichef/gypcrete-form/src/SelectList';
 
-import BasicUsage from './BasicUsage';
+import SingleControlled from './SingleControlled';
+import SingleUncontrolled from './SingleUncontrolled';
 
 storiesOf('[Form] SelectList', module)
-    .add('basic usage', withInfo()(BasicUsage))
+    .add('single (uncontrolled)', withInfo()(SingleUncontrolled))
+    .add('single (controlled)', withInfo()(SingleControlled))
     // Props table
     .addPropsTable(() => <SelectList />);
