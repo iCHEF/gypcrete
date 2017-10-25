@@ -76,25 +76,39 @@ class SelectList extends PureComponent {
         multiple: PropTypes.bool,
         minCheck: PropTypes.number,
         values: PropTypes.arrayOf(valueType),
+        defaultValues: PropTypes.arrayOf(valueType),
         onChange: PropTypes.func,
     };
 
     static defaultProps = {
         multiple: false,
         minCheck: 0,
-        values: [],
+        values: undefined,
+        defaultValues: [],
         onChange: () => {},
     };
 
     state = {
-        checkedState: this.getInitialCheckedState(),
+        checkedState: this.getInitialCheckedState(this.props.defaultValues || this.props.values),
     };
 
-    getInitialCheckedState() {
+    componentWillReceiveProps(nextProps) {
+        if (this.getIsControlled(nextProps)) {
+            this.setState({
+                checkedState: this.getInitialCheckedState(nextProps.values),
+            });
+        }
+    }
+
+    getIsControlled(fromProps = this.props) {
+        return Array.isArray(fromProps.values);
+    }
+
+    getInitialCheckedState(fromValues = this.props.values) {
         const checkedState = new ImmutableMap();
 
         return checkedState.withMutations((map) => {
-            this.props.values.forEach(optionValue => map.set(optionValue, true));
+            fromValues.forEach(optionValue => map.set(optionValue, true));
         });
     }
 
@@ -139,7 +153,9 @@ class SelectList extends PureComponent {
 
         const nextValues = this.getValues(nextState);
 
-        this.setState({ checkedState: nextState });
+        if (!this.getIsControlled()) {
+            this.setState({ checkedState: nextState });
+        }
         this.props.onChange(nextValues);
     }
 
