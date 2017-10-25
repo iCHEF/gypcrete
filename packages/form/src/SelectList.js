@@ -3,48 +3,10 @@ import PropTypes from 'prop-types';
 import { Map as ImmutableMap } from 'immutable';
 
 import {
-    Checkbox,
     List,
-    ListRow,
 } from '@ichef/gypcrete';
 
-const valueType = PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.bool,
-]);
-
-export function Option({ label, value, readOnly, checked, onChange }) {
-    const handleCheckboxChange = (event) => {
-        onChange(value, event.target.checked);
-    };
-
-    return (
-        <ListRow>
-            <Checkbox
-                checked={checked}
-                disabled={readOnly}
-                basic={label}
-                onChange={handleCheckboxChange} />
-        </ListRow>
-    );
-}
-
-Option.propTypes = {
-    label: PropTypes.node.isRequired,
-    value: valueType,
-    readOnly: PropTypes.bool,
-    // Set by <SelectList>
-    checked: PropTypes.bool,
-    onChange: PropTypes.func,
-};
-
-Option.defaultProps = {
-    value: null,
-    readOnly: false,
-    checked: false,
-    onChange: () => {},
-};
+import Option, { valueType } from './SelectOption';
 
 /**
  * <SelectList>
@@ -200,7 +162,7 @@ class SelectList extends PureComponent {
             // Check options until matching minCheck
             if (checksNeeded > 0) {
                 variableOptions.slice(0, checksNeeded)
-                    .forEach(option => map.set(option.value, true))
+                    .forEach(option => map.set(option.value, true));
             }
         });
 

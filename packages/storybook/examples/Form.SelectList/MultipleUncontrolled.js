@@ -1,7 +1,8 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import SelectList, { Option } from '@ichef/gypcrete-form/src/SelectList';
+import SelectList from '@ichef/gypcrete-form/src/SelectList';
+import Option from '@ichef/gypcrete-form/src/SelectOption';
 
 function MultipleUncontrolled() {
     return (
