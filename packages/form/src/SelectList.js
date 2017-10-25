@@ -89,6 +89,7 @@ class SelectList extends PureComponent {
     };
 
     state = {
+        readOnlyValues: [],
         checkedState: this.getInitialCheckedState(this.props.defaultValues || this.props.values),
     };
 
@@ -98,6 +99,13 @@ class SelectList extends PureComponent {
                 checkedState: this.getInitialCheckedState(nextProps.values),
             });
         }
+
+        // Cache read-only options
+        const readOnlyValues = this.getOptions(nextProps)
+            .filter(option => option.readOnly)
+            .map(option => option.value);
+
+        this.setState({ readOnlyValues });
     }
 
     getIsControlled(fromProps = this.props) {
@@ -139,6 +147,15 @@ class SelectList extends PureComponent {
             .toArray();
     }
 
+    handleChange(nextCheckedState) {
+        const nextValues = this.getValues(nextCheckedState);
+
+        if (!this.getIsControlled()) {
+            this.setState({ checkedState: nextCheckedState });
+        }
+        this.props.onChange(nextValues);
+    }
+
     handleOptionChange = (optionValue, isChecked) => {
         const { multiple, minCheck } = this.props;
         const { checkedState } = this.state;
@@ -146,8 +163,14 @@ class SelectList extends PureComponent {
         let nextState = checkedState;
 
         if (multiple) {
-            nextState = nextState
-                .set(optionValue, isChecked);
+            nextState = nextState.set(optionValue, isChecked);
+
+            const nextCheckedSize = nextState.filter(value => value).size;
+
+            if (nextCheckedSize < minCheck) {
+                // Cancel this operation
+                return;
+            }
         } else {
             const currentCheckedOptionValue = checkedState.findKey(value => value);
 
@@ -160,16 +183,27 @@ class SelectList extends PureComponent {
                 .set(optionValue, isChecked);
         }
 
-        const nextValues = this.getValues(nextState);
-
-        if (!this.getIsControlled()) {
-            this.setState({ checkedState: nextState });
-        }
-        this.props.onChange(nextValues);
+        this.handleChange(nextState);
     }
 
     handleCheckAllOptionChange = (ignoreThis, isChecked) => {
-        console.log(isChecked);
+        const variableOptions = this.getOptions()
+            .filter(option => !option.readOnly);
+
+        const nextState = this.state.checkedState.withMutations((map) => {
+            variableOptions.forEach(option => map.set(option.value, isChecked));
+
+            const nextCheckedSize = map.filter(value => value).size;
+            const checksNeeded = this.props.minCheck - nextCheckedSize;
+
+            // Check options until matching minCheck
+            if (checksNeeded > 0) {
+                variableOptions.slice(0, checksNeeded)
+                    .forEach(option => map.set(option.value, true))
+            }
+        });
+
+        this.handleChange(nextState);
     }
 
     renderOptions() {
