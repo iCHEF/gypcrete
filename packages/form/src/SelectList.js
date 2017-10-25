@@ -112,10 +112,18 @@ class SelectList extends PureComponent {
         });
     }
 
-    getOptions() {
+
+    getIsAllChecked() {
+        const { checkedState } = this.state;
+        const allOptions = this.getOptions();
+
+        return allOptions.every(option => checkedState.get(option.value));
+    }
+
+    getOptions(fromProps = this.props) {
         const options = [];
 
-        this.props.children.forEach((child) => {
+        fromProps.children.forEach((child) => {
             if (child && child.type === Option) {
                 options.push(child.props);
             }
@@ -138,7 +146,8 @@ class SelectList extends PureComponent {
         let nextState = checkedState;
 
         if (multiple) {
-            // #TODO: implement multi-select
+            nextState = nextState
+                .set(optionValue, isChecked);
         } else {
             const currentCheckedOptionValue = checkedState.findKey(value => value);
 
@@ -159,6 +168,10 @@ class SelectList extends PureComponent {
         this.props.onChange(nextValues);
     }
 
+    handleCheckAllOptionChange = (ignoreThis, isChecked) => {
+        console.log(isChecked);
+    }
+
     renderOptions() {
         return React.Children.map(this.props.children, (child) => {
             if (child && child.type === Option) {
@@ -171,9 +184,22 @@ class SelectList extends PureComponent {
         });
     }
 
+    renderCheckAllOption() {
+        const isAllChecked = this.getIsAllChecked();
+
+        return (
+            <Option
+                label="All"
+                value={null}
+                checked={isAllChecked}
+                onChange={this.handleCheckAllOptionChange} />
+        );
+    }
+
     render() {
         return (
             <List>
+                {this.props.multiple && this.renderCheckAllOption()}
                 {this.renderOptions()}
             </List>
         );
