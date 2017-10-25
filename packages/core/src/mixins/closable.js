@@ -37,6 +37,7 @@ const closable = ({
 
         state = {
             closeDelayTimeout: null,
+            clickedInside: false,
         };
 
         componentDidMount() {
@@ -92,31 +93,41 @@ const closable = ({
         }
 
         handleDocumentClick = () => {
+            if (this.state.clickedInside) {
+                this.setState({ clickedInside: false });
+                return;
+            }
+
             if (onClickOutside) {
                 this.props.onClose();
             }
         }
 
-        // Trigger `onClose()` call on any touch if turned on in options.
         handleDocumentTouch = (event) => {
+            if (this.state.clickedInside) {
+                this.setState({ clickedInside: false });
+                return;
+            }
+
             if (onClickOutside) {
                 this.delayedClose(event);
             }
         }
 
         handleInsideClick = (event) => {
+            this.setState({ clickedInside: true });
+
             if (onClickInside) {
                 this.props.onClose(event);
             }
-            // Stop event from bubbling up so the listeners at document won't hear.
-            event.stopPropagation();
         }
 
         handleInsideTouch = (event) => {
+            this.setState({ clickedInside: true });
+
             if (onClickInside) {
                 this.delayedClose(event);
             }
-            event.stopPropagation();
         }
 
         render() {
