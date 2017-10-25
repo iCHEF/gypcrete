@@ -17,31 +17,6 @@ it('renders without crashing', () => {
     ReactDOM.render(element, div);
 });
 
-it('injects props to <SelectOption> in children', () => {
-    const wrapper = shallow(
-        <SelectList values={['foo']}>
-            <Option label="Foo" value="foo" />
-            <Option label="Bar" value="bar" />
-            <div />
-        </SelectList>
-    );
-
-    expect(wrapper.find({ value: 'foo' }).props()).toMatchObject({
-        checked: true,
-        onChange: wrapper.instance().handleOptionChange,
-    });
-
-    expect(wrapper.find({ value: 'bar' }).props()).toMatchObject({
-        checked: false,
-        onChange: wrapper.instance().handleOptionChange,
-    });
-
-    expect(wrapper.find('div').props()).not.toMatchObject({
-        checked: false,
-        onChange: wrapper.instance().handleOptionChange,
-    });
-});
-
 it('reads options only from <SelectOptions>', () => {
     const wrapper = shallow(
         <SelectList values={['foo']}>
@@ -69,10 +44,10 @@ describe('Single response mode', () => {
         );
         expect(handleChange).not.toHaveBeenCalled();
 
-        wrapper.instance().handleOptionChange('foo', true);
+        wrapper.find('SelectOption[value="foo"]').simulate('change', 'foo', true);
         expect(handleChange).toHaveBeenLastCalledWith(['foo']);
 
-        wrapper.instance().handleOptionChange('bar', true);
+        wrapper.find('SelectOption[value="bar"]').simulate('change', 'bar', true);
         expect(handleChange).toHaveBeenLastCalledWith(['bar']);
     });
 
@@ -85,16 +60,16 @@ describe('Single response mode', () => {
         );
         expect(wrapper.instance().getValues()).toEqual([]);
 
-        wrapper.instance().handleOptionChange('foo', true);
-        expect(wrapper.find({ value: 'foo' }).prop('checked')).toBeTruthy();
+        wrapper.find('SelectOption[value="foo"]').simulate('change', 'foo', true);
+        expect(wrapper.find('SelectOption[value="foo"]').prop('checked')).toBeTruthy();
         expect(wrapper.instance().getValues()).toEqual(['foo']);
 
-        wrapper.instance().handleOptionChange('bar', true);
-        expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeTruthy();
+        wrapper.find('SelectOption[value="bar"]').simulate('change', 'bar', true);
+        expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeTruthy();
         expect(wrapper.instance().getValues()).toEqual(['bar']);
 
-        wrapper.instance().handleOptionChange('bar', false);
-        expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeTruthy();
+        wrapper.find('SelectOption[value="bar"]').simulate('change', 'bar', false);
+        expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeTruthy();
         expect(wrapper.instance().getValues()).toEqual(['bar']);
     });
 
@@ -107,8 +82,8 @@ describe('Single response mode', () => {
         );
         expect(wrapper.instance().getValues()).toEqual(['foo']);
 
-        wrapper.instance().handleOptionChange('bar', true);
-        expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeFalsy();
+        wrapper.find('SelectOption[value="bar"]').simulate('change', 'bar', true);
+        expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeFalsy();
         expect(wrapper.instance().getValues()).toEqual(['foo']);
     });
 
@@ -119,12 +94,12 @@ describe('Single response mode', () => {
                 <Option label="Bar" value="bar" />
             </SelectList>
         );
-        expect(wrapper.find({ value: 'foo' }).prop('checked')).toBeTruthy();
-        expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeFalsy();
+        expect(wrapper.find('SelectOption[value="foo"]').prop('checked')).toBeTruthy();
+        expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeFalsy();
 
         wrapper.setProps({ values: ['bar'] });
-        expect(wrapper.find({ value: 'foo' }).prop('checked')).toBeFalsy();
-        expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeTruthy();
+        expect(wrapper.find('SelectOption[value="foo"]').prop('checked')).toBeFalsy();
+        expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeTruthy();
     });
 
     it('does not update <Option checked> if is uncontrolled and other prop changes', () => {
@@ -134,12 +109,12 @@ describe('Single response mode', () => {
                 <Option label="Bar" value="bar" />
             </SelectList>
         );
-        expect(wrapper.find({ value: 'foo' }).prop('checked')).toBeTruthy();
-        expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeFalsy();
+        expect(wrapper.find('SelectOption[value="foo"]').prop('checked')).toBeTruthy();
+        expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeFalsy();
 
         wrapper.setProps({ defaultValues: ['bar'] });
-        expect(wrapper.find({ value: 'foo' }).prop('checked')).toBeTruthy();
-        expect(wrapper.find({ value: 'bar' }).prop('checked')).toBeFalsy();
+        expect(wrapper.find('SelectOption[value="foo"]').prop('checked')).toBeTruthy();
+        expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeFalsy();
     });
 });
 
@@ -172,13 +147,13 @@ describe('Multiple response mode', () => {
         );
         expect(handleChange).not.toHaveBeenCalled();
 
-        wrapper.instance().handleOptionChange('foo', true);
+        wrapper.find('SelectOption[value="foo"]').simulate('change', 'foo', true);
         expect(handleChange).toHaveBeenLastCalledWith(['foo']);
 
-        wrapper.instance().handleOptionChange('bar', true);
+        wrapper.find('SelectOption[value="bar"]').simulate('change', 'bar', true);
         expect(handleChange).toHaveBeenLastCalledWith(['foo', 'bar']);
 
-        wrapper.instance().handleOptionChange('foo', false);
+        wrapper.find('SelectOption[value="foo"]').simulate('change', 'foo', false);
         expect(handleChange).toHaveBeenLastCalledWith(['bar']);
     });
 
@@ -191,10 +166,10 @@ describe('Multiple response mode', () => {
         );
         expect(wrapper.instance().getValues()).toEqual([]);
 
-        wrapper.instance().handleCheckAllOptionChange(null, true);
+        wrapper.find(Option).at(0).simulate('change', null, true);
         expect(wrapper.instance().getValues()).toEqual(['foo', 'bar']);
 
-        wrapper.instance().handleCheckAllOptionChange(null, false);
+        wrapper.find(Option).at(0).simulate('change', null, false);
         expect(wrapper.instance().getValues()).toEqual([]);
     });
 });
@@ -209,10 +184,10 @@ describe('Read-only options', () => {
         );
         expect(wrapper.instance().getValues()).toEqual(['foo']);
 
-        wrapper.instance().handleCheckAllOptionChange(null, true);
+        wrapper.find(Option).at(0).simulate('change', null, true);
         expect(wrapper.instance().getValues()).toEqual(['foo', 'bar']);
 
-        wrapper.instance().handleCheckAllOptionChange(null, false);
+        wrapper.find(Option).at(0).simulate('change', null, false);
         expect(wrapper.instance().getValues()).toEqual(['foo']);
     });
 });
@@ -227,13 +202,13 @@ describe('Minimum checks limit', () => {
         );
         expect(wrapper.instance().getValues()).toEqual(['foo']);
 
-        wrapper.instance().handleOptionChange('bar', true);
+        wrapper.find('SelectOption[value="bar"]').simulate('change', 'bar', true);
         expect(wrapper.instance().getValues()).toEqual(['foo', 'bar']);
 
-        wrapper.instance().handleOptionChange('foo', false);
+        wrapper.find('SelectOption[value="foo"]').simulate('change', 'foo', false);
         expect(wrapper.instance().getValues()).toEqual(['bar']);
 
-        wrapper.instance().handleOptionChange('bar', false);
+        wrapper.find('SelectOption[value="bar"]').simulate('change', 'bar', false);
         expect(wrapper.instance().getValues()).toEqual(['bar']);
     });
 
@@ -247,10 +222,10 @@ describe('Minimum checks limit', () => {
         );
         expect(wrapper.instance().getValues()).toEqual(['foo', 'option3']);
 
-        wrapper.instance().handleCheckAllOptionChange(null, true);
+        wrapper.find(Option).at(0).simulate('change', null, true);
         expect(wrapper.instance().getValues()).toEqual(['foo', 'option3', 'bar']);
 
-        wrapper.instance().handleCheckAllOptionChange(null, false);
+        wrapper.find(Option).at(0).simulate('change', null, false);
         expect(wrapper.instance().getValues()).toEqual(['foo', 'bar']);
     });
 });
