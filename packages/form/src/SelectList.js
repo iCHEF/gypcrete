@@ -52,7 +52,6 @@ class SelectList extends PureComponent {
     };
 
     state = {
-        readOnlyValues: [],
         checkedState: this.getInitialCheckedState(this.props.values || this.props.defaultValues),
     };
 
@@ -62,13 +61,6 @@ class SelectList extends PureComponent {
                 checkedState: this.getInitialCheckedState(nextProps.values),
             });
         }
-
-        // Cache read-only options
-        const readOnlyValues = this.getOptions(nextProps)
-            .filter(option => option.readOnly)
-            .map(option => option.value);
-
-        this.setState({ readOnlyValues });
     }
 
     getIsControlled(fromProps = this.props) {
@@ -82,7 +74,6 @@ class SelectList extends PureComponent {
             fromValues.forEach(optionValue => map.set(optionValue, true));
         });
     }
-
 
     getIsAllChecked() {
         const { checkedState } = this.state;
