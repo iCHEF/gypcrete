@@ -20,7 +20,7 @@ import SelectList from './SelectList';
 import formRow, { rowPropTypes } from './mixins/formRow';
 import './styles/SelectRow.scss';
 
-const Popover = renderToLayer(
+export const Popover = renderToLayer(
     closable({
         onEscape: true,
         onClickOutside: true,
