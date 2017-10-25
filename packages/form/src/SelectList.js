@@ -90,7 +90,7 @@ class SelectList extends PureComponent {
 
     state = {
         readOnlyValues: [],
-        checkedState: this.getInitialCheckedState(this.props.defaultValues || this.props.values),
+        checkedState: this.getInitialCheckedState(this.props.values || this.props.defaultValues),
     };
 
     componentWillReceiveProps(nextProps) {
