@@ -85,7 +85,14 @@ const closable = ({
             this.nodeRef = node;
         }
 
-        // Trigger `onClose()` call on Escape keyup if turned on in options.
+        handleDocumentClickOrTouch(callback) {
+            if (this.state.clickedInside) {
+                this.setState({ clickedInside: false });
+                return;
+            }
+            callback();
+        }
+
         handleDocumentKeyup = (event) => {
             if (onEscape && event.keyCode === keycode(ESCAPE)) {
                 this.props.onClose(event);
@@ -93,25 +100,19 @@ const closable = ({
         }
 
         handleDocumentClick = () => {
-            if (this.state.clickedInside) {
-                this.setState({ clickedInside: false });
-                return;
-            }
-
-            if (onClickOutside) {
-                this.props.onClose();
-            }
+            this.handleDocumentClickOrTouch(() => {
+                if (onClickOutside) {
+                    this.props.onClose();
+                }
+            });
         }
 
         handleDocumentTouch = (event) => {
-            if (this.state.clickedInside) {
-                this.setState({ clickedInside: false });
-                return;
-            }
-
-            if (onClickOutside) {
-                this.delayedClose(event);
-            }
+            this.handleDocumentClickOrTouch(() => {
+                if (onClickOutside) {
+                    this.delayedClose(event);
+                }
+            });
         }
 
         handleInsideClick = (event) => {
