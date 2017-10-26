@@ -17,13 +17,21 @@ before_script:
     - yarn lint
     - yarn test
 
-script:
-    # Auth NPM for later release
+before_deploy:
     - npm config set //registry.npmjs.org/:_authToken=\${NPM_TOKEN}
-    # Publish canary builds when feature merges back to develop
-    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'develop' ]; then yarn canary ; fi"
-    # Publish release builds when merges to master
-    - "if [ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master' ]; then sh ./scripts/deploy.sh ; fi"
+
+deploy:
+    - provider: script
+      script: yarn canary
+      skip_cleanup: true
+      on:
+        branch: develop
+
+    - provider: script
+      script: yarn release && yarn ghpages
+      skip_cleanup: true
+      on:
+        branch: master
 
 # Send coverage data to Coveralls
 after_script:
