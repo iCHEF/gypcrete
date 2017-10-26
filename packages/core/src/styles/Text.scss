@@ -38,7 +38,8 @@
         font-size: rem($aside-text-font-size);
         line-height: rem($aside-text-line-height);
 
-        .#{$prefix}-state-error & {
+        .#{$prefix}-state-error &,
+        .#{$prefix}-list-row--highlight & {
             color: inherit;
         }
     }

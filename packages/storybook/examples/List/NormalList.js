@@ -28,7 +28,10 @@ function NormalList() {
                 </ListRow>
 
                 <ListRow highlight>
-                    <TextLabel icon="tickets" basic="Highlighted row" />
+                    <TextLabel
+                        icon="tickets"
+                        basic="Highlighted row"
+                        aside="Component aside" />
                 </ListRow>
                 <ListRow>
                     <TextLabel icon="tickets" basic="Row 3" />
