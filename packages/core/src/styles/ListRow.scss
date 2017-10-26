@@ -6,6 +6,10 @@ $component: #{$prefix}-list-row;
     padding: 0 $list-row-padding-horizontal;
     box-sizing: border-box;
 
+    &:hover {
+        background-color: $c-row-bg-hover;
+    }
+
     // --------------------
     //  Elements
     // --------------------
@@ -13,7 +17,6 @@ $component: #{$prefix}-list-row;
         display: flex;
         align-items: flex-start;
         padding: $list-row-padding-vertical 0;
-        // border-bottom: 1px solid $c-divider-row;
         box-shadow: inset 0 -1px 0 $c-divider-row;
 
         // Styles inside List
@@ -45,7 +48,7 @@ $component: #{$prefix}-list-row;
     //  Modifiers
     // --------------------
     &--highlight {
-        background-color: $c-row-bg-highlight;
+        background-color: $c-row-bg-highlight !important;
         color: $c-white;
     }
 }
