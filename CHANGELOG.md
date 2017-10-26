@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - N/A
 
+## [1.3.1]
+### Changed
+- Upgrade webpack to v3 (#101)
+- [Core] Fix aside label for `<Text>` should turn white inside a highlighted `<ListRow>`. (#104)
+- [Core] Adds hover background for `<ListRow>`. (#104)
+- [Core] Fix vertical padding for `<HeaderRow>`. (#104)
+
 ## [1.3.0]
 ### Added
 - Migrate and refactor `<Popover>`, exporting an anchored one by default.

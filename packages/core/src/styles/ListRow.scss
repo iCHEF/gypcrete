@@ -2,9 +2,13 @@
 $component: #{$prefix}-list-row;
 
 .#{$component} {
-    min-height: $row-base-height;
-    padding: 0 $list-row-padding-horizontal;
+    min-height: rem($row-base-height);
+    padding: 0 rem($list-row-padding-horizontal);
     box-sizing: border-box;
+
+    &:hover {
+        background-color: $c-row-bg-hover;
+    }
 
     // --------------------
     //  Elements
@@ -12,8 +16,7 @@ $component: #{$prefix}-list-row;
     &__body {
         display: flex;
         align-items: flex-start;
-        padding: $list-row-padding-vertical 0;
-        // border-bottom: 1px solid $c-divider-row;
+        padding: rem($list-row-padding-vertical) 0;
         box-shadow: inset 0 -1px 0 $c-divider-row;
 
         // Styles inside List
@@ -32,12 +35,12 @@ $component: #{$prefix}-list-row;
 
     &__footer {
         font-size: $list-row-footer-font-size;
-        line-height: $list-row-footer-line-height;
-        padding-top: $list-row-footer-padding-top;
-        padding-bottom: $list-row-footer-padding-bottom;
+        line-height: rem($list-row-footer-line-height);
+        padding-top: rem($list-row-footer-padding-top);
+        padding-bottom: rem($list-row-footer-padding-bottom);
 
         p {
-            margin: 0 0 $list-row-footer-padding-bottom;
+            margin: 0 0 rem($list-row-footer-padding-bottom);
         }
     }
 
@@ -45,7 +48,18 @@ $component: #{$prefix}-list-row;
     //  Modifiers
     // --------------------
     &--highlight {
-        background-color: $c-row-bg-highlight;
+        background-color: $c-row-bg-highlight !important;
         color: $c-white;
+    }
+
+    // --------------------
+    //  In other component
+    // --------------------
+    .#{$prefix}-list--setting & {
+        &:last-of-type {
+            .#{$component}__body {
+                box-shadow: none;
+            }
+        }
     }
 }

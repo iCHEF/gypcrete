@@ -66,5 +66,16 @@ Gypcrete does not publish develop builds to the `dist` branch anymore. It now pu
   * When pushed to `develop` branch --> publish a canary build
   * When pushed to `master` branch --> publish a relase build
 
+### Releasing
+When releasing a new build for Gypcrete, create a release branch `release/x.y.z` and bump version first by:
+```sh
+yarn bumpversion
+```
+
+This will run `lerna publish`, which updates all `package.json` files in `packages/`, commits the changes with pre-configured message and tags that commit.
+
+Then create a pull request for this release branch.
+Once it's merged into `master`, it should trigger `yarn release` and publishes packages to npm.
+
 ## LICENSE
 This project is licensed under the terms of the [Apache License 2.0](https://github.com/ichef/gypcrete/blob/master/LICENSE)
