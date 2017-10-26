@@ -19,6 +19,10 @@ before_script:
 script:
     - yarn test
 
+# Send coverage data to Coveralls
+after_success:
+    - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+
 before_deploy:
     - npm config set //registry.npmjs.org/:_authToken=\${NPM_TOKEN}
 
@@ -34,10 +38,6 @@ deploy:
       skip_cleanup: true
       on:
         branch: master
-
-# Send coverage data to Coveralls
-after_script:
-    - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
 branches:
     only:
