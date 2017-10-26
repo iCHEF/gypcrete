@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete-form",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Form components built on Gypcrete",
   "repository": "iCHEF/gypcrete",
   "contributors": [
@@ -25,6 +25,7 @@
     "package.json"
   ],
   "scripts": {
+    "prepublish": "npm run clean && npm run build",
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
     "build:dist": "webpack --config ./configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
@@ -38,7 +39,7 @@
     "react-dom": "^15.3.0"
   },
   "dependencies": {
-    "@ichef/gypcrete": "^1.3.2",
+    "@ichef/gypcrete": "^1.3.3",
     "classnames": "^2.2.5",
     "keycode": "^2.1.9"
   },
