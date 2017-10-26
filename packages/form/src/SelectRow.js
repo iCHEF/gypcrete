@@ -96,10 +96,12 @@ class SelectRow extends PureComponent {
             <ListRow className={wrapperClassName} {...rowProps}>
                 <Content minified={false} disabled={disabled} {...contentProps}>
                     <Text
-                        ref={(ref) => { this.anchorNode = ref; }}
                         bold={!ineditable}
                         basic={label} />
-                    <Icon type="unfold" />
+
+                    <span ref={(ref) => { this.anchorNode = ref; }}>
+                        <Icon type="unfold" />
+                    </span>
 
                     {popoverOpen && this.renderPopover(selectListProps)}
                 </Content>
