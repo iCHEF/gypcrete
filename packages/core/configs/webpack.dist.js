@@ -62,8 +62,7 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             name: '[name]-[hash:6].[ext]',
-                            outputPath: 'fonts/',
-                            publicPath: 'fonts/'
+                            outputPath: 'fonts/'
                         }
                     }
                 ]
