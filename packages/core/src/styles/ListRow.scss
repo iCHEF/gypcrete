@@ -51,4 +51,15 @@ $component: #{$prefix}-list-row;
         background-color: $c-row-bg-highlight !important;
         color: $c-white;
     }
+
+    // --------------------
+    //  In other component
+    // --------------------
+    .#{$prefix}-list--setting & {
+        &:last-of-type {
+            .#{$component}__body {
+                box-shadow: none;
+            }
+        }
+    }
 }
