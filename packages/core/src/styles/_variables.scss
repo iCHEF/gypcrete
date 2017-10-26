@@ -34,8 +34,6 @@ $component-padding: 4px;
 $element-base-height: 32px;
 $row-base-height: 48px;
 
-$header-padding: 4px;
-
 // ----------------------
 //  <Text>
 // ----------------------
@@ -43,8 +41,6 @@ $basic-text-font-size: $font-size-large;
 $basic-text-line-height: $line-height-large;
 $aside-text-font-size: $font-size-base;
 $aside-text-line-height: $line-height-base;
-
-$header-padding: 4px;
 
 $tag-font-size: $font-size-small;
 $tag-border-radius: 6px;
@@ -82,6 +78,8 @@ $list-row-footer-padding-top: 2px;
 $list-row-footer-padding-bottom: 8px;
 $list-row-footer-font-size: $font-size-small;
 $list-row-footer-line-height: $line-height-small;
+
+$header-row-padding: 4px;
 
 $column-body-padding: 16px;
 
