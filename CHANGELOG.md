@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.3.2]
 ### Fixed
+- Fix `@ichef/gypcrete` not publishing anything. (#110)
+
+## [1.3.2]
+### Fixed
 - Fixed CSS bundle requesting font files from broken path. (#108)
 
 ## [1.3.1]
