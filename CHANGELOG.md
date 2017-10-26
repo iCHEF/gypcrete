@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- N/A
+### Fixed
+- Fixed CSS bundle requesting font files from broken path. (#108)
 
 ## [1.3.1]
 ### Changed
