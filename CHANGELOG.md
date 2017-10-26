@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Migrate and refactor `<Popover>`, exporting an anchored one by default.
 - Add new `closable()` HOC mixin to determine when to “close” on Esc key or on any key/touch on document.
+- Add new `<SelectList>` to handle single or multiple selects by rendering a check list.
+- Add new `<SelectOption>` to provide options for `<SelectList>`.
 
 ### Changed
 - Gypcrete is now a multi-package mono-repo built on Lerna.
