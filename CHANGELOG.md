@@ -27,6 +27,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Upgrade storybook libraries to v3.2.12, also fix the API changes of `storybook-addon-info`.  (#93)(#95)
 - Deprecate `escapable()` mixin in favor of new `closable()`.
 - The `padding` option for `anchored()` is renamed to `edgePadding` for better understanding.
+- Upgrade webpack of main package to v3. (#101)
+- Upgrade jest to v21.2. (#103)
+
+### Bugs Fix
+- [InfiniteScroll] Attach scroll listener when the `scrollNode` is existing.
+- [storybook] Fix <InfiniteScroll> stories.
 
 ### Breaking
 - `<Tooltip>` now default-exports an anchored version. `<AnchoredTooltip>` is removed from bundle.

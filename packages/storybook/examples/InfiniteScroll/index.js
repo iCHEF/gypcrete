@@ -11,13 +11,13 @@ import PageAsContainerExample from './PageAsContainer';
 storiesOf('InfiniteScroll', module)
     .add('basic usage',
         withInfo('placed in a fixed height container')(
-            <BasicUsageExample />
+            () => <BasicUsageExample />
         )
     )
     .add('page as scroll container',
-        withInfo()(
+        withInfo({ inline: false })(
             () => <PageAsContainerExample />
-        )({ source: false })
+        )
     )
     // Props table
     .addPropsTable(
