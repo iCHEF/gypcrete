@@ -31,7 +31,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Upgrade jest to v21.2. (#103)
 
 ### Bugs Fix
-- [Checkbox] Update `indeterminate` attr after the checkbox input element was generated.
 - [InfiniteScroll] Attach scroll listener when the `scrollNode` is existing.
 - [storybook] Fix <InfiniteScroll> stories.
 
