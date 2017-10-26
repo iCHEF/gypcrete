@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 
 import {
     Button,
-    Text,
     TextLabel,
 } from '@ichef/gypcrete';
 
