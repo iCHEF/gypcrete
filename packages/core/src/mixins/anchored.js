@@ -194,7 +194,8 @@ const anchored = ({
             const hasSpaceOnLeft = anchorRect.left >= selfHalfWidth;
             const hasSpaceOnRight = (window.innerWidth - anchorRect.right) >= selfHalfWidth;
 
-            const arrowSafeAreaWidth = selfRect.width - (edgePadding * 2);
+            const arrowSafeAreaLeft = edgePadding;
+            const arrowSafeAreaRight = selfRect.width - edgePadding;
 
             switch (true) {
                 // Center-aligned
@@ -207,24 +208,24 @@ const anchored = ({
                     nextState.position.left =
                         anchorOffset.left + anchorRect.width - selfRect.width;
 
-                    // Calibrate arrow position to stay in safe area
-                    nextState.arrowPosition.left = Math.max(
-                        // anchorOffset.left - nextState.position.left + anchorHalfWidth
-                        selfRect.width - anchorHalfWidth,
-                        edgePadding
-                    );
+                    // anchorOffset.left - nextState.position.left + anchorHalfWidth
+                    nextState.arrowPosition.left = selfRect.width - anchorHalfWidth;
                     break;
 
                 // Left-align to the anchor
                 default:
                     nextState.position.left = anchorOffset.left;
-
-                    // Calibrate arrow position to stay in safe area
-                    nextState.arrowPosition.left = Math.min(
-                        anchorHalfWidth,
-                        arrowSafeAreaWidth
-                    );
+                    nextState.arrowPosition.left = anchorHalfWidth;
                     break;
+            }
+
+            // Calibrate arrow position so it stays in safe area
+            if (nextState.arrowPosition.left < arrowSafeAreaLeft) {
+                nextState.arrowPosition.left = arrowSafeAreaLeft;
+            }
+
+            if (nextState.arrowPosition.left > arrowSafeAreaRight) {
+                nextState.arrowPosition.left = arrowSafeAreaRight;
             }
 
             this.setState(nextState);

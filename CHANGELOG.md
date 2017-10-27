@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Fix aside label for `<Text>` should turn white inside a highlighted `<ListRow>`. (#104)
 - [Core] Adds hover background for `<ListRow>`. (#104)
 - [Core] Fix vertical padding for `<HeaderRow>`. (#104)
+- [Form] Add `<SelectRow>` which lets user to pick options from a `<SelectList>` rendered inside a `<Popover>`. (#107)
 
 ## [1.3.0]
 ### Added

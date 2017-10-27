@@ -1,0 +1,17 @@
+$componenet-name: gyp-form-select;
+
+.#{$componenet-name} {
+    &__popover {
+        .gyp-popover__arrow {
+            left: 50% !important;
+        }
+    }
+
+    .gyp-list-row__body {
+        position: relative;
+    }
+
+    .gyp-button {
+        color: inherit;
+    }
+}

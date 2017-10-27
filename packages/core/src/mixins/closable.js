@@ -37,6 +37,7 @@ const closable = ({
 
         state = {
             closeDelayTimeout: null,
+            clickedInside: false,
         };
 
         componentDidMount() {
@@ -84,7 +85,14 @@ const closable = ({
             this.nodeRef = node;
         }
 
-        // Trigger `onClose()` call on Escape keyup if turned on in options.
+        handleDocumentClickOrTouch(callback) {
+            if (this.state.clickedInside) {
+                this.setState({ clickedInside: false });
+                return;
+            }
+            callback();
+        }
+
         handleDocumentKeyup = (event) => {
             if (onEscape && event.keyCode === keycode(ESCAPE)) {
                 this.props.onClose(event);
@@ -92,31 +100,35 @@ const closable = ({
         }
 
         handleDocumentClick = () => {
-            if (onClickOutside) {
-                this.props.onClose();
-            }
+            this.handleDocumentClickOrTouch(() => {
+                if (onClickOutside) {
+                    this.props.onClose();
+                }
+            });
         }
 
-        // Trigger `onClose()` call on any touch if turned on in options.
         handleDocumentTouch = (event) => {
-            if (onClickOutside) {
-                this.delayedClose(event);
-            }
+            this.handleDocumentClickOrTouch(() => {
+                if (onClickOutside) {
+                    this.delayedClose(event);
+                }
+            });
         }
 
         handleInsideClick = (event) => {
+            this.setState({ clickedInside: true });
+
             if (onClickInside) {
                 this.props.onClose(event);
             }
-            // Stop event from bubbling up so the listeners at document won't hear.
-            event.stopPropagation();
         }
 
         handleInsideTouch = (event) => {
+            this.setState({ clickedInside: true });
+
             if (onClickInside) {
                 this.delayedClose(event);
             }
-            event.stopPropagation();
         }
 
         render() {
