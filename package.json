@@ -24,7 +24,7 @@
     "start": "lerna run storybook --stream",
     "bumpversion": "lerna publish -m \"Bump version to %s\" --skip-npm",
     "release": "lerna publish --yes --repo-version $PACKAGE_VERSION --skip-git",
-    "canary": "lerna publish -c --yes",
+    "canary": "lerna publish -c --yes --exact",
     "ghpages": "lerna run ghpages",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint ./packages --ignore-path=configs/.eslintignore ./ && echo \"eslint: no lint errors\"",
