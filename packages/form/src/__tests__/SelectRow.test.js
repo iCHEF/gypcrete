@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 
 import {
     Button,
+    Text,
     TextLabel,
 } from '@ichef/gypcrete';
 
@@ -82,5 +83,114 @@ describe('Pure <SelectRow>', () => {
 
         expect(element.props.children)
             .toEqual(wrapper.find(SelectList).prop('children'));
+    });
+
+    it('caches selected values from <SelectList> when uncontrolled', () => {
+        const wrapper = shallow(
+            <PureSelectRow multiple label="Select" />
+        );
+        wrapper.setState({ popoverOpen: true });
+        expect(wrapper.state('cachedValues')).toEqual([]);
+
+        wrapper.find(SelectList).simulate('change', [1, 2]);
+        expect(wrapper.state('cachedValues')).toEqual([1, 2]);
+    });
+
+    it('does not cache values from <SelectList> when controlled', () => {
+        const wrapper = shallow(
+            <PureSelectRow multiple label="Select" values={[1]} />
+        );
+        wrapper.setState({ popoverOpen: true });
+        expect(wrapper.state('cachedValues')).toEqual([1]);
+
+        wrapper.find(SelectList).simulate('change', [1, 2]);
+        expect(wrapper.state('cachedValues')).toEqual([1]);
+    });
+
+    it('updates cached values from props when controlled', () => {
+        const wrapper = shallow(
+            <PureSelectRow label="Select" values={[1]} />
+        );
+        expect(wrapper.state('cachedValues')).toEqual([1]);
+
+        wrapper.setProps({ values: [1, 2] });
+        expect(wrapper.state('cachedValues')).toEqual([1, 2]);
+    });
+
+    it('does updates cached values from props when uncontrolled', () => {
+        const wrapper = shallow(
+            <PureSelectRow label="Select" defaultValues={[1]} />
+        );
+        expect(wrapper.state('cachedValues')).toEqual([1]);
+
+        wrapper.setProps({ defaultValues: [1, 2] });
+        expect(wrapper.state('cachedValues')).toEqual([1]);
+    });
+
+    it('controls <SelectList> with cached values', () => {
+        const wrapper = shallow(<PureSelectRow label="Select" />);
+        wrapper.setState({
+            cachedValues: [1],
+            popoverOpen: true,
+        });
+        expect(wrapper.find(SelectList).prop('values')).toEqual([1]);
+
+        wrapper.setState({ cachedValues: [1, 2, 3] });
+        expect(wrapper.find(SelectList).prop('values')).toEqual([1, 2, 3]);
+    });
+
+    it('renders current values on aside', () => {
+        const wrapper = shallow(
+            <PureSelectRow multiple label="Select" values={[]}>
+                <Option label="Foo" value="foo" />
+                <Option label="Bar" value="bar" />
+                <Option label="Meh" value="meh" />
+            </PureSelectRow>
+        );
+        expect(wrapper.find(Text).prop('aside')).toBe('(Unset)');
+
+        wrapper.setProps({ values: ['foo', 'bar'] });
+        expect(wrapper.find(Text).prop('aside')).toBe('Foo, Bar');
+
+        wrapper.setProps({ values: ['foo', 'bar', 'meh'] });
+        expect(wrapper.find(Text).prop('aside')).toBe('All');
+    });
+
+    it('can customize aside labels', () => {
+        const wrapper = shallow(
+            <PureSelectRow multiple label="Select" values={[]} asideNone="None">
+                <Option label="Foo" value="foo" />
+                <Option label="Bar" value="bar" />
+                <Option label="Meh" value="meh" />
+            </PureSelectRow>
+        );
+        expect(wrapper.find(Text).prop('aside')).toBe('None');
+
+        wrapper.setProps({
+            values: ['foo', 'bar'],
+            asideSeparator: ' + '
+        });
+        expect(wrapper.find(Text).prop('aside')).toBe('Foo + Bar');
+
+        wrapper.setProps({
+            values: ['foo', 'bar', 'meh'],
+            asideAll: 'Everything'
+        });
+        expect(wrapper.find(Text).prop('aside')).toBe('Everything');
+    });
+
+    it('can disable "All" label by overriding with null', () => {
+        const wrapper = shallow(
+            <PureSelectRow
+                multiple
+                label="Select"
+                asideAll={null}
+                values={['foo', 'bar', 'meh']}>
+                <Option label="Foo" value="foo" />
+                <Option label="Bar" value="bar" />
+                <Option label="Meh" value="meh" />
+            </PureSelectRow>
+        );
+        expect(wrapper.find(Text).prop('aside')).toBe('Foo, Bar, Meh');
     });
 });
