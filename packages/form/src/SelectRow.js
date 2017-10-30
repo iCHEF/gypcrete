@@ -60,6 +60,10 @@ class SelectRow extends PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
         disabled: PropTypes.bool,
+        // <SelectList> props
+        values: SelectList.propTypes.values,
+        defaultValues: SelectList.propTypes.defaultValues,
+        onChange: PropTypes.func,
         // from formRow()
         ineditable: PropTypes.bool,
         rowProps: rowPropTypes,
@@ -67,6 +71,10 @@ class SelectRow extends PureComponent {
 
     static defaultProps = {
         disabled: false,
+        // <SelectList> props
+        values: SelectList.defaultProps.values,
+        defaultValues: SelectList.defaultProps.defaultValues,
+        onChange: () => {},
         ineditable: false,
         rowProps: {},
     };
@@ -74,12 +82,21 @@ class SelectRow extends PureComponent {
     state = {
         popoverOpen: false,
         valueLabelMap: getValueLabelMap(this.props.children),
+        cachedValues: this.props.values || this.props.defaultValues,
     };
 
     componentWillReceiveProps(nextProps) {
         this.setState({
             valueLabelMap: getValueLabelMap(nextProps.children),
         });
+
+        if (this.getIsControlled(nextProps)) {
+            this.setState({ cachedValues: nextProps.values });
+        }
+    }
+
+    getIsControlled(fromProps = this.props) {
+        return Array.isArray(fromProps.values);
     }
 
     handleButtonClick = () => {
@@ -90,6 +107,13 @@ class SelectRow extends PureComponent {
         this.setState({ popoverOpen: false });
     }
 
+    handleSelectChange = (newValues) => {
+        if (!this.getIsControlled()) {
+            this.setState({ cachedValues: newValues });
+        }
+        this.props.onChange(newValues);
+    }
+
     renderPopover(selectListProps) {
         return (
             <Popover
@@ -97,6 +121,7 @@ class SelectRow extends PureComponent {
                 className={BEM.popover.toString()}
                 onClose={this.handlePopoverClose}>
                 <SelectList
+                    values={this.state.cachedValues}
                     onChange={this.handleSelectChange}
                     {...selectListProps} />
             </Popover>
@@ -107,6 +132,10 @@ class SelectRow extends PureComponent {
         const {
             label,
             disabled,
+            // <ListRow> props (intercepted from it)
+            values,
+            defaultValues,
+            onChange,
             // from formRow()
             ineditable,
             rowProps,
