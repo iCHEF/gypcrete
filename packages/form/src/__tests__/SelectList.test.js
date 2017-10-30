@@ -137,24 +137,28 @@ describe('Multiple response mode', () => {
         expect(wrapper.find(Option).at(0).prop('label')).toBe('Check All');
     });
 
-    it('triggers onChange with multiple values', () => {
+    it('triggers onChange with sorted values', () => {
         const handleChange = jest.fn();
         const wrapper = shallow(
             <SelectList multiple onChange={handleChange}>
                 <Option label="Foo" value="foo" />
                 <Option label="Bar" value="bar" />
+                <Option label="Meh" value="meh" />
             </SelectList>
         );
         expect(handleChange).not.toHaveBeenCalled();
 
-        wrapper.find('SelectOption[value="foo"]').simulate('change', 'foo', true);
-        expect(handleChange).toHaveBeenLastCalledWith(['foo']);
+        wrapper.find('SelectOption[value="meh"]').simulate('change', 'meh', true);
+        expect(handleChange).toHaveBeenLastCalledWith(['meh']);
 
         wrapper.find('SelectOption[value="bar"]').simulate('change', 'bar', true);
-        expect(handleChange).toHaveBeenLastCalledWith(['foo', 'bar']);
+        expect(handleChange).toHaveBeenLastCalledWith(['bar', 'meh']);
 
-        wrapper.find('SelectOption[value="foo"]').simulate('change', 'foo', false);
-        expect(handleChange).toHaveBeenLastCalledWith(['bar']);
+        wrapper.find('SelectOption[value="foo"]').simulate('change', 'foo', true);
+        expect(handleChange).toHaveBeenLastCalledWith(['foo', 'bar', 'meh']);
+
+        wrapper.find('SelectOption[value="bar"]').simulate('change', 'bar', false);
+        expect(handleChange).toHaveBeenLastCalledWith(['foo', 'meh']);
     });
 
     it('can toggle all options at once', () => {
@@ -223,7 +227,7 @@ describe('Minimum checks limit', () => {
         expect(wrapper.instance().getValues()).toEqual(['foo', 'option3']);
 
         wrapper.find(Option).at(0).simulate('change', null, true);
-        expect(wrapper.instance().getValues()).toEqual(['foo', 'option3', 'bar']);
+        expect(wrapper.instance().getValues()).toEqual(['foo', 'bar', 'option3']);
 
         wrapper.find(Option).at(0).simulate('change', null, false);
         expect(wrapper.instance().getValues()).toEqual(['foo', 'bar']);
