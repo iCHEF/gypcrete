@@ -19,6 +19,7 @@ import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
 
 import SelectList from './SelectList';
 
+import parseSelectOptions from './utils/parseSelectOptions';
 import formRow, { rowPropTypes } from './mixins/formRow';
 import './styles/SelectRow.scss';
 
@@ -39,6 +40,22 @@ export const Popover = renderToLayer(
     )
 );
 
+/**
+ * Generate a value-label map from all `<SelectOption>`s.
+ *
+ * @param {array} fromOptions
+ * @return {Map}
+ */
+function getValueLabelMap(fromChildren = []) {
+    const resultMap = new Map();
+    const options = parseSelectOptions(fromChildren);
+
+    options.forEach(
+        option => resultMap.set(option.value, option.label)
+    );
+    return resultMap;
+}
+
 class SelectRow extends PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
@@ -56,7 +73,14 @@ class SelectRow extends PureComponent {
 
     state = {
         popoverOpen: false,
+        valueLabelMap: getValueLabelMap(this.props.children),
     };
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            valueLabelMap: getValueLabelMap(nextProps.children),
+        });
+    }
 
     handleButtonClick = () => {
         this.setState({ popoverOpen: true });
