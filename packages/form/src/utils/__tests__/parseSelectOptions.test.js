@@ -1,0 +1,36 @@
+import React from 'react';
+
+import SelectOption from 'src/SelectOption';
+import parseSelectOptions from '../parseSelectOptions';
+
+it('reads options from React children of <SelectOption>s', () => {
+    const singleOption = <SelectOption label="Foo" value="foo" />;
+
+    expect(parseSelectOptions(singleOption)).toMatchObject([
+        { label: 'Foo', value: 'foo' },
+    ]);
+
+    const multipleOptions = [
+        <SelectOption label="Foo" value="foo" checked />,
+        <SelectOption label="Bar" value="bar" readOnly />,
+        <SelectOption label="Meh" value="meh" />,
+    ];
+    expect(parseSelectOptions(multipleOptions)).toMatchObject([
+        { label: 'Foo', value: 'foo', checked: true },
+        { label: 'Bar', value: 'bar', readOnly: true },
+        { label: 'Meh', value: 'meh' },
+    ]);
+});
+
+it('ignores children that are not <SelectOption>', () => {
+    const children = [
+        <SelectOption label="Foo" value="foo" />,
+        'Hello World!',
+        <SelectOption label="Bar" value="bar" />
+    ];
+
+    expect(parseSelectOptions(children)).toMatchObject([
+        { label: 'Foo', value: 'foo' },
+        { label: 'Bar', value: 'bar' },
+    ]);
+});
