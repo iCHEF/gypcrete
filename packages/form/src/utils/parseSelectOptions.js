@@ -1,15 +1,16 @@
+import { Children } from 'react';
 import SelectOption from '../SelectOption';
 
 /**
  * Convert children of `<SelectOptions>` components to array of options.
  *
- * @param {array} childrenArray - Array of `<SelectOptions>` components
+ * @param {ReactChildren} children - children of `<SelectOptions>`
  * @returns {array}
  */
-function parseSelectOptions(childrenArray = []) {
+function parseSelectOptions(children) {
     const results = [];
 
-    childrenArray.forEach((child) => {
+    Children.forEach(children, (child) => {
         if (child && child.type === SelectOption) {
             results.push(child.props);
         }
