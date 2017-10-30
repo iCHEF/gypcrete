@@ -5,8 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Changed
+### Added
 - Add transition to text in `<TextInputRow>` when being focused.
+
+### Changed
+- `<SelectList>` now passes sorted values via `onChange()`
+- `<SelectRow>` now caches values internally, and use that to control `<SelectList>`
+- Customize display labels for `<SelectRow>` with `asideAll`, `asideNone` and `asideSeparator`.
+- Extract `parseSelectOptions()` helper to read from children of `<SelectOption>`s.
 
 ### Fixed
 - Fix input inside `<TextInputRow>` should take up whole space.
