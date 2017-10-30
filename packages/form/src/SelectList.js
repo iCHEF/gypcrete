@@ -7,6 +7,7 @@ import {
 } from '@ichef/gypcrete';
 
 import Option, { valueType } from './SelectOption';
+import parseSelectOptions from './utils/parseSelectOptions';
 
 function getInitialCheckedState(fromValues) {
     const checkedState = new ImmutableMap();
@@ -85,15 +86,7 @@ class SelectList extends PureComponent {
     }
 
     getOptions(fromProps = this.props) {
-        const options = [];
-
-        fromProps.children.forEach((child) => {
-            if (child && child.type === Option) {
-                options.push(child.props);
-            }
-        });
-
-        return options;
+        return parseSelectOptions(fromProps.children);
     }
 
     getValues(fromCheckedState = this.state.checkedState) {
