@@ -90,10 +90,11 @@ class SelectList extends PureComponent {
     }
 
     getValues(fromCheckedState = this.state.checkedState) {
-        return fromCheckedState
-            .filter(optionValue => optionValue) // all the checked values
-            .keySeq()
-            .toArray();
+        const allOptions = this.getOptions();
+
+        return allOptions
+            .filter(option => fromCheckedState.get(option.value))
+            .map(option => option.value);
     }
 
     handleChange(nextCheckedState) {
