@@ -59,6 +59,9 @@ function getValueLabelMap(fromChildren = []) {
 class SelectRow extends PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
+        asideAll: PropTypes.string,
+        asideNone: PropTypes.string,
+        asideSeparator: PropTypes.string,
         disabled: PropTypes.bool,
         // <SelectList> props
         values: SelectList.propTypes.values,
@@ -70,6 +73,9 @@ class SelectRow extends PureComponent {
     };
 
     static defaultProps = {
+        asideAll: 'All',
+        asideNone: '(Unset)',
+        asideSeparator: ', ',
         disabled: false,
         // <SelectList> props
         values: SelectList.defaultProps.values,
@@ -128,6 +134,24 @@ class SelectRow extends PureComponent {
         );
     }
 
+    renderRowValuesAside() {
+        const { asideAll, asideNone, asideSeparator } = this.props;
+        const { cachedValues, valueLabelMap } = this.state;
+
+        // Can turn off 'All' display by passing `null`.
+        if (asideAll && cachedValues.length === valueLabelMap.size) {
+            return asideAll;
+        }
+
+        if (cachedValues.length === 0) {
+            return asideNone;
+        }
+
+        return cachedValues
+            .map(value => valueLabelMap.get(value))
+            .join(asideSeparator);
+    }
+
     render() {
         const {
             label,
@@ -160,7 +184,8 @@ class SelectRow extends PureComponent {
                 <Content minified={false} disabled={disabled} {...contentProps}>
                     <Text
                         bold={!ineditable}
-                        basic={label} />
+                        basic={label}
+                        aside={this.renderRowValuesAside()} />
 
                     <span ref={(ref) => { this.anchorNode = ref; }}>
                         <Icon type="unfold" />
