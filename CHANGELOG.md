@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- N/A
+### Changed
+- Add transition to text in `<TextInputRow>` when being focused.
+
+### Fixed
+- Fix input inside `<TextInputRow>` should take up whole space.
 
 ## [1.3.2]
 ### Fixed
