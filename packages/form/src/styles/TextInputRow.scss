@@ -16,6 +16,13 @@ $font-weight-bold: 700;
     font-weight: $font-weight-base;
 }
 
+%text-transition {
+    transition-property: font-size, font-weight;
+    transition-duration: 150ms;
+    transition-timing-function: ease-out;
+    will-change: font-size, font-weight, line-height;
+}
+
 .#{$component-name} {
     ::placeholder {
         color: rgba(0, 0, 0, .3);
@@ -42,10 +49,12 @@ $font-weight-bold: 700;
     &--focused {
         .#{$component-name}__label {
             @extend %aside-text;
+            @extend %text-transition;
         }
 
         .#{$component-name}__input {
             @extend %main-text;
+            @extend %text-transition;
         }
     }
 
