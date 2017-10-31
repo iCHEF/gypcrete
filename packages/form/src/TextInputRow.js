@@ -11,7 +11,7 @@ import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
 import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
 
 import formRow, { rowPropTypes } from './mixins/formRow';
-import './styles/TextInput.scss';
+import './styles/TextInputRow.scss';
 
 export const COMPONENT_NAME = prefixClass('form-text-input');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
