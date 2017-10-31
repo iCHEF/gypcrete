@@ -29,6 +29,7 @@ $font-weight-bold: 700;
     &__input {
         @extend %aside-text;
 
+        width: 100%;
         color: inherit;
         font-size: inherit;
         line-height: inherit;
