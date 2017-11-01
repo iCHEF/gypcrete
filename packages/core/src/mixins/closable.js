@@ -5,7 +5,7 @@ import keycode from 'keycode';
 import getComponentName from '../utils/getComponentName';
 
 const ESCAPE = 'Escape';
-const TOUCH_CLOSE_DELAY = 200;
+const TOUCH_CLOSE_DELAY = 100;
 
 /**
  * `closable()` HOC mixin
@@ -42,14 +42,14 @@ const closable = ({
 
         componentDidMount() {
             document.addEventListener('keyup', this.handleDocumentKeyup);
-            document.addEventListener('click', this.handleDocumentClick);
-            document.addEventListener('touchstart', this.handleDocumentTouch);
+            document.addEventListener('click', this.handleDocumentClickOrTouch);
+            document.addEventListener('touchstart', this.handleDocumentClickOrTouch);
         }
 
         componentWillUnmount() {
             document.removeEventListener('keyup', this.handleDocumentKeyup);
-            document.removeEventListener('click', this.handleDocumentClick);
-            document.removeEventListener('touchstart', this.handleDocumentTouch);
+            document.removeEventListener('click', this.handleDocumentClickOrTouch);
+            document.removeEventListener('touchstart', this.handleDocumentClickOrTouch);
             clearTimeout(this.state.closeDelayTimeout);
         }
 
@@ -63,11 +63,8 @@ const closable = ({
         }
 
         /**
-         * Touchstart event fires as soon as finger touches the screen,
-         * emulate ghost-click's time delay to fire child events first
-         * before trigger the onClose event.
-         *
-         * @ref http://stackoverflow.com/a/9634715
+         * Delay slightly to fire child events first
+         * before trigger the `onClose` event.
          */
         delayedClose = (event) => {
             const timeout = setTimeout(
@@ -79,18 +76,10 @@ const closable = ({
 
         captureInsideEvents = (node) => {
             if (node) {
-                node.addEventListener('click', this.handleInsideClick);
-                node.addEventListener('touchstart', this.handleInsideTouch);
+                node.addEventListener('click', this.handleInsideClickOrTouch);
+                node.addEventListener('touchstart', this.handleInsideClickOrTouch);
             }
             this.nodeRef = node;
-        }
-
-        handleDocumentClickOrTouch(callback) {
-            if (this.state.clickedInside) {
-                this.setState({ clickedInside: false });
-                return;
-            }
-            callback();
         }
 
         handleDocumentKeyup = (event) => {
@@ -99,31 +88,18 @@ const closable = ({
             }
         }
 
-        handleDocumentClick = () => {
-            this.handleDocumentClickOrTouch(() => {
-                if (onClickOutside) {
-                    this.props.onClose();
-                }
-            });
-        }
+        handleDocumentClickOrTouch = (event) => {
+            if (this.state.clickedInside) {
+                this.setState({ clickedInside: false });
+                return;
+            }
 
-        handleDocumentTouch = (event) => {
-            this.handleDocumentClickOrTouch(() => {
-                if (onClickOutside) {
-                    this.delayedClose(event);
-                }
-            });
-        }
-
-        handleInsideClick = (event) => {
-            this.setState({ clickedInside: true });
-
-            if (onClickInside) {
-                this.props.onClose(event);
+            if (onClickOutside) {
+                this.delayedClose(event);
             }
         }
 
-        handleInsideTouch = (event) => {
+        handleInsideClickOrTouch = (event) => {
             this.setState({ clickedInside: true });
 
             if (onClickInside) {
