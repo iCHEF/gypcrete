@@ -19,6 +19,7 @@ import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
 
 import SelectList from './SelectList';
 
+import parseSelectOptions from './utils/parseSelectOptions';
 import formRow, { rowPropTypes } from './mixins/formRow';
 import './styles/SelectRow.scss';
 
@@ -39,24 +40,71 @@ export const Popover = renderToLayer(
     )
 );
 
+/**
+ * Generate a value-label map from all `<SelectOption>`s.
+ *
+ * @param {array} fromOptions
+ * @return {Map}
+ */
+function getValueLabelMap(fromChildren = []) {
+    const resultMap = new Map();
+    const options = parseSelectOptions(fromChildren);
+
+    options.forEach(
+        option => resultMap.set(option.value, option.label)
+    );
+    return resultMap;
+}
+
 class SelectRow extends PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
+        asideAll: PropTypes.string,
+        asideNone: PropTypes.string,
+        asideSeparator: PropTypes.string,
         disabled: PropTypes.bool,
+        // <SelectList> props
+        values: SelectList.propTypes.values,
+        defaultValues: SelectList.propTypes.defaultValues,
+        onChange: PropTypes.func,
         // from formRow()
         ineditable: PropTypes.bool,
         rowProps: rowPropTypes,
     };
 
     static defaultProps = {
+        asideAll: 'All',
+        asideNone: '(Unset)',
+        asideSeparator: ', ',
         disabled: false,
+        // <SelectList> props
+        values: SelectList.defaultProps.values,
+        defaultValues: SelectList.defaultProps.defaultValues,
+        onChange: () => {},
+        // from formRow()
         ineditable: false,
         rowProps: {},
     };
 
     state = {
         popoverOpen: false,
+        valueLabelMap: getValueLabelMap(this.props.children),
+        cachedValues: this.props.values || this.props.defaultValues,
     };
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            valueLabelMap: getValueLabelMap(nextProps.children),
+        });
+
+        if (this.getIsControlled(nextProps)) {
+            this.setState({ cachedValues: nextProps.values });
+        }
+    }
+
+    getIsControlled(fromProps = this.props) {
+        return Array.isArray(fromProps.values);
+    }
 
     handleButtonClick = () => {
         this.setState({ popoverOpen: true });
@@ -66,6 +114,13 @@ class SelectRow extends PureComponent {
         this.setState({ popoverOpen: false });
     }
 
+    handleSelectChange = (newValues) => {
+        if (!this.getIsControlled()) {
+            this.setState({ cachedValues: newValues });
+        }
+        this.props.onChange(newValues);
+    }
+
     renderPopover(selectListProps) {
         return (
             <Popover
@@ -73,16 +128,39 @@ class SelectRow extends PureComponent {
                 className={BEM.popover.toString()}
                 onClose={this.handlePopoverClose}>
                 <SelectList
+                    values={this.state.cachedValues}
                     onChange={this.handleSelectChange}
                     {...selectListProps} />
             </Popover>
         );
     }
 
+    renderRowValuesAside() {
+        const { asideAll, asideNone, asideSeparator } = this.props;
+        const { cachedValues, valueLabelMap } = this.state;
+
+        // Can turn off 'All' display by passing `null`.
+        if (asideAll && cachedValues.length === valueLabelMap.size) {
+            return asideAll;
+        }
+
+        if (cachedValues.length === 0) {
+            return asideNone;
+        }
+
+        return cachedValues
+            .map(value => valueLabelMap.get(value))
+            .join(asideSeparator);
+    }
+
     render() {
         const {
             label,
             disabled,
+            // <ListRow> props (intercepted from it)
+            values,
+            defaultValues,
+            onChange,
             // from formRow()
             ineditable,
             rowProps,
@@ -107,7 +185,8 @@ class SelectRow extends PureComponent {
                 <Content minified={false} disabled={disabled} {...contentProps}>
                     <Text
                         bold={!ineditable}
-                        basic={label} />
+                        basic={label}
+                        aside={this.renderRowValuesAside()} />
 
                     <span ref={(ref) => { this.anchorNode = ref; }}>
                         <Icon type="unfold" />
