@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fix input inside `<TextInputRow>` should take up whole space.
 - Fix input inside `<TextInputRow>` should not have background.
+- Fix click events are ignored if fire from components inside `closable()` HOC mixin configured to close on inside click.
 
 ## [1.3.2]
 ### Fixed
