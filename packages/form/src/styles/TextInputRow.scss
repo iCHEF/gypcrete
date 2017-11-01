@@ -37,6 +37,7 @@ $font-weight-bold: 700;
         @extend %aside-text;
 
         width: 100%;
+        background: none;
         color: inherit;
         font-size: inherit;
         line-height: inherit;

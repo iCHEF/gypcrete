@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Fix input inside `<TextInputRow>` should take up whole space.
+- Fix input inside `<TextInputRow>` should not have background.
 
 ## [1.3.2]
 ### Fixed
