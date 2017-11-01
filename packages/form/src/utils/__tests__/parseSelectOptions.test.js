@@ -22,6 +22,7 @@ it('reads options from React children of <SelectOption>s', () => {
     ]);
 });
 
+// #TODO: Add warning for children other than <SelectOption>
 it('ignores children that are not <SelectOption>', () => {
     const children = [
         <SelectOption label="Foo" value="foo" />,

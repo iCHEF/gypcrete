@@ -81,6 +81,7 @@ class SelectRow extends PureComponent {
         values: SelectList.defaultProps.values,
         defaultValues: SelectList.defaultProps.defaultValues,
         onChange: () => {},
+        // from formRow()
         ineditable: false,
         rowProps: {},
     };
