@@ -6,20 +6,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Add transition to text in `<TextInputRow>` when being focused.
+- [Form] Add transition to text in `<TextInputRow>` when being focused.
 - [Core] Add `tinted` prop for `<IconButton>` for a half-transparent icon.
 
 ### Changed
-- `<SelectList>` now passes sorted values via `onChange()`
-- `<SelectRow>` now caches values internally, and use that to control `<SelectList>`
-- Customize display labels for `<SelectRow>` with `asideAll`, `asideNone` and `asideSeparator`.
-- Extract `parseSelectOptions()` helper to read from children of `<SelectOption>`s.
+- [Form] `<SelectList>` now passes sorted values via `onChange()`
+- [Form] `<SelectRow>` now caches values internally, and use that to control `<SelectList>`
+- [Form] Customize display labels for `<SelectRow>` with `asideAll`, `asideNone` and `asideSeparator`.
+- [Form] Extract `parseSelectOptions()` helper to read from children of `<SelectOption>`s.
 - [Core] `<ListRow>` stops forwarding status props to children via context. This is changed against `v1.2.0`.
 
 ### Fixed
-- Fix input inside `<TextInputRow>` should take up whole space.
-- Fix input inside `<TextInputRow>` should not have background.
-- Fix click events are ignored if fire from components inside `closable()` HOC mixin configured to close on inside click.
+- [Form] Fix input inside `<TextInputRow>` should take up whole space.
+- [Form] Fix input inside `<TextInputRow>` should not have background.
+- [Core] Fix click events are ignored if fire from components inside `closable()` HOC mixin configured to close on inside click.
 
 ## [1.3.2]
 ### Fixed
