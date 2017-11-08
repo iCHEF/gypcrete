@@ -163,7 +163,7 @@ const rowComp = ({
                 status,
                 statusOptions,
                 errorMsg,
-                align,
+                align, // for <TextInput>
             };
         }
 
