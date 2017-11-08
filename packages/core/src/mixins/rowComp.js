@@ -148,13 +148,6 @@ const rowComp = ({
             errorMsg: undefined,
         };
 
-        static contextTypes = {
-            ...statusPropTypes,
-            // status,
-            // statusOptions,
-            // errorMsg,
-        };
-
         static childContextTypes = {
             align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
             ...statusPropTypes,
@@ -167,8 +160,8 @@ const rowComp = ({
             const { align, status, statusOptions, errorMsg } = this.props;
 
             return {
-                status: (status === undefined) ? this.context.status : status,
-                statusOptions: statusOptions || this.context.statusOptions,
+                status,
+                statusOptions,
                 errorMsg,
                 align,
             };
