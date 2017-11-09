@@ -105,6 +105,24 @@ it('passes down other props to wrapped component', () => {
     expect(wrapper.find(Foo).prop('bar')).toBeTruthy();
 });
 
+it('holds context for children components', () => {
+    const wrapper = shallow(
+        <RowCompFoo
+            align="right"
+            status="success"
+            statusOptions={{ autoHide: true }}
+            errorMsg="foo-bar" />
+    );
+    const context = wrapper.instance().getChildContext();
+
+    expect(context).toMatchObject({
+        align: 'right',
+        status: 'success',
+        statusOptions: { autoHide: true },
+        errorMsg: 'foo-bar',
+    });
+});
+
 it('takes defaults to its <RowComp> wrapper-component', () => {
     const Comp = rowComp({ defaultAlign: 'center', defaultMinified: true })(Foo);
 

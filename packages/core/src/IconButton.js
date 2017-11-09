@@ -6,14 +6,15 @@ import icBEM from './utils/icBEM';
 import Button, { COMPONENT_NAME } from './Button';
 import IconLayout from './IconLayout';
 
-const rootClass = icBEM(COMPONENT_NAME)
-    .modifier('icon-only')
-    .toString({ stripBlock: true });
-
 /**
  * color & solid props are not invalid in <IconButton>
  */
-function IconButton({ icon, color, solid, ...buttonProps }) {
+function IconButton({ icon, tinted, color, solid, ...buttonProps }) {
+    const rootClass = icBEM(COMPONENT_NAME)
+        .modifier('icon-only')
+        .modifier('tinted', tinted)
+        .toString({ stripBlock: true });
+
     return (
         <Button className={rootClass} {...buttonProps}>
             <IconLayout icon={icon} />
@@ -26,13 +27,15 @@ IconButton.propTypes = {
         PropTypes.string,
         PropTypes.element
     ]).isRequired,
+    tinted: PropTypes.bool,
     color: EnhancedPropTypes.isEmpty,
-    solid: EnhancedPropTypes.isEmpty
+    solid: EnhancedPropTypes.isEmpty,
 };
 
 IconButton.defaultProps = {
+    tinted: false,
     color: undefined,
-    solid: undefined
+    solid: undefined,
 };
 
 export default IconButton;
