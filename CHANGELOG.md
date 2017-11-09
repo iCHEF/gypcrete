@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.4.0]
 ### Added
 - [Form] Add transition to text in `<TextInputRow>` when being focused.
 - [Core] Add `tinted` prop for `<IconButton>` for a half-transparent icon.
