@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete-form",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "Form components built on Gypcrete",
   "repository": "iCHEF/gypcrete",
   "contributors": [
@@ -39,8 +39,9 @@
     "react-dom": "^15.3.0"
   },
   "dependencies": {
-    "@ichef/gypcrete": "^1.3.3",
+    "@ichef/gypcrete": "^1.4.0",
     "classnames": "^2.2.5",
+    "immutable": "^3.8.2",
     "keycode": "^2.1.9"
   },
   "devDependencies": {

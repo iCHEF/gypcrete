@@ -4,8 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
-- N/A
+## [1.4.0]
+### Added
+- [Form] Add transition to text in `<TextInputRow>` when being focused.
+- [Core] Add `tinted` prop for `<IconButton>` for a half-transparent icon.
+
+### Changed
+- [Form] `<SelectList>` now passes sorted values via `onChange()`
+- [Form] `<SelectRow>` now caches values internally, and use that to control `<SelectList>`
+- [Form] Customize display labels for `<SelectRow>` with `asideAll`, `asideNone` and `asideSeparator`.
+- [Form] Extract `parseSelectOptions()` helper to read from children of `<SelectOption>`s.
+- [Core] `<ListRow>` stops forwarding status props to children via context. This is changed against `v1.2.0`.
+
+### Fixed
+- [Form] Fix input inside `<TextInputRow>` should take up whole space.
+- [Form] Fix input inside `<TextInputRow>` should not have background.
+- [Core] Fix click events are ignored if fire from components inside `closable()` HOC mixin configured to close on inside click.
 
 ## [1.3.2]
 ### Fixed
@@ -21,11 +35,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Fix aside label for `<Text>` should turn white inside a highlighted `<ListRow>`. (#104)
 - [Core] Adds hover background for `<ListRow>`. (#104)
 - [Core] Fix vertical padding for `<HeaderRow>`. (#104)
+- [Form] Add `<SelectRow>` which lets user to pick options from a `<SelectList>` rendered inside a `<Popover>`. (#107)
 
 ## [1.3.0]
 ### Added
 - Migrate and refactor `<Popover>`, exporting an anchored one by default.
 - Add new `closable()` HOC mixin to determine when to “close” on Esc key or on any key/touch on document.
+- Add new `<SelectList>` to handle single or multiple selects by rendering a check list.
+- Add new `<SelectOption>` to provide options for `<SelectList>`.
 
 ### Changed
 - Gypcrete is now a multi-package mono-repo built on Lerna.
@@ -36,6 +53,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Upgrade storybook libraries to v3.2.12, also fix the API changes of `storybook-addon-info`.  (#93)(#95)
 - Deprecate `escapable()` mixin in favor of new `closable()`.
 - The `padding` option for `anchored()` is renamed to `edgePadding` for better understanding.
+- Upgrade webpack of main package to v3. (#101)
+- Upgrade jest to v21.2. (#103)
+
+### Bugs Fix
+- [InfiniteScroll] Attach scroll listener when the `scrollNode` is existing.
+- [storybook] Fix <InfiniteScroll> stories.
 
 ### Breaking
 - `<Tooltip>` now default-exports an anchored version. `<AnchoredTooltip>` is removed from bundle.

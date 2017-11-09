@@ -179,8 +179,8 @@ it('aligns to the right side of anchor if space is not enough on right side', ()
         // Viewport width - anchor right offset - box width
         .toBe(920);
     expect(boxWrapper.find(Box).prop('arrowStyle').left)
-        // anchor center x - box left
-        .toBe(90);
+        // box width - edge padding
+        .toBe(84);
 });
 
 it('aligns to the left side of anchor if space is not enough on left side', () => {
@@ -194,8 +194,8 @@ it('aligns to the left side of anchor if space is not enough on left side', () =
         // anchor left
         .toBe(10);
     expect(boxWrapper.find(Box).prop('arrowStyle').left)
-        // anchor size / 2
-        .toBe(10);
+        // edge padding
+        .toBe(16);
 });
 
 it('can take an HTMLElement as anchor', () => {

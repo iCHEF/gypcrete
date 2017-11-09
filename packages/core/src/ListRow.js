@@ -57,25 +57,6 @@ class ListRow extends PureComponent<Props, Props, any> {
         desc: undefined,
     };
 
-    static childContextTypes = {
-        status: statusPropTypes.status,
-        statusOptions: statusPropTypes.statusOptions,
-    };
-
-    /**
-     * Take `status` and its options then pass to children components.
-     * Error messages are rendered in this Row so it's filtered out from context.
-     *
-     * In the future v2, status are expected to be set on a row-basis components.
-     * #TODO: Remove status-related behavior from `rowComp()` mixin.
-     */
-    getChildContext() {
-        return {
-            status: this.props.status,
-            statusOptions: this.props.statusOptions,
-        };
-    }
-
     renderFooter() {
         const { desc, errorMsg } = this.props;
         const hasFooter = desc || errorMsg;

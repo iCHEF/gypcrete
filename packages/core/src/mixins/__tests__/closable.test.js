@@ -65,7 +65,7 @@ it('does not trigger onClose() call on Escape key up if turned off', () => {
     expect(handleClose).toHaveBeenCalledTimes(0);
 });
 
-it('triggers onClose() call on click/touch outside if turned on', () => {
+it('triggers onClose() call on click/touch outside after a delay if turned on', () => {
     const ClosableFoo = closable({ onClickOutside: true })(Foo);
     const handleClose = jest.fn();
 
@@ -74,6 +74,8 @@ it('triggers onClose() call on click/touch outside if turned on', () => {
 
     let event = new MouseEvent('click');
     document.dispatchEvent(event);
+
+    jest.runOnlyPendingTimers();
     expect(handleClose).toHaveBeenCalledTimes(1);
 
     // jsdom doesn't support constructing TouchEvent yet.
@@ -84,7 +86,7 @@ it('triggers onClose() call on click/touch outside if turned on', () => {
     expect(handleClose).toHaveBeenCalledTimes(2);
 });
 
-it('does not trigger onClose() call on any click/touch outside if turned off', () => {
+it('does not trigger onClose() call on any click/touch outside after a delay if turned off', () => {
     const ClosableFoo = closable({ onClickOutside: false })(Foo);
     const handleClose = jest.fn();
 
@@ -93,6 +95,8 @@ it('does not trigger onClose() call on any click/touch outside if turned off', (
 
     let event = new MouseEvent('click');
     document.dispatchEvent(event);
+
+    jest.runOnlyPendingTimers();
     expect(handleClose).toHaveBeenCalledTimes(0);
 
     event = new CustomEvent('touchstart');
@@ -102,7 +106,7 @@ it('does not trigger onClose() call on any click/touch outside if turned off', (
     expect(handleClose).toHaveBeenCalledTimes(0);
 });
 
-it('triggers onClose() call on click/touch inside if turned on', () => {
+it('triggers onClose() call on click/touch inside a delay if turned on', () => {
     const ClosableFoo = closable({ onClickInside: true })(Foo);
     const handleClose = jest.fn();
 
@@ -111,6 +115,8 @@ it('triggers onClose() call on click/touch inside if turned on', () => {
 
     let event = new MouseEvent('click');
     wrapper.instance().nodeRef.dispatchEvent(event);
+
+    jest.runOnlyPendingTimers();
     expect(handleClose).toHaveBeenCalledTimes(1);
 
     // jsdom doesn't support constructing TouchEvent yet.
@@ -121,7 +127,7 @@ it('triggers onClose() call on click/touch inside if turned on', () => {
     expect(handleClose).toHaveBeenCalledTimes(2);
 });
 
-it('triggers onClose() call on click/touch inside if turned off', () => {
+it('triggers onClose() call on click/touch inside a delay if turned off', () => {
     const ClosableFoo = closable({ onClickInside: false })(Foo);
     const handleClose = jest.fn();
 
@@ -130,6 +136,8 @@ it('triggers onClose() call on click/touch inside if turned off', () => {
 
     let event = new MouseEvent('click');
     wrapper.instance().nodeRef.dispatchEvent(event);
+
+    jest.runOnlyPendingTimers();
     expect(handleClose).toHaveBeenCalledTimes(0);
 
     // jsdom doesn't support constructing TouchEvent yet.
