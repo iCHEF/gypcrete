@@ -31,6 +31,18 @@ describe('<IconButton>', () => {
         expect(buttonChidlren.equals(<IconLayout icon="printer" />)).toBeTruthy();
     });
 
+    it('injects additional BEM class to <Button>', () => {
+        const wrapper = shallow(
+            <IconButton
+                tinted
+                icon="printer"
+                className="other-custom-class" />);
+
+        expect(wrapper.hasClass('gyp-button--icon-only')).toBeTruthy();
+        expect(wrapper.hasClass('gyp-button--tinted')).toBeTruthy();
+        expect(wrapper.hasClass('other-custom-class')).toBeTruthy();
+    });
+
     describe('invalid propTypes', () => {
         let consoleStub;
         beforeEach(() => {
