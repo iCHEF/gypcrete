@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+
 import EnhancedPropTypes from './utils/enhancedPropTypes';
 import icBEM from './utils/icBEM';
 
@@ -9,11 +11,21 @@ import IconLayout from './IconLayout';
 /**
  * color & solid props are not invalid in <IconButton>
  */
-function IconButton({ icon, tinted, color, solid, ...buttonProps }) {
-    const rootClass = icBEM(COMPONENT_NAME)
+function IconButton({
+    icon,
+    tinted,
+    color,
+    solid,
+    // React props
+    className,
+    ...buttonProps,
+}) {
+    const bemClass = icBEM(COMPONENT_NAME)
         .modifier('icon-only')
         .modifier('tinted', tinted)
         .toString({ stripBlock: true });
+
+    const rootClass = classNames(bemClass, className);
 
     return (
         <Button className={rootClass} {...buttonProps}>
