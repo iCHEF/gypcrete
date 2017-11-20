@@ -61,4 +61,13 @@ describe('Pure <TextInputRow>', () => {
 
         expect(wrapper.containsMatchingElement(<span data-foo />)).toBeTruthy();
     });
+
+    it('keeps a ref to the <input> inside', () => {
+        const wrapper = mount(
+            <PureTextInputRow label="foo" />
+        );
+
+        const inputRef = wrapper.instance().getInputNode();
+        expect(inputRef).toBeInstanceOf(HTMLInputElement);
+    });
 });

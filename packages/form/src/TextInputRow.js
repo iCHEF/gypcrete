@@ -45,6 +45,10 @@ class TextInputRow extends PureComponent {
         focused: false,
     };
 
+    getInputNode() {
+        return this.inputRef;
+    }
+
     handleInputFocus = (event) => {
         this.setState({ focused: true });
         this.props.onFocus(event);
@@ -58,6 +62,7 @@ class TextInputRow extends PureComponent {
     renderInput(inputProps) {
         return (
             <input
+                ref={(ref) => { this.inputRef = ref; }}
                 type="text"
                 className={BEM.input.toString()}
                 onFocus={this.handleInputFocus}
