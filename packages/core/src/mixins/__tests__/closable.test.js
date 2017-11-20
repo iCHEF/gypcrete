@@ -31,6 +31,23 @@ it('has default configs', () => {
     });
 });
 
+it('takes runtime options', () => {
+    const ClosableFoo = closable()(Foo);
+    const wrapper = mount(
+        <ClosableFoo
+            closable={{
+                onEscape: false,
+                onClickOutside: true,
+            }} />
+    );
+
+    expect(wrapper.instance().getOptions()).toMatchObject({
+        onEscape: false,
+        onClickOutside: true,
+        onClickInside: false,
+    });
+});
+
 it('triggers onClose() call on Escape key up if turned on', () => {
     const ClosableFoo = closable({ onEscape: true })(Foo);
     const handleClose = jest.fn();
