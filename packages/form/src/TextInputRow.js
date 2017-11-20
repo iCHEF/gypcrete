@@ -78,6 +78,7 @@ class TextInputRow extends PureComponent {
             rowProps,
             // React props
             className,
+            children,
             ...inputProps,
         } = this.props;
 
@@ -97,6 +98,8 @@ class TextInputRow extends PureComponent {
                 <TextLabel
                     basic={keyLabel}
                     aside={this.renderInput(inputProps)} />
+
+                {children}
             </ListRow>
         );
     }

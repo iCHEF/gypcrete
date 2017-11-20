@@ -51,4 +51,14 @@ describe('Pure <TextInputRow>', () => {
         expect(wrapper.state('focused')).toBeFalsy();
         expect(wrapper.hasClass(focusedModifier)).toBeFalsy();
     });
+
+    it('accepts additional children', () => {
+        const wrapper = mount(
+            <PureTextInputRow label="foo">
+                <span data-foo />
+            </PureTextInputRow>
+        );
+
+        expect(wrapper.containsMatchingElement(<span data-foo />)).toBeTruthy();
+    });
 });

@@ -72,4 +72,14 @@ describe('Pure <SwitchRow>', () => {
         wrapper.setProps({ checked: false });
         expect(wrapper.text()).toBe('fooTEST_OFF');
     });
+
+    it('accepts additional children', () => {
+        const wrapper = mount(
+            <PureSwitchRow label="foo">
+                <span data-foo />
+            </PureSwitchRow>
+        );
+
+        expect(wrapper.containsMatchingElement(<span data-foo />)).toBeTruthy();
+    });
 });
