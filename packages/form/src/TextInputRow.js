@@ -111,4 +111,4 @@ class TextInputRow extends PureComponent {
 }
 
 export { TextInputRow as PureTextInputRow };
-export default formRow()(TextInputRow);
+export default formRow({ withRef: true })(TextInputRow);
