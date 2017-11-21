@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - [Core] `closable()` HOC mixin now takes runtime options via props. (#118)
+- [Form] `formRow()` HOC mixin now takes `withRef` option to maintain a ref to its wrapped component. (#118)
 - [Form] `<TextInputRow>` and `<SwitchRow>` now accepts `children` prop, will render inside `<ListRow>`. (#118)
 - [Form] `<TextInputRow>` now exposes ref to inner `<input>` via `getInputNode()` method. (#118)
 
