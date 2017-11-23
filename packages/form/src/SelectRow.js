@@ -139,13 +139,13 @@ class SelectRow extends PureComponent {
         const { asideAll, asideNone, asideSeparator } = this.props;
         const { cachedValues, valueLabelMap } = this.state;
 
+        if (cachedValues.length === 0) {
+            return asideNone;
+        }
+
         // Can turn off 'All' display by passing `null`.
         if (asideAll && cachedValues.length === valueLabelMap.size) {
             return asideAll;
-        }
-
-        if (cachedValues.length === 0) {
-            return asideNone;
         }
 
         return cachedValues
