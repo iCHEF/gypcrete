@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import formRow from '../formRow';
 
 function Foo({ children }) {
     return <div>{children}</div>;
 }
-
 const FormRowFoo = formRow()(Foo);
+
+// eslint-disable-next-line react/prefer-stateless-function
+class Bar extends PureComponent {
+    render() {
+        return <div>bar</div>;
+    }
+}
+const FormRowBarWithRef = formRow({ withRef: true })(Bar);
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -62,4 +69,10 @@ it('passes a collected rowProps prop to wrapped component', () => {
         statusOptions: { autoHide: false },
         errorMsg: 'bar',
     });
+});
+
+it('can optionally keep a ref to wrapped component', () => {
+    const wrapper = mount(<FormRowBarWithRef />);
+
+    expect(wrapper.instance().getWrappedComponent()).toBeInstanceOf(Bar);
 });

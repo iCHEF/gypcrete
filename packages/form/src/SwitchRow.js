@@ -83,6 +83,7 @@ class SwitchRow extends PureComponent {
             rowProps,
             // React props
             className,
+            children,
             ...switchProps,
         } = this.props;
 
@@ -97,6 +98,8 @@ class SwitchRow extends PureComponent {
                     status={null}
                     onChange={this.handleSwitchButtonChange}
                     {...switchProps} />
+
+                {children}
             </ListRow>
         );
     }
