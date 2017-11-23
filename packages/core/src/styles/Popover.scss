@@ -5,11 +5,15 @@ $component-name: #{$prefix}-popover;
     background-color: $c-popover-background;
     min-width: rem($popover-min-width);
     max-width: rem($popover-max-width);
+    max-height: rem($popover-max-height);
     padding-bottom: rem($popover-bottom-padding);
     border-radius: $popover-border-radius;
     filter: drop-shadow($popover-drop-shadow);
     position: relative;
     z-index: z(popover);
+    overflow-x: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 
     // Elements
     &__arrow {

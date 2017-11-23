@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - [Core] Fix classNames injected by `<IconButton>` will be overridden with custom `className`. (#117)
+- [Core] Fix `<Popover>` should have `max-height` while making its content scrollable. (#120)
 
 ## [1.4.0]
 ### Added
