@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - [Core] Fix classNames injected by `<IconButton>` will be overridden with custom `className`. (#117)
+- [Core] Fix `<Popover>` should have `max-height` while making its content scrollable. (#120)
+- [Form] Fix unset `<SelectRow>` showing 'All' when it has no option. (#120)
+- [Form] Fix unset `<SelectRow>` label should be tinted. (#120)
 
 ## [1.4.0]
 ### Added

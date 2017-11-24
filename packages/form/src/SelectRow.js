@@ -28,6 +28,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
     root: ROOT_BEM,
     popover: ROOT_BEM.element('popover'),
+    placeholder: ROOT_BEM.element('placeholder'),
 };
 
 export const Popover = renderToLayer(
@@ -139,13 +140,13 @@ class SelectRow extends PureComponent {
         const { asideAll, asideNone, asideSeparator } = this.props;
         const { cachedValues, valueLabelMap } = this.state;
 
+        if (cachedValues.length === 0) {
+            return <span className={BEM.placeholder.toString()}>{asideNone}</span>;
+        }
+
         // Can turn off 'All' display by passing `null`.
         if (asideAll && cachedValues.length === valueLabelMap.size) {
             return asideAll;
-        }
-
-        if (cachedValues.length === 0) {
-            return asideNone;
         }
 
         return cachedValues
