@@ -34,6 +34,8 @@ function BasicIconsSet() {
             <Icon type="play" />
             <Icon type="search" />
             <Icon type="download" />
+            <Icon type="dropdown" />
+            <Icon type="remove-element" />
         </div>
     );
 }
