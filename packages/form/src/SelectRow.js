@@ -161,6 +161,9 @@ class SelectRow extends PureComponent {
     render() {
         const {
             label,
+            asideAll,
+            asideNone,
+            asideSeparator,
             disabled,
             // <ListRow> props (intercepted from it)
             // multiple,
