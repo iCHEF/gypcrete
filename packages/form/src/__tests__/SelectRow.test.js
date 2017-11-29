@@ -193,4 +193,13 @@ describe('Pure <SelectRow>', () => {
         );
         expect(wrapper.find(Text).prop('aside')).toBe('Foo, Bar, Meh');
     });
+
+    it('does not display "All" on single <SelectRow> with only one option', () => {
+        const wrapper = shallow(
+            <PureSelectRow label="Select" values={['foo']}>
+                <Option label="Foo" value="foo" />
+            </PureSelectRow>
+        );
+        expect(wrapper.find(Text).prop('aside')).toBe('Foo');
+    });
 });
