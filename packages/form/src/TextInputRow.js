@@ -45,6 +45,10 @@ class TextInputRow extends PureComponent {
         focused: false,
     };
 
+    getInputNode() {
+        return this.inputRef;
+    }
+
     handleInputFocus = (event) => {
         this.setState({ focused: true });
         this.props.onFocus(event);
@@ -58,6 +62,7 @@ class TextInputRow extends PureComponent {
     renderInput(inputProps) {
         return (
             <input
+                ref={(ref) => { this.inputRef = ref; }}
                 type="text"
                 className={BEM.input.toString()}
                 onFocus={this.handleInputFocus}
@@ -78,6 +83,7 @@ class TextInputRow extends PureComponent {
             rowProps,
             // React props
             className,
+            children,
             ...inputProps,
         } = this.props;
 
@@ -97,10 +103,12 @@ class TextInputRow extends PureComponent {
                 <TextLabel
                     basic={keyLabel}
                     aside={this.renderInput(inputProps)} />
+
+                {children}
             </ListRow>
         );
     }
 }
 
 export { TextInputRow as PureTextInputRow };
-export default formRow()(TextInputRow);
+export default formRow({ withRef: true })(TextInputRow);

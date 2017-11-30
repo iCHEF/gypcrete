@@ -156,13 +156,13 @@
     content: "\e813"; /* "" */
 }
 .#{$prefix}-icon-radio-empty:before {
-    content: "\e814"; /* "" */
+    content: "\e83c"; /* '' */
 }
 .#{$prefix}-icon-radio-half:before {
-    content: "\e815"; /* "" */
+    content: "\e83d"; /* '' */
 }
 .#{$prefix}-icon-radio-selected:before {
-    content: "\e816"; /* "" */
+    content: "\e83e"; /* '' */
 }
 .#{$prefix}-icon-picture:before {
     content: "\e817"; /* "" */
@@ -255,5 +255,26 @@
 }
 .#{$prefix}-icon-clear-item:before {
     content: '\e830'; /* '' */
+}
+.#{$prefix}-icon-first-page:before {
+    content: '\e835'; /* '' */
+}
+.#{$prefix}-icon-inline-question:before {
+    content: '\e838'; /* '' */
+}
+.#{$prefix}-icon-last-page:before {
+    content: '\e839'; /* '' */
+}
+.#{$prefix}-icon-remove-element:before {
+    content: '\e83f'; /* '' */
+}
+.#{$prefix}-icon-dropdown:before {
+    content: '\e840'; /* '' */
+}
+.#{$prefix}-icon-prev-page:before {
+    content: '\e841'; /* '' */
+}
+.#{$prefix}-icon-next-page:before {
+    content: '\e842'; /* '' */
 }
 /* stylelint-enable */

@@ -29,10 +29,20 @@ const closable = ({
 
         static propTypes = {
             onClose: PropTypes.func,
+            closable: PropTypes.shape({
+                onEscape: PropTypes.bool,
+                onClickOutside: PropTypes.bool,
+                onClickInside: PropTypes.bool,
+            }),
         };
 
         static defaultProps = {
             onClose: () => {},
+            closable: {
+                onEscape,
+                onClickInside,
+                onClickOutside,
+            },
         };
 
         state = {
@@ -53,12 +63,17 @@ const closable = ({
             clearTimeout(this.state.closeDelayTimeout);
         }
 
-        // eslint-disable-next-line class-methods-use-this
         getOptions() {
-            return {
+            const configuredOptions = {
                 onEscape,
-                onClickOutside,
                 onClickInside,
+                onClickOutside,
+            };
+            const runtimeOptions = this.props.closable;
+
+            return {
+                ...configuredOptions,
+                ...runtimeOptions,
             };
         }
 
@@ -83,32 +98,41 @@ const closable = ({
         }
 
         handleDocumentKeyup = (event) => {
-            if (onEscape && event.keyCode === keycode(ESCAPE)) {
+            const options = this.getOptions();
+
+            if (options.onEscape && event.keyCode === keycode(ESCAPE)) {
                 this.props.onClose(event);
             }
         }
 
         handleDocumentClickOrTouch = (event) => {
+            const options = this.getOptions();
+
             if (this.state.clickedInside) {
                 this.setState({ clickedInside: false });
                 return;
             }
 
-            if (onClickOutside) {
+            if (options.onClickOutside) {
                 this.delayedClose(event);
             }
         }
 
         handleInsideClickOrTouch = (event) => {
+            const options = this.getOptions();
             this.setState({ clickedInside: true });
 
-            if (onClickInside) {
+            if (options.onClickInside) {
                 this.delayedClose(event);
             }
         }
 
         render() {
-            const { onClose, ...otherProps } = this.props;
+            const {
+                onClose,
+                closable: runtimeOptions,
+                ...otherProps,
+            } = this.props;
 
             return (
                 <div ref={this.captureInsideEvents} role="presentation">

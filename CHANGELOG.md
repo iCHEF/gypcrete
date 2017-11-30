@@ -4,6 +4,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+- N/A
+
+## [1.5.0]
+### Added
+- [Core] Added 7 new icons: (#121)
+  * dropdown
+  * remove-element
+  * inline-question
+  * first-page
+  * prev-page
+  * next-page
+  * last-page
+
+### Changed
+- [Core] `closable()` HOC mixin now takes runtime options via props. (#118)
+- [Form] `formRow()` HOC mixin now takes `withRef` option to maintain a ref to its wrapped component. (#118)
+- [Form] `<TextInputRow>` and `<SwitchRow>` now accepts `children` prop, will render inside `<ListRow>`. (#118)
+- [Form] `<TextInputRow>` now exposes ref to inner `<input>` via `getInputNode()` method. (#118)
+- [Core] Updated 3 icons: (#121)
+  * radio-empty
+  * radio-half
+  * radio-selected
+
+### Fixed
+- [Core] Fix classNames injected by `<IconButton>` will be overridden with custom `className`. (#117)
+- [Core] Fix `<Popover>` should have `max-height` while making its content scrollable. (#120)
+- [Form] Fix unset `<SelectRow>` showing 'All' when it has no option. (#120)
+- [Form] Fix unset `<SelectRow>` label should be tinted. (#120)
+- [Form] Fix a non-multiple `<SelectRow>` with only one `<Option>` showing **All** when the only option is checked. (#122)
+
 ## [1.4.0]
 ### Added
 - [Form] Add transition to text in `<TextInputRow>` when being focused.
