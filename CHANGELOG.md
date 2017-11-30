@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Fix `<Popover>` should have `max-height` while making its content scrollable. (#120)
 - [Form] Fix unset `<SelectRow>` showing 'All' when it has no option. (#120)
 - [Form] Fix unset `<SelectRow>` label should be tinted. (#120)
+- [Form] Fix a non-multiple `<SelectRow>` with only one `<Option>` showing **All** when the only option is checked. (#122)
 
 ## [1.4.0]
 ### Added

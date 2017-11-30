@@ -65,6 +65,7 @@ class SelectRow extends PureComponent {
         asideSeparator: PropTypes.string,
         disabled: PropTypes.bool,
         // <SelectList> props
+        multiple: SelectList.propTypes.multiple,
         values: SelectList.propTypes.values,
         defaultValues: SelectList.propTypes.defaultValues,
         onChange: PropTypes.func,
@@ -79,6 +80,7 @@ class SelectRow extends PureComponent {
         asideSeparator: ', ',
         disabled: false,
         // <SelectList> props
+        multiple: SelectList.defaultProps.multiple,
         values: SelectList.defaultProps.values,
         defaultValues: SelectList.defaultProps.defaultValues,
         onChange: () => {},
@@ -137,16 +139,18 @@ class SelectRow extends PureComponent {
     }
 
     renderRowValuesAside() {
-        const { asideAll, asideNone, asideSeparator } = this.props;
+        const { multiple, asideAll, asideNone, asideSeparator } = this.props;
         const { cachedValues, valueLabelMap } = this.state;
 
         if (cachedValues.length === 0) {
             return <span className={BEM.placeholder.toString()}>{asideNone}</span>;
         }
 
-        // Can turn off 'All' display by passing `null`.
-        if (asideAll && cachedValues.length === valueLabelMap.size) {
-            return asideAll;
+        if (multiple) {
+            // Can turn off 'All' display by passing `null`.
+            if (asideAll && cachedValues.length === valueLabelMap.size) {
+                return asideAll;
+            }
         }
 
         return cachedValues
@@ -157,8 +161,12 @@ class SelectRow extends PureComponent {
     render() {
         const {
             label,
+            asideAll,
+            asideNone,
+            asideSeparator,
             disabled,
             // <ListRow> props (intercepted from it)
+            // multiple,
             values,
             defaultValues,
             onChange,

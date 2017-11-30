@@ -8,7 +8,7 @@ import {
     TextLabel,
 } from '@ichef/gypcrete';
 
-import SelectRow, { PureSelectRow, Popover } from '../SelectRow';
+import SelectRow, { PureSelectRow, Popover, BEM } from '../SelectRow';
 import SelectList from '../SelectList';
 import Option from '../SelectOption';
 
@@ -147,7 +147,8 @@ describe('Pure <SelectRow>', () => {
                 <Option label="Meh" value="meh" />
             </PureSelectRow>
         );
-        expect(wrapper.find(Text).prop('aside')).toBe('(Unset)');
+        expect(wrapper.find(Text).prop('aside'))
+            .toEqual(<span className={BEM.placeholder.toString()}>(Unset)</span>);
 
         wrapper.setProps({ values: ['foo', 'bar'] });
         expect(wrapper.find(Text).prop('aside')).toBe('Foo, Bar');
@@ -164,7 +165,9 @@ describe('Pure <SelectRow>', () => {
                 <Option label="Meh" value="meh" />
             </PureSelectRow>
         );
-        expect(wrapper.find(Text).prop('aside')).toBe('None');
+
+        expect(wrapper.find(Text).prop('aside'))
+            .toEqual(<span className={BEM.placeholder.toString()}>None</span>);
 
         wrapper.setProps({
             values: ['foo', 'bar'],
@@ -192,5 +195,14 @@ describe('Pure <SelectRow>', () => {
             </PureSelectRow>
         );
         expect(wrapper.find(Text).prop('aside')).toBe('Foo, Bar, Meh');
+    });
+
+    it('does not display "All" on single <SelectRow> with only one option', () => {
+        const wrapper = shallow(
+            <PureSelectRow label="Select" values={['foo']}>
+                <Option label="Foo" value="foo" />
+            </PureSelectRow>
+        );
+        expect(wrapper.find(Text).prop('aside')).toBe('Foo');
     });
 });
