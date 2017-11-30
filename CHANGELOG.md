@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- N/A
+
+## [1.5.0]
 ### Added
 - [Core] Added 7 new icons: (#121)
   * dropdown
