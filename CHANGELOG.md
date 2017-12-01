@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - N/A
 
+## [1.5.1]
+### Changed
+- [Form] Update `<SelectRow>` to use new `dropdown` icon. (#124)
+
+### Fixed
+- [Core] Fix `<Checkbox>` not displaying correct icons. (#124)
+
 ## [1.5.0]
 ### Added
 - [Core] Added 7 new icons: (#121)
