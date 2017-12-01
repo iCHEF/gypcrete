@@ -198,7 +198,7 @@ class SelectRow extends PureComponent {
                         aside={this.renderRowValuesAside()} />
 
                     <span ref={(ref) => { this.anchorNode = ref; }}>
-                        <Icon type="unfold" />
+                        <Icon type="dropdown" />
                     </span>
 
                     {popoverOpen && this.renderPopover(selectListProps)}

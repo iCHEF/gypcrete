@@ -21,17 +21,17 @@
         z-index: 1;
 
         &:before {
-            content: "\e814"; // radio-empty
+            content: "\e83c"; // radio-empty
         }
     }
 
     &__input:checked + &__button:before,
     &__input:checked + .#{$prefix}-iconlayout > &__button:before {
-        content: "\e816"; // radio-selected
+        content: "\e83e"; // radio-selected
     }
 
     &__input:indeterminate + &__button:before,
     &__input:indeterminate + .#{$prefix}-iconlayout > &__button:before {
-        content: "\e815"; // radio-half
+        content: "\e83d"; // radio-half
     }
 }
