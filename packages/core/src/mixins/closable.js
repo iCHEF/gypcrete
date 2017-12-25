@@ -13,7 +13,7 @@ const TOUCH_CLOSE_DELAY = 100;
  * Provide various of ways to determine when to “close” a component by
  * binding event listeners on `document`.
  *
- * Formally `escapable()`.
+ * Formerlly `escapable()`.
  *
  * @param {object} options
  */
