@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - N/A
 
+## [1.5.2]
+### Changed
+- [Form] The popover inside a single-value `<SelectRow>` should now close automatically after click on any option. (#125)
+- [Form] Update examples for `<SelectRow>`. (#125)
+
+### Fixed
+- [Core] Fix `<Popover>` should only scroll its container. (#125)
+
 ## [1.5.1]
 ### Changed
 - [Form] Update `<SelectRow>` to use new `dropdown` icon. (#124)
