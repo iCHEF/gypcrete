@@ -2,15 +2,18 @@
 import React, { isValidElement, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import type { ReactChildren } from 'react-flow-types';
+import type { AnyReactElement, ReactChildren } from 'react-flow-types';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+import wrapIfNotElement from './utils/wrapIfNotElement';
+
+import closable from './mixins/closable';
+import renderToLayer from './mixins/renderToLayer';
 
 import Icon from './Icon';
 import Overlay from './Overlay';
-import closable from './mixins/closable';
-import renderToLayer from './mixins/renderToLayer';
+import TextLabel from './TextLabel';
 
 import './styles/Popup.scss';
 
@@ -26,8 +29,8 @@ export const BEM = {
 };
 
 export type Props = {
-    icon?: string | ReactChildren,
-    message?: ReactChildren,
+    icon?: string | AnyReactElement,
+    message?: string | AnyReactElement,
     buttons?: React$Element<*>[],
 
     /* eslint-disable react/require-default-props */
@@ -36,42 +39,19 @@ export type Props = {
     /* eslint-enable react/require-default-props */
 };
 
-/**
- * Render popup's icon
- *
- * @param  {String|Element} icon
- * @return {Element}
- */
-function renderPopupIcon(icon) {
-    if (typeof icon === 'string') {
-        return (
-            <Icon
-                large
-                color="blue"
-                type={icon} />
-        );
-    }
-
-    return icon;
+function PopupIcon({ type }) {
+    return <Icon large type={type} />;
 }
+PopupIcon.propTypes = {
+    type: PropTypes.string.isRequired,
+};
 
-/**
- * Render popup's message
- *
- * @param  {Element|String} message
- * @return {Element}
- */
-function renderPopupMessage(message) {
-    if (!message) {
-        return null;
-    }
-
-    return (
-        <div className={BEM.message.toString()}>
-            {message}
-        </div>
-    );
+function PopupMessage({ text }) {
+    return <TextLabel align="center" basic={text} />;
 }
+PopupMessage.propTypes = {
+    text: PropTypes.string.isRequired,
+};
 
 /**
  * Render popup's buttons
@@ -113,7 +93,7 @@ function Popup({
     // React props
     className,
     children,
-    ...popupProps
+    ...popupProps,
 }: Props) {
     const rootClassName = classNames(BEM.root.toString(), className);
 
@@ -121,10 +101,10 @@ function Popup({
         <div className={rootClassName} {...popupProps}>
             <Overlay />
 
-            <div className={BEM.container.toString()}>
-                <div className={BEM.body.toString()}>
-                    {renderPopupIcon(icon)}
-                    {renderPopupMessage(message)}
+            <div className={BEM.container}>
+                <div className={BEM.body}>
+                    {icon && wrapIfNotElement(icon, { with: PopupIcon, via: 'type' })}
+                    {message && wrapIfNotElement(message, { with: PopupMessage, via: 'text' })}
                 </div>
 
                 {renderPopupButtons(buttons)}
@@ -134,9 +114,14 @@ function Popup({
     );
 }
 
+const StringOrElement = PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+]);
+
 Popup.propTypes = {
-    icon: PropTypes.node,
-    message: PropTypes.node,
+    icon: StringOrElement,
+    message: StringOrElement,
     buttons: PropTypes.arrayOf(PropTypes.element)
 };
 

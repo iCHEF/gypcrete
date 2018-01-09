@@ -1,10 +1,12 @@
 @import "./mixins";
 
+$component: #{$prefix}-popup;
+
 // -------------------------------------
 //   Popup
 // -------------------------------------
 
-.#{$prefix}-popup {
+.#{$component} {
     position: fixed;
     top: 0;
     left: 0;
@@ -43,12 +45,18 @@
 
     // Body
     &__body {
-        padding: 8px 16px 32px;
+        padding: rem(10px);
     }
 
     // Message
     &__message {
         line-height: 1.3em;
+    }
+
+    // Nested components
+    .#{$prefix}-icon--large {
+        margin-top: rem(-8px);
+        margin-bottom: rem(-16px);
     }
 }
 
