@@ -10,9 +10,7 @@ import EscapablePopupExample from './EscapablePopup';
 
 storiesOf('Popup', module)
     .add('basic usage',
-        withInfo()(
-            () => <BasicPopupExample />
-        )
+        withInfo()(BasicPopupExample)
     )
     .add('escapable popup',
         withInfo('Key `Esc` to close.')(
