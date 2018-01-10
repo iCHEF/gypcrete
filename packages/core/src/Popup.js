@@ -153,6 +153,6 @@ Popup.defaultProps = {
 
 // export for tests
 export { Popup as PurePopup };
-export const EscapablePopup = closable({ onEscape: true })(Popup);
+export const EscapablePopup = closable({ onEscape: false })(Popup);
 
 export default renderToLayer(EscapablePopup);
