@@ -46,21 +46,24 @@ export type Props = {
     /* eslint-enable react/require-default-props */
 };
 
-function PopupIcon({ type }) {
+export function PopupIcon({ type }: { type: string }) {
     return <Icon large type={type} />;
 }
 PopupIcon.propTypes = {
     type: PropTypes.string.isRequired,
 };
 
-function PopupMessage({ text }) {
+export function PopupMessage({ text }: { text: string }) {
     return <TextLabel align="center" basic={text} />;
 }
 PopupMessage.propTypes = {
     text: PropTypes.string.isRequired,
 };
 
-function PopupButton({ className, ...props }) {
+export function PopupButton({
+    className,
+    ...props,
+}: { className: string }) {
     const buttonClass = classNames(BEM.button.toString(), className);
 
     return (

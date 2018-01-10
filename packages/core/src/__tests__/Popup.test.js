@@ -1,74 +1,81 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount, ReactWrapper } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import Popup, { BEM as POPUP_BEM } from '../Popup';
-import Overlay from '../Overlay';
-import Icon from '../Icon';
+import Popup, {
+    PurePopup,
+    PopupMessage,
+    PopupIcon,
+    PopupButton,
+    BEM as POPUP_BEM,
+} from '../Popup';
+
 import Button from '../Button';
+import Icon from '../Icon';
+import Overlay from '../Overlay';
+import TextLabel from '../TextLabel';
 
-it('should render without crashing', () => {
-    const div = document.createElement('div');
-    const element = <Popup />;
+describe('<Popup> with mixins', () => {
+    it('should render without crashing', () => {
+        const div = document.createElement('div');
+        const element = <Popup />;
 
-    ReactDOM.render(element, div);
+        ReactDOM.render(element, div);
+    });
 });
 
-it('should contain <Overlay>', () => {
-    const wrapper = mount(<Popup>Bar</Popup>);
-    // <Popup> was wrapped by renderToLayer() and rendered outside React root
-    const popupWrapper = new ReactWrapper(wrapper.instance().componentRef, true);
+describe('Pure <Popup>', () => {
+    it('contains an <Overlay>', () => {
+        const wrapper = shallow(<PurePopup message="foo" />);
 
-    expect(popupWrapper.find(Overlay).exists()).toBeTruthy();
-});
+        expect(wrapper.find(Overlay).exists()).toBeTruthy();
+    });
 
-it('should render message in <div> when specified', () => {
-    const fooText = 'Foo';
-    const wrapper = mount(<Popup>Bar</Popup>);
-    const popupWrapper = new ReactWrapper(wrapper.instance().componentRef, true);
+    it('renders a string message with <PopupMessage>', () => {
+        const wrapper = shallow(<PurePopup message="foo" />);
 
-    expect(popupWrapper.find(`.${POPUP_BEM.message}`).exists()).toBeFalsy();
+        expect(wrapper.find(PopupMessage).exists()).toBeTruthy();
+        expect(wrapper.find(PopupMessage).prop('text')).toBe('foo');
+    });
 
-    wrapper.setProps({ message: fooText });
-    expect(popupWrapper.find(`.${POPUP_BEM.message}`).exists()).toBeTruthy();
-    expect(popupWrapper.find(`.${POPUP_BEM.message}`).text()).toBe(fooText);
-});
+    it('takes a valid element for message prop', () => {
+        const label = <TextLabel data-target basic="Foo" aside="bar" />;
+        const wrapper = shallow(<PurePopup message={label} />);
 
-it('should render icon with icon\'s type string', () => {
-    const wrapper = mount(<Popup icon="error" />);
-    const popupWrapper = new ReactWrapper(wrapper.instance().componentRef, true);
+        expect(wrapper.find(PopupMessage).exists()).toBeFalsy();
+        expect(wrapper.find('[data-target]').exists()).toBeTruthy();
+    });
 
-    expect(popupWrapper.find(Icon).exists()).toBeTruthy();
-    expect(popupWrapper.find(Icon).prop('type')).toBe('error');
+    it('renders a string icon with <PopupIcon>', () => {
+        const wrapper = shallow(<PurePopup icon="success" />);
 
-    // Blue color & large size as default
-    expect(popupWrapper.find(Icon).prop('large')).toBeTruthy();
-    expect(popupWrapper.find(Icon).prop('color')).toBe('blue');
-});
+        expect(wrapper.find(PopupIcon).exists()).toBeTruthy();
+        expect(wrapper.find(PopupIcon).prop('type')).toBe('success');
+    });
 
-it('should render icon with custom <Icon>', () => {
-    const successIcon = <Icon type="success" />;
-    const wrapper = mount(<Popup icon={successIcon} />);
-    const popupWrapper = new ReactWrapper(wrapper.instance().componentRef, true);
+    it('takes a valid element for icon prop', () => {
+        const icon = <Icon data-target type="success" />;
+        const wrapper = shallow(<PurePopup icon={icon} />);
 
-    expect(popupWrapper.find(Icon).exists()).toBeTruthy();
-    expect(popupWrapper.find(Icon).prop('type')).toBe('success');
-});
+        expect(wrapper.find(PopupIcon).exists()).toBeFalsy();
+        expect(wrapper.find('[data-target]').exists()).toBeTruthy();
+    });
 
-it('should render button(s) in buttons-group section when specified', () => {
-    const dismissBtn = <Button key="dismiss-btn" basic="Dismiss" />;
-    const wrapper = mount(<Popup />);
-    const popupWrapper = new ReactWrapper(wrapper.instance().componentRef, true);
+    it('renders buttons with <PopupButton> in a buttons-group section when specified', () => {
+        const buttons = [
+            <Button key="a" basic="Label A" />,
+            <Button key="b" basic="Label B" />,
+        ];
+        const wrapper = shallow(<PurePopup message="foo" />);
+        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).exists()).toBeFalsy();
 
-    expect(popupWrapper.find(`.${POPUP_BEM.buttonsGroup}`).exists()).toBeFalsy();
+        wrapper.setProps({ buttons });
+        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).exists()).toBeTruthy();
 
-    wrapper.setProps({ buttons: [dismissBtn, null] });
-    expect(popupWrapper.find(`.${POPUP_BEM.buttonsGroup}`).exists()).toBeTruthy();
-
-    const popupBtn = popupWrapper.find(`.${POPUP_BEM.buttonsGroup}`).find(Button);
-    expect(popupBtn.prop('basic')).toBe('Dismiss');
-
-    // Center align and non-minified as default
-    expect(popupBtn.prop('align')).toBe('center');
-    expect(popupBtn.prop('minified')).toBeFalsy();
+        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).children()).toHaveLength(2);
+        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).containsAllMatchingElements([
+            <PopupButton basic="Label A" />,
+            <PopupButton basic="Label B" />,
+        ])).toBeTruthy();
+    });
 });
