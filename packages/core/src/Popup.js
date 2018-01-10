@@ -1,5 +1,5 @@
 // @flow
-import React, { isValidElement } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import type { AnyReactElement, ReactChildren } from 'react-flow-types';
@@ -87,17 +87,11 @@ function renderPopupButtons(buttons, direction) {
         return null;
     }
 
-    const popupButtons = buttons.map((button) => {
-        if (isValidElement(button)) {
-            return (
-                <PopupButton
-                    key={button.key}
-                    {...button.props} />
-            );
-        }
-        // Ignore invalid elements
-        return null;
-    });
+    const popupButtons = buttons.map(button => (
+        <PopupButton
+            key={button.key}
+            {...button.props} />
+    ));
 
     const wrapperClass = BEM.buttonsGroup
         .modifier(direction)
