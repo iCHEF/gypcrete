@@ -86,7 +86,11 @@ function renderPopupButtons(buttons, direction) {
 
     const popupButtons = buttons.map((button) => {
         if (isValidElement(button)) {
-            return <PopupButton {...button.props} />;
+            return (
+                <PopupButton
+                    key={button.key}
+                    {...button.props} />
+            );
         }
         // Ignore invalid elements
         return null;
