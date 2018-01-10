@@ -79,4 +79,14 @@ $component: #{$prefix}-popup;
             border-top: 1px solid $c-popup-button-border;
         }
     }
+
+    &--horizontal {
+        .#{$component}__button {
+            flex: 1 1 50%;
+        }
+
+        .#{$component}__button + .#{$component}__button {
+            border-left: 1px solid $c-popup-button-border;
+        }
+    }
 }

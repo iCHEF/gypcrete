@@ -6,12 +6,12 @@ import { withInfo } from '@storybook/addon-info';
 import Popup, { EscapablePopup, PurePopup } from '@ichef/gypcrete/src/Popup';
 
 import BasicPopupExample from './BasicPopup';
+import HorizontalButtonsExample from './HorizontalButtons';
 import EscapablePopupExample from './EscapablePopup';
 
 storiesOf('Popup', module)
-    .add('basic usage',
-        withInfo()(BasicPopupExample)
-    )
+    .add('basic usage', withInfo()(BasicPopupExample))
+    .add('horizontal buttons', withInfo()(HorizontalButtonsExample))
     .add('escapable popup',
         withInfo('Key `Esc` to close.')(
             () => <EscapablePopupExample />
