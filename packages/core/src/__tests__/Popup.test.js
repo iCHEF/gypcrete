@@ -79,3 +79,37 @@ describe('Pure <Popup>', () => {
         ])).toBeTruthy();
     });
 });
+
+describe('<PopupIcon>', () => {
+    it('returns a pre-configured <Icon> of given type', () => {
+        const wrapper = shallow(<PopupIcon type="foo" />);
+        expect(wrapper.matchesElement(<Icon large type="foo" />)).toBeTruthy();
+    });
+});
+
+describe('<PopupMessage>', () => {
+    it('returns a pre-configured <TextLabel> of given text', () => {
+        const wrapper = shallow(<PopupMessage text="foo" />);
+        expect(wrapper.matchesElement(<TextLabel align="center" basic="foo" />)).toBeTruthy();
+    });
+});
+
+describe('<PopupButton>', () => {
+    it('returns a pre-configured <Button> extending given props', () => {
+        const wrapper = shallow(<PopupButton basic="foo" aside="bar" />);
+        expect(wrapper.matchesElement(
+            <Button
+                minified={false}
+                align="center"
+                basic="foo"
+                aside="bar" />
+        )).toBeTruthy();
+    });
+
+    it('mixes className with BEM class from Popup', () => {
+        const wrapper = shallow(<PopupButton basic="foo" className="bar" />);
+
+        expect(wrapper.hasClass(POPUP_BEM.button.toString()));
+        expect(wrapper.hasClass('bar'));
+    });
+});
