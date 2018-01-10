@@ -70,6 +70,11 @@ $component: #{$prefix}-popup;
     flex-wrap: wrap;
     border-top: 1px solid $c-popup-button-border;
 
+    .#{$component}__button {
+        padding-top: rem(8px);
+        padding-bottom: rem(8px);
+    }
+
     &--vertical {
         .#{$component}__button {
             flex-basis: 100%;
