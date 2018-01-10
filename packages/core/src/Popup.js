@@ -18,6 +18,11 @@ import TextLabel from './TextLabel';
 
 import './styles/Popup.scss';
 
+export const BUTTONS_DIRECTION = {
+    VERTICAL: 'vertical',
+    HORIZONTAL: 'horizontal',
+};
+
 export const COMPONENT_NAME = prefixClass('popup');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
@@ -33,6 +38,7 @@ export type Props = {
     icon?: string | AnyReactElement,
     message?: string | AnyReactElement,
     buttons?: React$Element<*>[],
+    buttonsDirection: 'vertical' | 'horizontal',
 
     /* eslint-disable react/require-default-props */
     className?: string,
@@ -69,10 +75,11 @@ function PopupButton({ className, ...props }) {
 /**
  * Render popup's buttons
  *
- * @param  {Array} buttons
+ * @param {Array} buttons
+ * @param {'vertical'|'horizontal'} direction
  * @return {Array}
  */
-function renderPopupButtons(buttons) {
+function renderPopupButtons(buttons, direction) {
     if (!buttons || buttons.length === 0) {
         return null;
     }
@@ -85,13 +92,22 @@ function renderPopupButtons(buttons) {
         return null;
     });
 
-    return popupButtons;
+    const wrapperClass = BEM.buttonsGroup
+        .modifier(direction)
+        .toString();
+
+    return (
+        <div className={wrapperClass}>
+            {popupButtons}
+        </div>
+    );
 }
 
 function Popup({
     icon,
     message,
     buttons,
+    buttonsDirection,
     // React props
     className,
     children,
@@ -109,7 +125,7 @@ function Popup({
                     {message && wrapIfNotElement(message, { with: PopupMessage, via: 'text' })}
                 </div>
 
-                {renderPopupButtons(buttons)}
+                {renderPopupButtons(buttons, buttonsDirection)}
                 {children}
             </div>
         </div>
@@ -125,12 +141,14 @@ Popup.propTypes = {
     icon: StringOrElement,
     message: StringOrElement,
     buttons: PropTypes.arrayOf(PropTypes.element),
+    buttonsDirection: PropTypes.oneOf(Object.values(BUTTONS_DIRECTION)),
 };
 
 Popup.defaultProps = {
     icon: null,
     message: null,
     buttons: [],
+    buttonsDirection: BUTTONS_DIRECTION.VERTICAL,
 };
 
 // export for tests

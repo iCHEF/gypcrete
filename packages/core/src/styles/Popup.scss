@@ -65,11 +65,18 @@ $component: #{$prefix}-popup;
 // -------------------------------------
 
 // Buttons group
-.#{$prefix}-popup__buttons-group {
+.#{$component}__buttons-group {
     display: flex;
-}
-
-// Button
-.#{$prefix}-popup__button {
+    flex-wrap: wrap;
     border-top: 1px solid $c-popup-button-border;
+
+    &--vertical {
+        .#{$component}__button {
+            flex-basis: 100%;
+        }
+
+        .#{$component}__button + .#{$component}__button {
+            border-top: 1px solid $c-popup-button-border;
+        }
+    }
 }

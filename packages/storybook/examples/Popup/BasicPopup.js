@@ -15,8 +15,9 @@ function BasicPopupExample() {
             aside="Please click “Download” to get your file." />
     );
     const buttons = [
-        <Button key="download" basic="Download" onClick={action('download')} />,
+        <Button key="download" bold basic="Download" onClick={action('download')} />,
         <Button key="dismiss" basic="Dismiss" onClick={action('dismiss')} />,
+        <Button key="nothing" basic="Do nothing" onClick={action('nothing')} />,
     ];
     return (
         <Popup
