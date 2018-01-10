@@ -1,5 +1,5 @@
 // @flow
-import React, { isValidElement, cloneElement } from 'react';
+import React, { isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import type { AnyReactElement, ReactChildren } from 'react-flow-types';
@@ -11,6 +11,7 @@ import wrapIfNotElement from './utils/wrapIfNotElement';
 import closable from './mixins/closable';
 import renderToLayer from './mixins/renderToLayer';
 
+import Button from './Button';
 import Icon from './Icon';
 import Overlay from './Overlay';
 import TextLabel from './TextLabel';
@@ -53,6 +54,18 @@ PopupMessage.propTypes = {
     text: PropTypes.string.isRequired,
 };
 
+function PopupButton({ className, ...props }) {
+    const buttonClass = classNames(BEM.button.toString(), className);
+
+    return (
+        <Button
+            {...props}
+            className={buttonClass}
+            minified={false}
+            align="center" />
+    );
+}
+
 /**
  * Render popup's buttons
  *
@@ -65,25 +78,14 @@ function renderPopupButtons(buttons) {
     }
 
     const popupButtons = buttons.map((button) => {
-        // Render as expanded button
         if (isValidElement(button)) {
-            const buttonBemClass = BEM.button.toString();
-
-            return cloneElement(button, {
-                className: buttonBemClass,
-                align: 'center',
-                minified: false
-            });
+            return <PopupButton {...button.props} />;
         }
-
-        return button;
+        // Ignore invalid elements
+        return null;
     });
 
-    return (
-        <div className={BEM.buttonsGroup.toString()}>
-            {popupButtons}
-        </div>
-    );
+    return popupButtons;
 }
 
 function Popup({
@@ -122,13 +124,13 @@ const StringOrElement = PropTypes.oneOfType([
 Popup.propTypes = {
     icon: StringOrElement,
     message: StringOrElement,
-    buttons: PropTypes.arrayOf(PropTypes.element)
+    buttons: PropTypes.arrayOf(PropTypes.element),
 };
 
 Popup.defaultProps = {
     icon: null,
     message: null,
-    buttons: []
+    buttons: [],
 };
 
 // export for tests
