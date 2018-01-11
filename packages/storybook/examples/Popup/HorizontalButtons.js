@@ -2,8 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import Popup from '@ichef/gypcrete/src/Popup';
-
-import Button from '@ichef/gypcrete/src/Button';
+import PopupButton from '@ichef/gypcrete/src/PopupButton';
 import TextLabel from '@ichef/gypcrete/src/TextLabel';
 
 function HorizontalButtonsExample() {
@@ -15,8 +14,8 @@ function HorizontalButtonsExample() {
             aside="Please click “Download” to get your file." />
     );
     const buttons = [
-        <Button key="dismiss" basic="Dismiss" onClick={action('dismiss')} />,
-        <Button key="download" bold basic="Download" onClick={action('download')} />,
+        <PopupButton key="dismiss" basic="Dismiss" onClick={action('dismiss')} />,
+        <PopupButton key="download" bold basic="Download" onClick={action('download')} />,
     ];
     return (
         <Popup

@@ -2,8 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import Popup from '@ichef/gypcrete/src/Popup';
-
-import Button from '@ichef/gypcrete/src/Button';
+import PopupButton from '@ichef/gypcrete/src/PopupButton';
 import TextLabel from '@ichef/gypcrete/src/TextLabel';
 
 function BasicPopupExample() {
@@ -15,9 +14,9 @@ function BasicPopupExample() {
             aside="Please click “Download” to get your file." />
     );
     const buttons = [
-        <Button key="download" bold basic="Download" onClick={action('download')} />,
-        <Button key="dismiss" basic="Dismiss" onClick={action('dismiss')} />,
-        <Button key="nothing" basic="Do nothing" onClick={action('nothing')} />,
+        <PopupButton key="download" bold basic="Download" onClick={action('download')} />,
+        <PopupButton key="dismiss" basic="Dismiss" onClick={action('dismiss')} />,
+        <PopupButton key="nothing" basic="Do nothing" onClick={action('nothing')} />,
     ];
     return (
         <Popup
