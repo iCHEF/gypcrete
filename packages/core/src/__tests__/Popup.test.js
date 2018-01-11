@@ -6,9 +6,9 @@ import Popup, {
     PurePopup,
     PopupMessage,
     PopupIcon,
-    PopupButton,
     BEM as POPUP_BEM,
 } from '../Popup';
+import PopupButton from '../PopupButton';
 
 import Button from '../Button';
 import Icon from '../Icon';
@@ -61,10 +61,10 @@ describe('Pure <Popup>', () => {
         expect(wrapper.find('[data-target]').exists()).toBeTruthy();
     });
 
-    it('renders buttons with <PopupButton> in a buttons-group section when specified', () => {
+    it('renders <PopupButton>s in a buttons-group section when specified', () => {
         const buttons = [
-            <Button key="a" basic="Label A" />,
-            <Button key="b" basic="Label B" />,
+            <PopupButton key="a" basic="Label A" />,
+            <PopupButton key="b" basic="Label B" />,
         ];
         const wrapper = shallow(<PurePopup message="foo" />);
         expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).exists()).toBeFalsy();
@@ -72,6 +72,20 @@ describe('Pure <Popup>', () => {
         wrapper.setProps({ buttons });
         expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).exists()).toBeTruthy();
 
+        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).children()).toHaveLength(2);
+        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).containsAllMatchingElements([
+            <PopupButton basic="Label A" />,
+            <PopupButton basic="Label B" />,
+        ])).toBeTruthy();
+    });
+
+    it('transforms <Button> into <PopupButton> for compatibility', () => {
+        // #DEPRECATE: remove in v2 release
+        const buttons = [
+            <Button key="a" basic="Label A" />,
+            <Button key="b" basic="Label B" />,
+        ];
+        const wrapper = shallow(<PurePopup message="foo" buttons={buttons} />);
         expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).children()).toHaveLength(2);
         expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).containsAllMatchingElements([
             <PopupButton basic="Label A" />,
@@ -91,25 +105,5 @@ describe('<PopupMessage>', () => {
     it('returns a pre-configured <TextLabel> of given text', () => {
         const wrapper = shallow(<PopupMessage text="foo" />);
         expect(wrapper.matchesElement(<TextLabel align="center" basic="foo" />)).toBeTruthy();
-    });
-});
-
-describe('<PopupButton>', () => {
-    it('returns a pre-configured <Button> extending given props', () => {
-        const wrapper = shallow(<PopupButton basic="foo" aside="bar" />);
-        expect(wrapper.matchesElement(
-            <Button
-                minified={false}
-                align="center"
-                basic="foo"
-                aside="bar" />
-        )).toBeTruthy();
-    });
-
-    it('mixes className with BEM class from Popup', () => {
-        const wrapper = shallow(<PopupButton basic="foo" className="bar" />);
-
-        expect(wrapper.hasClass(POPUP_BEM.button.toString()));
-        expect(wrapper.hasClass('bar'));
     });
 });
