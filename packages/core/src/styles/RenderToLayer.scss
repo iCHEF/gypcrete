@@ -1,0 +1,7 @@
+@import "./mixins";
+
+.#{$prefix}-base-layer {
+    position: relative;
+    // #FIXME: for compatibility with ic-framework. Should remove in the future.
+    z-index: 1000;
+}
