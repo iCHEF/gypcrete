@@ -5,7 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- N/A
+### Added
+- [Core] Add new `<PopupButton>` which renders a pre-configured `<Button>` that should be used inside a `<Popup>`. (#127)
+- [Core] Add `buttonsDirection` prop to `<Popup>` to align its buttons either vertically (as default) or horizontally. (#127)
+
+### Changed
+- [Core] Update styles for `<Popup>` to better match design. (#127)
+- [Core] Refactor `<Popup>` to simplify codes. (#127)
+- [Core] `<Popup>` does not trigger `onClose()` on ESC key by default. It can be turned back on with runtime options of `closable()` HOC mixin. (#127)
+- [Core] Update examples for `<Popup>`. (#127)
 
 ## [1.5.2]
 ### Changed
