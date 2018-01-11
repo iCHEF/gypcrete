@@ -35,6 +35,7 @@ import ListRow from './ListRow';
 import ColumnView from './ColumnView';
 import Overlay from './Overlay';
 import Popup from './Popup';
+import PopupButton from './PopupButton';
 import Popover from './Popover';
 
 export {
@@ -69,5 +70,6 @@ export {
     ColumnView,
     Overlay,
     Popup,
+    PopupButton,
     Popover,
 };

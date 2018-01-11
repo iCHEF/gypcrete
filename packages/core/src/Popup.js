@@ -11,7 +11,8 @@ import wrapIfNotElement from './utils/wrapIfNotElement';
 import closable from './mixins/closable';
 import renderToLayer from './mixins/renderToLayer';
 
-import Button from './Button';
+import PopupButton from './PopupButton';
+
 import Icon from './Icon';
 import Overlay from './Overlay';
 import TextLabel from './TextLabel';
@@ -60,21 +61,6 @@ PopupMessage.propTypes = {
     text: PropTypes.string.isRequired,
 };
 
-export function PopupButton({
-    className,
-    ...props,
-}: { className: string }) {
-    const buttonClass = classNames(BEM.button.toString(), className);
-
-    return (
-        <Button
-            {...props}
-            className={buttonClass}
-            minified={false}
-            align="center" />
-    );
-}
-
 /**
  * Render popup's buttons
  *
@@ -87,11 +73,23 @@ function renderPopupButtons(buttons, direction) {
         return null;
     }
 
-    const popupButtons = buttons.map(button => (
-        <PopupButton
-            key={button.key}
-            {...button.props} />
-    ));
+    /**
+     * `<Popup>` expects an array of pre-configured `<PopupButton>`s.
+     * This transforms `<Button>` into `<PopupButton>` for compatibility.
+     *
+     * Should remove in v2 release.
+     * @deprecated
+     */
+    const popupButtons = buttons.map((button) => {
+        if (button.type === PopupButton) {
+            return button;
+        }
+        return (
+            <PopupButton
+                key={button.key}
+                {...button.props} />
+        );
+    });
 
     const wrapperClass = BEM.buttonsGroup
         .modifier(direction)

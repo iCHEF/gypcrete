@@ -70,27 +70,24 @@ $component: #{$prefix}-popup;
     flex-wrap: wrap;
     border-top: 1px solid $c-popup-button-border;
 
-    .#{$component}__button {
-        padding-top: rem(8px);
-        padding-bottom: rem(8px);
-    }
+    $button: #{$prefix}-popup-button;
 
     &--vertical {
-        .#{$component}__button {
+        .#{$button} {
             flex-basis: 100%;
         }
 
-        .#{$component}__button + .#{$component}__button {
+        .#{$button} + .#{$button} {
             border-top: 1px solid $c-popup-button-border;
         }
     }
 
     &--horizontal {
-        .#{$component}__button {
+        .#{$button} {
             flex: 1 1 50%;
         }
 
-        .#{$component}__button + .#{$component}__button {
+        .#{$button} + .#{$button} {
             border-left: 1px solid $c-popup-button-border;
         }
     }
