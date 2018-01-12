@@ -34,14 +34,9 @@
     }
 
     &__aside {
-        color: $c-text-aside;
         font-size: rem($aside-text-font-size);
         line-height: rem($aside-text-line-height);
-
-        .#{$prefix}-state-error &,
-        .#{$prefix}-list-row--highlight & {
-            color: inherit;
-        }
+        opacity: $aside-text-opacity;
     }
 }
 
