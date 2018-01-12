@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - [Core] Remove `z-index` from components with `renderToLayer()` HOC mixin. They will now be stack based on the stacking context on the base layers. (#128)
+- [Storybook] Fix the showcase of `<Tooltip>` component. (#129)
 
 ## [1.5.2]
 ### Changed
