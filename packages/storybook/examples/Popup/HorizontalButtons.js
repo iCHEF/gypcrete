@@ -5,7 +5,7 @@ import Popup from '@ichef/gypcrete/src/Popup';
 import PopupButton from '@ichef/gypcrete/src/PopupButton';
 import TextLabel from '@ichef/gypcrete/src/TextLabel';
 
-function BasicPopupExample() {
+function HorizontalButtonsExample() {
     const message = (
         <TextLabel
             bold
@@ -14,16 +14,16 @@ function BasicPopupExample() {
             aside="Please click “Download” to get your file." />
     );
     const buttons = [
-        <PopupButton key="download" bold basic="Download" onClick={action('download')} />,
         <PopupButton key="dismiss" basic="Dismiss" onClick={action('dismiss')} />,
-        <PopupButton key="nothing" basic="Do nothing" onClick={action('nothing')} />,
+        <PopupButton key="download" bold basic="Download" onClick={action('download')} />,
     ];
     return (
         <Popup
             message={message}
             icon="success"
-            buttons={buttons} />
+            buttons={buttons}
+            buttonsDirection="horizontal" />
     );
 }
 
-export default BasicPopupExample;
+export default HorizontalButtonsExample;
