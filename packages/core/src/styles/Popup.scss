@@ -16,7 +16,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    z-index: z("popup");
 }
 
 // -------------------------------------
@@ -33,7 +32,6 @@
         box-shadow: $poup-box-shadow;
         position: relative;
         overflow: hidden;
-        z-index: z("front");
         transition: width .15s;
 
         // Active animation

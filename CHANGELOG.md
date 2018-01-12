@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- N/A
+### Changed
+- [Core] Remove `z-index` from components with `renderToLayer()` HOC mixin. They will now be stack based on the stacking context on the base layers. (#128)
 
 ## [1.5.2]
 ### Changed

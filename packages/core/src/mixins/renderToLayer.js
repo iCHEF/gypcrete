@@ -24,9 +24,13 @@ import React, { Component } from 'react';
 // eslint-disable-next-line camelcase
 import ReactDOM, { unstable_renderSubtreeIntoContainer } from 'react-dom';
 
+import prefixClass from '../utils/prefixClass';
 import getComponentName from '../utils/getComponentName';
 import randId from '../utils/randId';
 
+import '../styles/RenderToLayer.scss';
+
+const COMPONENT_NAME = prefixClass('base-layer');
 const LAYER_ID_PREFIX = 'layer';
 
 function renderToLayer(WrappedComponent) {
@@ -67,6 +71,7 @@ function renderToLayer(WrappedComponent) {
          */
         createBaseLayer() {
             const baseLayer = document.createElement('div');
+            baseLayer.className = COMPONENT_NAME;
             baseLayer.id = randId({ prefix: LAYER_ID_PREFIX });
 
             this.baseLayer = baseLayer;
