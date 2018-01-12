@@ -8,7 +8,7 @@ function BasicButtonExample() {
     return (
         <FlexRow>
             <Button
-                primary
+                bold
                 basic="Black Button"
                 aside="Default color"
                 tag="Tag"

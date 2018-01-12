@@ -7,6 +7,7 @@ function SolidButtonExample() {
     return (
         <FlexRow>
             <Button
+                bold
                 solid
                 basic="Black"
                 aside="Aside text"

@@ -8,6 +8,7 @@ function DisabledButtonExample() {
         <div>
             <FlexRow>
                 <Button
+                    bold
                     disabled
                     basic="Black"
                     aside="Disabled"
@@ -33,6 +34,7 @@ function DisabledButtonExample() {
             </FlexRow>
             <FlexRow>
                 <Button
+                    bold
                     solid
                     disabled
                     basic="Black"
