@@ -8,7 +8,6 @@ import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 import wrapIfNotElement from './utils/wrapIfNotElement';
 
-import closable from './mixins/closable';
 import renderToLayer from './mixins/renderToLayer';
 
 import PopupButton from './PopupButton';
@@ -152,6 +151,4 @@ Popup.defaultProps = {
 
 // export for tests
 export { Popup as PurePopup };
-export const EscapablePopup = closable({ onEscape: false })(Popup);
-
-export default renderToLayer(EscapablePopup);
+export default renderToLayer(Popup);
