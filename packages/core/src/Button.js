@@ -48,7 +48,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-    color: BLUE,
+    color: BLACK,
     solid: false,
     primary: false,
 };
