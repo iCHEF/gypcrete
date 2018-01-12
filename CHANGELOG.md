@@ -12,10 +12,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Core] Update styles for `<Popup>` to better match design. (#127)
 - [Core] Refactor `<Popup>` to simplify codes. (#127)
-- [Core] `<Popup>` does not trigger `onClose()` on ESC key by default. It can be turned back on with runtime options of `closable()` HOC mixin. (#127)
-- [Core] Update examples for `<Popup>`. (#127)
+- [Storybook] Update examples for `<Popup>`. (#127)
 - [Core] Remove `z-index` from components with `renderToLayer()` HOC mixin. They will now be stack based on the stacking context on the base layers. (#128)
 - [Storybook] Fix the showcase of `<Tooltip>` component. (#129)
+- [Core] Change aside label of `<Text>` to inherit parent color but with 70% opacity. (#131)
+- [Storybook] Update examples for `<Button>` (#131)
+
+### Minor Breaking
+- [Core] `<Popup>` is no longer wrapped with `closable()` mixin, will not respond to ESC key now. (#127)
+- [Core] Default color for `<Button>` is now black. (#131)
+- [Core] Remove `primary` prop from `<Button>` in favor of cross-component `bold` prop on `rowComp()`. (#131)
+
 
 ## [1.5.2]
 ### Changed
