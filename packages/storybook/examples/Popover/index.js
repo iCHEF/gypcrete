@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 // For props table
-import Popover from '@ichef/gypcrete/src/Popover';
+import Popover, { PurePopover } from '@ichef/gypcrete/src/Popover';
 
 import BasicExample from './Basic';
 import AnchoredExample from './Anchored';
@@ -17,4 +17,4 @@ storiesOf('Popover', module)
         )
     )
     // Props table
-    .addPropsTable(() => <Popover />);
+    .addPropsTable(() => <Popover />, [PurePopover]);
