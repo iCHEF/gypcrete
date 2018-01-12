@@ -9,7 +9,6 @@ $component-name: #{$prefix}-popover;
     border-radius: $popover-border-radius;
     filter: drop-shadow($popover-drop-shadow);
     position: relative;
-    z-index: z(popover);
 
     // Elements
     &__arrow {

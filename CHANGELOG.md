@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Refactor `<Popup>` to simplify codes. (#127)
 - [Core] `<Popup>` does not trigger `onClose()` on ESC key by default. It can be turned back on with runtime options of `closable()` HOC mixin. (#127)
 - [Core] Update examples for `<Popup>`. (#127)
+- [Core] Remove `z-index` from components with `renderToLayer()` HOC mixin. They will now be stack based on the stacking context on the base layers. (#128)
 
 ## [1.5.2]
 ### Changed
