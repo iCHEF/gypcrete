@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Storybook] Fix the showcase of `<Tooltip>` component. (#129)
 - [Core] Change aside label of `<Text>` to inherit parent color but with 70% opacity. (#131)
 - [Storybook] Update examples for `<Button>` (#131)
+- Fix CI not aware of failing tests with `--bail` workaround. (#132)
 
 ### Minor Breaking
 - [Core] `<Popup>` is no longer wrapped with `closable()` mixin, will not respond to ESC key now. (#127)
