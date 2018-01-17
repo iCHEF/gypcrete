@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- N/A
+
+## [1.6.0]
 ### Added
 - [Core] Add new `<PopupButton>` which renders a pre-configured `<Button>` that should be used inside a `<Popup>`. (#127)
 - [Core] Add `buttonsDirection` prop to `<Popup>` to align its buttons either vertically (as default) or horizontally. (#127)
