@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete-storybook",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "React Storybook for Gypcrete",
   "private": true,
   "repository": "iCHEF/gypcrete",
@@ -20,12 +20,12 @@
     "ghpages": "npm run clean && npm run build:storybook && sh ./scripts/ghpages.sh"
   },
   "dependencies": {
-    "@ichef/gypcrete": "^1.5.2",
-    "@ichef/gypcrete-form": "^1.5.2",
-    "@storybook/addon-actions": "^3.2.12",
-    "@storybook/addon-info": "^3.2.12",
-    "@storybook/addon-options": "^3.2.12",
-    "@storybook/react": "^3.2.12",
+    "@ichef/gypcrete": "^1.6.0",
+    "@ichef/gypcrete-form": "^1.6.0",
+    "@storybook/addon-actions": "^3.3.9",
+    "@storybook/addon-info": "^3.3.9",
+    "@storybook/addon-options": "^3.3.9",
+    "@storybook/react": "^3.3.9",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"

@@ -8,12 +8,19 @@ function BasicButtonExample() {
     return (
         <FlexRow>
             <Button
-                primary
-                basic="Blue Button"
+                bold
+                basic="Black Button"
                 aside="Default color"
                 tag="Tag"
                 icon="add"
                 onClick={action('clicked')} />
+
+            <Button
+                color="blue"
+                basic="Blue"
+                aside="Variants"
+                tag="Tag"
+                icon="add" />
 
             <Button
                 color="red"
@@ -25,13 +32,6 @@ function BasicButtonExample() {
             <Button
                 color="white"
                 basic="White"
-                aside="Variants"
-                tag="Tag"
-                icon="add" />
-
-            <Button
-                color="black"
-                basic="Black"
                 aside="Variants"
                 tag="Tag"
                 icon="add" />

@@ -5,18 +5,64 @@ import FlexRow from 'utils/FlexRow';
 
 function DisabledButtonExample() {
     return (
-        <FlexRow>
-            <Button
-                basic="Blue"
-                disabled />
-
-            <Button
-                solid
-                color="black"
-                basic="Black"
-                tag="Solid"
-                disabled />
-        </FlexRow>
+        <div>
+            <FlexRow>
+                <Button
+                    bold
+                    disabled
+                    basic="Black"
+                    aside="Disabled"
+                    tag="tag" />
+                <Button
+                    disabled
+                    color="blue"
+                    basic="Blue"
+                    aside="Disabled"
+                    tag="tag" />
+                <Button
+                    disabled
+                    color="red"
+                    basic="Red"
+                    aside="Disabled"
+                    tag="tag" />
+                <Button
+                    disabled
+                    color="white"
+                    basic="White"
+                    aside="Disabled"
+                    tag="tag" />
+            </FlexRow>
+            <FlexRow>
+                <Button
+                    bold
+                    solid
+                    disabled
+                    basic="Black"
+                    aside="Disabled"
+                    tag="tag" />
+                <Button
+                    solid
+                    disabled
+                    color="blue"
+                    basic="Blue"
+                    aside="Disabled"
+                    tag="tag" />
+                <Button
+                    solid
+                    disabled
+                    color="red"
+                    basic="Red"
+                    aside="Disabled"
+                    tag="tag" />
+                <Button
+                    solid
+                    disabled
+                    color="white"
+                    basic="White"
+                    aside="Disabled"
+                    tag="tag" />
+            </FlexRow>
+        </div>
     );
 }
 

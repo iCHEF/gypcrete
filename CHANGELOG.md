@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - N/A
 
+## [1.6.0]
+### Added
+- [Core] Add new `<PopupButton>` which renders a pre-configured `<Button>` that should be used inside a `<Popup>`. (#127)
+- [Core] Add `buttonsDirection` prop to `<Popup>` to align its buttons either vertically (as default) or horizontally. (#127)
+
+### Changed
+- [Core] Update styles for `<Popup>` to better match design. (#127)
+- [Core] Refactor `<Popup>` to simplify codes. (#127)
+- [Storybook] Update examples for `<Popup>`. (#127)
+- [Core] Remove `z-index` from components with `renderToLayer()` HOC mixin. They will now be stack based on the stacking context on the base layers. (#128)
+- [Storybook] Fix the showcase of `<Tooltip>` component. (#129)
+- [Core] Change aside label of `<Text>` to inherit parent color but with 70% opacity. (#131)
+- [Storybook] Update examples for `<Button>` (#131)
+- Fix CI not aware of failing tests with `--bail` workaround. (#132)
+- Upgrade dependency packages. (#133)
+
+### Minor Breaking
+- [Core] `<Popup>` is no longer wrapped with `closable()` mixin, will not respond to ESC key now. (#127)
+- [Core] Default color for `<Button>` is now black. (#131)
+- [Core] Remove `primary` prop from `<Button>` in favor of cross-component `bold` prop on `rowComp()`. (#131)
+
+
 ## [1.5.2]
 ### Changed
 - [Form] The popover inside a single-value `<SelectRow>` should now close automatically after click on any option. (#125)

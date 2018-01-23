@@ -41,6 +41,7 @@ $basic-text-font-size: $font-size-large;
 $basic-text-line-height: $line-height-large;
 $aside-text-font-size: $font-size-base;
 $aside-text-line-height: $line-height-base;
+$aside-text-opacity: .7;
 
 $tag-font-size: $font-size-small;
 $tag-border-radius: 6px;
@@ -83,7 +84,7 @@ $header-row-padding: 4px;
 
 $column-body-padding: 16px;
 
-$popup-container-width: 300px;
+$popup-container-width: 256px;
 $popup-border-radius: 8px;
 $poup-box-shadow: 0 2px 8px hsba(0, 0, 0, 40);
 
@@ -104,19 +105,3 @@ $popover-drop-shadow: 0 2px 3px hsba(0, 0, 0, 40);
 
 $ease-out-quad: cubic-bezier(.25, .46, .45, .94);
 $ease-out-cubic: cubic-bezier(.215, .61, .355, 1);
-
-// -------------------------------------
-//   z-index layers
-// -------------------------------------
-
-$z-layers: (
-    "popup":        1000,
-    "modal":        999,
-    "popover":      100,
-    "top":          99,
-    "front":        9,
-    "base":         1,
-    "default":      0,
-    "below":        -1,
-    "hidden":       -9999,
-);

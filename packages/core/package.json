@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "iCHEF web components library, built with React.",
   "repository": "iCHEF/gypcrete",
   "contributors": [
@@ -48,6 +48,6 @@
     "babel-cli": "^6.23.0",
     "enzyme": "^2.8.2",
     "sinon": "^4.0.1",
-    "webpack": "^3.8.1"
+    "webpack": "^3.10.0"
   }
 }

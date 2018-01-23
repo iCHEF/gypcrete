@@ -3,21 +3,13 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 // For props table
-import Popup, { EscapablePopup, PurePopup } from '@ichef/gypcrete/src/Popup';
+import Popup, { PurePopup } from '@ichef/gypcrete/src/Popup';
 
 import BasicPopupExample from './BasicPopup';
-import EscapablePopupExample from './EscapablePopup';
+import HorizontalButtonsExample from './HorizontalButtons';
 
 storiesOf('Popup', module)
-    .add('basic usage',
-        withInfo()(
-            () => <BasicPopupExample />
-        )
-    )
-    .add('escapable popup',
-        withInfo('Key `Esc` to close.')(
-            () => <EscapablePopupExample />
-        )
-    )
+    .add('basic usage', withInfo()(BasicPopupExample))
+    .add('horizontal buttons', withInfo()(HorizontalButtonsExample))
     // Props table
-    .addPropsTable(() => <Popup />, [EscapablePopup, PurePopup]);
+    .addPropsTable(() => <Popup />, [PurePopup]);

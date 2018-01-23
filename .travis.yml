@@ -17,7 +17,7 @@ before_script:
     - yarn lint
 
 script:
-    - yarn test
+    - yarn test --bail
 
 # Send coverage data to Coveralls
 after_success:
