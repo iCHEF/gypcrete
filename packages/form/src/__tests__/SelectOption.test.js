@@ -43,3 +43,10 @@ it('does not break when without explicit onChange', () => {
 
     wrapper.find('input').simulate('change', { target: { checked: true } });
 });
+
+it('accepts unknown props and passes to <Checkbox> inside', () => {
+    const wrapper = mount(
+        <SelectOption label="foo" value="bar" bold />
+    );
+    expect(wrapper.find(Checkbox).prop('bold')).toBeTruthy();
+});
