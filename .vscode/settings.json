@@ -13,5 +13,6 @@
 
     "flow.enabled": true,
     "flow.useNPMPackagedFlow": true,
-    "javascript.validate.enable": false
+    "javascript.validate.enable": false,
+    "jest.pathToConfig": "configs/jest.config.json"
 }
