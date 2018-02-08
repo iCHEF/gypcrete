@@ -1,0 +1,119 @@
+@import "./mixins";
+
+$component: #{$prefix}-modal;
+
+// *************************************
+//
+//   Modal
+//
+// *************************************
+// -------------------------------------
+//   Modal Block
+// -------------------------------------
+.#{$prefix}-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    text-align: center;
+    z-index: z("modal");
+}
+
+// -------------------------------------
+//   Modal Elements
+// -------------------------------------
+.#{$prefix}-modal {
+    // Backdrop
+    &__backdrop {
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: $c-backdrop;
+        z-index: z("default");
+    } // Container
+    &__container {
+        width: $modal-width-full;
+        height: $modal-height;
+        max-width: $modal-width-base;
+        max-height: $modal-max-height;
+        margin: 0 auto;
+        background-color: $c-section-bg-setting;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        border-radius: $modal-border-radius;
+        box-shadow: $modal-box-shadow;
+        overflow: hidden;
+        text-align: left;
+        z-index: z("front");
+        transition: width .15s;
+    } // Body
+    &__body {
+        flex: 1 1 auto;
+        position: relative;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+
+        &--padding {
+            padding: 24px;
+        }
+    } // Header
+    &__header {
+        flex: 0 0 auto;
+    } // Footer
+    &__footer {
+        flex: 0 0 auto;
+        padding: 0 24px;
+        text-align: right;
+        border-top: 1px solid $c-modal-border;
+    }
+}
+
+// -------------------------------------
+//   Modal Sizes
+// -------------------------------------
+.#{$prefix}-modal {
+    // Small
+    &--small {
+        .#{$prefix}-modal__container {
+            max-width: $modal-width-small;
+        }
+    } // Large
+    &--large {
+        .#{$prefix}-modal__container {
+            max-width: $modal-width-large;
+        }
+    } // Full
+    &--full {
+        .#{$prefix}-modal__container {
+            max-width: $modal-width-full;
+        }
+    }
+}
+
+// -------------------------------------
+//   Modal Modifies
+// -------------------------------------
+.#{$prefix}-modal {
+    // Active State
+    &--active {
+        // Backdrop
+        .#{$prefix}-modal__backdrop {
+            opacity: 0;
+            animation: anim-fade-in .3s forwards;
+        } // Container
+        .#{$prefix}-modal__container {
+            opacity: 0;
+            animation: anim-slide-down .4s forwards;
+        }
+    }
+}
