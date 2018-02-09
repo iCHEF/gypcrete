@@ -1,25 +1,49 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import { action } from '@storybook/addon-actions';
+import Modal from '@ichef/gypcrete/src/Modal';
+import ModalHeader from './ModalHeader';
 
-import { PureModal as Modal } from '@ichef/gypcrete/src/Modal';
 
-function BasicModalExample() {
+function BasicModalExample(props) {
     return (
-        <div>
-            <Modal>
-                <div>
-                    Demo
-                </div>
-            </Modal>
-
-            <div style={{ height: 50 }} />
-
-            <Modal placement="top">
-                <div>
-                    Demo
-                </div>
-            </Modal>
-        </div>
+        <Modal {...props}>
+            <div style={{ padding: '1rem' }}>
+                Content of Modal
+            </div>
+        </Modal>
     );
 }
 
+class ClosableModalExample extends PureComponent {
+    state ={
+        modalOpen: true
+    };
+
+    handleModalOpen = () => {
+        this.setState({ modalOpen: true });
+    }
+
+    handleModalClose = () => {
+        action('cancel')();
+        this.setState({ modalOpen: false });
+    }
+
+    render() {
+        const { modalOpen } = this.state;
+        const header = (
+            <ModalHeader
+                onCancel={this.handleModalClose} />
+        );
+
+        if (!modalOpen) {
+            return null;
+        }
+
+        return (
+            <BasicModalExample header={header} onClose={this.handleModalClose} {...this.props} />
+        );
+    }
+}
+
+export { ClosableModalExample };
 export default BasicModalExample;

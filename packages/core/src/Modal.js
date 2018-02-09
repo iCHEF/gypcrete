@@ -1,18 +1,16 @@
 import React, {
-  isValidElement,
-  cloneElement
+  cloneElement,
+  isValidElement
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import icBEM from './utils/icBEM';
-import prefixClass from './utils/prefixClass';
-
-import anchored, { anchoredPropTypes, ANCHORED_PLACEMENT } from './mixins/anchored';
-import closable from './mixins/closable';
-import renderToLayer from './mixins/renderToLayer';
 import Backdrop from './Backdrop';
 import HeaderRow from './HeaderRow';
+import closable from './mixins/closable';
+import icBEM from './utils/icBEM';
+import prefixClass from './utils/prefixClass';
+import renderToLayer from './mixins/renderToLayer';
 
 import './styles/Modal.scss';
 
@@ -23,6 +21,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
     root: ROOT_BEM.modifier('active'),
     backdrop: ROOT_BEM.element('backdrop'),
+    closable: ROOT_BEM.element('closable'),
     container: ROOT_BEM.element('container'),
     header: ROOT_BEM.element('header'),
     footer: ROOT_BEM.element('footer'),
@@ -69,64 +68,68 @@ function renderFooter(footer, footerClassName) {
 }
 
 
-function Modal({
-    // from anchored()
-    placement,
-    arrowStyle,
+const ModalContent = ({
     // React props
-    className,
     children,
     // Other props
     header,
     footer,
-    size,
     bodyClassName,
     bodyPadding,
-    ...otherProps,
-}) {
-    const bemClass = BEM.root.modifier(placement);
-    const rootClassName = classNames(bemClass.toString(), className);
+}) => (
+    <div className={BEM.container}>
+        {renderHeader(header, `${BEM.header}`)}
+        <div
+            className={classNames(
+                  bodyClassName,
+                  `${BEM.body.modifier('padding', bodyPadding)}`
+              )}>
+            {children}
+        </div>
+        {renderFooter(footer, `${BEM.footer}`)}
+    </div>
+    );
+
+ModalContent.propTypes = {
+    header: PropTypes.node,
+    footer: PropTypes.element,
+    bodyClassName: PropTypes.string,
+    bodyPadding: PropTypes.bool,
+};
+
+ModalContent.defaultProps = {
+    bodyPadding: false,
+};
+
+const ClosableModalContent = closable({
+    onEscape: true,
+    onClickOutside: true,
+    onClickInside: false,
+})(ModalContent);
+
+
+function Modal(props) {
+    const {
+        // React props
+        className,
+        // Other props
+        size,
+        ...otherProps,
+    } = props;
+    const rootClassName = classNames(BEM.root.toString(), className);
 
     return (
-        <article className={rootClassName} {...otherProps}>
+        <article className={classNames(rootClassName, `${BEM.root.modifier(size)}`)} {...otherProps}>
             <Backdrop className={BEM.backdrop} />
-            <div className={BEM.container}>
-                {renderHeader(header, `${BEM.header}`)}
-                <div
-                    className={classNames(
-                          bodyClassName,
-                          `${BEM.body.modifier('padding', bodyPadding)}`
-                      )}>
-                    {children}
-                </div>
-                {renderFooter(footer, `${BEM.footer}`)}
-            </div>
+            <ClosableModalContent className={BEM.closable} {...props} />
         </article>
     );
 }
 
 Modal.propTypes = {
-    ...anchoredPropTypes,
-    header: PropTypes.node,
-    footer: PropTypes.element,
     size: PropTypes.oneOf(MODAL_SIZE),
-    bodyClassName: PropTypes.string,
-    bodyPadding: PropTypes.bool,
-};
-
-Modal.defaultProps = {
-    bodyPadding: false,
-    placement: ANCHORED_PLACEMENT.BOTTOM,
 };
 
 export { Modal as PureModal };
 
-export default renderToLayer(
-    closable({
-        onEscape: true,
-        onClickOutside: true,
-        onClickInside: true,
-    })(
-        anchored()(Modal)
-    )
-);
+export default renderToLayer(Modal);

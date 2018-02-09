@@ -38,6 +38,9 @@ $component: #{$prefix}-modal;
         right: 0;
         background-color: $c-backdrop;
         z-index: z("default");
+    } // Closable
+    &__closable {
+        width: 100%;
     } // Container
     &__container {
         width: $modal-width-full;
