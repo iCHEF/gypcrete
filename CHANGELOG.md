@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Core] `<HeaderRow>` now accepts `children` and renders. (#136)
 - [Form] `<SelectOption>` now accepts and passes unknown props to its inner `<Checkbox>`. (#136)
+- [Core] Migrate <Modal> from ic-framework-react and ic-framework. (#137)
 
 ## [1.6.0]
 ### Added

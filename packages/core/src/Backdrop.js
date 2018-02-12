@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class Backdrop extends Component {
+class Backdrop extends PureComponent {
     componentDidMount() {
         document.body.classList.add('ic-has-backdrop');
     }

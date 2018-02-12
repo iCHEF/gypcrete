@@ -24,7 +24,6 @@ export const BEM = {
     closable: ROOT_BEM.element('closable'),
     container: ROOT_BEM.element('container'),
     header: ROOT_BEM.element('header'),
-    footer: ROOT_BEM.element('footer'),
     body: ROOT_BEM.element('body')
 };
 
@@ -49,31 +48,11 @@ function renderHeader(header, headerClassName) {
     return header;
 }
 
-/**
- * Render Modal Footer
- * If element, render with footer className
- *
- * @param  {Node|Any} footer          - Footer node or any
- * @param  {String}   footerClassName - Footer className
- * @return {Node|Any}                 - Footer node or any
- */
-function renderFooter(footer, footerClassName) {
-    if (isValidElement(footer)) {
-        return cloneElement(footer, {
-            className: footerClassName
-        });
-    }
-
-    return footer;
-}
-
-
 const ModalContent = ({
     // React props
     children,
     // Other props
     header,
-    footer,
     bodyClassName,
     bodyPadding,
 }) => (
@@ -86,13 +65,11 @@ const ModalContent = ({
               )}>
             {children}
         </div>
-        {renderFooter(footer, `${BEM.footer}`)}
     </div>
     );
 
 ModalContent.propTypes = {
     header: PropTypes.node,
-    footer: PropTypes.element,
     bodyClassName: PropTypes.string,
     bodyPadding: PropTypes.bool,
 };
@@ -114,12 +91,11 @@ function Modal(props) {
         className,
         // Other props
         size,
-        ...otherProps,
     } = props;
     const rootClassName = classNames(BEM.root.toString(), className);
 
     return (
-        <article className={classNames(rootClassName, `${BEM.root.modifier(size)}`)} {...otherProps}>
+        <article className={classNames(rootClassName, `${BEM.root.modifier(size)}`)}>
             <Backdrop className={BEM.backdrop} />
             <ClosableModalContent className={BEM.closable} {...props} />
         </article>
