@@ -1,13 +1,12 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "src": ["src"]
-        },
         "lib": [
             "es2017"
         ]
     },
+    "exclude": [
+      "node_modules"
+    ],
     "typeAcquisition": {
         "include": [
             "jest"

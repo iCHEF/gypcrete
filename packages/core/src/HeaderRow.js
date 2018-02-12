@@ -21,6 +21,7 @@ export type Props = {
     center?: ReactChildren,
     right?: ReactChildren,
     className?: string, // eslint-disable-line react/require-default-props
+    children?: ReactChildren,
 };
 
 function HeaderRow({
@@ -29,6 +30,7 @@ function HeaderRow({
     right,
     // React props
     className,
+    children,
     ...otherProps,
 }: Props) {
     const rootClassName = classNames(
@@ -41,6 +43,7 @@ function HeaderRow({
             <div className={BEM.left}>{left}</div>
             <div className={BEM.center}>{center}</div>
             <div className={BEM.right}>{right}</div>
+            {children}
         </div>
     );
 }
