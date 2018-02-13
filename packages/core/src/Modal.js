@@ -41,13 +41,13 @@ function renderHeader(header, headerClassName) {
             className: headerClassName
         });
     } else if (typeof header === 'string') {
-        return <HeaderRow label={header} />;
+        return <HeaderRow className={headerClassName} label={header} />;
     }
 
     return header;
 }
 
-const ModalContent = ({
+export const ModalContent = ({
     // React props
     children,
     // Other props
