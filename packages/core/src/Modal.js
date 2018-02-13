@@ -92,10 +92,11 @@ function Modal(props) {
         // Other props
         size,
     } = props;
-    const rootClassName = classNames(BEM.root.toString(), className);
+    const rootClassName = classNames(BEM.root.toString(),
+                                     className, `${BEM.root.modifier(size)}`);
 
     return (
-        <article className={classNames(rootClassName, `${BEM.root.modifier(size)}`)}>
+        <article className={rootClassName}>
             <Backdrop className={BEM.backdrop} />
             <ClosableModalContent className={BEM.closable} {...props} />
         </article>
