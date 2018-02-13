@@ -5,7 +5,7 @@ import React, {
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import Backdrop from './Backdrop';
+import Overlay from './Overlay';
 import HeaderRow from './HeaderRow';
 import closable from './mixins/closable';
 import icBEM from './utils/icBEM';
@@ -20,7 +20,6 @@ export const COMPONENT_NAME = prefixClass('modal');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
     root: ROOT_BEM.modifier('active'),
-    backdrop: ROOT_BEM.element('backdrop'),
     closable: ROOT_BEM.element('closable'),
     container: ROOT_BEM.element('container'),
     header: ROOT_BEM.element('header'),
@@ -97,7 +96,7 @@ function Modal(props) {
 
     return (
         <article className={rootClassName}>
-            <Backdrop className={BEM.backdrop} />
+            <Overlay />
             <ClosableModalContent className={BEM.closable} {...props} />
         </article>
     );

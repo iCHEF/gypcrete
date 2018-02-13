@@ -8,10 +8,10 @@ import Modal from '@ichef/gypcrete/src/Modal';
 import BasicModalExample, { ClosableModalExample } from './BasicModal';
 
 storiesOf('Modal', module)
-    .add('basic usage', withInfo()(() => <BasicModalExample />))
-    .add('small modal', withInfo()(() => <BasicModalExample size="small" />))
-    .add('large modal', withInfo()(() => <BasicModalExample size="large" />))
-    .add('full modal', withInfo()(() => <BasicModalExample size="full" />))
+    .add('basic usage', withInfo()(() => <BasicModalExample bodyPadding />))
+    .add('small modal', withInfo()(() => <BasicModalExample bodyPadding size="small" />))
+    .add('large modal', withInfo()(() => <BasicModalExample bodyPadding size="large" />))
+    .add('full modal', withInfo()(() => <BasicModalExample bodyPadding size="full" />))
     .add('closable modal', withInfo()(() => <ClosableModalExample />))
     // Props table
     .addPropsTable(() => <Modal />);

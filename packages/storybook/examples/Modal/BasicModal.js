@@ -7,7 +7,7 @@ import ModalHeader from './ModalHeader';
 function BasicModalExample(props) {
     return (
         <Modal {...props}>
-            <div style={{ padding: '1rem' }}>
+            <div>
                 Content of Modal
             </div>
         </Modal>
@@ -40,7 +40,9 @@ class ClosableModalExample extends PureComponent {
         }
 
         return (
-            <BasicModalExample header={header} onClose={this.handleModalClose} {...this.props} />
+            <BasicModalExample
+                header={header} onClose={this.handleModalClose}
+                bodyPadding {...this.props} />
         );
     }
 }
