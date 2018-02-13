@@ -48,12 +48,11 @@ function renderHeader(header, headerClassName) {
 }
 
 export const ModalContent = ({
-    // React props
-    children,
-    // Other props
     header,
     bodyClassName,
     bodyPadding,
+    // React props
+    children,
 }) => (
     <div className={BEM.container}>
         {renderHeader(header, `${BEM.header}`)}
@@ -86,13 +85,12 @@ const ClosableModalContent = closable({
 
 function Modal(props) {
     const {
+        size,
         // React props
         className,
-        // Other props
-        size,
     } = props;
-    const rootClassName = classNames(BEM.root.toString(),
-                                     className, `${BEM.root.modifier(size)}`);
+    const bemClass = BEM.root.modifier(size);
+    const rootClassName = className(bemClass.toString(), className);
 
     return (
         <article className={rootClassName}>
