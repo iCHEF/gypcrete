@@ -7,6 +7,7 @@ import classNames from 'classnames';
 
 import Overlay from './Overlay';
 import HeaderRow from './HeaderRow';
+import TextLabel from './TextLabel';
 import closable from './mixins/closable';
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
@@ -41,7 +42,8 @@ function renderHeader(header, headerClassName) {
             className: headerClassName
         });
     } else if (typeof header === 'string') {
-        return <HeaderRow className={headerClassName} label={header} />;
+        const label = <TextLabel align="center" basic={header} />;
+        return <HeaderRow className={headerClassName} center={label} />;
     }
 
     return header;
@@ -90,7 +92,7 @@ function Modal(props) {
         className,
     } = props;
     const bemClass = BEM.root.modifier(size);
-    const rootClassName = className(bemClass.toString(), className);
+    const rootClassName = classNames(bemClass.toString(), className);
 
     return (
         <article className={rootClassName}>

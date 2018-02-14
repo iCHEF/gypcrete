@@ -28,17 +28,7 @@ $component: #{$prefix}-modal;
 //   Modal Elements
 // -------------------------------------
 .#{$prefix}-modal {
-    // Backdrop
-    &__backdrop {
-        display: block;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: $c-backdrop;
-        z-index: z("default");
-    } // Closable
+    // Closable
     &__closable {
         width: 100%;
     } // Container

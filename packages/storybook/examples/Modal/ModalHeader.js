@@ -8,7 +8,7 @@ import {
     TextLabel,
 } from '@ichef/gypcrete';
 
-const L_MODAL_TITLE = 'Title';
+const L_MODAL_TITLE = 'Closable Modal';
 const L_FILTER_DATA = 'Filter';
 const L_CANCEL = 'Cancel';
 
