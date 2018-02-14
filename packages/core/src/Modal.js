@@ -85,25 +85,33 @@ const ClosableModalContent = closable({
 })(ModalContent);
 
 
-function Modal(props) {
-    const {
-        size,
-        // React props
-        className,
-    } = props;
+function Modal({
+    size,
+    header,
+    bodyClassName,
+    bodyPadding,
+    // React props
+    className,
+}) {
     const bemClass = BEM.root.modifier(size);
     const rootClassName = classNames(bemClass.toString(), className);
 
     return (
         <article className={rootClassName}>
             <Overlay />
-            <ClosableModalContent className={BEM.closable} {...props} />
+            <ClosableModalContent
+                className={BEM.closable}
+                header={header} bodyClassName={bodyClassName}
+                bodyPadding={bodyPadding} />
         </article>
     );
 }
 
 Modal.propTypes = {
     size: PropTypes.oneOf(MODAL_SIZE),
+    header: PropTypes.node,
+    bodyClassName: PropTypes.string,
+    bodyPadding: PropTypes.bool,
 };
 
 export { Modal as PureModal };
