@@ -90,6 +90,7 @@ function Modal({
     header,
     bodyClassName,
     bodyPadding,
+    onClose,
     // React props
     className,
 }) {
@@ -102,7 +103,7 @@ function Modal({
             <ClosableModalContent
                 className={BEM.closable}
                 header={header} bodyClassName={bodyClassName}
-                bodyPadding={bodyPadding} />
+                bodyPadding={bodyPadding} onClose={onClose} />
         </article>
     );
 }
@@ -112,6 +113,7 @@ Modal.propTypes = {
     header: PropTypes.node,
     bodyClassName: PropTypes.string,
     bodyPadding: PropTypes.bool,
+    onClose: PropTypes.func,
 };
 
 export { Modal as PureModal };
