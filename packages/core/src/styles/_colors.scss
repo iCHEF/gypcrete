@@ -70,6 +70,10 @@ $c-overlay: hsba(0, 0, 0, 60);
 
 // Popup colors
 $c-popup-button-border: rgba(235, 230, 230, 1);
+$c-modal-border: $c-popup-button-border;
 
 // Popover colors
 $c-popover-background: $c-white;
+
+// Modal colors
+$c-backdrop:                  rgba($c-black, .6);

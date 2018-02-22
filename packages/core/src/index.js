@@ -37,6 +37,7 @@ import Overlay from './Overlay';
 import Popup from './Popup';
 import PopupButton from './PopupButton';
 import Popover from './Popover';
+import Modal from './Modal';
 
 export {
     BasicRow,
@@ -72,4 +73,5 @@ export {
     Popup,
     PopupButton,
     Popover,
+    Modal,
 };
