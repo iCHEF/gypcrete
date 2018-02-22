@@ -55,18 +55,20 @@ export const ModalContent = ({
     bodyPadding,
     // React props
     children,
-}) => (
-    <div className={BEM.container}>
-        {renderHeader(header, `${BEM.header}`)}
-        <div
-            className={classNames(
-                  bodyClassName,
-                  `${BEM.body.modifier('padding', bodyPadding)}`
-              )}>
-            {children}
+}) => {
+    const cNames = classNames(
+                      bodyClassName,
+                      `${BEM.body.modifier('padding', bodyPadding)}`);
+    return (
+        <div className={BEM.container}>
+            {renderHeader(header, `${BEM.header}`)}
+            <div
+                className={cNames}>
+                {children}
+            </div>
         </div>
-    </div>
     );
+};
 
 ModalContent.propTypes = {
     header: PropTypes.node,
