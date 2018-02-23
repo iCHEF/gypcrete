@@ -12,7 +12,14 @@ export const valueType = PropTypes.oneOfType([
     PropTypes.bool,
 ]);
 
-function SelectOption({ label, value, readOnly, checked, onChange }) {
+function SelectOption({
+    label,
+    value,
+    readOnly,
+    checked,
+    onChange,
+    ...checkboxProps,
+}) {
     const handleCheckboxChange = (event) => {
         onChange(value, event.target.checked);
     };
@@ -23,7 +30,8 @@ function SelectOption({ label, value, readOnly, checked, onChange }) {
                 checked={checked}
                 disabled={readOnly}
                 basic={label}
-                onChange={handleCheckboxChange} />
+                onChange={handleCheckboxChange}
+                {...checkboxProps} />
         </ListRow>
     );
 }

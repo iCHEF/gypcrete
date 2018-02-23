@@ -131,11 +131,12 @@ const closable = ({
             const {
                 onClose,
                 closable: runtimeOptions,
+                className,
                 ...otherProps,
             } = this.props;
 
             return (
-                <div ref={this.captureInsideEvents} role="presentation">
+                <div ref={this.captureInsideEvents} className={className} role="presentation">
                     <WrappedComponent {...otherProps} />
                 </div>
             );

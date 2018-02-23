@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete-build",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "iCHEF web components library, built with React.",
   "private": true,
   "repository": {
@@ -23,6 +23,7 @@
     "prepublish": "lerna run prepublish",
     "start": "lerna run storybook --stream",
     "bumpversion": "lerna publish -m \"Lerna: bump version to %s\" --skip-npm",
+    "beta-preminor": "lerna publish -m \"Lerna: publish a beta version: %s\" --cd-version=preminor --preid=beta",
     "release": "lerna publish --yes --repo-version $PACKAGE_VERSION --skip-git",
     "canary": "lerna publish -c --yes --exact",
     "ghpages": "lerna run ghpages",
