@@ -5,11 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
+### Bugs Fix
+- [Core] Fix `<Modal>` not rendering its content (#139)
 
 ## [1.7.0]
 ### Added
-- [Core] Migrate <Modal> from ic-framework-react and ic-framework. (#137)
+- [Core] Migrate `<Modal>` from ic-framework-react and ic-framework. (#137)
 
 ### Changed
 - [Core] `<HeaderRow>` now accepts `children` and renders. (#136)

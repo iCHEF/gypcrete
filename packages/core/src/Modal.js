@@ -95,6 +95,7 @@ function Modal({
     onClose,
     // React props
     className,
+    children,
 }) {
     const bemClass = BEM.root.modifier(size);
     const rootClassName = classNames(bemClass.toString(), className);
@@ -105,7 +106,9 @@ function Modal({
             <ClosableModalContent
                 className={BEM.closable}
                 header={header} bodyClassName={bodyClassName}
-                bodyPadding={bodyPadding} onClose={onClose} />
+                bodyPadding={bodyPadding} onClose={onClose}>
+                {children}
+            </ClosableModalContent>
         </article>
     );
 }
