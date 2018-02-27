@@ -8,6 +8,7 @@ import ListRow from '@ichef/gypcrete/src/ListRow';
 
 import NormalList from './NormalList';
 import SettingList from './SettingList';
+import NestedList from './NestedList';
 
 storiesOf('List', module)
     .add('Normal list',
@@ -16,5 +17,6 @@ storiesOf('List', module)
     .add('Setting list',
         withInfo()(SettingList)
     )
+    .add('Nested list', withInfo()(NestedList))
     // Props table
     .addPropsTable(() => <List />, [ListRow]);
