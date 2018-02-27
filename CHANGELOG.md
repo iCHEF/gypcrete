@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
+### Changed
+- [Core] Update styles for `<ListRow>` to match design in nested lists. (#141)
+- [Storybook] Add examples for nested `<List>`. (#141)
 
 ## [1.7.0]
 ### Added
