@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Bugs Fix
 - [Core] Fix `<Modal>` not rendering its content (#139)
+- [Core] Remove the `Closable` HOC from `<Modal>` to prevent unexpected closing behaviors occur when more than one modals are open. (#139)
+
+### Changed
+- [Storybook] Refine the showcase of `<Modal>` component. (#139)
 
 ## [1.7.0]
 ### Added
