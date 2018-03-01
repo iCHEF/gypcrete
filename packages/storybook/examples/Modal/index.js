@@ -9,9 +9,18 @@ import BasicModalExample, { ClosableModalExample } from './BasicModal';
 
 storiesOf('Modal', module)
     .add('basic usage', withInfo()(() => <BasicModalExample bodyPadding><div>Modal Content</div></BasicModalExample>))
-    .add('small modal', withInfo()(() => <BasicModalExample bodyPadding size="small" header="Small Modal"><div>Modal Content</div></BasicModalExample>))
-    .add('large modal', withInfo()(() => <BasicModalExample bodyPadding size="large" header="Large Modal"><div>Modal Content</div></BasicModalExample>))
-    .add('full modal', withInfo()(() => <BasicModalExample bodyPadding size="full" header="Full Modal"><div>Modal Content</div></BasicModalExample>))
+    .add('small modal', withInfo()(() =>
+        (<BasicModalExample bodyPadding size="small" header="Small Modal">
+            <div>Modal Content</div>
+        </BasicModalExample>)))
+    .add('large modal', withInfo()(() =>
+        (<BasicModalExample bodyPadding size="large" header="Large Modal">
+            <div>Modal Content</div>
+        </BasicModalExample>)))
+    .add('full modal', withInfo()(() =>
+        (<BasicModalExample bodyPadding size="full" header="Full Modal">
+            <div>Modal Content</div>
+        </BasicModalExample>)))
     .add('closable modal', withInfo()(() => <ClosableModalExample />))
     // Props table
     .addPropsTable(() => <Modal />);
