@@ -45,6 +45,12 @@ describe('Pure <PureModal>', () => {
                               .toString({ stripBlock: true });
         expect(wrapper.find(`.${paddingClass}`).exists()).toBeTruthy();
     });
+
+    it('renders content of the modal', () => {
+        const content = <div>TestContent</div>;
+        const wrapper = shallow(<PureModal>{content}</PureModal>);
+        expect(wrapper.contains([content])).toBeTruthy();
+    });
 });
 
 describe('<PureModal> with a header row', () => {
