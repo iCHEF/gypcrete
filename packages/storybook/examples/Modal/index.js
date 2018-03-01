@@ -22,5 +22,11 @@ storiesOf('Modal', module)
             <div>Modal Content</div>
         </BasicModalExample>)))
     .add('closable modal', withInfo()(() => <ClosableModalExample />))
+    .add('closable overlaying modals', withInfo()(() => (<ClosableModalExample size="large">
+        <div>Outer Modal</div>
+        <ClosableModalExample size="small">
+            <div>Inner Modal</div>
+        </ClosableModalExample>
+    </ClosableModalExample>)))
     // Props table
     .addPropsTable(() => <Modal />);

@@ -8,7 +8,7 @@ function BasicModalExample(props) {
     return (
         <Modal {...props}>
             <div>
-                Content of Modal
+                {props.children}
             </div>
         </Modal>
     );

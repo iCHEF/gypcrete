@@ -51,6 +51,22 @@ describe('Pure <PureModal>', () => {
         const wrapper = shallow(<PureModal>{content}</PureModal>);
         expect(wrapper.contains([content])).toBeTruthy();
     });
+
+    it('calls handleOverlayClicked on Overlay click', () => {
+        const wrapper = mount(<PureModal />);
+        const spy = jest.spyOn(wrapper.instance(), 'handleOverlayClicked');
+        wrapper.instance().forceUpdate();
+        wrapper.find(Overlay).simulate('click');
+        expect(spy).toHaveBeenCalled();
+    });
+
+    it('calls onClick on Overlay click if the onClose prop is not null', () => {
+        const mockOnClick = jest.fn();
+        const wrapper = mount(<PureModal onClose={mockOnClick} />);
+        wrapper.instance().forceUpdate();
+        wrapper.find(Overlay).simulate('click');
+        expect(mockOnClick).toHaveBeenCalled();
+    });
 });
 
 describe('<PureModal> with a header row', () => {
