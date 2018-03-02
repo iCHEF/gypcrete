@@ -8,7 +8,6 @@ import classNames from 'classnames';
 import Overlay from './Overlay';
 import HeaderRow from './HeaderRow';
 import TextLabel from './TextLabel';
-import closable from './mixins/closable';
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 import renderToLayer from './mixins/renderToLayer';
@@ -80,13 +79,6 @@ ModalContent.defaultProps = {
     bodyPadding: false,
 };
 
-const ClosableModalContent = closable({
-    onEscape: true,
-    onClickOutside: true,
-    onClickInside: false,
-})(ModalContent);
-
-
 function Modal({
     size,
     header,
@@ -95,6 +87,7 @@ function Modal({
     onClose,
     // React props
     className,
+    children,
 }) {
     const bemClass = BEM.root.modifier(size);
     const rootClassName = classNames(bemClass.toString(), className);
@@ -102,10 +95,12 @@ function Modal({
     return (
         <article className={rootClassName}>
             <Overlay />
-            <ClosableModalContent
+            <ModalContent
                 className={BEM.closable}
                 header={header} bodyClassName={bodyClassName}
-                bodyPadding={bodyPadding} onClose={onClose} />
+                bodyPadding={bodyPadding} onClose={onClose}>
+                {children}
+            </ModalContent>
         </article>
     );
 }
