@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- [Core] Update `<Button>` to support rendering into custom HTML tags. (#144)
 
 ## [1.7.1]
 ### Fixed
