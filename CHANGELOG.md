@@ -6,10 +6,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [1.7.1]
+### Fixed
+- [Core] Fix `<Modal>` not rendering its content (#139)
+- [Core] Remove the `Closable` HOC from `<Modal>` to prevent unexpected closing behaviors occur when more than one modals are open. (#139)
+
+### Changed
+- [Storybook] Refine the showcase of `<Modal>` component. (#139)
 
 ## [1.7.0]
 ### Added
-- [Core] Migrate <Modal> from ic-framework-react and ic-framework. (#137)
+- [Core] Migrate `<Modal>` from ic-framework-react and ic-framework. (#137)
 
 ### Changed
 - [Core] `<HeaderRow>` now accepts `children` and renders. (#136)
