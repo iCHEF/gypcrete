@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Changed
+- [Core] Update styles for `<ListRow>` to match design in nested lists. (#141)
 - [Core] Update `<Button>` to support rendering into custom HTML tags. (#144)
+- [Storybook] Add examples for nested `<List>`. (#141)
 
 ## [1.7.1]
 ### Fixed
