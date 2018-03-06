@@ -52,9 +52,9 @@ describe('Pure <PureModal>', () => {
         expect(wrapper.contains([content])).toBeTruthy();
     });
 
-    it('calls handleOverlayClicked on Overlay click', () => {
+    it('calls handleOverlayClick on Overlay click', () => {
         const wrapper = mount(<PureModal />);
-        const spy = jest.spyOn(wrapper.instance(), 'handleOverlayClicked');
+        const spy = jest.spyOn(wrapper.instance(), 'handleOverlayClick');
         wrapper.instance().forceUpdate();
         wrapper.find(Overlay).simulate('click');
         expect(spy).toHaveBeenCalled();

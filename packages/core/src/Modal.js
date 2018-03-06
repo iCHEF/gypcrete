@@ -81,15 +81,10 @@ ModalContent.defaultProps = {
 };
 
 class Modal extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.handleOverlayClicked = this.handleOverlayClicked.bind(this);
-    }
-
-    handleOverlayClicked(e) {
+    handleOverlayClick = (event) => {
         const { onClose } = this.props;
         // Prevent onClick events being propagated to outer modals
-        e.stopPropagation();
+        event.stopPropagation();
         if (onClose) { onClose(); }
     }
 
@@ -109,11 +104,12 @@ class Modal extends PureComponent {
 
         return (
             <article className={rootClassName}>
-                <Overlay onClick={this.handleOverlayClicked} />
+                <Overlay onClick={this.handleOverlayClick} />
                 <ModalContent
-                    className={BEM.closable}
-                    header={header} bodyClassName={bodyClassName}
-                    bodyPadding={bodyPadding} onClose={onClose}>
+                    header={header}
+                    bodyClassName={bodyClassName}
+                    bodyPadding={bodyPadding}
+                    onClose={onClose}>
                     {children}
                 </ModalContent>
             </article>
