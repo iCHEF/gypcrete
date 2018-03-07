@@ -20,15 +20,6 @@ describe('rowComp(Button)', () => {
 });
 
 describe('Pure <Button>', () => {
-    // #TODO: Restore this after Safari 11 goes mainstream
-    it.skip('renders a <button type=button>', () => {
-        const wrapper = shallow(<PureButton solid>Label</PureButton>);
-
-        expect(wrapper.children()).toHaveLength(1);
-        expect(wrapper.find('button').exists()).toBeTruthy();
-        expect(wrapper.find('button').prop('type')).toBe('button');
-    });
-
     it('handles color modifiers', () => {
         let wrapper = shallow(<PureButton>Label</PureButton>);
         expect(wrapper.hasClass('gyp-button--black')).toBeTruthy();
@@ -47,5 +38,27 @@ describe('Pure <Button>', () => {
         const wrapper = shallow(<PureButton solid>Label</PureButton>);
 
         expect(wrapper.hasClass('gyp-button--solid')).toBeTruthy();
+    });
+
+    it('can render as different tags', () => {
+        const wrapper = shallow(<PureButton tagName="button">Label</PureButton>);
+        expect(wrapper.type()).toBe('button');
+
+        wrapper.setProps({ tagName: 'div' });
+        expect(wrapper.type()).toBe('div');
+
+        wrapper.setProps({ tagName: 'a' });
+        expect(wrapper.type()).toBe('a');
+    });
+
+    it('passes unknown props to its wrapper', () => {
+        const wrapper = shallow(
+            <PureButton id="foo-bar" data-test>
+                Label
+            </PureButton>
+        );
+
+        expect(wrapper.prop('id')).toBe('foo-bar');
+        expect(wrapper.prop('data-test')).toBeTruthy();
     });
 });

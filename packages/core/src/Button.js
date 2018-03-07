@@ -19,7 +19,7 @@ export const BUTTON_COLOR = { BLUE, RED, WHITE, BLACK };
 function Button({
     color,
     solid,
-
+    tagName: ButtonTag,
     // React props
     className,
     children,
@@ -33,20 +33,22 @@ function Button({
 
     // #TODO: Restore wrapper to <button> after Safari 11 goes mainstream
     return (
-        <div className={rootClassName} {...otherProps}>
+        <ButtonTag className={rootClassName} {...otherProps}>
             {children}
-        </div>
+        </ButtonTag>
     );
 }
 
 Button.propTypes = {
     color: PropTypes.oneOf(Object.values(BUTTON_COLOR)),
     solid: PropTypes.bool,
+    tagName: PropTypes.oneOf(['button', 'a', 'div']),
 };
 
 Button.defaultProps = {
     color: BLACK,
     solid: false,
+    tagName: 'div',
 };
 
 // export for tests
