@@ -8,20 +8,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [1.7.2]
+### Fixed
+- [Core] Add a function to close the `<Modal>` when users click `<Overlay>` and the onClose prop exists. (#140)
+
 ### Changed
 - [Core] Update styles for `<ListRow>` to match design in nested lists. (#141)
 - [Core] Update `<Button>` to support rendering into custom HTML tags. (#144)
+- [Storybook] Add the showcase of two overlaying `<Modal>`. (#140)
 - [Storybook] Add examples for nested `<List>`. (#141)
 
 ## [1.7.1]
 ### Fixed
 - [Core] Fix `<Modal>` not rendering its content (#139)
 - [Core] Remove the `Closable` HOC from `<Modal>` to prevent unexpected closing behaviors occur when more than one modals are open. (#139)
-- [Core] Add a function to close the `<Modal>` when users click `<Overlay>` and the onClose prop exists. (#140)
 
 ### Changed
 - [Storybook] Refine the showcase of `<Modal>` component. (#139)
-- [Storybook] Add the showcase of two overlaying `<Modal>`. (#140)
 
 ## [1.7.0]
 ### Added
