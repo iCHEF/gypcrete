@@ -28,10 +28,7 @@ $component: #{$prefix}-modal;
 //   Modal Elements
 // -------------------------------------
 .#{$prefix}-modal {
-    // Closable
-    &__closable {
-        width: 100%;
-    } // Container
+    // Container
     &__container {
         width: $modal-width-full;
         height: $modal-height;

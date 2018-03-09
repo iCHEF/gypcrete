@@ -1,6 +1,7 @@
 import React, {
   cloneElement,
-  isValidElement
+  isValidElement,
+  PureComponent
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -79,30 +80,41 @@ ModalContent.defaultProps = {
     bodyPadding: false,
 };
 
-function Modal({
-    size,
-    header,
-    bodyClassName,
-    bodyPadding,
-    onClose,
-    // React props
-    className,
-    children,
-}) {
-    const bemClass = BEM.root.modifier(size);
-    const rootClassName = classNames(bemClass.toString(), className);
+class Modal extends PureComponent {
+    handleOverlayClick = (event) => {
+        const { onClose } = this.props;
+        // Prevent onClick events being propagated to outer modals
+        event.stopPropagation();
+        if (onClose) { onClose(); }
+    }
 
-    return (
-        <article className={rootClassName}>
-            <Overlay />
-            <ModalContent
-                className={BEM.closable}
-                header={header} bodyClassName={bodyClassName}
-                bodyPadding={bodyPadding} onClose={onClose}>
-                {children}
-            </ModalContent>
-        </article>
-    );
+    render() {
+        const {
+            size,
+            header,
+            bodyClassName,
+            bodyPadding,
+            onClose,
+            // React props
+            className,
+            children,
+        } = this.props;
+        const bemClass = BEM.root.modifier(size);
+        const rootClassName = classNames(bemClass.toString(), className);
+
+        return (
+            <article className={rootClassName}>
+                <Overlay onClick={this.handleOverlayClick} />
+                <ModalContent
+                    header={header}
+                    bodyClassName={bodyClassName}
+                    bodyPadding={bodyPadding}
+                    onClose={onClose}>
+                    {children}
+                </ModalContent>
+            </article>
+        );
+    }
 }
 
 Modal.propTypes = {

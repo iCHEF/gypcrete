@@ -10,6 +10,7 @@ import SolidButtonExample from './SolidButton';
 import DisabledButtonExample from './DisabledButton';
 import ExpandedButtonExample from './ExpandedButton';
 import ButtonWithStatusExample from './ButtonWithStatus';
+import CustomTagButtonExample from './CustomTagButton';
 
 storiesOf('Button', module)
     .add('basic usage',
@@ -27,5 +28,6 @@ storiesOf('Button', module)
     .add('with status',
         withInfo()(ButtonWithStatusExample)
     )
+    .add('custom tag', withInfo()(CustomTagButtonExample))
     // Props table
     .addPropsTable(() => <Button />, [PureButton]);

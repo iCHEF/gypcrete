@@ -121,3 +121,18 @@
         opacity: .5;
     }
 }
+
+// ----------------------
+//  Custom <Button> tag
+// ----------------------
+button.#{$prefix}-button {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    appearance: none;
+    user-select: none;
+}
+
+a.#{$prefix}-button {
+    text-decoration: none;
+}
