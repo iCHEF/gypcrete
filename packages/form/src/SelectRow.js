@@ -122,16 +122,15 @@ class SelectRow extends PureComponent {
             this.setState({ cachedValues: newValues });
         }
         this.props.onChange(newValues);
+        this.handlePopoverClose();
     }
 
     renderPopover(selectListProps) {
-        const closableOptions = this.props.multiple ? undefined : { onClickInside: true };
-
         return (
             <Popover
                 anchor={this.anchorNode}
                 className={BEM.popover.toString()}
-                closable={closableOptions}
+                closable={{ onClickInside: false }}
                 onClose={this.handlePopoverClose}>
                 <SelectList
                     values={this.state.cachedValues}
