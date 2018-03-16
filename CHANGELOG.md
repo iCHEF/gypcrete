@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
+### Fixed
+- [Core] Fix some content might exceed `<Popover>` container. (#147)
+- [Form] Fix `<Popover>` inside `<SelectRow>` should not be closed until user clicks on the checkbox. (#147)
 
 ## [1.7.2]
 ### Fixed
