@@ -3,15 +3,19 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const packageDirname = process.cwd();
+const fullPackageName = process.env.npm_package_name || process.env.GPT_PKG_NAME;
+const packageName = fullPackageName.replace(/@ichef\//, '');
+
 module.exports = {
     entry: './src/index.js',
 
-    context: path.resolve(__dirname, '..'),
+    context: packageDirname,
 
     output: {
-        filename: 'gypcrete-imageeditor.js',
-        path: path.resolve(__dirname, '../dist'),
-        library: 'gypcrete-imageeditor'
+        filename: `${packageName}.js`,
+        path: path.resolve(packageDirname, 'dist'),
+        library: packageName,
     },
 
     module: {
@@ -19,14 +23,14 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 include: [
-                    path.resolve(__dirname, '../src')
+                    path.resolve(packageDirname, 'src')
                 ],
-                use: ['babel-loader']
+                use: ['babel-loader'],
             },
             {
                 test: /\.scss$/,
                 include: [
-                    path.resolve(__dirname, '../src')
+                    path.resolve(packageDirname, 'src')
                 ],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
@@ -34,32 +38,32 @@ module.exports = {
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 1
-                            }
+                                importLoaders: 1,
+                            },
                         },
                         {
                             loader: 'postcss-loader',
                             options: {
-                                plugins: () => [autoprefixer]
-                            }
+                                plugins: () => [autoprefixer],
+                            },
                         },
                         {
                             loader: 'sass-loader',
                             options: {
-                                outputStyle: 'expanded'
-                            }
-                        }
-                    ]
-                })
-            }
-        ]
+                                outputStyle: 'expanded',
+                            },
+                        },
+                    ],
+                }),
+            },
+        ],
     },
 
     plugins: [
-        new ExtractTextPlugin('gypcrete-form.css')
+        new ExtractTextPlugin(`${packageName}.css`),
     ],
 
     externals: {
-        react: 'React'
+        react: 'React',
     }
 };
