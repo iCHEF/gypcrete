@@ -1,0 +1,50 @@
+{
+  "name": "@ichef/gypcrete-imageeditor",
+  "version": "1.7.2",
+  "description": "Image cropper built with Gypcrete",
+  "repository": "iCHEF/gypcrete",
+  "contributors": [
+    "CJies Tan (https://github.com/cjies)",
+    "Teng-hao Chang (https://github.com/zhusee2)"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/iCHEF/gypcrete/issues"
+  },
+  "homepage": "https://github.com/iCHEF/gypcrete#readme",
+  "engines": {
+    "node": ">= 6.9.1",
+    "npm": ">= 3.10.10"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "dist/",
+    "lib/",
+    "es5/",
+    "README.md",
+    "package.json"
+  ],
+  "scripts": {
+    "prepublish": "npm run clean && npm run build",
+    "build": "npm run build:dist && npm run build:lib && npm run build:es5",
+    "build:dist": "webpack --config ./configs/webpack.dist.js --color",
+    "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
+    "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
+    "clean": "rm -rf ./dist ./lib ./es5"
+  },
+  "peerDependencies": {
+    "babel-runtime": "^6.18.0",
+    "prop-types": "^15.5.8",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
+  },
+  "dependencies": {
+    "@ichef/gypcrete": "^1.7.2",
+    "classnames": "^2.2.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "enzyme": "^2.8.2",
+    "webpack": "^3.10.0"
+  }
+}
