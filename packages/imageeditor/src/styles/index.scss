@@ -1,0 +1,32 @@
+@import "~@ichef/gypcrete/src/styles/mixins";
+
+$component-name: "#{$prefix}-image-editor";
+
+.#{$component-name} {
+    canvas {
+        // to remove mystery space below <canvas>
+        vertical-align: top;
+    }
+
+    // elements
+    &__canvas {
+        cursor: grab;
+    }
+
+    &__control {
+        margin-top: rem(8px);
+    }
+
+    &__slider {
+        width: 100%;
+        height: rem(16px);
+        background: transparent;
+        margin: 0;
+    }
+
+    // modifiers
+    &--auto-margin {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
 import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
@@ -14,16 +15,23 @@ export const BEM = {
     root: ROOT_BEM,
     canvas: ROOT_BEM.element('canvas'),
     control: ROOT_BEM.element('control'),
+    slider: ROOT_BEM.element('slider'),
 };
 
 class ImageEditor extends PureComponent {
     static propTypes = {
-        // Appearance configs
+        // props for <AvatarEditor>
+        width: AvatarEditor.propTypes.width,
+
+        // appearance configs
         control: PropTypes.bool,
+        autoMargin: PropTypes.bool,
     };
 
     static defaultProps = {
+        width: AvatarEditor.defaultProps.width,
         control: false,
+        autoMargin: false,
     };
 
     state = {
@@ -42,24 +50,46 @@ class ImageEditor extends PureComponent {
         }
 
         return (
-            <input
-                ref={(ref) => { this.sliderRef = ref; }}
-                type="range"
-                value={this.state.scale}
-                step="0.1"
-                min="0.5"
-                max="5"
-                onChange={this.handleSliderChange} />
+            <div className={BEM.control.toString()}>
+                <input
+                    ref={(ref) => { this.sliderRef = ref; }}
+                    type="range"
+                    value={this.state.scale}
+                    className={BEM.slider.toString()}
+                    step="0.1"
+                    min="0.5"
+                    max="5"
+                    onChange={this.handleSliderChange} />
+            </div>
         );
     }
 
     render() {
+        const {
+            width,
+            // appearancce
+            control,
+            autoMargin,
+            // react props
+            className,
+            style,
+            ...avatarEditorProps,
+        } = this.props;
+
+        const wraperBEM = BEM.root
+            .modifier('auto-margin', autoMargin)
+            .toString();
+
+        const wrapperClass = classNames(className, wraperBEM);
+        const wrapperStyle = { ...style, width };
+
         return (
-            <div className={BEM.root.toString()}>
+            <div className={wrapperClass} style={wrapperStyle}>
                 <div className={BEM.canvas.toString()}>
                     <AvatarEditor
                         scale={this.state.scale}
-                        {...this.props} />
+                        border={0}
+                        {...avatarEditorProps} />
                 </div>
 
                 {this.renderControl()}
