@@ -6,6 +6,7 @@ $placeholder-border-color: rgba(0, 0, 0, .1);
 
 .#{$component-name} {
     canvas {
+        cursor: grab;
         // to remove mystery space below <canvas>
         vertical-align: top;
     }
@@ -13,7 +14,6 @@ $placeholder-border-color: rgba(0, 0, 0, .1);
     // elements
     &__canvas {
         position: relative;
-        cursor: grab;
     }
 
     &__control {
@@ -27,35 +27,25 @@ $placeholder-border-color: rgba(0, 0, 0, .1);
         margin: 0;
     }
 
+    &__placeholder {
+        width: 100%;
+        color: $placeholder-icon-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 4px dashed $placeholder-border-color;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
     // modifiers
     &--auto-margin {
         margin-left: auto;
         margin-right: auto;
     }
 
-    &--no-image {
-        $spacing:0;
-
-        .#{$component-name}__canvas:before {
-            content: "\e817";
-            width: 100%;
-            height: 100%;
-            color: $placeholder-icon-color;
-            font-family: "gyp-icon";
-            font-size: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 4px dashed $placeholder-border-color;
-            border-radius: 8px;
-            box-sizing: border-box;
-            position: absolute;
-        }
-    }
-
-    &--no-image,
     &--readonly {
-        .#{$component-name}__canvas {
+        canvas {
             cursor: default;
         }
     }

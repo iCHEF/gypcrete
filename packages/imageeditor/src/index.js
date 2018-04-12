@@ -7,6 +7,7 @@ import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
 import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
 
 import AvatarEditor from 'react-avatar-editor';
+import EditorPlaceholder from './EditorPlaceholder';
 
 import getInitScale from './utils/getInitScale';
 import getInitPosition from './utils/getInitPosition';
@@ -22,6 +23,7 @@ export const BEM = {
     canvas: ROOT_BEM.element('canvas'),
     control: ROOT_BEM.element('control'),
     slider: ROOT_BEM.element('slider'),
+    placeholder: ROOT_BEM.element('placeholder'),
 };
 
 class ImageEditor extends PureComponent {
@@ -36,6 +38,7 @@ class ImageEditor extends PureComponent {
         control: PropTypes.bool,
         autoMargin: PropTypes.bool,
         readOnly: PropTypes.bool,
+        loading: PropTypes.bool,
         // props for <AvatarEditor>
         image: AvatarEditor.propTypes.image,
         width: AvatarEditor.propTypes.width,
@@ -47,6 +50,7 @@ class ImageEditor extends PureComponent {
         control: false,
         autoMargin: false,
         readOnly: false,
+        loading: false,
         // props for <AvatarEditor>
         image: AvatarEditor.defaultProps.image,
         width: AvatarEditor.defaultProps.width,
@@ -59,8 +63,12 @@ class ImageEditor extends PureComponent {
     };
 
     componentWillReceiveProps(nextProps) {
-        const { initCropRect: currentCropRect } = this.props;
-        const { initCropRect: nextCropRect } = nextProps;
+        const {
+            initCropRect: currentCropRect,
+        } = this.props;
+        const {
+            initCropRect: nextCropRect,
+        } = nextProps;
 
         if (nextCropRect && !shallowEqualObjects(currentCropRect, nextCropRect)) {
             this.setState({
@@ -87,8 +95,8 @@ class ImageEditor extends PureComponent {
             return null;
         }
 
-        const { image, readOnly } = this.props;
-        const shouldDisable = readOnly || !image;
+        const { image, readOnly, loading } = this.props;
+        const shouldDisable = readOnly || !image || loading;
 
         return (
             <div className={BEM.control.toString()}>
@@ -112,6 +120,7 @@ class ImageEditor extends PureComponent {
             control,
             autoMargin,
             readOnly,
+            loading,
             // props for <AvatarEditor>
             image,
             width,
@@ -124,25 +133,37 @@ class ImageEditor extends PureComponent {
 
         const wraperBEM = BEM.root
             .modifier('auto-margin', autoMargin)
-            .modifier('no-image', !image)
             .modifier('readonly', readOnly)
             .toString();
 
         const wrapperClass = classNames(className, wraperBEM);
         const wrapperStyle = { ...style, width };
 
+        const shouldShowPlaceholder = (!image || loading);
+
+        const placeholder = (
+            <EditorPlaceholder
+                loading={loading}
+                className={BEM.placeholder.toString()}
+                canvasHeight={height} />
+        );
+        const canvas = (
+            <AvatarEditor
+                image={image}
+                width={width}
+                height={height}
+                scale={this.state.scale}
+                position={this.state.position}
+                onLoadSuccess={this.handleCanvasLoadSuccess}
+                onPositionChange={this.handleCanvasPosChange}
+                border={0}
+                {...avatarEditorProps} />
+        );
+
         return (
             <div className={wrapperClass} style={wrapperStyle}>
                 <div className={BEM.canvas.toString()}>
-                    <AvatarEditor
-                        image={image}
-                        width={width}
-                        height={height}
-                        scale={this.state.scale}
-                        position={this.state.position}
-                        onPositionChange={this.handleCanvasPosChange}
-                        border={0}
-                        {...avatarEditorProps} />
+                    {shouldShowPlaceholder ? placeholder : canvas}
                 </div>
 
                 {this.renderControl()}
