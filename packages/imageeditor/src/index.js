@@ -1,13 +1,19 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import shallowEqualObjects from 'shallow-equal/objects';
 
 import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
 import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
 
 import AvatarEditor from 'react-avatar-editor';
 
+import getInitScale from './utils/getInitScale';
+import getInitPosition from './utils/getInitPosition';
+
 import './styles/index.scss';
+
+const DEFAULT_SCALE = 1;
 
 export const COMPONENT_NAME = prefixClass('image-editor');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -20,30 +26,56 @@ export const BEM = {
 
 class ImageEditor extends PureComponent {
     static propTypes = {
-        // props for <AvatarEditor>
-        image: AvatarEditor.propTypes.image,
-        width: AvatarEditor.propTypes.width,
-
+        initCropRect: PropTypes.shape({
+            x: PropTypes.number,
+            y: PropTypes.number,
+            width: PropTypes.number,
+            height: PropTypes.number,
+        }),
         // appearance configs
         control: PropTypes.bool,
         autoMargin: PropTypes.bool,
+        // props for <AvatarEditor>
+        image: AvatarEditor.propTypes.image,
+        width: AvatarEditor.propTypes.width,
+        height: AvatarEditor.propTypes.height,
     };
 
     static defaultProps = {
-        image: AvatarEditor.defaultProps.image,
-        width: AvatarEditor.defaultProps.width,
+        initCropRect: undefined,
         control: false,
         autoMargin: false,
+        // props for <AvatarEditor>
+        image: AvatarEditor.defaultProps.image,
+        width: AvatarEditor.defaultProps.width,
+        height: AvatarEditor.defaultProps.height,
     };
 
     state = {
-        scale: 1,
+        scale: getInitScale(this.props.initCropRect) || DEFAULT_SCALE,
+        position: getInitPosition(this.props.initCropRect),
     };
+
+    componentWillReceiveProps(nextProps) {
+        const { initCropRect: currentCropRect } = this.props;
+        const { initCropRect: nextCropRect } = nextProps;
+
+        if (nextCropRect && !shallowEqualObjects(currentCropRect, nextCropRect)) {
+            this.setState({
+                scale: getInitScale(nextCropRect),
+                position: getInitPosition(nextCropRect),
+            });
+        }
+    }
 
     handleSliderChange = (event) => {
         const newScale = Number(event.target.value);
 
         this.setState({ scale: newScale });
+    }
+
+    handleCanvasPosChange = (newPos) => {
+        this.setState({ position: newPos });
     }
 
     renderControl() {
@@ -69,11 +101,13 @@ class ImageEditor extends PureComponent {
 
     render() {
         const {
-            image,
-            width,
-            // appearancce
+            initCropRect,
             control,
             autoMargin,
+            // props for <AvatarEditor>
+            image,
+            width,
+            height,
             // react props
             className,
             style,
@@ -93,7 +127,11 @@ class ImageEditor extends PureComponent {
                 <div className={BEM.canvas.toString()}>
                     <AvatarEditor
                         image={image}
+                        width={width}
+                        height={height}
                         scale={this.state.scale}
+                        position={this.state.position}
+                        onPositionChange={this.handleCanvasPosChange}
                         border={0}
                         {...avatarEditorProps} />
                 </div>
