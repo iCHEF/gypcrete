@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import shallowEqualObjects from 'shallow-equal/objects';
 
 import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
 import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
@@ -63,17 +62,11 @@ class ImageEditor extends PureComponent {
     };
 
     componentWillReceiveProps(nextProps) {
-        const {
-            initCropRect: currentCropRect,
-        } = this.props;
-        const {
-            initCropRect: nextCropRect,
-        } = nextProps;
-
-        if (nextCropRect && !shallowEqualObjects(currentCropRect, nextCropRect)) {
+        // Consider current `scale`, `position` and `initCropRect` outdated when image changes
+        if (nextProps.image !== this.props.image) {
             this.setState({
-                scale: getInitScale(nextCropRect),
-                position: getInitPosition(nextCropRect),
+                scale: DEFAULT_SCALE,
+                position: undefined,
             });
         }
     }
