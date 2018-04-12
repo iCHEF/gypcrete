@@ -36,10 +36,6 @@ $placeholder-border-color: rgba(0, 0, 0, .1);
     &--no-image {
         $spacing:0;
 
-        .#{$component-name}__canvas {
-            cursor: default;
-        }
-
         .#{$component-name}__canvas:before {
             content: "\e817";
             width: 100%;
@@ -54,6 +50,13 @@ $placeholder-border-color: rgba(0, 0, 0, .1);
             border-radius: 8px;
             box-sizing: border-box;
             position: absolute;
+        }
+    }
+
+    &--no-image,
+    &--readonly {
+        .#{$component-name}__canvas {
+            cursor: default;
         }
     }
 }

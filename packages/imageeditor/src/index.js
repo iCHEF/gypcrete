@@ -35,6 +35,7 @@ class ImageEditor extends PureComponent {
         // appearance configs
         control: PropTypes.bool,
         autoMargin: PropTypes.bool,
+        readOnly: PropTypes.bool,
         // props for <AvatarEditor>
         image: AvatarEditor.propTypes.image,
         width: AvatarEditor.propTypes.width,
@@ -45,6 +46,7 @@ class ImageEditor extends PureComponent {
         initCropRect: undefined,
         control: false,
         autoMargin: false,
+        readOnly: false,
         // props for <AvatarEditor>
         image: AvatarEditor.defaultProps.image,
         width: AvatarEditor.defaultProps.width,
@@ -75,13 +77,18 @@ class ImageEditor extends PureComponent {
     }
 
     handleCanvasPosChange = (newPos) => {
-        this.setState({ position: newPos });
+        if (!this.props.readOnly) {
+            this.setState({ position: newPos });
+        }
     }
 
     renderControl() {
         if (!this.props.control) {
             return null;
         }
+
+        const { image, readOnly } = this.props;
+        const shouldDisable = readOnly || !image;
 
         return (
             <div className={BEM.control.toString()}>
@@ -90,7 +97,7 @@ class ImageEditor extends PureComponent {
                     type="range"
                     value={this.state.scale}
                     className={BEM.slider.toString()}
-                    disabled={!this.props.image}
+                    disabled={shouldDisable}
                     step="0.1"
                     min="0.5"
                     max="5"
@@ -104,6 +111,7 @@ class ImageEditor extends PureComponent {
             initCropRect,
             control,
             autoMargin,
+            readOnly,
             // props for <AvatarEditor>
             image,
             width,
@@ -117,6 +125,7 @@ class ImageEditor extends PureComponent {
         const wraperBEM = BEM.root
             .modifier('auto-margin', autoMargin)
             .modifier('no-image', !image)
+            .modifier('readonly', readOnly)
             .toString();
 
         const wrapperClass = classNames(className, wraperBEM);
