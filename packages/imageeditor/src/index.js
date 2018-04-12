@@ -21,6 +21,7 @@ export const BEM = {
 class ImageEditor extends PureComponent {
     static propTypes = {
         // props for <AvatarEditor>
+        image: AvatarEditor.propTypes.image,
         width: AvatarEditor.propTypes.width,
 
         // appearance configs
@@ -29,6 +30,7 @@ class ImageEditor extends PureComponent {
     };
 
     static defaultProps = {
+        image: AvatarEditor.defaultProps.image,
         width: AvatarEditor.defaultProps.width,
         control: false,
         autoMargin: false,
@@ -56,6 +58,7 @@ class ImageEditor extends PureComponent {
                     type="range"
                     value={this.state.scale}
                     className={BEM.slider.toString()}
+                    disabled={!this.props.image}
                     step="0.1"
                     min="0.5"
                     max="5"
@@ -66,6 +69,7 @@ class ImageEditor extends PureComponent {
 
     render() {
         const {
+            image,
             width,
             // appearancce
             control,
@@ -78,6 +82,7 @@ class ImageEditor extends PureComponent {
 
         const wraperBEM = BEM.root
             .modifier('auto-margin', autoMargin)
+            .modifier('no-image', !image)
             .toString();
 
         const wrapperClass = classNames(className, wraperBEM);
@@ -87,6 +92,7 @@ class ImageEditor extends PureComponent {
             <div className={wrapperClass} style={wrapperStyle}>
                 <div className={BEM.canvas.toString()}>
                     <AvatarEditor
+                        image={image}
                         scale={this.state.scale}
                         border={0}
                         {...avatarEditorProps} />

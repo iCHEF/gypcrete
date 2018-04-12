@@ -1,6 +1,8 @@
 @import "~@ichef/gypcrete/src/styles/mixins";
 
 $component-name: "#{$prefix}-image-editor";
+$placeholder-icon-color: rgba(0, 0, 0, .3);
+$placeholder-border-color: rgba(0, 0, 0, .1);
 
 .#{$component-name} {
     canvas {
@@ -10,6 +12,7 @@ $component-name: "#{$prefix}-image-editor";
 
     // elements
     &__canvas {
+        position: relative;
         cursor: grab;
     }
 
@@ -28,5 +31,29 @@ $component-name: "#{$prefix}-image-editor";
     &--auto-margin {
         margin-left: auto;
         margin-right: auto;
+    }
+
+    &--no-image {
+        $spacing:0;
+
+        .#{$component-name}__canvas {
+            cursor: default;
+        }
+
+        .#{$component-name}__canvas:before {
+            content: "\e817";
+            width: 100%;
+            height: 100%;
+            color: $placeholder-icon-color;
+            font-family: "gyp-icon";
+            font-size: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 4px dashed $placeholder-border-color;
+            border-radius: 8px;
+            box-sizing: border-box;
+            position: absolute;
+        }
     }
 }
