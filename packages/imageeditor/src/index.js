@@ -33,6 +33,7 @@ class ImageEditor extends PureComponent {
             width: PropTypes.number,
             height: PropTypes.number,
         }),
+        onCropChange: PropTypes.func,
         // appearance configs
         control: PropTypes.bool,
         autoMargin: PropTypes.bool,
@@ -42,10 +43,12 @@ class ImageEditor extends PureComponent {
         image: AvatarEditor.propTypes.image,
         width: AvatarEditor.propTypes.width,
         height: AvatarEditor.propTypes.height,
+        onImageChange: AvatarEditor.propTypes.onImageChange,
     };
 
     static defaultProps = {
         initCropRect: undefined,
+        onCropChange: () => {},
         control: false,
         autoMargin: false,
         readOnly: false,
@@ -54,6 +57,7 @@ class ImageEditor extends PureComponent {
         image: AvatarEditor.defaultProps.image,
         width: AvatarEditor.defaultProps.width,
         height: AvatarEditor.defaultProps.height,
+        onImageChange: AvatarEditor.defaultProps.onImageChange,
     };
 
     state = {
@@ -71,6 +75,17 @@ class ImageEditor extends PureComponent {
         }
     }
 
+    /**
+     * When maintaining ref with inline arrow function, it sometimes receives
+     * mystery `null` during canvas drag. This blocks accessing cropping rect
+     * via `onImageChange()` callback.
+     *
+     * Setting ref with instance method doesn't break. It's just MAGIC.
+     */
+    setCanvasRef = (ref) => {
+        this.canvasRef = ref;
+    }
+
     handleSliderChange = (event) => {
         const newScale = Number(event.target.value);
 
@@ -81,6 +96,14 @@ class ImageEditor extends PureComponent {
         if (!this.props.readOnly) {
             this.setState({ position: newPos });
         }
+    }
+
+    handleCanvasImageChange = () => {
+        const newCropRect = this.canvasRef.getCroppingRect();
+        this.props.onCropChange(newCropRect);
+
+        // Proxies original `onImageChange()` prop for `<AvatarEditor>`
+        this.props.onImageChange();
     }
 
     renderControl() {
@@ -118,6 +141,7 @@ class ImageEditor extends PureComponent {
             image,
             width,
             height,
+            onImageChange,
             // react props
             className,
             style,
@@ -142,12 +166,13 @@ class ImageEditor extends PureComponent {
         );
         const canvas = (
             <AvatarEditor
+                ref={this.setCanvasRef}
                 image={image}
                 width={width}
                 height={height}
                 scale={this.state.scale}
                 position={this.state.position}
-                onLoadSuccess={this.handleCanvasLoadSuccess}
+                onImageChange={this.handleCanvasImageChange}
                 onPositionChange={this.handleCanvasPosChange}
                 border={0}
                 {...avatarEditorProps} />
