@@ -1,0 +1,52 @@
+@import "~@ichef/gypcrete/src/styles/mixins";
+
+$component-name: "#{$prefix}-image-editor";
+$placeholder-icon-color: rgba(0, 0, 0, .3);
+$placeholder-border-color: rgba(0, 0, 0, .1);
+
+.#{$component-name} {
+    canvas {
+        cursor: grab;
+        // to remove mystery space below <canvas>
+        vertical-align: top;
+    }
+
+    // elements
+    &__canvas {
+        position: relative;
+    }
+
+    &__control {
+        margin-top: rem(8px);
+    }
+
+    &__slider {
+        width: 100%;
+        height: rem(16px);
+        background: transparent;
+        margin: 0;
+    }
+
+    &__placeholder {
+        width: 100%;
+        color: $placeholder-icon-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 4px dashed $placeholder-border-color;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    // modifiers
+    &--auto-margin {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &--readonly {
+        canvas {
+            cursor: default;
+        }
+    }
+}
