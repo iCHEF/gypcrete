@@ -44,6 +44,7 @@ class ImageEditor extends PureComponent {
         width: AvatarEditor.propTypes.width,
         height: AvatarEditor.propTypes.height,
         onImageChange: AvatarEditor.propTypes.onImageChange,
+        onPositionChange: AvatarEditor.propTypes.onPositionChange,
     };
 
     static defaultProps = {
@@ -58,6 +59,7 @@ class ImageEditor extends PureComponent {
         width: AvatarEditor.defaultProps.width,
         height: AvatarEditor.defaultProps.height,
         onImageChange: AvatarEditor.defaultProps.onImageChange,
+        onPositionChange: AvatarEditor.defaultProps.onPositionChange,
     };
 
     state = {
@@ -96,6 +98,9 @@ class ImageEditor extends PureComponent {
         if (!this.props.readOnly) {
             this.setState({ position: newPos });
         }
+
+        // Proxies original `onPositionChange()` prop for `<AvatarEditor>`
+        this.props.onPositionChange(newPos);
     }
 
     handleCanvasImageChange = () => {
@@ -142,6 +147,7 @@ class ImageEditor extends PureComponent {
             width,
             height,
             onImageChange,
+            onPositionChange,
             // react props
             className,
             style,
