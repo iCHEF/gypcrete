@@ -47,6 +47,9 @@ export const BEM = {
  */
 class ImageEditor extends PureComponent {
     static propTypes = {
+        // cropping configs
+        minScale: PropTypes.number,
+        maxScale: PropTypes.number,
         initCropRect: PropTypes.shape({
             x: PropTypes.number,
             y: PropTypes.number,
@@ -68,6 +71,8 @@ class ImageEditor extends PureComponent {
     };
 
     static defaultProps = {
+        minScale: 0.5,
+        maxScale: 5,
         initCropRect: undefined,
         onCropChange: () => {},
         control: false,
@@ -136,7 +141,13 @@ class ImageEditor extends PureComponent {
             return null;
         }
 
-        const { image, readOnly, loading } = this.props;
+        const {
+            minScale,
+            maxScale,
+            image,
+            readOnly,
+            loading,
+        } = this.props;
         const shouldDisable = readOnly || !image || loading;
 
         return (
@@ -148,8 +159,8 @@ class ImageEditor extends PureComponent {
                     className={BEM.slider.toString()}
                     disabled={shouldDisable}
                     step="0.1"
-                    min="0.5"
-                    max="5"
+                    min={minScale}
+                    max={maxScale}
                     onChange={this.handleSliderChange} />
             </div>
         );
@@ -157,7 +168,12 @@ class ImageEditor extends PureComponent {
 
     render() {
         const {
+            // cropping configs
+            minScale,
+            maxScale,
             initCropRect,
+            onCropChange,
+            // appearance configs
             control,
             autoMargin,
             readOnly,
