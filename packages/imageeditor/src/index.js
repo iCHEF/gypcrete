@@ -25,6 +25,26 @@ export const BEM = {
     placeholder: ROOT_BEM.element('placeholder'),
 };
 
+/**
+ * <ImageEditor>
+ * =============
+ * This component is built upon `mosch/react-avatar-editor`, offering pre-configured
+ * scale slider, no-image placeholder and a loading indicator mode. It also supports
+ * setting an initial cropping rectangle via `initCropRect` prop.
+ *
+ * This component passes unknown props to the inner `<AvatarEditor>`.
+ * Plase refer to: https://git.io/vxhT8, for a full list of supported props.
+ *
+ * ### Appearance configs
+ * - `control`: toggles the scale slider
+ * - `autoMargin`: adds `auto` to both left and right CSS margin.
+ * - `readOnly`: prevent the editor from modifing the crop.
+ * - `loading`: put the editor into a loading indicator mode.
+ *
+ * ### Notable <AvatarEditor> props
+ * - `onLoadSuccess`: called with `imgInfo` when image finishes loading
+ *
+ */
 class ImageEditor extends PureComponent {
     static propTypes = {
         initCropRect: PropTypes.shape({
