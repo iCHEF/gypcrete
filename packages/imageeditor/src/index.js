@@ -13,7 +13,7 @@ import getInitPosition from './utils/getInitPosition';
 
 import './styles/index.scss';
 
-const DEFAULT_SCALE = 1;
+export const DEFAULT_SCALE = 1;
 
 export const COMPONENT_NAME = prefixClass('image-editor');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -97,7 +97,7 @@ class ImageEditor extends PureComponent {
         if (nextProps.image !== this.props.image) {
             this.setState({
                 scale: DEFAULT_SCALE,
-                position: undefined,
+                position: null,
             });
         }
     }
@@ -153,7 +153,6 @@ class ImageEditor extends PureComponent {
         return (
             <div className={BEM.control.toString()}>
                 <input
-                    ref={(ref) => { this.sliderRef = ref; }}
                     type="range"
                     value={this.state.scale}
                     className={BEM.slider.toString()}
