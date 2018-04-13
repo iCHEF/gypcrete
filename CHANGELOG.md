@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- [ImageEditor] Add new package `@ichef/gypcrete-imageeditor`. (#148)
+- [ImageEditor] Add new package `@ichef/gypcrete-imageeditor`. (#148, #149)
+  This new component supports:
+    * Creating a cropping rectangle from an image in given dimension
+    * Adjust image scaling with a slider
+    * Customizable scaling range
+    * Display a placeholder when image isn't specified
+    * Display a loading animation when `loading` is set
 
 ### Changed
 - Refactor to reuse shared webpack configs between packages. (#148)
