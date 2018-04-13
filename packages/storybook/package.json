@@ -22,6 +22,7 @@
   "dependencies": {
     "@ichef/gypcrete": "^1.7.2",
     "@ichef/gypcrete-form": "^1.7.2",
+    "@ichef/gypcrete-imageeditor": "^1.7.2",
     "@storybook/addon-actions": "^3.3.9",
     "@storybook/addon-info": "^3.3.9",
     "@storybook/addon-options": "^3.3.9",
