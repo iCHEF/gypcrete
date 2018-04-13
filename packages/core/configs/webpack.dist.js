@@ -1,61 +1,18 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
-const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpackMerge = require('webpack-merge');
 
-module.exports = {
-    entry: './src/index.js',
+const defaultConfigs = require('../../../configs/webpack.dist');
 
-    context: path.resolve(__dirname, '..'),
+const packageDirname = process.cwd();
 
-    output: {
-        filename: 'gypcrete.js',
-        path: path.resolve(__dirname, '../dist'),
-        library: 'gypcrete'
-    },
-
+module.exports = webpackMerge(defaultConfigs, {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
-                include: [
-                    path.resolve(__dirname, '../src')
-                ],
-                use: ['babel-loader']
-            },
-            {
-                test: /\.scss$/,
-                include: [
-                    path.resolve(__dirname, '../src')
-                ],
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1
-                            }
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: () => [autoprefixer]
-                            }
-                        },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                outputStyle: 'expanded'
-                            }
-                        }
-                    ]
-                })
-            },
-            {
                 test: /\.(woff|woff2|otf|ttf|eot|svg)$/,
                 include: [
-                    path.resolve(__dirname, '../src/fonts')
+                    path.resolve(packageDirname, 'src/fonts')
                 ],
                 use: [
                     {
@@ -67,14 +24,6 @@ module.exports = {
                     }
                 ]
             }
-        ]
+        ],
     },
-
-    plugins: [
-        new ExtractTextPlugin('gypcrete.css')
-    ],
-
-    externals: {
-        react: 'React'
-    }
-};
+});

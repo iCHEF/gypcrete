@@ -1,7 +1,7 @@
 {
-  "name": "@ichef/gypcrete-form",
+  "name": "@ichef/gypcrete-imageeditor",
   "version": "1.7.2",
-  "description": "Form components built on Gypcrete",
+  "description": "Image cropper built with Gypcrete",
   "repository": "iCHEF/gypcrete",
   "contributors": [
     "CJies Tan (https://github.com/cjies)",
@@ -30,7 +30,7 @@
     "build:dist": "webpack --config ../../configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
     "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
-    "clean": "rm -rf ./dist ./lib ./es5 ./deploy"
+    "clean": "rm -rf ./dist ./lib ./es5"
   },
   "peerDependencies": {
     "babel-runtime": "^6.18.0",
@@ -41,8 +41,7 @@
   "dependencies": {
     "@ichef/gypcrete": "^1.7.2",
     "classnames": "^2.2.5",
-    "immutable": "^3.8.2",
-    "keycode": "^2.1.9"
+    "react-avatar-editor": "^11.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
