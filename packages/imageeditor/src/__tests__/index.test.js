@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import AvatarEditor from 'react-avatar-editor';
 
-import ImageEditor, { DEFAULT_SCALE } from '../index';
+import ImageEditor, { DEFAULT_SCALE, DEFAULT_POSITION } from '../index';
 import EditorPlaceholder from '../EditorPlaceholder';
 
 import getInitScale from '../utils/getInitScale';
@@ -73,6 +73,7 @@ it('controls scale of <AvatarEditor> with slider while not read-only', () => {
 
 it('caches and controls position of <AvatarEditor> while not read-only', () => {
     const wrapper = shallow(<ImageEditor image={TRANSPARENT_IMAGE} />);
+    expect(wrapper.find(AvatarEditor).prop('position')).toEqual(DEFAULT_POSITION);
 
     wrapper.find(AvatarEditor).simulate('positionChange', { x: 0.5, y: 0.5 });
     expect(wrapper.find(AvatarEditor).prop('position')).toEqual({ x: 0.5, y: 0.5 });
@@ -89,10 +90,10 @@ it('blocks changes to <AvatarEditor> while in read-only mode', () => {
             image={TRANSPARENT_IMAGE} />
     );
     expect(wrapper.find('input[type="range"]').prop('disabled')).toBeTruthy();
-    expect(wrapper.find(AvatarEditor).prop('position')).toBeNull();
+    expect(wrapper.find(AvatarEditor).prop('position')).toEqual(DEFAULT_POSITION);
 
     wrapper.find(AvatarEditor).simulate('positionChange', { x: 0.5, y: 0.5 });
-    expect(wrapper.find(AvatarEditor).prop('position')).toBeNull();
+    expect(wrapper.find(AvatarEditor).prop('position')).toEqual(DEFAULT_POSITION);
 });
 
 it('notifies new cropping rect whenever <AvatarEditor> think it changes', () => {
@@ -150,9 +151,9 @@ it('resets cached scale and position when image changes', () => {
     );
 
     expect(wrapper.find(AvatarEditor).prop('scale')).not.toBe(DEFAULT_SCALE);
-    expect(wrapper.find(AvatarEditor).prop('position')).not.toBeNull();
+    expect(wrapper.find(AvatarEditor).prop('position')).not.toEqual(DEFAULT_POSITION);
 
     wrapper.setProps({ image: BLACK_IMAGE });
     expect(wrapper.find(AvatarEditor).prop('scale')).toBe(DEFAULT_SCALE);
-    expect(wrapper.find(AvatarEditor).prop('position')).toBeNull();
+    expect(wrapper.find(AvatarEditor).prop('position')).toEqual(DEFAULT_POSITION);
 });
