@@ -6,7 +6,7 @@ import { Icon } from '@ichef/gypcrete';
 const PICTURE = 'picture';
 const LOADING = 'loading';
 
-function CenterIcon({ type, ...props }) {
+export function CenterIcon({ type, ...props }) {
     return (
         <Icon
             type={type}
