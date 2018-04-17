@@ -112,9 +112,15 @@ it('notifies new cropping rect whenever <AvatarEditor> think it changes', () => 
 
     wrapper.find(AvatarEditor).simulate('imageChange');
     expect(handleCropChange).toHaveBeenLastCalledWith(CROP_RECT_FOO);
+    expect(handleCropChange).toHaveBeenCalledTimes(1);
+
+    // should not notify under read-only mode
+    wrapper.setProps({ readOnly: true });
+    wrapper.find(AvatarEditor).simulate('imageChange');
+    expect(handleCropChange).toHaveBeenCalledTimes(1);
 
     // should not break even when `onCropChange` isn't provided
-    wrapper.setProps({ onCropChange: undefined });
+    wrapper.setProps({ readOnly: false, onCropChange: undefined });
     expect(() => wrapper.find(AvatarEditor).simulate('imageChange')).not.toThrow();
 });
 
