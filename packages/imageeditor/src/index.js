@@ -13,7 +13,8 @@ import getInitPosition from './utils/getInitPosition';
 
 import './styles/index.scss';
 
-const DEFAULT_SCALE = 1;
+export const DEFAULT_SCALE = 1;
+export const DEFAULT_POSITION = { x: 0.5, y: 0.5 };
 
 export const COMPONENT_NAME = prefixClass('image-editor');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -89,7 +90,7 @@ class ImageEditor extends PureComponent {
 
     state = {
         scale: getInitScale(this.props.initCropRect) || DEFAULT_SCALE,
-        position: getInitPosition(this.props.initCropRect),
+        position: getInitPosition(this.props.initCropRect) || DEFAULT_POSITION,
     };
 
     componentWillReceiveProps(nextProps) {
@@ -97,7 +98,7 @@ class ImageEditor extends PureComponent {
         if (nextProps.image !== this.props.image) {
             this.setState({
                 scale: DEFAULT_SCALE,
-                position: undefined,
+                position: DEFAULT_POSITION,
             });
         }
     }
@@ -129,8 +130,10 @@ class ImageEditor extends PureComponent {
     }
 
     handleCanvasImageChange = () => {
-        const newCropRect = this.canvasRef.getCroppingRect();
-        this.props.onCropChange(newCropRect);
+        if (!this.props.readOnly) {
+            const newCropRect = this.canvasRef.getCroppingRect();
+            this.props.onCropChange(newCropRect);
+        }
 
         // Proxies original `onImageChange()` prop for `<AvatarEditor>`
         this.props.onImageChange();
@@ -153,7 +156,6 @@ class ImageEditor extends PureComponent {
         return (
             <div className={BEM.control.toString()}>
                 <input
-                    ref={(ref) => { this.sliderRef = ref; }}
                     type="range"
                     value={this.state.scale}
                     className={BEM.slider.toString()}
