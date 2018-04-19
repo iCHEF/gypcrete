@@ -117,6 +117,8 @@ class ImageEditor extends PureComponent {
         this.canvasRef = ref;
     }
 
+    getCanvasRef = () => this.canvasRef;
+
     handleSliderChange = (event) => {
         const newScale = Number(event.target.value);
 
