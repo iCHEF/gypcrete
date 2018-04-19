@@ -105,7 +105,8 @@ it('notifies new cropping rect whenever <AvatarEditor> think it changes', () => 
     const wrapper = shallow(
         <ImageEditor
             image={TRANSPARENT_IMAGE}
-            onCropChange={handleCropChange} />);
+            onCropChange={handleCropChange} />
+    );
 
     // mock <AvatarEditor> instance API
     wrapper.instance().setCanvasRef({ getCroppingRect });
@@ -121,7 +122,41 @@ it('notifies new cropping rect whenever <AvatarEditor> think it changes', () => 
 
     // should not break even when `onCropChange` isn't provided
     wrapper.setProps({ readOnly: false, onCropChange: undefined });
-    expect(() => wrapper.find(AvatarEditor).simulate('imageChange')).not.toThrow();
+    expect(
+        () => wrapper.find(AvatarEditor).simulate('imageChange')
+    ).not.toThrow();
+});
+
+it('notifies imgInfo and cropping rect when image successfully loaded', () => {
+    const MOCKED_IMG_INFO = {
+        x: 0.5,
+        y: 0.5,
+        width: 200,
+        height: 200,
+        resource: '[HTMLImageElement]',
+    };
+    const MOCKED_CROP_RECT = { x: 0, y: 0, width: 1, height: 1 };
+
+    const getCroppingRect = jest.fn(() => MOCKED_CROP_RECT);
+    const handleLoadSuccess = jest.fn();
+
+    const wrapper = shallow(
+        <ImageEditor
+            image={TRANSPARENT_IMAGE}
+            onLoadSuccess={handleLoadSuccess} />
+    );
+
+    // mock <AvatarEditor> instance API
+    wrapper.instance().setCanvasRef({ getCroppingRect });
+
+    wrapper.find(AvatarEditor).simulate('loadSuccess', MOCKED_IMG_INFO);
+    expect(handleLoadSuccess).toHaveBeenLastCalledWith(MOCKED_IMG_INFO, MOCKED_CROP_RECT);
+
+    // should not break even when 'onLoadSuccess' not specified
+    wrapper.setProps({ onLoadSuccess: undefined });
+    expect(
+        () => wrapper.find(AvatarEditor).simulate('loadSuccess', MOCKED_IMG_INFO)
+    ).not.toThrow();
 });
 
 it('takes an initial cropping rect to set scale and position', () => {
@@ -162,4 +197,13 @@ it('resets cached scale and position when image changes', () => {
     wrapper.setProps({ image: BLACK_IMAGE });
     expect(wrapper.find(AvatarEditor).prop('scale')).toBe(DEFAULT_SCALE);
     expect(wrapper.find(AvatarEditor).prop('position')).toEqual(DEFAULT_POSITION);
+});
+
+it('offers accessor method to ref to inner <AvatarEditor>', () => {
+    const MOCKED_REF = { getCroppingRect: () => {} };
+    const wrapper = shallow(<ImageEditor image={TRANSPARENT_IMAGE} />);
+
+    // mock reference first as it does not happend under shallow rendering
+    wrapper.instance().setCanvasRef(MOCKED_REF);
+    expect(wrapper.instance().getCanvasRef()).toBe(MOCKED_REF);
 });
