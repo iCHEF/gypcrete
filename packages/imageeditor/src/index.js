@@ -42,13 +42,13 @@ export const BEM = {
  * - `readOnly`: prevent the editor from modifing the crop.
  * - `loading`: put the editor into a loading indicator mode.
  *
- * ### Notable <AvatarEditor> props
- * - `onLoadSuccess`: called with `imgInfo` when image finishes loading
+ * ### Event callbacks
+ * - `onCropChange`: called with cropping rect when not read-only and `onImageChange` fires.
+ * - `onLoadSuccess`: called with `imgInfo` and `cropRect` when image finishes loading
  *
  */
 class ImageEditor extends PureComponent {
     static propTypes = {
-        // cropping configs
         minScale: PropTypes.number,
         maxScale: PropTypes.number,
         initCropRect: PropTypes.shape({
@@ -58,6 +58,7 @@ class ImageEditor extends PureComponent {
             height: PropTypes.number,
         }),
         onCropChange: PropTypes.func,
+        onLoadSuccess: PropTypes.func,
         // appearance configs
         control: PropTypes.bool,
         autoMargin: PropTypes.bool,
@@ -76,6 +77,8 @@ class ImageEditor extends PureComponent {
         maxScale: 5,
         initCropRect: undefined,
         onCropChange: () => {},
+        onLoadSuccess: () => {},
+        // appearance configs
         control: false,
         autoMargin: false,
         readOnly: false,
@@ -139,6 +142,12 @@ class ImageEditor extends PureComponent {
         this.props.onImageChange();
     }
 
+    handleCanvasLoadSuccess = (imgInfo) => {
+        const cropRect = this.canvasRef.getCroppingRect();
+
+        this.props.onLoadSuccess(imgInfo, cropRect);
+    }
+
     renderControl() {
         if (!this.props.control) {
             return null;
@@ -170,11 +179,11 @@ class ImageEditor extends PureComponent {
 
     render() {
         const {
-            // cropping configs
             minScale,
             maxScale,
             initCropRect,
             onCropChange,
+            onLoadSuccess,
             // appearance configs
             control,
             autoMargin,
@@ -218,6 +227,7 @@ class ImageEditor extends PureComponent {
                 position={this.state.position}
                 onImageChange={this.handleCanvasImageChange}
                 onPositionChange={this.handleCanvasPosChange}
+                onLoadSuccess={this.handleCanvasLoadSuccess}
                 border={0}
                 {...avatarEditorProps} />
         );
