@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- [ImageEditor] Add new package `@ichef/gypcrete-imageeditor`. (#148, #149, #150)
+- [ImageEditor] Add new package `@ichef/gypcrete-imageeditor`. (#148, #149, #150, #151)
   This new component supports:
     * Creating a cropping rectangle from an image in given dimension
     * Adjust image scaling with a slider
