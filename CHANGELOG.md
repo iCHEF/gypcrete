@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Refactor to reuse shared webpack configs between packages. (#148)
+- Allow React 16.x as peer dependency. (#153)
 
 ### Fixed
 - [Core] Fix some content might exceed `<Popover>` container. (#147)
