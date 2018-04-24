@@ -28,7 +28,7 @@ before_deploy:
 
 deploy:
     - provider: script
-      script: yarn canary
+      script: yarn release:canary
       skip_cleanup: true
       on:
         branch: develop
