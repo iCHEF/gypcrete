@@ -35,8 +35,8 @@
   "peerDependencies": {
     "babel-runtime": "^6.18.0",
     "prop-types": "^15.5.8",
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react": "^15.3.0 || ^16.0",
+    "react-dom": "^15.3.0 || ^16.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
