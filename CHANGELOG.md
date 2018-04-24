@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+N/A
+
+## [1.8.0]
 ### Added
 - [ImageEditor] Add new package `@ichef/gypcrete-imageeditor`. (#148, #149, #150, #151)
   This new component supports:
