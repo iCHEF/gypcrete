@@ -35,8 +35,8 @@ class TextInputRow extends PureComponent {
     };
 
     static defaultProps = {
-        placeholder: 'Unset',
         multiLine: false,
+        placeholder: 'Unset',
         onFocus: () => {},
         onBlur: () => {},
         ineditable: false,
@@ -45,6 +45,7 @@ class TextInputRow extends PureComponent {
 
     state = {
         focused: false,
+        inputHeight: 'auto',
     };
 
     setInputRef = (ref) => {
@@ -70,7 +71,11 @@ class TextInputRow extends PureComponent {
         this.props.onBlur(event);
     }
 
-    renderInput(multiLine, inputProps) {
+    renderInput({
+        multiLine,
+        style: inputStyle = {},
+        ...inputProps
+    }) {
         const sharedProps = {
             ref: this.setInputRef,
             className: BEM.input.toString(),
@@ -78,9 +83,15 @@ class TextInputRow extends PureComponent {
             onBlur: this.handleInputBlur,
         };
 
+        const textareaStyle = {
+            ...inputStyle,
+            height: this.state.inputHeight,
+        };
+
         if (multiLine) {
             return (
                 <textarea
+                    style={textareaStyle}
                     {...sharedProps}
                     {...inputProps} />
             );
@@ -97,7 +108,7 @@ class TextInputRow extends PureComponent {
     render() {
         const {
             label,
-            multiLine,
+            // multiLine,
             // input props
             // placeholder,
             onFocus,
@@ -108,7 +119,7 @@ class TextInputRow extends PureComponent {
             // React props
             className,
             children,
-            ...inputProps,
+            ...renderInputProps,
         } = this.props;
 
         const bemClass = BEM.root
@@ -121,7 +132,7 @@ class TextInputRow extends PureComponent {
                 {label}
             </span>
         );
-        const input = this.renderInput(multiLine, inputProps);
+        const input = this.renderInput(renderInputProps);
 
         return (
             <ListRow className={rootClassName} {...rowProps}>
