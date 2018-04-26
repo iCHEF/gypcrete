@@ -24,6 +24,7 @@ export const BEM = {
 class TextInputRow extends PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
+        multiLine: PropTypes.bool,
         // input props
         placeholder: PropTypes.string,
         onFocus: PropTypes.func,
@@ -35,6 +36,7 @@ class TextInputRow extends PureComponent {
 
     static defaultProps = {
         placeholder: 'Unset',
+        multiLine: false,
         onFocus: () => {},
         onBlur: () => {},
         ineditable: false,
@@ -45,9 +47,18 @@ class TextInputRow extends PureComponent {
         focused: false,
     };
 
-    getInputNode() {
-        return this.inputRef;
+    setInputRef = (ref) => {
+        this.inputRef = ref;
     }
+
+    getInputRef = () => this.inputRef;
+
+    /**
+     * Use `getInputRef()` instead.
+     * Should remove in v2.
+     * @deprecated
+     */
+    getInputNode = this.getInputRef;
 
     handleInputFocus = (event) => {
         this.setState({ focused: true });
@@ -59,14 +70,26 @@ class TextInputRow extends PureComponent {
         this.props.onBlur(event);
     }
 
-    renderInput(inputProps) {
+    renderInput(multiLine, inputProps) {
+        const sharedProps = {
+            ref: this.setInputRef,
+            className: BEM.input.toString(),
+            onFocus: this.handleInputFocus,
+            onBlur: this.handleInputBlur,
+        };
+
+        if (multiLine) {
+            return (
+                <textarea
+                    {...sharedProps}
+                    {...inputProps} />
+            );
+        }
+
         return (
             <input
-                ref={(ref) => { this.inputRef = ref; }}
                 type="text"
-                className={BEM.input.toString()}
-                onFocus={this.handleInputFocus}
-                onBlur={this.handleInputBlur}
+                {...sharedProps}
                 {...inputProps} />
         );
     }
@@ -74,6 +97,7 @@ class TextInputRow extends PureComponent {
     render() {
         const {
             label,
+            multiLine,
             // input props
             // placeholder,
             onFocus,
@@ -97,13 +121,13 @@ class TextInputRow extends PureComponent {
                 {label}
             </span>
         );
+        const input = this.renderInput(multiLine, inputProps);
 
         return (
             <ListRow className={rootClassName} {...rowProps}>
                 <TextLabel
                     basic={keyLabel}
-                    aside={this.renderInput(inputProps)} />
-
+                    aside={input} />
                 {children}
             </ListRow>
         );
