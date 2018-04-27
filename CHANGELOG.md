@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-N/A
+### Added
+- [Form] New `multiLine` mode for `<TextInputRow>`. It renders a `<textarea>` instead,and auto-grows as user types. (#155)
+- [Storybook] Add examples for multi-line usage of `<TextInputRow>`. (#155)
 
 ## [1.8.0]
 ### Added
