@@ -51,7 +51,7 @@ class TextInputRow extends PureComponent {
     };
 
     componentDidMount() {
-        this.updateInputHeight();
+        this.updateInputHeight(this.getInputRef());
     }
 
     setInputRef = (ref) => {
@@ -67,7 +67,7 @@ class TextInputRow extends PureComponent {
      */
     getInputNode = this.getInputRef;
 
-    updateInputHeight(inputNode = this.getInputRef()) {
+    updateInputHeight(inputNode) {
         const newHeight = inputNode.scrollHeight;
         this.setState({ inputHeight: newHeight });
     }
