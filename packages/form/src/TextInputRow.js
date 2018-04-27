@@ -27,6 +27,7 @@ class TextInputRow extends PureComponent {
         multiLine: PropTypes.bool,
         // input props
         placeholder: PropTypes.string,
+        onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         // from formRow()
@@ -37,6 +38,7 @@ class TextInputRow extends PureComponent {
     static defaultProps = {
         multiLine: false,
         placeholder: 'Unset',
+        onChange: () => {},
         onFocus: () => {},
         onBlur: () => {},
         ineditable: false,
@@ -47,6 +49,10 @@ class TextInputRow extends PureComponent {
         focused: false,
         inputHeight: 'auto',
     };
+
+    componentDidMount() {
+        this.updateInputHeight();
+    }
 
     setInputRef = (ref) => {
         this.inputRef = ref;
@@ -61,14 +67,29 @@ class TextInputRow extends PureComponent {
      */
     getInputNode = this.getInputRef;
 
+    updateInputHeight(inputNode = this.getInputRef()) {
+        const newHeight = inputNode.scrollHeight;
+        this.setState({ inputHeight: newHeight });
+    }
+
     handleInputFocus = (event) => {
-        this.setState({ focused: true });
+        const inputNode = event.target;
+
+        this.setState(
+            { focused: true },
+            () => this.updateInputHeight(inputNode)
+        );
         this.props.onFocus(event);
     }
 
     handleInputBlur = (event) => {
         this.setState({ focused: false });
         this.props.onBlur(event);
+    }
+
+    handleInputChange = (event) => {
+        this.updateInputHeight(event.target);
+        this.props.onChange(event);
     }
 
     renderInput({
@@ -92,6 +113,7 @@ class TextInputRow extends PureComponent {
             return (
                 <textarea
                     style={textareaStyle}
+                    onChange={this.handleInputChange}
                     {...sharedProps}
                     {...inputProps} />
             );
@@ -100,6 +122,7 @@ class TextInputRow extends PureComponent {
         return (
             <input
                 type="text"
+                onChange={this.props.onChange}
                 {...sharedProps}
                 {...inputProps} />
         );
@@ -113,6 +136,7 @@ class TextInputRow extends PureComponent {
             // placeholder,
             onFocus,
             onBlur,
+            onChange,
             // row props
             ineditable,
             rowProps,
