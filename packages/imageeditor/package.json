@@ -1,9 +1,9 @@
 {
-  "name": "@ichef/gypcrete",
+  "name": "@ichef/gypcrete-imageeditor",
   "version": "1.8.0",
-  "description": "iCHEF web components library, built with React.",
+  "description": "Image cropper built with Gypcrete",
   "homepage": "https://ichef.github.io/gypcrete",
-  "repository": "https://github.com/iCHEF/gypcrete/tree/master/packages/core",
+  "repository": "https://github.com/iCHEF/gypcrete/tree/master/packages/imageeditor",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/iCHEF/gypcrete/issues"
@@ -23,10 +23,10 @@
   "scripts": {
     "prepublish": "npm run clean && npm run build",
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
-    "build:dist": "webpack --config ./configs/webpack.dist.js --color",
+    "build:dist": "webpack --config ../../configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
     "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
-    "clean": "rm -rf ./dist ./lib ./es5 ./deploy"
+    "clean": "rm -rf ./dist ./lib ./es5"
   },
   "peerDependencies": {
     "babel-runtime": "^6.18.0",
@@ -35,16 +35,13 @@
     "react-dom": "^15.3.0 || ^16.0"
   },
   "dependencies": {
+    "@ichef/gypcrete": "^1.8.0",
     "classnames": "^2.2.5",
-    "document-offset": "^1.0.4",
-    "keycode": "^2.1.9",
-    "react-flow-types": "^0.1.1"
+    "react-avatar-editor": "^11.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "enzyme": "^2.8.2",
-    "sinon": "^4.0.1",
-    "webpack": "^3.10.0",
-    "webpack-merge": "^4.1.2"
+    "webpack": "^3.10.0"
   }
 }

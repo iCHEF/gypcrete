@@ -1,17 +1,13 @@
 {
   "name": "@ichef/gypcrete-form",
-  "version": "1.7.2",
+  "version": "1.8.0",
   "description": "Form components built on Gypcrete",
-  "repository": "iCHEF/gypcrete",
-  "contributors": [
-    "CJies Tan (https://github.com/cjies)",
-    "Teng-hao Chang (https://github.com/zhusee2)"
-  ],
+  "homepage": "https://ichef.github.io/gypcrete",
+  "repository": "https://github.com/iCHEF/gypcrete/tree/master/packages/form",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/iCHEF/gypcrete/issues"
   },
-  "homepage": "https://github.com/iCHEF/gypcrete#readme",
   "engines": {
     "node": ">= 6.9.1",
     "npm": ">= 3.10.10"
@@ -27,7 +23,7 @@
   "scripts": {
     "prepublish": "npm run clean && npm run build",
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
-    "build:dist": "webpack --config ./configs/webpack.dist.js --color",
+    "build:dist": "webpack --config ../../configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
     "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
     "clean": "rm -rf ./dist ./lib ./es5 ./deploy"
@@ -35,11 +31,11 @@
   "peerDependencies": {
     "babel-runtime": "^6.18.0",
     "prop-types": "^15.5.8",
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react": "^15.3.0 || ^16.0",
+    "react-dom": "^15.3.0 || ^16.0"
   },
   "dependencies": {
-    "@ichef/gypcrete": "^1.7.2",
+    "@ichef/gypcrete": "^1.8.0",
     "classnames": "^2.2.5",
     "immutable": "^3.8.2",
     "keycode": "^2.1.9"

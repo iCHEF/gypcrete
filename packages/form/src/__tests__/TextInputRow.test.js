@@ -4,6 +4,16 @@ import { mount } from 'enzyme';
 
 import TextInputRow, { PureTextInputRow, BEM } from '../TextInputRow';
 
+/**
+ * Patch `this.getInputRef` on component instance
+ * so we can see if the value gets applied on lifecycle methods.
+ */
+class PatchedRow extends PureTextInputRow {
+    getInputRef = jest.fn()
+        .mockReturnValueOnce({ scrollHeight: 30 })
+        .mockReturnValueOnce({ scrollHeight: 60 });
+}
+
 describe('formRow(TextInputRow)', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div');
@@ -31,6 +41,20 @@ describe('Pure <TextInputRow>', () => {
         expect(wrapper.find('input').prop('tabIndex')).toBe(3);
     });
 
+    it('renders a <textarea> inside with unknown props under multiLine mode', () => {
+        const wrapper = mount(
+            <PureTextInputRow
+                multiLine
+                label="foo"
+                defaultValue="bar" />
+        );
+        expect(wrapper.find('textarea').exists()).toBeTruthy();
+
+        wrapper.setProps({ id: 'foo', tabIndex: 3 });
+        expect(wrapper.find('textarea').prop('id')).toBe('foo');
+        expect(wrapper.find('textarea').prop('tabIndex')).toBe(3);
+    });
+
     it('enters and leaves focused state on input events', () => {
         const focusedModifier = BEM.root
             .modifier('focused')
@@ -50,6 +74,46 @@ describe('Pure <TextInputRow>', () => {
         wrapper.find('input').simulate('blur');
         expect(wrapper.state('focused')).toBeFalsy();
         expect(wrapper.hasClass(focusedModifier)).toBeFalsy();
+    });
+
+    it('auto-grows on mount, on focus and on change under multiLine mode', () => {
+        const uncontrolledWrapper = mount(
+            <PatchedRow
+                multiLine
+                label="foo"
+                defaultValue="bar" />
+        );
+
+        // componentDidMount()
+        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 30 });
+
+        // handleInputFocus()
+        uncontrolledWrapper.find('textarea').simulate('focus', {
+            target: { scrollHeight: 40 },
+        });
+        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 40 });
+
+        // handleInputChange()
+        uncontrolledWrapper.find('textarea').simulate('change', {
+            target: { scrollHeight: 90 },
+        });
+        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 90 });
+    });
+
+    it('auto-grows on controlled value change under multiLine mode', () => {
+        const controlledWrapper = mount(
+            <PatchedRow
+                multiLine
+                label="foo"
+                value="bar" />
+        );
+
+        // componentDidMount()
+        expect(controlledWrapper.find('textarea').prop('style')).toEqual({ height: 30 });
+
+        // componentDidUpdate()
+        controlledWrapper.setProps({ value: 'more bar' });
+        expect(controlledWrapper.find('textarea').prop('style')).toEqual({ height: 60 });
     });
 
     it('accepts additional children', () => {
