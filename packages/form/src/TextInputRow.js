@@ -26,6 +26,7 @@ class TextInputRow extends PureComponent {
         label: PropTypes.node.isRequired,
         multiLine: PropTypes.bool,
         // input props
+        value: PropTypes.string,
         placeholder: PropTypes.string,
         onChange: PropTypes.func,
         onFocus: PropTypes.func,
@@ -37,6 +38,7 @@ class TextInputRow extends PureComponent {
 
     static defaultProps = {
         multiLine: false,
+        value: undefined,
         placeholder: 'Unset',
         onChange: () => {},
         onFocus: () => {},
@@ -52,6 +54,12 @@ class TextInputRow extends PureComponent {
 
     componentDidMount() {
         this.updateInputHeight(this.getInputRef());
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.value !== prevProps.value) {
+            this.updateInputHeight(this.getInputRef());
+        }
     }
 
     setInputRef = (ref) => {
@@ -133,10 +141,11 @@ class TextInputRow extends PureComponent {
             label,
             // multiLine,
             // input props
+            // value,
             // placeholder,
+            onChange,
             onFocus,
             onBlur,
-            onChange,
             // row props
             ineditable,
             rowProps,

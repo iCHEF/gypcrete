@@ -4,6 +4,16 @@ import { mount } from 'enzyme';
 
 import TextInputRow, { PureTextInputRow, BEM } from '../TextInputRow';
 
+/**
+ * Patch `this.getInputRef` on component instance
+ * so we can see if the value gets applied on lifecycle methods.
+ */
+class PatchedRow extends PureTextInputRow {
+    getInputRef = jest.fn()
+        .mockReturnValueOnce({ scrollHeight: 30 })
+        .mockReturnValueOnce({ scrollHeight: 60 });
+}
+
 describe('formRow(TextInputRow)', () => {
     it('renders without crashing', () => {
         const div = document.createElement('div');
@@ -67,32 +77,43 @@ describe('Pure <TextInputRow>', () => {
     });
 
     it('auto-grows on mount, on focus and on change under multiLine mode', () => {
-        /**
-         * Patch `this.getInputRef` on component instance
-         * so we can see if the value gets applied on mount.
-         */
-        class PatchedRow extends PureTextInputRow {
-            getInputRef = jest.fn(() => ({ scrollHeight: 30 }));
-        }
-
-        const wrapper = mount(
+        const uncontrolledWrapper = mount(
             <PatchedRow
                 multiLine
                 label="foo"
                 defaultValue="bar" />
         );
 
-        expect(wrapper.find('textarea').prop('style')).toEqual({ height: 30 });
+        // componentDidMount()
+        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 30 });
 
-        wrapper.find('textarea').simulate('focus', {
+        // handleInputFocus()
+        uncontrolledWrapper.find('textarea').simulate('focus', {
             target: { scrollHeight: 40 },
         });
-        expect(wrapper.find('textarea').prop('style')).toEqual({ height: 40 });
+        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 40 });
 
-        wrapper.find('textarea').simulate('change', {
+        // handleInputChange()
+        uncontrolledWrapper.find('textarea').simulate('change', {
             target: { scrollHeight: 90 },
         });
-        expect(wrapper.find('textarea').prop('style')).toEqual({ height: 90 });
+        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 90 });
+    });
+
+    it('auto-grows on controlled value change under multiLine mode', () => {
+        const controlledWrapper = mount(
+            <PatchedRow
+                multiLine
+                label="foo"
+                value="bar" />
+        );
+
+        // componentDidMount()
+        expect(controlledWrapper.find('textarea').prop('style')).toEqual({ height: 30 });
+
+        // componentDidUpdate()
+        controlledWrapper.setProps({ value: 'more bar' });
+        expect(controlledWrapper.find('textarea').prop('style')).toEqual({ height: 60 });
     });
 
     it('accepts additional children', () => {
