@@ -24,8 +24,11 @@ export const BEM = {
 class TextInputRow extends PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
+        multiLine: PropTypes.bool,
         // input props
+        value: PropTypes.string,
         placeholder: PropTypes.string,
+        onChange: PropTypes.func,
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
         // from formRow()
@@ -34,7 +37,10 @@ class TextInputRow extends PureComponent {
     };
 
     static defaultProps = {
+        multiLine: false,
+        value: undefined,
         placeholder: 'Unset',
+        onChange: () => {},
         onFocus: () => {},
         onBlur: () => {},
         ineditable: false,
@@ -43,14 +49,44 @@ class TextInputRow extends PureComponent {
 
     state = {
         focused: false,
+        inputHeight: 'auto',
     };
 
-    getInputNode() {
-        return this.inputRef;
+    componentDidMount() {
+        this.updateInputHeight(this.getInputRef());
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.value !== prevProps.value) {
+            this.updateInputHeight(this.getInputRef());
+        }
+    }
+
+    setInputRef = (ref) => {
+        this.inputRef = ref;
+    }
+
+    getInputRef = () => this.inputRef;
+
+    /**
+     * Use `getInputRef()` instead.
+     * Should remove in v2.
+     * @deprecated
+     */
+    getInputNode = this.getInputRef;
+
+    updateInputHeight(inputNode) {
+        const newHeight = inputNode.scrollHeight;
+        this.setState({ inputHeight: newHeight });
     }
 
     handleInputFocus = (event) => {
-        this.setState({ focused: true });
+        const inputNode = event.target;
+
+        this.setState(
+            { focused: true },
+            () => this.updateInputHeight(inputNode)
+        );
         this.props.onFocus(event);
     }
 
@@ -59,14 +95,43 @@ class TextInputRow extends PureComponent {
         this.props.onBlur(event);
     }
 
-    renderInput(inputProps) {
+    handleInputChange = (event) => {
+        this.updateInputHeight(event.target);
+        this.props.onChange(event);
+    }
+
+    renderInput({
+        multiLine,
+        style: inputStyle = {},
+        ...inputProps
+    }) {
+        const sharedProps = {
+            ref: this.setInputRef,
+            className: BEM.input.toString(),
+            onFocus: this.handleInputFocus,
+            onBlur: this.handleInputBlur,
+        };
+
+        const textareaStyle = {
+            ...inputStyle,
+            height: this.state.inputHeight,
+        };
+
+        if (multiLine) {
+            return (
+                <textarea
+                    style={textareaStyle}
+                    onChange={this.handleInputChange}
+                    {...sharedProps}
+                    {...inputProps} />
+            );
+        }
+
         return (
             <input
-                ref={(ref) => { this.inputRef = ref; }}
                 type="text"
-                className={BEM.input.toString()}
-                onFocus={this.handleInputFocus}
-                onBlur={this.handleInputBlur}
+                onChange={this.props.onChange}
+                {...sharedProps}
                 {...inputProps} />
         );
     }
@@ -74,8 +139,11 @@ class TextInputRow extends PureComponent {
     render() {
         const {
             label,
+            // multiLine,
             // input props
+            // value,
             // placeholder,
+            onChange,
             onFocus,
             onBlur,
             // row props
@@ -84,7 +152,7 @@ class TextInputRow extends PureComponent {
             // React props
             className,
             children,
-            ...inputProps,
+            ...renderInputProps,
         } = this.props;
 
         const bemClass = BEM.root
@@ -97,13 +165,13 @@ class TextInputRow extends PureComponent {
                 {label}
             </span>
         );
+        const input = this.renderInput(renderInputProps);
 
         return (
             <ListRow className={rootClassName} {...rowProps}>
                 <TextLabel
                     basic={keyLabel}
-                    aside={this.renderInput(inputProps)} />
-
+                    aside={input} />
                 {children}
             </ListRow>
         );
