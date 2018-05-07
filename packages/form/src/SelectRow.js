@@ -122,7 +122,10 @@ class SelectRow extends PureComponent {
             this.setState({ cachedValues: newValues });
         }
         this.props.onChange(newValues);
-        this.handlePopoverClose();
+
+        if (!this.props.multiple) {
+            this.handlePopoverClose();
+        }
     }
 
     renderPopover(selectListProps) {
