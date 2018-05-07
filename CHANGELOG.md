@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+N/A
+
+## [1.8.0]
 ### Added
 - [ImageEditor] Add new package `@ichef/gypcrete-imageeditor`. (#148, #149, #150, #151)
   This new component supports:
@@ -14,6 +17,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     * Display a placeholder when image isn't specified
     * Display a loading animation when `loading` is set
 - [Storybook] Add examples for `<ImageEditor>`. (#150)
+- [Form] New `multiLine` mode for `<TextInputRow>`. It renders a `<textarea>` instead,and auto-grows as user types. (#155)
+- [Storybook] Add examples for multi-line usage of `<TextInputRow>`. (#155)
 
 ### Changed
 - Refactor to reuse shared webpack configs between packages. (#148)

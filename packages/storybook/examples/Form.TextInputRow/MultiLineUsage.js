@@ -2,35 +2,49 @@ import React from 'react';
 
 import List from '@ichef/gypcrete/src/List';
 import TextInputRow from '@ichef/gypcrete-form/src/TextInputRow';
+
 import ControlledRow from './ControlledRow';
 
-function BasicUsage() {
+const EXAMPLE_TEXT = (`
+Lorem ipsum dolor sit amet,
+
+consectetur adipiscing elit.
+Donec vitae nibh sem.
+`).trim();
+
+function MultiLineUsage() {
     return (
         <List title="Configs">
             <TextInputRow
+                multiLine
                 label="Module name"
-                defaultValue="Points module" />
+                defaultValue={EXAMPLE_TEXT} />
 
-            <ControlledRow initValue="Points module" />
+            <ControlledRow
+                multiLine
+                initValue={EXAMPLE_TEXT} />
 
             <TextInputRow
+                multiLine
                 disabled
                 label="Disabled row"
-                value="Points module" />
+                value={EXAMPLE_TEXT} />
 
             <TextInputRow
+                multiLine
                 readOnly
                 label="Read-only row"
-                value="Points module" />
+                value={EXAMPLE_TEXT} />
 
 
             <TextInputRow
+                multiLine
                 label="Secret code"
-                value="Foo bar"
+                value={EXAMPLE_TEXT}
                 status="error"
                 errorMsg="Cannot authenticate with this code." />
         </List>
     );
 }
 
-export default BasicUsage;
+export default MultiLineUsage;
