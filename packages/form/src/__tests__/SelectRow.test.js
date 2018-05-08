@@ -4,11 +4,12 @@ import { shallow } from 'enzyme';
 
 import {
     Button,
+    Popover,
     Text,
     TextLabel,
 } from '@ichef/gypcrete';
 
-import SelectRow, { PureSelectRow, Popover, BEM } from '../SelectRow';
+import SelectRow, { PureSelectRow, BEM } from '../SelectRow';
 import SelectList from '../SelectList';
 import Option from '../SelectOption';
 
@@ -27,7 +28,7 @@ describe('formRow(SelectRow)', () => {
     });
 });
 
-describe('Pure <SelectRow>', () => {
+describe('Pure <SelectRow>: UI', () => {
     it('renders a <Button> if the row is editable', () => {
         const wrapper = shallow(
             <PureSelectRow label="Select" />
@@ -60,7 +61,7 @@ describe('Pure <SelectRow>', () => {
         expect(wrapper.find(Popover).find(SelectList).exists()).toBeTruthy();
     });
 
-    it('removed <Popover> when it requests close', () => {
+    it('removes <Popover> when it requests close', () => {
         const wrapper = shallow(
             <PureSelectRow label="Select" />
         );
@@ -70,6 +71,28 @@ describe('Pure <SelectRow>', () => {
         wrapper.find(Popover).simulate('close');
         wrapper.setState({ popoverOpen: false });
         expect(wrapper.find(Popover).exists()).toBeFalsy();
+    });
+
+    it('removes <Popover> when value change under single-select mode', () => {
+        const wrapper = shallow(
+            <PureSelectRow label="Select" />
+        );
+
+        // Single-select mode: auto close Popover
+        expect(wrapper.find(Button).simulate('click'));
+        expect(wrapper.find(Popover).exists()).toBeTruthy();
+
+        wrapper.find(SelectList).simulate('change', [1]);
+        expect(wrapper.find(Popover).exists()).toBeFalsy();
+
+        // Multi-select mode: Popover remains
+        wrapper.setProps({ multiple: true });
+
+        expect(wrapper.find(Button).simulate('click'));
+        expect(wrapper.find(Popover).exists()).toBeTruthy();
+
+        wrapper.find(SelectList).simulate('change', [2]);
+        expect(wrapper.find(Popover).exists()).toBeTruthy();
     });
 
     it('passes children to <SelectList> inside <Popover>', () => {
@@ -84,7 +107,9 @@ describe('Pure <SelectRow>', () => {
         expect(element.props.children)
             .toEqual(wrapper.find(SelectList).prop('children'));
     });
+});
 
+describe('Pure <SelectRow>: Data', () => {
     it('caches selected values from <SelectList> when uncontrolled', () => {
         const wrapper = shallow(
             <PureSelectRow multiple label="Select" />
