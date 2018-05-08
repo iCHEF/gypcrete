@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-N/A
+### Added
+- [Form] Add new `SelectOption.typeSymbol` for element type comparison. (#157)
+- [Form] Add `getElementTypeSymbol` helper for getting type symbol from React Element. (#157)
 
 ## [1.8.0]
 ### Added

@@ -1,5 +1,7 @@
 import { Children } from 'react';
-import SelectOption from '../SelectOption';
+import { TYPE_SYMBOL } from '../SelectOption';
+
+import getElementTypeSymbol from './getElementTypeSymbol';
 
 /**
  * Convert children of `<SelectOptions>` components to array of options.
@@ -11,7 +13,7 @@ function parseSelectOptions(children) {
     const results = [];
 
     Children.forEach(children, (child) => {
-        if (child && child.type === SelectOption) {
+        if (getElementTypeSymbol(child) === TYPE_SYMBOL) {
             results.push(child.props);
         }
     });
