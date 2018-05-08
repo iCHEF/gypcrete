@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Form] Add new `SelectOption.typeSymbol` for element type comparison. (#157)
 - [Form] Add `getElementTypeSymbol` helper for getting type symbol from React Element. (#157)
 
+### Fixed
+- [Form] Fix Popover inside `<SelectRow>` should not auto-close under multiple selection mode. (#158)
+
 ## [1.8.0]
 ### Added
 - [ImageEditor] Add new package `@ichef/gypcrete-imageeditor`. (#148, #149, #150, #151)
