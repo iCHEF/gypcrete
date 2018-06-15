@@ -9,8 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Form] Add new `SelectOption.typeSymbol` for element type comparison. (#157)
 - [Form] Add `getElementTypeSymbol` helper for getting type symbol from React Element. (#157)
 
+### Changed
+- [Core] Update styles to match design for: `<List>`. (#159)
+- [Core] `<Button>`s are now `bold` by default. (#159)
+- [Core] `<Text>` and `rowComp()` now preserve white space by default. (#159)
+
 ### Fixed
 - [Form] Fix Popover inside `<SelectRow>` should not auto-close under multiple selection mode. (#158)
+- [Core] Fix `<ListRow>` footer should not render empty `<p>` tags. (#159)
 
 ## [1.8.0]
 ### Added
