@@ -117,6 +117,7 @@ const rowComp = ({
             aside: PropTypes.node,
             tag: PropTypes.node,
             bold: PropTypes.bool,
+            preserveWhiteSpace: PropTypes.bool,
 
             // State props
             active: PropTypes.bool,
@@ -138,6 +139,7 @@ const rowComp = ({
             aside: null,
             tag: null,
             bold: false,
+            preserveWhiteSpace: true,
 
             active: false,
             highlight: false,
@@ -183,12 +185,14 @@ const rowComp = ({
             const {
                 align,
                 icon,
+                // text props
                 basic,
                 aside,
                 tag,
                 bold,
+                preserveWhiteSpace,
             } = this.props;
-            const textProps = { basic, aside, tag, bold };
+            const textProps = { basic, aside, tag, bold, preserveWhiteSpace };
             const textLayoutProps = getTextLayoutProps(align, !!icon);
 
             // Render icon element
@@ -213,6 +217,7 @@ const rowComp = ({
                 aside,
                 tag,
                 bold,
+                preserveWhiteSpace,
 
                 active,
                 highlight,
