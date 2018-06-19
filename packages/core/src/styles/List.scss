@@ -34,7 +34,7 @@ $component: #{$prefix}-list;
     // --------------------
     &--normal {
         .#{$component}__title {
-            border-bottom: 1px solid $c-divider-header;
+            border-bottom: 2px solid $c-divider-header;
         }
 
         .#{$component}__title,

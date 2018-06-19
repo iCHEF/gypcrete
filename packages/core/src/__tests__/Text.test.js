@@ -106,4 +106,10 @@ describe('Pure <Text>', () => {
 
         expect(wrapper.hasClass('gyp-text--bold')).toBeTruthy();
     });
+
+    it('can render in preserve-whitespace mode', () => {
+        const wrapper = shallow(<PureText preserveWhiteSpace basic="foo" />);
+
+        expect(wrapper.hasClass('gyp-text--pre')).toBeTruthy();
+    });
 });

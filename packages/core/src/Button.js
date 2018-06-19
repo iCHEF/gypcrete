@@ -54,4 +54,7 @@ Button.defaultProps = {
 // export for tests
 export { Button as PureButton };
 
-export default rowComp({ defaultMinified: true })(Button);
+const RowCompButton = rowComp({ defaultMinified: true })(Button);
+RowCompButton.defaultProps.bold = true;
+
+export default RowCompButton;
