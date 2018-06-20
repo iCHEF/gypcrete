@@ -38,6 +38,7 @@ $component: #{$prefix}-list-row;
         line-height: rem($list-row-footer-line-height);
         padding-top: rem($list-row-footer-padding-top);
         padding-bottom: rem($list-row-footer-padding-bottom);
+        white-space: pre-wrap;
 
         p {
             margin: 0 0 rem($list-row-footer-padding-bottom);

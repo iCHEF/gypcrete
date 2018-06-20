@@ -16,6 +16,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
+    white-space: pre-wrap;
 }
 
 // ===============
@@ -26,6 +27,7 @@
     &__row {
         display: flex;
         align-items: flex-start;
+        white-space: pre-wrap;
     }
 
     &__basic {
