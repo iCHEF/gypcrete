@@ -32,7 +32,6 @@ it('renders <Text> into wrapped component', () => {
 
     expect(textWrapper.exists()).toBeTruthy();
     expect(textWrapper.prop('bold')).toBeTruthy();
-    expect(textWrapper.prop('preserveWhiteSpace')).toBeTruthy();
     expect(textWrapper.prop('basic')).toBe('Basic text');
     expect(textWrapper.prop('tag')).toBe('Tag');
     expect(textWrapper.prop('aside')).toBe('Aside text');

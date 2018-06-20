@@ -12,7 +12,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Core] Update styles to match design for: `<List>`. (#159)
 - [Core] `<Button>`s are now `bold` by default. (#159)
-- [Core] `<Text>` and `rowComp()` now preserve white space by default. (#159)
 
 ### Fixed
 - [Form] Fix Popover inside `<SelectRow>` should not auto-close under multiple selection mode. (#158)

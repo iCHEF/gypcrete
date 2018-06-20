@@ -55,12 +55,6 @@
         }
     }
 
-    &--pre {
-        .#{$prefix}-text__row {
-            white-space: pre-wrap;
-        }
-    }
-
     &--center {
         .#{$prefix}-text__row {
             justify-content: center;
