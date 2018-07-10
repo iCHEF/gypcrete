@@ -113,17 +113,6 @@ it('renders basic label with additional line-break when tag is textarea', () => 
     expect(wrapper.find(labelClass).text()).toBe('Foo\n\n');
 });
 
-it('blurs input when status changes', () => {
-    const mockedInputBlur = jest.fn();
-    const wrapper = mount(<EditableBasicRow />);
-    wrapper.instance().inputNode.blur = mockedInputBlur;
-
-    expect(mockedInputBlur).not.toHaveBeenCalled();
-
-    wrapper.setProps({ status: 'loading' });
-    expect(mockedInputBlur).toHaveBeenCalledTimes(1);
-});
-
 it('keeps input from keyboard navigation when input looks untouchable', () => {
     const wrapper = shallow(<EditableBasicRow readOnly={false} disabled={false} />);
     expect(wrapper.find('input').prop('tabIndex')).toBeUndefined();

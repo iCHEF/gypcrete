@@ -129,10 +129,6 @@ class EditableBasicRow extends PureComponent<Props, Props, any> {
         if (nextProps.value !== this.props.value) {
             this.setState({ currentValue: nextProps.value });
         }
-
-        if (this.inputNode && nextProps.status !== this.props.status) {
-            this.inputNode.blur();
-        }
     }
 
     handleInputFocus = (event: Event) => {
