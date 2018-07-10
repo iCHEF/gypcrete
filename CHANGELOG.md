@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     * `<ListRow>` (in desc)
     * `<Tag>`
     * `<Tooltip>`
+- [Core] Input inside `<EditableBasicRow>` does not blur on component status change anymore. (#161)
 
 ### Fixed
 - [Form] Fix Popover inside `<SelectRow>` should not auto-close under multiple selection mode. (#158)
