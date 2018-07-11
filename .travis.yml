@@ -25,6 +25,7 @@ after_success:
 
 before_deploy:
     - npm config set //registry.npmjs.org/:_authToken=\${NPM_TOKEN}
+    - yarn run lerna run ghpages --scope @ichef/gypcrete-storybook
 
 deploy:
     - provider: script
@@ -34,8 +35,17 @@ deploy:
         branch: develop
 
     - provider: script
-      script: yarn release && yarn ghpages
+      script: yarn release
       skip_cleanup: true
+      on:
+        branch: master
+
+    - provider: pages
+      skip_cleanup: true
+      github_token: $GH_TOKEN
+      keep_history: true
+      local_dir: packages/storybook/public
+      verbose: true
       on:
         branch: master
 
