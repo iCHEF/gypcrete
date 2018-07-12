@@ -67,15 +67,21 @@ Gypcrete does not publish develop builds to the `dist` branch anymore. It now pu
   * When pushed to `master` branch --> publish a relase build
 
 ### Releasing
-When releasing a new build for Gypcrete, create a release branch `release/x.y.z` and bump version first by:
-```sh
-yarn bumpversion
-```
+When releasing a new build for Gypcrete, follow the steps:
 
-This will run `lerna publish`, which updates all `package.json` files in `packages/`, commits the changes with pre-configured message and tags that commit.
+1. Create a release branch `release/x.y.z`
+2. *(Optionally)* release beta builds with `yarn release:beta`.
+3. Bump version for `package.json` and `CHANGELOG`.
+4. Bump children packages version with script:
+   ```sh
+   yarn bumpversion
+   ```
+   This will run `lerna publish`, which updates all `package.json` files in `packages/`.
 
-Then create a pull request for this release branch.
-Once it's merged into `master`, it should trigger `yarn release` and publishes packages to npm.
+5. Commit above changes, then create a pull request for this release branch.
+6. Create a new release on Github once it's merged into `master`.
+
+At the time relase PR is merged, it should trigger `yarn release` on Travis CI and publishes packages to npm.
 
 ## LICENSE
 This project is licensed under the terms of the [Apache License 2.0](https://github.com/ichef/gypcrete/blob/master/LICENSE)
