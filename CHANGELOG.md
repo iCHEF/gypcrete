@@ -22,6 +22,7 @@ N/A
     * `<Tag>`
     * `<Tooltip>`
 - [Core] Input inside `<EditableBasicRow>` does not blur on component status change anymore. (#161)
+- [Build] Update deploy steps. (#164)
 
 ### Fixed
 - [Form] Fix Popover inside `<SelectRow>` should not auto-close under multiple selection mode. (#158)
