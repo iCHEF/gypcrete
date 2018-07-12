@@ -26,6 +26,7 @@ N/A
 ### Fixed
 - [Form] Fix Popover inside `<SelectRow>` should not auto-close under multiple selection mode. (#158)
 - [Core] Fix `<ListRow>` footer should not render empty `<p>` tags. (#159)
+- [Core] Fix the bug that the bottom border of the title in the normal `<List>` lacks a right margin. (#163)
 
 ## [1.8.0]
 ### Added

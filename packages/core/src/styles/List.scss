@@ -41,6 +41,7 @@ $component: #{$prefix}-list;
         .#{$component}__title,
         .#{$component}__desc {
             margin-left: rem($list-row-padding-horizontal);
+            margin-right: rem($list-row-padding-horizontal);
         }
     }
 
