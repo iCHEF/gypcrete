@@ -80,6 +80,7 @@ When releasing a new build for Gypcrete, follow the steps:
 
 5. Commit above changes, then create a pull request for this release branch.
 6. Create a new release on Github once it's merged into `master`.
+7. Backport changes from `master` back to `develop` by creating a `backport/x.y.y` branch and create a pull request for that.
 
 At the time relase PR is merged, it should trigger `yarn release` on Travis CI and publishes packages to npm.
 
