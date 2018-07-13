@@ -49,11 +49,6 @@ deploy:
       on:
         branch: master
 
-branches:
-    only:
-        - master
-        - develop
-
 env:
   global:
     - GH_REPO: github.com/iCHEF/gypcrete.git
