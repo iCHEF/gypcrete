@@ -10,10 +10,7 @@ import {
     TextLabel,
 } from '@ichef/gypcrete';
 
-import { PurePopover } from '@ichef/gypcrete/lib/Popover';
-import anchored from '@ichef/gypcrete/lib/mixins/anchored';
-import closable from '@ichef/gypcrete/lib/mixins/closable';
-import renderToLayer from '@ichef/gypcrete/lib/mixins/renderToLayer';
+import Popover from '@ichef/gypcrete/lib/Popover';
 import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
 import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
 
@@ -31,15 +28,11 @@ export const BEM = {
     placeholder: ROOT_BEM.element('placeholder'),
 };
 
-export const Popover = renderToLayer(
-    closable({
-        onEscape: true,
-        onClickOutside: true,
-        onClickInside: false,
-    })(
-        anchored()(PurePopover)
-    )
-);
+const CLOSABLE_CONFIG = {
+    onEscape: true,
+    onClickOutside: true,
+    onClickInside: false,
+};
 
 /**
  * Generate a value-label map from all `<SelectOption>`s.
@@ -122,7 +115,10 @@ class SelectRow extends PureComponent {
             this.setState({ cachedValues: newValues });
         }
         this.props.onChange(newValues);
-        this.handlePopoverClose();
+
+        if (!this.props.multiple) {
+            this.handlePopoverClose();
+        }
     }
 
     renderPopover(selectListProps) {
@@ -130,7 +126,7 @@ class SelectRow extends PureComponent {
             <Popover
                 anchor={this.anchorNode}
                 className={BEM.popover.toString()}
-                closable={{ onClickInside: false }}
+                closable={CLOSABLE_CONFIG}
                 onClose={this.handlePopoverClose}>
                 <SelectList
                     values={this.state.cachedValues}

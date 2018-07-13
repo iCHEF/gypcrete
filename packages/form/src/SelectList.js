@@ -6,8 +6,13 @@ import {
     List,
 } from '@ichef/gypcrete';
 
-import Option, { valueType } from './SelectOption';
+import Option, {
+    valueType,
+    TYPE_SYMBOL as OPTION_TYPE_SYMBOL,
+} from './SelectOption';
+
 import parseSelectOptions from './utils/parseSelectOptions';
+import getElementTypeSymbol from './utils/getElementTypeSymbol';
 
 function getInitialCheckedState(fromValues) {
     const checkedState = new ImmutableMap();
@@ -158,7 +163,7 @@ class SelectList extends PureComponent {
 
     renderOptions() {
         return React.Children.map(this.props.children, (child) => {
-            if (child && child.type === Option) {
+            if (getElementTypeSymbol(child) === OPTION_TYPE_SYMBOL) {
                 return React.cloneElement(child, {
                     checked: this.state.checkedState.get(child.props.value),
                     onChange: this.handleOptionChange,

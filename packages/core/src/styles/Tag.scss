@@ -21,6 +21,7 @@
     background-clip: padding-box;
     display: inline-block;
     vertical-align: text-top;
+    white-space: pre-wrap;
 
     & > span {
         color: $c-white;
