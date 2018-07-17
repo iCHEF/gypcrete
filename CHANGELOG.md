@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+N/A
+
+## [1.8.1]
 ### Added
 - [Form] Add new `SelectOption.typeSymbol` for element type comparison. (#157)
 - [Form] Add `getElementTypeSymbol` helper for getting type symbol from React Element. (#157)
@@ -19,10 +22,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     * `<Tag>`
     * `<Tooltip>`
 - [Core] Input inside `<EditableBasicRow>` does not blur on component status change anymore. (#161)
+- [Build] Update deploy steps. (#164)
 
 ### Fixed
 - [Form] Fix Popover inside `<SelectRow>` should not auto-close under multiple selection mode. (#158)
 - [Core] Fix `<ListRow>` footer should not render empty `<p>` tags. (#159)
+- [Core] Fix the bug that the bottom border of the title in the normal `<List>` lacks a right margin. (#163)
 
 ## [1.8.0]
 ### Added
