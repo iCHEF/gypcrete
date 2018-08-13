@@ -1,8 +1,6 @@
-// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import type { ReactChildren } from 'react-flow-types';
 import './styles/List.scss';
 
 import prefixClass from './utils/prefixClass';
@@ -22,16 +20,6 @@ const SETTING = 'setting';
 const BUTTON = 'button';
 const LIST_VARIANTS = [NORMAL, SETTING, BUTTON];
 
-export type Props = {
-    variant: typeof NORMAL | typeof SETTING | typeof BUTTON,
-    title?: string,
-    desc?: ReactChildren,
-
-    /* eslint-disable react/require-default-props */
-    className?: string,
-    children?: ReactChildren,
-    /* eslint-enable react/require-default-props */
-};
 
 function List({
     variant,
@@ -41,7 +29,7 @@ function List({
     className,
     children,
     ...otherProps,
-}: Props) {
+}) {
     const bemClass = BEM.root.modifier(variant);
     const rootClassName = classNames(bemClass.toString(), className);
 
