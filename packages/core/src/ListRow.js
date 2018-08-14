@@ -9,6 +9,7 @@ import getStateClassnames from './utils/getStateClassnames';
 import icBEM from './utils/icBEM';
 import wrapIfNotElement from './utils/wrapIfNotElement';
 
+import { TYPE_SYMBOL as LIST_TYPE_SYMBOL } from './List';
 import { STATUS_CODE } from './StatusIcon';
 
 import './styles/ListRow.scss';
@@ -19,6 +20,17 @@ export const BEM = {
     root: ROOT_BEM,
     body: ROOT_BEM.element('body'),
     footer: ROOT_BEM.element('footer'),
+};
+
+const overrideNestedList = (nestedList) => {
+    const isElement = React.isValidElement(nestedList);
+
+    if (isElement && nestedList.type.typeSymbol === LIST_TYPE_SYMBOL) {
+        return React.cloneElement(nestedList, {
+            verticalSpacing: false,
+        });
+    }
+    return nestedList;
 };
 
 class ListRow extends PureComponent {
@@ -84,7 +96,7 @@ class ListRow extends PureComponent {
                 </div>
 
                 {this.renderFooter()}
-                {nestedList}
+                {overrideNestedList(nestedList)}
             </li>
         );
     }

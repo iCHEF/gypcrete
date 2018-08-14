@@ -20,6 +20,8 @@ const SETTING = 'setting'; // #TODO: design deprecated
 const BUTTON = 'button';
 const LIST_VARIANTS = [NORMAL, SETTING, BUTTON];
 
+export const TYPE_SYMBOL = Symbol('List');
+
 function List({
     variant,
     // <Section> props
@@ -58,5 +60,9 @@ List.defaultProps = {
     title: undefined,
     desc: undefined,
 };
+
+// For `<ListRow>` to check if `nestedList` is a `<List>.
+// Ref for this symbol approach: https://github.com/iCHEF/gypcrete/pull/157
+List.typeSymbol = TYPE_SYMBOL;
 
 export default List;
