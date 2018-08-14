@@ -2,8 +2,6 @@
 $component: #{$prefix}-list;
 
 .#{$component} {
-    padding: rem($list-vertical-margin) 0;
-
     // --------------------
     //  Elements
     // --------------------
@@ -13,48 +11,24 @@ $component: #{$prefix}-list;
         margin: 0;
     }
 
-    &__title,
-    &__desc {
-        font-size: rem($aside-text-font-size);
-        line-height: rem($aside-text-line-height);
-        white-space: pre-wrap;
-    }
-
-    &__title {
-        font-weight: $font-weight-bold;
-        padding: rem(12px) 0 rem(4px);
-    }
-
-    &__desc {
-        padding-top: rem(8px);
-        margin-right: rem($list-row-padding-horizontal);
-    }
-
     // --------------------
     //  Variants
     // --------------------
-    &--normal {
-        .#{$component}__title {
-            border-bottom: 2px solid $c-divider-header;
-        }
-
-        .#{$component}__title,
-        .#{$component}__desc {
-            margin-left: rem($list-row-padding-horizontal);
-            margin-right: rem($list-row-padding-horizontal);
-        }
-    }
-
     &--setting {
+        // #TODO: design deprecated
         .#{$component}__body {
             background-color: white;
             border: 1px solid $c-divider-row;
             border-radius: rem($list-border-radius);
         }
 
-        .#{$component}__title,
-        .#{$component}__desc {
-            margin-left: rem($list-border-radius);
+        .#{$prefix}-section__title {
+            padding-bottom: rem(2px);
+            border-bottom: none;
         }
+    }
+
+    &--button {
+        // #TODO: implement button list
     }
 }

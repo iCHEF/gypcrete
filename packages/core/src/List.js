@@ -6,23 +6,23 @@ import './styles/List.scss';
 import prefixClass from './utils/prefixClass';
 import icBEM from './utils/icBEM';
 
+import Section from './Section';
+
 export const COMPONENT_NAME = prefixClass('list');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
     root: ROOT_BEM,
-    title: ROOT_BEM.element('title'),
     body: ROOT_BEM.element('body'),
-    desc: ROOT_BEM.element('desc'),
 };
 
 const NORMAL = 'normal';
-const SETTING = 'setting';
+const SETTING = 'setting'; // #TODO: design deprecated
 const BUTTON = 'button';
 const LIST_VARIANTS = [NORMAL, SETTING, BUTTON];
 
-
 function List({
     variant,
+    // <Section> props
     title,
     desc,
     // React props
@@ -33,17 +33,17 @@ function List({
     const bemClass = BEM.root.modifier(variant);
     const rootClassName = classNames(bemClass.toString(), className);
 
-    const titleNode = <div className={BEM.title.toString()}>{title}</div>;
-    const descNode = <div className={BEM.desc.toString()}>{desc}</div>;
-
     return (
-        <div className={rootClassName} {...otherProps}>
-            {title && titleNode}
+        <Section
+            className={rootClassName}
+            title={title}
+            desc={desc}
+            bodySpacing={false}
+            {...otherProps}>
             <ul className={BEM.body.toString()}>
                 {children}
             </ul>
-            {desc && descNode}
-        </div>
+        </Section>
     );
 }
 
