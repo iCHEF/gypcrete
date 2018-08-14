@@ -3,12 +3,23 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
 import List, { BEM as LIST_BEM } from '../List';
+import Section from '../Section';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
     const element = <List title="Title">Hello world</List>;
 
     ReactDOM.render(element, div);
+});
+
+it('renders a <ul> inside a <Section> without body spacing', () => {
+    const wrapper = shallow(<List>Foo Bar</List>);
+
+    expect(wrapper.is(Section)).toBeTruthy();
+    expect(wrapper.prop('bodySpacing')).toBeFalsy();
+
+    expect(wrapper.children('ul').exists()).toBeTruthy();
+    expect(wrapper.children('ul').text()).toBe('Foo Bar');
 });
 
 it('renders in variants with "normal" as default', () => {
@@ -22,27 +33,17 @@ it('renders in variants with "normal" as default', () => {
     expect(wrapper.hasClass(`${LIST_BEM.root.modifier('button')}`)).toBeTruthy();
 });
 
-it('renders children inside a <ul>', () => {
-    const wrapper = shallow(<List>Foo Bar</List>);
+it('passes unknown props to wrapper <Section>', () => {
+    const wrapper = shallow(
+        <List
+            id="foo"
+            verticalSpacing={false} />
+    );
 
-    expect(wrapper.find('ul')).toHaveLength(1);
-    expect(wrapper.find('ul').text()).toBe('Foo Bar');
-});
-
-it('renders title in <div> when specified', () => {
-    const wrapper = shallow(<List>Foo</List>);
-    expect(wrapper.find(`.${LIST_BEM.title}`).exists()).toBeFalsy();
-
-    wrapper.setProps({ title: 'Bar' });
-    expect(wrapper.find(`.${LIST_BEM.title}`)).toHaveLength(1);
-    expect(wrapper.find(`.${LIST_BEM.title}`).text()).toBe('Bar');
-});
-
-it('renders desc in <div> when specified', () => {
-    const wrapper = shallow(<List>Foo</List>);
-    expect(wrapper.find(`.${LIST_BEM.desc}`).exists()).toBeFalsy();
-
-    wrapper.setProps({ desc: <span data-test="foo" /> });
-    expect(wrapper.find(`.${LIST_BEM.desc}`)).toHaveLength(1);
-    expect(wrapper.find(`.${LIST_BEM.desc}`).find('[data-test="foo"]')).toHaveLength(1);
+    expect(wrapper.find(Section).props()).toEqual(
+        expect.objectContaining({
+            id: 'foo',
+            verticalSpacing: false,
+        })
+    );
 });
