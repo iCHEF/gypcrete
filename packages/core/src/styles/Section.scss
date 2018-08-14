@@ -25,6 +25,23 @@ $component-name: #{$prefix}-section;
     }
 
     &__desc {
-        padding-top: rem(2px); // take padding from row layout for now.
+        // take padding from row layout as reference
+        padding-top: rem(2px);
+    }
+
+    &__body {
+        &--padded {
+            // for aligning non-row components
+            padding-left: rem($section-horizontal-padding);
+            padding-right: rem($section-horizontal-padding);
+        }
+    }
+
+    // --------------------
+    //  Modifiers
+    // --------------------
+    &--no-margin {
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
