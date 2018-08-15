@@ -16,6 +16,9 @@ $component: #{$prefix}-list;
     // --------------------
     &--setting {
         // #TODO: design deprecated
+        margin-left: rem($section-horizontal-padding);
+        margin-right: rem($section-horizontal-padding);
+
         .#{$component}__body {
             background-color: white;
             border: 1px solid $c-divider-row;
