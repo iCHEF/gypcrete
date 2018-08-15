@@ -31,12 +31,9 @@ function Section({
             .toString(),
         className,
     );
-    const bodyClassName = classNames(
-        BEM.body
-            .modifier('padded', bodySpacing)
-            .toString(),
-        className,
-    );
+    const bodyClassName = BEM.body
+        .modifier('padded', bodySpacing)
+        .toString();
 
     // Conditional parts
     const titleArea = title && (
