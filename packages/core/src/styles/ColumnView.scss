@@ -19,7 +19,6 @@ $component: #{$prefix}-column-view;
     }
 
     &__body {
-        padding: 0 rem($column-body-padding);
         flex: 1 1 auto;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
