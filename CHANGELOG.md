@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Update `<List>` to wrap its own body with `<Section>`. (#166)
 - [Core] Update `<ListRow>` to remove vertical margin from nested `<List>`. (#166)
 - [Storybook] Add examples for `<Section>`. (#166)
+- [Core] Removed padding in `<ColumnView>` body. (#167)
+- [Core] `<HeaderRow>` can now disable an area by setting `false` to it. Styles updated.  (#167)
 
 ## [1.8.1]
 ### Added
