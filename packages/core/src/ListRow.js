@@ -22,7 +22,7 @@ export const BEM = {
     footer: ROOT_BEM.element('footer'),
 };
 
-const overrideNestedList = (nestedList) => {
+const renderListWithoutSpacing = (nestedList) => {
     const isElement = React.isValidElement(nestedList);
 
     if (isElement && nestedList.type.typeSymbol === LIST_TYPE_SYMBOL) {
@@ -96,7 +96,7 @@ class ListRow extends PureComponent {
                 </div>
 
                 {this.renderFooter()}
-                {overrideNestedList(nestedList)}
+                {renderListWithoutSpacing(nestedList)}
             </li>
         );
     }
