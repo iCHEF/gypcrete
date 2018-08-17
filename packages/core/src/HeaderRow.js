@@ -1,7 +1,6 @@
-// @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import type { ReactChildren } from 'react-flow-types';
 import './styles/HeaderRow.scss';
 
 import prefixClass from './utils/prefixClass';
@@ -16,14 +15,6 @@ export const BEM = {
     right: ROOT_BEM.element('right'),
 };
 
-export type Props = {
-    left?: ReactChildren,
-    center?: ReactChildren,
-    right?: ReactChildren,
-    className?: string, // eslint-disable-line react/require-default-props
-    children?: ReactChildren,
-};
-
 function HeaderRow({
     left,
     center,
@@ -32,7 +23,7 @@ function HeaderRow({
     className,
     children,
     ...otherProps,
-}: Props) {
+}) {
     const rootClassName = classNames(
         BEM.root.toString(),
         className,
@@ -47,6 +38,12 @@ function HeaderRow({
         </div>
     );
 }
+
+HeaderRow.propTypes = {
+    left: PropTypes.node,
+    center: PropTypes.node,
+    right: PropTypes.node,
+};
 
 HeaderRow.defaultProps = {
     left: undefined,
