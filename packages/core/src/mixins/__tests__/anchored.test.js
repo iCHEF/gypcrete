@@ -25,9 +25,9 @@ import anchored, { ANCHORED_PLACEMENT } from '../anchored';
 // --------------------
 //  Mocking components
 // --------------------
-
-const ANCHOR_SIZE = 20;
 const BOX_SIZE = 100;
+const ANCHOR_SIZE_SMALL = 20;
+const ANCHOR_SIZE_LARGE = 200;
 
 // <Anchor> needs to be a React Component so it has an backing instance.
 // eslint-disable-next-line react/prefer-stateless-function
@@ -35,13 +35,20 @@ class Anchor extends PureComponent {
     static propTypes = {
         top: PropTypes.number.isRequired,
         left: PropTypes.number.isRequired,
+        large: PropTypes.bool,
+    };
+
+    static defaultProps = {
+        large: false,
     };
 
     render() {
-        const { top, left } = this.props;
+        const { top, left, large } = this.props;
+        const anchorSize = large ? ANCHOR_SIZE_LARGE : ANCHOR_SIZE_SMALL;
+
         const style = {
-            width: ANCHOR_SIZE,
-            height: ANCHOR_SIZE,
+            width: anchorSize,
+            height: anchorSize,
             position: 'absolute',
             top,
             left,
@@ -113,91 +120,6 @@ it('renders without crashing', () => {
     ReactDOM.render(element, div);
 });
 
-it('renders above when anchor placed near bottom of viewport', () => {
-    const anchorWrapper = mount(<Anchor top={700} left={100} />, { attachTo: anchorRoot });
-
-    let boxWrapper = mount(
-        <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
-        { attachTo: boxRoot }
-    ).find(Box);
-
-    expect(boxWrapper.prop('placement')).toBe(ANCHORED_PLACEMENT.TOP);
-    expect(boxWrapper.prop('style').top).toBe(700 - BOX_SIZE);
-
-    boxWrapper = mount(
-        <AnchoredBoxBottom anchor={anchorWrapper.instance()} />,
-        { attachTo: boxRoot }
-    ).find(Box);
-
-    expect(boxWrapper.prop('placement')).toBe(ANCHORED_PLACEMENT.TOP);
-    expect(boxWrapper.prop('style').top).toBe(700 - BOX_SIZE);
-});
-
-it('renders below when anchor placed near top of viewport', () => {
-    const anchorWrapper = mount(<Anchor top={50} left={100} />, { attachTo: anchorRoot });
-
-    let boxWrapper = mount(
-        <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
-        { attachTo: boxRoot }
-    ).find(Box);
-
-    expect(boxWrapper.prop('placement')).toBe(ANCHORED_PLACEMENT.BOTTOM);
-    expect(boxWrapper.prop('style').top).toBe(50 + ANCHOR_SIZE);
-
-    boxWrapper = mount(
-        <AnchoredBoxBottom anchor={anchorWrapper.instance()} />,
-        { attachTo: boxRoot }
-    ).find(Box);
-
-    expect(boxWrapper.prop('placement')).toBe(ANCHORED_PLACEMENT.BOTTOM);
-    expect(boxWrapper.prop('style').top).toBe(50 + ANCHOR_SIZE);
-});
-
-it('aligns to the center of anchor if space is enough on both left and right', () => {
-    const anchorWrapper = mount(<Anchor top={20} left={100} />, { attachTo: anchorRoot });
-    const boxWrapper = mount(
-        <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
-        { attachTo: boxRoot }
-    ).find(Box);
-
-    expect(boxWrapper.prop('style').left)
-        // 100 + (ANCHOR_SIZE / 2) - (BOX_SIZE / 2)
-        .toBe(60);
-
-    // Center-aligned component doesn't specify arrow style.
-    expect(boxWrapper.find(Box).prop('arrowStyle')).toEqual({});
-});
-
-it('aligns to the right side of anchor if space is not enough on right side', () => {
-    const anchorWrapper = mount(<Anchor top={20} left={1000} />, { attachTo: anchorRoot });
-    const boxWrapper = mount(
-        <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
-        { attachTo: boxRoot }
-    ).find(Box);
-
-    expect(boxWrapper.prop('style').left)
-        // Viewport width - anchor right offset - box width
-        .toBe(920);
-    expect(boxWrapper.find(Box).prop('arrowStyle').left)
-        // box width - edge padding
-        .toBe(84);
-});
-
-it('aligns to the left side of anchor if space is not enough on left side', () => {
-    const anchorWrapper = mount(<Anchor top={20} left={10} />, { attachTo: anchorRoot });
-    const boxWrapper = mount(
-        <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
-        { attachTo: boxRoot }
-    ).find(Box);
-
-    expect(boxWrapper.prop('style').left)
-        // anchor left
-        .toBe(10);
-    expect(boxWrapper.find(Box).prop('arrowStyle').left)
-        // edge padding
-        .toBe(16);
-});
-
 it('can take an HTMLElement as anchor', () => {
     mount(<Anchor top={10} left={10} />, { attachTo: anchorRoot });
     const anchorNode = document.getElementById('anchor');
@@ -230,3 +152,110 @@ it('re-adjusts position when assigned with another anchor', () => {
 
     expect(wrapper.find(Box).prop('placement')).toBe(ANCHORED_PLACEMENT.TOP);
 });
+
+describe('Vertical placement', () => {
+    it('renders above when anchor placed near bottom of viewport', () => {
+        const anchorWrapper = mount(<Anchor top={700} left={100} />, { attachTo: anchorRoot });
+
+        let boxWrapper = mount(
+            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            { attachTo: boxRoot }
+        ).find(Box);
+
+        expect(boxWrapper.prop('placement')).toBe(ANCHORED_PLACEMENT.TOP);
+        expect(boxWrapper.prop('style').top).toBe(700 - BOX_SIZE);
+
+        boxWrapper = mount(
+            <AnchoredBoxBottom anchor={anchorWrapper.instance()} />,
+            { attachTo: boxRoot }
+        ).find(Box);
+
+        expect(boxWrapper.prop('placement')).toBe(ANCHORED_PLACEMENT.TOP);
+        expect(boxWrapper.prop('style').top).toBe(700 - BOX_SIZE);
+    });
+
+    it('renders below when anchor placed near top of viewport', () => {
+        const anchorWrapper = mount(<Anchor top={50} left={100} />, { attachTo: anchorRoot });
+
+        let boxWrapper = mount(
+            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            { attachTo: boxRoot }
+        ).find(Box);
+
+        expect(boxWrapper.prop('placement')).toBe(ANCHORED_PLACEMENT.BOTTOM);
+        expect(boxWrapper.prop('style').top).toBe(50 + ANCHOR_SIZE_SMALL);
+
+        boxWrapper = mount(
+            <AnchoredBoxBottom anchor={anchorWrapper.instance()} />,
+            { attachTo: boxRoot }
+        ).find(Box);
+
+        expect(boxWrapper.prop('placement')).toBe(ANCHORED_PLACEMENT.BOTTOM);
+        expect(boxWrapper.prop('style').top).toBe(50 + ANCHOR_SIZE_SMALL);
+    });
+});
+
+describe('Horizontal placement: small anchor', () => {
+    it('aligns to the center of anchor when space is enough', () => {
+        const anchorWrapper = mount(<Anchor top={20} left={100} />, { attachTo: anchorRoot });
+        const boxWrapper = mount(
+            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            { attachTo: boxRoot }
+        ).find(Box);
+
+        expect(boxWrapper.prop('style').left)
+            // 100 + (anchor size / 2) - (box size / 2)
+            .toBe(60);
+
+        // Center-aligned component doesn't specify arrow style.
+        expect(boxWrapper.find(Box).prop('arrowStyle')).toEqual({});
+    });
+
+    it('aligns to the right side of anchor if space is not enough on right side', () => {
+        const anchorWrapper = mount(<Anchor top={20} left={1000} />, { attachTo: anchorRoot });
+        const boxWrapper = mount(
+            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            { attachTo: boxRoot }
+        ).find(Box);
+
+        expect(boxWrapper.prop('style').left)
+            // Viewport width - anchor right offset - box width
+            .toBe(920);
+        expect(boxWrapper.find(Box).prop('arrowStyle').left)
+            // box width - edge padding
+            .toBe(84);
+    });
+
+    it('aligns to the left side of anchor if space is not enough on left side', () => {
+        const anchorWrapper = mount(<Anchor top={20} left={10} />, { attachTo: anchorRoot });
+        const boxWrapper = mount(
+            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            { attachTo: boxRoot }
+        ).find(Box);
+
+        expect(boxWrapper.prop('style').left)
+            // anchor left
+            .toBe(10);
+        expect(boxWrapper.find(Box).prop('arrowStyle').left)
+            // edge padding
+            .toBe(16);
+    });
+});
+
+describe('Horizontal placement: large anchor', () => {
+    it('aligns to the center of anchor when anchor is wider than box', () => {
+        const anchorWrapper = mount(<Anchor large top={20} left={20} />, { attachTo: anchorRoot });
+        const boxWrapper = mount(
+            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            { attachTo: boxRoot }
+        ).find(Box);
+
+        expect(boxWrapper.prop('style').left)
+            // 10 + (large anchor size / 2) - (box size / 2)
+            .toBe(70);
+
+        // Center-aligned component doesn't specify arrow style.
+        expect(boxWrapper.find(Box).prop('arrowStyle')).toEqual({});
+    });
+});
+
