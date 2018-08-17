@@ -15,6 +15,32 @@ export const BEM = {
     right: ROOT_BEM.element('right'),
 };
 
+// --------------------
+//  Helper Component
+// --------------------
+
+export function HeaderArea({ content, ...props }) {
+    if (content === false) {
+        return null;
+    }
+    return <div {...props}>{content}</div>;
+}
+
+HeaderArea.propTypes = {
+    content: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.oneOf([false]),
+    ]),
+};
+
+HeaderArea.defaultProps = {
+    content: undefined,
+};
+
+// --------------------
+//  Main Component
+// --------------------
+
 function HeaderRow({
     left,
     center,
@@ -31,18 +57,18 @@ function HeaderRow({
 
     return (
         <div className={rootClassName} {...otherProps}>
-            <div className={BEM.left}>{left}</div>
-            <div className={BEM.center}>{center}</div>
-            <div className={BEM.right}>{right}</div>
+            <HeaderArea content={left} className={BEM.left} />
+            <HeaderArea content={center} className={BEM.center} />
+            <HeaderArea content={right} className={BEM.right} />
             {children}
         </div>
     );
 }
 
 HeaderRow.propTypes = {
-    left: PropTypes.node,
-    center: PropTypes.node,
-    right: PropTypes.node,
+    left: HeaderArea.propTypes.content,
+    center: HeaderArea.propTypes.content,
+    right: HeaderArea.propTypes.content,
 };
 
 HeaderRow.defaultProps = {
