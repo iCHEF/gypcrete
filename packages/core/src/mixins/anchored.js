@@ -142,9 +142,24 @@ const anchored = ({
          * Adjust popover position based on spacing around anchor element,
          * then set new position to state.
          *
-         * ClientRect: element's positions related to viewport.
+         * ClientRect: element's positions related to browser window viewport.
          * Offset: element's position related to document.
          */
+
+        /**
+         * @typedef {Object} DOMRect
+         * @property {number} top
+         * @property {number} bottom
+         * @property {number} left
+         * @property {number} right
+         * @property {number} width
+         * @property {number} height
+         *
+         * @typedef {Object} DocumentOffset
+         * @property {number} top
+         * @property {number} left
+         */
+
         adjustPosition(nextAnchor = this.props.anchor) {
             const anchorNode = this.getAnchorDOMNode(nextAnchor);
             const selfNode = this.getSelfDOMNode();
@@ -153,10 +168,14 @@ const anchored = ({
                 return;
             }
 
+            /** @type {DOMRect} */
             const anchorRect = anchorNode.getBoundingClientRect();
-            const anchorOffset = documentOffset(anchorNode); // offset = { top,left }
+
+            /** @type {DocumentOffset} */
+            const anchorOffset = documentOffset(anchorNode);
             const anchorHalfWidth = anchorRect.width / 2;
 
+            /** @type {DOMRect} */
             const selfRect = selfNode.getBoundingClientRect();
             const selfHalfWidth = selfRect.width / 2;
 
@@ -169,13 +188,14 @@ const anchored = ({
             // -------------------------------------
             //   Determine vertical position
             // -------------------------------------
-            const hasSpaceAbove = anchorRect.top >= selfRect.height;
-            const hasSpaceBelow = (window.innerHeight - anchorRect.bottom) >= selfRect.height;
+            const hasSpaceToPlaceSelfAbove = anchorRect.top >= selfRect.height;
+            const hasSpaceToPlaceSelfBelow =
+                (window.innerHeight - anchorRect.bottom) >= selfRect.height;
 
             nextState.placement = getVerticalPlacement(
                 defaultPlacement,
-                hasSpaceAbove,
-                hasSpaceBelow,
+                hasSpaceToPlaceSelfAbove,
+                hasSpaceToPlaceSelfBelow,
             );
 
             if (nextState.placement === TOP) {
@@ -184,31 +204,34 @@ const anchored = ({
                 nextState.position.top = anchorOffset.top + anchorRect.height;
             }
 
-            // -------------------------------------
-            //   Determine horizontal position
-            //
-            //   #TODO: Fix the arrow's position if
-            //          anchor is multi-line text.
-            //          (May point at end of anchor)
-            // -------------------------------------
-            const hasSpaceOnLeft = anchorRect.left >= selfHalfWidth;
-            const hasSpaceOnRight = (window.innerWidth - anchorRect.right) >= selfHalfWidth;
+            /**
+             * Determine horizontal position.
+             *
+             * 1. Try to align self to the center of anchor.
+             * 2. If not possible, try to align self to the right edge of anchor.
+             * 3. If still not possible, align self to the left edge of anchor.
+             */
+            // Relative to browser window viewport
+            const anchorCenterCoordX = anchorRect.left + anchorHalfWidth;
+
+            const hasSpaceOnLeftOfAnchorCenter = anchorCenterCoordX >= selfHalfWidth;
+            const hasSpaceOnRightOfAnchorCenter =
+                (window.innerWidth - anchorCenterCoordX) >= selfHalfWidth;
 
             const arrowSafeAreaLeft = edgePadding;
             const arrowSafeAreaRight = selfRect.width - edgePadding;
 
             switch (true) {
                 // Center-aligned
-                case (hasSpaceOnLeft && hasSpaceOnRight):
+                case (hasSpaceOnLeftOfAnchorCenter && hasSpaceOnRightOfAnchorCenter):
                     nextState.position.left = (anchorOffset.left + anchorHalfWidth) - selfHalfWidth;
                     break;
 
                 // Right-align to the anchor
-                case (hasSpaceOnLeft && !hasSpaceOnRight):
+                case (hasSpaceOnLeftOfAnchorCenter && !hasSpaceOnRightOfAnchorCenter):
                     nextState.position.left =
                         anchorOffset.left + anchorRect.width - selfRect.width;
 
-                    // anchorOffset.left - nextState.position.left + anchorHalfWidth
                     nextState.arrowPosition.left = selfRect.width - anchorHalfWidth;
                     break;
 
