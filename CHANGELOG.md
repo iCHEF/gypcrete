@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Update `<ListRow>` to remove vertical margin from nested `<List>`. (#166)
 - [Storybook] Add examples for `<Section>`. (#166)
 
+### Fixed
+- [Core] Fix `anchored()` mixin horizontal alignment when anchor is larger than component applying the mixin. (#168)
+
 ## [1.8.1]
 ### Added
 - [Form] Add new `SelectOption.typeSymbol` for element type comparison. (#157)
