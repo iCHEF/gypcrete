@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
+import List from '../List';
 import ListRow, { BEM as ROW_BEM } from '../ListRow';
 
 it('renders without crashing', () => {
@@ -64,4 +65,13 @@ it('renders nested item inside <li> but outside of body wrapper', () => {
 
     expect(wrapper.find('span[data-test]')).toHaveLength(1);
     expect(wrapper.find(`.${ROW_BEM.body}`).find('span[data-test]').exists()).toBeFalsy();
+});
+
+it('overrides nested <List> to remove its vertical spacing', () => {
+    const wrapper = shallow(
+        <ListRow nestedList={<List>Bar</List>}>
+            Foo
+        </ListRow>
+    );
+    expect(wrapper.find(List).prop('verticalSpacing')).toBeFalsy();
 });

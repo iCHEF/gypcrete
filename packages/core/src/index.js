@@ -30,6 +30,7 @@ import SearchInput from './SearchInput';
 // Containers
 import InfiniteScroll from './InfiniteScroll';
 import HeaderRow from './HeaderRow';
+import Section from './Section';
 import List from './List';
 import ListRow from './ListRow';
 import ColumnView from './ColumnView';
@@ -66,6 +67,7 @@ export {
 
     InfiniteScroll,
     HeaderRow,
+    Section,
     List,
     ListRow,
     ColumnView,

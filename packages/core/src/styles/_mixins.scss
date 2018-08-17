@@ -41,3 +41,21 @@
     appearance: none;
     user-select: none;
 }
+
+// -------------------------------------
+//   Default typography
+// -------------------------------------
+@mixin small-text {
+    font-size: rem($font-size-small);
+    line-height: rem($line-height-small);
+}
+
+@mixin base-text {
+    font-size: rem($font-size-base);
+    line-height: rem($line-height-base);
+}
+
+@mixin large-text {
+    font-size: rem($font-size-large);
+    line-height: rem($line-height-large);
+}

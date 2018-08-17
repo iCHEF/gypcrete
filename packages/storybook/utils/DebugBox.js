@@ -5,6 +5,7 @@ const defaultBoxStyle = {
     boxShadow: '0 0 1px red',
     marginBottom: 15,
     position: 'relative',
+    overflow: 'hidden',
 };
 
 function DebugBox({ width, height, style, children }) {

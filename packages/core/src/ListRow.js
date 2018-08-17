@@ -1,10 +1,7 @@
-// @flow
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import type { ReactChildren } from 'react-flow-types';
-import type { Props as StatusIconProps } from './StatusIcon';
 import { statusPropTypes } from './mixins/withStatus';
 
 import prefixClass from './utils/prefixClass';
@@ -12,6 +9,7 @@ import getStateClassnames from './utils/getStateClassnames';
 import icBEM from './utils/icBEM';
 import wrapIfNotElement from './utils/wrapIfNotElement';
 
+import { TYPE_SYMBOL as LIST_TYPE_SYMBOL } from './List';
 import { STATUS_CODE } from './StatusIcon';
 
 import './styles/ListRow.scss';
@@ -24,22 +22,18 @@ export const BEM = {
     footer: ROOT_BEM.element('footer'),
 };
 
-export type Props = {
-    highlight?: boolean,
-    nestedList?: ReactChildren,
-    desc?: ReactChildren,
-    status?: $PropertyType<StatusIconProps, 'status'>,
-    // #FIXME: Use type import
-    statusOptions?: { [string]: any },
-    errorMsg?: string,
+const renderListWithoutSpacing = (nestedList) => {
+    const isElement = React.isValidElement(nestedList);
 
-    /* eslint-disable react/require-default-props */
-    className?: string,
-    children?: ReactChildren,
-    /* eslint-enable react/require-default-props */
+    if (isElement && nestedList.type.typeSymbol === LIST_TYPE_SYMBOL) {
+        return React.cloneElement(nestedList, {
+            verticalSpacing: false,
+        });
+    }
+    return nestedList;
 };
 
-class ListRow extends PureComponent<Props, Props, any> {
+class ListRow extends PureComponent {
     static propTypes = {
         highlight: PropTypes.bool,
         nestedList: PropTypes.node,
@@ -102,7 +96,7 @@ class ListRow extends PureComponent<Props, Props, any> {
                 </div>
 
                 {this.renderFooter()}
-                {nestedList}
+                {renderListWithoutSpacing(nestedList)}
             </li>
         );
     }

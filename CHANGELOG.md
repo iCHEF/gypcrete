@@ -5,7 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-N/A
+### Added
+- [Core] Add new `<Section>` as a general content wrapper with optional title and description text. (#166)
+
+### Changed
+- [Core] Update `<List>` to wrap its own body with `<Section>`. (#166)
+- [Core] Update `<ListRow>` to remove vertical margin from nested `<List>`. (#166)
+- [Storybook] Add examples for `<Section>`. (#166)
 
 ## [1.8.1]
 ### Added
