@@ -10,6 +10,10 @@ import OptionalArea from './OptionalArea';
 
 storiesOf('HeaderRow', module)
     .add('Basic usage', withInfo()(BasicUsage))
-    .add('Optional area', withInfo()(OptionalArea))
+    .add(
+        'Optional area',
+        withInfo('Remove an area from DOM by explictly setting it to false.')(OptionalArea)
+    )
+
     // Props table
     .addPropsTable(() => <HeaderRow />);
