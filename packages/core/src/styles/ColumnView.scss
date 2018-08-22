@@ -19,10 +19,10 @@ $component: #{$prefix}-column-view;
     }
 
     &__body {
-        padding: 0 rem($column-body-padding);
         flex: 1 1 auto;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        padding-bottom: rem($column-body-bottom-padding);
     }
 
     &__footer {
