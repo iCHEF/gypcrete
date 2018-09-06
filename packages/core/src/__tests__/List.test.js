@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
-import List, { BEM as LIST_BEM } from '../List';
+import List from '../List';
 import Section from '../Section';
+
+import ListSpacingContext from '../contexts/listSpacing';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -12,29 +14,36 @@ it('renders without crashing', () => {
     ReactDOM.render(element, div);
 });
 
-it('renders a <ul> inside a <Section> without body spacing', () => {
+it('consumes context to render a <Section> with spacing configs', () => {
     const wrapper = shallow(<List>Foo Bar</List>);
+    expect(wrapper.is(ListSpacingContext.Consumer)).toBeTruthy();
 
-    expect(wrapper.is(Section)).toBeTruthy();
-    expect(wrapper.prop('bodySpacing')).toBeFalsy();
+    const renderedElement = wrapper.prop('children')(true);
+    expect(renderedElement.type).toBe(Section);
+    expect(renderedElement.props.verticalSpacing).toBe(true);
+    expect(renderedElement.props.bodySpacing).toBe(false);
+});
 
-    expect(wrapper.children('ul').exists()).toBeTruthy();
-    expect(wrapper.children('ul').text()).toBe('Foo Bar');
+it('renders a <ul> inside root <Section>', () => {
+    const wrapper = mount(<List>Foo Bar</List>);
+
+    expect(wrapper.find(Section).find('ul').exists()).toBeTruthy();
+    expect(wrapper.find(Section).find('ul').text()).toBe('Foo Bar');
 });
 
 it('renders in variants with "normal" as default', () => {
-    const wrapper = shallow(<List>Foo Bar</List>);
-    expect(wrapper.hasClass(`${LIST_BEM.root.modifier('normal')}`)).toBeTruthy();
+    const wrapper = mount(<List>Foo Bar</List>);
+    expect(wrapper.find(Section).hasClass('gyp-list--normal')).toBeTruthy();
 
     wrapper.setProps({ variant: 'setting' });
-    expect(wrapper.hasClass(`${LIST_BEM.root.modifier('setting')}`)).toBeTruthy();
+    expect(wrapper.find(Section).hasClass('gyp-list--setting')).toBeTruthy();
 
     wrapper.setProps({ variant: 'button' });
-    expect(wrapper.hasClass(`${LIST_BEM.root.modifier('button')}`)).toBeTruthy();
+    expect(wrapper.find(Section).hasClass('gyp-list--button')).toBeTruthy();
 });
 
 it('passes unknown props to wrapper <Section>', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
         <List
             id="foo"
             verticalSpacing={false} />
