@@ -7,6 +7,7 @@ import prefixClass from './utils/prefixClass';
 import icBEM from './utils/icBEM';
 
 import Section from './Section';
+import ListSpacingContext from './contexts/listSpacing';
 
 export const COMPONENT_NAME = prefixClass('list');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -36,16 +37,21 @@ function List({
     const rootClassName = classNames(bemClass.toString(), className);
 
     return (
-        <Section
-            className={rootClassName}
-            title={title}
-            desc={desc}
-            bodySpacing={false}
-            {...otherProps}>
-            <ul className={BEM.body.toString()}>
-                {children}
-            </ul>
-        </Section>
+        <ListSpacingContext.Consumer>
+            {spacing => (
+                <Section
+                    className={rootClassName}
+                    title={title}
+                    desc={desc}
+                    bodySpacing={false}
+                    verticalSpacing={spacing}
+                    {...otherProps}>
+                    <ul className={BEM.body.toString()}>
+                        {children}
+                    </ul>
+                </Section>
+            )}
+        </ListSpacingContext.Consumer>
     );
 }
 
