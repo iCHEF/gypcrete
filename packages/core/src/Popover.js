@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import ListSpacingContext from './contexts/listSpacing';
+
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 
@@ -31,12 +33,14 @@ function Popover({
     const rootClassName = classNames(bemClass.toString(), className);
 
     return (
-        <div className={rootClassName} {...otherProps}>
-            <span className={BEM.arrow} style={arrowStyle} />
-            <div className={BEM.container}>
-                {children}
+        <ListSpacingContext.Provider value={false}>
+            <div className={rootClassName} {...otherProps}>
+                <span className={BEM.arrow} style={arrowStyle} />
+                <div className={BEM.container}>
+                    {children}
+                </div>
             </div>
-        </div>
+        </ListSpacingContext.Provider>
     );
 }
 

@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import ListSpacingContext from './contexts/listSpacing';
+
 import { statusPropTypes } from './mixins/withStatus';
 
 import prefixClass from './utils/prefixClass';
@@ -9,7 +11,6 @@ import getStateClassnames from './utils/getStateClassnames';
 import icBEM from './utils/icBEM';
 import wrapIfNotElement from './utils/wrapIfNotElement';
 
-import { TYPE_SYMBOL as LIST_TYPE_SYMBOL } from './List';
 import { STATUS_CODE } from './StatusIcon';
 
 import './styles/ListRow.scss';
@@ -20,17 +21,6 @@ export const BEM = {
     root: ROOT_BEM,
     body: ROOT_BEM.element('body'),
     footer: ROOT_BEM.element('footer'),
-};
-
-const renderListWithoutSpacing = (nestedList) => {
-    const isElement = React.isValidElement(nestedList);
-
-    if (isElement && nestedList.type.typeSymbol === LIST_TYPE_SYMBOL) {
-        return React.cloneElement(nestedList, {
-            verticalSpacing: false,
-        });
-    }
-    return nestedList;
 };
 
 class ListRow extends PureComponent {
@@ -90,14 +80,15 @@ class ListRow extends PureComponent {
         const rootClassName = classNames(bemClass.toString(), stateClass, className);
 
         return (
-            <li className={rootClassName} {...wrapperProps}>
-                <div className={BEM.body.toString()}>
-                    {children}
-                </div>
-
-                {this.renderFooter()}
-                {renderListWithoutSpacing(nestedList)}
-            </li>
+            <ListSpacingContext.Provider value={false}>
+                <li className={rootClassName} {...wrapperProps}>
+                    <div className={BEM.body.toString()}>
+                        {children}
+                    </div>
+                    {this.renderFooter()}
+                    {nestedList}
+                </li>
+            </ListSpacingContext.Provider>
         );
     }
 }
