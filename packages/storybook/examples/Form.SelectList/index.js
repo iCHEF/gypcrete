@@ -9,6 +9,7 @@ import SingleControlled from './SingleControlled';
 import SingleUncontrolled from './SingleUncontrolled';
 import MultipleUncontrolled from './MultipleUncontrolled';
 import MultipleControlled from './MultipleControlled';
+import MultipleWithoutCheckAll from './MultipleWithoutCheckAll';
 import MultipleReadOnlyOption from './MultipleReadOnlyOption';
 import MultipleMinCheck from './MultipleMinCheck';
 
@@ -17,6 +18,7 @@ storiesOf('[Form] SelectList', module)
     .add('single (controlled)', withInfo()(SingleControlled))
     .add('multiple (uncontrolled)', withInfo()(MultipleUncontrolled))
     .add('multiple (controlled)', withInfo()(MultipleControlled))
+    .add('multiple (without checkAll)', withInfo()(MultipleWithoutCheckAll))
     .add('with read-only options', withInfo()(MultipleReadOnlyOption))
     .add('has minimum checks', withInfo()(MultipleMinCheck))
     // Props table

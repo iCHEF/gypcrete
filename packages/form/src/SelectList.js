@@ -51,6 +51,7 @@ function getInitialCheckedState(fromValues) {
 class SelectList extends PureComponent {
     static propTypes = {
         multiple: PropTypes.bool,
+        showCheckAll: PropTypes.bool,
         minCheck: PropTypes.number,
         allOptionLabel: PropTypes.node,
         values: PropTypes.arrayOf(valueType),
@@ -60,6 +61,7 @@ class SelectList extends PureComponent {
 
     static defaultProps = {
         multiple: false,
+        showCheckAll: true,
         minCheck: 0,
         allOptionLabel: 'All',
         values: undefined,
@@ -112,7 +114,7 @@ class SelectList extends PureComponent {
     }
 
     handleOptionChange = (optionValue, isChecked) => {
-        const { multiple, minCheck } = this.props;
+        const { multiple, showCheckAll, minCheck } = this.props;
         const { checkedState } = this.state;
 
         let nextState = checkedState;
@@ -186,9 +188,11 @@ class SelectList extends PureComponent {
     }
 
     render() {
+        const { multiple, showCheckAll } = this.props;
+
         return (
             <List>
-                {this.props.multiple && this.renderCheckAllOption()}
+                {multiple && showCheckAll && this.renderCheckAllOption()}
                 {this.renderOptions()}
             </List>
         );
