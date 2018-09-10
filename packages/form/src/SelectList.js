@@ -114,7 +114,7 @@ class SelectList extends PureComponent {
     }
 
     handleOptionChange = (optionValue, isChecked) => {
-        const { multiple, showCheckAll, minCheck } = this.props;
+        const { multiple, minCheck } = this.props;
         const { checkedState } = this.state;
 
         let nextState = checkedState;
