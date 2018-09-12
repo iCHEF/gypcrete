@@ -137,6 +137,20 @@ describe('Multiple response mode', () => {
         expect(wrapper.find(Option).at(0).prop('label')).toBe('Check All');
     });
 
+    it('should not renders the "All" option if showCheckAll is false', () => {
+        const wrapper = shallow(
+            <SelectList multiple showCheckAll={false}>
+                <Option label="Foo" value="foo" />
+                <Option label="Bar" value="bar" />
+            </SelectList>
+        );
+
+        expect(wrapper.find(Option).at(0).props()).toMatchObject({
+            label: 'Foo',
+            value: 'foo',
+        });
+    });
+
     it('triggers onChange with sorted values', () => {
         const handleChange = jest.fn();
         const wrapper = shallow(

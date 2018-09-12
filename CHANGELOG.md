@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - [Core] Add new `<Section>` as a general content wrapper with optional title and description text. (#166)
+- [Form] Add the `showCheckAll` prop to disable `checkAll` option in `<SelectList>`. (#170)
 
 ### Changed
 - [Core] Update `<List>` to wrap its own body with `<Section>`. (#166)
