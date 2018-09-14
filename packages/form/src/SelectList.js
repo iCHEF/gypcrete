@@ -57,6 +57,8 @@ class SelectList extends PureComponent {
         values: PropTypes.arrayOf(valueType),
         defaultValues: PropTypes.arrayOf(valueType),
         onChange: PropTypes.func,
+        title: PropTypes.string,
+        desc: PropTypes.node,
     };
 
     static defaultProps = {
@@ -67,6 +69,8 @@ class SelectList extends PureComponent {
         values: undefined,
         defaultValues: [],
         onChange: () => {},
+        title: undefined,
+        desc: undefined,
     };
 
     state = {
@@ -188,10 +192,15 @@ class SelectList extends PureComponent {
     }
 
     render() {
-        const { multiple, showCheckAll } = this.props;
+        const {
+            multiple,
+            showCheckAll,
+            title,
+            desc,
+         } = this.props;
 
         return (
-            <List>
+            <List title={title} desc={desc}>
                 {multiple && showCheckAll && this.renderCheckAllOption()}
                 {this.renderOptions()}
             </List>
