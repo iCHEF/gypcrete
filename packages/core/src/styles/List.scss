@@ -21,7 +21,7 @@ $component: #{$prefix}-list;
 
         .#{$component}__body {
             background-color: white;
-            border: 1px solid $c-divider-row;
+            border: 1px solid $c-row-divider;
             border-radius: rem($list-border-radius);
         }
 
