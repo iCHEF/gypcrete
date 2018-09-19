@@ -76,10 +76,15 @@ $c-row-bg-hover:     hsba(0, 0, 0, 3);
 $c-row-bg-active:    hsba(0, 0, 0, 6);
 $c-row-bg-highlight: $c-blue;
 
+// ListRow colors
+$c-row-bg-hover:     $c-black-5;
+$c-row-bg-highlight: $c-black-10;
+$c-row-divider: $c-black-30;
+$c-row-divider-highlight: $c-black-100;
+
 // Component backgrounds
-$c-comp-bg:        $c-row-bg;
-$c-comp-bg-hover:  $c-row-bg-hover;
-$c-comp-bg-active: $c-row-bg-active;
+$c-comp-bg-hover:  $c-black-5;
+$c-comp-bg-active: $c-black-10;
 
 // Divider lines
 $c-divider-row:             hsba(0, 0, 0, 30);

@@ -17,12 +17,7 @@ $component: #{$prefix}-list-row;
         display: flex;
         align-items: flex-start;
         padding: rem($list-row-padding-vertical) 0;
-        box-shadow: inset 0 -1px 0 $c-divider-row;
-
-        // Styles inside List
-        .#{$prefix}-list--setting li:last-of-type > & {
-            border-bottom: none;
-        }
+        box-shadow: inset 0 -1px 0 $c-row-divider;
 
         & > :first-child {
             margin-left: -$component-padding;
@@ -46,11 +41,20 @@ $component: #{$prefix}-list-row;
     }
 
     // --------------------
-    //  Modifiers
+    //  Modifiers / States
     // --------------------
     &--highlight {
         background-color: $c-row-bg-highlight !important;
-        color: $c-white;
+
+        .#{$component}__body {
+            box-shadow: inset 0 -1px 0 $c-row-divider-highlight;
+        }
+    }
+
+    .#{$prefix-state}-error & {
+        &__body {
+            box-shadow: inset 0 -1px 0 currentColor;
+        }
     }
 
     // --------------------
