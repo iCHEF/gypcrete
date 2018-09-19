@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Storybook] Add examples for `<Section>`. (#166)
 - [Core] Removed padding in `<ColumnView>` body. (#167)
 - [Core] `<HeaderRow>` can now disable an area by setting `false` to it. Styles updated.  (#167)
+- [Core] Update colors for `<ListRow>`. Add v3 color plates. (#172)
 
 ### Fixed
 - [Core] Fix `anchored()` mixin horizontal alignment when anchor is larger than component applying the mixin. (#168)
