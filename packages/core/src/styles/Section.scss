@@ -21,7 +21,7 @@ $component-name: #{$prefix}-section;
     &__title {
         font-weight: $font-weight-bold;
         padding-bottom: rem(1px);
-        border-bottom: 1px solid $c-divider-header;
+        border-bottom: 2px solid $c-section-divider;
     }
 
     &__desc {
