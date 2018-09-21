@@ -18,9 +18,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Removed padding in `<ColumnView>` body. (#167)
 - [Core] `<HeaderRow>` can now disable an area by setting `false` to it. Styles updated.  (#167)
 - [Core] Update colors for `<ListRow>`. Add v3 color plates. (#172)
+- [Storybook] Upgrade `@storybook/react` and its addons to `3.4.11`. (#173)
 
 ### Fixed
 - [Core] Fix `anchored()` mixin horizontal alignment when anchor is larger than component applying the mixin. (#168)
+- [Storybook] Fix prop tables for each component. (#173)
 
 ## [1.8.1]
 ### Added
