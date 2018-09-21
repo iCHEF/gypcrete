@@ -1,8 +1,6 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
-// For props table
 import Button, { PureButton } from '@ichef/gypcrete/src/Button';
 
 import BasicButtonExample from './BasicButton';
@@ -11,6 +9,8 @@ import DisabledButtonExample from './DisabledButton';
 import ExpandedButtonExample from './ExpandedButton';
 import ButtonWithStatusExample from './ButtonWithStatus';
 import CustomTagButtonExample from './CustomTagButton';
+
+import getPropTables from '../../utils/getPropTables';
 
 storiesOf('Button', module)
     .add('basic usage',
@@ -29,5 +29,4 @@ storiesOf('Button', module)
         withInfo()(ButtonWithStatusExample)
     )
     .add('custom tag', withInfo()(CustomTagButtonExample))
-    // Props table
-    .addPropsTable(() => <Button />, [PureButton]);
+    .add('props', getPropTables([PureButton, Button]));

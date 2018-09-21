@@ -1,4 +1,3 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -8,6 +7,8 @@ import BasicUsage from './BasicUsage';
 import ControlledInput from './ControlledInput';
 import WithStatus from './WithStatus';
 import InputProps from './InputProps';
+
+import getPropTables from '../../utils/getPropTables';
 
 storiesOf('Switch', module)
     .add('Basic usage',
@@ -29,4 +30,4 @@ storiesOf('Switch', module)
         )(InputProps)
     )
     // Props table
-    .addPropsTable(() => <Switch />, [PureSwitch]);
+    .add('props', getPropTables([PureSwitch, Switch]));

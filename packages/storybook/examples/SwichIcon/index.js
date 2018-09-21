@@ -1,9 +1,10 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import SwitchIcon from '@ichef/gypcrete/src/SwitchIcon';
 import BasicUsage from './BasicUsage';
+
+import getPropTables from '../../utils/getPropTables';
 
 storiesOf('SwitchIcon', module)
     .add('Basic usage',
@@ -13,4 +14,4 @@ storiesOf('SwitchIcon', module)
         )(BasicUsage)
     )
     // Props table
-    .addPropsTable(() => <SwitchIcon />);
+    .add('props', getPropTables([SwitchIcon]));
