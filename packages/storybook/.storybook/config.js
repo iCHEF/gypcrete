@@ -1,8 +1,7 @@
-import { configure, setAddon } from '@storybook/react';
+import { configure } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import { setDefaults } from '@storybook/addon-info';
 
-import propsTableAddon from './propsTable-addon';
 import Code from './Code';
 
 // -------------------------------------
@@ -30,8 +29,6 @@ setDefaults({
     },
     components: { codespan: Code },
 });
-
-setAddon(propsTableAddon);
 
 // -------------------------------------
 //   Load Stories
