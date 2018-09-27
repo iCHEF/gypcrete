@@ -1,4 +1,3 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -8,6 +7,8 @@ import StatusIcon from '@ichef/gypcrete/src/StatusIcon';
 import BasicStatusIconExample from './BasicStatusIcon';
 import CornerStatusIconExample from './CornerStatusIcon';
 
+import getPropTables from '../../utils/getPropTables';
+
 storiesOf('StatusIcon', module)
     .add('basic usage',
         withInfo()(BasicStatusIconExample)
@@ -16,4 +17,4 @@ storiesOf('StatusIcon', module)
         withInfo()(CornerStatusIconExample)
     )
     // Props table
-    .addPropsTable(() => <StatusIcon />);
+    .add('props', getPropTables([StatusIcon]));

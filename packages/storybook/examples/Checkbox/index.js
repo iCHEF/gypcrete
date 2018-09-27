@@ -2,12 +2,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
-// For props table
 import Checkbox, { PureCheckbox } from '@ichef/gypcrete/src/Checkbox';
 
 import BasicCheckboxExample from './BasicCheckbox';
 import CheckboxWithIndeterminateExample from './CheckboxWithIndeterminate';
 import CheckboxWithStatusExample from './CheckboxWithStatus';
+
+import getPropTables from '../../utils/getPropTables';
 
 storiesOf('Checkbox', module)
     .add('basic usage',
@@ -21,5 +22,4 @@ storiesOf('Checkbox', module)
     .add('with status',
         withInfo()(CheckboxWithStatusExample)
     )
-    // Props table
-    .addPropsTable(() => <Checkbox />, [PureCheckbox]);
+    .add('props', getPropTables([PureCheckbox, Checkbox]));

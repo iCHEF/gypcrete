@@ -1,14 +1,14 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
-// For props table
 import TextLabel, { PureTextLabel } from '@ichef/gypcrete/src/TextLabel';
 
 import BasicTextLabelExample from './BasicTextLabel';
 import TextLabelWithStatusExample from './TextLabelWithStatus';
 import TextLabelWithTextExample from './TextLabelWithText';
 import Editable from './Editable';
+
+import getPropTables from '../../utils/getPropTables';
 
 storiesOf('TextLabel', module)
     .add('basic usage',
@@ -24,4 +24,4 @@ storiesOf('TextLabel', module)
         withInfo()(Editable)
     )
     // Props table
-    .addPropsTable(() => <TextLabel />, [PureTextLabel]);
+    .add('props', getPropTables([PureTextLabel, TextLabel]));

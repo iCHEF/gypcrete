@@ -6,6 +6,8 @@ import Section from '@ichef/gypcrete/src/Section';
 import DebugBox from 'utils/DebugBox';
 import DemoContent from './DemoContent';
 
+import getPropTables from '../../utils/getPropTables';
+
 storiesOf('Section', module)
     .add('Plain section', withInfo('Plain <Section> with spacing around container')(() => (
         <DebugBox>
@@ -44,4 +46,4 @@ storiesOf('Section', module)
         </DebugBox>
     )))
 
-    .add('PropTypes', withInfo({ propTables: [Section], source: false })(() => <div />));
+    .add('PropTypes', getPropTables([Section]));

@@ -1,12 +1,12 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
-// For props table
 import IconButton from '@ichef/gypcrete/src/IconButton';
 
 import BasicIconButtonExample from './BasicIconButton';
 import IconButtonWithStatusExample from './IconButtonWithStatus';
+
+import getPropTables from '../../utils/getPropTables';
 
 storiesOf('IconButton', module)
     .add('basic usage',
@@ -17,8 +17,6 @@ storiesOf('IconButton', module)
     .add('with status',
         withInfo()(IconButtonWithStatusExample)
     )
-    // Props table
-    .addPropsTable(
-        () => <IconButton icon="null" />,
-        'check `<Button>` props table for more available props.'
-    );
+    .add('props', getPropTables([IconButton], {
+        text: 'check `<Button>` props table for more available props.',
+    }));

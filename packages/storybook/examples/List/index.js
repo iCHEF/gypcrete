@@ -1,4 +1,3 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -10,6 +9,8 @@ import NormalList from './NormalList';
 import SettingList from './SettingList';
 import NestedList from './NestedList';
 
+import getPropTables from '../../utils/getPropTables';
+
 storiesOf('List', module)
     .add('Normal list',
         withInfo()(NormalList)
@@ -19,4 +20,4 @@ storiesOf('List', module)
     )
     .add('Nested list', withInfo()(NestedList))
     // Props table
-    .addPropsTable(() => <List />, [ListRow]);
+    .add('props', getPropTables([List, ListRow]));

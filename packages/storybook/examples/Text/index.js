@@ -1,4 +1,3 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -8,6 +7,8 @@ import Text, { PureText } from '@ichef/gypcrete/src/Text';
 import BasicTextExample from './BasicText';
 import EllipsisExample from './Ellipsis';
 import TextWithStatusIconExample from './TextWithStatusIcon';
+
+import getPropTables from '../../utils/getPropTables';
 
 storiesOf('Text', module)
     .add('basic usage',
@@ -20,4 +21,4 @@ storiesOf('Text', module)
         withInfo()(TextWithStatusIconExample)
     )
     // Props table
-    .addPropsTable(() => <Text />, [PureText]);
+    .add('props', getPropTables([PureText, Text]));
