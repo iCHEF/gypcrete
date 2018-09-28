@@ -1,4 +1,3 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -8,6 +7,8 @@ import Tag from '@ichef/gypcrete/src/Tag';
 import BasicTagExample from './BasicTag';
 import TagWithParentColorExample from './TagWithParentColor';
 
+import getPropTables from '../../utils/getPropTables';
+
 storiesOf('Tag', module)
     .add('basic usage',
         withInfo()(BasicTagExample)
@@ -16,4 +17,4 @@ storiesOf('Tag', module)
         withInfo()(TagWithParentColorExample)
     )
     // Props table
-    .addPropsTable(() => <Tag />);
+    .add('props', getPropTables([Tag]));

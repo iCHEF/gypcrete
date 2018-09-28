@@ -1,10 +1,9 @@
-// @flow
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import type { ReactChildren } from 'react-flow-types';
-import type { Props as StatusIconProps } from './StatusIcon';
+import ListSpacingContext from './contexts/listSpacing';
+
 import { statusPropTypes } from './mixins/withStatus';
 
 import prefixClass from './utils/prefixClass';
@@ -24,22 +23,7 @@ export const BEM = {
     footer: ROOT_BEM.element('footer'),
 };
 
-export type Props = {
-    highlight?: boolean,
-    nestedList?: ReactChildren,
-    desc?: ReactChildren,
-    status?: $PropertyType<StatusIconProps, 'status'>,
-    // #FIXME: Use type import
-    statusOptions?: { [string]: any },
-    errorMsg?: string,
-
-    /* eslint-disable react/require-default-props */
-    className?: string,
-    children?: ReactChildren,
-    /* eslint-enable react/require-default-props */
-};
-
-class ListRow extends PureComponent<Props, Props, any> {
+class ListRow extends PureComponent {
     static propTypes = {
         highlight: PropTypes.bool,
         nestedList: PropTypes.node,
@@ -96,14 +80,15 @@ class ListRow extends PureComponent<Props, Props, any> {
         const rootClassName = classNames(bemClass.toString(), stateClass, className);
 
         return (
-            <li className={rootClassName} {...wrapperProps}>
-                <div className={BEM.body.toString()}>
-                    {children}
-                </div>
-
-                {this.renderFooter()}
-                {nestedList}
-            </li>
+            <ListSpacingContext.Provider value={false}>
+                <li className={rootClassName} {...wrapperProps}>
+                    <div className={BEM.body.toString()}>
+                        {children}
+                    </div>
+                    {this.renderFooter()}
+                    {nestedList}
+                </li>
+            </ListSpacingContext.Provider>
         );
     }
 }

@@ -1,14 +1,13 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
-// For props table
 import ColumnView from '@ichef/gypcrete/src/ColumnView';
 import BasicUsage from './BasicUsage';
+
+import getPropTables from '../../utils/getPropTables';
 
 storiesOf('ColumnView', module)
     .add('basic usage',
         withInfo()(BasicUsage)
     )
-    // Props table
-    .addPropsTable(() => <ColumnView />);
+    .add('props', getPropTables([ColumnView]));

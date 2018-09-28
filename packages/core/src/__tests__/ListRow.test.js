@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
 import ListRow, { BEM as ROW_BEM } from '../ListRow';
+import ListSpacingContext from '../contexts/listSpacing';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -11,11 +12,11 @@ it('renders without crashing', () => {
     ReactDOM.render(element, div);
 });
 
-it('renders as a <li> element', () => {
+it('renders a <li> element with class name of root wrapper', () => {
     const wrapper = shallow(<ListRow>Foo</ListRow>);
 
-    expect(wrapper.type()).toBe('li');
-    expect(wrapper.hasClass(`${ROW_BEM.root}`));
+    expect(wrapper.find('li').exists()).toBeTruthy();
+    expect(wrapper.find('li').hasClass(`${ROW_BEM.root}`));
 });
 
 it('renders children inside a body wrapper', () => {
@@ -52,7 +53,7 @@ it('handles highlight modifier', () => {
     const wrapper = shallow(<ListRow highlight>Foo</ListRow>);
     const expectedClassName = ROW_BEM.root.modifier('highlight').toString();
 
-    expect(wrapper.hasClass(expectedClassName)).toBeTruthy();
+    expect(wrapper.find('li').hasClass(expectedClassName)).toBeTruthy();
 });
 
 it('renders nested item inside <li> but outside of body wrapper', () => {
@@ -64,4 +65,11 @@ it('renders nested item inside <li> but outside of body wrapper', () => {
 
     expect(wrapper.find('span[data-test]')).toHaveLength(1);
     expect(wrapper.find(`.${ROW_BEM.body}`).find('span[data-test]').exists()).toBeFalsy();
+});
+
+it('provides context for nested list spacing', () => {
+    const wrapper = shallow(<ListRow>Foo bar</ListRow>);
+
+    expect(wrapper.find(ListSpacingContext.Provider).exists()).toBeTruthy();
+    expect(wrapper.find(ListSpacingContext.Provider).prop('value')).toBe(false);
 });

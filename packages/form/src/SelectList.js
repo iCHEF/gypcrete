@@ -51,20 +51,26 @@ function getInitialCheckedState(fromValues) {
 class SelectList extends PureComponent {
     static propTypes = {
         multiple: PropTypes.bool,
+        showCheckAll: PropTypes.bool,
         minCheck: PropTypes.number,
         allOptionLabel: PropTypes.node,
         values: PropTypes.arrayOf(valueType),
         defaultValues: PropTypes.arrayOf(valueType),
         onChange: PropTypes.func,
+        title: PropTypes.string,
+        desc: PropTypes.node,
     };
 
     static defaultProps = {
         multiple: false,
+        showCheckAll: true,
         minCheck: 0,
         allOptionLabel: 'All',
         values: undefined,
         defaultValues: [],
         onChange: () => {},
+        title: undefined,
+        desc: undefined,
     };
 
     state = {
@@ -186,9 +192,16 @@ class SelectList extends PureComponent {
     }
 
     render() {
+        const {
+            multiple,
+            showCheckAll,
+            title,
+            desc,
+         } = this.props;
+
         return (
-            <List>
-                {this.props.multiple && this.renderCheckAllOption()}
+            <List title={title} desc={desc}>
+                {multiple && showCheckAll && this.renderCheckAllOption()}
                 {this.renderOptions()}
             </List>
         );

@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 N/A
 
+## [1.9.0]
+### Added
+- [Core] Add new `<Section>` as a general content wrapper with optional title and description text. (#166)
+- [Form] Add the `showCheckAll` prop to disable `checkAll` option in `<SelectList>`. (#170)
+- [Form] Let `<SelectList>` accept the `title` and `desc` props. (#171)
+
+### Changed
+- [Core] Update `<List>` to wrap its own body with `<Section>`. (#166)
+- ~~[Core] Update `<ListRow>` to remove vertical margin from nested `<List>`. (#166)~~
+- [Core] Remove vertical margin from `<List>` by context when placed inside `<ListRow>` or `<Popover>`. (#169)
+- [Storybook] Add examples for `<Section>`. (#166)
+- [Core] Removed padding in `<ColumnView>` body. (#167)
+- [Core] `<HeaderRow>` can now disable an area by setting `false` to it. Styles updated.  (#167)
+- [Core] Update colors for `<ListRow>`. Add v3 color plates. (#172)
+- [Storybook] Upgrade `@storybook/react` and its addons to `3.4.11`. (#173)
+
+### Fixed
+- [Core] Fix `anchored()` mixin horizontal alignment when anchor is larger than component applying the mixin. (#168)
+- [Storybook] Fix prop tables for each component. (#173)
+
 ## [1.8.1]
 ### Added
 - [Form] Add new `SelectOption.typeSymbol` for element type comparison. (#157)

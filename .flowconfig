@@ -2,6 +2,9 @@
 .*/__tests__/.*
 <PROJECT_ROOT>/node_modules/stylelint/*
 <PROJECT_ROOT>/node_modules/radium/*
+<PROJECT_ROOT>/node_modules/create-react-context/*
+<PROJECT_ROOT>/node_modules/@storybook/*
+<PROJECT_ROOT>/node_modules/babel-plugin-*
 
 [include]
 packages/*/src

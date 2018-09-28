@@ -69,8 +69,12 @@ $search-input-border-color: $c-gray;
 $search-input-border-radius: 6px;
 $search-input-padding: 8px;
 
+$column-body-bottom-padding: 24px;
+
+$section-vertical-margin: 24px;
+$section-horizontal-padding: 16px;
+
 $list-border-radius: 8px;
-$list-vertical-margin: 8px;
 
 $list-row-padding-horizontal: 16px;
 $list-row-padding-vertical: 4px;
@@ -81,18 +85,18 @@ $list-row-footer-font-size: $font-size-small;
 $list-row-footer-line-height: $line-height-small;
 
 $header-row-padding: 4px;
-
-$column-body-padding: 16px;
+$header-row-box-shadow: 0 3px 3px hsba(0, 0, 0, 16);
 
 $popup-container-width: 256px;
 $popup-border-radius: 8px;
 $poup-box-shadow: 0 2px 8px hsba(0, 0, 0, 40);
 
-$popover-min-width: 208px;
+$popover-min-width: 240px;
 $popover-max-width: 320px;
 $popover-max-height: 320px;
 $popover-arrow-size: 11px;
-$popover-bottom-padding: 8px;
+$popover-top-padding: 8px;
+$popover-bottom-padding: 16px;
 $popover-border-radius: 8px;
 $popover-drop-shadow: 0 2px 3px hsba(0, 0, 0, 40);
 

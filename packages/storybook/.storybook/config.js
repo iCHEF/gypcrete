@@ -1,8 +1,7 @@
-import { configure, setAddon } from '@storybook/react';
+import { configure } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import { setDefaults } from '@storybook/addon-info';
 
-import propsTableAddon from './propsTable-addon';
 import Code from './Code';
 
 // -------------------------------------
@@ -18,28 +17,18 @@ setOptions({
 setDefaults({
     inline: true,
     propTables: false,
-
-    /**
-     * Remove the header temporary.
-     *
-     * Since the inline styling is damn strange now,
-     * header and preview parts are split into separate shadowed containers.
-     *
-     * @issue https://github.com/storybooks/storybook/issues/1877
-     *
-     * #FIXME: wait for storybooks/storybook#1501
-     */
-    header: false,
-
-    /**
-     * Fix <Code> styling
-     *
-     * #FIXME: wait for storybooks/storybook#1501
-     */
-    marksyConf: { code: Code }
+    styles: {
+        infoStory: {
+            margin: 30,
+        },
+        infoBody: {
+            padding: '0 30px',
+            border: 'none',
+            boxShadow: 'none',
+        },
+    },
+    components: { codespan: Code },
 });
-
-setAddon(propsTableAddon);
 
 // -------------------------------------
 //   Load Stories

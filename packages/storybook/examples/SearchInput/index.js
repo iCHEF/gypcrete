@@ -1,4 +1,3 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -6,10 +5,11 @@ import { withInfo } from '@storybook/addon-info';
 import SearchInput, { PureSearchInput } from '@ichef/gypcrete/src/SearchInput';
 
 import BasicSearchInputExample from './BasicSearchInput';
+import getPropTables from '../../utils/getPropTables';
 
 storiesOf('SearchInput', module)
     .add('basic usage',
         withInfo()(BasicSearchInputExample)
     )
     // Props table
-    .addPropsTable(() => <SearchInput />, [PureSearchInput]);
+    .add('props', getPropTables([PureSearchInput, SearchInput]));

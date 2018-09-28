@@ -1,0 +1,47 @@
+@import "./mixins";
+
+$component-name: #{$prefix}-section;
+
+.#{$component-name} {
+    margin-top: rem($section-vertical-margin);
+    margin-bottom: rem($section-vertical-margin);
+
+    // --------------------
+    //  Elements
+    // --------------------
+    &__title,
+    &__desc {
+        @include small-text;
+
+        white-space: pre-wrap;
+        margin-left: rem($section-horizontal-padding);
+        margin-right: rem($section-horizontal-padding);
+    }
+
+    &__title {
+        font-weight: $font-weight-bold;
+        padding-bottom: rem(1px);
+        border-bottom: 2px solid $c-section-divider;
+    }
+
+    &__desc {
+        // take padding from row layout as reference
+        padding-top: rem(2px);
+    }
+
+    &__body {
+        &--padded {
+            // for aligning non-row components
+            padding-left: rem($section-horizontal-padding);
+            padding-right: rem($section-horizontal-padding);
+        }
+    }
+
+    // --------------------
+    //  Modifiers
+    // --------------------
+    &--no-margin {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}

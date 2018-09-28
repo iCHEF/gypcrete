@@ -8,6 +8,8 @@ import Popover, { PurePopover } from '@ichef/gypcrete/src/Popover';
 import BasicExample from './Basic';
 import AnchoredExample from './Anchored';
 
+import getPropTables from '../../utils/getPropTables';
+
 storiesOf('Popover', module)
     .add('basic usage', withInfo()(BasicExample))
     .add(
@@ -17,4 +19,4 @@ storiesOf('Popover', module)
         )
     )
     // Props table
-    .addPropsTable(() => <Popover />, [PurePopover]);
+    .add('props', getPropTables([PurePopover, Popover]));

@@ -1,4 +1,3 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -7,6 +6,8 @@ import IconCheckbox from '@ichef/gypcrete/src/IconCheckbox';
 
 import BasicIconCheckboxExample from './BasicIconCheckbox';
 import IconCheckboxWithStatusExample from './IconCheckboxWithStatus';
+
+import getPropTables from '../../utils/getPropTables';
 
 storiesOf('IconCheckbox', module)
     .add('basic usage',
@@ -17,8 +18,6 @@ storiesOf('IconCheckbox', module)
     .add('with status',
         withInfo()(IconCheckboxWithStatusExample)
     )
-    // Props table
-    .addPropsTable(
-        () => <IconCheckbox />,
-        'check `<Checkbox>` props table for more available props.'
-    );
+    .add('props', getPropTables([IconCheckbox], {
+        text: 'check `<Checkbox>` props table for more available props.',
+    }));

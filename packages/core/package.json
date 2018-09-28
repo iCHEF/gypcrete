@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "description": "iCHEF web components library, built with React.",
   "homepage": "https://ichef.github.io/gypcrete",
   "repository": "https://github.com/iCHEF/gypcrete/tree/master/packages/core",
@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "create-react-context": "^0.2.3",
     "document-offset": "^1.0.4",
     "keycode": "^2.1.9",
     "react-flow-types": "^0.1.1"

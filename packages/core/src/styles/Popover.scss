@@ -5,6 +5,7 @@ $component-name: #{$prefix}-popover;
     background-color: $c-popover-background;
     min-width: rem($popover-min-width);
     max-width: rem($popover-max-width);
+    padding-top: rem($popover-top-padding);
     padding-bottom: rem($popover-bottom-padding);
     border-radius: $popover-border-radius;
     filter: drop-shadow($popover-drop-shadow);

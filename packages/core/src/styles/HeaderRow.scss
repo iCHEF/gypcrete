@@ -4,10 +4,12 @@ $component: #{$prefix}-header-row;
 .#{$component} {
     min-height: rem($row-base-height);
     background-color: $c-header-bg;
-    border-bottom: 1px solid $c-divider-header;
     padding: rem($header-row-padding);
     box-sizing: border-box;
     display: flex;
+    box-shadow: $header-row-box-shadow;
+    // Create a new stacking context so box-shadow is harder to be blocked
+    position: relative;
 
     &__left,
     &__right {
