@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+N/A
+
+## [1.9.0]
 ### Added
 - [Core] Add new `<Section>` as a general content wrapper with optional title and description text. (#166)
 - [Form] Add the `showCheckAll` prop to disable `checkAll` option in `<SelectList>`. (#170)
