@@ -96,7 +96,7 @@ it('triggers onClose() call on click/touch outside after a delay if turned on', 
     expect(handleClose).toHaveBeenCalledTimes(1);
 
     // jsdom doesn't support constructing TouchEvent yet.
-    event = new CustomEvent('touchstart');
+    event = new CustomEvent('touchend');
     document.dispatchEvent(event);
 
     jest.runOnlyPendingTimers();
@@ -137,7 +137,7 @@ it('triggers onClose() call on click/touch inside a delay if turned on', () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
 
     // jsdom doesn't support constructing TouchEvent yet.
-    event = new CustomEvent('touchstart');
+    event = new CustomEvent('touchend');
     wrapper.instance().nodeRef.dispatchEvent(event);
 
     jest.runOnlyPendingTimers();

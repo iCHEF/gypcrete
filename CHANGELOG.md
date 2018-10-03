@@ -5,7 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-N/A
+### Changed
+- [Core] `closable()` mixin is now triggered on `touchend` events on touch devices. (#176)
+- [Storybook] Update examples for `<Popover>` to add a row of hyperlink `<Button>`. (#176)
 
 ## [1.9.0]
 ### Added

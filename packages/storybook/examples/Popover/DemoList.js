@@ -5,28 +5,24 @@ import Button from '@ichef/gypcrete/src/Button';
 import List from '@ichef/gypcrete/src/List';
 import ListRow from '@ichef/gypcrete/src/ListRow';
 
-function DemoButton(props) {
+function ButtonRow(props) {
     return (
-        <Button
-            bold
-            minified={false}
-            color="black"
-            {...props} />
+        <ListRow>
+            <Button
+                minified={false}
+                {...props} />
+        </ListRow>
     );
 }
 
 function DemoList() {
     return (
         <List>
-            <ListRow>
-                <DemoButton basic="Row 1" onClick={action('click.1')} />
-            </ListRow>
-            <ListRow>
-                <DemoButton basic="Row 2" onClick={action('click.2')} />
-            </ListRow>
-            <ListRow>
-                <DemoButton basic="Row 3" onClick={action('click.3')} />
-            </ListRow>
+            <ButtonRow basic="Row 1" onClick={action('click.1')} />
+            <ButtonRow basic="Row 2" onClick={action('click.2')} />
+            <ButtonRow basic="Row 3" onClick={action('click.3')} />
+
+            <ButtonRow basic="Link row" tagName="a" href="https://apple.com" />
         </List>
     );
 }
