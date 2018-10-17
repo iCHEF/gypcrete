@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import Button, { PureButton } from '@ichef/gypcrete/src/Button';
+import getPropTables from 'utils/getPropTables';
 
 import BasicButtonExample from './BasicButton';
 import SolidButtonExample from './SolidButton';
@@ -9,8 +10,6 @@ import DisabledButtonExample from './DisabledButton';
 import ExpandedButtonExample from './ExpandedButton';
 import ButtonWithStatusExample from './ButtonWithStatus';
 import CustomTagButtonExample from './CustomTagButton';
-
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('Button', module)
     .add('basic usage',

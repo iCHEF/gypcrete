@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import Icon from '@ichef/gypcrete/src/Icon';
+import getPropTables from 'utils/getPropTables';
 
 import BasicIconsSet from './BasicIcons';
 import PaymentIconsSet from './PaymentIcons';
@@ -13,8 +14,6 @@ import PaginationIconsSet from './PaginationIcons';
 import InlineIconsSet from './InlineIcons';
 import LargeIconExample from './LargeIcon';
 import IconColorsExample from './IconColors';
-
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('Icon', module)
     .add('basic icons set',

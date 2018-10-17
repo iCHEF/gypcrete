@@ -3,10 +3,10 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import ImageEditor from '@ichef/gypcrete-imageeditor/src/index';
+import getPropTables from 'utils/getPropTables';
 
 import handleLoadSuccess from './utils/handleLoadSuccess';
 import handleCropChange from './utils/handleCropChange';
-import getPropTables from '../../utils/getPropTables';
 
 const EXAMPLE_IMAGE = 'https://i.imgur.com/VfBVxsO.jpg';
 

@@ -1,14 +1,12 @@
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
-// For props table
 import TextInput, { PureTextInput } from '@ichef/gypcrete/src/TextInput';
+import getPropTables from 'utils/getPropTables';
 
 import BasicUsage from './BasicUsage';
 import WithStatus from './WithStatus';
 import MultiLines from './MultiLines';
-
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('TextInput', module)
     .add('Basic usage',

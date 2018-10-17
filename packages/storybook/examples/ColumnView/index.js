@@ -2,9 +2,8 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import ColumnView from '@ichef/gypcrete/src/ColumnView';
+import getPropTables from 'utils/getPropTables';
 import BasicUsage from './BasicUsage';
-
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('ColumnView', module)
     .add('basic usage',

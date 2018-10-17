@@ -3,9 +3,9 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import Modal, { PureModal } from '@ichef/gypcrete/src/Modal';
+import getPropTables from 'utils/getPropTables';
 
 import BasicModalExample, { ClosableModalExample } from './BasicModal';
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('Modal', module)
     .add(

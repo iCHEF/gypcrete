@@ -2,12 +2,10 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import HeaderRow from '@ichef/gypcrete/src/HeaderRow';
+import getPropTables from 'utils/getPropTables';
 
 import BasicUsage from './BasicUsage';
 import OptionalArea from './OptionalArea';
-
-import getPropTables from '../../utils/getPropTables';
-
 
 storiesOf('HeaderRow', module)
     .add('Basic usage', withInfo()(BasicUsage))

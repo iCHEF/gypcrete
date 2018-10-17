@@ -3,10 +3,10 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import Section from '@ichef/gypcrete/src/Section';
+
+import getPropTables from 'utils/getPropTables';
 import DebugBox from 'utils/DebugBox';
 import DemoContent from './DemoContent';
-
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('Section', module)
     .add('Plain section', withInfo('Plain <Section> with spacing around container')(() => (

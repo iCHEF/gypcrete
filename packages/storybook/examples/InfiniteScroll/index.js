@@ -3,11 +3,10 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import InfiniteScroll from '@ichef/gypcrete/src/InfiniteScroll';
+import getPropTables from 'utils/getPropTables';
 
 import BasicUsageExample from './BasicUsage';
 import PageAsContainerExample from './PageAsContainer';
-
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('InfiniteScroll')
     .add('basic usage',

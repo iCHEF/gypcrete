@@ -2,13 +2,12 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import Switch, { PureSwitch } from '@ichef/gypcrete/src/Switch';
+import getPropTables from 'utils/getPropTables';
 
 import BasicUsage from './BasicUsage';
 import ControlledInput from './ControlledInput';
 import WithStatus from './WithStatus';
 import InputProps from './InputProps';
-
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('Switch', module)
     .add('Basic usage',

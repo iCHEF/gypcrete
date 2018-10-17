@@ -2,11 +2,10 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import TextInputRow from '@ichef/gypcrete-form/src/TextInputRow';
+import getPropTables from 'utils/getPropTables';
 
 import BasicUsage from './BasicUsage';
 import MultiLineUsage from './MultiLineUsage';
-
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('[Form] TextInputRow', module)
     .add('basic usage', withInfo()(BasicUsage))

@@ -4,12 +4,11 @@ import { withInfo } from '@storybook/addon-info';
 // For props table
 import List from '@ichef/gypcrete/src/List';
 import ListRow from '@ichef/gypcrete/src/ListRow';
+import getPropTables from 'utils/getPropTables';
 
 import NormalList from './NormalList';
 import SettingList from './SettingList';
 import NestedList from './NestedList';
-
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('List', module)
     .add('Normal list',

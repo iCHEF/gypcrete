@@ -2,12 +2,11 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import EditableText, { PureEditableText } from '@ichef/gypcrete/src/EditableText';
+import getPropTables from 'utils/getPropTables';
 
 import BasicUsage from './BasicUsage';
 import Alignments from './Alignments';
 import MultiLines from './MultiLines';
-
-import getPropTables from '../../utils/getPropTables';
 
 storiesOf('EditableText', module)
     .add('Basic usage',
