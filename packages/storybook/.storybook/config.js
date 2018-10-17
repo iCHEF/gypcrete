@@ -12,6 +12,7 @@ setOptions({
     name: 'iCHEF gypcrete',
     url: 'https://github.com/iCHEF/gypcrete',
     showDownPanel: true,
+    hierarchyRootSeparator: /\|/,
 });
 
 setDefaults({

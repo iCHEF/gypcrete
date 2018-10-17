@@ -7,7 +7,7 @@ import getPropTables from 'utils/getPropTables';
 import BasicIconButtonExample from './BasicIconButton';
 import IconButtonWithStatusExample from './IconButtonWithStatus';
 
-storiesOf('IconButton', module)
+storiesOf('@ichef/gypcrete|IconButton', module)
     .add('basic usage',
         withInfo('IconButton is a variant of `<Button>`.')(
             BasicIconButtonExample

@@ -6,7 +6,7 @@ import getPropTables from 'utils/getPropTables';
 
 import BasicUsage from './BasicUsage';
 
-storiesOf('[Form] SwitchRow', module)
+storiesOf('@ichef/gypcrete-form|SwitchRow', module)
     .add('basic usage', withInfo()(BasicUsage))
     // Props table
     .add('props', getPropTables([SwitchRow]));

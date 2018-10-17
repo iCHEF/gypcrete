@@ -7,7 +7,7 @@ import getPropTables from 'utils/getPropTables';
 import BasicTagExample from './BasicTag';
 import TagWithParentColorExample from './TagWithParentColor';
 
-storiesOf('Tag', module)
+storiesOf('@ichef/gypcrete|Tag', module)
     .add('basic usage',
         withInfo()(BasicTagExample)
     )

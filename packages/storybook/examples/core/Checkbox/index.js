@@ -9,7 +9,7 @@ import BasicCheckboxExample from './BasicCheckbox';
 import CheckboxWithIndeterminateExample from './CheckboxWithIndeterminate';
 import CheckboxWithStatusExample from './CheckboxWithStatus';
 
-storiesOf('Checkbox', module)
+storiesOf('@ichef/gypcrete|Checkbox', module)
     .add('basic usage',
         withInfo()(BasicCheckboxExample)
     )

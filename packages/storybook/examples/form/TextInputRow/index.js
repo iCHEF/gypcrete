@@ -7,7 +7,7 @@ import getPropTables from 'utils/getPropTables';
 import BasicUsage from './BasicUsage';
 import MultiLineUsage from './MultiLineUsage';
 
-storiesOf('[Form] TextInputRow', module)
+storiesOf('@ichef/gypcrete-form|TextInputRow', module)
     .add('basic usage', withInfo()(BasicUsage))
     .add('multi-line usage', withInfo()(MultiLineUsage))
     // Props table

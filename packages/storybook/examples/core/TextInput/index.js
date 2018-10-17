@@ -8,7 +8,7 @@ import BasicUsage from './BasicUsage';
 import WithStatus from './WithStatus';
 import MultiLines from './MultiLines';
 
-storiesOf('TextInput', module)
+storiesOf('@ichef/gypcrete|TextInput', module)
     .add('Basic usage',
         withInfo()(BasicUsage)
     )

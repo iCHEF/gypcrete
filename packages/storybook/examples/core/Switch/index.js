@@ -9,7 +9,7 @@ import ControlledInput from './ControlledInput';
 import WithStatus from './WithStatus';
 import InputProps from './InputProps';
 
-storiesOf('Switch', module)
+storiesOf('@ichef/gypcrete|Switch', module)
     .add('Basic usage',
         withInfo(
             `A <Switch> is a row component which can be turned either on

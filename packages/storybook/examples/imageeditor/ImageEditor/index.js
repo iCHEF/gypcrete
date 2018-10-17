@@ -10,7 +10,7 @@ import handleCropChange from './utils/handleCropChange';
 
 const EXAMPLE_IMAGE = 'https://i.imgur.com/VfBVxsO.jpg';
 
-storiesOf('[ImageEditor] ImageEditor', module)
+storiesOf('@ichef/gypcrete-imageeditor|ImageEditor', module)
     .add('Basic usage', withInfo()(() => (
         <ImageEditor
             control

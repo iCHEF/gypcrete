@@ -11,7 +11,7 @@ import ExpandedButtonExample from './ExpandedButton';
 import ButtonWithStatusExample from './ButtonWithStatus';
 import CustomTagButtonExample from './CustomTagButton';
 
-storiesOf('Button', module)
+storiesOf('@ichef/gypcrete|Button', module)
     .add('basic usage',
         withInfo()(BasicButtonExample)
     )

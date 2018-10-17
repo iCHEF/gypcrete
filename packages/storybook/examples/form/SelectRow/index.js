@@ -8,7 +8,7 @@ import BasicUsage from './BasicUsage';
 import MultipleValues from './MultipleValues';
 import Customize from './Customize';
 
-storiesOf('[Form] SelectRow', module)
+storiesOf('@ichef/gypcrete-form|SelectRow', module)
     .add('basic usage', withInfo()(BasicUsage))
     .add('multiple selection', withInfo()(MultipleValues))
     .add('customize labels', withInfo()(Customize))

@@ -8,7 +8,7 @@ import BasicTextExample from './BasicText';
 import EllipsisExample from './Ellipsis';
 import TextWithStatusIconExample from './TextWithStatusIcon';
 
-storiesOf('Text', module)
+storiesOf('@ichef/gypcrete|Text', module)
     .add('basic usage',
         withInfo()(BasicTextExample)
     )

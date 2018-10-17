@@ -13,7 +13,7 @@ import MultipleWithoutCheckAll from './MultipleWithoutCheckAll';
 import MultipleReadOnlyOption from './MultipleReadOnlyOption';
 import MultipleMinCheck from './MultipleMinCheck';
 
-storiesOf('[Form] SelectList', module)
+storiesOf('@ichef/gypcrete-form|SelectList', module)
     .add('single (uncontrolled)', withInfo()(SingleUncontrolled))
     .add('single (controlled)', withInfo()(SingleControlled))
     .add('multiple (uncontrolled)', withInfo()(MultipleUncontrolled))

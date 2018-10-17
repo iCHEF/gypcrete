@@ -9,7 +9,7 @@ import TextLabelWithStatusExample from './TextLabelWithStatus';
 import TextLabelWithTextExample from './TextLabelWithText';
 import Editable from './Editable';
 
-storiesOf('TextLabel', module)
+storiesOf('@ichef/gypcrete|TextLabel', module)
     .add('basic usage',
         withInfo()(BasicTextLabelExample)
     )

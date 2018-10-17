@@ -15,7 +15,7 @@ import InlineIconsSet from './InlineIcons';
 import LargeIconExample from './LargeIcon';
 import IconColorsExample from './IconColors';
 
-storiesOf('Icon', module)
+storiesOf('@ichef/gypcrete|Icon', module)
     .add('basic icons set',
         withInfo()(BasicIconsSet)
     )

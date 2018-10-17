@@ -10,7 +10,7 @@ import NormalList from './NormalList';
 import SettingList from './SettingList';
 import NestedList from './NestedList';
 
-storiesOf('List', module)
+storiesOf('@ichef/gypcrete|List', module)
     .add('Normal list',
         withInfo()(NormalList)
     )

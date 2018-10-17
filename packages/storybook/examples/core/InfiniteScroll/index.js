@@ -8,7 +8,7 @@ import getPropTables from 'utils/getPropTables';
 import BasicUsageExample from './BasicUsage';
 import PageAsContainerExample from './PageAsContainer';
 
-storiesOf('InfiniteScroll')
+storiesOf('@ichef/gypcrete|InfiniteScroll', module)
     .add('basic usage',
         withInfo('placed in a fixed height container')(
             () => <BasicUsageExample />

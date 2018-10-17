@@ -8,7 +8,7 @@ import getPropTables from 'utils/getPropTables';
 import BasicTooltipExample from './BasicTooltip';
 import AnchoredTooltipExample from './AnchoredTooltip';
 
-storiesOf('Tooltip', module)
+storiesOf('@ichef/gypcrete|Tooltip', module)
     .add('basic usage',
         withInfo()(BasicTooltipExample)
     )

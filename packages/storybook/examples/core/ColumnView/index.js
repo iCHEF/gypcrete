@@ -5,7 +5,7 @@ import ColumnView from '@ichef/gypcrete/src/ColumnView';
 import getPropTables from 'utils/getPropTables';
 import BasicUsage from './BasicUsage';
 
-storiesOf('ColumnView', module)
+storiesOf('@ichef/gypcrete|ColumnView', module)
     .add('basic usage',
         withInfo()(BasicUsage)
     )

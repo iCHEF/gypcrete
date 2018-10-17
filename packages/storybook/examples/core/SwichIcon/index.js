@@ -5,7 +5,7 @@ import SwitchIcon from '@ichef/gypcrete/src/SwitchIcon';
 import getPropTables from 'utils/getPropTables';
 import BasicUsage from './BasicUsage';
 
-storiesOf('SwitchIcon', module)
+storiesOf('@ichef/gypcrete|SwitchIcon', module)
     .add('Basic usage',
         withInfo(
             `A <SwitchIcon> is a visual element that is supposed

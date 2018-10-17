@@ -7,7 +7,7 @@ import getPropTables from 'utils/getPropTables';
 import BasicUsage from './BasicUsage';
 import OptionalArea from './OptionalArea';
 
-storiesOf('HeaderRow', module)
+storiesOf('@ichef/gypcrete|HeaderRow', module)
     .add('Basic usage', withInfo()(BasicUsage))
     .add(
         'Optional area',

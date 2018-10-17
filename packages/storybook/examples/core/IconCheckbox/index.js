@@ -7,7 +7,7 @@ import getPropTables from 'utils/getPropTables';
 import BasicIconCheckboxExample from './BasicIconCheckbox';
 import IconCheckboxWithStatusExample from './IconCheckboxWithStatus';
 
-storiesOf('IconCheckbox', module)
+storiesOf('@ichef/gypcrete|IconCheckbox', module)
     .add('basic usage',
         withInfo('IconCheckbox is a variant of `<Checkbox>`')(
             BasicIconCheckboxExample

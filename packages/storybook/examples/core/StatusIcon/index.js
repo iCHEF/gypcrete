@@ -7,7 +7,7 @@ import getPropTables from 'utils/getPropTables';
 import BasicStatusIconExample from './BasicStatusIcon';
 import CornerStatusIconExample from './CornerStatusIcon';
 
-storiesOf('StatusIcon', module)
+storiesOf('@ichef/gypcrete|StatusIcon', module)
     .add('basic usage',
         withInfo()(BasicStatusIconExample)
     )

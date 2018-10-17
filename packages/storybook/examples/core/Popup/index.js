@@ -7,7 +7,7 @@ import getPropTables from 'utils/getPropTables';
 import BasicPopupExample from './BasicPopup';
 import HorizontalButtonsExample from './HorizontalButtons';
 
-storiesOf('Popup', module)
+storiesOf('@ichef/gypcrete|Popup', module)
     .add('basic usage', withInfo()(BasicPopupExample))
     .add('horizontal buttons', withInfo()(HorizontalButtonsExample))
     // Props table

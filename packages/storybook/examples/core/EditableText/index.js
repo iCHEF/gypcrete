@@ -8,7 +8,7 @@ import BasicUsage from './BasicUsage';
 import Alignments from './Alignments';
 import MultiLines from './MultiLines';
 
-storiesOf('EditableText', module)
+storiesOf('@ichef/gypcrete|EditableText', module)
     .add('Basic usage',
         withInfo()(BasicUsage)
     )

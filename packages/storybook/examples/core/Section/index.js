@@ -8,7 +8,7 @@ import getPropTables from 'utils/getPropTables';
 import DebugBox from 'utils/DebugBox';
 import DemoContent from './DemoContent';
 
-storiesOf('Section', module)
+storiesOf('@ichef/gypcrete|Section', module)
     .add('Plain section', withInfo('Plain <Section> with spacing around container')(() => (
         <DebugBox>
             <Section>

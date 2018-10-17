@@ -7,7 +7,7 @@ import getPropTables from 'utils/getPropTables';
 
 import BasicModalExample, { ClosableModalExample } from './BasicModal';
 
-storiesOf('Modal', module)
+storiesOf('@ichef/gypcrete|Modal', module)
     .add(
         'basic usage',
         withInfo()(() => (

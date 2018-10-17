@@ -8,7 +8,7 @@ import getPropTables from 'utils/getPropTables';
 import BasicExample from './Basic';
 import AnchoredExample from './Anchored';
 
-storiesOf('Popover', module)
+storiesOf('@ichef/gypcrete|Popover', module)
     .add('basic usage', withInfo()(BasicExample))
     .add(
         'anchored popover',
