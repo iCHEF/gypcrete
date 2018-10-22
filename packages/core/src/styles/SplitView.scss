@@ -1,0 +1,31 @@
+@import "./mixins";
+
+.#{$prefix}-splitview {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    // if nested in Flexbox
+    flex: 1 1 auto;
+
+    &,
+    &__column {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    &__column {
+        min-width: rem($splitview-narrow-min-width);
+        max-width: rem($splitview-narrow-max-width);
+        flex: 1 0 25%;
+
+        & + & {
+            border-left: 1px solid $c-divider-splitview;
+        }
+
+        &--wide {
+            min-width: rem($splitview-wide-min-width);
+            max-width: none;
+            flex: 3 1 50%;
+        }
+    }
+}
