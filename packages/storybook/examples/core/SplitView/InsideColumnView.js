@@ -11,7 +11,7 @@ import DemoColumnView from './DemoColumnView';
 function InsideColumnView() {
     return (
         <DebugBox width="40rem" height="24rem">
-            <DemoColumnView>
+            <DemoColumnView bottomPadding="0">
                 <SplitView>
                     <SplitViewColumn>
                         <ColoredBox

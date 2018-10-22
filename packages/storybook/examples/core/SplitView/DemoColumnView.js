@@ -18,9 +18,9 @@ function ColumnHeader() {
 
 const HEADER = <ColumnHeader />;
 
-function DemoColumnView({ children }) {
+function DemoColumnView({ children, ...props }) {
     return (
-        <ColumnView header={HEADER}>
+        <ColumnView header={HEADER} {...props}>
             {children}
         </ColumnView>
     );
