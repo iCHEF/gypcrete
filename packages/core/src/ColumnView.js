@@ -1,8 +1,6 @@
-// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import type { ReactChildren } from 'react-flow-types';
 import './styles/ColumnView.scss';
 
 import prefixClass from './utils/prefixClass';
@@ -17,17 +15,7 @@ export const BEM = {
     footer: ROOT_BEM.element('footer'),
 };
 
-export type Props = {
-    header?: ReactChildren,
-    footer?: ReactChildren,
-    /* eslint-disable react/require-default-props */
-    className?: string,
-    children?: ReactChildren,
-    /* eslint-enable react/require-default-props */
-};
-
-// eslint-disable-next-line react/require-default-props
-export function ColumnPart({ children, ...otherProps }: { children?: ReactChildren }) {
+export function ColumnPart({ children, ...otherProps }) {
     if (!children) {
         return null;
     }
@@ -42,7 +30,7 @@ function ColumnView({
     className,
     children,
     ...wrapperProps,
-}: Props) {
+}) {
     const rootClassName = classNames(BEM.root.toString(), className);
 
     return (
