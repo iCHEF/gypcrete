@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Core] `closable()` mixin is now triggered on `touchend` events on touch devices. (#176)
 - [Storybook] Update examples for `<Popover>` to add a row of hyperlink `<Button>`. (#176)
+- [Storybook] Split stories into different package-based sections. (#177)
 
 ## [1.9.0]
 ### Added
