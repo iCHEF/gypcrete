@@ -18,6 +18,10 @@ $component: #{$prefix}-column-view;
         flex: 0 0 auto;
     }
 
+    &__header {
+        z-index: 1;
+    }
+
     &__body {
         flex: 1 1 100%;
         overflow-y: scroll;
