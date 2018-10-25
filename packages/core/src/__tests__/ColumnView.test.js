@@ -39,6 +39,17 @@ describe('<ColumnView>', () => {
         expect(wrapper.find(`.${COLUMN_BEM.body}`).text()).toBe('Foo bar');
     });
 
+    it('can override bottom padding on body wrapper', () => {
+        const wrapper = shallow(
+            <ColumnView bottomPadding="0">
+                Foo bar
+            </ColumnView>
+        );
+        expect(wrapper.find(`.${COLUMN_BEM.body}`).prop('style')).toEqual({
+            paddingBottom: '0',
+        });
+    });
+
     it('renders header in a header <ColumnPart>', () => {
         const wrapper = shallow(
             <ColumnView header={<span data-test="header" />} />

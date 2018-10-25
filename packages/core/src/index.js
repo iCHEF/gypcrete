@@ -34,6 +34,8 @@ import Section from './Section';
 import List from './List';
 import ListRow from './ListRow';
 import ColumnView from './ColumnView';
+import SplitView from './SplitView';
+import SplitViewColumn from './SplitViewColumn';
 import Overlay from './Overlay';
 import Popup from './Popup';
 import PopupButton from './PopupButton';
@@ -71,6 +73,8 @@ export {
     List,
     ListRow,
     ColumnView,
+    SplitView,
+    SplitViewColumn,
     Overlay,
     Popup,
     PopupButton,
