@@ -67,63 +67,46 @@ it('renders <EditableText> with layout props the same as rowComp() in edit mode'
 
 it('fires onEditEnd with input value on input blurs', () => {
     const handleEditEnd = jest.fn(() => EditableTextLabel.defaultProps.onEditEnd());
-    const wrapper = mount(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
-    const input = wrapper.find('input').node;
+    const wrapper = shallow(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
 
     expect(handleEditEnd).not.toHaveBeenCalled();
 
     // Blur without changing input value
-    wrapper.find('input').simulate('blur');
-    expect(handleEditEnd).toHaveBeenCalledTimes(1);
-    expect(handleEditEnd.mock.calls[0][0].value).toBe('foo');
+    wrapper.find(EditableText).simulate('blur', { currentTarget: { value: 'foo' } });
+    expect(handleEditEnd).toHaveBeenLastCalledWith(
+        expect.objectContaining({ value: 'foo' })
+    );
 
     // Blur with a different value
-    input.value = 'bar';
-    wrapper.find('input').simulate('blur');
-    expect(handleEditEnd).toHaveBeenCalledTimes(2);
-    expect(handleEditEnd.mock.calls[1][0].value).toBe('bar');
+    wrapper.find(EditableText).simulate('blur', { currentTarget: { value: 'bar' } });
+    expect(handleEditEnd).toHaveBeenLastCalledWith(
+        expect.objectContaining({ value: 'bar' })
+    );
 });
 
-it('fires onEditEnd with input value on Enter key', () => {
-    const handleEditEnd = jest.fn();
-    const wrapper = mount(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
+it('blurs input on Enter key', () => {
+    const wrapper = shallow(<EditableTextLabel basic="foo" inEdit />);
+    const mockedBlur = jest.fn();
 
-    const input = wrapper.find('input').node;
-    input.blur = jest.fn(() => wrapper.find('input').simulate('blur'));
+    expect(mockedBlur).not.toHaveBeenCalled();
 
-    expect(handleEditEnd).not.toHaveBeenCalled();
-
-    // Simulate 'Enter' without changing input value
-    wrapper.find('input').simulate('keydown', { keyCode: keycode('Enter') });
-    expect(handleEditEnd).toHaveBeenCalledTimes(1);
-    expect(handleEditEnd.mock.calls[0][0].value).toBe('foo');
-
-    // Simulate 'Enter' with a different value
-    input.value = 'bar';
-    wrapper.find('input').simulate('keydown', { keyCode: keycode('Enter') });
-    expect(handleEditEnd).toHaveBeenCalledTimes(2);
-    expect(handleEditEnd.mock.calls[1][0].value).toBe('bar');
+    wrapper.find(EditableText).simulate('keydown', {
+        currentTarget: { blur: mockedBlur },
+        keyCode: keycode('Enter'),
+    });
+    expect(mockedBlur).toHaveBeenCalledTimes(1);
 });
 
 it('fires onEditEnd with value as null on Escape key', () => {
     const handleEditEnd = jest.fn();
-    const wrapper = mount(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
-
-    const input = wrapper.find('input').node;
-    input.blur = jest.fn(() => wrapper.find('input').simulate('blur'));
+    const wrapper = shallow(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
 
     expect(handleEditEnd).not.toHaveBeenCalled();
 
-    // Simulate 'Enter' without changing input value
-    wrapper.find('input').simulate('keydown', { keyCode: keycode('Escape') });
-    expect(handleEditEnd).toHaveBeenCalledTimes(1);
-    expect(handleEditEnd.mock.calls[0][0].value).toBeNull();
-
-    // Simulate 'Enter' with a different value
-    input.value = 'bar';
-    wrapper.find('input').simulate('keydown', { keyCode: keycode('Escape') });
-    expect(handleEditEnd).toHaveBeenCalledTimes(2);
-    expect(handleEditEnd.mock.calls[1][0].value).toBeNull();
+    wrapper.find(EditableText).simulate('keydown', { keyCode: keycode('Escape') });
+    expect(handleEditEnd).toHaveBeenLastCalledWith(
+        expect.objectContaining({ value: null })
+    );
 });
 
 it('does not fire onEditEnd on other keys', () => {
