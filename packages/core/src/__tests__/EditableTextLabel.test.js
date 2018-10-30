@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import keycode from 'keycode';
 
 import { getTextLayoutProps, ROW_COMP_ALIGN } from '../mixins/rowComp';
@@ -111,17 +111,17 @@ it('fires onEditEnd with value as null on Escape key', () => {
 
 it('does not fire onEditEnd on other keys', () => {
     const handleEditEnd = jest.fn();
-    const wrapper = mount(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
+    const wrapper = shallow(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
 
     expect(handleEditEnd).not.toHaveBeenCalled();
 
-    wrapper.find('input').simulate('keydown', { keyCode: keycode('A') });
+    wrapper.find(EditableText).simulate('keydown', { keyCode: keycode('A') });
     expect(handleEditEnd).not.toHaveBeenCalled();
 
-    wrapper.find('input').simulate('keydown', { keyCode: keycode('Ctrl') });
+    wrapper.find(EditableText).simulate('keydown', { keyCode: keycode('Ctrl') });
     expect(handleEditEnd).not.toHaveBeenCalled();
 
-    wrapper.find('input').simulate('keydown', { keyCode: keycode('Delete') });
+    wrapper.find(EditableText).simulate('keydown', { keyCode: keycode('Delete') });
     expect(handleEditEnd).not.toHaveBeenCalled();
 });
 
@@ -143,19 +143,19 @@ it("stays in edit mode as long as 'inEdit' is uncontrolled", () => {
 });
 
 it("leaves edit mode on blur if 'inEdit' is uncontrolled", () => {
-    const wrapper = mount(<EditableTextLabel basic="foo" />);
+    const wrapper = shallow(<EditableTextLabel basic="foo" />);
 
     wrapper.setState({ inEdit: true });
-    wrapper.find('input').simulate('blur');
+    wrapper.find(EditableText).simulate('blur', { currentTarget: {} });
 
     expect(wrapper.state('inEdit')).toBeFalsy();
 });
 
 it("leaves edit mode on Esc if 'inEdit' is uncontrolled", () => {
-    const wrapper = mount(<EditableTextLabel basic="foo" />);
+    const wrapper = shallow(<EditableTextLabel basic="foo" />);
 
     wrapper.setState({ inEdit: true });
-    wrapper.find('input').simulate('keydown', { keyCode: keycode('Escape') });
+    wrapper.find(EditableText).simulate('keydown', { keyCode: keycode('Escape') });
 
     expect(wrapper.state('inEdit')).toBeFalsy();
 });
