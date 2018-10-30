@@ -1,5 +1,3 @@
-// @flow
-
 /**
  * <Text>
  * ======
@@ -20,7 +18,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import type { AnyReactElement, ReactChildren } from 'react-flow-types';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
@@ -28,7 +25,6 @@ import withStatus, { withStatusPropTypes } from './mixins/withStatus';
 import './styles/Text.scss';
 
 import BasicRow from './BasicRow';
-import type { Props as BasicRowProps } from './BasicRow';
 
 export const COMPONENT_NAME = prefixClass('text');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -45,22 +41,7 @@ const CENTER = 'center';
 const RIGHT = 'right';
 export const TEXT_ALIGN = { LEFT, CENTER, RIGHT };
 
-export type Props = {
-    align: typeof LEFT | typeof CENTER | typeof RIGHT,
-    aside?: ReactChildren,
-    basicRow: AnyReactElement,
-    noGrow: boolean,
-    bold: boolean,
-    errorMsg?: string,
-    statusIcon?: ReactChildren, // #FIXME: use type from withStatus()
-    basic: $PropertyType<BasicRowProps, 'basic'>,
-    tag: $PropertyType<BasicRowProps, 'tag'>,
-    className?: string,
-};
-
 class Text extends PureComponent {
-    props: Props;
-
     static propTypes = {
         align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
         aside: PropTypes.node,

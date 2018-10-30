@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import classNames from 'classnames';
 import './styles/Tag.scss';
@@ -9,12 +8,7 @@ import prefixClass from './utils/prefixClass';
 const COMPONENT_NAME = prefixClass('tag');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
-export type Props = {
-    className: string,
-    children: any,
-};
-
-function Tag({ className, children }: Props) {
+function Tag({ className, children }) {
     const rootClass: string = classNames(`${ROOT_BEM.toString()}`, className);
 
     return (

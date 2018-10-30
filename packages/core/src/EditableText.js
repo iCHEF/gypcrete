@@ -1,4 +1,3 @@
-// @flow
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
@@ -6,20 +5,6 @@ import withStatus, { withStatusPropTypes, STATUS_CODE } from './mixins/withStatu
 
 import EditableBasicRow from './EditableBasicRow';
 import { PureText } from './Text';
-import type { Props as TextProps } from './Text';
-
-export type Props = {
-    basic?: void,
-    onFocus: (event?: Event) => void,
-    onBlur: (event?: Event) => void,
-    align: $PropertyType<TextProps, 'align'>,
-    noGrow: $PropertyType<TextProps, 'noGrow'>,
-    // #FIXME: use exported Flow types
-    status?: string | null,
-    statusIcon?: React$Element<*>,
-    errorMsg?: string,
-    className?: string, // eslint-disable-line react/require-default-props
-};
 
 /**
  * <EditableText>
@@ -47,7 +32,7 @@ export type Props = {
  *     status="loading" />
  * ```
  */
-class EditableText extends PureComponent<Props, Props, any> {
+class EditableText extends PureComponent {
     static propTypes = {
         onFocus: PropTypes.func,
         onBlur: PropTypes.func,
@@ -76,12 +61,12 @@ class EditableText extends PureComponent<Props, Props, any> {
         focused: false,
     };
 
-    handleInputFocus = (event: Event) => {
+    handleInputFocus = (event) => {
         this.setState({ focused: true });
         this.props.onFocus(event);
     }
 
-    handleInputBlur = (event: Event) => {
+    handleInputBlur = (event) => {
         this.setState({ focused: false });
         this.props.onBlur(event);
     }

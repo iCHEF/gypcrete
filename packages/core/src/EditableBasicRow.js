@@ -1,8 +1,6 @@
-// @flow
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import type { ReactChildren } from 'react-flow-types';
 import './styles/EditableBasicRow.scss';
 
 import prefixClass from './utils/prefixClass';
@@ -24,34 +22,6 @@ const TAG_TEXTAREA = 'textarea';
 export const ROW_INPUT_TAGS = {
     INPUT: TAG_INPUT,
     TEXTAREA: TAG_TEXTAREA
-};
-
-type AcceptedInput = HTMLInputElement | HTMLTextAreaElement;
-type EventWithInput = Event & { currentTarget: AcceptedInput };
-
-export type Props = {
-    inputTag: typeof TAG_INPUT | typeof TAG_TEXTAREA,
-
-    // <input> props
-    value?: string,
-    defaultValue?: string,
-    placeholder: string,
-    readOnly: boolean,
-    disabled: boolean,
-    onChange: (event?: Event) => void,
-    onFocus: (event?: Event) => void,
-    onBlur: (event?: Event) => void,
-
-    // Status props
-    status?: string | null,
-    statusIcon?: ReactChildren,
-
-    // <BasicRow> props from <Text>, should ignore
-    basic?: any,
-    tag?: any,
-
-    // React prop
-    className?: string, // eslint-disable-line react/require-default-props
 };
 
 /**
@@ -87,9 +57,7 @@ export type Props = {
  * ```
  */
 
-class EditableBasicRow extends PureComponent<Props, Props, any> {
-    inputNode: ?AcceptedInput;
-
+class EditableBasicRow extends PureComponent {
     static propTypes = {
         inputTag: PropTypes.oneOf(Object.values(ROW_INPUT_TAGS)),
         // <input> props
@@ -125,23 +93,23 @@ class EditableBasicRow extends PureComponent<Props, Props, any> {
         focused: false,
     };
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
             this.setState({ currentValue: nextProps.value });
         }
     }
 
-    handleInputFocus = (event: Event) => {
+    handleInputFocus = (event) => {
         this.setState({ focused: true });
         this.props.onFocus(event);
     }
 
-    handleInputBlur = (event: Event) => {
+    handleInputBlur = (event) => {
         this.setState({ focused: false });
         this.props.onBlur(event);
     }
 
-    handleInputChange = (event: EventWithInput) => {
+    handleInputChange = (event) => {
         // Only update if <input> isn't controlled
         if (!this.props.value) {
             this.setState({ currentValue: event.currentTarget.value });
