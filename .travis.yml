@@ -13,7 +13,6 @@ install:
     - yarn
 
 before_script:
-    - yarn flow
     - yarn lint
 
 script:
