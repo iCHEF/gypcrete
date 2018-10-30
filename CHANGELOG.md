@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-N/A
+### Changed
+- [Core] Remove flow type annotation. (#180)
 
 ## [1.10.0]
 ### Added
