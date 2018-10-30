@@ -6,5 +6,6 @@
     },
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/(?!@ichef/)"
-    ]
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/configs/jestSetup.js"
 }
