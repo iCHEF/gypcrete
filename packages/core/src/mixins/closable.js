@@ -53,13 +53,13 @@ const closable = ({
         componentDidMount() {
             document.addEventListener('keyup', this.handleDocumentKeyup);
             document.addEventListener('click', this.handleDocumentClickOrTouch);
-            document.addEventListener('touchstart', this.handleDocumentClickOrTouch);
+            document.addEventListener('touchend', this.handleDocumentClickOrTouch);
         }
 
         componentWillUnmount() {
             document.removeEventListener('keyup', this.handleDocumentKeyup);
             document.removeEventListener('click', this.handleDocumentClickOrTouch);
-            document.removeEventListener('touchstart', this.handleDocumentClickOrTouch);
+            document.removeEventListener('touchend', this.handleDocumentClickOrTouch);
             clearTimeout(this.state.closeDelayTimeout);
         }
 
@@ -92,7 +92,7 @@ const closable = ({
         captureInsideEvents = (node) => {
             if (node) {
                 node.addEventListener('click', this.handleInsideClickOrTouch);
-                node.addEventListener('touchstart', this.handleInsideClickOrTouch);
+                node.addEventListener('touchend', this.handleInsideClickOrTouch);
             }
             this.nodeRef = node;
         }

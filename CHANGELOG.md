@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 N/A
 
+## [1.10.0]
+### Added
+- [Core] Add new `<SplitView>` and `<SplitViewColumn>`. (#178)
+- [Storybook] Add examples for `<SplitView>` and its usage with `<ColumView>`. (#178)
+
+### Changed
+- [Core] `closable()` mixin is now triggered on `touchend` events on touch devices. (#176)
+- [Core] Update `<ColumnView>` layout styles; allow overriding bottom padding. (#178)
+- [Storybook] Update examples for `<Popover>` to add a row of hyperlink `<Button>`. (#176)
+- [Storybook] Split stories into different package-based sections. (#177)
+
 ## [1.9.0]
 ### Added
 - [Core] Add new `<Section>` as a general content wrapper with optional title and description text. (#166)
