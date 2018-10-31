@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+N/A
+
+## [1.10.0]
 ### Added
 - [Core] Add new `<SplitView>` and `<SplitViewColumn>`. (#178)
 - [Storybook] Add examples for `<SplitView>` and its usage with `<ColumView>`. (#178)
