@@ -1,5 +1,4 @@
-// @flow
-function isNonEmptyString(checkingString: any): boolean {
+function isNonEmptyString(checkingString) {
     return (typeof checkingString === 'string' && checkingString.length > 0);
 }
 

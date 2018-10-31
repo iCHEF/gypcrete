@@ -1,9 +1,6 @@
-// @flow
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
-
-import type { ReactChildren } from 'react-flow-types';
 
 import { getTextLayoutProps } from './mixins/rowComp';
 import wrapIfNotElement from './utils/wrapIfNotElement';
@@ -15,17 +12,6 @@ import TextLabel from './TextLabel';
 import { STATUS_CODE as STATUS } from './StatusIcon';
 
 const TOUCH_TIMEOUT_MS = 250;
-
-export type Props = {
-    inEdit?: boolean,
-    onEditEnd: (payload?: { value: string | null, event: Event }) => void,
-    onDblClick: (event?: Event) => void,
-    // #FIXME: use exported Flow types
-    icon?: string,
-    basic?: ReactChildren,
-    align?: string,
-    status?: string | null,
-};
 
 /**
  * <EditableTextLabel>
@@ -62,7 +48,7 @@ export type Props = {
  * ```
  */
 
-class EditableTextLabel extends PureComponent<Props, Props, any> {
+class EditableTextLabel extends PureComponent {
     static propTypes = {
         inEdit: PropTypes.bool,
         onEditEnd: PropTypes.func,
@@ -92,7 +78,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         dblTouchTimeout: null,
     };
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         /**
          * If the edit-state of <EditableTextLabel> is *controlled* by `inEdit` prop.
          * If the prop is `undefined`, this component became *uncontrolled*
@@ -103,7 +89,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         }
     }
 
-    getEditabilityControlled(fromProps: Props = this.props) {
+    getEditabilityControlled(fromProps = this.props) {
         return fromProps.inEdit !== undefined;
     }
 
@@ -120,7 +106,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         });
     }
 
-    handleDoubleClick = (event: Event) => {
+    handleDoubleClick = (event) => {
         /**
          * If `inEdit` isn't controlled, this component by default
          * goes into edit mode on double click/touch.
@@ -132,7 +118,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         this.props.onDblClick(event);
     }
 
-    handleTouchStart = (event: Event) => {
+    handleTouchStart = (event) => {
         const currentCount = this.state.touchCount + 1;
 
         if (currentCount === 2) {
@@ -158,7 +144,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         });
     }
 
-    handleInputBlur = (event: Event & { currentTarget: HTMLInputElement }) => {
+    handleInputBlur = (event) => {
         this.leaveEditModeIfNotControlled();
         this.props.onEditEnd({
             value: event.currentTarget.value,
@@ -166,7 +152,7 @@ class EditableTextLabel extends PureComponent<Props, Props, any> {
         });
     }
 
-    handleInputKeyDown = (event: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
+    handleInputKeyDown = (event) => {
         switch (event.keyCode) {
             case keycode('Enter'):
                 // Blur the input, and trigger `onEditEnd` in blur handler

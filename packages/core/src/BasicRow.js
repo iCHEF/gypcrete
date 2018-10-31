@@ -1,21 +1,18 @@
-// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
-import type { ReactChildren } from 'react-flow-types';
 
 import FlexCell from './FlexCell';
 import Tag from './Tag';
 
 import wrapIfNotElement from './utils/wrapIfNotElement';
 
-export type Props = {
-    basic?: ReactChildren,
-    tag?: ReactChildren,
-    statusIcon?: ReactChildren,
-    children?: ReactChildren, // eslint-disable-line react/require-default-props
-};
-
-function BasicRow({ basic, tag, statusIcon, children, ...otherProps }: Props) {
+function BasicRow({
+    basic,
+    tag,
+    statusIcon,
+    children,
+    ...otherProps
+}) {
     if (!basic) {
         return null;
     }

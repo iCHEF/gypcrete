@@ -1,10 +1,8 @@
-// @flow
-
 // -------------------------------------
 //   Enhanced PropTypes Validator
 // -------------------------------------
 
-const EnhancedPropTypes: { [string]: ReactPropsCheckType } = {
+const EnhancedPropTypes = {
     /**
      * Check prop should be empty
      *
