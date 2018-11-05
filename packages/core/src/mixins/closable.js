@@ -132,7 +132,7 @@ const closable = ({
                 onClose,
                 closable: runtimeOptions,
                 className,
-                ...otherProps,
+                ...otherProps
             } = this.props;
 
             return (

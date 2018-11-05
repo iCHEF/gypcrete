@@ -200,7 +200,7 @@ class ImageEditor extends PureComponent {
             // react props
             className,
             style,
-            ...avatarEditorProps,
+            ...avatarEditorProps
         } = this.props;
 
         const wraperBEM = BEM.root

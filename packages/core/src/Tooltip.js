@@ -26,7 +26,7 @@ function Tooltip({
     // React props
     className,
     children,
-    ...otherProps,
+    ...otherProps
 }) {
     const bemClass = BEM.root.modifier(placement);
     const rootClassName = classNames(className, `${bemClass}`);

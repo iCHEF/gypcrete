@@ -27,7 +27,7 @@ function Popover({
     // React props
     className,
     children,
-    ...otherProps,
+    ...otherProps
 }) {
     const bemClass = BEM.root.modifier(placement);
     const rootClassName = classNames(bemClass.toString(), className);

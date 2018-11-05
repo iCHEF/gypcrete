@@ -31,7 +31,7 @@ function List({
     // React props
     className,
     children,
-    ...otherProps,
+    ...otherProps
 }) {
     const bemClass = BEM.root.modifier(variant);
     const rootClassName = classNames(bemClass.toString(), className);

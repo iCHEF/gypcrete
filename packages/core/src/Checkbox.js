@@ -92,7 +92,7 @@ class Checkbox extends PureComponent {
             // React props
             className,
             children,
-            ...otherProps,
+            ...otherProps
         } = this.props;
 
         const inputProps = {

@@ -82,7 +82,7 @@ class EditableText extends PureComponent {
             errorMsg,
             // React props,
             className,
-            ...editableRowProps,
+            ...editableRowProps
         } = this.props;
 
         const textProps = { align, noGrow };

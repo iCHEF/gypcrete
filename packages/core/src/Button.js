@@ -23,7 +23,7 @@ function Button({
     // React props
     className,
     children,
-    ...otherProps,
+    ...otherProps
 }) {
     const bemClass = ROOT_BEM
         .modifier(color)

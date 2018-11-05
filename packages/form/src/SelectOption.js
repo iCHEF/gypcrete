@@ -20,7 +20,7 @@ function SelectOption({
     readOnly,
     checked,
     onChange,
-    ...checkboxProps,
+    ...checkboxProps
 }) {
     const handleCheckboxChange = (event) => {
         onChange(value, event.target.checked);

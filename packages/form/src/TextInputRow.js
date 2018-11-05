@@ -152,7 +152,7 @@ class TextInputRow extends PureComponent {
             // React props
             className,
             children,
-            ...renderInputProps,
+            ...renderInputProps
         } = this.props;
 
         const bemClass = BEM.root

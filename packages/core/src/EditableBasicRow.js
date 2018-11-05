@@ -137,7 +137,7 @@ class EditableBasicRow extends PureComponent {
             // <BasicRow> props from <Text>, should ignore
             basic, // eslint-disable-line react/prop-types
             tag, // eslint-disable-line react/prop-types
-            ...inputProps,
+            ...inputProps
         } = this.props;
         const { currentValue, focused } = this.state;
 
