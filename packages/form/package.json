@@ -24,12 +24,12 @@
     "prepublish": "npm run clean && npm run build",
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
     "build:dist": "webpack --config ../../configs/webpack.dist.js --color",
-    "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
-    "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
+    "build:lib": "BABEL_ENV=lib babel src --root-mode=upward --out-dir=lib",
+    "build:es5": "BABEL_ENV=es5 babel src --root-mode=upward --out-dir es5",
     "clean": "rm -rf ./dist ./lib ./es5 ./deploy"
   },
   "peerDependencies": {
-    "@babel/runtime": "^7.1.0",
+    "@babel/runtime-corejs2": "^7.1.0",
     "prop-types": "^15.5.8",
     "react": "^15.3.0 || ^16.0",
     "react-dom": "^15.3.0 || ^16.0"

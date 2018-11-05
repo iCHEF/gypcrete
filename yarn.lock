@@ -659,11 +659,12 @@
     "@babel/plugin-transform-react-jsx-self" "^7.0.0"
     "@babel/plugin-transform-react-jsx-source" "^7.0.0"
 
-"@babel/runtime@^7.1.0":
+"@babel/runtime-corejs2@^7.1.0":
   version "7.1.2"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.1.2.tgz#81c89935f4647706fc54541145e6b4ecfef4b8e3"
-  integrity sha512-Y3SCjmhSupzFB6wcv1KmmFucH6gDVnI30WjOcicV10ju0cZjak3Jcs67YLIXBrmZYw1xCrVeJPbycFwrqNyxpg==
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs2/-/runtime-corejs2-7.1.2.tgz#8695811a3fd8091f54f274b9320334e5e8c62200"
+  integrity sha512-drxaPByExlcRDKW4ZLubUO4ZkI8/8ax9k9wve1aEthdLKFzjB7XRkOQ0xoTIWGxqdDnWDElkjYq77bt7yrcYJQ==
   dependencies:
+    core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
 
 "@babel/template@^7.1.0", "@babel/template@^7.1.2":
@@ -3652,6 +3653,11 @@ core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.3.tgz#8acc38345824f16d8365b7c9b4259168e8ed603e"
   integrity sha1-isw4NFgk8W2DZbfJtCWRaOjtYD4=
+
+core-js@^2.5.7:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
+  integrity sha512-RszJCAxg/PP6uzXVXL6BsxSXx/B05oJAQ2vkJRjyjrEcNVycaqOmNb5OTxZPE3xa5gwZduqza6L9JOCenh/Ecw==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
