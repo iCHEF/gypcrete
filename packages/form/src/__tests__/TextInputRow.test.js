@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
+import { ListRow } from '@ichef/gypcrete';
 import TextInputRow, { PureTextInputRow, BEM } from '../TextInputRow';
 
 /**
@@ -28,6 +29,15 @@ describe('formRow(TextInputRow)', () => {
 });
 
 describe('Pure <TextInputRow>', () => {
+    it('renders a <ListRow> to wrap everything', () => {
+        const wrapper = mount(
+            <PureTextInputRow
+                label="foo"
+                defaultValue="bar" />
+        );
+        expect(wrapper.children().is(ListRow));
+    });
+
     it('renders an <input> inside with all unknown props', () => {
         const wrapper = mount(
             <PureTextInputRow
@@ -69,11 +79,11 @@ describe('Pure <TextInputRow>', () => {
 
         wrapper.find('input').simulate('focus');
         expect(wrapper.state('focused')).toBeTruthy();
-        expect(wrapper.hasClass(focusedModifier)).toBeTruthy();
+        expect(wrapper.find(ListRow).hasClass(focusedModifier)).toBeTruthy();
 
         wrapper.find('input').simulate('blur');
         expect(wrapper.state('focused')).toBeFalsy();
-        expect(wrapper.hasClass(focusedModifier)).toBeFalsy();
+        expect(wrapper.find(ListRow).hasClass(focusedModifier)).toBeFalsy();
     });
 
     it('auto-grows on mount, on focus and on change under multiLine mode', () => {
