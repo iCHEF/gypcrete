@@ -28,7 +28,12 @@ module.exports = (defaultConfig, configType) => {
             test: /\.jsx?$/,
             include: includePath,
             exclude: excludePath,
-            use: ['babel-loader'],
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    rootMode: 'upward',
+                },
+            },
         },
         {
             test: /\.scss$/,

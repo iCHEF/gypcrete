@@ -21,7 +21,7 @@ CenterIcon.propTypes = {
 function EditorPlaceholder({
     canvasHeight,
     loading,
-    ...wrapperProps,
+    ...wrapperProps
 }) {
     const wrapperStyle = {
         height: canvasHeight,

@@ -48,7 +48,7 @@ function HeaderRow({
     // React props
     className,
     children,
-    ...otherProps,
+    ...otherProps
 }) {
     const rootClassName = classNames(
         BEM.root.toString(),

@@ -19,11 +19,6 @@ const ELEMENT_SEPARATOR = '__';
 const MODIFIER_SEPARATOR = '--';
 
 export class BEMFactory {
-    _block: string;
-    _element: string | void;
-    _modifiers: string[];
-    _nonBemClasses: string[];
-
     constructor({ block, element, modifiers = [], nonBemClasses = [] }) {
         if (!block) {
             throw new Error('block is required.');

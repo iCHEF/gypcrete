@@ -9,7 +9,7 @@ export const COMPONENT_NAME = prefixClass('popup-button');
 
 function PopupButton({
     className,
-    ...props,
+    ...props
 }) {
     const buttonClass = classNames(COMPONENT_NAME, className);
 

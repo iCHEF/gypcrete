@@ -176,7 +176,7 @@ class EditableTextLabel extends PureComponent {
             onDblClick, // also not used here
             onEditEnd,
             status,
-            ...labelProps,
+            ...labelProps
         } = this.props;
         const { icon, basic, align } = labelProps;
 

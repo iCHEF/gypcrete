@@ -30,7 +30,7 @@ function ColumnView({
     // React props
     className,
     children,
-    ...wrapperProps,
+    ...wrapperProps
 }) {
     const rootClassName = classNames(BEM.root.toString(), className);
     const bodyStyle = {};

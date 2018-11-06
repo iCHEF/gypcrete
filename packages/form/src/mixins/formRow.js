@@ -49,7 +49,7 @@ const formRow = ({
                 status,
                 statusOptions,
                 errorMsg,
-                ...otherProps,
+                ...otherProps
             } = this.props;
 
             const ineditable = disabled || readOnly;

@@ -262,7 +262,7 @@ const anchored = ({
             const {
                 anchor,
                 style,
-                ...otherProps,
+                ...otherProps
             } = this.props;
 
             const mergedStyle = {

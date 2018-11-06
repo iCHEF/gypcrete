@@ -95,7 +95,7 @@ function Popup({
     // React props
     className,
     children,
-    ...popupProps,
+    ...popupProps
 }) {
     const rootClassName = classNames(BEM.root.toString(), className);
 
