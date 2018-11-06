@@ -36,7 +36,8 @@ describe('<IconButton>', () => {
             <IconButton
                 tinted
                 icon="printer"
-                className="other-custom-class" />);
+                className="other-custom-class" />
+        );
 
         expect(wrapper.hasClass('gyp-button--icon-only')).toBeTruthy();
         expect(wrapper.hasClass('gyp-button--tinted')).toBeTruthy();

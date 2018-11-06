@@ -258,4 +258,3 @@ describe('Horizontal placement: large anchor', () => {
         expect(boxWrapper.find(Box).prop('arrowStyle')).toEqual({});
     });
 });
-
