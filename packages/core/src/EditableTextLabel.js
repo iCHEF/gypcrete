@@ -72,6 +72,7 @@ class EditableTextLabel extends PureComponent {
     };
 
     state = {
+        // eslint-disable-next-line react/destructuring-assignment
         inEdit: this.props.inEdit || false,
         // For simulating double-touch
         touchCount: 0,
@@ -93,17 +94,17 @@ class EditableTextLabel extends PureComponent {
         return fromProps.inEdit !== undefined;
     }
 
-    leaveEditModeIfNotControlled() {
-        if (!this.getEditabilityControlled(this.props)) {
-            this.setState({ inEdit: false });
-        }
-    }
-
     resetDblTouchSimulation = () => {
         this.setState({
             touchCount: 0,
             dblTouchTimeout: null,
         });
+    }
+
+    leaveEditModeIfNotControlled() {
+        if (!this.getEditabilityControlled(this.props)) {
+            this.setState({ inEdit: false });
+        }
     }
 
     handleDoubleClick = (event) => {
@@ -115,11 +116,13 @@ class EditableTextLabel extends PureComponent {
             this.setState({ inEdit: true });
         }
 
-        this.props.onDblClick(event);
+        const { onDblClick } = this.props;
+        onDblClick(event);
     }
 
     handleTouchStart = (event) => {
-        const currentCount = this.state.touchCount + 1;
+        const { touchCount, dblTouchTimeout } = this.state;
+        const currentCount = touchCount + 1;
 
         if (currentCount === 2) {
             // Simulates “double touch”
@@ -132,7 +135,7 @@ class EditableTextLabel extends PureComponent {
          * Clears prev timeout to keep touch counts, and then
          * create new timeout to reset touch counts.
          */
-        global.clearTimeout(this.state.dblTouchTimeout);
+        global.clearTimeout(dblTouchTimeout);
         const resetTimeout = global.setTimeout(
             this.resetDblTouchSimulation,
             TOUCH_TIMEOUT_MS
@@ -145,8 +148,10 @@ class EditableTextLabel extends PureComponent {
     }
 
     handleInputBlur = (event) => {
+        const { onEditEnd } = this.props;
+
         this.leaveEditModeIfNotControlled();
-        this.props.onEditEnd({
+        onEditEnd({
             value: event.currentTarget.value,
             event,
         });
@@ -158,13 +163,16 @@ class EditableTextLabel extends PureComponent {
                 // Blur the input, and trigger `onEditEnd` in blur handler
                 event.currentTarget.blur();
                 break;
-            case keycode('Escape'):
+            case keycode('Escape'): {
+                const { onEditEnd } = this.props;
+
                 this.leaveEditModeIfNotControlled();
-                this.props.onEditEnd({
+                onEditEnd({
                     value: null,
                     event,
                 });
                 break;
+            }
             default:
                 break;
         }
@@ -178,9 +186,11 @@ class EditableTextLabel extends PureComponent {
             status,
             ...labelProps
         } = this.props;
+        const { inEdit: stateInEdit } = this.state;
+
         const { icon, basic, align } = labelProps;
 
-        if (!this.state.inEdit && status !== STATUS.LOADING) {
+        if (!stateInEdit && status !== STATUS.LOADING) {
             return (
                 <TextLabel
                     status={status}
@@ -199,7 +209,7 @@ class EditableTextLabel extends PureComponent {
 
                 <EditableText
                     defaultValue={basic}
-                    autoFocus={this.state.inEdit}
+                    autoFocus={stateInEdit}
                     onBlur={this.handleInputBlur}
                     onKeyDown={this.handleInputKeyDown}
                     {...layoutProps} />

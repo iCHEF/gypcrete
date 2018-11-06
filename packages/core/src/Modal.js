@@ -1,7 +1,7 @@
 import React, {
-  cloneElement,
-  isValidElement,
-  PureComponent
+    cloneElement,
+    isValidElement,
+    PureComponent
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -41,7 +41,8 @@ function renderHeader(header, headerClassName) {
         return cloneElement(header, {
             className: headerClassName
         });
-    } else if (typeof header === 'string') {
+    }
+    if (typeof header === 'string') {
         const label = <TextLabel align="center" basic={header} />;
         return <HeaderRow className={headerClassName} center={label} />;
     }
@@ -57,8 +58,9 @@ export const ModalContent = ({
     children,
 }) => {
     const cNames = classNames(
-                      bodyClassName,
-                      `${BEM.body.modifier('padding', bodyPadding)}`);
+        bodyClassName,
+        `${BEM.body.modifier('padding', bodyPadding)}`
+    );
     return (
         <div className={BEM.container}>
             {renderHeader(header, `${BEM.header}`)}
@@ -77,6 +79,8 @@ ModalContent.propTypes = {
 };
 
 ModalContent.defaultProps = {
+    header: undefined,
+    bodyClassName: '',
     bodyPadding: false,
 };
 
@@ -119,10 +123,18 @@ class Modal extends PureComponent {
 
 Modal.propTypes = {
     size: PropTypes.oneOf(MODAL_SIZE),
-    header: PropTypes.node,
-    bodyClassName: PropTypes.string,
-    bodyPadding: PropTypes.bool,
     onClose: PropTypes.func,
+    header: ModalContent.propTypes.header,
+    bodyClassName: ModalContent.propTypes.bodyClassName,
+    bodyPadding: ModalContent.propTypes.bodyPadding,
+};
+
+Modal.defaultProps = {
+    size: undefined,
+    onClose: () => {},
+    header: ModalContent.defaultProps.header,
+    bodyClassName: ModalContent.defaultProps.bodyClassName,
+    bodyPadding: ModalContent.defaultProps.bodyPadding,
 };
 
 export { Modal as PureModal };

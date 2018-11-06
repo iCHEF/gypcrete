@@ -45,9 +45,8 @@ function Popover({
 }
 
 Popover.propTypes = {
-    ...anchoredPropTypes,
-    // placement
-    // arrowStyle
+    placement: anchoredPropTypes.placement,
+    arrowStyle: anchoredPropTypes.arrowStyle,
 };
 
 Popover.defaultProps = {

@@ -189,8 +189,9 @@ const anchored = ({
             //   Determine vertical position
             // -------------------------------------
             const hasSpaceToPlaceSelfAbove = anchorRect.top >= selfRect.height;
-            const hasSpaceToPlaceSelfBelow =
-                (window.innerHeight - anchorRect.bottom) >= selfRect.height;
+            const hasSpaceToPlaceSelfBelow = (
+                (window.innerHeight - anchorRect.bottom) >= selfRect.height
+            );
 
             nextState.placement = getVerticalPlacement(
                 defaultPlacement,
@@ -215,8 +216,9 @@ const anchored = ({
             const anchorCenterCoordX = anchorRect.left + anchorHalfWidth;
 
             const hasSpaceOnLeftOfAnchorCenter = anchorCenterCoordX >= selfHalfWidth;
-            const hasSpaceOnRightOfAnchorCenter =
-                (window.innerWidth - anchorCenterCoordX) >= selfHalfWidth;
+            const hasSpaceOnRightOfAnchorCenter = (
+                (window.innerWidth - anchorCenterCoordX) >= selfHalfWidth
+            );
 
             const arrowSafeAreaLeft = edgePadding;
             const arrowSafeAreaRight = selfRect.width - edgePadding;
@@ -229,8 +231,9 @@ const anchored = ({
 
                 // Right-align to the anchor
                 case (hasSpaceOnLeftOfAnchorCenter && !hasSpaceOnRightOfAnchorCenter):
-                    nextState.position.left =
-                        anchorOffset.left + anchorRect.width - selfRect.width;
+                    nextState.position.left = (
+                        anchorOffset.left + anchorRect.width - selfRect.width
+                    );
 
                     nextState.arrowPosition.left = selfRect.width - anchorHalfWidth;
                     break;
@@ -265,9 +268,15 @@ const anchored = ({
                 ...otherProps
             } = this.props;
 
+            const {
+                placement,
+                position,
+                arrowPosition,
+            } = this.state;
+
             const mergedStyle = {
                 position: 'absolute',
-                ...this.state.position,
+                ...position,
                 ...style,
             };
 
@@ -278,8 +287,8 @@ const anchored = ({
             return (
                 <WrappedComponent
                     {...otherProps}
-                    placement={this.state.placement}
-                    arrowStyle={this.state.arrowPosition}
+                    placement={placement}
+                    arrowStyle={arrowPosition}
                     style={mergedStyle} />
             );
         }

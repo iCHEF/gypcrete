@@ -11,7 +11,8 @@ function IconCheckbox(props) {
             minified
             overrideButton={buttonWithStatus}
             {...props}>
-            <span /> {/* to trick <RowComp> from rendering default content */}
+            <span />
+            {' ' /* to trick <RowComp> from rendering default content */}
         </Checkbox>
     );
 }

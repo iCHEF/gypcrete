@@ -74,6 +74,7 @@ class SelectList extends PureComponent {
     };
 
     state = {
+        // eslint-disable-next-line react/destructuring-assignment
         checkedState: getInitialCheckedState(this.props.values || this.props.defaultValues),
     };
 
@@ -100,6 +101,7 @@ class SelectList extends PureComponent {
         return parseSelectOptions(fromProps.children);
     }
 
+    // eslint-disable-next-line react/destructuring-assignment
     getValues(fromCheckedState = this.state.checkedState) {
         const allOptions = this.getOptions();
 
@@ -109,12 +111,13 @@ class SelectList extends PureComponent {
     }
 
     handleChange(nextCheckedState) {
+        const { onChange } = this.props;
         const nextValues = this.getValues(nextCheckedState);
 
         if (!this.getIsControlled()) {
             this.setState({ checkedState: nextCheckedState });
         }
-        this.props.onChange(nextValues);
+        onChange(nextValues);
     }
 
     handleOptionChange = (optionValue, isChecked) => {
@@ -148,14 +151,17 @@ class SelectList extends PureComponent {
     }
 
     handleCheckAllOptionChange = (ignoreThis, isChecked) => {
+        const { minCheck } = this.props;
+        const { checkedState } = this.state;
+
         const variableOptions = this.getOptions()
             .filter(option => !option.readOnly);
 
-        const nextState = this.state.checkedState.withMutations((map) => {
+        const nextState = checkedState.withMutations((map) => {
             variableOptions.forEach(option => map.set(option.value, isChecked));
 
             const nextCheckedSize = map.filter(value => value).size;
-            const checksNeeded = this.props.minCheck - nextCheckedSize;
+            const checksNeeded = minCheck - nextCheckedSize;
 
             // Check options until matching minCheck
             if (checksNeeded > 0) {
@@ -168,10 +174,13 @@ class SelectList extends PureComponent {
     }
 
     renderOptions() {
-        return React.Children.map(this.props.children, (child) => {
+        const { children } = this.props;
+        const { checkedState } = this.state;
+
+        return React.Children.map(children, (child) => {
             if (getElementTypeSymbol(child) === OPTION_TYPE_SYMBOL) {
                 return React.cloneElement(child, {
-                    checked: this.state.checkedState.get(child.props.value),
+                    checked: checkedState.get(child.props.value),
                     onChange: this.handleOptionChange,
                 });
             }
@@ -180,11 +189,12 @@ class SelectList extends PureComponent {
     }
 
     renderCheckAllOption() {
+        const { allOptionLabel } = this.props;
         const isAllChecked = this.getIsAllChecked();
 
         return (
             <Option
-                label={this.props.allOptionLabel}
+                label={allOptionLabel}
                 value={null}
                 checked={isAllChecked}
                 onChange={this.handleCheckAllOptionChange} />
@@ -197,7 +207,7 @@ class SelectList extends PureComponent {
             showCheckAll,
             title,
             desc,
-         } = this.props;
+        } = this.props;
 
         return (
             <List title={title} desc={desc}>
