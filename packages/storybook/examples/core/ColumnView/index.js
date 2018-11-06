@@ -6,7 +6,5 @@ import getPropTables from 'utils/getPropTables';
 import BasicUsage from './BasicUsage';
 
 storiesOf('@ichef/gypcrete|ColumnView', module)
-    .add('basic usage',
-        withInfo()(BasicUsage)
-    )
+    .add('basic usage', withInfo()(BasicUsage))
     .add('props', getPropTables([ColumnView]));

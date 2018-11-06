@@ -12,12 +12,10 @@ storiesOf('@ichef/gypcrete|InfiniteScroll', module)
     .add('basic usage',
         withInfo('placed in a fixed height container')(
             () => <BasicUsageExample />
-        )
-    )
+        ))
     .add('page as scroll container',
         withInfo({ inline: false })(
             () => <PageAsContainerExample />
-        )
-    )
+        ))
     // Props table
     .add('props', getPropTables([InfiniteScroll]));

@@ -11,12 +11,8 @@ import SettingList from './SettingList';
 import NestedList from './NestedList';
 
 storiesOf('@ichef/gypcrete|List', module)
-    .add('Normal list',
-        withInfo()(NormalList)
-    )
-    .add('Setting list',
-        withInfo()(SettingList)
-    )
+    .add('Normal list', withInfo()(NormalList))
+    .add('Setting list', withInfo()(SettingList))
     .add('Nested list', withInfo()(NestedList))
     // Props table
     .add('props', getPropTables([List, ListRow]));

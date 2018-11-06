@@ -14,19 +14,13 @@ storiesOf('@ichef/gypcrete|Switch', module)
         withInfo(
             `A <Switch> is a row component which can be turned either on
             or off, with its underlying <input type=checkbox>.`
-        )(BasicUsage)
-    )
-    .add('Controlled input',
-        withInfo()(ControlledInput)
-    )
-    .add('With status',
-        withInfo()(WithStatus)
-    )
+        )(BasicUsage))
+    .add('Controlled input', withInfo()(ControlledInput))
+    .add('With status', withInfo()(WithStatus))
     .add('<input> props',
         withInfo(
             `Pass additional props to the underlying <input type="checkbox">
             via the 'input' prop.`
-        )(InputProps)
-    )
+        )(InputProps))
     // Props table
     .add('props', getPropTables([PureSwitch, Switch]));

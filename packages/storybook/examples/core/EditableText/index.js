@@ -9,14 +9,8 @@ import Alignments from './Alignments';
 import MultiLines from './MultiLines';
 
 storiesOf('@ichef/gypcrete|EditableText', module)
-    .add('Basic usage',
-        withInfo()(BasicUsage)
-    )
-    .add('Alignments',
-        withInfo()(Alignments)
-    )
-    .add('Mutiple lines',
-        withInfo()(MultiLines)
-    )
+    .add('Basic usage', withInfo()(BasicUsage))
+    .add('Alignments', withInfo()(Alignments))
+    .add('Mutiple lines', withInfo()(MultiLines))
     // Props table
     .add('props', getPropTables([PureEditableText, EditableText]));

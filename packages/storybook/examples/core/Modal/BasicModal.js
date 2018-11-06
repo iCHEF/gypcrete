@@ -4,11 +4,11 @@ import Modal from '@ichef/gypcrete/src/Modal';
 import ModalHeader from './ModalHeader';
 
 
-function BasicModalExample(props) {
+function BasicModalExample({ children, ...props }) {
     return (
         <Modal {...props}>
             <div>
-                {props.children}
+                {children}
             </div>
         </Modal>
     );
@@ -41,8 +41,10 @@ class ClosableModalExample extends PureComponent {
 
         return (
             <BasicModalExample
-                header={header} onClose={this.handleModalClose}
-                bodyPadding {...this.props} />
+                header={header}
+                onClose={this.handleModalClose}
+                bodyPadding
+                {...this.props} />
         );
     }
 }
