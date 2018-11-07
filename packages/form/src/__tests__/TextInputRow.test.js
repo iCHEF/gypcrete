@@ -123,6 +123,7 @@ describe('Pure <TextInputRow>', () => {
 
         // componentDidUpdate()
         controlledWrapper.setProps({ value: 'more bar' });
+        controlledWrapper.update();
         expect(controlledWrapper.find('textarea').prop('style')).toEqual({ height: 60 });
     });
 
