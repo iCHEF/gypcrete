@@ -8,11 +8,7 @@ import BasicTagExample from './BasicTag';
 import TagWithParentColorExample from './TagWithParentColor';
 
 storiesOf('@ichef/gypcrete|Tag', module)
-    .add('basic usage',
-        withInfo()(BasicTagExample)
-    )
-    .add('with parent color',
-        withInfo()(TagWithParentColorExample)
-    )
+    .add('basic usage', withInfo()(BasicTagExample))
+    .add('with parent color', withInfo()(TagWithParentColorExample))
     // Props table
     .add('props', getPropTables([Tag]));

@@ -9,9 +9,7 @@ import BasicTooltipExample from './BasicTooltip';
 import AnchoredTooltipExample from './AnchoredTooltip';
 
 storiesOf('@ichef/gypcrete|Tooltip', module)
-    .add('basic usage',
-        withInfo()(BasicTooltipExample)
-    )
+    .add('basic usage', withInfo()(BasicTooltipExample))
     .add(
         'anchored popover',
         withInfo('placed to a specified DOM element')(

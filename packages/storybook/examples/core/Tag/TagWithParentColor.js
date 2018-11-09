@@ -6,11 +6,15 @@ function TagWithParentColorExample() {
     return (
         <div>
             <span style={{ color: 'blue' }}>
-                Blue text <Tag>Tag</Tag>
+                Blue text
+                {' '}
+                <Tag>Tag</Tag>
             </span>
 
             <span style={{ color: 'red' }}>
-                Red text <Tag>Tag</Tag>
+                Red text
+                {' '}
+                <Tag>Tag</Tag>
             </span>
         </div>
     );

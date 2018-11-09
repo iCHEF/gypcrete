@@ -57,4 +57,3 @@ it("adds class to remove vertical margin when 'verticalSpacing' is false", () =>
     wrapper.setProps({ verticalSpacing: false });
     expect(wrapper.hasClass(expectedClassName)).toBeTruthy();
 });
-

@@ -3,8 +3,7 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 
 // Load default config generator
-const genDefaultConfig =
-    require('@storybook/react/dist/server/config/defaults/webpack.config.js');
+const genDefaultConfig = require('@storybook/react/dist/server/config/defaults/webpack.config.js');
 
 const includePath = path.resolve(__dirname, '../..'); // gypcrete/packages
 const excludePath = /node_modules/;

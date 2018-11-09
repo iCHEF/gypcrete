@@ -41,8 +41,8 @@ describe('Pure <PureModal>', () => {
     it('renders class names in response to the bodyPadding prop', () => {
         const wrapper = mount(<PureModal bodyPadding />);
         const paddingClass = BEM.body
-                              .modifier('padding', true)
-                              .toString({ stripBlock: true });
+            .modifier('padding', true)
+            .toString({ stripBlock: true });
         expect(wrapper.find(`.${paddingClass}`).exists()).toBeTruthy();
     });
 
@@ -98,16 +98,16 @@ describe('Pure <ModalContent>', () => {
     it('should render a padding if the prop bodyPadding is true', () => {
         const wrapper = shallow(<ModalContent bodyPadding />);
         const paddingClass = BEM.body
-                              .modifier('padding', true)
-                              .toString({ stripBlock: true });
+            .modifier('padding', true)
+            .toString({ stripBlock: true });
         expect(wrapper.find(`.${paddingClass}`).exists()).toBeTruthy();
     });
 
     it('should not render a padding if the prop bodyPadding is null', () => {
         const wrapper = shallow(<ModalContent />);
         const paddingClass = BEM.body
-                              .modifier('padding', true)
-                              .toString({ stripBlock: true });
+            .modifier('padding', true)
+            .toString({ stripBlock: true });
         expect(wrapper.find(`.${paddingClass}`).exists()).toBeFalsy();
     });
 });

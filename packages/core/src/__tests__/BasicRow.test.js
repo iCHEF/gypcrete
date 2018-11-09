@@ -52,4 +52,3 @@ it('renders with both tag and statusIcon', () => {
     expect(wrapper.find(Tag).shallow().text()).toBe('bar');
     expect(wrapper.contains(icon)).toBeTruthy();
 });
-

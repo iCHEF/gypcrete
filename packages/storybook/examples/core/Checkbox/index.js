@@ -10,15 +10,10 @@ import CheckboxWithIndeterminateExample from './CheckboxWithIndeterminate';
 import CheckboxWithStatusExample from './CheckboxWithStatus';
 
 storiesOf('@ichef/gypcrete|Checkbox', module)
-    .add('basic usage',
-        withInfo()(BasicCheckboxExample)
-    )
+    .add('basic usage', withInfo()(BasicCheckboxExample))
     .add('indeterminate state',
         withInfo('`Check all` indeterminate state is interacting with `item 1` and `item 2`.')(
             () => <CheckboxWithIndeterminateExample />
-        )
-    )
-    .add('with status',
-        withInfo()(CheckboxWithStatusExample)
-    )
+        ))
+    .add('with status', withInfo()(CheckboxWithStatusExample))
     .add('props', getPropTables([PureCheckbox, Checkbox]));

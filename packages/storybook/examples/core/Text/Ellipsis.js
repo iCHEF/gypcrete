@@ -4,9 +4,10 @@ import Text from '@ichef/gypcrete/src/Text';
 import TextEllipsis from '@ichef/gypcrete/src/TextEllipsis';
 import DebugBox from 'utils/DebugBox';
 
-const LONG_LABEL =
+const LONG_LABEL = (
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-     Proin at pellentesque dui. Vivamus non egestas ante. Integer a egestas dui.`;
+     Proin at pellentesque dui. Vivamus non egestas ante. Integer a egestas dui.`
+);
 
 function EllipsisExample() {
     const ellipsisLabel = <TextEllipsis>{LONG_LABEL}</TextEllipsis>;

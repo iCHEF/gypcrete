@@ -11,11 +11,8 @@ storiesOf('@ichef/gypcrete|IconButton', module)
     .add('basic usage',
         withInfo('IconButton is a variant of `<Button>`.')(
             BasicIconButtonExample
-        )
-    )
-    .add('with status',
-        withInfo()(IconButtonWithStatusExample)
-    )
+        ))
+    .add('with status', withInfo()(IconButtonWithStatusExample))
     .add('props', getPropTables([IconButton], {
         text: 'check `<Button>` props table for more available props.',
     }));

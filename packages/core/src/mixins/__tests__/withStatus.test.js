@@ -40,10 +40,12 @@ it('renders without crashing', () => {
 it('renders <StatusIcon> from context and passes to wrapped component', () => {
     const wrapper = shallow(
         <FooWithStatus />,
-        { context: {
-            status: 'loading',
-            statusOptions: { position: 'corner' }
-        } }
+        {
+            context: {
+                status: 'loading',
+                statusOptions: { position: 'corner' }
+            }
+        }
     );
     const iconWrapper = wrapper.find(Foo).shallow().find(StatusIcon);
 

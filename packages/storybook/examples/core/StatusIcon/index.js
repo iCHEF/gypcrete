@@ -8,11 +8,7 @@ import BasicStatusIconExample from './BasicStatusIcon';
 import CornerStatusIconExample from './CornerStatusIcon';
 
 storiesOf('@ichef/gypcrete|StatusIcon', module)
-    .add('basic usage',
-        withInfo()(BasicStatusIconExample)
-    )
-    .add('corner position',
-        withInfo()(CornerStatusIconExample)
-    )
+    .add('basic usage', withInfo()(BasicStatusIconExample))
+    .add('corner position', withInfo()(CornerStatusIconExample))
     // Props table
     .add('props', getPropTables([StatusIcon]));

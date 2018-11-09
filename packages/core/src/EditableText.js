@@ -39,11 +39,10 @@ class EditableText extends PureComponent {
         // <PureText> props,
         align: PureText.propTypes.align,
         noGrow: PureText.propTypes.noGrow,
-
-        ...withStatusPropTypes,
-        // status,
-        // statusIcon,
-        // errorMsg,
+        // withStatus() props
+        status: withStatusPropTypes.status,
+        statusIcon: withStatusPropTypes.statusIcon,
+        errorMsg: withStatusPropTypes.errorMsg,
     };
 
     static defaultProps = {
@@ -52,6 +51,7 @@ class EditableText extends PureComponent {
         // <PureText> props,
         align: PureText.defaultProps.align,
         noGrow: PureText.defaultProps.noGrow,
+        // withStatus() props
         status: undefined,
         statusIcon: undefined,
         errorMsg: undefined,
@@ -62,13 +62,17 @@ class EditableText extends PureComponent {
     };
 
     handleInputFocus = (event) => {
+        const { onFocus } = this.props;
+
         this.setState({ focused: true });
-        this.props.onFocus(event);
+        onFocus(event);
     }
 
     handleInputBlur = (event) => {
+        const { onBlur } = this.props;
+
         this.setState({ focused: false });
-        this.props.onBlur(event);
+        onBlur(event);
     }
 
     render() {
@@ -85,8 +89,10 @@ class EditableText extends PureComponent {
             ...editableRowProps
         } = this.props;
 
+        const { focused: isFocused } = this.state;
+
         const textProps = { align, noGrow };
-        const statusProps = this.state.focused ? {} : { statusIcon, errorMsg };
+        const statusProps = isFocused ? {} : { statusIcon, errorMsg };
 
         const basicRow = (
             <EditableBasicRow

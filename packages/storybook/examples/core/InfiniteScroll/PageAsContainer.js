@@ -39,6 +39,7 @@ class PageAsContainerExample extends PureComponent {
         const listItems = [];
 
         for (let i = 1; i <= itemsAmount; i += 1) {
+            // eslint-disable-next-line react/jsx-one-expression-per-line
             listItems.push(<li key={`item-${i}`}>item {i}</li>);
         }
 
