@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 
+import './styles/_animations.scss';
 import './styles/Overlay.scss';
 
 export const COMPONENT_NAME = prefixClass('overlay');

@@ -4,6 +4,8 @@ import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+
+import './styles/_animations.scss';
 import './styles/Icon.scss';
 
 const COMPONENT_NAME = prefixClass('icon');

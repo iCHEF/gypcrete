@@ -13,6 +13,7 @@ import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 import renderToLayer from './mixins/renderToLayer';
 
+import './styles/_animations.scss';
 import './styles/Modal.scss';
 
 export const MODAL_SIZE = ['small', 'large', 'full'];
