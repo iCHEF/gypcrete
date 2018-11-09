@@ -51,8 +51,12 @@ it('append layer to body on mount and removes on unmount', () => {
     expect(document.getElementById(layerId)).toBeNull();
 });
 
-it('renders wrapped component with ReactPortal', () => {
-    const wrapper = shallow(<LayerFoo />);
+it('renders wrapped component via ReactPortal after layer is in DOM', () => {
+    const wrapper = shallow(<LayerFoo />, { disableLifecycleMethods: true });
+    expect(wrapper.children().isEmpty()).toBeTruthy();
+
+    // Triggers layer appending
+    wrapper.instance().componentDidMount();
 
     expect(wrapper.type()).toBe(ReactIs.Portal);
     expect(wrapper.children().is(Foo)).toBeTruthy();

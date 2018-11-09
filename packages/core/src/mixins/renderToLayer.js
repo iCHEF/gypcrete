@@ -35,6 +35,10 @@ function renderToLayer(WrappedComponent) {
     class RenderToLayer extends Component {
         static displayName = `renderToLayer(${componentName})`;
 
+        state = {
+            inDOM: false,
+        };
+
         constructor(props) {
             super(props);
             this.baseLayer = createLayer();
@@ -42,6 +46,7 @@ function renderToLayer(WrappedComponent) {
 
         componentDidMount() {
             document.body.appendChild(this.baseLayer);
+            this.setState({ inDOM: true });
         }
 
         componentWillUnmount() {
@@ -49,7 +54,9 @@ function renderToLayer(WrappedComponent) {
         }
 
         render() {
-            return createPortal(
+            const { inDOM } = this.state;
+
+            return inDOM && createPortal(
                 <WrappedComponent {...this.props} />,
                 this.baseLayer,
             );
