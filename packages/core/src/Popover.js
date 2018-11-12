@@ -6,7 +6,10 @@ import ListSpacingContext from './contexts/listSpacing';
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 
-import anchored, { anchoredPropTypes, ANCHORED_PLACEMENT } from './mixins/anchored';
+import anchored, {
+    anchoredPropTypes,
+    ANCHORED_PLACEMENT,
+} from './mixins/anchored';
 import closable from './mixins/closable';
 import renderToLayer from './mixins/renderToLayer';
 
@@ -24,6 +27,7 @@ function Popover({
     // from anchored()
     placement,
     arrowStyle,
+    nodeRef,
     // React props
     className,
     children,
@@ -34,7 +38,7 @@ function Popover({
 
     return (
         <ListSpacingContext.Provider value={false}>
-            <div className={rootClassName} {...otherProps}>
+            <div className={rootClassName} ref={nodeRef} {...otherProps}>
                 <span className={BEM.arrow} style={arrowStyle} />
                 <div className={BEM.container}>
                     {children}
@@ -47,11 +51,13 @@ function Popover({
 Popover.propTypes = {
     placement: anchoredPropTypes.placement,
     arrowStyle: anchoredPropTypes.arrowStyle,
+    nodeRef: anchoredPropTypes.nodeRef,
 };
 
 Popover.defaultProps = {
     placement: ANCHORED_PLACEMENT.BOTTOM,
     arrowStyle: {},
+    nodeRef: undefined,
 };
 
 export { Popover as PurePopover };
