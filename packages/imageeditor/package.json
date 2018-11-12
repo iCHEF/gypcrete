@@ -31,8 +31,8 @@
   "peerDependencies": {
     "@babel/runtime-corejs2": "^7.1.0",
     "prop-types": "^15.5.8",
-    "react": "^15.3.0 || ^16.0",
-    "react-dom": "^15.3.0 || ^16.0"
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
   },
   "dependencies": {
     "@ichef/gypcrete": "^1.10.0",
