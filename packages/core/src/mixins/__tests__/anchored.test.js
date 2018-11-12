@@ -20,7 +20,10 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
-import anchored, { ANCHORED_PLACEMENT } from '../anchored';
+import anchored, {
+    anchoredPropTypes,
+    ANCHORED_PLACEMENT,
+} from '../anchored';
 
 // --------------------
 //  Mocking components
@@ -57,14 +60,17 @@ class Anchor extends PureComponent {
     }
 }
 
-function Box({ style }) {
+function Box({ style, nodeRef }) {
     const boxStyle = {
         ...style,
         width: BOX_SIZE,
         height: BOX_SIZE,
     };
-    return <div style={boxStyle} />;
+    return <div style={boxStyle} ref={nodeRef} />;
 }
+Box.propTypes = {
+    nodeRef: anchoredPropTypes.nodeRef.isRequired,
+};
 const AnchoredBoxBottom = anchored()(Box);
 const AnchoredBoxTop = anchored({ defaultPlacement: ANCHORED_PLACEMENT.TOP })(Box);
 

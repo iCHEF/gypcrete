@@ -12,6 +12,9 @@ export const ANCHORED_PLACEMENT = { TOP, BOTTOM };
 export const anchoredPropTypes = {
     placement: PropTypes.oneOf(Object.values(ANCHORED_PLACEMENT)),
     arrowStyle: PropTypes.objectOf(PropTypes.number),
+    nodeRef: PropTypes.shape({
+        current: PropTypes.any,
+    }),
 };
 
 /**
@@ -35,6 +38,10 @@ function getVerticalPlacement(defaultPlacement, hasSpaceAbove, hasSpaceBelow) {
  * Calculate the absolute position on <body> for the wrapped component,
  * based on specified **anchor** node.
  *
+ * You should manually set ref to the outer-most wrapper node via `nodeRef` prop
+ * passed onto the wrapped component, so this mixin can determine which DOM node
+ * to use for positioning.
+ *
  * Usually used along with `renderToLayer()` mixin.
  *
  * Concept
@@ -45,24 +52,35 @@ function getVerticalPlacement(defaultPlacement, hasSpaceAbove, hasSpaceBelow) {
  * The arrow should stay in the Component's width, deducting the
  * “edge padding”.
  *
- * ```
- *                      edge padding
- * ╭╌┊╌╌╌╌╌╌╌/\╌╌╌╌╌╌╌╌┊╌╮
- * ╎ ┊                 ┊ ╎
- * ╎ ┊                 ┊ ╎
- * ╰╌┊╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┊╌╯
- *     arrow safe area
- * ```
+ ```
+                    edge padding
+╭╌┊╌╌╌╌╌╌╌/\╌╌╌╌╌╌╌╌┊╌╮
+╎ ┊                 ┊ ╎
+╎ ┊                 ┊ ╎
+╰╌┊╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┊╌╯
+    arrow safe area
+ ```
  *
- * @param {bool} defaultPlacement the default vertical placement
- * @param {number} edgePadding the number to be deducted when calculating “safe area”
+ * @param {object} options
+ * @param {TOP|BOTTOM} options.defaultPlacement - the default vertical placement
+ * @param {number} options.edgePadding - the number to be deducted when calculating “safe area”
  *
  * @example
- * ```jsx
- * const AnchoredComponent = anchored(options)(Component);
- * return <AnchoredComponent anchor={fooRef} />
- * ```
+ ```jsx
+function Component({ placement, arrowStyle, style, nodeRef }) {
+    return (
+        <div ref={nodeRef} className={placement} style={style}>
+            <div className="arrow" style={arrowStyle} />
+            content body
+        </div>
+    );
+}
+const AnchoredComponent = anchored(options)(Component);
+
+return <AnchoredComponent anchor={fooRef} />
+ ```
  */
+
 const anchored = ({
     defaultPlacement = BOTTOM,
     edgePadding = 16,
@@ -84,11 +102,17 @@ const anchored = ({
             anchor: null,
         };
 
+        // instance variables
+
         state = {
             placement: BOTTOM,
             position: {},
             arrowPosition: {}
         };
+
+        selfNodeRef = React.createRef();
+
+        // lifecycle methods
 
         componentDidMount() {
             this.adjustPosition();
@@ -100,10 +124,9 @@ const anchored = ({
             }
         }
 
-
-        // -------------------------------------
-        //   Get DOM elements
-        // -------------------------------------
+        // --------------------
+        // Handling DOM nodes
+        // --------------------
 
         /**
          * Find the underlying DOM node of `props.anchor` for its size and position.
@@ -120,17 +143,6 @@ const anchored = ({
             }
 
             return null;
-        }
-
-        /**
-         * Find the DOM node of this component, which should be the same
-         * root node of `<WrappedComponent>`, for its size and position.
-         *
-         * `findDOMNode()` is required for this.
-         */
-        getSelfDOMNode() {
-            // eslint-disable-next-line react/no-find-dom-node
-            return ReactDOM.findDOMNode(this);
         }
 
 
@@ -162,9 +174,9 @@ const anchored = ({
 
         adjustPosition(nextAnchor = this.props.anchor) {
             const anchorNode = this.getAnchorDOMNode(nextAnchor);
-            const selfNode = this.getSelfDOMNode();
+            const selfNode = this.selfNodeRef.current;
 
-            if (!anchorNode) {
+            if (!anchorNode || !selfNode) {
                 return;
             }
 
@@ -289,7 +301,8 @@ const anchored = ({
                     {...otherProps}
                     placement={placement}
                     arrowStyle={arrowPosition}
-                    style={mergedStyle} />
+                    style={mergedStyle}
+                    nodeRef={this.selfNodeRef} />
             );
         }
     }
