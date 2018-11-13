@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import documentOffset from 'document-offset';
 
@@ -9,12 +8,14 @@ const TOP = 'top';
 const BOTTOM = 'bottom';
 export const ANCHORED_PLACEMENT = { TOP, BOTTOM };
 
+const ReactRefPropType = PropTypes.shape({
+    current: PropTypes.any,
+});
+
 export const anchoredPropTypes = {
     placement: PropTypes.oneOf(Object.values(ANCHORED_PLACEMENT)),
     arrowStyle: PropTypes.objectOf(PropTypes.number),
-    nodeRef: PropTypes.shape({
-        current: PropTypes.any,
-    }),
+    nodeRef: ReactRefPropType,
 };
 
 /**
@@ -38,9 +39,11 @@ function getVerticalPlacement(defaultPlacement, hasSpaceAbove, hasSpaceBelow) {
  * Calculate the absolute position on <body> for the wrapped component,
  * based on specified **anchor** node.
  *
- * You should manually set ref to the outer-most wrapper node via `nodeRef` prop
- * passed onto the wrapped component, so this mixin can determine which DOM node
- * to use for positioning.
+ * You should manually set ref to:
+ *   1. The DOM node of *anchor element* by assigning ref via `anchor` prop, and
+ *   2. The DOM node of *wrapped component* via `nodeRef` prop passed onto it,
+ *
+ * so this mixin can determine which DOM node to use for positioning.
  *
  * Usually used along with `renderToLayer()` mixin.
  *
@@ -67,6 +70,7 @@ function getVerticalPlacement(defaultPlacement, hasSpaceAbove, hasSpaceBelow) {
  *
  * @example
  ```jsx
+// configuring wrapped component
 function Component({ placement, arrowStyle, style, nodeRef }) {
     return (
         <div ref={nodeRef} className={placement} style={style}>
@@ -77,7 +81,25 @@ function Component({ placement, arrowStyle, style, nodeRef }) {
 }
 const AnchoredComponent = anchored(options)(Component);
 
-return <AnchoredComponent anchor={fooRef} />
+// setting anchor
+class Example extends React.Component {
+    static propTypes = {
+        show: PropTypes.bool.isRequired,
+    };
+
+    anchorRef = React.createRef();
+
+    render() {
+        return (
+            <div>
+                <div className="anchor" ref={this.anchorRef} />
+                {this.props.show && (
+                    <AnchoredComponent anchor={this.anchorRef.current} />
+                )}
+            </div>
+        );
+    }
+}
  ```
  */
 
@@ -91,11 +113,7 @@ const anchored = ({
         static displayName = `anchored(${componentName})`;
 
         static propTypes = {
-            // Expects a ref to a Node or to a React Element
-            anchor: PropTypes.oneOfType([
-                PropTypes.instanceOf(window.Node),
-                PropTypes.instanceOf(Component)
-            ])
+            anchor: PropTypes.instanceOf(window.Node),
         };
 
         static defaultProps = {
@@ -119,32 +137,21 @@ const anchored = ({
         }
 
         componentWillReceiveProps(nextProps) {
-            if (nextProps.anchor !== this.props.anchor) {
+            const { anchor: currentAnchor } = this.props;
+
+            if (nextProps.anchor !== currentAnchor) {
                 this.adjustPosition(nextProps.anchor);
             }
         }
 
-        // --------------------
-        // Handling DOM nodes
-        // --------------------
-
-        /**
-         * Find the underlying DOM node of `props.anchor` for its size and position.
-         * `findDOMNode()` is required for this.
-         */
         getAnchorDOMNode(fromAnchor = this.props.anchor) {
             if (fromAnchor instanceof window.HTMLElement) {
                 return fromAnchor;
             }
 
-            if (fromAnchor instanceof Component) {
-                // eslint-disable-next-line react/no-find-dom-node
-                return ReactDOM.findDOMNode(fromAnchor);
-            }
-
+            // Ignore non-HTMLElement anchors
             return null;
         }
-
 
         // -------------------------------------
         //   Adjust component's position
