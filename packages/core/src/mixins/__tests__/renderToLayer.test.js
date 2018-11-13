@@ -53,7 +53,7 @@ it('append layer to body on mount and removes on unmount', () => {
 
 it('renders wrapped component via ReactPortal after layer is in DOM', () => {
     const wrapper = shallow(<LayerFoo />, { disableLifecycleMethods: true });
-    expect(wrapper.children().isEmpty()).toBeTruthy();
+    expect(wrapper.children().exists()).toBeFalsy();
 
     // Triggers layer appending
     wrapper.instance().componentDidMount();
