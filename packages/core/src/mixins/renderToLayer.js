@@ -46,6 +46,15 @@ function renderToLayer(WrappedComponent) {
 
         componentDidMount() {
             document.body.appendChild(this.baseLayer);
+
+            /**
+             * Render null before base layer is put in DOM for 'renderToLayer()' mixin.
+             *
+             * This is the current behavior of v1.x.
+             * It prevents an issue with 'anchored()' mixin where it can retrieve
+             * incorrect rects from self DOM node when calculating its own position,
+             * due to its parent node (the layer) isn't inserted to DOM yet.
+             */
             this.setState({ inDOM: true });
         }
 
