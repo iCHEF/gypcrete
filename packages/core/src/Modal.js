@@ -90,7 +90,7 @@ class Modal extends PureComponent {
         const { onClose } = this.props;
         // Prevent onClick events being propagated to outer modals
         event.stopPropagation();
-        if (onClose) { onClose(); }
+        onClose();
     }
 
     render() {
