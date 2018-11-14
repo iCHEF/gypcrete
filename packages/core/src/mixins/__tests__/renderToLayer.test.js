@@ -1,19 +1,21 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount, ReactWrapper } from 'enzyme';
+import { shallow } from 'enzyme';
+import * as ReactIs from 'react-is';
 
+import randId from '../../utils/randId';
 import renderToLayer from '../renderToLayer';
+
+jest.mock('../../utils/randId');
 
 // --------------------
 //  Mocking components
 // --------------------
 
-// eslint-disable-next-line react/prefer-stateless-function
-class Foo extends PureComponent {
-    render() {
-        return <div className="bar">Hello World!</div>;
-    }
+function Foo() {
+    return <div className="bar">Hello World!</div>;
 }
+
 const LayerFoo = renderToLayer(Foo);
 
 
@@ -28,51 +30,34 @@ it('renders without crashing', () => {
     ReactDOM.render(element, div);
 });
 
-it('creates layer on mount and removes on unmount', () => {
-    const wrapper = mount(<LayerFoo />);
-    const layerId = wrapper.instance().baseLayer.id;
+it('creates a layer with unique ID on creation', () => {
+    randId.mockReturnValueOnce('MOCKED_ID');
 
-    // Make sure the layer is created
-    expect(document.getElementById(layerId)).not.toBeNull();
+    const wrapper = shallow(<LayerFoo />);
+
+    expect(randId).toHaveBeenCalled();
+    expect(wrapper.instance().baseLayer.id = 'MOCKED_ID');
+});
+
+it('append layer to body on mount and removes on unmount', () => {
+    const layerId = 'layer-1234';
+    randId.mockReturnValueOnce(layerId);
+
+    const wrapper = shallow(<LayerFoo />);
+
+    expect(document.getElementById(layerId)).toBe(wrapper.instance().baseLayer);
 
     wrapper.unmount();
-
-    // Now make sure the layer is removed from DOM tree
     expect(document.getElementById(layerId)).toBeNull();
 });
 
-it('should give up removing layer if reference to layer lost', () => {
-    const wrapper = mount(<LayerFoo />);
-    const layerId = wrapper.instance().baseLayer.id;
-
-    // Mock reference lost
-    wrapper.instance().baseLayer = null;
-    wrapper.unmount();
-
-    // Expect unmount to abort
-    expect(document.getElementById(layerId)).not.toBeNull();
-});
-
-// #FIXME: Fail in Enzyme 3 + React 15. Fix with Portal from React 16.
-it.skip('renders wrapped Component outside React root', () => {
-    const wrapper = mount(<LayerFoo />);
-    const layerWrapper = new ReactWrapper(wrapper.instance().componentRef, true);
-
-    // Wrapper should not have children, because it's rendered somewhere else.
+it('renders wrapped component via ReactPortal after layer is in DOM', () => {
+    const wrapper = shallow(<LayerFoo />, { disableLifecycleMethods: true });
     expect(wrapper.children().exists()).toBeFalsy();
 
-    expect(layerWrapper.find(Foo)).toHaveLength(1);
-    expect(layerWrapper.hasClass('bar')).toBeTruthy();
-    expect(layerWrapper.text()).toBe('Hello World!');
-});
+    // Triggers layer appending
+    wrapper.instance().componentDidMount();
 
-// #FIXME: Fail in Enzyme 3 + React 16. Fix with React Portal.
-it.skip('updates wrapped component when props change', () => {
-    const wrapper = mount(<LayerFoo />);
-    const layerWrapper = new ReactWrapper(wrapper.instance().componentRef, true);
-
-    expect(layerWrapper.props()).toEqual({});
-
-    wrapper.setProps({ inline: true });
-    expect(layerWrapper.props()).toEqual({ inline: true });
+    expect(wrapper.type()).toBe(ReactIs.Portal);
+    expect(wrapper.children().is(Foo)).toBeTruthy();
 });

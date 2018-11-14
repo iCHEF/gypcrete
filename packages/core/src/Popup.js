@@ -14,6 +14,7 @@ import Icon from './Icon';
 import Overlay from './Overlay';
 import TextLabel from './TextLabel';
 
+import './styles/_animations.scss';
 import './styles/Popup.scss';
 
 export const BUTTONS_DIRECTION = {
