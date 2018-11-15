@@ -1,11 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 
-import anchored, { ANCHORED_PLACEMENT } from './mixins/anchored';
+import anchored, {
+    anchoredPropTypes,
+    ANCHORED_PLACEMENT,
+} from './mixins/anchored';
 import renderToLayer from './mixins/renderToLayer';
 import './styles/Tooltip.scss';
 
@@ -21,8 +23,10 @@ const BOTTOM = 'bottom';
 export const TOOLTIP_PLACEMENT = { TOP, BOTTOM };
 
 function Tooltip({
+    // from anchored()
     placement,
     arrowStyle,
+    nodeRef,
     // React props
     className,
     children,
@@ -32,7 +36,7 @@ function Tooltip({
     const rootClassName = classNames(className, `${bemClass}`);
 
     return (
-        <span className={rootClassName} {...otherProps}>
+        <span className={rootClassName} ref={nodeRef} {...otherProps}>
             {children}
             <span className={BEM.arrow} style={arrowStyle} />
         </span>
@@ -40,13 +44,15 @@ function Tooltip({
 }
 
 Tooltip.propTypes = {
-    placement: PropTypes.oneOf(Object.values(TOOLTIP_PLACEMENT)),
-    arrowStyle: PropTypes.objectOf(PropTypes.number),
+    placement: anchoredPropTypes.placement,
+    arrowStyle: anchoredPropTypes.arrowStyle,
+    nodeRef: anchoredPropTypes.nodeRef,
 };
 
 Tooltip.defaultProps = {
     placement: TOP,
     arrowStyle: {},
+    nodeRef: undefined,
 };
 
 export { Tooltip as PureTooltip };

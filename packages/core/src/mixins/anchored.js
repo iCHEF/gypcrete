@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import documentOffset from 'document-offset';
 
@@ -9,9 +8,14 @@ const TOP = 'top';
 const BOTTOM = 'bottom';
 export const ANCHORED_PLACEMENT = { TOP, BOTTOM };
 
+const ReactRefPropType = PropTypes.shape({
+    current: PropTypes.any,
+});
+
 export const anchoredPropTypes = {
     placement: PropTypes.oneOf(Object.values(ANCHORED_PLACEMENT)),
     arrowStyle: PropTypes.objectOf(PropTypes.number),
+    nodeRef: ReactRefPropType,
 };
 
 /**
@@ -35,6 +39,12 @@ function getVerticalPlacement(defaultPlacement, hasSpaceAbove, hasSpaceBelow) {
  * Calculate the absolute position on <body> for the wrapped component,
  * based on specified **anchor** node.
  *
+ * You should manually set ref to:
+ *   1. The DOM node of *anchor element* by assigning ref via `anchor` prop, and
+ *   2. The DOM node of *wrapped component* via `nodeRef` prop passed onto it,
+ *
+ * so this mixin can determine which DOM node to use for positioning.
+ *
  * Usually used along with `renderToLayer()` mixin.
  *
  * Concept
@@ -45,24 +55,54 @@ function getVerticalPlacement(defaultPlacement, hasSpaceAbove, hasSpaceBelow) {
  * The arrow should stay in the Component's width, deducting the
  * “edge padding”.
  *
- * ```
- *                      edge padding
- * ╭╌┊╌╌╌╌╌╌╌/\╌╌╌╌╌╌╌╌┊╌╮
- * ╎ ┊                 ┊ ╎
- * ╎ ┊                 ┊ ╎
- * ╰╌┊╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┊╌╯
- *     arrow safe area
- * ```
+ ```
+                    edge padding
+╭╌┊╌╌╌╌╌╌╌/\╌╌╌╌╌╌╌╌┊╌╮
+╎ ┊                 ┊ ╎
+╎ ┊                 ┊ ╎
+╰╌┊╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┊╌╯
+    arrow safe area
+ ```
  *
- * @param {bool} defaultPlacement the default vertical placement
- * @param {number} edgePadding the number to be deducted when calculating “safe area”
+ * @param {object} options
+ * @param {TOP|BOTTOM} options.defaultPlacement - the default vertical placement
+ * @param {number} options.edgePadding - the number to be deducted when calculating “safe area”
  *
  * @example
- * ```jsx
- * const AnchoredComponent = anchored(options)(Component);
- * return <AnchoredComponent anchor={fooRef} />
- * ```
+ ```jsx
+// configuring wrapped component
+function Component({ placement, arrowStyle, style, nodeRef }) {
+    return (
+        <div ref={nodeRef} className={placement} style={style}>
+            <div className="arrow" style={arrowStyle} />
+            content body
+        </div>
+    );
+}
+const AnchoredComponent = anchored(options)(Component);
+
+// setting anchor
+class Example extends React.Component {
+    static propTypes = {
+        show: PropTypes.bool.isRequired,
+    };
+
+    anchorRef = React.createRef();
+
+    render() {
+        return (
+            <div>
+                <div className="anchor" ref={this.anchorRef} />
+                {this.props.show && (
+                    <AnchoredComponent anchor={this.anchorRef.current} />
+                )}
+            </div>
+        );
+    }
+}
+ ```
  */
+
 const anchored = ({
     defaultPlacement = BOTTOM,
     edgePadding = 16,
@@ -73,16 +113,14 @@ const anchored = ({
         static displayName = `anchored(${componentName})`;
 
         static propTypes = {
-            // Expects a ref to a Node or to a React Element
-            anchor: PropTypes.oneOfType([
-                PropTypes.instanceOf(window.Node),
-                PropTypes.instanceOf(Component)
-            ])
+            anchor: PropTypes.instanceOf(window.Node),
         };
 
         static defaultProps = {
             anchor: null,
         };
+
+        // instance variables
 
         state = {
             placement: BOTTOM,
@@ -90,49 +128,30 @@ const anchored = ({
             arrowPosition: {}
         };
 
+        selfNodeRef = React.createRef();
+
+        // lifecycle methods
+
         componentDidMount() {
             this.adjustPosition();
         }
 
         componentWillReceiveProps(nextProps) {
-            if (nextProps.anchor !== this.props.anchor) {
+            const { anchor: currentAnchor } = this.props;
+
+            if (nextProps.anchor !== currentAnchor) {
                 this.adjustPosition(nextProps.anchor);
             }
         }
 
-
-        // -------------------------------------
-        //   Get DOM elements
-        // -------------------------------------
-
-        /**
-         * Find the underlying DOM node of `props.anchor` for its size and position.
-         * `findDOMNode()` is required for this.
-         */
         getAnchorDOMNode(fromAnchor = this.props.anchor) {
             if (fromAnchor instanceof window.HTMLElement) {
                 return fromAnchor;
             }
 
-            if (fromAnchor instanceof Component) {
-                // eslint-disable-next-line react/no-find-dom-node
-                return ReactDOM.findDOMNode(fromAnchor);
-            }
-
+            // Ignore non-HTMLElement anchors
             return null;
         }
-
-        /**
-         * Find the DOM node of this component, which should be the same
-         * root node of `<WrappedComponent>`, for its size and position.
-         *
-         * `findDOMNode()` is required for this.
-         */
-        getSelfDOMNode() {
-            // eslint-disable-next-line react/no-find-dom-node
-            return ReactDOM.findDOMNode(this);
-        }
-
 
         // -------------------------------------
         //   Adjust component's position
@@ -162,9 +181,9 @@ const anchored = ({
 
         adjustPosition(nextAnchor = this.props.anchor) {
             const anchorNode = this.getAnchorDOMNode(nextAnchor);
-            const selfNode = this.getSelfDOMNode();
+            const selfNode = this.selfNodeRef.current;
 
-            if (!anchorNode) {
+            if (!anchorNode || !selfNode) {
                 return;
             }
 
@@ -289,7 +308,8 @@ const anchored = ({
                     {...otherProps}
                     placement={placement}
                     arrowStyle={arrowPosition}
-                    style={mergedStyle} />
+                    style={mergedStyle}
+                    nodeRef={this.selfNodeRef} />
             );
         }
     }

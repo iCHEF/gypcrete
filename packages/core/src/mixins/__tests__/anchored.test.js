@@ -15,12 +15,15 @@
  * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
  */
 
-import React, { PureComponent } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
-import anchored, { ANCHORED_PLACEMENT } from '../anchored';
+import anchored, {
+    anchoredPropTypes,
+    ANCHORED_PLACEMENT,
+} from '../anchored';
 
 // --------------------
 //  Mocking components
@@ -29,42 +32,41 @@ const BOX_SIZE = 100;
 const ANCHOR_SIZE_SMALL = 20;
 const ANCHOR_SIZE_LARGE = 200;
 
-// <Anchor> needs to be a React Component so it has an backing instance.
-// eslint-disable-next-line react/prefer-stateless-function
-class Anchor extends PureComponent {
-    static propTypes = {
-        top: PropTypes.number.isRequired,
-        left: PropTypes.number.isRequired,
-        large: PropTypes.bool,
+// Anchor component
+const Anchor = React.forwardRef(({ top, left, large }, ref) => {
+    const anchorSize = large ? ANCHOR_SIZE_LARGE : ANCHOR_SIZE_SMALL;
+
+    const style = {
+        width: anchorSize,
+        height: anchorSize,
+        position: 'absolute',
+        top,
+        left,
     };
+    return <div id="anchor" style={style} ref={ref} />;
+});
+Anchor.propTypes = {
+    top: PropTypes.number.isRequired,
+    left: PropTypes.number.isRequired,
+    large: PropTypes.bool,
+};
+Anchor.defaultProps = {
+    large: false,
+};
 
-    static defaultProps = {
-        large: false,
-    };
-
-    render() {
-        const { top, left, large } = this.props;
-        const anchorSize = large ? ANCHOR_SIZE_LARGE : ANCHOR_SIZE_SMALL;
-
-        const style = {
-            width: anchorSize,
-            height: anchorSize,
-            position: 'absolute',
-            top,
-            left,
-        };
-        return <div id="anchor" style={style} />;
-    }
-}
-
-function Box({ style }) {
+// Positioned “wrapped” component
+function Box({ style, nodeRef }) {
     const boxStyle = {
         ...style,
         width: BOX_SIZE,
         height: BOX_SIZE,
     };
-    return <div style={boxStyle} />;
+    return <div style={boxStyle} ref={nodeRef} />;
 }
+Box.propTypes = {
+    nodeRef: anchoredPropTypes.nodeRef.isRequired,
+};
+
 const AnchoredBoxBottom = anchored()(Box);
 const AnchoredBoxTop = anchored({ defaultPlacement: ANCHORED_PLACEMENT.TOP })(Box);
 
@@ -106,6 +108,9 @@ HTMLElement.prototype.getBoundingClientRect = function getBoundingClientRect() {
 const anchorRoot = document.createElement('div');
 const boxRoot = document.createElement('div');
 
+anchorRoot.id = 'anchor-root';
+boxRoot.id = 'box-root';
+
 document.body.appendChild(anchorRoot);
 document.body.appendChild(boxRoot);
 
@@ -120,45 +125,63 @@ it('renders without crashing', () => {
     ReactDOM.render(element, div);
 });
 
-it('can take an HTMLElement as anchor', () => {
-    mount(<Anchor top={10} left={10} />, { attachTo: anchorRoot });
-    const anchorNode = document.getElementById('anchor');
-
-    const wrapper = mount(
-        <AnchoredBoxTop anchor={anchorNode} />,
-        { attachTo: boxRoot }
+it('takes an HTMLElement as anchor', async () => {
+    /**
+     * Enzyme weirdly passes an instance of `WrapperComponent` to React ref
+     * when you directly mounts:
+     * ```js
+     * mount(<div ref={(ref) => { console.log(ref); }} />);
+     * // console prints: WrapperComponent
+     * ```
+     *
+     * But if you wrap the ref-target element with another layer of wrapper,
+     * if receives correct HTMLDivElement.
+     */
+    const anchorRef = React.createRef();
+    mount(
+        <><Anchor top={10} left={10} ref={anchorRef} /></>,
+        { attachTo: anchorRoot }
     );
 
+    const wrapper = mount(<AnchoredBoxTop anchor={anchorRef.current} />);
+
     expect(wrapper.find(Box).exists()).toBeTruthy();
-    expect(wrapper.instance().getAnchorDOMNode()).toBe(anchorNode);
+    expect(wrapper.instance().getAnchorDOMNode()).toBe(anchorRef.current);
 });
 
 it('re-adjusts position when assigned with another anchor', () => {
-    let anchorWrapper = mount(<Anchor top={20} left={10} />, { attachTo: anchorRoot });
-    const wrapper = mount(
-        <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
-        { attachTo: boxRoot }
+    const anchorRefOne = React.createRef();
+    const anchorRefTwo = React.createRef();
+    mount(
+        <>
+            <Anchor top={20} left={10} ref={anchorRefOne} />
+            <Anchor top={200} left={10} ref={anchorRefTwo} />
+        </>,
+        { attachTo: anchorRoot }
     );
 
+    const wrapper = mount(<AnchoredBoxTop anchor={anchorRefOne.current} />);
     expect(wrapper.find(Box).prop('placement')).toBe(ANCHORED_PLACEMENT.BOTTOM);
 
-    // Should not re-adjust if anchor isn't changed
+    // Should not re-adjust if anchor remains the same
     wrapper.setProps({ foo: true });
     expect(wrapper.find(Box).prop('placement')).toBe(ANCHORED_PLACEMENT.BOTTOM);
 
-    // Should re-adjust since anchor changes
-    anchorWrapper = mount(<Anchor top={200} left={10} />, { attachTo: anchorRoot });
-    wrapper.setProps({ anchor: anchorWrapper.instance() });
-
+    // Should re-adjust when anchor changes
+    wrapper.setProps({ anchor: anchorRefTwo.current });
     expect(wrapper.find(Box).prop('placement')).toBe(ANCHORED_PLACEMENT.TOP);
 });
 
 describe('Vertical placement', () => {
     it('renders above when anchor placed near bottom of viewport', () => {
-        const anchorWrapper = mount(<Anchor top={700} left={100} />, { attachTo: anchorRoot });
+        const anchorRef = React.createRef();
+        mount(
+            <><Anchor top={700} left={100} ref={anchorRef} /></>,
+            { attachTo: anchorRoot }
+        );
 
         let boxWrapper = mount(
-            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            <AnchoredBoxTop anchor={anchorRef.current} />,
             { attachTo: boxRoot }
         ).find(Box);
 
@@ -166,7 +189,7 @@ describe('Vertical placement', () => {
         expect(boxWrapper.prop('style').top).toBe(700 - BOX_SIZE);
 
         boxWrapper = mount(
-            <AnchoredBoxBottom anchor={anchorWrapper.instance()} />,
+            <AnchoredBoxBottom anchor={anchorRef.current} />,
             { attachTo: boxRoot }
         ).find(Box);
 
@@ -175,10 +198,14 @@ describe('Vertical placement', () => {
     });
 
     it('renders below when anchor placed near top of viewport', () => {
-        const anchorWrapper = mount(<Anchor top={50} left={100} />, { attachTo: anchorRoot });
+        const anchorRef = React.createRef();
+        mount(
+            <><Anchor top={50} left={100} ref={anchorRef} /></>,
+            { attachTo: anchorRoot }
+        );
 
         let boxWrapper = mount(
-            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            <AnchoredBoxTop anchor={anchorRef.current} />,
             { attachTo: boxRoot }
         ).find(Box);
 
@@ -186,7 +213,7 @@ describe('Vertical placement', () => {
         expect(boxWrapper.prop('style').top).toBe(50 + ANCHOR_SIZE_SMALL);
 
         boxWrapper = mount(
-            <AnchoredBoxBottom anchor={anchorWrapper.instance()} />,
+            <AnchoredBoxBottom anchor={anchorRef.current} />,
             { attachTo: boxRoot }
         ).find(Box);
 
@@ -197,9 +224,14 @@ describe('Vertical placement', () => {
 
 describe('Horizontal placement: small anchor', () => {
     it('aligns to the center of anchor when space is enough', () => {
-        const anchorWrapper = mount(<Anchor top={20} left={100} />, { attachTo: anchorRoot });
+        const anchorRef = React.createRef();
+        mount(
+            <><Anchor top={20} left={100} ref={anchorRef} /></>,
+            { attachTo: anchorRoot }
+        );
+
         const boxWrapper = mount(
-            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            <AnchoredBoxTop anchor={anchorRef.current} />,
             { attachTo: boxRoot }
         ).find(Box);
 
@@ -212,9 +244,14 @@ describe('Horizontal placement: small anchor', () => {
     });
 
     it('aligns to the right side of anchor if space is not enough on right side', () => {
-        const anchorWrapper = mount(<Anchor top={20} left={1000} />, { attachTo: anchorRoot });
+        const anchorRef = React.createRef();
+        mount(
+            <><Anchor top={20} left={1000} ref={anchorRef} /></>,
+            { attachTo: anchorRoot }
+        );
+
         const boxWrapper = mount(
-            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            <AnchoredBoxTop anchor={anchorRef.current} />,
             { attachTo: boxRoot }
         ).find(Box);
 
@@ -227,9 +264,14 @@ describe('Horizontal placement: small anchor', () => {
     });
 
     it('aligns to the left side of anchor if space is not enough on left side', () => {
-        const anchorWrapper = mount(<Anchor top={20} left={10} />, { attachTo: anchorRoot });
+        const anchorRef = React.createRef();
+        mount(
+            <><Anchor top={20} left={10} ref={anchorRef} /></>,
+            { attachTo: anchorRoot }
+        );
+
         const boxWrapper = mount(
-            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            <AnchoredBoxTop anchor={anchorRef.current} />,
             { attachTo: boxRoot }
         ).find(Box);
 
@@ -244,9 +286,14 @@ describe('Horizontal placement: small anchor', () => {
 
 describe('Horizontal placement: large anchor', () => {
     it('aligns to the center of anchor when anchor is wider than box', () => {
-        const anchorWrapper = mount(<Anchor large top={20} left={20} />, { attachTo: anchorRoot });
+        const anchorRef = React.createRef();
+        mount(
+            <><Anchor large top={20} left={20} ref={anchorRef} /></>,
+            { attachTo: anchorRoot }
+        );
+
         const boxWrapper = mount(
-            <AnchoredBoxTop anchor={anchorWrapper.instance()} />,
+            <AnchoredBoxTop anchor={anchorRef.current} />,
             { attachTo: boxRoot }
         ).find(Box);
 

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] [Form] [ImageEditor] Peer dependency changes:
     * Switch from `babel-runtime` to `@babel/runtime-corejs2`. (#185)
     * Upgrade to `react@^16.6.0` and `react-dom@^16.6.0`. (#187)
+- [Core] `anchored()` HOC mixin no longer uses `ReactDOM.findDOMNode()` to find the actual node for you. You should now manually set ref to both *anchor* element and *wrappred* element instead. Please read #189 for more info.
 
 ### Changed
 - [Core] Remove flow type annotation. (#180)
