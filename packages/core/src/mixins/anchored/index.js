@@ -11,15 +11,18 @@ import getPositionState, {
 
 export { PLACEMENT as ANCHORED_PLACEMENT };
 
-const ReactRefPropType = PropTypes.shape({
-    current: PropTypes.any,
-});
-
 export const anchoredPropTypes = {
     placement: PropTypes.oneOf(Object.values(PLACEMENT)),
     arrowStyle: PropTypes.objectOf(PropTypes.number),
-    nodeRef: ReactRefPropType,
+    nodeRef: PropTypes.func,
 };
+
+function filterDOMNode(node) {
+    if (node instanceof HTMLElement) {
+        return node;
+    }
+    return null;
+}
 
 /**
  * anchored() HOC mixin
@@ -90,64 +93,22 @@ const anchored = ({
         static displayName = `anchored(${componentName})`;
 
         static propTypes = {
-            anchor: PropTypes.instanceOf(window.Node),
+            anchor: PropTypes.instanceOf(window.HTMLElement),
         };
 
         static defaultProps = {
             anchor: null,
         };
 
-        // instance variables
-
         state = {
-            placement: defaultPlacement,
-            position: {},
-            arrowPosition: {}
+            selfNode: null,
         };
-
-        selfNodeRef = React.createRef();
-
-        // lifecycle methods
-
-        componentDidMount() {
-            this.adjustPosition();
-        }
-
-        componentWillReceiveProps(nextProps) {
-            const { anchor: currentAnchor } = this.props;
-
-            if (nextProps.anchor !== currentAnchor) {
-                this.adjustPosition(nextProps.anchor);
-            }
-        }
-
-        getAnchorDOMNode(fromAnchor = this.props.anchor) {
-            if (fromAnchor instanceof window.HTMLElement) {
-                return fromAnchor;
-            }
-
-            // Ignore non-HTMLElement anchors
-            return null;
-        }
 
         getPositions = memoize(getPositionState(defaultPlacement, edgePadding));
 
-        // -------------------------------------
-        //   Adjust component's position
-        // -------------------------------------
-
-        adjustPosition(nextAnchor = this.props.anchor) {
-            const anchorNode = this.getAnchorDOMNode(nextAnchor);
-            const selfNode = this.selfNodeRef.current;
-
-            const nextState = this.getPositions(anchorNode, selfNode);
-
-            this.setState(nextState);
+        setSelfNode = (nodeRef) => {
+            this.setState({ selfNode: nodeRef });
         }
-
-        // -------------------------------------
-        //   Renders
-        // -------------------------------------
 
         render() {
             const {
@@ -156,11 +117,20 @@ const anchored = ({
                 ...otherProps
             } = this.props;
 
+            const { selfNode } = this.state;
+
+            if (!anchor) {
+                return null;
+            }
+
             const {
                 placement,
                 position,
                 arrowPosition,
-            } = this.state;
+            } = this.getPositions(
+                filterDOMNode(anchor),
+                filterDOMNode(selfNode),
+            );
 
             const mergedStyle = {
                 position: 'absolute',
@@ -168,17 +138,13 @@ const anchored = ({
                 ...style,
             };
 
-            if (!anchor) {
-                return null;
-            }
-
             return (
                 <WrappedComponent
                     {...otherProps}
                     placement={placement}
                     arrowStyle={arrowPosition}
                     style={mergedStyle}
-                    nodeRef={this.selfNodeRef} />
+                    nodeRef={this.setSelfNode} />
             );
         }
     }
