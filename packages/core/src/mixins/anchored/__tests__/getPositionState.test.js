@@ -67,3 +67,110 @@ describe('getTopPosition()', () => {
         }
     );
 });
+
+describe('getLeftPositionSet()', () => {
+    /**
+     * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+     * ╎       □                ╎
+     * ╎    ┌╌╌^╌╌┐             ╎
+     * ╎    └╌╌╌╌╌┘             ╎
+     * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+     */
+    it('returns coord sets for center-align sceanario', () => {
+        const result = getLeftPositionSet(
+            200, // anchor screen left
+            200, // anchor document left
+            30, // anchor width
+            200, // self width
+            8, // edge padding
+        );
+        expect(result).toEqual({
+            selfLeft: 115,
+            arrowLeft: 100,
+        });
+    });
+
+    /**
+     * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+     * ╎ □                      ╎
+     * ╎┌^╌╌╌╌┐                 ╎
+     * ╎└╌╌╌╌╌┘                 ╎
+     * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+     */
+    it('returns coord sets for left-align sceanario', () => {
+        const result = getLeftPositionSet(
+            10, // anchor screen left
+            10, // anchor document left
+            30, // anchor width
+            200, // self width
+            8, // edge padding
+        );
+        expect(result).toEqual({
+            selfLeft: 10,
+            arrowLeft: 15,
+        });
+    });
+
+    /**
+     * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+     * ╎                      □ ╎
+     * ╎                 ┌╌╌╌╌^┐╎
+     * ╎                 └╌╌╌╌╌┘╎
+     * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+     */
+    it('returns coord sets for right-align sceanario', () => {
+        const result = getLeftPositionSet(
+            980, // anchor screen left
+            980, // anchor document left
+            30, // anchor width
+            200, // self width
+            8, // edge padding
+        );
+        expect(result).toEqual({
+            selfLeft: 810,
+            arrowLeft: 185,
+        });
+    });
+
+    /**
+     * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+     * ╎|                       ╎
+     * ╎┌^╌╌╌╌┐                 ╎
+     * ╎└╌╌╌╌╌┘                 ╎
+     * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+     */
+    it('arrow should stay in safe area for left-align, tiny anchor sceanario', () => {
+        const result = getLeftPositionSet(
+            10, // anchor screen left
+            10, // anchor document left
+            10, // anchor width
+            200, // self width
+            8, // edge padding
+        );
+        expect(result).toEqual({
+            selfLeft: 10,
+            arrowLeft: 8, // minimun padding from left edge
+        });
+    });
+
+    /**
+     * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+     * ╎                       |╎
+     * ╎                 ┌╌╌╌╌^┐╎
+     * ╎                 └╌╌╌╌╌┘╎
+     * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+     */
+    it('arrow should stay in safe area for right-align, tiny anchor sceanario', () => {
+        const result = getLeftPositionSet(
+            1010, // anchor screen left
+            1010, // anchor document left
+            10, // anchor width
+            200, // self width
+            8, // edge padding
+        );
+        expect(result).toEqual({
+            selfLeft: 820,
+            arrowLeft: 192, // minimun padding from right edge
+        });
+    });
+});
