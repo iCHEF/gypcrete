@@ -1,9 +1,15 @@
+import documentOffset from 'document-offset';
+
 import getPositionState, {
     getPlacement,
     getTopPosition,
     getLeftPositionSet,
     PLACEMENT,
 } from '../getPositionState';
+
+jest.mock('document-offset', () => (
+    jest.fn(() => ({ left: 0, top: 0 }))
+));
 
 /**
  * Test scenario
@@ -171,6 +177,62 @@ describe('getLeftPositionSet()', () => {
         expect(result).toEqual({
             selfLeft: 820,
             arrowLeft: 192, // minimun padding from right edge
+        });
+    });
+});
+
+describe('getPositionState()', () => {
+    const getterFunc = getPositionState(PLACEMENT.TOP, 8);
+
+    it('takes a config set and then returns a getter function', () => {
+        expect(typeof getterFunc).toBe('function');
+    });
+
+    it('getterFunc returns null if anchor or self node does not exist', () => {
+        expect(
+            getterFunc(document.createElement('div'), null)
+        ).toBeNull();
+
+        expect(
+            getterFunc(null, document.createElement('div'))
+        ).toBeNull();
+    });
+
+    it('getterFunc gathers measurements for anchorNode and selfNode to determine position', () => {
+        const anchorNode = document.createElement('div');
+        const selfNode = document.createElement('div');
+
+        anchorNode.getBoundingClientRect = jest.fn(() => ({
+            width: 30,
+            height: 30,
+            top: 10,
+            right: 40,
+            bottom: 40,
+            left: 10,
+        }));
+        selfNode.getBoundingClientRect = jest.fn(() => ({
+            width: 200,
+            height: 300,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+        }));
+        documentOffset.mockReturnValueOnce({
+            top: 10,
+            left: 10,
+        });
+
+        const result = getterFunc(anchorNode, selfNode);
+
+        expect(anchorNode.getBoundingClientRect).toHaveBeenCalled();
+        expect(selfNode.getBoundingClientRect).toHaveBeenCalled();
+        expect(documentOffset).toHaveBeenLastCalledWith(anchorNode);
+
+        expect(result).toMatchObject({
+            placement: PLACEMENT.BOTTOM,
+            position: { top: 40, left: 10 },
+            arrowPosition: { left: 15 },
         });
     });
 });
