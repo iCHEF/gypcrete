@@ -163,7 +163,11 @@ export function getLeftPositionSet(
 
 const getPositionState = (defaultPlacement, edgePadding) => (anchorNode, selfNode) => {
     if (!anchorNode || !selfNode) {
-        return null;
+        return {
+            placement: defaultPlacement,
+            position: {},
+            arrowPosition: {},
+        };
     }
 
     // -------------------------------------

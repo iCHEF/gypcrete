@@ -188,14 +188,20 @@ describe('getPositionState()', () => {
         expect(typeof getterFunc).toBe('function');
     });
 
-    it('getterFunc returns null if anchor or self node does not exist', () => {
+    it('getterFunc returns a fallback config if anchor or self node does not exist', () => {
+        const expectedFallback = {
+            placement: PLACEMENT.TOP, // equals defaultPlacement
+            position: {},
+            arrowPosition: {},
+        };
+
         expect(
             getterFunc(document.createElement('div'), null)
-        ).toBeNull();
+        ).toMatchObject(expectedFallback);
 
         expect(
             getterFunc(null, document.createElement('div'))
-        ).toBeNull();
+        ).toMatchObject(expectedFallback);
     });
 
     it('getterFunc gathers measurements for anchorNode and selfNode to determine position', () => {
