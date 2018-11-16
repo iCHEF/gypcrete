@@ -32,7 +32,7 @@ export const PLACEMENT = { TOP, BOTTOM };
  * @param {number} anchorHeight
  * @param {number} selfHeight
  */
-function getPlacement(defaultPlacement, anchorRectTop, anchorHeight, selfHeight) {
+export function getPlacement(defaultPlacement, anchorRectTop, anchorHeight, selfHeight) {
     const hasSpaceToPlaceSelfAbove = anchorRectTop >= selfHeight;
     const hasSpaceToPlaceSelfBelow = (
         (anchorRectTop + anchorHeight + selfHeight) <= window.innerHeight
@@ -56,7 +56,7 @@ function getPlacement(defaultPlacement, anchorRectTop, anchorHeight, selfHeight)
  * @param {number} anchorHeight
  * @param {number} selfHeight
  */
-function getTopPosition(placement, anchorOffsetTop, anchorHeight, selfHeight) {
+export function getTopPosition(placement, anchorOffsetTop, anchorHeight, selfHeight) {
     let positionTop = 0;
 
     if (placement === TOP) {
@@ -91,7 +91,7 @@ function getTopPosition(placement, anchorOffsetTop, anchorHeight, selfHeight) {
  * @param {number} selfWidth
  * @param {number} edgePadding
  */
-function getLeftPositionSet(
+export function getLeftPositionSet(
     anchorRectLeft,
     anchorOffsetLeft,
     anchorWidth,
