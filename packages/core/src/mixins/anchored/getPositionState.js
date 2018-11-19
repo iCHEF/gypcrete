@@ -9,11 +9,11 @@ export const PLACEMENT = { TOP, BOTTOM };
  * @typedef {typeof TOP| typeof BOTTOM} Placement
  *
  * @typedef {Object} SelfPosition
- * @prop {number} top
- * @prop {number} left
+ * @prop {number} [top]
+ * @prop {number} [left]
  *
  * @typedef {Object} ArrowPosition
- * @prop {number} left
+ * @prop {number} [left]
  *
  * @typedef {SelfPosition} DocumentOffset
  *
