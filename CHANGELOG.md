@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Core] Remove flow type annotation. (#180)
 - [Core] Adapt React Portal in `renderToLayer()` HOC mixin. (#188)
+- [Core] Refactor `anchored()` mixin to extrac its positioning logic, and adapt memoize approach to not rely on lifecycle methods. (#190)
 - [Storybook] Upgrade to `@storybook/react@^4.0.0` to support Babel 7. (#187)
 - [Build] Upgrade to `enzyme@3.7.0`; fix tests for that. (#183)
 - [Build] Upgrade to Babel v7; switch to project-scope Babel config. (#185)
