@@ -11,6 +11,5 @@
         "ignorePath": "configs/.eslintignore"
     },
 
-    "javascript.validate.enable": false,
     "jest.pathToConfig": "configs/jest.config.json"
 }
