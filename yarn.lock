@@ -4560,10 +4560,10 @@ eslint-config-airbnb@^17.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-ichef@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-ichef/-/eslint-config-ichef-2.0.0.tgz#277fee92c6b855b23136fae447e39faa955cd4e0"
-  integrity sha512-s0NGw6FQKGC5ZLtZ+jIVc+H8nAYR4JYMQekEsRCh6Rn5FZLkFeCLa4dhpPTTXYxQ17CrT9MaeaZA5Ka8dD/Ndg==
+eslint-config-ichef@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-ichef/-/eslint-config-ichef-2.0.1.tgz#521a353dc363ae1ec847053258a1dd7024cc9e7b"
+  integrity sha512-kFuMl85gQpD/Prgu+VgjAk0wrlHpDBtXOLecLa//UeGQyChPs2HuWf6CxzYSeiHHBRjEzL1f6FvpkAZShcc/AA==
 
 eslint-import-resolver-babel-module@^5.0.0-beta.1:
   version "5.0.0-beta.1"
