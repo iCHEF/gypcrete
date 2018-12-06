@@ -19,7 +19,7 @@
     "start": "lerna run storybook --stream",
     "bumpversion": "lerna publish --skip-npm --skip-git",
     "release": "lerna publish --yes --repo-version $PACKAGE_VERSION --skip-git",
-    "release:beta": "lerna publish --skip-git --cd-version=preminor --preid=beta --npm-tag=prerelease",
+    "release:beta": "lerna publish --skip-git --preid=beta --npm-tag=prerelease",
     "release:canary": "lerna publish -c --yes --exact",
     "ghpages": "lerna run ghpages",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
