@@ -33,7 +33,7 @@ function TextInput(props, { align }) {
         // React props
         className,
         children, // strip out from component
-        ...editableTextProps,
+        ...editableTextProps
     } = props;
 
     const rootClassName = classNames(className, COMPONENT_NAME);

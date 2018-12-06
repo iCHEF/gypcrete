@@ -1,4 +1,3 @@
-// @flow
 import classNames from 'classnames';
 import prefixClass from './prefixClass';
 
@@ -10,15 +9,7 @@ const CLASS_ERROR = prefixClass(`${PREFIX}-error`);
 const CLASS_DISABLED = prefixClass(`${PREFIX}-disabled`);
 const CLASS_UNTOUCHABLE = prefixClass(`${PREFIX}-untouchable`);
 
-type StateProps = {
-    active?: boolean,
-    highlight?: boolean,
-    error?: boolean,
-    disabled?: boolean,
-    untouchable?: boolean,
-};
-
-function getStateClassnames(stateProps: StateProps) {
+function getStateClassnames(stateProps) {
     const results = classNames({
         [CLASS_ACTIVE]: stateProps.active,
         [CLASS_HIGHLIGHT]: stateProps.highlight,

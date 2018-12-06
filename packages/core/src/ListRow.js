@@ -69,7 +69,7 @@ class ListRow extends PureComponent {
             // React props
             className,
             children,
-            ...wrapperProps,
+            ...wrapperProps
         } = this.props;
 
         const bemClass = BEM.root.modifier('highlight', highlight);

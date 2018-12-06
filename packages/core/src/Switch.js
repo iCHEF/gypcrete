@@ -71,7 +71,7 @@ class Switch extends PureComponent {
             // React props
             className,
             children,
-            ...otherProps,
+            ...otherProps
         } = this.props;
 
         const rootClassName = classNames(className, `${BEM.root}`);

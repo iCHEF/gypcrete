@@ -18,7 +18,7 @@ function IconButton({
     solid,
     // React props
     className,
-    ...buttonProps,
+    ...buttonProps
 }) {
     const bemClass = icBEM(COMPONENT_NAME)
         .modifier('icon-only')

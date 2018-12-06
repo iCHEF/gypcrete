@@ -1,7 +1,7 @@
 import React, {
-  cloneElement,
-  isValidElement,
-  PureComponent
+    cloneElement,
+    isValidElement,
+    PureComponent
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -13,6 +13,7 @@ import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 import renderToLayer from './mixins/renderToLayer';
 
+import './styles/_animations.scss';
 import './styles/Modal.scss';
 
 export const MODAL_SIZE = ['small', 'large', 'full'];
@@ -41,7 +42,8 @@ function renderHeader(header, headerClassName) {
         return cloneElement(header, {
             className: headerClassName
         });
-    } else if (typeof header === 'string') {
+    }
+    if (typeof header === 'string') {
         const label = <TextLabel align="center" basic={header} />;
         return <HeaderRow className={headerClassName} center={label} />;
     }
@@ -57,8 +59,9 @@ export const ModalContent = ({
     children,
 }) => {
     const cNames = classNames(
-                      bodyClassName,
-                      `${BEM.body.modifier('padding', bodyPadding)}`);
+        bodyClassName,
+        `${BEM.body.modifier('padding', bodyPadding)}`
+    );
     return (
         <div className={BEM.container}>
             {renderHeader(header, `${BEM.header}`)}
@@ -77,6 +80,8 @@ ModalContent.propTypes = {
 };
 
 ModalContent.defaultProps = {
+    header: undefined,
+    bodyClassName: '',
     bodyPadding: false,
 };
 
@@ -85,7 +90,7 @@ class Modal extends PureComponent {
         const { onClose } = this.props;
         // Prevent onClick events being propagated to outer modals
         event.stopPropagation();
-        if (onClose) { onClose(); }
+        onClose();
     }
 
     render() {
@@ -119,10 +124,18 @@ class Modal extends PureComponent {
 
 Modal.propTypes = {
     size: PropTypes.oneOf(MODAL_SIZE),
-    header: PropTypes.node,
-    bodyClassName: PropTypes.string,
-    bodyPadding: PropTypes.bool,
     onClose: PropTypes.func,
+    header: ModalContent.propTypes.header,
+    bodyClassName: ModalContent.propTypes.bodyClassName,
+    bodyPadding: ModalContent.propTypes.bodyPadding,
+};
+
+Modal.defaultProps = {
+    size: undefined,
+    onClose: () => {},
+    header: ModalContent.defaultProps.header,
+    bodyClassName: ModalContent.defaultProps.bodyClassName,
+    bodyPadding: ModalContent.defaultProps.bodyPadding,
 };
 
 export { Modal as PureModal };

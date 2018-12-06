@@ -1,14 +1,4 @@
-// @flow
 import React from 'react';
-import type {
-    Component as ComponentType,
-    ReactChildren
-} from 'react-flow-types';
-
-type Options = {
-    with: string | ComponentType<{ [string]: any }>,
-    via?: string,
-};
 
 /**
  * Wrap the passed-in `content` with a component if it's not a React element,
@@ -20,10 +10,10 @@ type Options = {
  *
  * @return {Element}
  */
-function wrapIfNotElement(
-    content: ReactChildren,
-    { with: Wrapper, via: prop = 'children' }: Options
-) {
+function wrapIfNotElement(content, {
+    with: Wrapper,
+    via: prop = 'children',
+}) {
     if (React.isValidElement(content)) {
         return content;
     }

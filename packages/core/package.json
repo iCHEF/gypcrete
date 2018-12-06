@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete",
-  "version": "1.10.0",
+  "version": "2.0.0",
   "description": "iCHEF web components library, built with React.",
   "homepage": "https://ichef.github.io/gypcrete",
   "repository": "https://github.com/iCHEF/gypcrete/tree/master/packages/core",
@@ -24,26 +24,27 @@
     "prepublish": "npm run clean && npm run build",
     "build": "npm run build:dist && npm run build:lib && npm run build:es5",
     "build:dist": "webpack --config ./configs/webpack.dist.js --color",
-    "build:lib": "BABEL_ENV=lib babel src --out-dir lib",
-    "build:es5": "BABEL_ENV=es5 babel src --out-dir es5",
+    "build:lib": "BABEL_ENV=lib babel src --root-mode=upward --out-dir lib",
+    "build:es5": "BABEL_ENV=es5 babel src --root-mode=upward --out-dir es5",
     "clean": "rm -rf ./dist ./lib ./es5 ./deploy"
   },
   "peerDependencies": {
-    "babel-runtime": "^6.18.0",
+    "@babel/runtime-corejs2": "^7.1.0",
     "prop-types": "^15.5.8",
-    "react": "^15.3.0 || ^16.0",
-    "react-dom": "^15.3.0 || ^16.0"
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
     "create-react-context": "^0.2.3",
     "document-offset": "^1.0.4",
     "keycode": "^2.1.9",
-    "react-flow-types": "^0.1.1"
+    "memoize-one": "^4.0.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.23.0",
-    "enzyme": "^2.8.2",
+    "@babel/cli": "^7.1.0",
+    "enzyme": "^3.7.0",
+    "react-is": "^16.6.1",
     "sinon": "^4.0.1",
     "webpack": "^3.10.0",
     "webpack-merge": "^4.1.2"

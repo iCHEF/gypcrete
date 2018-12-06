@@ -123,10 +123,10 @@ const rowComp = ({
             highlight: PropTypes.bool,
             disabled: PropTypes.bool,
 
-            ...statusPropTypes,
-            // status,
-            // statusOptions,
-            // errorMsg,
+            // status props
+            status: statusPropTypes.status,
+            statusOptions: statusPropTypes.statusOptions,
+            errorMsg: statusPropTypes.errorMsg,
         };
 
         static defaultProps = {

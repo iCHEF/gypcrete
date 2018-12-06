@@ -1,4 +1,3 @@
-// @flow
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
@@ -22,19 +21,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 const ICON_HIDE_TIMEOUT = 2 * 1000;
 
-export type Props = {
-    status?: 'loading' | 'success' | 'error',
-    position: 'inline' | 'corner',
-    autohide: boolean,
-};
-
-export type State = {
-    hideIcon: boolean,
-};
-
-class StatusIcon extends PureComponent<Props, Props, State> {
-    hideIconTimeout: ?number;
-
+class StatusIcon extends PureComponent {
     static propTypes = {
         status: PropTypes.oneOf(Object.values(STATUS_CODE)),
         position: PropTypes.oneOf(Object.values(STATUS_POSITION)),
@@ -47,7 +34,7 @@ class StatusIcon extends PureComponent<Props, Props, State> {
         autohide: true,
     };
 
-    constructor(props: Props) {
+    constructor(props) {
         super(props);
         this.hideIconTimeout = null;
     }
@@ -60,7 +47,7 @@ class StatusIcon extends PureComponent<Props, Props, State> {
         this.autoToggleStatusIcon();
     }
 
-    componentWillReceiveProps(nextProps: Props) {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.status !== this.props.status) {
             this.autoToggleStatusIcon(nextProps.status);
         }
@@ -87,7 +74,7 @@ class StatusIcon extends PureComponent<Props, Props, State> {
      *
      * @param {String} status - current or next 'status'
      */
-    autoToggleStatusIcon(status: $PropertyType<Props, 'status'> = this.props.status) {
+    autoToggleStatusIcon(status = this.props.status) {
         // Ignore if autohide === false
         if (!this.props.autohide) {
             return;

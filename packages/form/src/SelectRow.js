@@ -173,7 +173,7 @@ class SelectRow extends PureComponent {
             rowProps,
             // React props
             className,
-            ...selectListProps,
+            ...selectListProps
         } = this.props;
         const { popoverOpen } = this.state;
 

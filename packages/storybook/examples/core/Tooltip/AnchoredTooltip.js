@@ -31,10 +31,12 @@ class AnchoredTooltipExample extends PureComponent {
                     Hover on me
                 </span>
 
-                {(shouldShowTooltip && this.textRef) &&
-                    <AnchoredTooltip anchor={this.textRef}>
-                        Yo, I am a tooltip.
-                    </AnchoredTooltip>}
+                {(shouldShowTooltip && this.textRef)
+                    && (
+                        <AnchoredTooltip anchor={this.textRef}>
+                            Yo, I am a tooltip.
+                        </AnchoredTooltip>
+                    )}
             </div>
         );
     }

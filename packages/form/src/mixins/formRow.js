@@ -36,9 +36,7 @@ const formRow = ({
         }
 
         handleRef = (ref) => {
-            if (withRef) {
-                this.componentRef = ref;
-            }
+            this.componentRef = ref;
         }
 
         render() {
@@ -49,7 +47,7 @@ const formRow = ({
                 status,
                 statusOptions,
                 errorMsg,
-                ...otherProps,
+                ...otherProps
             } = this.props;
 
             const ineditable = disabled || readOnly;
@@ -62,7 +60,7 @@ const formRow = ({
 
             return (
                 <WrappedComponent
-                    ref={this.handleRef}
+                    ref={withRef ? this.handleRef : undefined}
                     ineditable={ineditable}
                     disabled={disabled}
                     readOnly={readOnly}

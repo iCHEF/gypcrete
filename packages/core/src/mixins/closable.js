@@ -45,10 +45,11 @@ const closable = ({
             },
         };
 
-        state = {
-            closeDelayTimeout: null,
-            clickedInside: false,
-        };
+        constructor(props) {
+            super(props);
+            this.clickedInside = false;
+            this.closeDelayTimeout = null;
+        }
 
         componentDidMount() {
             document.addEventListener('keyup', this.handleDocumentKeyup);
@@ -60,7 +61,7 @@ const closable = ({
             document.removeEventListener('keyup', this.handleDocumentKeyup);
             document.removeEventListener('click', this.handleDocumentClickOrTouch);
             document.removeEventListener('touchend', this.handleDocumentClickOrTouch);
-            clearTimeout(this.state.closeDelayTimeout);
+            clearTimeout(this.closeDelayTimeout);
         }
 
         getOptions() {
@@ -82,11 +83,10 @@ const closable = ({
          * before trigger the `onClose` event.
          */
         delayedClose = (event) => {
-            const timeout = setTimeout(
+            this.closeDelayTimeout = setTimeout(
                 () => this.props.onClose(event),
                 TOUCH_CLOSE_DELAY,
             );
-            this.setState({ closeDelayTimeout: timeout });
         }
 
         captureInsideEvents = (node) => {
@@ -108,8 +108,9 @@ const closable = ({
         handleDocumentClickOrTouch = (event) => {
             const options = this.getOptions();
 
-            if (this.state.clickedInside) {
-                this.setState({ clickedInside: false });
+            if (this.clickedInside) {
+                // already scheduled close when clicked inside, skip here.
+                this.clickedInside = false;
                 return;
             }
 
@@ -120,9 +121,9 @@ const closable = ({
 
         handleInsideClickOrTouch = (event) => {
             const options = this.getOptions();
-            this.setState({ clickedInside: true });
 
             if (options.onClickInside) {
+                this.clickedInside = true;
                 this.delayedClose(event);
             }
         }
@@ -132,7 +133,7 @@ const closable = ({
                 onClose,
                 closable: runtimeOptions,
                 className,
-                ...otherProps,
+                ...otherProps
             } = this.props;
 
             return (

@@ -56,8 +56,13 @@ class Checkbox extends PureComponent {
         }
     }
 
+    getInputRef() {
+        return this.inputRef;
+    }
+
     updateInputIndeterminate() {
-        this.inputRef.indeterminate = this.props.indeterminate;
+        const inputNode = this.getInputRef();
+        inputNode.indeterminate = this.props.indeterminate;
     }
 
     renderCheckboxInput(inputProps, overrideButton) {
@@ -87,7 +92,7 @@ class Checkbox extends PureComponent {
             // React props
             className,
             children,
-            ...otherProps,
+            ...otherProps
         } = this.props;
 
         const inputProps = {

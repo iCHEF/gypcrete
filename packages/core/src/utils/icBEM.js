@@ -1,5 +1,3 @@
-// @flow
-
 // -------------------------------------
 //   icBEM Helper
 //   @ref https://github.com/14islands/bem-helper-js
@@ -20,20 +18,8 @@ import isNonEmptyString from './isNonEmptyString';
 const ELEMENT_SEPARATOR = '__';
 const MODIFIER_SEPARATOR = '--';
 
-type FactoryParams = {
-    block: string,
-    element?: string,
-    modifiers?: string[],
-    nonBemClasses?: string[],
-};
-
 export class BEMFactory {
-    _block: string;
-    _element: string | void;
-    _modifiers: string[];
-    _nonBemClasses: string[];
-
-    constructor({ block, element, modifiers = [], nonBemClasses = [] }: FactoryParams) {
+    constructor({ block, element, modifiers = [], nonBemClasses = [] }) {
         if (!block) {
             throw new Error('block is required.');
         }
@@ -52,7 +38,7 @@ export class BEMFactory {
      * @param {String}
      * @return {BEMFactory}
      */
-    element(elementIdentifier: string): BEMFactory {
+    element(elementIdentifier) {
         if (isNonEmptyString(elementIdentifier)) {
             return new BEMFactory({
                 ...this.toHash(),
@@ -68,7 +54,7 @@ export class BEMFactory {
      * @param {String}
      * @return {BEMFactory}
      */
-    modifier(modifierIdentifier: string, isOn: boolean = true): BEMFactory {
+    modifier(modifierIdentifier, isOn = true) {
         if (isOn && isNonEmptyString(modifierIdentifier)) {
             return new BEMFactory({
                 ...this.toHash(),
@@ -84,7 +70,7 @@ export class BEMFactory {
      * @param {String}
      * @return {BEMFactory}
      */
-    add(className: string): BEMFactory {
+    add(className) {
         if (isNonEmptyString(className)) {
             return new BEMFactory({
                 ...this.toHash(),
@@ -100,7 +86,7 @@ export class BEMFactory {
      * @param {Bool} stripBlock - Should remove Block from output.
      * @return {String}
      */
-    toString({ stripBlock = false }: { stripBlock: boolean } = {}): string {
+    toString({ stripBlock = false } = {}) {
         const { _block, _element, _modifiers, _nonBemClasses } = this;
 
         const baseClass = (typeof _element !== 'undefined')
@@ -123,7 +109,7 @@ export class BEMFactory {
      *
      * @return {Hash}
      */
-    toHash(): FactoryParams {
+    toHash() {
         return {
             block: this._block,
             element: this._element,
@@ -132,13 +118,13 @@ export class BEMFactory {
         };
     }
 
-    valueOf(): string {
+    valueOf() {
         return this.toString();
     }
 }
 
 // Creates BEM chain based on context type
-function icBEM(blockName: string): BEMFactory {
+function icBEM(blockName) {
     if (typeof blockName === 'string') {
         return new BEMFactory({ block: blockName });
     }

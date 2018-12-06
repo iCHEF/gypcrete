@@ -84,7 +84,7 @@ class SwitchRow extends PureComponent {
             // React props
             className,
             children,
-            ...switchProps,
+            ...switchProps
         } = this.props;
 
         return (

@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 N/A
 
+## [2.0.0]
+### Breaking
+- [Core] [Form] [ImageEditor] Peer dependency changes:
+    * Switch from `babel-runtime` to `@babel/runtime-corejs2`. (#185)
+    * Upgrade to `react@^16.6.0` and `react-dom@^16.6.0`. (#187)
+- [Core] `anchored()` HOC mixin no longer uses `ReactDOM.findDOMNode()` to find the actual node for you. You should now manually set ref to both *anchor* element and *wrappred* element instead. Please read #189 for more info.
+
+### Changed
+- [Core] Remove flow type annotation. (#180)
+- [Core] Adapt React Portal in `renderToLayer()` HOC mixin. (#188)
+- [Core] Refactor `anchored()` mixin to extrac its positioning logic, and adapt memoize approach to not rely on lifecycle methods. (#190)
+- [Core] Refacto `closable()` mixin to reduce useless render calls. (#192)
+- [Storybook] Upgrade to `@storybook/react@^4.0.0` to support Babel 7. (#187)
+- [Build] Upgrade to `enzyme@3.7.0`; fix tests for that. (#183)
+- [Build] Upgrade to Babel v7; switch to project-scope Babel config. (#185)
+- [Build] Upgrade to `jest@23.6.0` to support Babel 7. (#185)
+- [Build] Upgrade to `eslint@5.8.0`, `eslint-config-ichef@2.0.1` and `eslint-config-airbnb@17.1.0`. (#186)
+- [Build] Upgrade to `react@16.6.1` and `prop-types@15.6.2`. (#187)
+
 ## [1.10.0]
 ### Added
 - [Core] Add new `<SplitView>` and `<SplitViewColumn>`. (#178)

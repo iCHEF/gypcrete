@@ -10,7 +10,6 @@ storiesOf('@ichef/gypcrete|SwitchIcon', module)
         withInfo(
             `A <SwitchIcon> is a visual element that is supposed
             to be like a 64x32 icon.`
-        )(BasicUsage)
-    )
+        )(BasicUsage))
     // Props table
     .add('props', getPropTables([SwitchIcon]));

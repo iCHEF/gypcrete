@@ -1,10 +1,11 @@
-// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+
+import './styles/_animations.scss';
 import './styles/Icon.scss';
 
 const COMPONENT_NAME = prefixClass('icon');
@@ -15,20 +16,18 @@ const BLUE = 'blue';
 const RED = 'red';
 export const ICON_COLOR = { GRAY, BLUE, RED };
 
-export type Props = {
-    type: string,
-    color?: typeof GRAY | typeof BLUE | typeof RED,
-    large?: boolean,
-    spinning?: boolean,
-    className?: string, // eslint-disable-line react/require-default-props
-};
-
-function Icon({ type, color, large, spinning, className, ...otherProps }: Props) {
+function Icon({
+    type,
+    color,
+    large,
+    spinning,
+    className,
+    ...otherProps
+}) {
     let bemClass = ROOT_BEM
         .modifier('large', large)
         .modifier('spin', spinning);
 
-    // Type refinement for Flow
     if (color) {
         bemClass = bemClass.modifier(color);
     }

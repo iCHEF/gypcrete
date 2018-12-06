@@ -1,8 +1,6 @@
-// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import type { AnyReactElement, ReactChildren } from 'react-flow-types';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
@@ -16,6 +14,7 @@ import Icon from './Icon';
 import Overlay from './Overlay';
 import TextLabel from './TextLabel';
 
+import './styles/_animations.scss';
 import './styles/Popup.scss';
 
 export const BUTTONS_DIRECTION = {
@@ -34,26 +33,14 @@ export const BEM = {
     buttonsGroup: ROOT_BEM.element('buttons-group')
 };
 
-export type Props = {
-    icon?: string | AnyReactElement,
-    message?: string | AnyReactElement,
-    buttons?: React$Element<*>[],
-    buttonsDirection: 'vertical' | 'horizontal',
-
-    /* eslint-disable react/require-default-props */
-    className?: string,
-    children?: ReactChildren,
-    /* eslint-enable react/require-default-props */
-};
-
-export function PopupIcon({ type }: { type: string }) {
+export function PopupIcon({ type }) {
     return <Icon large type={type} />;
 }
 PopupIcon.propTypes = {
     type: PropTypes.string.isRequired,
 };
 
-export function PopupMessage({ text }: { text: string }) {
+export function PopupMessage({ text }) {
     return <TextLabel align="center" basic={text} />;
 }
 PopupMessage.propTypes = {
@@ -109,8 +96,8 @@ function Popup({
     // React props
     className,
     children,
-    ...popupProps,
-}: Props) {
+    ...popupProps
+}) {
     const rootClassName = classNames(BEM.root.toString(), className);
 
     return (

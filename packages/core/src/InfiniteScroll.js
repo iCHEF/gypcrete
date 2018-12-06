@@ -47,7 +47,6 @@ class InfiniteScroll extends PureComponent {
     };
 
     static defaultProps = {
-        onLoadMore: () => {},
         threshold: 100,
         isLoading: false,
         hasMore: true,
@@ -84,17 +83,16 @@ class InfiniteScroll extends PureComponent {
      * @return {Number}
      */
     getScrollNodeHeight = () => {
-        const scrollNode = this.scrollNode;
         const { usePageAsContainer } = this.props;
 
         if (usePageAsContainer) {
-            const scrollNodeOffset = documentOffset(scrollNode) || {};
+            const scrollNodeOffset = documentOffset(this.scrollNode) || {};
             const scrollNodeTopOffset = scrollNodeOffset.top || 0;
 
-            return scrollNodeTopOffset + scrollNode.offsetHeight;
+            return scrollNodeTopOffset + this.scrollNode.offsetHeight;
         }
 
-        return scrollNode.scrollHeight;
+        return this.scrollNode.scrollHeight;
     }
 
     /**

@@ -25,7 +25,14 @@ module.exports = {
                 include: [
                     path.resolve(packageDirname, 'src')
                 ],
-                use: ['babel-loader'],
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            rootMode: 'upward',
+                        },
+                    },
+                ],
             },
             {
                 test: /\.scss$/,

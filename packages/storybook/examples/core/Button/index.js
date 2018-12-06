@@ -12,20 +12,10 @@ import ButtonWithStatusExample from './ButtonWithStatus';
 import CustomTagButtonExample from './CustomTagButton';
 
 storiesOf('@ichef/gypcrete|Button', module)
-    .add('basic usage',
-        withInfo()(BasicButtonExample)
-    )
-    .add('solid style',
-        withInfo()(SolidButtonExample)
-    )
-    .add('disabled state',
-        withInfo()(DisabledButtonExample)
-    )
-    .add('expanded button',
-        withInfo()(ExpandedButtonExample)
-    )
-    .add('with status',
-        withInfo()(ButtonWithStatusExample)
-    )
+    .add('basic usage', withInfo()(BasicButtonExample))
+    .add('solid style', withInfo()(SolidButtonExample))
+    .add('disabled state', withInfo()(DisabledButtonExample))
+    .add('expanded button', withInfo()(ExpandedButtonExample))
+    .add('with status', withInfo()(ButtonWithStatusExample))
     .add('custom tag', withInfo()(CustomTagButtonExample))
     .add('props', getPropTables([PureButton, Button]));

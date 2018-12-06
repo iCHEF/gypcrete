@@ -24,7 +24,7 @@ export const withStatusPropTypes = {
 const withStatus = ({
     withRef = false,
     withRawStatus = false,
-    ...defaultStatusOptions,
+    ...defaultStatusOptions
 } = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
 
