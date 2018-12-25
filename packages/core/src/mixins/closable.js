@@ -16,6 +16,9 @@ const TOUCH_CLOSE_DELAY = 100;
  * Formerlly `escapable()`.
  *
  * @param {object} options
+ * @param {boolean=} options.onEscape
+ * @param {boolean=} options.onClickOutside
+ * @param {boolean=} options.onClickInside
  */
 const closable = ({
     onEscape = true,
