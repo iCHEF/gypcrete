@@ -121,9 +121,9 @@ const closable = ({
 
         handleInsideClickOrTouch = (event) => {
             const options = this.getOptions();
+            this.clickedInside = true;
 
             if (options.onClickInside) {
-                this.clickedInside = true;
                 this.delayedClose(event);
             }
         }
