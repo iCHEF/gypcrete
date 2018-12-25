@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-N/A
+### Changed
+- [Core] Fix `closable()` mixin to or not to call `onClose()` correctly on inside-clicks. (#193)
 
 ## [2.0.0]
 ### Breaking
