@@ -16,6 +16,9 @@ const TOUCH_CLOSE_DELAY = 100;
  * Formerlly `escapable()`.
  *
  * @param {object} options
+ * @param {boolean=} options.onEscape
+ * @param {boolean=} options.onClickOutside
+ * @param {boolean=} options.onClickInside
  */
 const closable = ({
     onEscape = true,
@@ -121,9 +124,9 @@ const closable = ({
 
         handleInsideClickOrTouch = (event) => {
             const options = this.getOptions();
+            this.clickedInside = true;
 
             if (options.onClickInside) {
-                this.clickedInside = true;
                 this.delayedClose(event);
             }
         }

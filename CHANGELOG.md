@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 N/A
 
+## [2.0.1]
+### Changed
+- [Core] Fix `closable()` mixin to or not to call `onClose()` correctly on inside-clicks. (#193)
+
 ## [2.0.0]
 ### Breaking
 - [Core] [Form] [ImageEditor] Peer dependency changes:
