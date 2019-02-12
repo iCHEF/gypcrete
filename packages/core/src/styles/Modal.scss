@@ -12,14 +12,15 @@ $component: #{$prefix}-modal;
 // -------------------------------------
 .#{$prefix}-modal {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: top;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     padding: 10px;
+    padding-top: 0;
     text-align: center;
     z-index: z("modal");
 }
@@ -39,7 +40,7 @@ $component: #{$prefix}-modal;
         display: flex;
         flex-direction: column;
         position: relative;
-        border-radius: $modal-border-radius;
+        border-radius: 0 0 $modal-border-radius $modal-border-radius;
         box-shadow: $modal-box-shadow;
         overflow: hidden;
         text-align: left;
@@ -86,6 +87,20 @@ $component: #{$prefix}-modal;
     &--full {
         .#{$prefix}-modal__container {
             max-width: $modal-width-full;
+        }
+    }
+}
+
+// -------------------------------------
+//   Modal Position
+// -------------------------------------
+.#{$prefix}-modal {
+    &--center {
+        align-items: center;
+        padding-top: 10px;
+
+        .#{$prefix}-modal__container {
+            border-radius: $modal-border-radius;
         }
     }
 }
