@@ -5,7 +5,7 @@ import { withInfo } from '@storybook/addon-info';
 import Modal, { PureModal } from '@ichef/gypcrete/src/Modal';
 import getPropTables from 'utils/getPropTables';
 
-import BasicModalExample, { ClosableModalExample } from './BasicModal';
+import BasicModalExample, { ClosableModalExample, MulitpleClosableModalExample } from './BasicModal';
 
 storiesOf('@ichef/gypcrete|Modal', module)
     .add(
@@ -57,5 +57,11 @@ storiesOf('@ichef/gypcrete|Modal', module)
             Modal Content
         </BasicModalExample>
     )))
+    .add(
+        'multiple layer modals',
+        withInfo('Indented with 8px from each side for each layer. When number of layer > 7 we won\'t indent it')(() => (
+            <MulitpleClosableModalExample depth={8} />
+        ))
+    )
     // Props table
     .add('props', getPropTables([PureModal, Modal]));
