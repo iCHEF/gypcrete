@@ -100,11 +100,12 @@ class Modal extends PureComponent {
             bodyClassName,
             bodyPadding,
             onClose,
+            centered,
             // React props
             className,
             children,
         } = this.props;
-        const bemClass = BEM.root.modifier(size);
+        const bemClass = BEM.root.modifier('center', centered).modifier(size);
         const rootClassName = classNames(bemClass.toString(), className);
 
         return (
@@ -128,6 +129,7 @@ Modal.propTypes = {
     header: ModalContent.propTypes.header,
     bodyClassName: ModalContent.propTypes.bodyClassName,
     bodyPadding: ModalContent.propTypes.bodyPadding,
+    centered: PropTypes.bool,
 };
 
 Modal.defaultProps = {
@@ -136,6 +138,7 @@ Modal.defaultProps = {
     header: ModalContent.defaultProps.header,
     bodyClassName: ModalContent.defaultProps.bodyClassName,
     bodyPadding: ModalContent.defaultProps.bodyPadding,
+    centered: false,
 };
 
 export { Modal as PureModal };

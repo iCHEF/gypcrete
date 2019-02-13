@@ -38,6 +38,11 @@ describe('Pure <PureModal>', () => {
         testSizeProp('full');
     });
 
+    it('renders class names in response to the centered prop', () => {
+        const wrapper = shallow(<PureModal centered />);
+        expect(wrapper.hasClass(BEM.root.modifier('center').toString({ stripBlock: true }))).toBeTruthy();
+    });
+
     it('renders class names in response to the bodyPadding prop', () => {
         const wrapper = mount(<PureModal bodyPadding />);
         const paddingClass = BEM.body

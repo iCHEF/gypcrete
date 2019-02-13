@@ -52,5 +52,10 @@ storiesOf('@ichef/gypcrete|Modal', module)
             </ClosableModalExample>
         ))
     )
+    .add('centered modal', withInfo()(() => (
+        <BasicModalExample bodyPadding centered>
+            Modal Content
+        </BasicModalExample>
+    )))
     // Props table
     .add('props', getPropTables([PureModal, Modal]));
