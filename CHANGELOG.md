@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - [Core] Add centered prop into Modal to make it on top of screen by default (#196)
+- [Core] Shorten width for multiple modal. (#197)
 
 ## [2.0.1]
 ### Changed

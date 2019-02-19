@@ -1,6 +1,20 @@
 @import "./variables";
 
 // -------------------------------------
+//   String helpers
+// -------------------------------------
+
+@function repeat-str($str, $times) {
+    $ret: '';
+
+    @for $i from 1 through $times {
+        $ret: $ret + $str;
+    }
+
+    @return $ret;
+}
+
+// -------------------------------------
 //   Relative size calculator
 // -------------------------------------
 

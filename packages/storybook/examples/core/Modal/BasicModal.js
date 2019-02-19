@@ -49,5 +49,18 @@ class ClosableModalExample extends PureComponent {
     }
 }
 
-export { ClosableModalExample };
+const MulitpleClosableModalExample = (props) => {
+    const { depth, modalProp } = props;
+    if (depth === 0) {
+        return false;
+    }
+    return (
+        <ClosableModalExample {...modalProp}>
+            <div>{depth}</div>
+            <MulitpleClosableModalExample depth={depth - 1} />
+        </ClosableModalExample>
+    );
+};
+
+export { ClosableModalExample, MulitpleClosableModalExample };
 export default BasicModalExample;
