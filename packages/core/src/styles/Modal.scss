@@ -53,6 +53,7 @@ $component: #{$prefix}-modal;
         overflow: auto;
         display: flex;
         flex-direction: column;
+        padding-bottom: 24px;
 
         &--padding {
             padding: 24px;
