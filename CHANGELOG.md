@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - Can be controlled now, via props `value`, `onChange` and `onReset`.
     - No longer trigger `onSearch` when input blur by default. You can enable this behavior by setting prop `searchWhenInputBlur` be `true`
     - New prop `searchWhenInputChange`, when it is `true`, `onSearch` will be triggered every time after input changed. The default value is `false`.
+    - Rename prop `input` to be `inputProps`.
 - [Core] update `<SearchInput>` styles.
 - [Core] Add centered prop into Modal to make it on top of screen by default (#196)
 - [Core] Shorten width for multiple modal. (#197)
