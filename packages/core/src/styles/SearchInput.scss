@@ -32,4 +32,8 @@
         display: flex;
         align-content: flex-start;
     }
+
+    &__input-icon {
+        cursor: pointer;
+    }
 }
