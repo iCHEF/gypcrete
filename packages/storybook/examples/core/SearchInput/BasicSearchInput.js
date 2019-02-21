@@ -3,22 +3,50 @@ import React from 'react';
 import SearchInput from '@ichef/gypcrete/src/SearchInput';
 import DebugBox from 'utils/DebugBox';
 
-function BasicSearchInputExample() {
-    return (
-        <div>
-            <DebugBox>
-                <SearchInput />
-            </DebugBox>
+export default class BasicSearchInputExample extends React.Component {
+    state = {
+        controlledInputValue: '',
+    }
 
-            <DebugBox>
-                <SearchInput defaultValue="Monkey King" />
-            </DebugBox>
+    handleSearch = (keyword) => {
+        console.log('handleSearch', keyword);
+    }
 
-            <DebugBox>
-                <SearchInput defaultValue="Monkey King" status="loading" />
-            </DebugBox>
-        </div>
-    );
+    handleControlledInputChange = (e) => {
+        this.setState({
+            controlledInputValue: e.target.value,
+        });
+    }
+
+    handleControlledInputReset = () => {
+        this.setState({
+            controlledInputValue: '',
+        });
+    }
+
+    render() {
+        const { controlledInputValue } = this.state;
+        return (
+            <div>
+                <DebugBox>
+                    <SearchInput
+                        value={controlledInputValue}
+                        onChange={this.handleControlledInputChange}
+                        onSearch={this.handleSearch}
+                        onReset={this.handleControlledInputReset}
+                        searchWhenInputChange
+                        searchWhenInputBlur
+                    />
+                </DebugBox>
+
+                <DebugBox>
+                    <SearchInput defaultValue="Monkey King" />
+                </DebugBox>
+
+                <DebugBox>
+                    <SearchInput defaultValue="Monkey King" status="loading" />
+                </DebugBox>
+            </div>
+        );
+    }
 }
-
-export default BasicSearchInputExample;
