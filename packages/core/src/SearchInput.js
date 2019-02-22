@@ -34,8 +34,8 @@ class SearchInput extends Component {
         onChange: PropTypes.func,
         onSearch: PropTypes.func,
         onReset: PropTypes.func,
-        searchWhenInputChange: PropTypes.bool,
-        searchWhenInputBlur: PropTypes.bool,
+        searchOnInputChange: PropTypes.bool,
+        searchOnInputBlur: PropTypes.bool,
         blockDuplicateValueSearch: PropTypes.bool,
         blockEmptyValueSearch: PropTypes.bool,
     };
@@ -48,8 +48,8 @@ class SearchInput extends Component {
         onChange: () => {},
         onSearch: () => {},
         onReset: () => {},
-        searchWhenInputChange: false,
-        searchWhenInputBlur: false,
+        searchOnInputChange: false,
+        searchOnInputBlur: false,
         blockDuplicateValueSearch: false,
         blockEmptyValueSearch: false,
     };
@@ -64,25 +64,29 @@ class SearchInput extends Component {
 
     inputRef = React.createRef();
 
-    isFoucs = false;
+    isFoucsed = false;
 
     cachedValue = null;
 
     isControlled = () => (typeof this.props.value) !== 'undefined';
 
     handleInputChange = (event) => {
-        const { searchWhenInputChange, blockEmptyValueSearch, onChange, onSearch } = this.props;
+        const { searchOnInputChange, blockEmptyValueSearch, onChange, onSearch } = this.props;
+        const newValue = event.target.value;
+
         if (this.isControlled()) {
             onChange(event);
         } else {
-            this.setState({ innerValue: event.target.value });
+            this.setState({ innerValue: newValue });
         }
 
-        if (searchWhenInputChange) {
-            if (blockEmptyValueSearch && event.target.value === '') {
+        if (searchOnInputChange) {
+            if (blockEmptyValueSearch && newValue === '') {
                 return;
             }
-            onSearch(event.target.value);
+
+            this.cachedValue = newValue;
+            onSearch(newValue);
         }
     }
 
@@ -120,16 +124,16 @@ class SearchInput extends Component {
     }
 
     handleInputFocus = () => {
-        this.isFoucs = true;
+        this.isFoucsed = true;
     }
 
     handleInputBlur = () => {
-        this.isFoucs = false;
-        const { searchWhenInputBlur } = this.props;
-        if (searchWhenInputBlur) {
+        this.isFoucsed = false;
+        const { searchOnInputBlur } = this.props;
+        if (searchOnInputBlur) {
             // Prevent triggering `onSearch` when reset button clicked.
             setTimeout(() => {
-                if (!this.isFoucs) {
+                if (!this.isFoucsed) {
                     this.handleSearch();
                 }
             }, 30);

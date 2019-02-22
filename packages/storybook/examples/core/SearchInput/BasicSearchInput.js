@@ -1,24 +1,24 @@
 import React from 'react';
 
 import SearchInput from '@ichef/gypcrete/src/SearchInput';
+import { action } from '@storybook/addon-actions';
 import DebugBox from 'utils/DebugBox';
+
 
 export default class BasicSearchInputExample extends React.Component {
     state = {
         controlledInputValue: '',
     }
 
-    handleSearch = (keyword) => {
-        console.log('handleSearch', keyword);
-    }
-
     handleControlledInputChange = (e) => {
+        action('onChange')(e.target.value);
         this.setState({
             controlledInputValue: e.target.value,
         });
     }
 
     handleControlledInputReset = () => {
+        action('onReset')();
         this.setState({
             controlledInputValue: '',
         });
@@ -32,10 +32,10 @@ export default class BasicSearchInputExample extends React.Component {
                     <SearchInput
                         value={controlledInputValue}
                         onChange={this.handleControlledInputChange}
-                        onSearch={this.handleSearch}
+                        onSearch={action('onSearch')}
                         onReset={this.handleControlledInputReset}
-                        searchWhenInputChange
-                        searchWhenInputBlur
+                        searchOnInputChange
+                        searchOnInputBlur
                         blockDuplicateValueSearch
                         blockEmptyValueSearch
                     />
