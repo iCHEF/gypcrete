@@ -60,6 +60,8 @@ class SearchInput extends Component {
 
     inputRef = React.createRef();
 
+    isFoucs = false;
+
     isControlled = () => (typeof this.props.value) !== 'undefined';
 
     handleInputChange = (event) => {
@@ -96,15 +98,20 @@ class SearchInput extends Component {
         onSearch(this.isControlled() ? value : innerValue);
     }
 
+    handleInputFocus = () => {
+        this.isFoucs = true;
+    }
+
     handleInputBlur = () => {
+        this.isFoucs = false;
         const { searchWhenInputBlur } = this.props;
         if (searchWhenInputBlur) {
             // Prevent triggering `onSearch` when reset button clicked.
             setTimeout(() => {
-                if (document.activeElement !== this.inputRef.current) {
+                if (!this.isFoucs) {
                     this.handleSearch();
                 }
-            }, 50);
+            }, 30);
         }
     }
 
@@ -134,6 +141,7 @@ class SearchInput extends Component {
                         placeholder={placeholder}
                         value={inputValue}
                         onChange={this.handleInputChange}
+                        onFocus={this.handleInputFocus}
                         onBlur={this.handleInputBlur}
                         onKeyUp={this.handleInputKeyup}
                         ref={this.inputRef}
