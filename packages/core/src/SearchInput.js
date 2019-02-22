@@ -36,6 +36,8 @@ class SearchInput extends Component {
         onReset: PropTypes.func,
         searchWhenInputChange: PropTypes.bool,
         searchWhenInputBlur: PropTypes.bool,
+        blockDuplicateValueSearch: PropTypes.bool,
+        blockEmptyValueSearch: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -48,6 +50,8 @@ class SearchInput extends Component {
         onReset: () => {},
         searchWhenInputChange: false,
         searchWhenInputBlur: false,
+        blockDuplicateValueSearch: false,
+        blockEmptyValueSearch: false,
     };
 
     static contextTypes = {
@@ -62,10 +66,12 @@ class SearchInput extends Component {
 
     isFoucs = false;
 
+    cachedValue = null;
+
     isControlled = () => (typeof this.props.value) !== 'undefined';
 
     handleInputChange = (event) => {
-        const { searchWhenInputChange, onChange, onSearch } = this.props;
+        const { searchWhenInputChange, blockEmptyValueSearch, onChange, onSearch } = this.props;
         if (this.isControlled()) {
             onChange(event);
         } else {
@@ -73,6 +79,9 @@ class SearchInput extends Component {
         }
 
         if (searchWhenInputChange) {
+            if (blockEmptyValueSearch && event.target.value === '') {
+                return;
+            }
             onSearch(event.target.value);
         }
     }
@@ -92,10 +101,22 @@ class SearchInput extends Component {
     }
 
     handleSearch = () => {
-        const { onSearch, value } = this.props;
+        const { onSearch, value, blockDuplicateValueSearch, blockEmptyValueSearch } = this.props;
         const { innerValue } = this.state;
+        const newValue = this.isControlled() ? value : innerValue;
 
-        onSearch(this.isControlled() ? value : innerValue);
+        if (blockDuplicateValueSearch && (newValue === this.cachedValue)) {
+            return;
+        }
+
+        this.cachedValue = newValue;
+
+
+        if (blockEmptyValueSearch && newValue === '') {
+            return;
+        }
+
+        onSearch(newValue);
     }
 
     handleInputFocus = () => {
@@ -132,7 +153,7 @@ class SearchInput extends Component {
         return (
             <div className={rootClassName}>
                 <div className={BEM.inputWrapper}>
-                    <Icon type="search" onClick={this.handleSearch} className={`${BEM.icon}`} />
+                    <Icon type="search" />
 
                     <input
                         {...inputProps}

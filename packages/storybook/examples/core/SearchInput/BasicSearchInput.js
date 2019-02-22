@@ -36,6 +36,8 @@ export default class BasicSearchInputExample extends React.Component {
                         onReset={this.handleControlledInputReset}
                         searchWhenInputChange
                         searchWhenInputBlur
+                        blockDuplicateValueSearch
+                        blockEmptyValueSearch
                     />
                 </DebugBox>
 
