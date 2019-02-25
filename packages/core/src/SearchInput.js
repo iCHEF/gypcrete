@@ -64,8 +64,6 @@ class SearchInput extends Component {
 
     inputRef = React.createRef();
 
-    isFoucsed = false;
-
     cachedValue = null;
 
     isControlled = () => (typeof this.props.value) !== 'undefined';
@@ -92,7 +90,6 @@ class SearchInput extends Component {
 
     handleResetButtonClick = () => {
         this.inputRef.current.focus();
-
         const { onReset, value } = this.props;
         const { innerValue } = this.state;
 
@@ -123,20 +120,15 @@ class SearchInput extends Component {
         onSearch(newValue);
     }
 
-    handleInputFocus = () => {
-        this.isFoucsed = true;
-    }
-
     handleInputBlur = () => {
-        this.isFoucsed = false;
         const { searchOnInputBlur } = this.props;
         if (searchOnInputBlur) {
             // Prevent triggering `onSearch` when reset button clicked.
             setTimeout(() => {
-                if (!this.isFoucsed) {
+                if (document.activeElement !== this.inputRef.current) {
                     this.handleSearch();
                 }
-            }, 30);
+            }, 100);
         }
     }
 
@@ -166,7 +158,6 @@ class SearchInput extends Component {
                         placeholder={placeholder}
                         value={inputValue}
                         onChange={this.handleInputChange}
-                        onFocus={this.handleInputFocus}
                         onBlur={this.handleInputBlur}
                         onKeyUp={this.handleInputKeyup}
                         ref={this.inputRef}

@@ -34,7 +34,7 @@ export default class BasicSearchInputExample extends React.Component {
                         onChange={this.handleControlledInputChange}
                         onSearch={action('onSearch')}
                         onReset={this.handleControlledInputReset}
-                        searchOnInputChange
+                        // searchOnInputChange
                         searchOnInputBlur
                         blockDuplicateValueSearch
                         blockEmptyValueSearch
