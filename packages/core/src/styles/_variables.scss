@@ -65,11 +65,9 @@ $status-icon-corner-size: 16px;
 $button-border-radius: 4px;
 
 $search-input-background-color: $c-white;
-$search-input-border-color: $c-gray;
-$search-input-border-radius: 6px;
+$search-input-border-color: $c-black-30;
+$search-input-border-radius: 20px;
 $search-input-padding: 8px;
-
-$column-body-bottom-padding: 24px;
 
 $section-vertical-margin: 24px;
 $section-horizontal-padding: 16px;
@@ -108,6 +106,7 @@ $modal-height:           480px;
 $modal-max-height:       80vh;
 $modal-border-radius:    $popover-border-radius;
 $modal-box-shadow:       $poup-box-shadow;
+$modal-indent-layer-max: 7;
 
 $splitview-narrow-min-width: 240px;
 $splitview-narrow-max-width: 400px;
