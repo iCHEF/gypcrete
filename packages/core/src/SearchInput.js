@@ -18,25 +18,40 @@ export const BEM = {
     input: ROOT_BEM.element('input'),
     inputWrapper: ROOT_BEM.element('input-wrapper'),
     resetBtn: ROOT_BEM.element('reset-button'),
+    icon: ROOT_BEM.element('input-icon'),
 };
 
 // a React.Component ensures it can be re-rendered when context changes
 class SearchInput extends Component {
     static propTypes = {
         /**
-         * Use `input` to inject props to the underlying <input>
+         * Use `inputProps` to inject props to the underlying <input>
          */
-        input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+        inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
         placeholder: PropTypes.string,
         defaultValue: PropTypes.string,
+        value: PropTypes.string,
+        onChange: PropTypes.func,
         onSearch: PropTypes.func,
+        onReset: PropTypes.func,
+        searchOnInputChange: PropTypes.bool,
+        searchOnInputBlur: PropTypes.bool,
+        blockDuplicateValueSearch: PropTypes.bool,
+        blockEmptyValueSearch: PropTypes.bool,
     };
 
     static defaultProps = {
-        input: {},
+        inputProps: {},
         placeholder: 'Search',
+        value: undefined,
         defaultValue: '',
+        onChange: () => {},
         onSearch: () => {},
+        onReset: () => {},
+        searchOnInputChange: false,
+        searchOnInputBlur: false,
+        blockDuplicateValueSearch: false,
+        blockEmptyValueSearch: false,
     };
 
     static contextTypes = {
@@ -44,56 +59,92 @@ class SearchInput extends Component {
     };
 
     state = {
-        inputValue: this.props.defaultValue,
-        lastNotifiedValue: null,
+        innerValue: this.props.defaultValue,
     };
 
-    notifySearch() {
-        const { inputValue, lastNotifiedValue } = this.state;
+    inputRef = React.createRef();
 
-        if (inputValue !== lastNotifiedValue) {
-            this.setState({ lastNotifiedValue: inputValue });
-            this.props.onSearch(inputValue);
+    cachedValue = null;
+
+    isControlled = () => (typeof this.props.value) !== 'undefined';
+
+    handleInputChange = (event) => {
+        const { searchOnInputChange, blockEmptyValueSearch, onChange, onSearch } = this.props;
+        const newValue = event.target.value;
+
+        if (this.isControlled()) {
+            onChange(event);
+        } else {
+            this.setState({ innerValue: newValue });
+        }
+
+        if (searchOnInputChange) {
+            if (blockEmptyValueSearch && newValue === '') {
+                return;
+            }
+
+            this.cachedValue = newValue;
+            onSearch(newValue);
         }
     }
 
-    handleInputChange = (event) => {
-        this.setState({ inputValue: event.target.value });
+    handleResetButtonClick = () => {
+        this.inputRef.current.focus();
+        const { onReset, value } = this.props;
+        const { innerValue } = this.state;
+
+        if (this.isControlled()) {
+            onReset(value);
+        } else {
+            onReset(innerValue);
+            this.setState({ innerValue: '' });
+        }
     }
 
-    handleResetButtonClick = () => {
-        this.setState({ inputValue: '' }, () => this.notifySearch());
+    handleSearch = () => {
+        const { onSearch, value, blockDuplicateValueSearch, blockEmptyValueSearch } = this.props;
+        const { innerValue } = this.state;
+        const newValue = this.isControlled() ? value : innerValue;
+
+        if (blockDuplicateValueSearch && (newValue === this.cachedValue)) {
+            return;
+        }
+
+        this.cachedValue = newValue;
+
+
+        if (blockEmptyValueSearch && newValue === '') {
+            return;
+        }
+
+        onSearch(newValue);
     }
 
     handleInputBlur = () => {
-        this.notifySearch();
+        const { searchOnInputBlur } = this.props;
+        if (searchOnInputBlur) {
+            // Prevent triggering `onSearch` when reset button clicked.
+            setTimeout(() => {
+                if (document.activeElement !== this.inputRef.current) {
+                    this.handleSearch();
+                }
+            }, 100);
+        }
     }
 
     handleInputKeyup = (event) => {
         if (event.key === 'Enter') {
-            this.notifySearch();
+            this.handleSearch();
         }
     }
 
-    renderResetButton() {
-        return (
-            <button
-                type="button"
-                className={`${BEM.resetBtn}`}
-                aria-label="Reset"
-                tabIndex="-1"
-                onClick={this.handleResetButtonClick}>
-                <Icon type="delete" color="gray" />
-            </button>
-        );
-    }
-
     render() {
-        const { input: inputProps, placeholder, className } = this.props;
-        const { inputValue } = this.state;
+        const { inputProps, value, placeholder, className } = this.props;
+        const { innerValue } = this.state;
 
-        const rootClassName = classNames(className, `${BEM.root}`);
+        const inputValue = this.isControlled() ? value : innerValue;
         const isLoading = this.context.status === STATUS_CODE.LOADING;
+        const rootClassName = classNames(className, `${BEM.root}`);
 
         return (
             <div className={rootClassName}>
@@ -101,6 +152,7 @@ class SearchInput extends Component {
                     <Icon type="search" />
 
                     <input
+                        {...inputProps}
                         type="text"
                         className={`${BEM.input}`}
                         placeholder={placeholder}
@@ -108,10 +160,22 @@ class SearchInput extends Component {
                         onChange={this.handleInputChange}
                         onBlur={this.handleInputBlur}
                         onKeyUp={this.handleInputKeyup}
-                        {...inputProps} />
+                        ref={this.inputRef}
+                    />
 
                     {isLoading && <Icon type="loading" spinning color="gray" />}
-                    {inputValue && !isLoading && this.renderResetButton()}
+
+                    {(inputValue && !isLoading) && (
+                        <button
+                            type="button"
+                            className={`${BEM.resetBtn}`}
+                            aria-label="Reset"
+                            tabIndex="-1"
+                            onClick={this.handleResetButtonClick}
+                        >
+                            <Icon type="delete" color="gray" className={`${BEM.icon}`} />
+                        </button>
+                    )}
                 </div>
             </div>
         );
