@@ -2,17 +2,16 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 
+import icBEM from '../utils/icBEM';
+import prefixClass from '../utils/prefixClass';
 import getComponentName from '../utils/getComponentName';
 
-const ESCAPE = 'Escape';
+import '../styles/Closable.scss';
 
-const outerLayerStyle = {
-    position: 'fixed',
-    width: '100vw',
-    height: '100vh',
-    top: 0,
-    left: 0,
-};
+export const COMPONENT_NAME = prefixClass('closable');
+const ROOT_BEM = icBEM(COMPONENT_NAME);
+
+const ESCAPE = 'Escape';
 
 /**
  * `closable()` HOC mixin
@@ -127,8 +126,8 @@ const closable = ({
             return (
                 <div
                     role="presentation"
-                    onClick={this.handleOuterLayerClick}
-                    style={outerLayerStyle}>
+                    className={ROOT_BEM.toString()}
+                    onClick={this.handleOuterLayerClick}>
                     <div
                         className={className}
                         role="presentation"
