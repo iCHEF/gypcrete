@@ -119,7 +119,6 @@ const closable = ({
             const {
                 onClose,
                 closable: runtimeOptions,
-                className,
                 ...otherProps
             } = this.props;
 
@@ -128,12 +127,9 @@ const closable = ({
                     role="presentation"
                     className={ROOT_BEM.toString()}
                     onClick={this.handleOuterLayerClick}>
-                    <div
-                        className={className}
-                        role="presentation"
-                        onClick={this.handleInsideClick}>
-                        <WrappedComponent {...otherProps} />
-                    </div>
+                    <WrappedComponent
+                        handleInsideClick={this.handleInsideClick}
+                        {...otherProps} />
                 </div>
             );
         }

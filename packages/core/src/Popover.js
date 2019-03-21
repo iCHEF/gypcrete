@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import ListSpacingContext from './contexts/listSpacing';
@@ -24,10 +25,13 @@ export const BEM = {
 };
 
 function Popover({
+    onClick,
     // from anchored()
     placement,
     arrowStyle,
     nodeRef,
+    // from closable()
+    handleInsideClick,
     // React props
     className,
     children,
@@ -36,9 +40,19 @@ function Popover({
     const bemClass = BEM.root.modifier(placement);
     const rootClassName = classNames(bemClass.toString(), className);
 
+    const handleWrapperClick = (event) => {
+        handleInsideClick(event);
+        onClick(event);
+    };
+
     return (
         <ListSpacingContext.Provider value={false}>
-            <div className={rootClassName} ref={nodeRef} {...otherProps}>
+            <div
+                role="presentation"
+                className={rootClassName}
+                ref={nodeRef}
+                onClick={handleWrapperClick}
+                {...otherProps}>
                 <span className={BEM.arrow} style={arrowStyle} />
                 <div className={BEM.container}>
                     {children}
@@ -49,12 +63,15 @@ function Popover({
 }
 
 Popover.propTypes = {
+    onClick: PropTypes.func,
     placement: anchoredPropTypes.placement,
     arrowStyle: anchoredPropTypes.arrowStyle,
     nodeRef: anchoredPropTypes.nodeRef,
+    handleInsideClick: PropTypes.func.isRequired,
 };
 
 Popover.defaultProps = {
+    onClick: () => {},
     placement: ANCHORED_PLACEMENT.BOTTOM,
     arrowStyle: {},
     nodeRef: undefined,
