@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- [Core] Refactored `closable()` mixin to detect inside/outside clicks via React SyntheticEvent mechanism instead of listening native events from DOM.
 
 ## [2.1.0]
 ### Changed
