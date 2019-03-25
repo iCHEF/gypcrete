@@ -128,7 +128,7 @@ const closable = ({
                     className={ROOT_BEM.toString()}
                     onClick={this.handleOuterLayerClick}>
                     <WrappedComponent
-                        handleInsideClick={this.handleInsideClick}
+                        onInsideClick={this.handleInsideClick}
                         {...otherProps} />
                 </div>
             );

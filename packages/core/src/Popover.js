@@ -31,7 +31,7 @@ function Popover({
     arrowStyle,
     nodeRef,
     // from closable()
-    handleInsideClick,
+    onInsideClick,
     // React props
     className,
     children,
@@ -41,7 +41,7 @@ function Popover({
     const rootClassName = classNames(bemClass.toString(), className);
 
     const handleWrapperClick = (event) => {
-        handleInsideClick(event);
+        onInsideClick(event);
         onClick(event);
     };
 
@@ -67,7 +67,7 @@ Popover.propTypes = {
     placement: anchoredPropTypes.placement,
     arrowStyle: anchoredPropTypes.arrowStyle,
     nodeRef: anchoredPropTypes.nodeRef,
-    handleInsideClick: PropTypes.func.isRequired,
+    onInsideClick: PropTypes.func.isRequired,
 };
 
 Popover.defaultProps = {

@@ -9,16 +9,16 @@ import closable, {
     COMPONENT_NAME as OUTER_LAYER_NAME,
 } from '../closable';
 
-const Foo = ({ handleInsideClick }) => (
+const Foo = ({ onInsideClick }) => (
     <div
         id="foo"
         role="presentation"
-        onClick={handleInsideClick}>
+        onClick={onInsideClick}>
         Foo
     </div>
 );
 Foo.propTypes = {
-    handleInsideClick: PropTypes.func.isRequired,
+    onInsideClick: PropTypes.func.isRequired,
 };
 
 it('renders without crashing', () => {
