@@ -29,7 +29,10 @@ class TextInputRow extends PureComponent {
         minRows: PropTypes.number,
         maxRows: PropTypes.number,
         renderInput: PropTypes.func,
-        inputComponent: PropTypes.func,
+        inputComponent: PropTypes.oneOfType([
+            PropTypes.func,
+            PropTypes.string,
+        ]),
         // input props
         value: PropTypes.string,
         placeholder: PropTypes.string,
@@ -46,7 +49,7 @@ class TextInputRow extends PureComponent {
         minRows: 2,
         maxRows: undefined,
         renderInput: undefined,
-        inputComponent: undefined,
+        inputComponent: 'input',
         value: undefined,
         placeholder: 'Unset',
         onChange: () => {},
@@ -106,10 +109,7 @@ class TextInputRow extends PureComponent {
             return renderInput(inputProps);
         }
 
-        return React.createElement(
-            isFunction(inputComponent) ? inputComponent : 'input',
-            inputProps
-        );
+        return React.createElement(inputComponent, inputProps);
     }
 
     render() {
