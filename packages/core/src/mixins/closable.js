@@ -98,6 +98,12 @@ const closable = ({
         handleOuterLayerClick = (event) => {
             const options = this.getOptions();
 
+            if (this.clickedInside) {
+                // ignoring click events bubbling up from inside
+                this.clickedInside = false;
+                return;
+            }
+
             if (options.onClickOutside) {
                 this.props.onClose(event);
             }
@@ -108,7 +114,7 @@ const closable = ({
          */
         handleInsideClick = (event) => {
             const options = this.getOptions();
-            event.stopPropagation();
+            this.clickedInside = true;
 
             if (options.onClickInside) {
                 this.props.onClose(event);
