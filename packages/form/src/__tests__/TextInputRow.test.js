@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
 import { ListRow } from '@ichef/gypcrete';
+import AutoSizeTextarea from 'react-textarea-autosize';
+
 import TextInputRow, { PureTextInputRow, BEM } from '../TextInputRow';
 
 /**
@@ -86,45 +88,20 @@ describe('Pure <TextInputRow>', () => {
         expect(wrapper.find(ListRow).hasClass(focusedModifier)).toBeFalsy();
     });
 
-    it('auto-grows on mount, on focus and on change under multiLine mode', () => {
+    it('pass minRows & maxRows props to <AutoSizeTextarea> when multiLine is true', () => {
         const uncontrolledWrapper = mount(
             <PatchedRow
                 multiLine
                 label="foo"
-                defaultValue="bar" />
+                defaultValue="bar"
+                minRows={5}
+                maxRows={10}
+            />
         );
 
-        // componentDidMount()
-        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 30 });
-
-        // handleInputFocus()
-        uncontrolledWrapper.find('textarea').simulate('focus', {
-            target: { scrollHeight: 40 },
-        });
-        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 40 });
-
-        // handleInputChange()
-        uncontrolledWrapper.find('textarea').simulate('change', {
-            target: { scrollHeight: 90 },
-        });
-        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 90 });
-    });
-
-    it('auto-grows on controlled value change under multiLine mode', () => {
-        const controlledWrapper = mount(
-            <PatchedRow
-                multiLine
-                label="foo"
-                value="bar" />
-        );
-
-        // componentDidMount()
-        expect(controlledWrapper.find('textarea').prop('style')).toEqual({ height: 30 });
-
-        // componentDidUpdate()
-        controlledWrapper.setProps({ value: 'more bar' });
-        controlledWrapper.update();
-        expect(controlledWrapper.find('textarea').prop('style')).toEqual({ height: 60 });
+        const textareaWrapper = uncontrolledWrapper.find(AutoSizeTextarea);
+        expect(textareaWrapper.exists()).toBeTruthy();
+        expect(textareaWrapper.props()).toMatchObject({ minRows: 5, maxRows: 10 });
     });
 
     it('accepts additional children', () => {
@@ -135,14 +112,5 @@ describe('Pure <TextInputRow>', () => {
         );
 
         expect(wrapper.containsMatchingElement(<span data-foo />)).toBeTruthy();
-    });
-
-    it('keeps a ref to the <input> inside', () => {
-        const wrapper = mount(
-            <PureTextInputRow label="foo" />
-        );
-
-        const inputRef = wrapper.instance().getInputNode();
-        expect(inputRef).toBeInstanceOf(HTMLInputElement);
     });
 });

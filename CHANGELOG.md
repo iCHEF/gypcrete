@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
 - [Core] Refactored `closable()` mixin to detect inside/outside clicks via React SyntheticEvent mechanism instead of listening native events from DOM.
+- [Form] Enhance `<TextInputRow>`:
+    - Can render custom input by `renderInput` or `inputComponent` prop.
+    - Can specify textarea autosize rules by `minRows` and `maxRows` props.
 
 ## [2.1.0]
 ### Changed

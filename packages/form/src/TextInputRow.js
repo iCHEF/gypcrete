@@ -1,11 +1,10 @@
+/* eslint-disable class-methods-use-this */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import {
-    ListRow,
-    TextLabel,
-} from '@ichef/gypcrete';
+import { ListRow, TextLabel } from '@ichef/gypcrete';
+import AutoSizeTextarea from 'react-textarea-autosize';
 
 import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
 import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
@@ -21,10 +20,19 @@ export const BEM = {
     input: ROOT_BEM.element('input'),
 };
 
+const isFunction = func => (typeof func === 'function');
+
 class TextInputRow extends PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
         multiLine: PropTypes.bool,
+        minRows: PropTypes.number,
+        maxRows: PropTypes.number,
+        renderInput: PropTypes.func,
+        inputComponent: PropTypes.oneOfType([
+            PropTypes.func,
+            PropTypes.string,
+        ]),
         // input props
         value: PropTypes.string,
         placeholder: PropTypes.string,
@@ -38,6 +46,10 @@ class TextInputRow extends PureComponent {
 
     static defaultProps = {
         multiLine: false,
+        minRows: 2,
+        maxRows: undefined,
+        renderInput: undefined,
+        inputComponent: 'input',
         value: undefined,
         placeholder: 'Unset',
         onChange: () => {},
@@ -49,44 +61,10 @@ class TextInputRow extends PureComponent {
 
     state = {
         focused: false,
-        inputHeight: 'auto',
     };
 
-    componentDidMount() {
-        this.updateInputHeight(this.getInputRef());
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.value !== prevProps.value) {
-            this.updateInputHeight(this.getInputRef());
-        }
-    }
-
-    setInputRef = (ref) => {
-        this.inputRef = ref;
-    }
-
-    getInputRef = () => this.inputRef;
-
-    /**
-     * Use `getInputRef()` instead.
-     * Should remove in v2.
-     * @deprecated
-     */
-    getInputNode = this.getInputRef;
-
-    updateInputHeight(inputNode) {
-        const newHeight = inputNode.scrollHeight;
-        this.setState({ inputHeight: newHeight });
-    }
-
     handleInputFocus = (event) => {
-        const inputNode = event.target;
-
-        this.setState(
-            { focused: true },
-            () => this.updateInputHeight(inputNode)
-        );
+        this.setState({ focused: true });
         this.props.onFocus(event);
     }
 
@@ -95,55 +73,48 @@ class TextInputRow extends PureComponent {
         this.props.onBlur(event);
     }
 
-    handleInputChange = (event) => {
-        this.updateInputHeight(event.target);
-        this.props.onChange(event);
-    }
-
     renderInput({
         multiLine,
-        style: inputStyle = {},
-        ...inputProps
+        style = {},
+        renderInput,
+        inputComponent,
+        minRows,
+        maxRows,
+        ...otherProps
     }) {
         const sharedProps = {
-            ref: this.setInputRef,
             className: BEM.input.toString(),
+            style,
             onFocus: this.handleInputFocus,
             onBlur: this.handleInputBlur,
-        };
-
-        const textareaStyle = {
-            ...inputStyle,
-            height: this.state.inputHeight,
+            ...otherProps
         };
 
         if (multiLine) {
-            return (
-                <textarea
-                    style={textareaStyle}
-                    onChange={this.handleInputChange}
-                    {...sharedProps}
-                    {...inputProps} />
-            );
+            const textareaProps = {
+                ...sharedProps,
+                minRows,
+                maxRows,
+            };
+
+            return <AutoSizeTextarea {...textareaProps} />;
         }
 
-        return (
-            <input
-                type="text"
-                onChange={this.props.onChange}
-                {...sharedProps}
-                {...inputProps} />
-        );
+        const inputProps = {
+            type: 'text',
+            ...sharedProps,
+        };
+
+        if (isFunction(renderInput)) {
+            return renderInput(inputProps);
+        }
+
+        return React.createElement(inputComponent, inputProps);
     }
 
     render() {
         const {
             label,
-            // multiLine,
-            // input props
-            // value,
-            // placeholder,
-            onChange,
             onFocus,
             onBlur,
             // row props
@@ -171,7 +142,8 @@ class TextInputRow extends PureComponent {
             <ListRow className={rootClassName} {...rowProps}>
                 <TextLabel
                     basic={keyLabel}
-                    aside={input} />
+                    aside={input}
+                />
                 {children}
             </ListRow>
         );
