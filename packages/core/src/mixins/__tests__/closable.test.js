@@ -38,6 +38,7 @@ it('has default configs', () => {
         onEscape: true,
         onClickOutside: false,
         onClickInside: false,
+        stopEventPropagation: true,
     });
 });
 
@@ -48,6 +49,7 @@ it('takes runtime options', () => {
             closable={{
                 onEscape: false,
                 onClickOutside: true,
+                stopEventPropagation: false,
             }} />
     );
 
@@ -55,6 +57,7 @@ it('takes runtime options', () => {
         onEscape: false,
         onClickOutside: true,
         onClickInside: false,
+        stopEventPropagation: false,
     });
 });
 
@@ -71,6 +74,28 @@ it('tears down event listeners on unmount', () => {
     const event = new KeyboardEvent('keyup', { keyCode: keycode('Escape') });
     document.dispatchEvent(event);
     expect(handleClose).not.toHaveBeenCalled();
+});
+
+it('intercepts event propagation if instructed', () => {
+    const ClosableFoo = closable()(Foo);
+    const handleClick = jest.fn();
+
+    let wrapper = mount(
+        <div role="presentation" onClick={handleClick}>
+            <ClosableFoo closable={{ stopEventPropagation: true }} />
+        </div>
+    );
+    wrapper.find('div#foo').simulate('click');
+    expect(handleClick).not.toHaveBeenCalled();
+
+    wrapper = mount(
+        <div role="presentation" onClick={handleClick}>
+            <ClosableFoo closable={{ stopEventPropagation: false }} />
+        </div>
+    );
+
+    wrapper.find('div#foo').simulate('click');
+    expect(handleClick).toHaveBeenCalled();
 });
 
 describe.each`

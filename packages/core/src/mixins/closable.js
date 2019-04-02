@@ -20,18 +20,21 @@ const ESCAPE = 'Escape';
  * binding event listeners on `document`.
  *
  * Formerlly `escapable()`.
- *
- * @param {object} options
- * @param {boolean=} options.onEscape
- * @param {boolean=} options.onClickOutside
- * @param {boolean=} options.onClickInside
  */
 const closable = ({
     onEscape = true,
     onClickOutside = false,
     onClickInside = false,
+    stopEventPropagation = true,
 } = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
+
+    const mixinConfigs = {
+        onEscape,
+        onClickOutside,
+        onClickInside,
+        stopEventPropagation,
+    };
 
     class Closable extends PureComponent {
         static displayName = `closable(${componentName})`;
@@ -42,16 +45,13 @@ const closable = ({
                 onEscape: PropTypes.bool,
                 onClickOutside: PropTypes.bool,
                 onClickInside: PropTypes.bool,
+                stopEventPropagation: PropTypes.bool,
             }),
         };
 
         static defaultProps = {
             onClose: () => {},
-            closable: {
-                onEscape,
-                onClickInside,
-                onClickOutside,
-            },
+            closable: mixinConfigs,
         };
 
         constructor(props) {
@@ -68,17 +68,15 @@ const closable = ({
         }
 
         getOptions() {
-            const configuredOptions = {
-                onEscape,
-                onClickInside,
-                onClickOutside,
-            };
-            const runtimeOptions = this.props.closable;
+            const { closable: runtimeOptions } = this.props;
 
-            return {
-                ...configuredOptions,
+            /** @type {typeof mixinDefaults} */
+            const actualOptions = {
+                ...mixinConfigs,
                 ...runtimeOptions,
             };
+
+            return actualOptions;
         }
 
         /**
@@ -97,6 +95,10 @@ const closable = ({
          */
         handleOuterLayerClick = (event) => {
             const options = this.getOptions();
+
+            if (options.stopEventPropagation) {
+                event.stopPropagation();
+            }
 
             if (this.clickedInside) {
                 // ignoring click events bubbling up from inside
