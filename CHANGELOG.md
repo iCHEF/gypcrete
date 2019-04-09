@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Form] Enhance `<TextInputRow>`:
     - Can render custom input by `renderInput` or `inputComponent` prop.
     - Can specify textarea autosize rules by `minRows` and `maxRows` props.
+- [Storybook] Fix mangled component name in storybook build. (#203)
 
 ## [2.1.0]
 ### Changed
