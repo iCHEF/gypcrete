@@ -68,4 +68,14 @@
             flex-direction: row-reverse;
         }
     }
+
+    &--v-reverse {
+        .#{$prefix}-text__basic {
+            order: 2;
+        }
+
+        .#{$prefix}-text__aside {
+            order: 1;
+        }
+    }
 }

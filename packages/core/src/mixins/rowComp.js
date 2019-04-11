@@ -45,7 +45,7 @@ import getStateClassnames from '../utils/getStateClassnames';
 import { statusPropTypes } from './withStatus';
 
 import Icon from '../Icon';
-import Text from '../Text';
+import Text, { VERTICAL_ORDER } from '../Text';
 
 import { STATUS_CODE } from '../StatusIcon';
 
@@ -98,6 +98,7 @@ export function getTextLayoutProps(compAlign, hasIcon) {
 const rowComp = ({
     defaultMinified = false,
     defaultAlign = LEFT,
+    defaultVerticalOrder = VERTICAL_ORDER.NORMAL,
 } = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
 
@@ -108,7 +109,16 @@ const rowComp = ({
             minified: PropTypes.bool,
 
             // Text label props
-            align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
+            align: PropTypes.oneOf([
+                ROW_COMP_ALIGN.LEFT,
+                ROW_COMP_ALIGN.CENTER,
+                ROW_COMP_ALIGN.RIGHT,
+                ROW_COMP_ALIGN.REVERSE,
+            ]),
+            verticalOrder: PropTypes.oneOf([
+                VERTICAL_ORDER.NORMAL,
+                VERTICAL_ORDER.REVERSE,
+            ]),
             icon: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.element
@@ -133,6 +143,7 @@ const rowComp = ({
             minified: defaultMinified,
 
             align: defaultAlign,
+            verticalOrder: defaultVerticalOrder,
             icon: null,
             basic: null,
             aside: null,
@@ -182,6 +193,7 @@ const rowComp = ({
         renderContent() {
             const {
                 align,
+                verticalOrder,
                 icon,
                 basic,
                 aside,
@@ -198,6 +210,7 @@ const rowComp = ({
                 iconElement,
                 <Text
                     key="comp-text"
+                    verticalOrder={verticalOrder}
                     {...textProps}
                     {...textLayoutProps} />
             ];
@@ -208,6 +221,7 @@ const rowComp = ({
                 minified,
 
                 align,
+                verticalOrder,
                 icon,
                 basic,
                 aside,
