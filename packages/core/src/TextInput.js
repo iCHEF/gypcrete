@@ -3,62 +3,92 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import prefixClass from './utils/prefixClass';
-import rowComp, { getTextLayoutProps, ROW_COMP_ALIGN } from './mixins/rowComp';
+import icBEM from './utils/icBEM';
+import rowComp from './mixins/rowComp';
 
-import EditableText from './EditableText';
+import { PureText, TEXT_ALIGN, VERTICAL_ORDER } from './Text';
+import './styles/TextInput.scss';
 
 export const COMPONENT_NAME = prefixClass('text-input');
+const ROOT_BEM = icBEM(COMPONENT_NAME);
+
+export const BEM = {
+    label: ROOT_BEM.element('label'),
+    input: ROOT_BEM.element('input'),
+};
 
 /**
- * <TextInput>
- * ===========
- * The row component holding an editable `<input>` as its main part.
+ * A `<TextInput>` is a specialized `<TextLabel>`, which holds an editable `<input>`
+ * as its main part.
  * All unknown props are expected to be passed into the underlying `<input>`.
  *
- * What's different from other row component is: _basic text_ is not allowed
- * on a `<TextInput>`, since that place is occupied by an `<input>`.
+ * What's different from other row component is - it does not have a _basic text_
+ * not a _aside text_. Instead it holds a `label` and `value` (or `defaultValue`).
  *
  * @example
- * ```jsx
- * <TextInput
- *     value="Hello world"
- *     placeholder="(Unset)"
- *     onChange={event => console.log(event.target.value)} />
- * ```
+```jsx
+<TextInput
+    label="Welcome msg"
+    value="Hello world"
+    placeholder="(Unset)"
+    onChange={event => console.log(event.target.value)} />
+```
  */
 
-function TextInput(props, { align }) {
-    const {
-        wrapperProps,
-        // React props
-        className,
-        children, // strip out from component
-        ...editableTextProps
-    } = props;
-
+function TextInput({
+    label,
+    readOnly,
+    disabled,
+    // React props
+    className,
+    children,
+    ...inputProps
+}, context) {
     const rootClassName = classNames(className, COMPONENT_NAME);
-    const textLayoutProps = getTextLayoutProps(align, false);
+    const { textProps } = context;
+
+    const isEditable = !(readOnly || disabled);
+
+    const input = (
+        <input
+            className={BEM.input.toString()}
+            readOnly={readOnly}
+            disabled={disabled}
+            placeholder="Unset"
+            {...inputProps}
+        />
+    );
 
     return (
-        <div className={rootClassName} {...wrapperProps}>
-            <EditableText
-                {...textLayoutProps}
-                {...editableTextProps} />
+        <div className={rootClassName}>
+            <PureText
+                bold={isEditable}
+                align={textProps.align}
+                verticalOrder={textProps.verticalOrder}
+                basic={input}
+                aside={label}
+            />
         </div>
     );
 }
 
 TextInput.propTypes = {
-    wrapperProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    label: PropTypes.node,
+    readOnly: PropTypes.bool,
+    disabled: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
-    wrapperProps: {},
+    label: undefined,
+    readOnly: false,
+    disabled: false,
 };
 
 TextInput.contextTypes = {
-    align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
+    textProps: PropTypes.shape({
+        align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
+    }),
 };
 
 export { TextInput as PureTextInput };
-export default rowComp({ defaultAlign: ROW_COMP_ALIGN.REVERSE })(TextInput);
+export default rowComp({ defaultVerticalOrder: VERTICAL_ORDER.REVERSE })(TextInput);

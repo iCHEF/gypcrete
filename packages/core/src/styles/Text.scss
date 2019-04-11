@@ -60,12 +60,14 @@
     &--center {
         .#{$prefix}-text__row {
             justify-content: center;
+            text-align: center;
         }
     }
 
     &--right {
         .#{$prefix}-text__row {
             flex-direction: row-reverse;
+            text-align: right;
         }
     }
 
