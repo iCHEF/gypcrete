@@ -57,6 +57,7 @@ function TextInput({
     label,
     readOnly,
     disabled,
+    renderInput,
     // multi-line mode
     multiLine,
     minRows,
@@ -69,21 +70,25 @@ function TextInput({
     const rootClassName = classNames(className, COMPONENT_NAME);
     const { textProps } = context;
 
-    const input = (function renderInput() {
-        const sharedProps = {
+    const input = (() => {
+        const sharedInputProps = {
             className: BEM.input.toString(),
             placeholder: 'Unset',
             readOnly,
             disabled,
+            ...inputProps,
         };
+
+        if (renderInput) {
+            return renderInput(sharedInputProps);
+        }
 
         if (multiLine) {
             return (
                 <AutoSizeTextarea
                     minRows={minRows}
                     maxRows={maxRows}
-                    {...sharedProps}
-                    {...inputProps}
+                    {...sharedInputProps}
                 />
             );
         }
@@ -91,11 +96,10 @@ function TextInput({
         return (
             <input
                 type="text"
-                {...sharedProps}
-                {...inputProps}
+                {...sharedInputProps}
             />
         );
-    }());
+    })();
 
     const isEditable = !(readOnly || disabled);
 
@@ -116,6 +120,8 @@ TextInput.propTypes = {
     label: PropTypes.node,
     readOnly: PropTypes.bool,
     disabled: PropTypes.bool,
+    renderInput: PropTypes.func,
+    // multi-line mode
     multiLine: PropTypes.bool,
     minRows: PropTypes.number,
     maxRows: PropTypes.number,
@@ -125,6 +131,8 @@ TextInput.defaultProps = {
     label: undefined,
     readOnly: false,
     disabled: false,
+    renderInput: undefined,
+    // multi-line mode
     multiLine: false,
     minRows: 2,
     maxRows: undefined,

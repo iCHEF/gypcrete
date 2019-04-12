@@ -91,63 +91,78 @@ describe('pure <TextInput>', () => {
     });
 });
 
-describe.each([false, true])(
-    'input behavior when multiLine=%p',
-    (multiLine) => {
-        it('has shared props', () => {
-            const wrapper = shallow(<PureTextInput multiLine={multiLine} />);
+(describe.each`
+    type         | multiLine    | desc
+    ${'default'} | ${false}     | ${'in single-line mode'}
+    ${'default'} | ${true}      | ${'in multi-line mode'}
+    ${'custom'}  | ${undefined} | ${'from render function'}
+`)(
+    '$type input behavior $desc',
+    ({ type, multiLine }) => {
+        function buildWrapper(element) {
+            if (type === 'default') {
+                const wrapper = shallow(React.cloneElement(element, { multiLine }));
+                const getInputProps = () => wrapper.find(PureText).prop('basic').props;
 
-            expect(wrapper.find(PureText).prop('basic')).toMatchObject({
-                props: {
-                    className: BEM.input.toString(),
-                    placeholder: 'Unset',
-                    readOnly: false,
-                    disabled: false,
-                },
+                return [wrapper, getInputProps];
+            }
+
+            const mockedRenderInput = jest.fn(() => null);
+            const wrapper = shallow(React.cloneElement(element, {
+                renderInput: mockedRenderInput,
+            }));
+            const getInputProps = () => {
+                const { calls: funcCalls } = mockedRenderInput.mock;
+                const lastCall = funcCalls[funcCalls.length - 1];
+                return lastCall[0];
+            };
+
+            return [wrapper, getInputProps];
+        }
+
+        it('has shared props', () => {
+            const [, getInputProps] = buildWrapper(<PureTextInput />);
+
+            expect(getInputProps()).toMatchObject({
+                className: BEM.input.toString(),
+                placeholder: 'Unset',
+                readOnly: false,
+                disabled: false,
             });
         });
 
         it('is forwarded with props that is unknown for <TextInput>', () => {
             const handleChange = jest.fn();
-            const wrapper = shallow(
+            const [, getInputProps] = buildWrapper(
                 <PureTextInput
-                    multiLine={multiLine}
                     placeholder="(Empty)"
                     onChange={handleChange}
                 />
             );
 
-            expect(wrapper.find(PureText).prop('basic')).toMatchObject({
-                props: {
-                    placeholder: '(Empty)',
-                    onChange: handleChange,
-                },
+            expect(getInputProps()).toMatchObject({
+                placeholder: '(Empty)',
+                onChange: handleChange,
             });
         });
 
         it('reflects readOnly or disabled props', () => {
-            const wrapper = shallow(<PureTextInput multiLine={multiLine} />);
-            expect(wrapper.find(PureText).prop('basic')).toMatchObject({
-                props: {
-                    readOnly: false,
-                    disabled: false,
-                },
+            const [wrapper, getInputProps] = buildWrapper(<PureTextInput />);
+            expect(getInputProps()).toMatchObject({
+                readOnly: false,
+                disabled: false,
             });
 
             wrapper.setProps({ readOnly: true });
-            expect(wrapper.find(PureText).prop('basic')).toMatchObject({
-                props: {
-                    readOnly: true,
-                    disabled: false,
-                },
+            expect(getInputProps()).toMatchObject({
+                readOnly: true,
+                disabled: false,
             });
 
             wrapper.setProps({ readOnly: false, disabled: true });
-            expect(wrapper.find(PureText).prop('basic')).toMatchObject({
-                props: {
-                    readOnly: false,
-                    disabled: true,
-                },
+            expect(getInputProps()).toMatchObject({
+                readOnly: false,
+                disabled: true,
             });
         });
     }
