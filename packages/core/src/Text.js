@@ -70,6 +70,7 @@ class Text extends PureComponent {
 
     static defaultProps = {
         align: LEFT,
+        verticalOrder: VERTICAL_ORDER.NORMAL,
         aside: undefined,
         basicRow: <BasicRow />,
         noGrow: false,
