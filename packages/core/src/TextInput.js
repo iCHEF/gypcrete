@@ -15,11 +15,10 @@ export const COMPONENT_NAME = prefixClass('text-input');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 export const BEM = {
-    label: ROOT_BEM.element('label'),
     input: ROOT_BEM.element('input'),
 };
 
-function TextInputBasicRow({ basic, className }) {
+export function TextInputBasicRow({ basic, className }) {
     return (
         <div className={className}>
             {basic}
