@@ -28,6 +28,14 @@ function BasicUsage() {
 
             <DebugBox>
                 <TextInput
+                    label="Error input"
+                    defaultValue="Input Value"
+                    status="error"
+                    onChange={action('change')} />
+            </DebugBox>
+
+            <DebugBox>
+                <TextInput
                     readOnly
                     label="Read-only input"
                     value="Input Value" />

@@ -38,8 +38,9 @@ TextInputBasicRow.defaultProps = {
  * as its main part.
  * All unknown props are expected to be passed into the underlying `<input>`.
  *
- * What's different from other row component is - it does not have a _basic text_
- * not a _aside text_. Instead it holds a `label` and `value` (or `defaultValue`).
+ * What's different from other row component is:
+ *   1. It doesn't have `basic` nor `aside`. Instead it holds `label` and `value`/`defaultValue`.
+ *   2. It doesn't support status icons, error message nor tags
  *
  * @example
 ```jsx
