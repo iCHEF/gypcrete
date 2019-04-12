@@ -24,6 +24,7 @@ it('renders <Text> into wrapped component', () => {
     const wrapper = shallow(
         <RowCompFoo
             bold
+            verticalOrder="reverse"
             basic="Basic text"
             tag="Tag"
             aside="Aside text" />
@@ -31,10 +32,13 @@ it('renders <Text> into wrapped component', () => {
     const textWrapper = wrapper.find(Foo).shallow().find(Text);
 
     expect(textWrapper.exists()).toBeTruthy();
-    expect(textWrapper.prop('bold')).toBeTruthy();
-    expect(textWrapper.prop('basic')).toBe('Basic text');
-    expect(textWrapper.prop('tag')).toBe('Tag');
-    expect(textWrapper.prop('aside')).toBe('Aside text');
+    expect(textWrapper.props()).toMatchObject({
+        verticalOrder: 'reverse',
+        basic: 'Basic text',
+        aside: 'Aside text',
+        tag: 'Tag',
+        bold: true,
+    });
 });
 
 it('renders <Icon> and <Text> into wrapped component', () => {
@@ -60,41 +64,40 @@ it('takes a React Element as icon', () => {
 });
 
 it('renders <Text> with adjusted alignment', () => {
-    const leftWrapper = shallow(<RowCompFoo align="left" basic="Basic" />);
-    const centerWrapper = shallow(<RowCompFoo align="center" basic="Basic" />);
-    const centerIconWrapper = shallow(<RowCompFoo align="center" basic="Basic" icon="add" />);
-    const rightWrapper = shallow(<RowCompFoo align="right" basic="Basic" />);
-    const reverseWrapper = shallow(<RowCompFoo align="reverse" basic="Basic" />);
+    // Left-aligned
+    const wrapper = shallow(<RowCompFoo align="left" basic="Basic" />);
+    expect(wrapper.find(Text).props()).toMatchObject({
+        align: 'left',
+        noGrow: false,
+    });
 
-    expect(
-        leftWrapper
-            .find(Foo).shallow()
-            .find(Text).prop('align')
-    ).toBe('left');
+    // Center-aligned
+    wrapper.setProps({ align: 'center' });
+    expect(wrapper.find(Text).props()).toMatchObject({
+        align: 'center',
+        noGrow: true,
+    });
 
-    expect(
-        centerWrapper
-            .find(Foo).shallow()
-            .find(Text).prop('align')
-    ).toBe('center');
+    // Center-aligned with Icon
+    wrapper.setProps({ align: 'center', icon: 'add' });
+    expect(wrapper.find(Text).props()).toMatchObject({
+        align: 'left',
+        noGrow: true,
+    });
 
-    expect(
-        centerIconWrapper
-            .find(Foo).shallow()
-            .find(Text).prop('align')
-    ).toBe('left');
+    // Right-aligned
+    wrapper.setProps({ align: 'right' });
+    expect(wrapper.find(Text).props()).toMatchObject({
+        align: 'right',
+        noGrow: false,
+    });
 
-    expect(
-        rightWrapper
-            .find(Foo).shallow()
-            .find(Text).prop('align')
-    ).toBe('right');
-
-    expect(
-        reverseWrapper
-            .find(Foo).shallow()
-            .find(Text).prop('align')
-    ).toBe('right');
+    // Reverse-aligned
+    wrapper.setProps({ align: 'reverse' });
+    expect(wrapper.find(Text).props()).toMatchObject({
+        align: 'right',
+        noGrow: false,
+    });
 });
 
 it('passes down other props to wrapped component', () => {
@@ -116,10 +119,18 @@ it('holds context for children components', () => {
     const context = wrapper.instance().getChildContext();
 
     expect(context).toMatchObject({
-        align: 'right',
         status: 'success',
         statusOptions: { autoHide: true },
         errorMsg: 'foo-bar',
+        textProps: {
+            align: 'right',
+            basic: null,
+            aside: null,
+            tag: null,
+            bold: false,
+            noGrow: false,
+            verticalOrder: 'normal',
+        },
     });
 });
 
