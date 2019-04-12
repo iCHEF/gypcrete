@@ -17,6 +17,22 @@ export const BEM = {
     input: ROOT_BEM.element('input'),
 };
 
+function TextInputBasicRow({ basic, className }) {
+    return (
+        <div className={className}>
+            {basic}
+        </div>
+    );
+}
+
+TextInputBasicRow.propTypes = {
+    basic: PropTypes.node,
+};
+
+TextInputBasicRow.defaultProps = {
+    basic: undefined,
+};
+
 /**
  * A `<TextInput>` is a specialized `<TextLabel>`, which holds an editable `<input>`
  * as its main part.
@@ -62,9 +78,9 @@ function TextInput({
     return (
         <div className={rootClassName}>
             <PureText
+                {...textProps}
+                basicRow={<TextInputBasicRow />}
                 bold={isEditable}
-                align={textProps.align}
-                verticalOrder={textProps.verticalOrder}
                 basic={input}
                 aside={label}
             />
