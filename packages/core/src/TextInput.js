@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import AutoSizeTextarea from 'react-textarea-autosize';
+
 import prefixClass from './utils/prefixClass';
 import icBEM from './utils/icBEM';
 import rowComp from './mixins/rowComp';
@@ -56,6 +58,10 @@ function TextInput({
     label,
     readOnly,
     disabled,
+    // multi-line mode
+    multiLine,
+    minRows,
+    maxRows,
     // React props
     className,
     children,
@@ -64,17 +70,35 @@ function TextInput({
     const rootClassName = classNames(className, COMPONENT_NAME);
     const { textProps } = context;
 
-    const isEditable = !(readOnly || disabled);
+    const input = (function renderInput() {
+        const sharedProps = {
+            className: BEM.input.toString(),
+            placeholder: 'Unset',
+            readOnly,
+            disabled,
+        };
 
-    const input = (
-        <input
-            className={BEM.input.toString()}
-            readOnly={readOnly}
-            disabled={disabled}
-            placeholder="Unset"
-            {...inputProps}
-        />
-    );
+        if (multiLine) {
+            return (
+                <AutoSizeTextarea
+                    minRows={minRows}
+                    maxRows={maxRows}
+                    {...sharedProps}
+                    {...inputProps}
+                />
+            );
+        }
+
+        return (
+            <input
+                type="text"
+                {...sharedProps}
+                {...inputProps}
+            />
+        );
+    }());
+
+    const isEditable = !(readOnly || disabled);
 
     return (
         <div className={rootClassName}>
@@ -93,12 +117,18 @@ TextInput.propTypes = {
     label: PropTypes.node,
     readOnly: PropTypes.bool,
     disabled: PropTypes.bool,
+    multiLine: PropTypes.bool,
+    minRows: PropTypes.number,
+    maxRows: PropTypes.number,
 };
 
 TextInput.defaultProps = {
     label: undefined,
     readOnly: false,
     disabled: false,
+    multiLine: false,
+    minRows: 2,
+    maxRows: undefined,
 };
 
 TextInput.contextTypes = {
