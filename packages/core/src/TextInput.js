@@ -45,11 +45,28 @@ TextInputBasicRow.defaultProps = {
  *
  * @example
 ```jsx
+# Single-line mode
 <TextInput
     label="Welcome msg"
     value="Hello world"
     placeholder="(Unset)"
     onChange={event => console.log(event.target.value)} />
+
+# Multi-line mode
+<TextInput
+    multiLine
+    minRows={5}
+    maxRows={10}
+    label="Comments"
+/>
+
+# Custom rendering
+<TextInput
+    label="Pick a color"
+    renderInput={inputProps => (
+        <input type="color" {...inputProps} />
+    )}
+/>
 ```
  */
 
