@@ -5,12 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Breaking
+- [Core] Add `verticalOrder` prop to `<Text>` so you can swap the position of `basic` and `aside`. Also applied to `rowComp()` mixin.
+- [Core] Rewrite `<TextInput>` to match latest design, offering single-line `<input>`, multi-line `<textarea>` and supports custom rendering via render prop.
+- [Form] `<TextInputRow>` now renders the new `<TextInput>` and forwards almost every prop to it, **without** a ref to its inner input.
+
 ### Changed
 - [Core] Refactored `closable()` mixin to detect inside/outside clicks via React SyntheticEvent mechanism instead of listening native events from DOM.
-- [Form] Enhance `<TextInputRow>`:
-    - Can render custom input by `renderInput` or `inputComponent` prop.
-    - Can specify textarea autosize rules by `minRows` and `maxRows` props.
 - [Storybook] Fix mangled component name in storybook build. (#203)
+- [Storybook] Update examples for core `<TextInput>` and form `<TextInputRow>`. (#203)
 
 ## [2.1.0]
 ### Changed
