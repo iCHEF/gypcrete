@@ -63,40 +63,45 @@ it('takes a React Element as icon', () => {
     expect(fooWrapper.find('[data-foo]')).toHaveLength(1);
 });
 
-it('renders <Text> with adjusted alignment', () => {
-    // Left-aligned
-    const wrapper = shallow(<RowCompFoo align="left" basic="Basic" />);
-    expect(wrapper.find(Text).props()).toMatchObject({
-        align: 'left',
-        noGrow: false,
+describe('it renders <Text> with adjusted alignment', () => {
+    test('left-aligned', () => {
+        const wrapper = shallow(<RowCompFoo align="left" basic="Basic" />);
+        expect(wrapper.find(Text).props()).toMatchObject({
+            align: 'left',
+            noGrow: false,
+        });
     });
 
-    // Center-aligned
-    wrapper.setProps({ align: 'center' });
-    expect(wrapper.find(Text).props()).toMatchObject({
-        align: 'center',
-        noGrow: true,
+    test('center-aligned', () => {
+        const wrapper = shallow(<RowCompFoo align="center" basic="Basic" />);
+        expect(wrapper.find(Text).props()).toMatchObject({
+            align: 'center',
+            noGrow: true,
+        });
     });
 
-    // Center-aligned with Icon
-    wrapper.setProps({ align: 'center', icon: 'add' });
-    expect(wrapper.find(Text).props()).toMatchObject({
-        align: 'left',
-        noGrow: true,
+    test('center-aligned with Icon', () => {
+        const wrapper = shallow(<RowCompFoo align="center" icon="add" basic="Basic" />);
+        expect(wrapper.find(Text).props()).toMatchObject({
+            align: 'left',
+            noGrow: true,
+        });
     });
 
-    // Right-aligned
-    wrapper.setProps({ align: 'right' });
-    expect(wrapper.find(Text).props()).toMatchObject({
-        align: 'right',
-        noGrow: false,
+    test('right-aligned', () => {
+        const wrapper = shallow(<RowCompFoo align="right" basic="Basic" />);
+        expect(wrapper.find(Text).props()).toMatchObject({
+            align: 'right',
+            noGrow: false,
+        });
     });
 
-    // Reverse-aligned
-    wrapper.setProps({ align: 'reverse' });
-    expect(wrapper.find(Text).props()).toMatchObject({
-        align: 'right',
-        noGrow: false,
+    test('reverse-aligned', () => {
+        const wrapper = shallow(<RowCompFoo align="reverse" basic="Basic" />);
+        expect(wrapper.find(Text).props()).toMatchObject({
+            align: 'right',
+            noGrow: false,
+        });
     });
 });
 
