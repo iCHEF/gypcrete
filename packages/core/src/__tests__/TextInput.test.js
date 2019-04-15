@@ -5,7 +5,12 @@ import { shallow } from 'enzyme';
 import AutoSizeTextarea from 'react-textarea-autosize';
 
 import { PureText } from '../Text';
-import TextInput, { PureTextInput, TextInputBasicRow, BEM } from '../TextInput';
+import TextInput, {
+    PureTextInput,
+    TextInputBasicRow,
+    InnerInput,
+    BEM,
+} from '../TextInput';
 
 describe('<TextInputBasicRow> helper component', () => {
     it('renders "basic" with a simple wrapper', () => {
@@ -18,6 +23,51 @@ describe('<TextInputBasicRow> helper component', () => {
 
         expect(wrapper.hasClass('foo-row')).toBeTruthy();
         expect(wrapper.children().matchesElement(<div data-target />));
+    });
+});
+
+describe('<InnerInput> helper component', () => {
+    it('renders an <input type="text"> by default, with inputProps', () => {
+        const wrapper = shallow(<InnerInput inputProps={{ foo: 'bar' }} />);
+
+        expect(wrapper.matchesElement(
+            <input type="text" foo="bar" />
+        )).toBeTruthy();
+    });
+
+    it('renders an <AutoSizeTextarea> with defaults in multi-line mode, with inputProps', () => {
+        const wrapper = shallow(<InnerInput multiLine />);
+
+        expect(wrapper.matchesElement(
+            <AutoSizeTextarea minRows={2} />
+        )).toBeTruthy();
+
+        wrapper.setProps({
+            minRows: 5,
+            maxRows: 9,
+        });
+        expect(wrapper.matchesElement(
+            <AutoSizeTextarea minRows={5} maxRows={9} />
+        )).toBeTruthy();
+
+        wrapper.setProps({
+            inputProps: { foo: 'bar' },
+        });
+        expect(wrapper.matchesElement(
+            <AutoSizeTextarea minRows={5} maxRows={9} foo="bar" />
+        )).toBeTruthy();
+    });
+
+    it('allows custom input rendering via "renderInput" prop', () => {
+        const mockedRenderer = jest.fn(() => null);
+        shallow(
+            <InnerInput
+                inputProps={{ foo: 'bar' }}
+                renderInput={mockedRenderer}
+            />
+        );
+
+        expect(mockedRenderer).toHaveBeenLastCalledWith({ foo: 'bar' });
     });
 });
 
@@ -67,103 +117,63 @@ describe('pure <TextInput>', () => {
         expect(wrapper.find(PureText).prop('bold')).toBeFalsy();
     });
 
-    it('renders an <input type="text"> by default', () => {
-        const wrapper = shallow(<PureTextInput />);
+    it('renders a customized <InnerInput> on basic prop of <PureText>', () => {
+        const mockedRenderer = jest.fn(() => null);
 
-        expect(wrapper.find(PureText).prop('basic')).toMatchObject(
-            <input type="text" />
+        const wrapper = shallow(
+            <PureTextInput
+                multiLine
+                readOnly
+                minRows={5}
+                maxRows={9}
+                renderInput={mockedRenderer}
+            />
         );
-    });
 
-    it('renders an <AutoSizeTextarea> with defaults in multi-line mode', () => {
-        const wrapper = shallow(<PureTextInput multiLine />);
         expect(wrapper.find(PureText).prop('basic')).toMatchObject(
-            <AutoSizeTextarea minRows={2} />
+            <InnerInput
+                multiLine
+                minRows={5}
+                maxRows={9}
+                renderInput={mockedRenderer}
+                inputProps={{
+                    className: BEM.input.toString(),
+                    placeholder: 'Unset',
+                    readOnly: true,
+                    disabled: false,
+                }}
+            />
         );
 
         wrapper.setProps({
-            minRows: 5,
-            maxRows: 9,
-        });
-        expect(wrapper.find(PureText).prop('basic')).toMatchObject(
-            <AutoSizeTextarea minRows={5} maxRows={9} />
-        );
-    });
-});
-
-(describe.each`
-    type         | multiLine    | desc
-    ${'default'} | ${false}     | ${'in single-line mode'}
-    ${'default'} | ${true}      | ${'in multi-line mode'}
-    ${'custom'}  | ${undefined} | ${'from render function'}
-`)(
-    '$type input behavior $desc',
-    ({ type, multiLine }) => {
-        function buildWrapper(element) {
-            if (type === 'default') {
-                const wrapper = shallow(React.cloneElement(element, { multiLine }));
-                const getInputProps = () => wrapper.find(PureText).prop('basic').props;
-
-                return [wrapper, getInputProps];
-            }
-
-            const mockedRenderInput = jest.fn(() => null);
-            const wrapper = shallow(React.cloneElement(element, {
-                renderInput: mockedRenderInput,
-            }));
-            const getInputProps = () => {
-                const { calls: funcCalls } = mockedRenderInput.mock;
-                const lastCall = funcCalls[funcCalls.length - 1];
-                return lastCall[0];
-            };
-
-            return [wrapper, getInputProps];
-        }
-
-        it('has shared props', () => {
-            const [, getInputProps] = buildWrapper(<PureTextInput />);
-
-            expect(getInputProps()).toMatchObject({
-                className: BEM.input.toString(),
-                placeholder: 'Unset',
-                readOnly: false,
-                disabled: false,
-            });
+            multiLine: false,
+            readOnly: false,
+            disabled: true,
         });
 
-        it('is forwarded with props that is unknown for <TextInput>', () => {
-            const handleChange = jest.fn();
-            const [, getInputProps] = buildWrapper(
-                <PureTextInput
-                    placeholder="(Empty)"
-                    onChange={handleChange}
-                />
-            );
-
-            expect(getInputProps()).toMatchObject({
-                placeholder: '(Empty)',
-                onChange: handleChange,
-            });
-        });
-
-        it('reflects readOnly or disabled props', () => {
-            const [wrapper, getInputProps] = buildWrapper(<PureTextInput />);
-            expect(getInputProps()).toMatchObject({
-                readOnly: false,
-                disabled: false,
-            });
-
-            wrapper.setProps({ readOnly: true });
-            expect(getInputProps()).toMatchObject({
-                readOnly: true,
-                disabled: false,
-            });
-
-            wrapper.setProps({ readOnly: false, disabled: true });
-            expect(getInputProps()).toMatchObject({
+        expect(wrapper.find(PureText).prop('basic').props).toMatchObject({
+            multiLine: false,
+            inputProps: {
                 readOnly: false,
                 disabled: true,
-            });
+            },
         });
-    }
-);
+    });
+
+    it('forwards unknown props to <InnerInput> via "inputProps" prop', () => {
+        const handleChange = jest.fn();
+        const wrapper = shallow(
+            <PureTextInput
+                foo="bar"
+                onChange={handleChange}
+            />
+        );
+
+        expect(wrapper.find(PureText).prop('basic').props).toMatchObject({
+            inputProps: {
+                foo: 'bar',
+                onChange: handleChange,
+            },
+        });
+    });
+});

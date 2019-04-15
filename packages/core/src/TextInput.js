@@ -18,6 +18,11 @@ export const BEM = {
     input: ROOT_BEM.element('input'),
 };
 
+
+// --------------------
+//  Helper components
+// --------------------
+
 export function TextInputBasicRow({ basic, className }) {
     return (
         <div className={className}>
@@ -32,6 +37,51 @@ TextInputBasicRow.propTypes = {
 
 TextInputBasicRow.defaultProps = {
     basic: undefined,
+};
+
+export function InnerInput({
+    multiLine,
+    minRows,
+    maxRows,
+    renderInput,
+    inputProps,
+}) {
+    if (renderInput) {
+        return renderInput(inputProps);
+    }
+
+    if (multiLine) {
+        return (
+            <AutoSizeTextarea
+                minRows={minRows}
+                maxRows={maxRows}
+                {...inputProps}
+            />
+        );
+    }
+
+    return (
+        <input
+            type="text"
+            {...inputProps}
+        />
+    );
+}
+
+InnerInput.propTypes = {
+    multiLine: PropTypes.bool,
+    minRows: PropTypes.number,
+    maxRows: PropTypes.number,
+    renderInput: PropTypes.func,
+    inputProps: PropTypes.objectOf(PropTypes.any),
+};
+
+InnerInput.defaultProps = {
+    multiLine: false,
+    minRows: 2,
+    maxRows: undefined,
+    renderInput: undefined,
+    inputProps: {},
 };
 
 /**
@@ -74,8 +124,8 @@ function TextInput({
     label,
     readOnly,
     disabled,
+    // <InnerInput> props
     renderInput,
-    // multi-line mode
     multiLine,
     minRows,
     maxRows,
@@ -87,36 +137,21 @@ function TextInput({
     const rootClassName = classNames(className, COMPONENT_NAME);
     const { textProps } = context;
 
-    const input = (() => {
-        const sharedInputProps = {
-            className: BEM.input.toString(),
-            placeholder: 'Unset',
-            readOnly,
-            disabled,
-            ...inputProps,
-        };
-
-        if (renderInput) {
-            return renderInput(sharedInputProps);
-        }
-
-        if (multiLine) {
-            return (
-                <AutoSizeTextarea
-                    minRows={minRows}
-                    maxRows={maxRows}
-                    {...sharedInputProps}
-                />
-            );
-        }
-
-        return (
-            <input
-                type="text"
-                {...sharedInputProps}
-            />
-        );
-    })();
+    const input = (
+        <InnerInput
+            multiLine={multiLine}
+            minRows={minRows}
+            maxRows={maxRows}
+            renderInput={renderInput}
+            inputProps={{
+                className: BEM.input.toString(),
+                placeholder: 'Unset',
+                readOnly,
+                disabled,
+                ...inputProps,
+            }}
+        />
+    );
 
     const isEditable = !(readOnly || disabled);
 
@@ -137,8 +172,8 @@ TextInput.propTypes = {
     label: PropTypes.node,
     readOnly: PropTypes.bool,
     disabled: PropTypes.bool,
+    // <InnerInput> props
     renderInput: PropTypes.func,
-    // multi-line mode
     multiLine: PropTypes.bool,
     minRows: PropTypes.number,
     maxRows: PropTypes.number,
@@ -148,10 +183,10 @@ TextInput.defaultProps = {
     label: undefined,
     readOnly: false,
     disabled: false,
+    // <InnerInput> props
     renderInput: undefined,
-    // multi-line mode
-    multiLine: false,
-    minRows: 2,
+    multiLine: undefined,
+    minRows: undefined,
     maxRows: undefined,
 };
 
