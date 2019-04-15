@@ -45,12 +45,6 @@ describe('<InnerInput> helper component', () => {
         wrapper.setProps({
             minRows: 5,
             maxRows: 9,
-        });
-        expect(wrapper.matchesElement(
-            <AutoSizeTextarea minRows={5} maxRows={9} />
-        )).toBeTruthy();
-
-        wrapper.setProps({
             inputProps: { foo: 'bar' },
         });
         expect(wrapper.matchesElement(
