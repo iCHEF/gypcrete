@@ -45,7 +45,7 @@ import getStateClassnames from '../utils/getStateClassnames';
 import { statusPropTypes } from './withStatus';
 
 import Icon from '../Icon';
-import Text from '../Text';
+import Text, { VERTICAL_ORDER } from '../Text';
 
 import { STATUS_CODE } from '../StatusIcon';
 
@@ -59,6 +59,16 @@ const CENTER = 'center';
 const RIGHT = 'right';
 const REVERSE = 'reverse';
 export const ROW_COMP_ALIGN = { LEFT, CENTER, RIGHT, REVERSE };
+
+export const textPropTypes = {
+    align: PropTypes.string,
+    noGrow: PropTypes.bool,
+    verticalOrder: PropTypes.string,
+    basic: PropTypes.node,
+    aside: PropTypes.node,
+    tag: PropTypes.node,
+    bold: PropTypes.bool,
+};
 
 /**
  * Determine alignment for pre-configured <Text> based on
@@ -84,9 +94,8 @@ function determineTextAlign(compAlign, hasIcon) {
  * Get 'align' and 'noGrow' layout props for <Text>
  * as it would receive if rendered by rowComp().
  *
- * @param  {String} compAlign
- * @param  {Bool}   hasIcon
- * @return {Object} layoutProps
+ * @param  {string} compAlign
+ * @param  {boolean}   hasIcon
  */
 export function getTextLayoutProps(compAlign, hasIcon) {
     return {
@@ -98,6 +107,7 @@ export function getTextLayoutProps(compAlign, hasIcon) {
 const rowComp = ({
     defaultMinified = false,
     defaultAlign = LEFT,
+    defaultVerticalOrder = VERTICAL_ORDER.NORMAL,
 } = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
 
@@ -108,7 +118,16 @@ const rowComp = ({
             minified: PropTypes.bool,
 
             // Text label props
-            align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
+            align: PropTypes.oneOf([
+                ROW_COMP_ALIGN.LEFT,
+                ROW_COMP_ALIGN.CENTER,
+                ROW_COMP_ALIGN.RIGHT,
+                ROW_COMP_ALIGN.REVERSE,
+            ]),
+            verticalOrder: PropTypes.oneOf([
+                VERTICAL_ORDER.NORMAL,
+                VERTICAL_ORDER.REVERSE,
+            ]),
             icon: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.element
@@ -133,6 +152,7 @@ const rowComp = ({
             minified: defaultMinified,
 
             align: defaultAlign,
+            verticalOrder: defaultVerticalOrder,
             icon: null,
             basic: null,
             aside: null,
@@ -149,7 +169,7 @@ const rowComp = ({
         };
 
         static childContextTypes = {
-            align: PropTypes.oneOf(Object.values(ROW_COMP_ALIGN)),
+            textProps: PropTypes.shape(textPropTypes),
             ...statusPropTypes,
             // status,
             // statusOptions,
@@ -157,13 +177,38 @@ const rowComp = ({
         };
 
         getChildContext() {
-            const { align, status, statusOptions, errorMsg } = this.props;
+            const { status, statusOptions, errorMsg } = this.props;
+            const textProps = this.getTextProps();
 
             return {
                 status,
                 statusOptions,
                 errorMsg,
-                align, // for <TextInput>
+                // for <TextInput>
+                textProps,
+            };
+        }
+
+        getTextProps() {
+            const {
+                align,
+                verticalOrder,
+                icon,
+                basic,
+                aside,
+                tag,
+                bold,
+            } = this.props;
+
+            const textLayoutProps = getTextLayoutProps(align, !!icon);
+
+            return {
+                verticalOrder,
+                basic,
+                aside,
+                tag,
+                bold,
+                ...textLayoutProps,
             };
         }
 
@@ -180,26 +225,12 @@ const rowComp = ({
         }
 
         renderContent() {
-            const {
-                align,
-                icon,
-                basic,
-                aside,
-                tag,
-                bold,
-            } = this.props;
-            const textProps = { basic, aside, tag, bold };
-            const textLayoutProps = getTextLayoutProps(align, !!icon);
-
-            // Render icon element
             const iconElement = this.renderIconElement();
+            const textProps = this.getTextProps();
 
             return [
                 iconElement,
-                <Text
-                    key="comp-text"
-                    {...textProps}
-                    {...textLayoutProps} />
+                <Text key="comp-text" {...textProps} />
             ];
         }
 
@@ -208,6 +239,7 @@ const rowComp = ({
                 minified,
 
                 align,
+                verticalOrder,
                 icon,
                 basic,
                 aside,

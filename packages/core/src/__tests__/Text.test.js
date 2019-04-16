@@ -106,4 +106,12 @@ describe('Pure <Text>', () => {
 
         expect(wrapper.hasClass('gyp-text--bold')).toBeTruthy();
     });
+
+    it('can render in vertical-order reverse mode', () => {
+        const wrapper = shallow(<PureText basic="foo" />);
+        expect(wrapper.hasClass('gyp-text--v-normal')).toBeTruthy();
+
+        wrapper.setProps({ verticalOrder: 'reverse' });
+        expect(wrapper.hasClass('gyp-text--v-reverse')).toBeTruthy();
+    });
 });

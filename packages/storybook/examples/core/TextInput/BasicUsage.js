@@ -8,31 +8,45 @@ function BasicUsage() {
     return (
         <div>
             <DebugBox>
-                <TextInput onChange={action('change')} />
+                <TextInput label="Label" onChange={action('change')} />
             </DebugBox>
 
             <DebugBox>
                 <TextInput
-                    value="Controlled input"
+                    align="reverse"
+                    label="Controlled input"
+                    value="Input Value"
                     onChange={action('change')} />
             </DebugBox>
 
             <DebugBox>
                 <TextInput
-                    defaultValue="Uncontrolled input"
+                    label="Uncontrolled input"
+                    defaultValue="Input Value"
+                    onChange={action('change')} />
+            </DebugBox>
+
+            <DebugBox>
+                <TextInput
+                    label="Error input"
+                    defaultValue="Input Value"
+                    status="error"
                     onChange={action('change')} />
             </DebugBox>
 
             <DebugBox>
                 <TextInput
                     readOnly
-                    value="Read-only input" />
+                    label="Read-only input"
+                    value="Input Value" />
             </DebugBox>
 
             <DebugBox>
                 <TextInput
                     disabled
-                    value="Disabled input" />
+                    label="Disabled input"
+                    value="Input Value"
+                    onChange={action('change')} />
             </DebugBox>
         </div>
     );

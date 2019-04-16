@@ -1,4 +1,5 @@
 @import "./mixins";
+@import "./states";
 
 .#{$prefix}-row-comp {
     font-size: rem($basic-text-font-size);
