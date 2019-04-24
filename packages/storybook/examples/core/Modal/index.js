@@ -7,6 +7,18 @@ import getPropTables from 'utils/getPropTables';
 
 import BasicModalExample, { ClosableModalExample, MulitpleClosableModalExample } from './BasicModal';
 
+function BigContentBlock() {
+    return (
+        <div
+            style={{
+                height: 500,
+                border: '3px solid red',
+            }}>
+            Big Content Block
+        </div>
+    );
+}
+
 storiesOf('@ichef/gypcrete|Modal', module)
     .add(
         'basic usage',
@@ -37,6 +49,30 @@ storiesOf('@ichef/gypcrete|Modal', module)
         withInfo()(() => (
             <BasicModalExample bodyPadding size="full" header="Full Modal">
                 Modal Content
+            </BasicModalExample>
+        ))
+    )
+    .add(
+        'modal with default padding',
+        withInfo()(() => (
+            <BasicModalExample header="Modal">
+                <BigContentBlock />
+            </BasicModalExample>
+        ))
+    )
+    .add(
+        'modal without padding bottom',
+        withInfo()(() => (
+            <BasicModalExample removePaddingBottom header="Modal">
+                <BigContentBlock />
+            </BasicModalExample>
+        ))
+    )
+    .add(
+        'modal with bodyPadding and removePaddingBottom',
+        withInfo()(() => (
+            <BasicModalExample bodyPadding removePaddingBottom header="Modal">
+                <BigContentBlock />
             </BasicModalExample>
         ))
     )
