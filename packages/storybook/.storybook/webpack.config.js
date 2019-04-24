@@ -18,14 +18,16 @@ module.exports = (baseConfig, env, defaultConfig) => {
     // Following config customize the TerserPlugin to remove the mangling.
     // Note that this will make the total bundle size increase a little (2.9MB => 3.2MB).
     // Consider storybook is for developer this should be fine.
-    // eslint-disable-next-line no-param-reassign
-    defaultConfig.optimization.minimizer = [new TerserPlugin({
-        cache: true,
-        parallel: true,
-        terserOptions: {
-            mangle: false,
-        }
-    })];
+    if (defaultConfig.optimization && env === 'PRODUCTION') {
+        // eslint-disable-next-line no-param-reassign
+        defaultConfig.optimization.minimizer = [new TerserPlugin({
+            cache: true,
+            parallel: true,
+            terserOptions: {
+                mangle: false,
+            }
+        })];
+    }
 
     // Ref: Storybook webpack dev config https://git.io/fpJ6h
     const babelLoaderRule = defaultConfig.module.rules[0];
