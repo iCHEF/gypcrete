@@ -55,12 +55,14 @@ export const ModalContent = ({
     header,
     bodyClassName,
     bodyPadding,
+    removePaddingBottom,
     // React props
     children,
 }) => {
     const cNames = classNames(
         bodyClassName,
-        `${BEM.body.modifier('padding', bodyPadding)}`
+        `${BEM.body.modifier('padding', bodyPadding)}`,
+        `${BEM.body.modifier('remove-padding-bottom', removePaddingBottom)}`,
     );
     return (
         <div className={BEM.container}>
@@ -77,12 +79,14 @@ ModalContent.propTypes = {
     header: PropTypes.node,
     bodyClassName: PropTypes.string,
     bodyPadding: PropTypes.bool,
+    removePaddingBottom: PropTypes.bool,
 };
 
 ModalContent.defaultProps = {
     header: undefined,
     bodyClassName: '',
     bodyPadding: false,
+    removePaddingBottom: false,
 };
 
 class Modal extends PureComponent {
@@ -99,6 +103,7 @@ class Modal extends PureComponent {
             header,
             bodyClassName,
             bodyPadding,
+            removePaddingBottom,
             onClose,
             centered,
             // React props
@@ -115,6 +120,7 @@ class Modal extends PureComponent {
                     header={header}
                     bodyClassName={bodyClassName}
                     bodyPadding={bodyPadding}
+                    removePaddingBottom={removePaddingBottom}
                     onClose={onClose}>
                     {children}
                 </ModalContent>
@@ -129,6 +135,7 @@ Modal.propTypes = {
     header: ModalContent.propTypes.header,
     bodyClassName: ModalContent.propTypes.bodyClassName,
     bodyPadding: ModalContent.propTypes.bodyPadding,
+    removePaddingBottom: ModalContent.propTypes.removePaddingBottom,
     centered: PropTypes.bool,
 };
 
@@ -138,6 +145,7 @@ Modal.defaultProps = {
     header: ModalContent.defaultProps.header,
     bodyClassName: ModalContent.defaultProps.bodyClassName,
     bodyPadding: ModalContent.defaultProps.bodyPadding,
+    removePaddingBottom: ModalContent.defaultProps.removePaddingBottom,
     centered: false,
 };
 

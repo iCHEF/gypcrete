@@ -58,6 +58,10 @@ $component: #{$prefix}-modal;
         &--padding {
             padding: 24px;
         }
+
+        &--remove-padding-bottom {
+            padding-bottom: 0 !important;
+        }
     } // Header
     &__header {
         flex: 0 0 auto;

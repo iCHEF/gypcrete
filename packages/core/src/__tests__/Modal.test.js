@@ -51,6 +51,14 @@ describe('Pure <PureModal>', () => {
         expect(wrapper.find(`.${paddingClass}`).exists()).toBeTruthy();
     });
 
+    it('renders class names in response to the removePaddingBottom prop', () => {
+        const wrapper = mount(<PureModal removePaddingBottom />);
+        const paddingClass = BEM.body
+            .modifier('remove-padding-bottom', true)
+            .toString({ stripBlock: true });
+        expect(wrapper.find(`.${paddingClass}`).exists()).toBeTruthy();
+    });
+
     it('renders content of the modal', () => {
         const content = <div>TestContent</div>;
         const wrapper = shallow(<PureModal>{content}</PureModal>);
@@ -112,6 +120,22 @@ describe('Pure <ModalContent>', () => {
         const wrapper = shallow(<ModalContent />);
         const paddingClass = BEM.body
             .modifier('padding', true)
+            .toString({ stripBlock: true });
+        expect(wrapper.find(`.${paddingClass}`).exists()).toBeFalsy();
+    });
+
+    it('should render remove-padding-bottom class if the prop removePaddingBottom is true', () => {
+        const wrapper = shallow(<ModalContent removePaddingBottom />);
+        const paddingClass = BEM.body
+            .modifier('remove-padding-bottom', true)
+            .toString({ stripBlock: true });
+        expect(wrapper.find(`.${paddingClass}`).exists()).toBeTruthy();
+    });
+
+    it('should not render remove-padding-bottom class if the prop removePaddingBottom is null', () => {
+        const wrapper = shallow(<ModalContent />);
+        const paddingClass = BEM.body
+            .modifier('remove-padding-bottom', true)
             .toString({ stripBlock: true });
         expect(wrapper.find(`.${paddingClass}`).exists()).toBeFalsy();
     });
