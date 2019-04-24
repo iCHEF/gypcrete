@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - [Core] Refactored `closable()` mixin to detect inside/outside clicks via React SyntheticEvent mechanism instead of listening native events from DOM.
+- [Core] Add `removePaddingBotom` on `<Modal>` to remove padding bottom.
 - [Storybook] Fix mangled component name in storybook build. (#203)
 - [Storybook] Update examples for core `<TextInput>` and form `<TextInputRow>`. (#203)
 
