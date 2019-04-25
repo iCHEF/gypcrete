@@ -6,6 +6,7 @@ import EditableBasicRow from './EditableBasicRow';
 import Icon from './Icon';
 import StatusIcon from './StatusIcon';
 import Tag from './Tag';
+import Avatar from './Avatar';
 import Text from './Text';
 import EditableText from './EditableText';
 import Tooltip from './Tooltip';
@@ -49,6 +50,7 @@ export {
     StatusIcon,
     Tag,
     Text,
+    Avatar,
     EditableText,
     Tooltip,
     SwitchIcon,
