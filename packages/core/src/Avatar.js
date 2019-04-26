@@ -10,19 +10,37 @@ import prefixClass from './utils/prefixClass';
 const COMPONENT_NAME = prefixClass('avatar');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
-function Avatar({ className, src, alt }) {
-    const rootClass = classNames(`${ROOT_BEM.toString()}`, className);
+const SQUARE = 'square';
+const ROUNDED = 'rounded';
+const CIRCLE = 'circle';
+export const AVATAR_TYPE = { SQUARE, ROUNDED, CIRCLE };
+
+function Avatar({
+    className,
+    src,
+    alt,
+    type,
+    ...otherProps
+}) {
+    const bemClass = ROOT_BEM.modifier(type);
+
+    const rootClassName = classNames(className, `${bemClass}`);
 
     return (
-        <div className={rootClass}>
+        <div className={rootClassName} {...otherProps}>
             <img alt={alt} src={src} />
         </div>
     );
 }
 
 Avatar.propTypes = {
-    src: PropTypes.bool.isRequired,
-    alt: PropTypes.bool.isRequired,
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(Object.values(AVATAR_TYPE)),
+};
+
+Avatar.defaultProps = {
+    type: SQUARE,
 };
 
 export default Avatar;
