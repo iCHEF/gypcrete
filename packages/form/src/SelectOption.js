@@ -17,6 +17,7 @@ export const TYPE_SYMBOL = Symbol('SelectOption');
 function SelectOption({
     label,
     value,
+    avatar,
     readOnly,
     checked,
     onChange,
@@ -32,6 +33,7 @@ function SelectOption({
                 checked={checked}
                 disabled={readOnly}
                 basic={label}
+                avatar={avatar}
                 onChange={handleCheckboxChange}
                 {...checkboxProps} />
         </ListRow>
