@@ -7,17 +7,19 @@ import SelectRow from '@ichef/gypcrete-form/src/SelectRow';
 import Option from '@ichef/gypcrete-form/src/SelectOption';
 
 function WithAvatar() {
-    const rdAvatar = <Avatar type="square" alt="Avatar of RD" src="https://api.adorable.io/avatars/285/rd@ichef.tw" />;
-    const designAvatar = <Avatar alt="Avatar of Design" src="https://api.adorable.io/avatars/285/design@ichef.tw" />;
+    const loveAvatar = <Avatar alt="Love" src="https://api.adorable.io/avatars/285/love@ichef.tw" />;
+    const trumpsAvatar = <Avatar alt="Trumps" src="https://api.adorable.io/avatars/285/trumps@ichef.tw" />;
+    const hateAvatar = <Avatar alt="Hate" src="https://api.adorable.io/avatars/285/hate@ichef.tw" />;
 
     return (
         <List title="Switch rows">
             <SelectRow
-                desc="Default is off"
-                defaultValues={['RD']}
+                desc="Select One Avatar"
+                defaultValues={['Love']}
                 onChange={action('change')}>
-                <Option label="RD" value="RD" avatar={rdAvatar} />
-                <Option label="Design" value="Design" avatar={designAvatar} />
+                <Option label="Love" value="Love" avatar={loveAvatar} />
+                <Option label="Trumps" value="Trumps" avatar={trumpsAvatar} />
+                <Option label="Hate" value="Hate" avatar={hateAvatar} />
             </SelectRow>
         </List>
     );
