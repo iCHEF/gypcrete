@@ -42,3 +42,9 @@
         margin-left: 0;
     }
 }
+
+.#{$prefix}-list-row__body > .#{$prefix}-avatar {
+    &:first-child {
+        margin-left: 0;
+    }
+}
