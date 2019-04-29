@@ -9,6 +9,7 @@
     overflow: hidden;
     margin: .2rem .45rem .2rem .25rem;
     background-color: $c-gray;
+    flex-shrink: 0;
 
     // ----------------------
     //  <Avatar> variants
