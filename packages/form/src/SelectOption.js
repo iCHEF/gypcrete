@@ -43,6 +43,7 @@ function SelectOption({
 SelectOption.propTypes = {
     label: PropTypes.node.isRequired,
     value: valueType,
+    avatar: PropTypes.node,
     readOnly: PropTypes.bool,
     // Set by <SelectList>
     checked: PropTypes.bool,
@@ -51,6 +52,7 @@ SelectOption.propTypes = {
 
 SelectOption.defaultProps = {
     value: null,
+    avatar: null,
     readOnly: false,
     checked: false,
     onChange: () => {},
