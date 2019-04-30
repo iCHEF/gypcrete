@@ -40,28 +40,18 @@ const CLOSABLE_CONFIG = {
  * @param {array} fromOptions
  * @return {Map}
  */
-function getValueLabelMap(fromChildren = []) {
+function getValueToLabelAvatarMap(fromChildren = []) {
     const resultMap = new Map();
     const options = parseSelectOptions(fromChildren);
 
     options.forEach(
-        option => resultMap.set(option.value, option.label)
-    );
-    return resultMap;
-}
-
-/**
- * Generate a value-avatar map from all `<SelectOption>`s.
- *
- * @param {array} fromOptions
- * @return {Map}
- */
-function getValueAvatarMap(fromChildren = []) {
-    const resultMap = new Map();
-    const options = parseSelectOptions(fromChildren);
-
-    options.forEach(
-        option => resultMap.set(option.value, option.avatar)
+        (option) => {
+            const { label, avatar } = option;
+            resultMap.set(option.value, {
+                label,
+                avatar,
+            });
+        }
     );
     return resultMap;
 }
@@ -100,15 +90,13 @@ class SelectRow extends PureComponent {
 
     state = {
         popoverOpen: false,
-        valueLabelMap: getValueLabelMap(this.props.children),
-        avatarLabelMap: getValueAvatarMap(this.props.children),
+        valueLabelMap: getValueToLabelAvatarMap(this.props.children),
         cachedValues: this.props.values || this.props.defaultValues,
     };
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            valueLabelMap: getValueLabelMap(nextProps.children),
-            avatarLabelMap: getValueAvatarMap(nextProps.children),
+            valueLabelMap: getValueToLabelAvatarMap(nextProps.children),
         });
 
         if (this.getIsControlled(nextProps)) {
@@ -170,19 +158,25 @@ class SelectRow extends PureComponent {
         }
 
         return cachedValues
-            .map(value => valueLabelMap.get(value))
+            .map((value) => {
+                const valueMap = valueLabelMap.get(value) || {};
+                return valueMap.label;
+            })
             .join(asideSeparator);
     }
 
     renderAvatar() {
-        const { cachedValues, avatarLabelMap } = this.state;
+        const { cachedValues, valueLabelMap } = this.state;
 
         if (cachedValues.length === 0) {
             return null;
         }
 
         return cachedValues
-            .map(value => avatarLabelMap.get(value));
+            .map((value) => {
+                const valueMap = valueLabelMap.get(value) || {};
+                return valueMap.avatar;
+            });
     }
 
     render() {
