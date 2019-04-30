@@ -5,7 +5,7 @@ import Avatar from '@ichef/gypcrete/src/Avatar';
 import DebugBox from 'utils/DebugBox';
 
 function BasicCheckboxExample() {
-    const rdAvatar = <Avatar type="square" alt="Avatar of RD" src="https://api.adorable.io/avatars/285/rd@ichef.tw" />;
+    const rdAvatar = <Avatar type="square" alt="John Doe" src="https://api.adorable.io/avatars/285/johndoe@example.com" />;
 
     return (
         <div>
