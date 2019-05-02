@@ -49,6 +49,7 @@ export const BEM = {
  */
 class ImageEditor extends PureComponent {
     static propTypes = {
+        scale: PropTypes.number,
         minScale: PropTypes.number,
         maxScale: PropTypes.number,
         initCropRect: PropTypes.shape({
@@ -57,6 +58,7 @@ class ImageEditor extends PureComponent {
             width: PropTypes.number,
             height: PropTypes.number,
         }),
+        onScaleChange: PropTypes.func,
         onCropChange: PropTypes.func,
         onLoadSuccess: PropTypes.func,
         // appearance configs
@@ -73,9 +75,11 @@ class ImageEditor extends PureComponent {
     };
 
     static defaultProps = {
+        scale: undefined,
         minScale: 0.5,
         maxScale: 5,
         initCropRect: undefined,
+        onScaleChange: () => {},
         onCropChange: () => {},
         onLoadSuccess: () => {},
         // appearance configs
@@ -96,6 +100,8 @@ class ImageEditor extends PureComponent {
         position: getInitPosition(this.props.initCropRect) || DEFAULT_POSITION,
     };
 
+    editorRef = React.createRef();
+
     componentWillReceiveProps(nextProps) {
         // Consider current `scale`, `position` and `initCropRect` outdated when image changes
         if (nextProps.image !== this.props.image) {
@@ -113,16 +119,13 @@ class ImageEditor extends PureComponent {
      *
      * Setting ref with instance method doesn't break. It's just MAGIC.
      */
-    setCanvasRef = (ref) => {
-        this.canvasRef = ref;
-    }
-
-    getCanvasRef = () => this.canvasRef;
+    getImageCanvas = () => this.editorRef.current.getImage();
 
     handleSliderChange = (event) => {
         const newScale = Number(event.target.value);
 
         this.setState({ scale: newScale });
+        this.props.onScaleChange(newScale);
     }
 
     handleCanvasPosChange = (newPos) => {
@@ -136,7 +139,7 @@ class ImageEditor extends PureComponent {
 
     handleCanvasImageChange = () => {
         if (!this.props.readOnly) {
-            const newCropRect = this.canvasRef && this.canvasRef.getCroppingRect();
+            const newCropRect = this.editorRef.current && this.editorRef.current.getCroppingRect();
             this.props.onCropChange(newCropRect);
         }
 
@@ -145,7 +148,7 @@ class ImageEditor extends PureComponent {
     }
 
     handleCanvasLoadSuccess = (imgInfo) => {
-        const cropRect = this.canvasRef && this.canvasRef.getCroppingRect();
+        const cropRect = this.editorRef.current && this.editorRef.current.getCroppingRect();
 
         this.props.onLoadSuccess(imgInfo, cropRect);
     }
@@ -156,6 +159,7 @@ class ImageEditor extends PureComponent {
         }
 
         const {
+            scale,
             minScale,
             maxScale,
             image,
@@ -168,7 +172,7 @@ class ImageEditor extends PureComponent {
             <div className={BEM.control.toString()}>
                 <input
                     type="range"
-                    value={this.state.scale}
+                    value={scale || this.state.scale}
                     className={BEM.slider.toString()}
                     disabled={shouldDisable}
                     step="0.1"
@@ -192,6 +196,7 @@ class ImageEditor extends PureComponent {
             readOnly,
             loading,
             // props for <AvatarEditor>
+            scale,
             image,
             width,
             height,
@@ -221,11 +226,11 @@ class ImageEditor extends PureComponent {
         );
         const canvas = (
             <AvatarEditor
-                ref={this.setCanvasRef}
+                ref={this.editorRef}
                 image={image}
                 width={width}
                 height={height}
-                scale={this.state.scale}
+                scale={scale || this.state.scale}
                 position={this.state.position}
                 onImageChange={this.handleCanvasImageChange}
                 onPositionChange={this.handleCanvasPosChange}

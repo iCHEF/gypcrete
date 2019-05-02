@@ -109,7 +109,7 @@ it('notifies new cropping rect whenever <AvatarEditor> think it changes', () => 
     );
 
     // mock <AvatarEditor> instance API
-    wrapper.instance().setCanvasRef({ getCroppingRect });
+    wrapper.instance().editorRef.current = { getCroppingRect };
 
     wrapper.find(AvatarEditor).simulate('imageChange');
     expect(handleCropChange).toHaveBeenLastCalledWith(CROP_RECT_FOO);
@@ -147,7 +147,7 @@ it('notifies imgInfo and cropping rect when image successfully loaded', () => {
     );
 
     // mock <AvatarEditor> instance API
-    wrapper.instance().setCanvasRef({ getCroppingRect });
+    wrapper.instance().editorRef.current = { getCroppingRect };
 
     wrapper.find(AvatarEditor).simulate('loadSuccess', MOCKED_IMG_INFO);
     expect(handleLoadSuccess).toHaveBeenLastCalledWith(MOCKED_IMG_INFO, MOCKED_CROP_RECT);
@@ -199,11 +199,29 @@ it('resets cached scale and position when image changes', () => {
     expect(wrapper.find(AvatarEditor).prop('position')).toEqual(DEFAULT_POSITION);
 });
 
-it('offers accessor method to ref to inner <AvatarEditor>', () => {
-    const MOCKED_REF = { getCroppingRect: () => {} };
+it('can get current image canvas via "getImageCanvas" method', () => {
+    const MOCKED_REF = { getImage: () => 'foo' };
     const wrapper = shallow(<ImageEditor image={TRANSPARENT_IMAGE} />);
 
-    // mock reference first as it does not happend under shallow rendering
-    wrapper.instance().setCanvasRef(MOCKED_REF);
-    expect(wrapper.instance().getCanvasRef()).toBe(MOCKED_REF);
+    wrapper.instance().editorRef.current = MOCKED_REF;
+    expect(wrapper.instance().getImageCanvas()).toBe('foo');
+});
+
+it('can be controlled by "scale" & "onScaleChange" props', () => {
+    const mockedHandleScaleChange = jest.fn();
+    const wrapper = shallow(
+        <ImageEditor
+            control
+            image={TRANSPARENT_IMAGE}
+            scale={0.87}
+            onScaleChange={mockedHandleScaleChange}
+        />
+    );
+
+    expect(wrapper.find(AvatarEditor).prop('scale')).toBe(0.87);
+
+    wrapper.find('input[type="range"]').simulate('change', {
+        target: { value: 1.5 },
+    });
+    expect(mockedHandleScaleChange).toBeCalledWith(1.5);
 });
