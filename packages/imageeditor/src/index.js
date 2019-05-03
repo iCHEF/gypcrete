@@ -202,6 +202,7 @@ class ImageEditor extends PureComponent {
             height,
             onImageChange,
             onPositionChange,
+            onScaleChange,
             // react props
             className,
             style,
