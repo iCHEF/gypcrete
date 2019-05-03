@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Avatar from '@ichef/gypcrete/src/Avatar';
 import List from '@ichef/gypcrete/src/List';
 import ListRow from '@ichef/gypcrete/src/ListRow';
 
@@ -13,6 +14,11 @@ function NormalList() {
     return (
         <DebugBox width="30rem">
             <List variant="normal" title="List title" desc="Help text here">
+                <ListRow>
+                    <Avatar alt="iCHEF" src="https://api.adorable.io/avatars/285/hello@ichef.tw" />
+                    <TextLabel basic="Hello World" />
+                </ListRow>
+
                 <ListRow>
                     <TextLabel icon="tickets" basic="Hello World" />
                 </ListRow>

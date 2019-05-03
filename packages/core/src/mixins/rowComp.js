@@ -133,6 +133,7 @@ const rowComp = ({
                 PropTypes.element
             ]),
             basic: PropTypes.node,
+            avatar: PropTypes.node,
             aside: PropTypes.node,
             tag: PropTypes.node,
             bold: PropTypes.bool,
@@ -155,6 +156,7 @@ const rowComp = ({
             verticalOrder: defaultVerticalOrder,
             icon: null,
             basic: null,
+            avatar: null,
             aside: null,
             tag: null,
             bold: false,
@@ -237,7 +239,7 @@ const rowComp = ({
         render() {
             const {
                 minified,
-
+                avatar,
                 align,
                 verticalOrder,
                 icon,
@@ -276,6 +278,7 @@ const rowComp = ({
 
             return (
                 <WrappedComponent className={wrapperClassName} {...otherProps}>
+                    {avatar}
                     {children || this.renderContent()}
                 </WrappedComponent>
             );

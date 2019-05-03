@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
 import {
+    Avatar,
     Button,
     Popover,
     Text,
@@ -180,6 +181,23 @@ describe('Pure <SelectRow>: Data', () => {
 
         wrapper.setProps({ values: ['foo', 'bar', 'meh'] });
         expect(wrapper.find(Text).prop('aside')).toBe('All');
+    });
+
+    it('renders the avatar', () => {
+        const fooAvatar = <Avatar alt="foo" src="FOO_SRC" />;
+        const barAvatar = <Avatar alt="bar" src="BAR_SRC" />;
+
+        const wrapper = shallow(
+            <PureSelectRow label="Select" values={['foo']}>
+                <Option label="foo" value="foo" avatar={fooAvatar} />
+                <Option label="bar" value="bar" avatar={barAvatar} />
+            </PureSelectRow>
+        );
+
+        expect(wrapper.find(Avatar).prop('src')).toEqual('FOO_SRC');
+
+        wrapper.setProps({ values: ['bar'] });
+        expect(wrapper.find(Avatar).prop('src')).toEqual('BAR_SRC');
     });
 
     it('can customize aside labels', () => {

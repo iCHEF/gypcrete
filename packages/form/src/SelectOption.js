@@ -17,6 +17,7 @@ export const TYPE_SYMBOL = Symbol('SelectOption');
 function SelectOption({
     label,
     value,
+    avatar,
     readOnly,
     checked,
     onChange,
@@ -32,6 +33,7 @@ function SelectOption({
                 checked={checked}
                 disabled={readOnly}
                 basic={label}
+                avatar={avatar}
                 onChange={handleCheckboxChange}
                 {...checkboxProps} />
         </ListRow>
@@ -41,6 +43,7 @@ function SelectOption({
 SelectOption.propTypes = {
     label: PropTypes.node.isRequired,
     value: valueType,
+    avatar: PropTypes.node,
     readOnly: PropTypes.bool,
     // Set by <SelectList>
     checked: PropTypes.bool,
@@ -49,6 +52,7 @@ SelectOption.propTypes = {
 
 SelectOption.defaultProps = {
     value: null,
+    avatar: null,
     readOnly: false,
     checked: false,
     onChange: () => {},

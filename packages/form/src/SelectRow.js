@@ -40,12 +40,18 @@ const CLOSABLE_CONFIG = {
  * @param {array} fromOptions
  * @return {Map}
  */
-function getValueLabelMap(fromChildren = []) {
+function getValueToLabelAvatarMap(fromChildren = []) {
     const resultMap = new Map();
     const options = parseSelectOptions(fromChildren);
 
     options.forEach(
-        option => resultMap.set(option.value, option.label)
+        (option) => {
+            const { label, avatar } = option;
+            resultMap.set(option.value, {
+                label,
+                avatar,
+            });
+        }
     );
     return resultMap;
 }
@@ -84,13 +90,13 @@ class SelectRow extends PureComponent {
 
     state = {
         popoverOpen: false,
-        valueLabelMap: getValueLabelMap(this.props.children),
+        valueLabelMap: getValueToLabelAvatarMap(this.props.children),
         cachedValues: this.props.values || this.props.defaultValues,
     };
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            valueLabelMap: getValueLabelMap(nextProps.children),
+            valueLabelMap: getValueToLabelAvatarMap(nextProps.children),
         });
 
         if (this.getIsControlled(nextProps)) {
@@ -152,8 +158,25 @@ class SelectRow extends PureComponent {
         }
 
         return cachedValues
-            .map(value => valueLabelMap.get(value))
+            .map((value) => {
+                const valueMap = valueLabelMap.get(value) || {};
+                return valueMap.label;
+            })
             .join(asideSeparator);
+    }
+
+    renderAvatar() {
+        const { cachedValues, valueLabelMap } = this.state;
+
+        if (cachedValues.length === 0) {
+            return null;
+        }
+
+        return cachedValues
+            .map((value) => {
+                const valueMap = valueLabelMap.get(value) || {};
+                return valueMap.avatar;
+            });
     }
 
     render() {
@@ -189,6 +212,7 @@ class SelectRow extends PureComponent {
 
         return (
             <ListRow className={wrapperClassName} {...rowProps}>
+                {this.renderAvatar()}
                 <Content minified={false} disabled={disabled} {...contentProps}>
                     <Text
                         bold={!ineditable}
