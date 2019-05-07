@@ -14,6 +14,16 @@ $placeholder-border-color: rgba(0, 0, 0, .1);
     // elements
     &__canvas {
         position: relative;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+
+        & > canvas {
+            border: 1px solid #707070;
+            border-radius: 8px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
     }
 
     &__control {

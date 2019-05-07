@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Add `<Avatar>` to display an image.
 
 ### Changed
+- [ImageEditor] Add new instance method `getImageCanvas()` to get current image canvas element.
+- [ImageEditor] Add new props `scale` & `onScaleChange` to make scale value of editor can be controlled.
 - [Core] Refactored `closable()` mixin to detect inside/outside clicks via React SyntheticEvent mechanism instead of listening native events from DOM.
 - [Storybook] Fix mangled component name in storybook build. (#203)
 - [Storybook] Update examples for core `<TextInput>` and form `<TextInputRow>`. (#203)
