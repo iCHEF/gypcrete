@@ -54,6 +54,24 @@ describe('Pure <TextInputRow>', () => {
         )).toBeTruthy();
     });
 
+    it('allows additional children', () => {
+        const wrapper = shallow(
+            <PureTextInputRow
+                readOnly={false}
+                disabled
+                rowProps={{}}
+            >
+                <div data-target />
+            </PureTextInputRow>
+        );
+
+        expect(
+            wrapper.children().containsMatchingElement(
+                <div data-target />
+            )
+        ).toBeTruthy();
+    });
+
     it('forwards unknown props to <TextInput>', () => {
         const handleChange = jest.fn();
         const wrapper = shallow(

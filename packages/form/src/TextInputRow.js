@@ -12,6 +12,7 @@ function TextInputRow({
     readOnly,
     disabled,
     rowProps,
+    children,
     ...inputProps
 }) {
     return (
@@ -21,6 +22,7 @@ function TextInputRow({
                 disabled={disabled}
                 {...inputProps}
             />
+            {children}
         </ListRow>
     );
 }
