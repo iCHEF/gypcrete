@@ -9,7 +9,7 @@ function MultipleWithoutCheckAll() {
         <SelectList
             multiple
             showCheckAll={false}
-            defaultValues={['1']}
+            defaultValue={['1']}
             onChange={action('change')}>
             <Option label="Option A" value="1" />
             <Option label="Option B" value="2" />

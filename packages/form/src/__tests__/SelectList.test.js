@@ -19,7 +19,7 @@ it('renders without crashing', () => {
 
 it('reads options only from <SelectOptions>', () => {
     const wrapper = shallow(
-        <SelectList values={['foo']}>
+        <SelectList value="foo">
             <Option label="Foo" value="foo" />
             <Option label="Bar" value="bar" />
             <div />
@@ -45,10 +45,10 @@ describe('Single response mode', () => {
         expect(handleChange).not.toHaveBeenCalled();
 
         wrapper.find('SelectOption[value="foo"]').simulate('change', 'foo', true);
-        expect(handleChange).toHaveBeenLastCalledWith(['foo']);
+        expect(handleChange).toHaveBeenLastCalledWith('foo');
 
         wrapper.find('SelectOption[value="bar"]').simulate('change', 'bar', true);
-        expect(handleChange).toHaveBeenLastCalledWith(['bar']);
+        expect(handleChange).toHaveBeenLastCalledWith('bar');
     });
 
     it('keeps one option checked when uncontrolled', () => {
@@ -75,7 +75,7 @@ describe('Single response mode', () => {
 
     it('does not update options checked state when controlled', () => {
         const wrapper = shallow(
-            <SelectList values={['foo']}>
+            <SelectList value="foo">
                 <Option label="Foo" value="foo" />
                 <Option label="Bar" value="bar" />
             </SelectList>
@@ -89,7 +89,7 @@ describe('Single response mode', () => {
 
     it('updates <Option checked> if is controlled and values changes', () => {
         const wrapper = shallow(
-            <SelectList values={['foo']}>
+            <SelectList value="foo">
                 <Option label="Foo" value="foo" />
                 <Option label="Bar" value="bar" />
             </SelectList>
@@ -97,14 +97,14 @@ describe('Single response mode', () => {
         expect(wrapper.find('SelectOption[value="foo"]').prop('checked')).toBeTruthy();
         expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeFalsy();
 
-        wrapper.setProps({ values: ['bar'] });
+        wrapper.setProps({ value: 'bar' });
         expect(wrapper.find('SelectOption[value="foo"]').prop('checked')).toBeFalsy();
         expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeTruthy();
     });
 
     it('does not update <Option checked> if is uncontrolled and other prop changes', () => {
         const wrapper = shallow(
-            <SelectList defaultValues={['foo']}>
+            <SelectList defaultValue="foo">
                 <Option label="Foo" value="foo" />
                 <Option label="Bar" value="bar" />
             </SelectList>
@@ -112,7 +112,7 @@ describe('Single response mode', () => {
         expect(wrapper.find('SelectOption[value="foo"]').prop('checked')).toBeTruthy();
         expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeFalsy();
 
-        wrapper.setProps({ defaultValues: ['bar'] });
+        wrapper.setProps({ defaultValue: ['bar'] });
         expect(wrapper.find('SelectOption[value="foo"]').prop('checked')).toBeTruthy();
         expect(wrapper.find('SelectOption[value="bar"]').prop('checked')).toBeFalsy();
     });
@@ -133,7 +133,7 @@ describe('Multiple response mode', () => {
             onChange: wrapper.instance().handleCheckAllOptionChange,
         });
 
-        wrapper.setProps({ allOptionLabel: 'Check All' });
+        wrapper.setProps({ checkAllLabel: 'Check All' });
         expect(wrapper.find(Option).at(0).prop('label')).toBe('Check All');
     });
 
@@ -195,7 +195,7 @@ describe('Multiple response mode', () => {
 describe('Read-only options', () => {
     it('toggles all options without affecting read-only options', () => {
         const wrapper = shallow(
-            <SelectList multiple defaultValues={['foo']}>
+            <SelectList multiple defaultValue={['foo']}>
                 <Option label="Foo" value="foo" readOnly />
                 <Option label="Bar" value="bar" />
             </SelectList>
@@ -213,7 +213,7 @@ describe('Read-only options', () => {
 describe('Minimum checks limit', () => {
     it('does not allow to uncheck if will unable to match minCheck', () => {
         const wrapper = shallow(
-            <SelectList multiple minCheck={1} defaultValues={['foo']}>
+            <SelectList multiple minCheck={1} defaultValue={['foo']}>
                 <Option label="Foo" value="foo" />
                 <Option label="Bar" value="bar" />
             </SelectList>
@@ -232,7 +232,7 @@ describe('Minimum checks limit', () => {
 
     it('keeps first n-options checked when unchecking all options', () => {
         const wrapper = shallow(
-            <SelectList multiple minCheck={2} defaultValues={['foo', 'option3']}>
+            <SelectList multiple minCheck={2} defaultValue={['foo', 'option3']}>
                 <Option label="Foo" value="foo" />
                 <Option label="Bar" value="bar" />
                 <Option label="Option3" value="option3" />
