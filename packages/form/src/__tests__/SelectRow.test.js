@@ -53,11 +53,11 @@ describe('Pure <SelectRow>: UI', () => {
             <PureSelectRow label="Select" />
         );
         expect(wrapper.find(Popover).exists()).toBeFalsy();
-        expect(wrapper.state('popoverOpen')).toBeFalsy();
+        expect(wrapper.state('isPopoverOpen')).toBeFalsy();
 
         expect(wrapper.find(Button).simulate('click'));
         expect(wrapper.find(Popover).exists()).toBeTruthy();
-        expect(wrapper.state('popoverOpen')).toBeTruthy();
+        expect(wrapper.state('isPopoverOpen')).toBeTruthy();
 
         expect(wrapper.find(Popover).find(SelectList).exists()).toBeTruthy();
     });
@@ -66,11 +66,11 @@ describe('Pure <SelectRow>: UI', () => {
         const wrapper = shallow(
             <PureSelectRow label="Select" />
         );
-        wrapper.setState({ popoverOpen: true });
+        wrapper.setState({ isPopoverOpen: true });
         expect(wrapper.find(Popover).exists()).toBeTruthy();
 
         wrapper.find(Popover).simulate('close');
-        wrapper.setState({ popoverOpen: false });
+        wrapper.setState({ isPopoverOpen: false });
         expect(wrapper.find(Popover).exists()).toBeFalsy();
     });
 
@@ -103,7 +103,7 @@ describe('Pure <SelectRow>: UI', () => {
             </PureSelectRow>
         );
         const wrapper = shallow(element);
-        wrapper.setState({ popoverOpen: true });
+        wrapper.setState({ isPopoverOpen: true });
 
         expect(element.props.children)
             .toEqual(wrapper.find(SelectList).prop('children'));
@@ -111,63 +111,62 @@ describe('Pure <SelectRow>: UI', () => {
 });
 
 describe('Pure <SelectRow>: Data', () => {
-    it('caches selected values from <SelectList> when uncontrolled', () => {
+    it('caches selected value from <SelectList> when uncontrolled', () => {
         const wrapper = shallow(
             <PureSelectRow multiple label="Select" />
         );
-        wrapper.setState({ popoverOpen: true });
-        expect(wrapper.state('cachedValues')).toEqual([]);
+        wrapper.setState({ isPopoverOpen: true });
+        wrapper.find(SelectList).simulate('change', [1, 2]);
+        expect(wrapper.state('cachedValue')).toEqual([1, 2]);
+    });
+
+    it('does not cache value from <SelectList> when controlled', () => {
+        const wrapper = shallow(
+            <PureSelectRow multiple label="Select" value={[1]} />
+        );
+        wrapper.setState({ isPopoverOpen: true });
+        expect(wrapper.state('cachedValue')).toEqual([1]);
 
         wrapper.find(SelectList).simulate('change', [1, 2]);
-        expect(wrapper.state('cachedValues')).toEqual([1, 2]);
+        expect(wrapper.state('cachedValue')).toEqual([1]);
     });
 
-    it('does not cache values from <SelectList> when controlled', () => {
+    it('updates cached value from props when controlled', () => {
         const wrapper = shallow(
-            <PureSelectRow multiple label="Select" values={[1]} />
+            <PureSelectRow label="Select" value={1} />
         );
-        wrapper.setState({ popoverOpen: true });
-        expect(wrapper.state('cachedValues')).toEqual([1]);
+        expect(wrapper.state('cachedValue')).toEqual(1);
 
-        wrapper.find(SelectList).simulate('change', [1, 2]);
-        expect(wrapper.state('cachedValues')).toEqual([1]);
+        wrapper.setProps({ multiple: true, value: [1, 2] });
+        expect(wrapper.state('cachedValue')).toEqual([1, 2]);
     });
 
-    it('updates cached values from props when controlled', () => {
+    it('does updates cached value from props when uncontrolled', () => {
         const wrapper = shallow(
-            <PureSelectRow label="Select" values={[1]} />
+            <PureSelectRow label="Select" defaultValue={1} />
         );
-        expect(wrapper.state('cachedValues')).toEqual([1]);
+        expect(wrapper.state('cachedValue')).toEqual(1);
 
-        wrapper.setProps({ values: [1, 2] });
-        expect(wrapper.state('cachedValues')).toEqual([1, 2]);
+        wrapper.setProps({ multiple: true, defaultValue: [1, 2] });
+        expect(wrapper.state('cachedValue')).toEqual(1);
     });
 
-    it('does updates cached values from props when uncontrolled', () => {
-        const wrapper = shallow(
-            <PureSelectRow label="Select" defaultValues={[1]} />
-        );
-        expect(wrapper.state('cachedValues')).toEqual([1]);
-
-        wrapper.setProps({ defaultValues: [1, 2] });
-        expect(wrapper.state('cachedValues')).toEqual([1]);
-    });
-
-    it('controls <SelectList> with cached values', () => {
+    it('controls <SelectList> with cached value', () => {
         const wrapper = shallow(<PureSelectRow label="Select" />);
         wrapper.setState({
-            cachedValues: [1],
-            popoverOpen: true,
+            cachedValue: 1,
+            isPopoverOpen: true,
         });
-        expect(wrapper.find(SelectList).prop('values')).toEqual([1]);
+        expect(wrapper.find(SelectList).prop('value')).toEqual(1);
 
-        wrapper.setState({ cachedValues: [1, 2, 3] });
-        expect(wrapper.find(SelectList).prop('values')).toEqual([1, 2, 3]);
+        wrapper.setProps({ multiple: true });
+        wrapper.setState({ cachedValue: [1, 2, 3] });
+        expect(wrapper.find(SelectList).prop('value')).toEqual([1, 2, 3]);
     });
 
-    it('renders current values on aside', () => {
+    it('renders current value on aside', () => {
         const wrapper = shallow(
-            <PureSelectRow multiple label="Select" values={[]}>
+            <PureSelectRow multiple label="Select" value={[]}>
                 <Option label="Foo" value="foo" />
                 <Option label="Bar" value="bar" />
                 <Option label="Meh" value="meh" />
@@ -176,10 +175,10 @@ describe('Pure <SelectRow>: Data', () => {
         expect(wrapper.find(Text).prop('aside'))
             .toEqual(<span className={BEM.placeholder.toString()}>(Unset)</span>);
 
-        wrapper.setProps({ values: ['foo', 'bar'] });
+        wrapper.setProps({ value: ['foo', 'bar'] });
         expect(wrapper.find(Text).prop('aside')).toBe('Foo, Bar');
 
-        wrapper.setProps({ values: ['foo', 'bar', 'meh'] });
+        wrapper.setProps({ value: ['foo', 'bar', 'meh'] });
         expect(wrapper.find(Text).prop('aside')).toBe('All');
     });
 
@@ -188,7 +187,7 @@ describe('Pure <SelectRow>: Data', () => {
         const barAvatar = <Avatar alt="bar" src="BAR_SRC" />;
 
         const wrapper = shallow(
-            <PureSelectRow label="Select" values={['foo']}>
+            <PureSelectRow label="Select" value={['foo']}>
                 <Option label="foo" value="foo" avatar={fooAvatar} />
                 <Option label="bar" value="bar" avatar={barAvatar} />
             </PureSelectRow>
@@ -196,13 +195,13 @@ describe('Pure <SelectRow>: Data', () => {
 
         expect(wrapper.find(Avatar).prop('src')).toEqual('FOO_SRC');
 
-        wrapper.setProps({ values: ['bar'] });
+        wrapper.setProps({ value: ['bar'] });
         expect(wrapper.find(Avatar).prop('src')).toEqual('BAR_SRC');
     });
 
     it('can customize aside labels', () => {
         const wrapper = shallow(
-            <PureSelectRow multiple label="Select" values={[]} asideNone="None">
+            <PureSelectRow multiple label="Select" value={[]} asideNoneLabel="None">
                 <Option label="Foo" value="foo" />
                 <Option label="Bar" value="bar" />
                 <Option label="Meh" value="meh" />
@@ -213,14 +212,14 @@ describe('Pure <SelectRow>: Data', () => {
             .toEqual(<span className={BEM.placeholder.toString()}>None</span>);
 
         wrapper.setProps({
-            values: ['foo', 'bar'],
+            value: ['foo', 'bar'],
             asideSeparator: ' + '
         });
         expect(wrapper.find(Text).prop('aside')).toBe('Foo + Bar');
 
         wrapper.setProps({
-            values: ['foo', 'bar', 'meh'],
-            asideAll: 'Everything'
+            value: ['foo', 'bar', 'meh'],
+            asideAllLabel: 'Everything'
         });
         expect(wrapper.find(Text).prop('aside')).toBe('Everything');
     });
@@ -230,8 +229,8 @@ describe('Pure <SelectRow>: Data', () => {
             <PureSelectRow
                 multiple
                 label="Select"
-                asideAll={null}
-                values={['foo', 'bar', 'meh']}>
+                asideAllLabel={null}
+                value={['foo', 'bar', 'meh']}>
                 <Option label="Foo" value="foo" />
                 <Option label="Bar" value="bar" />
                 <Option label="Meh" value="meh" />
@@ -242,7 +241,7 @@ describe('Pure <SelectRow>: Data', () => {
 
     it('does not display "All" on single <SelectRow> with only one option', () => {
         const wrapper = shallow(
-            <PureSelectRow label="Select" values={['foo']}>
+            <PureSelectRow label="Select" value={['foo']}>
                 <Option label="Foo" value="foo" />
             </PureSelectRow>
         );
