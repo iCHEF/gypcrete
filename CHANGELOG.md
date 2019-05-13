@@ -15,6 +15,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.0.0]
 ### Breaking
+- [Form] `<SelectList>`:
+    - Rename prop `values` to `value`, and it receive a single value directly when is not `multiple`, and receive and array when `multiple` is true.
+    - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive and array when `multiple` is true.
+    - Rename prop `allOptionLabel` to `checkAllLabel`.
+- [Form] `<SelectRow>`:
+    - Rename prop `values` to `value`, and it receive a single value directly when is not `multiple`, and receive and array when `multiple` is true.
+    - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive and array when `multiple` is true.
+    - Rename prop `asideAll` to `asideAllLabel`.
+    - Rename prop `asideNone` to `asideNoneLabel`.
 - [Core] Add `verticalOrder` prop to `<Text>` so you can swap the position of `basic` and `aside`. Also applied to `rowComp()` mixin.
 - [Core] Rewrite `<TextInput>` to match latest design, offering single-line `<input>`, multi-line `<textarea>` and supports custom rendering via render prop.
 - [Form] `<TextInputRow>` now renders the new `<TextInput>` and forwards almost every prop to it, **without** a ref to its inner input.
@@ -241,7 +250,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Form] `<SelectList>` now passes sorted values via `onChange()`
 - [Form] `<SelectRow>` now caches values internally, and use that to control `<SelectList>`
-- [Form] Customize display labels for `<SelectRow>` with `asideAll`, `asideNone` and `asideSeparator`.
+- [Form] Customize display labels for `<SelectRow>` with `asideAllLabel`, `asideNoneLabel` and `asideSeparator`.
 - [Form] Extract `parseSelectOptions()` helper to read from children of `<SelectOption>`s.
 - [Core] `<ListRow>` stops forwarding status props to children via context. This is changed against `v1.2.0`.
 
