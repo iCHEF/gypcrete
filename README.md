@@ -70,7 +70,7 @@ Gypcrete does not publish develop builds to the `dist` branch anymore. It now pu
 When releasing a new build for Gypcrete, follow the steps:
 
 1. Create a release branch `release/x.y.z`
-2. *(Optionally)* release beta builds with `yarn release:beta`.
+2. *(Optionally)* release beta builds with `yarn release:beta --cd-version=prepatch` (or preminor/premajor).
 3. Bump version for `package.json` and `CHANGELOG`.
 4. Bump children packages version with script:
    ```sh
