@@ -41,9 +41,18 @@ const CENTER = 'center';
 const RIGHT = 'right';
 export const TEXT_ALIGN = { LEFT, CENTER, RIGHT };
 
+export const VERTICAL_ORDER = {
+    NORMAL: 'normal',
+    REVERSE: 'reverse',
+};
+
 class Text extends PureComponent {
     static propTypes = {
         align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
+        verticalOrder: PropTypes.oneOf([
+            VERTICAL_ORDER.NORMAL,
+            VERTICAL_ORDER.REVERSE,
+        ]),
         aside: PropTypes.node,
         basicRow: PropTypes.element,
         noGrow: PropTypes.bool,
@@ -61,6 +70,7 @@ class Text extends PureComponent {
 
     static defaultProps = {
         align: LEFT,
+        verticalOrder: VERTICAL_ORDER.NORMAL,
         aside: undefined,
         basicRow: <BasicRow />,
         noGrow: false,
@@ -109,10 +119,11 @@ class Text extends PureComponent {
     }
 
     render() {
-        const { align, noGrow, bold, className } = this.props;
+        const { align, verticalOrder, noGrow, bold, className } = this.props;
 
         const bemClass = BEM.root
             .modifier(align)
+            .modifier(`v-${verticalOrder}`)
             .modifier('no-grow', noGrow)
             .modifier('bold', bold);
 

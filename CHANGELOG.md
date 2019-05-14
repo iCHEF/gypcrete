@@ -5,6 +5,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+N/A
+
+## [3.0.0]
+### Breaking
+- [Core] Add `verticalOrder` prop to `<Text>` so you can swap the position of `basic` and `aside`. Also applied to `rowComp()` mixin.
+- [Core] Rewrite `<TextInput>` to match latest design, offering single-line `<input>`, multi-line `<textarea>` and supports custom rendering via render prop.
+- [Form] `<TextInputRow>` now renders the new `<TextInput>` and forwards almost every prop to it, **without** a ref to its inner input.
+- [Core] Add `<Avatar>` to display an image.
+
+### Changed
+- [ImageEditor] Add new instance method `getImageCanvas()` to get current image canvas element.
+- [ImageEditor] Add new props `scale` & `onScaleChange` to make scale value of editor can be controlled.
+- [Core] Refactored `closable()` mixin to detect inside/outside clicks via React SyntheticEvent mechanism instead of listening native events from DOM.
+- [Storybook] Fix mangled component name in storybook build. (#203)
+- [Storybook] Update examples for core `<TextInput>` and form `<TextInputRow>`. (#203)
+- [Core] Change `rowComp()` to allow the appearance of `<Avatar>` alongside the text. (#208)
+- [Core] Change `<Checkbox>` to display `<Avatar>`. (#208)
+- [Form] Change `<SelectRow>` and `<Checkbox>` to display `<Avatar>`. (#208)
+- [Storybook] Add examples for `<Avatar>` and the list components with `<Avatar>`s. (#208)
 
 ## [2.1.0]
 ### Changed

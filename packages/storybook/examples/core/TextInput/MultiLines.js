@@ -9,36 +9,47 @@ function MultiLines() {
         <div>
             <DebugBox>
                 <TextInput
-                    inputTag="textarea"
-                    onChange={action('change')} />
+                    multiLine
+                    label="Empty Textarea"
+                    onChange={action('change')}
+                />
             </DebugBox>
 
             <DebugBox>
                 <TextInput
-                    inputTag="textarea"
+                    multiLine
+                    label="Controlled Textarea"
                     value={'Controlled input\nin multiple lines'}
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
 
             <DebugBox>
                 <TextInput
-                    inputTag="textarea"
+                    multiLine
+                    label="Uncontrolled Textarea"
                     defaultValue={'Uncontrolled input\nin multiple lines'}
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
 
             <DebugBox>
                 <TextInput
+                    multiLine
                     readOnly
-                    inputTag="textarea"
-                    value={'Read-only input\nin multiple lines'} />
+                    label="Read-only Textarea"
+                    value={'Read-only input\nin multiple lines'}
+                />
             </DebugBox>
 
             <DebugBox>
                 <TextInput
+                    multiLine
                     disabled
-                    inputTag="textarea"
-                    value={'Disabled input\nin multiple lines'} />
+                    label="Disabled Textarea"
+                    value={'Disabled input\nin multiple lines'}
+                    onChange={action('change')}
+                />
             </DebugBox>
         </div>
     );

@@ -60,12 +60,24 @@
     &--center {
         .#{$prefix}-text__row {
             justify-content: center;
+            text-align: center;
         }
     }
 
     &--right {
         .#{$prefix}-text__row {
             flex-direction: row-reverse;
+            text-align: right;
+        }
+    }
+
+    &--v-reverse {
+        .#{$prefix}-text__basic {
+            order: 2;
+        }
+
+        .#{$prefix}-text__aside {
+            order: 1;
         }
     }
 }

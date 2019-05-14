@@ -1,15 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+
 import { mount } from 'enzyme';
 import keycode from 'keycode';
 
-import closable from '../closable';
+import closable, {
+    COMPONENT_NAME as OUTER_LAYER_NAME,
+} from '../closable';
 
-const Foo = () => (
-    <div id="foo">Foo</div>
+const Foo = ({ onInsideClick }) => (
+    <div
+        id="foo"
+        role="presentation"
+        onClick={onInsideClick}>
+        Foo
+    </div>
 );
-
-jest.useFakeTimers();
+Foo.propTypes = {
+    onInsideClick: PropTypes.func.isRequired,
+};
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -28,6 +38,7 @@ it('has default configs', () => {
         onEscape: true,
         onClickOutside: false,
         onClickInside: false,
+        stopEventPropagation: true,
     });
 });
 
@@ -38,6 +49,7 @@ it('takes runtime options', () => {
             closable={{
                 onEscape: false,
                 onClickOutside: true,
+                stopEventPropagation: false,
             }} />
     );
 
@@ -45,6 +57,7 @@ it('takes runtime options', () => {
         onEscape: false,
         onClickOutside: true,
         onClickInside: false,
+        stopEventPropagation: false,
     });
 });
 
@@ -58,19 +71,31 @@ it('tears down event listeners on unmount', () => {
     const wrapper = mount(<ClosableFoo onClose={handleClose} />);
     wrapper.unmount();
 
-    let event = new KeyboardEvent('keyup', { keyCode: keycode('Escape') });
+    const event = new KeyboardEvent('keyup', { keyCode: keycode('Escape') });
     document.dispatchEvent(event);
     expect(handleClose).not.toHaveBeenCalled();
+});
 
-    event = new MouseEvent('click');
-    document.dispatchEvent(event);
-    expect(handleClose).not.toHaveBeenCalled();
+it('intercepts event propagation if instructed', () => {
+    const ClosableFoo = closable()(Foo);
+    const handleClick = jest.fn();
 
-    event = new CustomEvent('touchstart');
-    document.dispatchEvent(event);
+    let wrapper = mount(
+        <div role="presentation" onClick={handleClick}>
+            <ClosableFoo closable={{ stopEventPropagation: true }} />
+        </div>
+    );
+    wrapper.find('div#foo').simulate('click');
+    expect(handleClick).not.toHaveBeenCalled();
 
-    jest.runAllTimers();
-    expect(handleClose).not.toHaveBeenCalled();
+    wrapper = mount(
+        <div role="presentation" onClick={handleClick}>
+            <ClosableFoo closable={{ stopEventPropagation: false }} />
+        </div>
+    );
+
+    wrapper.find('div#foo').simulate('click');
+    expect(handleClick).toHaveBeenCalled();
 });
 
 describe.each`
@@ -98,7 +123,7 @@ describe.each`
         const handleClose = jest.fn();
         const closableOptions = { onClickInside, onClickOutside };
 
-        const wrapper = mount(
+        mount(
             <ClosableFoo closable={closableOptions} onClose={handleClose} />,
             { attachTo: rootNode },
         );
@@ -112,8 +137,6 @@ describe.each`
         keyEvent = new KeyboardEvent('keyup', { keyCode: keycode('Escape') });
         document.dispatchEvent(keyEvent);
         expect(handleClose).toHaveBeenCalledTimes(shouldBeCalled ? 1 : 0);
-
-        wrapper.unmount();
     });
 });
 
@@ -124,15 +147,6 @@ describe.each`
     ${false}      | ${false}       | ${'should not'}
 `('$desc call onClose() for inside-clicks when onClickInside=$onClickInside', ({ onClickInside, shouldBeCalled }) => {
     const ClosableFoo = closable({ onClickInside })(Foo);
-    const rootNode = document.createElement('div');
-
-    beforeAll(() => {
-        document.body.appendChild(rootNode);
-    });
-
-    afterAll(() => {
-        document.body.removeChild(rootNode);
-    });
 
     it.each([
         { onEscape: true, onClickOutside: true },
@@ -144,24 +158,11 @@ describe.each`
         const closableOptions = { onEscape, onClickOutside };
 
         const wrapper = mount(
-            <ClosableFoo closable={closableOptions} onClose={handleClose} />,
-            { attachTo: rootNode },
+            <ClosableFoo closable={closableOptions} onClose={handleClose} />
         );
 
-        let event = new MouseEvent('click', { bubbles: true });
-        wrapper.instance().nodeRef.dispatchEvent(event);
-
-        jest.runOnlyPendingTimers();
+        wrapper.find('div#foo').simulate('click');
         expect(handleClose).toHaveBeenCalledTimes(shouldBeCalled ? 1 : 0);
-
-        // jsdom doesn't support constructing TouchEvent yet.
-        event = new CustomEvent('touchend', { bubbles: true });
-        wrapper.instance().nodeRef.dispatchEvent(event);
-
-        jest.runOnlyPendingTimers();
-        expect(handleClose).toHaveBeenCalledTimes(shouldBeCalled ? 2 : 0);
-
-        wrapper.unmount();
     });
 });
 
@@ -171,15 +172,6 @@ describe.each`
     ${false}       | ${false}       | ${'should not'}
 `('$desc call onClose() when onClickOutside=$onClickOutside', ({ onClickOutside, shouldBeCalled }) => {
     const ClosableFoo = closable({ onClickOutside })(Foo);
-    const rootNode = document.createElement('div');
-
-    beforeAll(() => {
-        document.body.appendChild(rootNode);
-    });
-
-    afterAll(() => {
-        document.body.removeChild(rootNode);
-    });
 
     it.each([
         { onEscape: true, onClickInside: true },
@@ -191,23 +183,10 @@ describe.each`
         const closableOptions = { onEscape, onClickInside };
 
         const wrapper = mount(
-            <ClosableFoo closable={closableOptions} onClose={handleClose} />,
-            { attachTo: rootNode },
+            <ClosableFoo closable={closableOptions} onClose={handleClose} />
         );
 
-        let event = new MouseEvent('click');
-        document.dispatchEvent(event);
-
-        jest.runOnlyPendingTimers();
+        wrapper.find(`.${OUTER_LAYER_NAME}`).simulate('click');
         expect(handleClose).toHaveBeenCalledTimes(shouldBeCalled ? 1 : 0);
-
-        // jsdom doesn't support constructing TouchEvent yet.
-        event = new CustomEvent('touchend');
-        document.dispatchEvent(event);
-
-        jest.runOnlyPendingTimers();
-        expect(handleClose).toHaveBeenCalledTimes(shouldBeCalled ? 2 : 0);
-
-        wrapper.unmount();
     });
 });

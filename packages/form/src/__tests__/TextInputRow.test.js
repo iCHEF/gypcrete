@@ -1,19 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import { ListRow } from '@ichef/gypcrete';
-import TextInputRow, { PureTextInputRow, BEM } from '../TextInputRow';
+import { ListRow, TextInput } from '@ichef/gypcrete';
 
-/**
- * Patch `this.getInputRef` on component instance
- * so we can see if the value gets applied on lifecycle methods.
- */
-class PatchedRow extends PureTextInputRow {
-    getInputRef = jest.fn()
-        .mockReturnValueOnce({ scrollHeight: 30 })
-        .mockReturnValueOnce({ scrollHeight: 60 });
-}
+import TextInputRow, { PureTextInputRow } from '../TextInputRow';
 
 describe('formRow(TextInputRow)', () => {
     it('renders without crashing', () => {
@@ -29,120 +20,77 @@ describe('formRow(TextInputRow)', () => {
 });
 
 describe('Pure <TextInputRow>', () => {
-    it('renders a <ListRow> to wrap everything', () => {
-        const wrapper = mount(
+    it("renders a <ListRow> as wrapper, taking props from 'rowProps'", () => {
+        const mockedRowProps = {
+            foo: 'foo',
+            bar: 'bar',
+        };
+        const wrapper = shallow(
             <PureTextInputRow
-                label="foo"
-                defaultValue="bar" />
+                readOnly={false}
+                disabled={false}
+                rowProps={mockedRowProps}
+            />
         );
-        expect(wrapper.children().is(ListRow));
+        expect(wrapper.is(ListRow));
+        expect(wrapper.props()).toMatchObject(mockedRowProps);
     });
 
-    it('renders an <input> inside with all unknown props', () => {
-        const wrapper = mount(
+
+    it('renders an <TextInput> inside with readOnly/disable props', () => {
+        const wrapper = shallow(
             <PureTextInputRow
-                label="foo"
-                defaultValue="bar" />
+                readOnly={false}
+                disabled
+                rowProps={{}}
+            />
         );
-        expect(wrapper.find('input').exists()).toBeTruthy();
 
-        wrapper.setProps({ id: 'foo', tabIndex: 3 });
-        expect(wrapper.find('input').prop('id')).toBe('foo');
-        expect(wrapper.find('input').prop('tabIndex')).toBe(3);
+        expect(wrapper.containsMatchingElement(
+            <TextInput
+                readOnly={false}
+                disabled
+            />
+        )).toBeTruthy();
     });
 
-    it('renders a <textarea> inside with unknown props under multiLine mode', () => {
-        const wrapper = mount(
+    it('allows additional children', () => {
+        const wrapper = shallow(
             <PureTextInputRow
-                multiLine
-                label="foo"
-                defaultValue="bar" />
-        );
-        expect(wrapper.find('textarea').exists()).toBeTruthy();
-
-        wrapper.setProps({ id: 'foo', tabIndex: 3 });
-        expect(wrapper.find('textarea').prop('id')).toBe('foo');
-        expect(wrapper.find('textarea').prop('tabIndex')).toBe(3);
-    });
-
-    it('enters and leaves focused state on input events', () => {
-        const focusedModifier = BEM.root
-            .modifier('focused')
-            .toString({ stripBlock: true });
-
-        const wrapper = mount(
-            <PureTextInputRow
-                label="foo"
-                defaultValue="bar" />
-        );
-        expect(wrapper.state('focused')).toBeFalsy();
-
-        wrapper.find('input').simulate('focus');
-        expect(wrapper.state('focused')).toBeTruthy();
-        expect(wrapper.find(ListRow).hasClass(focusedModifier)).toBeTruthy();
-
-        wrapper.find('input').simulate('blur');
-        expect(wrapper.state('focused')).toBeFalsy();
-        expect(wrapper.find(ListRow).hasClass(focusedModifier)).toBeFalsy();
-    });
-
-    it('auto-grows on mount, on focus and on change under multiLine mode', () => {
-        const uncontrolledWrapper = mount(
-            <PatchedRow
-                multiLine
-                label="foo"
-                defaultValue="bar" />
-        );
-
-        // componentDidMount()
-        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 30 });
-
-        // handleInputFocus()
-        uncontrolledWrapper.find('textarea').simulate('focus', {
-            target: { scrollHeight: 40 },
-        });
-        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 40 });
-
-        // handleInputChange()
-        uncontrolledWrapper.find('textarea').simulate('change', {
-            target: { scrollHeight: 90 },
-        });
-        expect(uncontrolledWrapper.find('textarea').prop('style')).toEqual({ height: 90 });
-    });
-
-    it('auto-grows on controlled value change under multiLine mode', () => {
-        const controlledWrapper = mount(
-            <PatchedRow
-                multiLine
-                label="foo"
-                value="bar" />
-        );
-
-        // componentDidMount()
-        expect(controlledWrapper.find('textarea').prop('style')).toEqual({ height: 30 });
-
-        // componentDidUpdate()
-        controlledWrapper.setProps({ value: 'more bar' });
-        controlledWrapper.update();
-        expect(controlledWrapper.find('textarea').prop('style')).toEqual({ height: 60 });
-    });
-
-    it('accepts additional children', () => {
-        const wrapper = mount(
-            <PureTextInputRow label="foo">
-                <span data-foo />
+                readOnly={false}
+                disabled
+                rowProps={{}}
+            >
+                <div data-target />
             </PureTextInputRow>
         );
 
-        expect(wrapper.containsMatchingElement(<span data-foo />)).toBeTruthy();
+        expect(
+            wrapper.children().containsMatchingElement(
+                <div data-target />
+            )
+        ).toBeTruthy();
     });
 
-    it('keeps a ref to the <input> inside', () => {
-        const wrapper = mount(
-            <PureTextInputRow label="foo" />
+    it('forwards unknown props to <TextInput>', () => {
+        const handleChange = jest.fn();
+        const wrapper = shallow(
+            <PureTextInputRow
+                readOnly
+                disabled={false}
+                rowProps={{}}
+                label="Foo"
+                onChange={handleChange}
+            />
         );
 
-        const inputRef = wrapper.instance().getInputNode();
-        expect(inputRef).toBeInstanceOf(HTMLInputElement);
+        expect(wrapper.containsMatchingElement(
+            <TextInput
+                readOnly
+                disabled={false}
+                label="Foo"
+                onChange={handleChange}
+            />
+        )).toBeTruthy();
     });
 });

@@ -24,6 +24,7 @@ it('renders <Text> into wrapped component', () => {
     const wrapper = shallow(
         <RowCompFoo
             bold
+            verticalOrder="reverse"
             basic="Basic text"
             tag="Tag"
             aside="Aside text" />
@@ -31,10 +32,13 @@ it('renders <Text> into wrapped component', () => {
     const textWrapper = wrapper.find(Foo).shallow().find(Text);
 
     expect(textWrapper.exists()).toBeTruthy();
-    expect(textWrapper.prop('bold')).toBeTruthy();
-    expect(textWrapper.prop('basic')).toBe('Basic text');
-    expect(textWrapper.prop('tag')).toBe('Tag');
-    expect(textWrapper.prop('aside')).toBe('Aside text');
+    expect(textWrapper.props()).toMatchObject({
+        verticalOrder: 'reverse',
+        basic: 'Basic text',
+        aside: 'Aside text',
+        tag: 'Tag',
+        bold: true,
+    });
 });
 
 it('renders <Icon> and <Text> into wrapped component', () => {
@@ -59,42 +63,46 @@ it('takes a React Element as icon', () => {
     expect(fooWrapper.find('[data-foo]')).toHaveLength(1);
 });
 
-it('renders <Text> with adjusted alignment', () => {
-    const leftWrapper = shallow(<RowCompFoo align="left" basic="Basic" />);
-    const centerWrapper = shallow(<RowCompFoo align="center" basic="Basic" />);
-    const centerIconWrapper = shallow(<RowCompFoo align="center" basic="Basic" icon="add" />);
-    const rightWrapper = shallow(<RowCompFoo align="right" basic="Basic" />);
-    const reverseWrapper = shallow(<RowCompFoo align="reverse" basic="Basic" />);
+describe('it renders <Text> with adjusted alignment', () => {
+    test('left-aligned', () => {
+        const wrapper = shallow(<RowCompFoo align="left" basic="Basic" />);
+        expect(wrapper.find(Text).props()).toMatchObject({
+            align: 'left',
+            noGrow: false,
+        });
+    });
 
-    expect(
-        leftWrapper
-            .find(Foo).shallow()
-            .find(Text).prop('align')
-    ).toBe('left');
+    test('center-aligned', () => {
+        const wrapper = shallow(<RowCompFoo align="center" basic="Basic" />);
+        expect(wrapper.find(Text).props()).toMatchObject({
+            align: 'center',
+            noGrow: true,
+        });
+    });
 
-    expect(
-        centerWrapper
-            .find(Foo).shallow()
-            .find(Text).prop('align')
-    ).toBe('center');
+    test('center-aligned with Icon', () => {
+        const wrapper = shallow(<RowCompFoo align="center" icon="add" basic="Basic" />);
+        expect(wrapper.find(Text).props()).toMatchObject({
+            align: 'left',
+            noGrow: true,
+        });
+    });
 
-    expect(
-        centerIconWrapper
-            .find(Foo).shallow()
-            .find(Text).prop('align')
-    ).toBe('left');
+    test('right-aligned', () => {
+        const wrapper = shallow(<RowCompFoo align="right" basic="Basic" />);
+        expect(wrapper.find(Text).props()).toMatchObject({
+            align: 'right',
+            noGrow: false,
+        });
+    });
 
-    expect(
-        rightWrapper
-            .find(Foo).shallow()
-            .find(Text).prop('align')
-    ).toBe('right');
-
-    expect(
-        reverseWrapper
-            .find(Foo).shallow()
-            .find(Text).prop('align')
-    ).toBe('right');
+    test('reverse-aligned', () => {
+        const wrapper = shallow(<RowCompFoo align="reverse" basic="Basic" />);
+        expect(wrapper.find(Text).props()).toMatchObject({
+            align: 'right',
+            noGrow: false,
+        });
+    });
 });
 
 it('passes down other props to wrapped component', () => {
@@ -116,10 +124,18 @@ it('holds context for children components', () => {
     const context = wrapper.instance().getChildContext();
 
     expect(context).toMatchObject({
-        align: 'right',
         status: 'success',
         statusOptions: { autoHide: true },
         errorMsg: 'foo-bar',
+        textProps: {
+            align: 'right',
+            basic: null,
+            aside: null,
+            tag: null,
+            bold: false,
+            noGrow: false,
+            verticalOrder: 'normal',
+        },
     });
 });
 

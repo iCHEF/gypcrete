@@ -1,0 +1,21 @@
+@import "./mixins";
+
+.#{$prefix}-text-input {
+    ::placeholder {
+        color: $c-black-30;
+    }
+
+    // Elements
+    &__input {
+        width: 100%;
+        background: none;
+        color: currentColor;
+        font-weight: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        text-align: inherit;
+        border: none;
+        padding: 0;
+        outline: none;
+    }
+}

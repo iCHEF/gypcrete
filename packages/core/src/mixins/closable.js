@@ -2,10 +2,16 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 
+import icBEM from '../utils/icBEM';
+import prefixClass from '../utils/prefixClass';
 import getComponentName from '../utils/getComponentName';
 
+import '../styles/Closable.scss';
+
+export const COMPONENT_NAME = prefixClass('closable');
+const ROOT_BEM = icBEM(COMPONENT_NAME);
+
 const ESCAPE = 'Escape';
-const TOUCH_CLOSE_DELAY = 100;
 
 /**
  * `closable()` HOC mixin
@@ -14,18 +20,21 @@ const TOUCH_CLOSE_DELAY = 100;
  * binding event listeners on `document`.
  *
  * Formerlly `escapable()`.
- *
- * @param {object} options
- * @param {boolean=} options.onEscape
- * @param {boolean=} options.onClickOutside
- * @param {boolean=} options.onClickInside
  */
 const closable = ({
     onEscape = true,
     onClickOutside = false,
     onClickInside = false,
+    stopEventPropagation = true,
 } = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
+
+    const mixinConfigs = {
+        onEscape,
+        onClickOutside,
+        onClickInside,
+        stopEventPropagation,
+    };
 
     class Closable extends PureComponent {
         static displayName = `closable(${componentName})`;
@@ -36,70 +45,43 @@ const closable = ({
                 onEscape: PropTypes.bool,
                 onClickOutside: PropTypes.bool,
                 onClickInside: PropTypes.bool,
+                stopEventPropagation: PropTypes.bool,
             }),
         };
 
         static defaultProps = {
             onClose: () => {},
-            closable: {
-                onEscape,
-                onClickInside,
-                onClickOutside,
-            },
+            closable: mixinConfigs,
         };
 
         constructor(props) {
             super(props);
             this.clickedInside = false;
-            this.closeDelayTimeout = null;
         }
 
         componentDidMount() {
             document.addEventListener('keyup', this.handleDocumentKeyup);
-            document.addEventListener('click', this.handleDocumentClickOrTouch);
-            document.addEventListener('touchend', this.handleDocumentClickOrTouch);
         }
 
         componentWillUnmount() {
             document.removeEventListener('keyup', this.handleDocumentKeyup);
-            document.removeEventListener('click', this.handleDocumentClickOrTouch);
-            document.removeEventListener('touchend', this.handleDocumentClickOrTouch);
-            clearTimeout(this.closeDelayTimeout);
         }
 
         getOptions() {
-            const configuredOptions = {
-                onEscape,
-                onClickInside,
-                onClickOutside,
-            };
-            const runtimeOptions = this.props.closable;
+            const { closable: runtimeOptions } = this.props;
 
-            return {
-                ...configuredOptions,
+            /** @type {typeof mixinDefaults} */
+            const actualOptions = {
+                ...mixinConfigs,
                 ...runtimeOptions,
             };
+
+            return actualOptions;
         }
 
         /**
-         * Delay slightly to fire child events first
-         * before trigger the `onClose` event.
+         * @param {KeyboardEvent} event
          */
-        delayedClose = (event) => {
-            this.closeDelayTimeout = setTimeout(
-                () => this.props.onClose(event),
-                TOUCH_CLOSE_DELAY,
-            );
-        }
-
-        captureInsideEvents = (node) => {
-            if (node) {
-                node.addEventListener('click', this.handleInsideClickOrTouch);
-                node.addEventListener('touchend', this.handleInsideClickOrTouch);
-            }
-            this.nodeRef = node;
-        }
-
         handleDocumentKeyup = (event) => {
             const options = this.getOptions();
 
@@ -108,26 +90,36 @@ const closable = ({
             }
         }
 
-        handleDocumentClickOrTouch = (event) => {
+        /**
+         * @param {React.MouseEvent} event
+         */
+        handleOuterLayerClick = (event) => {
             const options = this.getOptions();
 
+            if (options.stopEventPropagation) {
+                event.stopPropagation();
+            }
+
             if (this.clickedInside) {
-                // already scheduled close when clicked inside, skip here.
+                // ignoring click events bubbling up from inside
                 this.clickedInside = false;
                 return;
             }
 
             if (options.onClickOutside) {
-                this.delayedClose(event);
+                this.props.onClose(event);
             }
         }
 
-        handleInsideClickOrTouch = (event) => {
+        /**
+         * @param {React.MouseEvent} event
+         */
+        handleInsideClick = (event) => {
             const options = this.getOptions();
             this.clickedInside = true;
 
             if (options.onClickInside) {
-                this.delayedClose(event);
+                this.props.onClose(event);
             }
         }
 
@@ -135,13 +127,17 @@ const closable = ({
             const {
                 onClose,
                 closable: runtimeOptions,
-                className,
                 ...otherProps
             } = this.props;
 
             return (
-                <div ref={this.captureInsideEvents} className={className} role="presentation">
-                    <WrappedComponent {...otherProps} />
+                <div
+                    role="presentation"
+                    className={ROOT_BEM.toString()}
+                    onClick={this.handleOuterLayerClick}>
+                    <WrappedComponent
+                        onInsideClick={this.handleInsideClick}
+                        {...otherProps} />
                 </div>
             );
         }
