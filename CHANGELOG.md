@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+N/A
+
+## [3.0.0]
 ### Breaking
 - [Core] Add `verticalOrder` prop to `<Text>` so you can swap the position of `basic` and `aside`. Also applied to `rowComp()` mixin.
 - [Core] Rewrite `<TextInput>` to match latest design, offering single-line `<input>`, multi-line `<textarea>` and supports custom rendering via render prop.
