@@ -92,7 +92,7 @@ class SelectList extends PureComponent {
     componentWillReceiveProps(nextProps) {
         warning(
             this.getIsControlled(this.props) === this.getIsControlled(nextProps),
-            '<SelectList>: do not change between controlled and uncontrolld, it may cause some dataflow problem.'
+            '<SelectList> should not switch from controlled to uncontrolled (or vice versa).'
         );
 
         if (this.getIsControlled(nextProps)) {
@@ -100,7 +100,7 @@ class SelectList extends PureComponent {
                 checkedState: getInitialCheckedState(nextProps.value, nextProps.multiple),
             });
         } else if (this.props.multiple !== nextProps.multiple) {
-            warning(false, '<SelectList>: do not change `multiple` prop when uncontrolld, it will auto reset value to prevent dataflow problem.');
+            warning(false, '<SelectList>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.');
             this.setState({
                 checkedState: getInitialCheckedState([])
             });
