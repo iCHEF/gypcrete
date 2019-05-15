@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import warning from 'warning';
+
 import { Map as ImmutableMap } from 'immutable';
 
 import {
@@ -14,7 +16,7 @@ import Option, {
 import parseSelectOptions from './utils/parseSelectOptions';
 import getElementTypeSymbol from './utils/getElementTypeSymbol';
 
-function getInitialCheckedState(selectedValue, multiple) {
+function getInitialCheckedState(selectedValue, multiple = true) {
     const checkedState = new ImmutableMap();
 
     return checkedState.withMutations((map) => {
@@ -88,9 +90,19 @@ class SelectList extends PureComponent {
     };
 
     componentWillReceiveProps(nextProps) {
+        warning(
+            this.getIsControlled(this.props) === this.getIsControlled(nextProps),
+            '<SelectList>: do not change between controlled and uncontrolld, it may cause some dataflow problem.'
+        );
+
         if (this.getIsControlled(nextProps)) {
             this.setState({
-                checkedState: getInitialCheckedState(nextProps.value),
+                checkedState: getInitialCheckedState(nextProps.value, nextProps.multiple),
+            });
+        } else if (this.props.multiple !== nextProps.multiple) {
+            warning(false, '<SelectList>: do not change `multiple` prop when uncontrolld, it will auto reset value to prevent dataflow problem.');
+            this.setState({
+                checkedState: getInitialCheckedState([])
             });
         }
     }

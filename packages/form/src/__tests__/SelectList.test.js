@@ -247,3 +247,19 @@ describe('Minimum checks limit', () => {
         expect(wrapper.instance().getValues()).toEqual(['foo', 'bar']);
     });
 });
+
+it('if change `multiple` prop when uncontrolled, it will auto reset cachedValue', () => {
+    const wrapper = shallow(
+        <SelectList defaultValue="foo">
+            <Option label="Option A" value="foo" />
+            <Option label="Option B" value="bar" />
+        </SelectList>
+    );
+    expect(wrapper.instance().getValues()).toEqual(['foo']);
+
+    wrapper.setProps({ multiple: true, defaultValue: ['foo', 'bar'] });
+    expect(wrapper.instance().getValues()).toEqual([]);
+
+    wrapper.setProps({ multiple: false, defaultValue: ['bar'] });
+    expect(wrapper.instance().getValues()).toEqual([]);
+});
