@@ -95,7 +95,7 @@ class SelectRow extends PureComponent {
     state = {
         isPopoverOpen: false,
         valueLabelMap: getValueToLabelAvatarMap(this.props.children),
-        cachedValue: this.props.value || this.props.defaultValue,
+        cachedValue: this.getInitialValue(),
     };
 
     componentWillReceiveProps(nextProps) {
@@ -105,19 +105,32 @@ class SelectRow extends PureComponent {
 
         warning(
             this.getIsControlled(this.props) === this.getIsControlled(nextProps),
-            '<SelectRow> warning: do not change between controlled and uncontrolld, it may cause some dataflow problem.'
+            '<SelectRow> should not switch from controlled to uncontrolled (or vice versa).'
         );
 
         if (this.getIsControlled(nextProps)) {
             this.setState({ cachedValue: nextProps.value });
         } else if (this.props.multiple !== nextProps.multiple) {
-            warning(false, '<SelectRow> Warning: do not change `multiple` prop when uncontrolld, it will auto reset value to prevent dataflow problem.');
+            warning(false, '<SelectRow>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.');
             this.setState({ cachedValue: (nextProps.multiple) ? [] : null });
         }
     }
 
+    getInitialValue() {
+        const { value, defaultValue, multiple } = this.props;
+        const newDefaultValue = (defaultValue === undefined && multiple) ? [] : defaultValue;
+
+        return (value !== undefined) ? value : newDefaultValue;
+    }
+
     getIsControlled(fromProps = this.props) {
         return fromProps.value !== undefined;
+    }
+
+    getCacheValueArray = () => {
+        const { multiple } = this.props;
+        const { cachedValue } = this.state;
+        return (multiple) ? cachedValue : [cachedValue].filter(val => val !== undefined);
     }
 
     handleButtonClick = () => {
@@ -158,7 +171,7 @@ class SelectRow extends PureComponent {
         const { multiple, asideAllLabel, asideNoneLabel, asideSeparator } = this.props;
         const { cachedValue, valueLabelMap } = this.state;
 
-        if (multiple && cachedValue.length === 0) {
+        if (cachedValue === undefined || (multiple && cachedValue.length === 0)) {
             return <span className={BEM.placeholder.toString()}>{asideNoneLabel}</span>;
         }
 
@@ -169,8 +182,7 @@ class SelectRow extends PureComponent {
             }
         }
 
-        const cachedValueArray = multiple ? cachedValue : [cachedValue];
-        return cachedValueArray
+        return this.getCacheValueArray()
             .map((value) => {
                 const valueMap = valueLabelMap.get(value) || {};
                 return valueMap.label;
@@ -179,10 +191,8 @@ class SelectRow extends PureComponent {
     }
 
     renderAvatar() {
-        const { cachedValue, valueLabelMap } = this.state;
-
-        const cachedValueArray = Array.isArray(cachedValue) ? cachedValue : [cachedValue];
-        return cachedValueArray
+        const { valueLabelMap } = this.state;
+        return this.getCacheValueArray()
             .map((value) => {
                 const valueMap = valueLabelMap.get(value) || {};
                 return (

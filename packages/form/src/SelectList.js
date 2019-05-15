@@ -76,7 +76,7 @@ class SelectList extends PureComponent {
         minCheck: 0,
         checkAllLabel: 'All',
         value: undefined,
-        defaultValue: [],
+        defaultValue: undefined,
         onChange: () => {},
         title: undefined,
         desc: undefined,
@@ -84,7 +84,7 @@ class SelectList extends PureComponent {
 
     state = {
         checkedState: getInitialCheckedState(
-            this.props.value || this.props.defaultValue,
+            this.getInitialValue(),
             this.props.multiple
         ),
     };
@@ -105,6 +105,13 @@ class SelectList extends PureComponent {
                 checkedState: getInitialCheckedState([])
             });
         }
+    }
+
+    getInitialValue() {
+        const { value, defaultValue, multiple } = this.props;
+        const newDefaultValue = (defaultValue === undefined && multiple) ? [] : defaultValue;
+
+        return (value !== undefined) ? value : newDefaultValue;
     }
 
     getIsControlled(fromProps = this.props) {
