@@ -250,7 +250,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Form] `<SelectList>` now passes sorted values via `onChange()`
 - [Form] `<SelectRow>` now caches values internally, and use that to control `<SelectList>`
-- [Form] Customize display labels for `<SelectRow>` with `asideAllLabel`, `asideNoneLabel` and `asideSeparator`.
+- [Form] Customize display labels for `<SelectRow>` with `asideAll`, `asideNone` and `asideSeparator`.
 - [Form] Extract `parseSelectOptions()` helper to read from children of `<SelectOption>`s.
 - [Core] `<ListRow>` stops forwarding status props to children via context. This is changed against `v1.2.0`.
 
