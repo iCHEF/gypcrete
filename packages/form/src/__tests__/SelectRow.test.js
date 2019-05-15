@@ -141,14 +141,17 @@ describe('Pure <SelectRow>: Data', () => {
         expect(wrapper.state('cachedValue')).toEqual([1, 2]);
     });
 
-    it('does updates cached value from props when uncontrolled', () => {
+    it('if change `multiple` prop when uncontrolled, it will auto reset cachedValue', () => {
         const wrapper = shallow(
             <PureSelectRow label="Select" defaultValue={1} />
         );
         expect(wrapper.state('cachedValue')).toEqual(1);
 
         wrapper.setProps({ multiple: true, defaultValue: [1, 2] });
-        expect(wrapper.state('cachedValue')).toEqual(1);
+        expect(wrapper.state('cachedValue')).toEqual([]);
+
+        wrapper.setProps({ multiple: false, defaultValue: 87 });
+        expect(wrapper.state('cachedValue')).toEqual(null);
     });
 
     it('controls <SelectList> with cached value', () => {
@@ -187,7 +190,7 @@ describe('Pure <SelectRow>: Data', () => {
         const barAvatar = <Avatar alt="bar" src="BAR_SRC" />;
 
         const wrapper = shallow(
-            <PureSelectRow label="Select" value={['foo']}>
+            <PureSelectRow label="Select" value="foo">
                 <Option label="foo" value="foo" avatar={fooAvatar} />
                 <Option label="bar" value="bar" avatar={barAvatar} />
             </PureSelectRow>
@@ -195,7 +198,7 @@ describe('Pure <SelectRow>: Data', () => {
 
         expect(wrapper.find(Avatar).prop('src')).toEqual('FOO_SRC');
 
-        wrapper.setProps({ value: ['bar'] });
+        wrapper.setProps({ value: 'bar' });
         expect(wrapper.find(Avatar).prop('src')).toEqual('BAR_SRC');
     });
 
@@ -241,7 +244,7 @@ describe('Pure <SelectRow>: Data', () => {
 
     it('does not display "All" on single <SelectRow> with only one option', () => {
         const wrapper = shallow(
-            <PureSelectRow label="Select" value={['foo']}>
+            <PureSelectRow label="Select" value="foo">
                 <Option label="Foo" value="foo" />
             </PureSelectRow>
         );

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import warning from 'warning';
 
 import {
     ListRow,
@@ -102,8 +103,16 @@ class SelectRow extends PureComponent {
             valueLabelMap: getValueToLabelAvatarMap(nextProps.children),
         });
 
+        warning(
+            this.getIsControlled(this.props) === this.getIsControlled(nextProps),
+            '<SelectRow> warning: do not change between controlled and uncontrolld, it may cause some dataflow problem.'
+        );
+
         if (this.getIsControlled(nextProps)) {
             this.setState({ cachedValue: nextProps.value });
+        } else if (this.props.multiple !== nextProps.multiple) {
+            warning(false, '<SelectRow> Warning: do not change `multiple` prop when uncontrolld, it will auto reset value to prevent dataflow problem.');
+            this.setState({ cachedValue: (nextProps.multiple) ? [] : null });
         }
     }
 
@@ -149,7 +158,7 @@ class SelectRow extends PureComponent {
         const { multiple, asideAllLabel, asideNoneLabel, asideSeparator } = this.props;
         const { cachedValue, valueLabelMap } = this.state;
 
-        if (cachedValue.length === 0) {
+        if (multiple && cachedValue.length === 0) {
             return <span className={BEM.placeholder.toString()}>{asideNoneLabel}</span>;
         }
 
@@ -160,7 +169,7 @@ class SelectRow extends PureComponent {
             }
         }
 
-        const cachedValueArray = Array.isArray(cachedValue) ? cachedValue : [cachedValue];
+        const cachedValueArray = multiple ? cachedValue : [cachedValue];
         return cachedValueArray
             .map((value) => {
                 const valueMap = valueLabelMap.get(value) || {};
@@ -171,10 +180,6 @@ class SelectRow extends PureComponent {
 
     renderAvatar() {
         const { cachedValue, valueLabelMap } = this.state;
-
-        if (cachedValue.length === 0) {
-            return null;
-        }
 
         const cachedValueArray = Array.isArray(cachedValue) ? cachedValue : [cachedValue];
         return cachedValueArray
