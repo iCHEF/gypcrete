@@ -5,25 +5,27 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Breaking
-- [Core] [Form] [ImageEditor] Peer dependency changes:
-  * Change from `@babel/runtime-corejs2` to `@babel/runtime-corejs3`.
-
 ### Changed
 - Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
 
+### Added
+- [Core] [Form] [ImageEditor] setup `warning@4.0.3`.
+
+### Breaking
+- [Core] [Form] [ImageEditor] Peer dependency changes:
+  * Change from `@babel/runtime-corejs2` to `@babel/runtime-corejs3`.
+- [Form] `<SelectList>`:
+    - Rename prop `values` to `value`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
+    - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
+    - Rename prop `allOptionLabel` to `checkAllLabel`.
+- [Form] `<SelectRow>`:
+    - Rename prop `values` to `value`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
+    - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
+    - Rename prop `asideAll` to `asideAllLabel`.
+    - Rename prop `asideNone` to `asideNoneLabel`.
 
 ## [3.0.0]
 ### Breaking
-- [Form] `<SelectList>`:
-    - Rename prop `values` to `value`, and it receive a single value directly when is not `multiple`, and receive and array when `multiple` is true.
-    - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive and array when `multiple` is true.
-    - Rename prop `allOptionLabel` to `checkAllLabel`.
-- [Form] `<SelectRow>`:
-    - Rename prop `values` to `value`, and it receive a single value directly when is not `multiple`, and receive and array when `multiple` is true.
-    - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive and array when `multiple` is true.
-    - Rename prop `asideAll` to `asideAllLabel`.
-    - Rename prop `asideNone` to `asideNoneLabel`.
 - [Core] Add `verticalOrder` prop to `<Text>` so you can swap the position of `basic` and `aside`. Also applied to `rowComp()` mixin.
 - [Core] Rewrite `<TextInput>` to match latest design, offering single-line `<input>`, multi-line `<textarea>` and supports custom rendering via render prop.
 - [Form] `<TextInputRow>` now renders the new `<TextInput>` and forwards almost every prop to it, **without** a ref to its inner input.
