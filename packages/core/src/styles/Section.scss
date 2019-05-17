@@ -11,20 +11,27 @@ $component-name: #{$prefix}-section;
     // --------------------
     &__title,
     &__desc {
-        @include small-text;
-
         white-space: pre-wrap;
         margin-left: rem($section-horizontal-padding);
         margin-right: rem($section-horizontal-padding);
     }
 
     &__title {
+        font-size: rem($section-title-font-size);
+        line-height: rem($section-title-line-height);
         font-weight: $font-weight-bold;
         padding-bottom: rem(1px);
         border-bottom: 2px solid $c-section-divider;
+
+        &:before {
+            content: "\25a0";
+            display: inline-block;
+            margin-right: 0.25em;
+        }
     }
 
     &__desc {
+        @include small-text;
         // take padding from row layout as reference
         padding-top: rem(2px);
     }
