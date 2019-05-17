@@ -246,9 +246,11 @@ class SelectRow extends PureComponent {
                 {this.renderAvatar()}
                 <Content minified={false} disabled={disabled} {...contentProps}>
                     <Text
+                        verticalOrder="reverse"
                         bold={!ineditable}
-                        basic={label}
-                        aside={this.renderRowValuesAside()} />
+                        basic={this.renderRowValuesAside()}
+                        aside={label}
+                    />
 
                     <span ref={(ref) => { this.anchorNode = ref; }}>
                         <Icon type="dropdown" />
