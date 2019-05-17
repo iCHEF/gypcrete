@@ -109,9 +109,16 @@ class SelectList extends PureComponent {
 
     getInitialValue() {
         const { value, defaultValue, multiple } = this.props;
-        const newDefaultValue = (defaultValue === undefined && multiple) ? [] : defaultValue;
 
-        return (value !== undefined) ? value : newDefaultValue;
+        if (value !== undefined) {
+            return value;
+        }
+
+        if (multiple && defaultValue === undefined) {
+            return [];
+        }
+
+        return defaultValue;
     }
 
     getIsControlled(fromProps = this.props) {
