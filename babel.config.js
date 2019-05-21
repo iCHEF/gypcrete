@@ -1,6 +1,6 @@
 module.exports = {
     presets: [
-        ['@babel/preset-env', { useBuiltIns: 'usage' }],
+        '@babel/preset-env',
         '@babel/preset-react',
     ],
 
@@ -30,10 +30,7 @@ module.exports = {
         lib: {
             // Module: ES Module
             presets: [
-                ['@babel/preset-env', {
-                    modules: false,
-                    useBuiltIns: 'usage',
-                }],
+                ['@babel/preset-env', { modules: false }],
             ],
             plugins: [
                 'babel-plugin-strip-css-imports',
@@ -45,6 +42,7 @@ module.exports = {
             presets: [
                 ['@babel/preset-env', {
                     useBuiltIns: 'usage',
+                    corejs: 3,
                     targets: {
                         node: 'current',
                     },
@@ -52,6 +50,10 @@ module.exports = {
             ],
             plugins: [
                 'babel-plugin-strip-css-imports',
+                ['@babel/plugin-transform-runtime', {
+                    // so `setTimeout` is not replaced with core-js 3 version.
+                    corejs: false,
+                }]
             ],
         },
     },
