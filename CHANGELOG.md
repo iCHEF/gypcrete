@@ -5,7 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-N/A
+### Breaking
+- [Core] [Form] [ImageEditor] Peer dependency changes:
+  * Change from `@babel/runtime-corejs2` to `@babel/runtime-corejs3`.
+
+### Changed
+- Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
+
 
 ## [3.0.0]
 ### Breaking
