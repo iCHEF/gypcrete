@@ -208,8 +208,7 @@ class SelectList extends PureComponent {
         this.handleChange(nextState);
     }
 
-    renderOptions() {
-        const { children } = this.props;
+    renderOptions(children = this.props.children) {
         const { checkedState } = this.state;
 
         return React.Children.map(children, (child) => {
@@ -219,6 +218,11 @@ class SelectList extends PureComponent {
                     onChange: this.handleOptionChange,
                 });
             }
+
+            if (child && child.type === React.Fragment) {
+                return this.renderOptions(child.props.children);
+            }
+
             return child;
         });
     }
