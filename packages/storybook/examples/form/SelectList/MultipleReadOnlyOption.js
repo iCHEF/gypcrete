@@ -8,7 +8,7 @@ function MultipleReadOnlyOption() {
     return (
         <SelectList
             multiple
-            defaultValues={['1']}
+            defaultValue={['1']}
             onChange={action('change')}>
             <Option label="Option A" value="1" readOnly />
             <Option label="Option B" value="2" />

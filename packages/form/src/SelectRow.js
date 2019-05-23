@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import warning from 'warning';
 
 import {
     ListRow,
@@ -59,14 +60,17 @@ function getValueToLabelAvatarMap(fromChildren = []) {
 class SelectRow extends PureComponent {
     static propTypes = {
         label: PropTypes.node.isRequired,
-        asideAll: PropTypes.string,
-        asideNone: PropTypes.string,
+        asideAllLabel: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.bool, // can pass false to disable 'All' label
+        ]),
+        asideNoneLabel: PropTypes.string,
         asideSeparator: PropTypes.string,
         disabled: PropTypes.bool,
         // <SelectList> props
         multiple: SelectList.propTypes.multiple,
-        values: SelectList.propTypes.values,
-        defaultValues: SelectList.propTypes.defaultValues,
+        value: SelectList.propTypes.value,
+        defaultValue: SelectList.propTypes.defaultValue,
         onChange: PropTypes.func,
         // from formRow()
         ineditable: PropTypes.bool,
@@ -74,14 +78,14 @@ class SelectRow extends PureComponent {
     };
 
     static defaultProps = {
-        asideAll: 'All',
-        asideNone: '(Unset)',
+        asideAllLabel: 'All',
+        asideNoneLabel: '(Unset)',
         asideSeparator: ', ',
         disabled: false,
         // <SelectList> props
         multiple: SelectList.defaultProps.multiple,
-        values: SelectList.defaultProps.values,
-        defaultValues: SelectList.defaultProps.defaultValues,
+        value: SelectList.defaultProps.value,
+        defaultValue: SelectList.defaultProps.defaultValue,
         onChange: () => {},
         // from formRow()
         ineditable: false,
@@ -89,9 +93,9 @@ class SelectRow extends PureComponent {
     };
 
     state = {
-        popoverOpen: false,
+        isPopoverOpen: false,
         valueLabelMap: getValueToLabelAvatarMap(this.props.children),
-        cachedValues: this.props.values || this.props.defaultValues,
+        cachedValue: this.getInitialValue(),
     };
 
     componentWillReceiveProps(nextProps) {
@@ -99,28 +103,56 @@ class SelectRow extends PureComponent {
             valueLabelMap: getValueToLabelAvatarMap(nextProps.children),
         });
 
+        warning(
+            this.getIsControlled(this.props) === this.getIsControlled(nextProps),
+            '<SelectRow> should not switch from controlled to uncontrolled (or vice versa).'
+        );
+
         if (this.getIsControlled(nextProps)) {
-            this.setState({ cachedValues: nextProps.values });
+            this.setState({ cachedValue: nextProps.value });
+        } else if (this.props.multiple !== nextProps.multiple) {
+            warning(false, '<SelectRow>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.');
+            this.setState({ cachedValue: (nextProps.multiple) ? [] : null });
         }
+    }
+
+    getInitialValue() {
+        const { value, defaultValue, multiple } = this.props;
+
+        if (value !== undefined) {
+            return value;
+        }
+
+        if (multiple && defaultValue === undefined) {
+            return [];
+        }
+
+        return defaultValue;
     }
 
     getIsControlled(fromProps = this.props) {
-        return Array.isArray(fromProps.values);
+        return fromProps.value !== undefined;
+    }
+
+    getCacheValueArray = () => {
+        const { multiple } = this.props;
+        const { cachedValue } = this.state;
+        return (multiple) ? cachedValue : [cachedValue].filter(val => val !== undefined);
     }
 
     handleButtonClick = () => {
-        this.setState({ popoverOpen: true });
+        this.setState({ isPopoverOpen: true });
     }
 
     handlePopoverClose = () => {
-        this.setState({ popoverOpen: false });
+        this.setState({ isPopoverOpen: false });
     }
 
-    handleSelectChange = (newValues) => {
+    handleSelectChange = (nextValue) => {
         if (!this.getIsControlled()) {
-            this.setState({ cachedValues: newValues });
+            this.setState({ cachedValue: nextValue });
         }
-        this.props.onChange(newValues);
+        this.props.onChange(nextValue);
 
         if (!this.props.multiple) {
             this.handlePopoverClose();
@@ -135,7 +167,7 @@ class SelectRow extends PureComponent {
                 closable={CLOSABLE_CONFIG}
                 onClose={this.handlePopoverClose}>
                 <SelectList
-                    values={this.state.cachedValues}
+                    value={this.state.cachedValue}
                     onChange={this.handleSelectChange}
                     {...selectListProps} />
             </Popover>
@@ -143,21 +175,21 @@ class SelectRow extends PureComponent {
     }
 
     renderRowValuesAside() {
-        const { multiple, asideAll, asideNone, asideSeparator } = this.props;
-        const { cachedValues, valueLabelMap } = this.state;
+        const { multiple, asideAllLabel, asideNoneLabel, asideSeparator } = this.props;
+        const { cachedValue, valueLabelMap } = this.state;
 
-        if (cachedValues.length === 0) {
-            return <span className={BEM.placeholder.toString()}>{asideNone}</span>;
+        if (cachedValue === undefined || (multiple && cachedValue.length === 0)) {
+            return <span className={BEM.placeholder.toString()}>{asideNoneLabel}</span>;
         }
 
         if (multiple) {
-            // Can turn off 'All' display by passing `null`.
-            if (asideAll && cachedValues.length === valueLabelMap.size) {
-                return asideAll;
+            // Can turn off 'All' display by passing `false`.
+            if (asideAllLabel && cachedValue.length === valueLabelMap.size) {
+                return asideAllLabel;
             }
         }
 
-        return cachedValues
+        return this.getCacheValueArray()
             .map((value) => {
                 const valueMap = valueLabelMap.get(value) || {};
                 return valueMap.label;
@@ -166,30 +198,29 @@ class SelectRow extends PureComponent {
     }
 
     renderAvatar() {
-        const { cachedValues, valueLabelMap } = this.state;
-
-        if (cachedValues.length === 0) {
-            return null;
-        }
-
-        return cachedValues
+        const { valueLabelMap } = this.state;
+        return this.getCacheValueArray()
             .map((value) => {
                 const valueMap = valueLabelMap.get(value) || {};
-                return valueMap.avatar;
+                return (
+                    <React.Fragment key={value}>
+                        {valueMap.avatar}
+                    </React.Fragment>
+                );
             });
     }
 
     render() {
         const {
             label,
-            asideAll,
-            asideNone,
+            asideAllLabel,
+            asideNoneLabel,
             asideSeparator,
             disabled,
             // <ListRow> props (intercepted from it)
             // multiple,
-            values,
-            defaultValues,
+            value,
+            defaultValue,
             onChange,
             // from formRow()
             ineditable,
@@ -198,7 +229,7 @@ class SelectRow extends PureComponent {
             className,
             ...selectListProps
         } = this.props;
-        const { popoverOpen } = this.state;
+        const { isPopoverOpen } = this.state;
 
         const wrapperClassName = classNames(
             COMPONENT_NAME,
@@ -223,7 +254,7 @@ class SelectRow extends PureComponent {
                         <Icon type="dropdown" />
                     </span>
 
-                    {popoverOpen && this.renderPopover(selectListProps)}
+                    {isPopoverOpen && this.renderPopover(selectListProps)}
                 </Content>
             </ListRow>
         );

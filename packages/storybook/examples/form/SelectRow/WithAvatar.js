@@ -14,8 +14,9 @@ function WithAvatar() {
     return (
         <List title="Switch rows">
             <SelectRow
+                label="Avatar"
                 desc="Select One Avatar"
-                defaultValues={['Love']}
+                defaultValue="Love"
                 onChange={action('change')}>
                 <Option label="Love" value="Love" avatar={loveAvatar} />
                 <Option label="Trumps" value="Trumps" avatar={trumpsAvatar} />

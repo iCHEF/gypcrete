@@ -36,7 +36,8 @@
   "dependencies": {
     "@ichef/gypcrete": "^3.0.0",
     "classnames": "^2.2.5",
-    "react-avatar-editor": "^11.0.2"
+    "react-avatar-editor": "^11.0.2",
+    "warning": "^4.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
