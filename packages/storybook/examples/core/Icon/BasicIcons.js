@@ -36,6 +36,7 @@ function BasicIconsSet() {
             <Icon type="download" />
             <Icon type="dropdown" />
             <Icon type="remove-element" />
+            <Icon type="inline-info" />
         </div>
     );
 }
