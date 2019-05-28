@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - [Core] [Form] [ImageEditor] setup `warning@4.0.3`.
+- [Core] Add the `inline-info` icon to the selections of `<Icon>`.
 
 ### Breaking
 - [Core] [Form] [ImageEditor] Peer dependency changes:
