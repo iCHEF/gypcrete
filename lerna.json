@@ -5,7 +5,11 @@
   "version": "3.0.0",
   "npmClient": "yarn",
   "command": {
+    "version": {
+      "includeMergedTags": true
+    },
     "publish": {
+      "includeMergedTags": true,
       "registry": "https://registry.npmjs.org"
     }
   }
