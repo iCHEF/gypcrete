@@ -5,12 +5,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Changed
-- Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
-
-### Added
-- [Core] [Form] [ImageEditor] setup `warning@4.0.3`.
-- [Core] Add the `inline-info` icon to the selections of `<Icon>`.
 
 ### Breaking
 - [Core] [Form] [ImageEditor] Peer dependency changes:
@@ -24,6 +18,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
     - Rename prop `asideAll` to `asideAllLabel`.
     - Rename prop `asideNone` to `asideNoneLabel`.
+
+### Added
+- [Core] [Form] [ImageEditor] setup `warning@4.0.3`.
+- [Core] Add the `inline-info` icon to the selections of `<Icon>`.
+
+### Changed
+- Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
+- Upgrade to Lerna v3; changes publish steps.
 
 ## [3.0.0]
 ### Breaking
