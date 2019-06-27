@@ -3,8 +3,8 @@
 $component-name: #{$prefix}-section;
 
 .#{$component-name} {
-    margin-top: rem($section-vertical-margin);
-    margin-bottom: rem($section-vertical-margin);
+    margin-top: rem($section-top-margin);
+    margin-bottom: rem($section-bottom-margin);
 
     // --------------------
     //  Elements
