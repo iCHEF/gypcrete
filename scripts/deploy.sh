@@ -7,4 +7,4 @@ git tag -a -f -m "${TRAVIS_TAG}" "${TRAVIS_TAG}" "${TRAVIS_TAG}"
 git push --force origin "${TRAVIS_TAG}"
 
 # publish to npm
-yarn release --ignore-prepublish
+yarn release --yes --ignore-prepublish
