@@ -24,8 +24,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Add the `inline-info` icon to the selections of `<Icon>`.
 
 ### Changed
-- Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
-- Upgrade to Lerna v3; changes publish steps.
+- [Build] Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
+- [Build] Upgrade to Lerna v3; changes publish steps.
+- [Core] Update `<Section>` title style and increase bottom margin.
+- [Form] Update `<SelectRow>` and `<SwitchRow>` to adpat vertically-reversed appearance as `<TextInputRow>` in v3.0.
 
 ## [3.0.0]
 ### Breaking
