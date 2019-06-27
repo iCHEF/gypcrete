@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
-import { Switch } from '@ichef/gypcrete';
+import { Switch, TextLabel } from '@ichef/gypcrete';
 import SwitchRow, { PureSwitchRow } from '../SwitchRow';
 
 describe('formRow(SwitchRow)', () => {
@@ -59,18 +59,19 @@ describe('Pure <SwitchRow>', () => {
         expect(wrapper.state('checked')).toBeFalsy();
     });
 
-    it('shows different aside with checked state', () => {
-        const wrapper = mount(
+    it('shows different basic with checked state', () => {
+        const wrapper = shallow(
             <PureSwitchRow
                 checked
                 label="foo"
                 asideOn="TEST_ON"
                 asideOff="TEST_OFF" />
         );
-        expect(wrapper.text()).toBe('fooTEST_ON');
+
+        expect(wrapper.find(TextLabel).prop('basic')).toBe('TEST_ON');
 
         wrapper.setProps({ checked: false });
-        expect(wrapper.text()).toBe('fooTEST_OFF');
+        expect(wrapper.find(TextLabel).prop('basic')).toBe('TEST_OFF');
     });
 
     it('accepts additional children', () => {

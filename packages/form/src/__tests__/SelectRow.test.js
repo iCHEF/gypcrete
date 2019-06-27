@@ -167,7 +167,7 @@ describe('Pure <SelectRow>: Data', () => {
         expect(wrapper.find(SelectList).prop('value')).toEqual([1, 2, 3]);
     });
 
-    it('renders current value on aside', () => {
+    it('renders current value on <Text basic="value">', () => {
         const wrapper = shallow(
             <PureSelectRow multiple label="Select" value={[]}>
                 <Option label="Foo" value="foo" />
@@ -175,14 +175,14 @@ describe('Pure <SelectRow>: Data', () => {
                 <Option label="Meh" value="meh" />
             </PureSelectRow>
         );
-        expect(wrapper.find(Text).prop('aside'))
+        expect(wrapper.find(Text).prop('basic'))
             .toEqual(<span className={BEM.placeholder.toString()}>(Unset)</span>);
 
         wrapper.setProps({ value: ['foo', 'bar'] });
-        expect(wrapper.find(Text).prop('aside')).toBe('Foo, Bar');
+        expect(wrapper.find(Text).prop('basic')).toBe('Foo, Bar');
 
         wrapper.setProps({ value: ['foo', 'bar', 'meh'] });
-        expect(wrapper.find(Text).prop('aside')).toBe('All');
+        expect(wrapper.find(Text).prop('basic')).toBe('All');
     });
 
     it('renders the avatar', () => {
@@ -202,7 +202,7 @@ describe('Pure <SelectRow>: Data', () => {
         expect(wrapper.find(Avatar).prop('src')).toEqual('BAR_SRC');
     });
 
-    it('can customize aside labels', () => {
+    it('can customize value labels', () => {
         const wrapper = shallow(
             <PureSelectRow multiple label="Select" value={[]} asideNoneLabel="None">
                 <Option label="Foo" value="foo" />
@@ -211,20 +211,20 @@ describe('Pure <SelectRow>: Data', () => {
             </PureSelectRow>
         );
 
-        expect(wrapper.find(Text).prop('aside'))
+        expect(wrapper.find(Text).prop('basic'))
             .toEqual(<span className={BEM.placeholder.toString()}>None</span>);
 
         wrapper.setProps({
             value: ['foo', 'bar'],
             asideSeparator: ' + '
         });
-        expect(wrapper.find(Text).prop('aside')).toBe('Foo + Bar');
+        expect(wrapper.find(Text).prop('basic')).toBe('Foo + Bar');
 
         wrapper.setProps({
             value: ['foo', 'bar', 'meh'],
             asideAllLabel: 'Everything'
         });
-        expect(wrapper.find(Text).prop('aside')).toBe('Everything');
+        expect(wrapper.find(Text).prop('basic')).toBe('Everything');
     });
 
     it('can disable "All" label by overriding with null', () => {
@@ -239,7 +239,7 @@ describe('Pure <SelectRow>: Data', () => {
                 <Option label="Meh" value="meh" />
             </PureSelectRow>
         );
-        expect(wrapper.find(Text).prop('aside')).toBe('Foo, Bar, Meh');
+        expect(wrapper.find(Text).prop('basic')).toBe('Foo, Bar, Meh');
     });
 
     it('does not display "All" on single <SelectRow> with only one option', () => {
@@ -248,6 +248,6 @@ describe('Pure <SelectRow>: Data', () => {
                 <Option label="Foo" value="foo" />
             </PureSelectRow>
         );
-        expect(wrapper.find(Text).prop('aside')).toBe('Foo');
+        expect(wrapper.find(Text).prop('basic')).toBe('Foo');
     });
 });
