@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Build] Upgrade to Lerna v3; changes publish steps.
 - [Core] Update `<Section>` title style and increase bottom margin.
 - [Form] Update `<SelectRow>` and `<SwitchRow>` to adpat vertically-reversed appearance as `<TextInputRow>` in v3.0.
+- [Form] Add `desc` prop to `<SelectOption>`
 
 ## [3.0.0]
 ### Breaking
