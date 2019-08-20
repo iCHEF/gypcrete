@@ -112,13 +112,6 @@ class ImageEditor extends PureComponent {
         }
     }
 
-    /**
-     * When maintaining ref with inline arrow function, it sometimes receives
-     * mystery `null` during canvas drag. This blocks accessing cropping rect
-     * via `onImageChange()` callback.
-     *
-     * Setting ref with instance method doesn't break. It's just MAGIC.
-     */
     getImageCanvas = ({ originalSize = false } = {}) => {
         if (originalSize) {
             return this.editorRef.current.getImage();
