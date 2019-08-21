@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
     - Rename prop `asideAll` to `asideAllLabel`.
     - Rename prop `asideNone` to `asideNoneLabel`.
+- [ImageEditor] The instance method `getImageCanvas()` of `<ImageEditor>` now returns a `<canvas>` in the same dimension as the editor itself by default.
+
 
 ### Added
 - [Core] [Form] [ImageEditor] setup `warning@4.0.3`.
