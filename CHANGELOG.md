@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - [Build] Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
-- [Build] Upgrade to Lerna v3; changes publish steps.
+- [Build] Upgrade to Lerna v3.16.4; changes publish steps.
 - [Core] Update `<Section>` title style and increase bottom margin.
 - [Form] Update `<SelectRow>` and `<SwitchRow>` to adpat vertically-reversed appearance as `<TextInputRow>` in v3.0.
 - [Form] Add `desc` prop to `<SelectOption>`

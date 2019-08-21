@@ -58,7 +58,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
     "jest": "^23.6.0",
-    "lerna": "^3.15.0",
+    "lerna": "^3.16.4",
     "node-sass": "^4.7.2",
     "postcss-loader": "^2.0.10",
     "prop-types": "^15.6.2",
