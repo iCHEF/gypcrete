@@ -2,27 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
-import ColumnView, { ColumnPart, BEM as COLUMN_BEM } from '../ColumnView';
-
-describe('<ColumnPart>', () => {
-    it('passes every prop to wrapper when children exists', () => {
-        const handleClick = jest.fn();
-        const wrapper = shallow(
-            <ColumnPart className="bar" onClick={handleClick}>
-                Foo Bar
-            </ColumnPart>
-        );
-
-        expect(wrapper.text()).toBe('Foo Bar');
-        expect(wrapper.find('div').prop('className')).toBe('bar');
-        expect(wrapper.find('div').prop('onClick')).toBe(handleClick);
-    });
-
-    it('renders null when children does not exist', () => {
-        const wrapper = shallow(<ColumnPart />);
-        expect(wrapper.type()).toBeNull();
-    });
-});
+import ColumnView, { BEM as COLUMN_BEM } from '../ColumnView';
 
 describe('<ColumnView>', () => {
     it('renders without crashing', () => {
@@ -39,23 +19,41 @@ describe('<ColumnView>', () => {
         expect(wrapper.find(`.${COLUMN_BEM.body}`).text()).toBe('Foo bar');
     });
 
-    it('can override bottom padding on body wrapper', () => {
+    it('can make body a Flexbox', () => {
+        const wrapper = shallow(<ColumnView flexBody>Foo bar</ColumnView>);
+
+        expect(
+            wrapper.find(`.${COLUMN_BEM.body}`).hasClass(
+                COLUMN_BEM.body.modifier('flex').toString({ stripBlock: true })
+            )
+        ).toBeTruthy();
+    });
+
+    it('can override padding on body wrapper', () => {
+        const padding = {
+            top: 1,
+            bottom: 2,
+            left: 3,
+            right: 4,
+        };
         const wrapper = shallow(
-            <ColumnView bottomPadding="0">
+            <ColumnView bodyPadding={padding}>
                 Foo bar
             </ColumnView>
         );
         expect(wrapper.find(`.${COLUMN_BEM.body}`).prop('style')).toEqual({
-            paddingBottom: '0',
+            paddingTop: 1,
+            paddingBottom: 2,
+            paddingLeft: 3,
+            paddingRight: 4,
         });
     });
 
-    it('renders header in a header <ColumnPart>', () => {
+    it('renders header area if "header" prop is given', () => {
         const wrapper = shallow(
             <ColumnView header={<span data-test="header" />} />
         );
         expect(wrapper.find(`.${COLUMN_BEM.header}`)).toHaveLength(1);
-        expect(wrapper.find(`.${COLUMN_BEM.header}`).type()).toBe(ColumnPart);
         expect(
             wrapper
                 .find(`.${COLUMN_BEM.header}`)
@@ -63,12 +61,11 @@ describe('<ColumnView>', () => {
         ).toBeTruthy();
     });
 
-    it('renders footer in a footer <ColumnPart>', () => {
+    it('renders footer area if "footer" prop is given', () => {
         const wrapper = shallow(
             <ColumnView footer={<span data-test="footer" />} />
         );
         expect(wrapper.find(`.${COLUMN_BEM.footer}`)).toHaveLength(1);
-        expect(wrapper.find(`.${COLUMN_BEM.footer}`).type()).toBe(ColumnPart);
         expect(
             wrapper
                 .find(`.${COLUMN_BEM.footer}`)
