@@ -15,14 +15,6 @@ export const BEM = {
     footer: ROOT_BEM.element('footer'),
 };
 
-export function ColumnPart({ children, ...otherProps }) {
-    if (!children) {
-        return null;
-    }
-
-    return <div {...otherProps}>{children}</div>;
-}
-
 function ColumnView({
     header,
     footer,
@@ -45,17 +37,21 @@ function ColumnView({
 
     return (
         <div className={rootClassName} {...wrapperProps}>
-            <ColumnPart className={BEM.header.toString()}>
-                {header}
-            </ColumnPart>
+            {header && (
+                <div className={`${BEM.header}`}>
+                    {header}
+                </div>
+            )}
 
             <div className={`${bodyClassName}`} style={bodyStyle}>
                 {children}
             </div>
 
-            <ColumnPart className={BEM.footer.toString()}>
-                {footer}
-            </ColumnPart>
+            {footer && (
+                <div className={`${BEM.footer}`}>
+                    {footer}
+                </div>
+            )}
         </div>
     );
 }
