@@ -26,18 +26,20 @@ export function ColumnPart({ children, ...otherProps }) {
 function ColumnView({
     header,
     footer,
-    bottomPadding,
+    bodyPadding,
     // React props
     className,
     children,
     ...wrapperProps
 }) {
     const rootClassName = classNames(BEM.root.toString(), className);
-    const bodyStyle = {};
 
-    if (bottomPadding) {
-        bodyStyle.paddingBottom = bottomPadding;
-    }
+    const bodyStyle = {
+        paddingTop: bodyPadding.top,
+        paddingBottom: bodyPadding.bottom,
+        paddingLeft: bodyPadding.left,
+        paddingRight: bodyPadding.right,
+    };
 
     return (
         <div className={rootClassName} {...wrapperProps}>
@@ -59,13 +61,18 @@ function ColumnView({
 ColumnView.propTypes = {
     header: PropTypes.node,
     footer: PropTypes.node,
-    bottomPadding: PropTypes.string,
+    bodyPadding: PropTypes.shape({
+        top: PropTypes.number,
+        bottom: PropTypes.number,
+        left: PropTypes.number,
+        right: PropTypes.number,
+    }),
 };
 
 ColumnView.defaultProps = {
     header: undefined,
     footer: undefined,
-    bottomPadding: undefined,
+    bodyPadding: { bottom: 24 },
 };
 
 export default ColumnView;
