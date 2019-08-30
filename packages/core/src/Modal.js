@@ -1,6 +1,7 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import memoize from 'memoize-one';
 
 import ColumnView from './ColumnView';
 import HeaderRow from './HeaderRow';
@@ -24,7 +25,23 @@ export const BEM = {
     container: ROOT_BEM.element('container'),
 };
 
-function DefaultHeader({ title }) {
+// -----------------
+//  Helpers
+// -----------------
+
+const createHandleOverlayClick = memoize(
+    onClose => (event) => {
+        // Prevent onClick events being propagated to outer modals
+        event.stopPropagation();
+        onClose();
+    }
+);
+
+// -----------------
+//  Sub-component
+// -----------------
+
+export function DefaultHeader({ title }) {
     const label = <TextLabel align="center" basic={title} />;
 
     return <HeaderRow center={label} />;
@@ -34,71 +51,67 @@ DefaultHeader.propTypes = {
     title: PropTypes.string.isRequired,
 };
 
-class Modal extends PureComponent {
-    static propTypes = {
-        header: PropTypes.node,
-        onClose: PropTypes.func,
-        centered: PropTypes.bool,
-        // <ColumnView> props
-        flexBody: ColumnView.propTypes.flexBody,
-        bodyPadding: ColumnView.propTypes.bodyPadding,
-    };
+// -----------------
+//  Main Component
+// -----------------
 
-    static defaultProps = {
-        header: undefined,
-        onClose: () => {},
-        centered: false,
-        // <ColumnView> props
-        flexBody: ColumnView.defaultProps.flexBody,
-        bodyPadding: ColumnView.defaultProps.bodyPadding,
-    };
+function Modal({
+    header,
+    centered,
+    onClose,
+    // <ColumnView> props
+    flexBody,
+    bodyPadding,
+    // React props
+    className,
+    children,
+}) {
+    const rootBem = BEM.root
+        .modifier('centered', centered)
+        .toString();
 
-    handleOverlayClick = (event) => {
-        const { onClose } = this.props;
-        // Prevent onClick events being propagated to outer modals
-        event.stopPropagation();
-        onClose();
-    }
+    const rootClassName = classNames(rootBem, className);
 
-    render() {
-        const {
-            header,
-            centered,
-            // <ColumnView> props
-            flexBody,
-            bodyPadding,
-            // React props
-            className,
-            children,
-        } = this.props;
+    const headerRow = header && wrapIfNotElement(header, {
+        with: DefaultHeader,
+        via: 'title',
+    });
 
-        const rootBem = BEM.root
-            .modifier('centered', centered)
-            .toString();
+    const handleOverlayClick = createHandleOverlayClick(onClose);
 
-        const rootClassName = classNames(rootBem, className);
+    return (
+        <div className={rootClassName}>
+            <Overlay onClick={handleOverlayClick} />
 
-        const headerRow = header && wrapIfNotElement(header, {
-            with: DefaultHeader,
-            via: 'title',
-        });
-
-        return (
-            <div className={rootClassName}>
-                <Overlay onClick={this.handleOverlayClick} />
-
-                <ColumnView
-                    header={headerRow}
-                    className={`${BEM.container}`}
-                    flexBody={flexBody}
-                    bodyPadding={bodyPadding}
-                >
-                    {children}
-                </ColumnView>
-            </div>
-        );
-    }
+            <ColumnView
+                header={headerRow}
+                className={`${BEM.container}`}
+                flexBody={flexBody}
+                bodyPadding={bodyPadding}
+            >
+                {children}
+            </ColumnView>
+        </div>
+    );
 }
+
+Modal.propTypes = {
+    header: PropTypes.node,
+    centered: PropTypes.bool,
+    onClose: PropTypes.func,
+    // <ColumnView> props
+    flexBody: ColumnView.propTypes.flexBody,
+    bodyPadding: ColumnView.propTypes.bodyPadding,
+};
+
+Modal.defaultProps = {
+    header: undefined,
+    centered: false,
+    onClose: () => {},
+    // <ColumnView> props
+    flexBody: ColumnView.defaultProps.flexBody,
+    bodyPadding: ColumnView.defaultProps.bodyPadding,
+};
 
 export { Modal as PureModal };
 export default renderToLayer(Modal);
