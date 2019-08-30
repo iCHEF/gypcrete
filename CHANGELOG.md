@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Breaking
 - [Core] [Form] [ImageEditor] Peer dependency changes:
   * Change from `@babel/runtime-corejs2` to `@babel/runtime-corejs3`.
+- [Core] `<ColumnView>`:
+  * The `bottomPadding` prop is removed. Please use `bodyPadding` prop and pass an object instead.
+- [Core] `<Modal>`:
+  * `<Modal>` is refactored to render a `<ColumnView>` as its inner layout.
+  * `<Modal>` no longer takes `size`  and `bodyClassName` props.
+  * The `bodyPadding` prop now takes an object and is passed to `<ColumnView>`.
 - [Form] `<SelectList>`:
     - Rename prop `values` to `value`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
     - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
@@ -24,6 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - [Core] [Form] [ImageEditor] setup `warning@4.0.3`.
 - [Core] Add the `inline-info` icon to the selections of `<Icon>`.
+- [Core] Add `flexBody` prop for `<ColumnView>` (and also `<Modal>`) to render its body as a Flexbox.
 
 ### Changed
 - [Build] Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
@@ -31,6 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Update `<Section>` title style and increase bottom margin.
 - [Form] Update `<SelectRow>` and `<SwitchRow>` to adpat vertically-reversed appearance as `<TextInputRow>` in v3.0.
 - [Form] Add `desc` prop to `<SelectOption>`
+- [Storybook] Update examples for refactord `<ColumnView>` and `<Modal>`.
 
 ## [3.0.0]
 ### Breaking
