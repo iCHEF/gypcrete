@@ -7,7 +7,7 @@ $component: #{$prefix}-column-view;
     background-color: $c-column-bg;
     display: flex;
     flex-direction: column;
-    // when nested under another column view
+    // when placed in another Flexbox
     flex: 1 1 100%;
 
     // --------------------
@@ -20,13 +20,14 @@ $component: #{$prefix}-column-view;
     }
 
     &__header {
-        z-index: 1;
+        z-index: 2;
     }
 
     &__body {
-        flex: 1 1 100%;
+        flex: 1 1 auto;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+        z-index: 1;
 
         &--flex {
             display: flex;
