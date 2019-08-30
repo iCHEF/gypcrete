@@ -26,13 +26,15 @@ export function ColumnPart({ children, ...otherProps }) {
 function ColumnView({
     header,
     footer,
+    flexBody,
     bodyPadding,
     // React props
     className,
     children,
     ...wrapperProps
 }) {
-    const rootClassName = classNames(BEM.root.toString(), className);
+    const rootClassName = classNames(`${BEM.root}`, className);
+    const bodyClassName = BEM.body.modifier('flex', flexBody);
 
     const bodyStyle = {
         paddingTop: bodyPadding.top,
@@ -47,7 +49,7 @@ function ColumnView({
                 {header}
             </ColumnPart>
 
-            <div className={BEM.body.toString()} style={bodyStyle}>
+            <div className={`${bodyClassName}`} style={bodyStyle}>
                 {children}
             </div>
 
@@ -61,6 +63,7 @@ function ColumnView({
 ColumnView.propTypes = {
     header: PropTypes.node,
     footer: PropTypes.node,
+    flexBody: PropTypes.bool,
     bodyPadding: PropTypes.shape({
         top: PropTypes.number,
         bottom: PropTypes.number,
@@ -72,6 +75,7 @@ ColumnView.propTypes = {
 ColumnView.defaultProps = {
     header: undefined,
     footer: undefined,
+    flexBody: false,
     bodyPadding: { bottom: 24 },
 };
 

@@ -13,6 +13,7 @@ $component: #{$prefix}-column-view;
     // --------------------
     //  Elements
     // --------------------
+
     &__header,
     &__footer {
         flex: 0 0 auto;
@@ -26,6 +27,11 @@ $component: #{$prefix}-column-view;
         flex: 1 1 100%;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
+
+        &--flex {
+            display: flex;
+            flex-direction: column;
+        }
     }
 
     &__footer {
