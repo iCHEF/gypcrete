@@ -15,43 +15,43 @@ export const BEM = {
     footer: ROOT_BEM.element('footer'),
 };
 
-export function ColumnPart({ children, ...otherProps }) {
-    if (!children) {
-        return null;
-    }
-
-    return <div {...otherProps}>{children}</div>;
-}
-
 function ColumnView({
     header,
     footer,
-    bottomPadding,
+    flexBody,
+    bodyPadding,
     // React props
     className,
     children,
     ...wrapperProps
 }) {
-    const rootClassName = classNames(BEM.root.toString(), className);
-    const bodyStyle = {};
+    const rootClassName = classNames(`${BEM.root}`, className);
+    const bodyClassName = BEM.body.modifier('flex', flexBody);
 
-    if (bottomPadding) {
-        bodyStyle.paddingBottom = bottomPadding;
-    }
+    const bodyStyle = {
+        paddingTop: bodyPadding.top,
+        paddingBottom: bodyPadding.bottom,
+        paddingLeft: bodyPadding.left,
+        paddingRight: bodyPadding.right,
+    };
 
     return (
         <div className={rootClassName} {...wrapperProps}>
-            <ColumnPart className={BEM.header.toString()}>
-                {header}
-            </ColumnPart>
+            {header && (
+                <div className={`${BEM.header}`}>
+                    {header}
+                </div>
+            )}
 
-            <div className={BEM.body.toString()} style={bodyStyle}>
+            <div className={`${bodyClassName}`} style={bodyStyle}>
                 {children}
             </div>
 
-            <ColumnPart className={BEM.footer.toString()}>
-                {footer}
-            </ColumnPart>
+            {footer && (
+                <div className={`${BEM.footer}`}>
+                    {footer}
+                </div>
+            )}
         </div>
     );
 }
@@ -59,13 +59,20 @@ function ColumnView({
 ColumnView.propTypes = {
     header: PropTypes.node,
     footer: PropTypes.node,
-    bottomPadding: PropTypes.string,
+    flexBody: PropTypes.bool,
+    bodyPadding: PropTypes.shape({
+        top: PropTypes.number,
+        bottom: PropTypes.number,
+        left: PropTypes.number,
+        right: PropTypes.number,
+    }),
 };
 
 ColumnView.defaultProps = {
     header: undefined,
     footer: undefined,
-    bottomPadding: undefined,
+    flexBody: false,
+    bodyPadding: { bottom: 24 },
 };
 
 export default ColumnView;

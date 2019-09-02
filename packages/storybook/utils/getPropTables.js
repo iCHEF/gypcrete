@@ -6,11 +6,17 @@ const DEFAULT_OPTIONS = {
 };
 const EMPTY_COMPONENT = () => <div />;
 
-function getPropTables(components = [], options = {}) {
-    return withInfo({
+export function getAddonOptions(components = []) {
+    return {
         ...DEFAULT_OPTIONS,
-        ...options,
         propTables: components,
+    };
+}
+
+function getPropTables(components, options = {}) {
+    return withInfo({
+        ...getAddonOptions(components),
+        ...options,
     })(EMPTY_COMPONENT);
 }
 

@@ -1,16 +1,16 @@
-import React, {
-    cloneElement,
-    isValidElement,
-    PureComponent
-} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import memoize from 'memoize-one';
 
-import Overlay from './Overlay';
+import ColumnView from './ColumnView';
 import HeaderRow from './HeaderRow';
+import Overlay from './Overlay';
 import TextLabel from './TextLabel';
+
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+import wrapIfNotElement from './utils/wrapIfNotElement';
 import renderToLayer from './mixins/renderToLayer';
 
 import './styles/_animations.scss';
@@ -21,126 +21,97 @@ export const MODAL_SIZE = ['small', 'large', 'full'];
 export const COMPONENT_NAME = prefixClass('modal');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
-    root: ROOT_BEM.modifier('active'),
-    closable: ROOT_BEM.element('closable'),
+    root: ROOT_BEM,
     container: ROOT_BEM.element('container'),
-    header: ROOT_BEM.element('header'),
-    body: ROOT_BEM.element('body')
 };
 
-/**
- * Render Modal Header
- * If string, render <HeaderRow> with label
- * If element, render element with headerClassName
- *
- * @param  {String|Node|Any} header           - Title string or <HeaderRow>
- * @param  {String}          headerClassName  - Header className
- * @return {Node|Any}                         - Header Node or any
- */
-function renderHeader(header, headerClassName) {
-    if (isValidElement(header)) {
-        return cloneElement(header, {
-            className: headerClassName
-        });
-    }
-    if (typeof header === 'string') {
-        const label = <TextLabel align="center" basic={header} />;
-        return <HeaderRow className={headerClassName} center={label} />;
-    }
+// -----------------
+//  Helpers
+// -----------------
 
-    return header;
-}
-
-export const ModalContent = ({
-    header,
-    bodyClassName,
-    bodyPadding,
-    // React props
-    children,
-}) => {
-    const cNames = classNames(
-        bodyClassName,
-        `${BEM.body.modifier('padding', bodyPadding)}`
-    );
-    return (
-        <div className={BEM.container}>
-            {renderHeader(header, `${BEM.header}`)}
-            <div
-                className={cNames}>
-                {children}
-            </div>
-        </div>
-    );
-};
-
-ModalContent.propTypes = {
-    header: PropTypes.node,
-    bodyClassName: PropTypes.string,
-    bodyPadding: PropTypes.bool,
-};
-
-ModalContent.defaultProps = {
-    header: undefined,
-    bodyClassName: '',
-    bodyPadding: false,
-};
-
-class Modal extends PureComponent {
-    handleOverlayClick = (event) => {
-        const { onClose } = this.props;
+const createHandleOverlayClick = memoize(
+    onClose => (event) => {
         // Prevent onClick events being propagated to outer modals
         event.stopPropagation();
         onClose();
     }
+);
 
-    render() {
-        const {
-            size,
-            header,
-            bodyClassName,
-            bodyPadding,
-            onClose,
-            centered,
-            // React props
-            className,
-            children,
-        } = this.props;
-        const bemClass = BEM.root.modifier('center', centered).modifier(size);
-        const rootClassName = classNames(bemClass.toString(), className);
+// -----------------
+//  Sub-component
+// -----------------
 
-        return (
-            <article className={rootClassName}>
-                <Overlay onClick={this.handleOverlayClick} />
-                <ModalContent
-                    header={header}
-                    bodyClassName={bodyClassName}
-                    bodyPadding={bodyPadding}
-                    onClose={onClose}>
-                    {children}
-                </ModalContent>
-            </article>
-        );
-    }
+export function DefaultHeader({ title }) {
+    const label = <TextLabel align="center" basic={title} />;
+
+    return <HeaderRow center={label} />;
+}
+
+DefaultHeader.propTypes = {
+    title: PropTypes.string.isRequired,
+};
+
+// -----------------
+//  Main Component
+// -----------------
+
+function Modal({
+    header,
+    centered,
+    onClose,
+    // <ColumnView> props
+    flexBody,
+    bodyPadding,
+    // React props
+    className,
+    children,
+}) {
+    const rootBem = BEM.root
+        .modifier('centered', centered)
+        .toString();
+
+    const rootClassName = classNames(rootBem, className);
+
+    const headerRow = header && wrapIfNotElement(header, {
+        with: DefaultHeader,
+        via: 'title',
+    });
+
+    const handleOverlayClick = createHandleOverlayClick(onClose);
+
+    return (
+        <div className={rootClassName}>
+            <Overlay onClick={handleOverlayClick} />
+
+            <ColumnView
+                header={headerRow}
+                className={`${BEM.container}`}
+                flexBody={flexBody}
+                bodyPadding={bodyPadding}
+            >
+                {children}
+            </ColumnView>
+        </div>
+    );
 }
 
 Modal.propTypes = {
-    size: PropTypes.oneOf(MODAL_SIZE),
-    onClose: PropTypes.func,
-    header: ModalContent.propTypes.header,
-    bodyClassName: ModalContent.propTypes.bodyClassName,
-    bodyPadding: ModalContent.propTypes.bodyPadding,
+    header: PropTypes.node,
     centered: PropTypes.bool,
+    onClose: PropTypes.func,
+    // <ColumnView> props
+    flexBody: ColumnView.propTypes.flexBody,
+    bodyPadding: ColumnView.propTypes.bodyPadding,
 };
 
 Modal.defaultProps = {
-    size: undefined,
-    onClose: () => {},
-    header: ModalContent.defaultProps.header,
-    bodyClassName: ModalContent.defaultProps.bodyClassName,
-    bodyPadding: ModalContent.defaultProps.bodyPadding,
+    header: undefined,
     centered: false,
+    onClose: () => {},
+    // <ColumnView> props
+    flexBody: ColumnView.defaultProps.flexBody,
+    bodyPadding: ColumnView.defaultProps.bodyPadding,
 };
 
 export { Modal as PureModal };
-
 export default renderToLayer(Modal);
