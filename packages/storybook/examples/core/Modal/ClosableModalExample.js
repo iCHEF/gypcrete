@@ -21,7 +21,9 @@ export default class ClosableModalExample extends PureComponent {
     }
 
     render() {
+        const { children } = this.props;
         const { modalOpen } = this.state;
+
         const header = (
             <ModalHeader
                 onCancel={this.handleModalClose} />
@@ -48,6 +50,7 @@ export default class ClosableModalExample extends PureComponent {
                 onClose={this.handleModalClose}
             >
                 Modal content
+                {children}
             </Modal>
         );
     }
