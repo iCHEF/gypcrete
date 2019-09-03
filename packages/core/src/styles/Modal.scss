@@ -69,8 +69,8 @@ $component: #{$prefix}-modal;
     #{repeat-str('.#{$prefix}-base-layer ~', $i)} .#{$prefix}-base-layer {
         .#{$prefix}-modal {
             &__container {
-                width: $modal-width - $i * 64px;
-                height: $modal-height - $i * 32px;
+                width: $modal-width - ($i * $modal-indent * 2);
+                height: $modal-height - ($i * $modal-indent);
             }
         }
     }
