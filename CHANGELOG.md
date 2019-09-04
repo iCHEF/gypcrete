@@ -33,12 +33,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Add `flexBody` prop for `<ColumnView>` (and also `<Modal>`) to render its body as a Flexbox.
 
 ### Changed
-- [Build] Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
-- [Build] Upgrade to Lerna v3.16.4; changes publish steps.
 - [Core] Update `<Section>` title style and increase bottom margin.
 - [Form] Update `<SelectRow>` and `<SwitchRow>` to adpat vertically-reversed appearance as `<TextInputRow>` in v3.0.
 - [Form] Add `desc` prop to `<SelectOption>`
 - [Storybook] Update examples for refactord `<ColumnView>` and `<Modal>`.
+
+### Upgrades
+- [Build] Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
+- [Build] Upgrade to Lerna v3.16.4; changes publish steps.
+- [Build] Upgrade to `node-sass@4.12.0` for Node v10+ support.
+- [Build] Upgrade dependencies to address security alerts.
 
 ## [3.0.0]
 ### Breaking
