@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - [Core] Update `<Section>` title style and increase bottom margin.
+- [Core] Remove the only test cases that uses `sinon`; remove `sinon` from dev dependencies.
 - [Form] Update `<SelectRow>` and `<SwitchRow>` to adpat vertically-reversed appearance as `<TextInputRow>` in v3.0.
 - [Form] Add `desc` prop to `<SelectOption>`
 - [Storybook] Update examples for refactord `<ColumnView>` and `<Modal>`.

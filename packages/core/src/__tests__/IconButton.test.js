@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
-import { stub, assert } from 'sinon';
 
 import Button from '../Button';
 import IconButton from '../IconButton';
@@ -42,30 +41,5 @@ describe('<IconButton>', () => {
         expect(wrapper.hasClass('gyp-button--icon-only')).toBeTruthy();
         expect(wrapper.hasClass('gyp-button--tinted')).toBeTruthy();
         expect(wrapper.hasClass('other-custom-class')).toBeTruthy();
-    });
-
-    describe('invalid propTypes', () => {
-        let consoleStub;
-        beforeEach(() => {
-            consoleStub = stub(console, 'error');
-        });
-
-        afterEach(() => {
-            consoleStub.restore();
-        });
-
-        it('color must be empty', () => {
-            const wrapper = shallow(<IconButton icon="printer" color="red" />);
-
-            assert.calledWithMatch(consoleStub, /Failed prop type: <IconButton> must not contains color./);
-            expect(wrapper.find(Button).prop('color')).toBeUndefined();
-        });
-
-        it('solid must be empty', () => {
-            const wrapper = shallow(<IconButton icon="printer" solid />);
-
-            assert.calledWithMatch(consoleStub, /Failed prop type: <IconButton> must not contains solid./);
-            expect(wrapper.find(Button).prop('solid')).toBeUndefined();
-        });
     });
 });
