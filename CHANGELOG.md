@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Breaking
 - [Core] [Form] [ImageEditor] Peer dependency changes:
   * Change from `@babel/runtime-corejs2` to `@babel/runtime-corejs3`.
+- [Core] [Form] [ImageEditor] now exports CommonJS modules via "main" and ES modules via "module" field in `package.json`.
 - [Core] `<ColumnView>`:
   * The `bottomPadding` prop is removed. Please use `bodyPadding` prop and pass an object instead.
 - [Core] `<Modal>`:
