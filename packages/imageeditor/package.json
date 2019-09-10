@@ -13,20 +13,21 @@
     "npm": ">= 3.10.10"
   },
   "main": "lib/index.js",
+  "module": "es/index.js",
   "files": [
     "dist/",
     "lib/",
-    "es5/",
+    "es/",
     "README.md",
     "package.json"
   ],
   "scripts": {
     "prepublish": "npm run clean && npm run build",
-    "build": "npm run build:dist && npm run build:lib && npm run build:es5",
+    "build": "npm run build:dist && npm run build:lib && npm run build:es",
     "build:dist": "webpack --config ../../configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --root-mode=upward --out-dir lib",
-    "build:es5": "BABEL_ENV=es5 babel src --root-mode=upward --out-dir es5",
-    "clean": "rm -rf ./dist ./lib ./es5"
+    "build:es": "BABEL_ENV=es babel src --root-mode=upward --out-dir es",
+    "clean": "rm -rf ./dist ./lib ./es"
   },
   "peerDependencies": {
     "@babel/runtime-corejs3": "^7.4.4",

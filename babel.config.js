@@ -20,14 +20,14 @@ module.exports = {
             // Environment for Webpack. Empty for now.
             // Module: CommonJS
         },
-        es5: {
+        lib: {
             // Module: CommonJS
             plugins: [
                 'babel-plugin-strip-css-imports',
             ],
             ignore: ['**/__tests__/*'],
         },
-        lib: {
+        es: {
             // Module: ES Module
             presets: [
                 ['@babel/preset-env', { modules: false }],
