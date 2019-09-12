@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Remove the only test cases that uses `sinon`; remove `sinon` from dev dependencies.
 - [Form] Update `<SelectRow>` and `<SwitchRow>` to adpat vertically-reversed appearance as `<TextInputRow>` in v3.0.
 - [Form] Add `desc` prop to `<SelectOption>`
+- [form] `<SelectRow>` now considers empty string `''` as unset.
 - [Storybook] Update examples for refactord `<ColumnView>` and `<Modal>`.
 
 ### Upgrades
