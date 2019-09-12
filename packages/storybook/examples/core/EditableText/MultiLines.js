@@ -10,21 +10,24 @@ function MultiLines() {
             <DebugBox>
                 <EditableText
                     inputTag="textarea"
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
 
             <DebugBox>
                 <EditableText
                     inputTag="textarea"
                     value={'Controlled input\nin multiple lines'}
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
 
             <DebugBox>
                 <EditableText
                     inputTag="textarea"
                     defaultValue={'Unontrolled input\nin multiple lines'}
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
         </div>
     );

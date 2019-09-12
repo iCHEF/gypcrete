@@ -7,14 +7,14 @@ const defaultItemsCount = 50;
 const rootContainerStyle = {
     height: 300,
     overflow: 'auto',
-    border: '1px solid #efefef'
+    border: '1px solid #efefef',
 };
 
 class BasicUsageExample extends PureComponent {
     state = {
         lastPage: 1,
         isLoading: false,
-        hasMore: true
+        hasMore: true,
     }
 
     loadMore = (event) => {
@@ -27,12 +27,12 @@ class BasicUsageExample extends PureComponent {
             if (lastPage < 2) {
                 this.setState({
                     lastPage: lastPage + 1,
-                    isLoading: false
+                    isLoading: false,
                 });
             } else {
                 this.setState({
                     isLoading: false,
-                    hasMore: false
+                    hasMore: false,
                 });
             }
         }, 1500);
@@ -46,7 +46,7 @@ class BasicUsageExample extends PureComponent {
 
             this.setState({
                 lastPage: lastPage + 1,
-                isLoading: false
+                isLoading: false,
             });
         }, 1500);
     }
@@ -75,7 +75,8 @@ class BasicUsageExample extends PureComponent {
                     hasMore={hasMore}
                     loadingLabel="Loading..."
                     showMoreButton="Show more"
-                    noNewestButton="All items displayed">
+                    noNewestButton="All items displayed"
+                >
                     <ul>
                         {this.renderListItems()}
                     </ul>

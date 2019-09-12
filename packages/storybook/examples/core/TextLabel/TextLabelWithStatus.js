@@ -13,7 +13,8 @@ function TextLabelWithStatusExample() {
                     tag="Tag"
                     aside="Center align"
                     align="center"
-                    status="loading" />
+                    status="loading"
+                />
             </DebugBox>
 
             <DebugBox>
@@ -24,7 +25,8 @@ function TextLabelWithStatusExample() {
                     aside="Reverse align"
                     align="reverse"
                     status="success"
-                    statusOptions={{ autohide: false }} />
+                    statusOptions={{ autohide: false }}
+                />
             </DebugBox>
 
             <DebugBox>
@@ -34,7 +36,8 @@ function TextLabelWithStatusExample() {
                     tag="Tag"
                     aside="Left align"
                     status="error"
-                    errorMsg="Save failed" />
+                    errorMsg="Save failed"
+                />
             </DebugBox>
         </div>
     );

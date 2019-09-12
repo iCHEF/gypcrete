@@ -18,14 +18,16 @@ function BasicCheckboxExample() {
                     defaultChecked
                     basic="Join pilot program"
                     aside="Secondary helps"
-                    tag="New" />
+                    tag="New"
+                />
             </DebugBox>
 
             <DebugBox>
                 <Checkbox
                     defaultChecked
                     basic="Join pilot program"
-                    avatar={rdAvatar} />
+                    avatar={rdAvatar}
+                />
             </DebugBox>
 
             <DebugBox>
@@ -33,7 +35,8 @@ function BasicCheckboxExample() {
                     defaultChecked
                     basic="Turn the light"
                     aside="center align"
-                    align="center" />
+                    align="center"
+                />
             </DebugBox>
         </div>
     );

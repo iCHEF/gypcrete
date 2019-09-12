@@ -26,7 +26,8 @@ class ControlledRow extends PureComponent {
                 label="Controlled row"
                 value={this.state.value}
                 onChange={this.handleInputChange}
-                {...otherProps} />
+                {...otherProps}
+            />
         );
     }
 }

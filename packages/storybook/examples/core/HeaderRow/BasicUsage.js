@@ -15,7 +15,8 @@ function BasicUsage() {
             align="center"
             basic={
                 <TextEllipsis>Lorem ipsum a slightly longer title</TextEllipsis>
-            } />
+            }
+        />
     );
 
     return (
@@ -23,7 +24,8 @@ function BasicUsage() {
             <HeaderRow
                 left={leftBtn}
                 center={centerLabel}
-                right={rightBtn} />
+                right={rightBtn}
+            />
         </DebugBox>
     );
 }

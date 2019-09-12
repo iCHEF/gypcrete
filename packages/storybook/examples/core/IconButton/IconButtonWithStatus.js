@@ -8,17 +8,20 @@ function IconButtonWithStatusExample() {
         <FlexRow>
             <IconButton
                 icon="printer"
-                status="loading" />
+                status="loading"
+            />
 
             <IconButton
                 icon="printer"
                 status="success"
-                statusOptions={{ autohide: false }} />
+                statusOptions={{ autohide: false }}
+            />
 
             <IconButton
                 icon="printer"
                 status="error"
-                errorMsg="Cannot add printer." />
+                errorMsg="Cannot add printer."
+            />
         </FlexRow>
     );
 }

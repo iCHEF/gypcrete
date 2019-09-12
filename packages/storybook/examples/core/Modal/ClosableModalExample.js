@@ -8,7 +8,7 @@ import ModalHeader from './ModalHeader';
 
 export default class ClosableModalExample extends PureComponent {
     state ={
-        modalOpen: true
+        modalOpen: true,
     };
 
     handleModalOpen = () => {
@@ -26,7 +26,8 @@ export default class ClosableModalExample extends PureComponent {
 
         const header = (
             <ModalHeader
-                onCancel={this.handleModalClose} />
+                onCancel={this.handleModalClose}
+            />
         );
 
         if (!modalOpen) {

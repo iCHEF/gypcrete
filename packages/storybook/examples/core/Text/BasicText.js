@@ -19,7 +19,8 @@ function BasicTextExample() {
                 <Text
                     align="center"
                     basic="Basic Text"
-                    aside="I am center-aligned" />
+                    aside="I am center-aligned"
+                />
             </DebugBox>
 
             <DebugBox>
@@ -27,14 +28,16 @@ function BasicTextExample() {
                     align="right"
                     basic="Basic Text"
                     tag="Tag"
-                    aside="I am right-aligned" />
+                    aside="I am right-aligned"
+                />
             </DebugBox>
 
             <DebugBox>
                 <Text
                     basic={LONG_LABEL}
                     tag="Tag"
-                    aside="Multi-line basic" />
+                    aside="Multi-line basic"
+                />
             </DebugBox>
 
             <DebugBox>

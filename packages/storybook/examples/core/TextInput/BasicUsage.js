@@ -16,14 +16,16 @@ function BasicUsage() {
                     align="reverse"
                     label="Controlled input"
                     value="Input Value"
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
 
             <DebugBox>
                 <TextInput
                     label="Uncontrolled input"
                     defaultValue="Input Value"
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
 
             <DebugBox>
@@ -31,14 +33,16 @@ function BasicUsage() {
                     label="Error input"
                     defaultValue="Input Value"
                     status="error"
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
 
             <DebugBox>
                 <TextInput
                     readOnly
                     label="Read-only input"
-                    value="Input Value" />
+                    value="Input Value"
+                />
             </DebugBox>
 
             <DebugBox>
@@ -46,7 +50,8 @@ function BasicUsage() {
                     disabled
                     label="Disabled input"
                     value="Input Value"
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
         </div>
     );

@@ -13,13 +13,15 @@ function Alignments() {
             <DebugBox>
                 <EditableText
                     align="center"
-                    value="center-aligned" />
+                    value="center-aligned"
+                />
             </DebugBox>
 
             <DebugBox>
                 <EditableText
                     align="right"
-                    value="right-aligned" />
+                    value="right-aligned"
+                />
             </DebugBox>
         </div>
     );

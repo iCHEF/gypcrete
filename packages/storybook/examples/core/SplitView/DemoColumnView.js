@@ -8,7 +8,8 @@ function ColumnHeader() {
     const label = (
         <TextLabel
             align="center"
-            basic="Column Header" />
+            basic="Column Header"
+        />
     );
 
     return (

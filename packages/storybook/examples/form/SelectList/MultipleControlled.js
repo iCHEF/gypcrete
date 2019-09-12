@@ -9,7 +9,8 @@ function MultipleControlled() {
         <SelectList
             multiple
             value={['1', '2']}
-            onChange={action('change')}>
+            onChange={action('change')}
+        >
             <Option label="Option A" value="1" />
             <Option label="Option B" value="2" />
             <Option label="Option C" value="3" />

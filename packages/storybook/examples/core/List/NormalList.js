@@ -26,13 +26,15 @@ function NormalList() {
                 <ListRow
                     desc="Row help message"
                     status="error"
-                    errorMsg="Row error message">
+                    errorMsg="Row error message"
+                >
                     <TextLabel
                         bold
                         icon="tickets"
                         basic="Hello World"
                         aside="Component aside"
-                        status={null} />
+                        status={null}
+                    />
                     <IconButton icon="edit" />
                     <IconButton tinted icon="drag" />
                 </ListRow>
@@ -41,7 +43,8 @@ function NormalList() {
                     <TextLabel
                         icon="tickets"
                         basic="Highlighted row"
-                        aside="Component aside" />
+                        aside="Component aside"
+                    />
                     <IconButton icon="edit" />
                     <IconButton tinted icon="drag" />
                 </ListRow>
@@ -53,7 +56,8 @@ function NormalList() {
                 <ListRow>
                     <Button
                         icon="add"
-                        basic="Add row" />
+                        basic="Add row"
+                    />
                 </ListRow>
             </List>
         </DebugBox>

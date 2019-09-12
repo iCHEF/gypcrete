@@ -16,11 +16,13 @@ function BasicUsage() {
                 label="Module default state on iPad"
                 asideOn="Turned on by default"
                 asideOff="Turned off by default"
-                desc={DESC} />
+                desc={DESC}
+            />
 
             <SwitchRow
                 disabled
-                label="Disabled row" />
+                label="Disabled row"
+            />
 
             <SwitchRow
                 checked
@@ -28,7 +30,8 @@ function BasicUsage() {
                 asideOn="There will be peace"
                 asideOff="There will be war"
                 status="error"
-                errorMsg="Cannot declare a war." />
+                errorMsg="Cannot declare a war."
+            />
         </List>
     );
 }

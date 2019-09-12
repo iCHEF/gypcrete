@@ -11,7 +11,8 @@ function CheckboxWithStatusExample() {
                     indeterminate
                     align="center"
                     basic="Count me in"
-                    status="loading" />
+                    status="loading"
+                />
             </DebugBox>
 
             <DebugBox>
@@ -20,14 +21,16 @@ function CheckboxWithStatusExample() {
                     align="reverse"
                     basic="Count me in"
                     status="success"
-                    statusOptions={{ autohide: false }} />
+                    statusOptions={{ autohide: false }}
+                />
             </DebugBox>
 
             <DebugBox>
                 <Checkbox
                     basic="Count me in"
                     status="error"
-                    errorMsg="Unauthorized" />
+                    errorMsg="Unauthorized"
+                />
             </DebugBox>
         </div>
     );

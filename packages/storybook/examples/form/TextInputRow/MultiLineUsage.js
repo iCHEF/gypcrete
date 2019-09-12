@@ -18,23 +18,27 @@ function MultiLineUsage() {
             <TextInputRow
                 multiLine
                 label="Module name"
-                defaultValue={EXAMPLE_TEXT} />
+                defaultValue={EXAMPLE_TEXT}
+            />
 
             <ControlledRow
                 multiLine
-                initValue={EXAMPLE_TEXT} />
+                initValue={EXAMPLE_TEXT}
+            />
 
             <TextInputRow
                 multiLine
                 disabled
                 label="Disabled row"
-                value={EXAMPLE_TEXT} />
+                value={EXAMPLE_TEXT}
+            />
 
             <TextInputRow
                 multiLine
                 readOnly
                 label="Read-only row"
-                value={EXAMPLE_TEXT} />
+                value={EXAMPLE_TEXT}
+            />
 
 
             <TextInputRow
@@ -42,7 +46,8 @@ function MultiLineUsage() {
                 label="Secret code"
                 value={EXAMPLE_TEXT}
                 status="error"
-                errorMsg="Cannot authenticate with this code." />
+                errorMsg="Cannot authenticate with this code."
+            />
         </List>
     );
 }

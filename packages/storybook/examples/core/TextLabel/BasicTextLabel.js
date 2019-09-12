@@ -11,7 +11,8 @@ function BasicTextLabelExample() {
                     icon="printer"
                     basic="Basic text"
                     tag="Tag"
-                    aside="left align (default)" />
+                    aside="left align (default)"
+                />
             </DebugBox>
 
             <DebugBox>
@@ -20,7 +21,8 @@ function BasicTextLabelExample() {
                     basic="Basic text"
                     tag="Tag"
                     aside="center align"
-                    align="center" />
+                    align="center"
+                />
             </DebugBox>
 
             <DebugBox>
@@ -29,7 +31,8 @@ function BasicTextLabelExample() {
                     basic="Basic text"
                     tag="Tag"
                     aside="right align"
-                    align="right" />
+                    align="right"
+                />
             </DebugBox>
 
             <DebugBox>
@@ -38,7 +41,8 @@ function BasicTextLabelExample() {
                     basic="Basic text"
                     tag="Tag"
                     aside="reverse align"
-                    align="reverse" />
+                    align="reverse"
+                />
             </DebugBox>
         </div>
     );

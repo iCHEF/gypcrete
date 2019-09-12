@@ -10,7 +10,8 @@ function MultipleMinCheck() {
             multiple
             minCheck={1}
             defaultValue={['1']}
-            onChange={action('change')}>
+            onChange={action('change')}
+        >
             <Option label="Option A" value="1" />
             <Option label="Option B" value="2" />
             <Option label="Option C" value="3" />

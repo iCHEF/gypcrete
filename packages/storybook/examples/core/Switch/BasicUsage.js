@@ -12,7 +12,8 @@ function BasicUsage() {
             <DebugBox>
                 <Switch
                     basic="Switch with basic"
-                    aside="Rare usage" />
+                    aside="Rare usage"
+                />
             </DebugBox>
 
             <DebugBox>

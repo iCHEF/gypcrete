@@ -9,7 +9,7 @@ class PageAsContainerExample extends PureComponent {
     state = {
         lastPage: 1,
         isLoading: false,
-        hasMore: true
+        hasMore: true,
     }
 
     loadMore = (event) => {
@@ -22,12 +22,12 @@ class PageAsContainerExample extends PureComponent {
             if (lastPage < 3) {
                 this.setState({
                     lastPage: lastPage + 1,
-                    isLoading: false
+                    isLoading: false,
                 });
             } else {
                 this.setState({
                     isLoading: false,
-                    hasMore: false
+                    hasMore: false,
                 });
             }
         }, 1500);
@@ -56,7 +56,8 @@ class PageAsContainerExample extends PureComponent {
                 onLoadMore={this.loadMore}
                 isLoading={isLoading}
                 hasMore={hasMore}
-                showMoreButton="Show more">
+                showMoreButton="Show more"
+            >
                 <ul>
                     {this.renderListItems()}
                 </ul>

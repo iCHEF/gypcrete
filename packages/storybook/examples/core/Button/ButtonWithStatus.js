@@ -10,21 +10,24 @@ function ButtonWithStatusExample() {
                 basic="Loading"
                 tag="Tag"
                 icon="add"
-                status="loading" />
+                status="loading"
+            />
 
             <Button
                 basic="Success"
                 tag="Tag"
                 icon="add"
                 status="success"
-                statusOptions={{ autohide: false }} />
+                statusOptions={{ autohide: false }}
+            />
 
             <Button
                 basic="Error"
                 tag="Tag"
                 icon="add"
                 status="error"
-                errorMsg="Save failed" />
+                errorMsg="Save failed"
+            />
         </FlexRow>
     );
 }

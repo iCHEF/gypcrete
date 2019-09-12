@@ -11,7 +11,8 @@ function MultipleValues() {
                 multiple
                 label="Custom 'All' label"
                 asideAllLabel="EVERYHTING SELECTED"
-                defaultValue={['opt-a', 'opt-b', 'opt-c']}>
+                defaultValue={['opt-a', 'opt-b', 'opt-c']}
+            >
                 <Option label="Option A" value="opt-a" />
                 <Option label="Option B" value="opt-b" />
                 <Option label="Option C" value="opt-c" />
@@ -21,7 +22,8 @@ function MultipleValues() {
                 multiple
                 label="Turn off 'All' label"
                 asideAllLabel={false}
-                defaultValue={['opt-a', 'opt-b', 'opt-c']}>
+                defaultValue={['opt-a', 'opt-b', 'opt-c']}
+            >
                 <Option label="Option A" value="opt-a" />
                 <Option label="Option B" value="opt-b" />
                 <Option label="Option C" value="opt-c" />
@@ -30,7 +32,8 @@ function MultipleValues() {
             <SelectRow
                 multiple
                 label="Custom 'None' label"
-                asideNoneLabel="Nothing">
+                asideNoneLabel="Nothing"
+            >
                 <Option label="Option A" value="opt-a" />
                 <Option label="Option B" value="opt-b" />
                 <Option label="Option C" value="opt-c" />
@@ -41,7 +44,8 @@ function MultipleValues() {
                 label="Custom separator label"
                 asideAllLabel={false}
                 asideSeparator=" + "
-                defaultValue={['opt-a', 'opt-b', 'opt-c']}>
+                defaultValue={['opt-a', 'opt-b', 'opt-c']}
+            >
                 <Option label="Option A" value="opt-a" />
                 <Option label="Option B" value="opt-b" />
                 <Option label="Option C" value="opt-c" />

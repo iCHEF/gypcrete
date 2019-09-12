@@ -12,7 +12,8 @@ function BasicUsage() {
                 <ColoredBox
                     width="100%"
                     height="30rem"
-                    color="rgb(255, 235, 235)">
+                    color="rgb(255, 235, 235)"
+                >
                     Narrow Column
                 </ColoredBox>
             </SplitViewColumn>
@@ -21,7 +22,8 @@ function BasicUsage() {
                 <ColoredBox
                     width="100%"
                     height="30rem"
-                    color="rgb(235, 245, 255)">
+                    color="rgb(235, 245, 255)"
+                >
                     Narrow Column
                 </ColoredBox>
             </SplitViewColumn>

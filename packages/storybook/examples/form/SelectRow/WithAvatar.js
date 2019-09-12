@@ -17,7 +17,8 @@ function WithAvatar() {
                 label="Avatar"
                 desc="Select One Avatar"
                 defaultValue="Love"
-                onChange={action('change')}>
+                onChange={action('change')}
+            >
                 <Option label="Love" value="Love" avatar={loveAvatar} />
                 <Option label="Trumps" value="Trumps" avatar={trumpsAvatar} />
                 <Option label="Hate" value="Hate" avatar={hateAvatar} />

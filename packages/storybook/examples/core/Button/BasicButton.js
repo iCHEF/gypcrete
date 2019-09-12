@@ -13,28 +13,32 @@ function BasicButtonExample() {
                 aside="Default color"
                 tag="Tag"
                 icon="add"
-                onClick={action('clicked')} />
+                onClick={action('clicked')}
+            />
 
             <Button
                 color="blue"
                 basic="Blue"
                 aside="Variants"
                 tag="Tag"
-                icon="add" />
+                icon="add"
+            />
 
             <Button
                 color="red"
                 basic="Red"
                 aside="Variants"
                 tag="Tag"
-                icon="add" />
+                icon="add"
+            />
 
             <Button
                 color="white"
                 basic="White"
                 aside="Variants"
                 tag="Tag"
-                icon="add" />
+                icon="add"
+            />
         </FlexRow>
     );
 }

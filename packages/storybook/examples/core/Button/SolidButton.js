@@ -11,28 +11,32 @@ function SolidButtonExample() {
                 solid
                 basic="Black"
                 aside="Aside text"
-                tag="Solid" />
+                tag="Solid"
+            />
 
             <Button
                 solid
                 color="blue"
                 basic="Blue"
                 aside="Aside text"
-                tag="Solid" />
+                tag="Solid"
+            />
 
             <Button
                 solid
                 color="red"
                 basic="Red"
                 aside="Aside text"
-                tag="Solid" />
+                tag="Solid"
+            />
 
             <Button
                 solid
                 color="white"
                 basic="White"
                 aside="Aside text"
-                tag="Solid" />
+                tag="Solid"
+            />
         </FlexRow>
     );
 }

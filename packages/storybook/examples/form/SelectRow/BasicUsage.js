@@ -12,14 +12,16 @@ function BasicUsage() {
                 label="Module default state on iPad"
                 desc="Default is off"
                 defaultValue="no"
-                onChange={action('change')}>
+                onChange={action('change')}
+            >
                 <Option label="Yes" value="yes" />
                 <Option label="No" value="no" />
             </SelectRow>
 
             <SelectRow
                 disabled
-                label="Disabled row">
+                label="Disabled row"
+            >
                 <Option label="Yes" value="yes" />
                 <Option label="No" value="no" />
             </SelectRow>
@@ -29,7 +31,8 @@ function BasicUsage() {
                 label="World peace"
                 status="error"
                 errorMsg="Cannot declare a war."
-                value="peace">
+                value="peace"
+            >
                 <Option label="Peace" value="peace" />
                 <Option label="War" value="war" />
             </SelectRow>

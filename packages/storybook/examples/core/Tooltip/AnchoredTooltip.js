@@ -4,7 +4,7 @@ import AnchoredTooltip from '@ichef/gypcrete/src/Tooltip';
 
 class AnchoredTooltipExample extends PureComponent {
     state ={
-        shouldShowTooltip: false
+        shouldShowTooltip: false,
     };
 
     handleTooltipShow = () => {
@@ -27,7 +27,8 @@ class AnchoredTooltipExample extends PureComponent {
                     ref={(ref) => { this.textRef = ref; }}
                     onMouseEnter={this.handleTooltipShow}
                     onMouseLeave={this.handleTooltipHide}
-                    style={anchoredStyle}>
+                    style={anchoredStyle}
+                >
                     Hover on me
                 </span>
 

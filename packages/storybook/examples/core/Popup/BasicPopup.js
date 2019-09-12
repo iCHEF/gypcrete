@@ -11,7 +11,8 @@ function BasicPopupExample() {
             bold
             align="center"
             basic="File generated"
-            aside="Please click “Download” to get your file." />
+            aside="Please click “Download” to get your file."
+        />
     );
     const buttons = [
         <PopupButton key="download" bold basic="Download" onClick={action('download')} />,
@@ -22,7 +23,8 @@ function BasicPopupExample() {
         <Popup
             message={message}
             icon="success"
-            buttons={buttons} />
+            buttons={buttons}
+        />
     );
 }
 

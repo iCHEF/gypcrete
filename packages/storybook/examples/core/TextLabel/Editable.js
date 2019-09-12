@@ -17,7 +17,7 @@ const cleanAction = decorateAction([
             event: `[${payload.event.constructor.name}]`,
         };
         return [cleanPayload];
-    }
+    },
 ]);
 
 class ControlledExample extends PureComponent {
@@ -59,7 +59,8 @@ class ControlledExample extends PureComponent {
                     tag="Online"
                     onDblClick={this.handleDblClick}
                     onEditEnd={this.handleEditEnd}
-                    status={this.state.status} />
+                    status={this.state.status}
+                />
             </DebugBox>
         );
     }
@@ -75,7 +76,8 @@ function Editable() {
                 aside="00:11:22:33"
                 tag="Online"
                 onDblClick={action('dblClick')}
-                onEditEnd={cleanAction('editEnd')} />
+                onEditEnd={cleanAction('editEnd')}
+            />
 
             <p>Controlled editable label:</p>
             <ControlledExample />

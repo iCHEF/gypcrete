@@ -21,7 +21,8 @@ function ModalHeader({ onCancel }) {
         <HeaderRow
             left={cancelBtn}
             center={label}
-            right={filterBtn} />
+            right={filterBtn}
+        />
     );
 }
 

@@ -10,7 +10,8 @@ function NormalButton(props) {
             aside="<button>"
             tag="Tag"
             tagName="button"
-            {...props} />
+            {...props}
+        />
     );
 }
 
@@ -21,7 +22,8 @@ function DivButton(props) {
             aside="<div>"
             tag="Tag"
             tagName="div"
-            {...props} />
+            {...props}
+        />
     );
 }
 
@@ -35,7 +37,8 @@ function LinkButton(props) {
             // props for <a>
             href="http://ichefpos.com/"
             target="_blank"
-            {...props} />
+            {...props}
+        />
     );
 }
 

@@ -11,7 +11,8 @@ function MultipleValues() {
             <SelectRow
                 multiple
                 label="Enabled modules"
-                onChange={action('change')}>
+                onChange={action('change')}
+            >
                 <Option label="Module 1" value="mod1" />
                 <Option label="Module 2" value="mod2" />
                 <Option label="Module 3" value="mod3" />
@@ -23,7 +24,8 @@ function MultipleValues() {
                 multiple
                 label="Minimal selection: 2"
                 minCheck={2}
-                defaultValue={['opt-c', 'opt-d']}>
+                defaultValue={['opt-c', 'opt-d']}
+            >
                 <Option label="Option A" value="opt-a" />
                 <Option label="Option B" value="opt-b" />
                 <Option label="Option C" value="opt-c" />
@@ -33,7 +35,8 @@ function MultipleValues() {
 
             <SelectRow
                 multiple
-                label="Multiple selection with no options" />
+                label="Multiple selection with no options"
+            />
         </List>
     );
 }

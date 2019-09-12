@@ -15,7 +15,8 @@ function OptionalArea() {
             <HeaderRow
                 left={false}
                 center={centerLabel}
-                right={rightBtn} />
+                right={rightBtn}
+            />
         </DebugBox>
     );
 }

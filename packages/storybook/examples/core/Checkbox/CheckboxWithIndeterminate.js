@@ -5,7 +5,7 @@ import Checkbox from '@ichef/gypcrete/src/Checkbox';
 class CheckboxWithIndeterminateExample extends PureComponent {
     state = {
         item1Checked: true,
-        item2Checked: false
+        item2Checked: false,
     };
 
     handleCheckAll = () => {
@@ -18,13 +18,13 @@ class CheckboxWithIndeterminateExample extends PureComponent {
 
         this.setState({
             item1Checked: checkAllValue,
-            item2Checked: checkAllValue
+            item2Checked: checkAllValue,
         });
     }
 
     handleItemCheck = item => (event) => {
         this.setState({
-            [item]: event.target.checked
+            [item]: event.target.checked,
         });
     }
 
@@ -40,17 +40,20 @@ class CheckboxWithIndeterminateExample extends PureComponent {
                         && !(item1Checked && item2Checked)
                     }
                     checked={item1Checked && item2Checked}
-                    onChange={this.handleCheckAll} />
+                    onChange={this.handleCheckAll}
+                />
 
                 <Checkbox
                     basic="Item 1"
                     checked={item1Checked}
-                    onChange={this.handleItemCheck('item1Checked')} />
+                    onChange={this.handleItemCheck('item1Checked')}
+                />
 
                 <Checkbox
                     basic="Item 2"
                     checked={item2Checked}
-                    onChange={this.handleItemCheck('item2Checked')} />
+                    onChange={this.handleItemCheck('item2Checked')}
+                />
             </div>
         );
     }

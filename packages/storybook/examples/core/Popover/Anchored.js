@@ -6,7 +6,7 @@ import DemoList from './DemoList';
 
 class AnchoredExample extends PureComponent {
     state ={
-        popoverOpen: false
+        popoverOpen: false,
     };
 
     handlePopoverOpen = () => {
@@ -27,7 +27,8 @@ class AnchoredExample extends PureComponent {
         return (
             <AnchoredPopover
                 anchor={this.btnRef}
-                onClose={this.handlePopoverClose}>
+                onClose={this.handlePopoverClose}
+            >
                 <DemoList />
             </AnchoredPopover>
         );
@@ -42,10 +43,12 @@ class AnchoredExample extends PureComponent {
             <div>
                 <span
                     style={anchorStyle}
-                    ref={(ref) => { this.btnRef = ref; }}>
+                    ref={(ref) => { this.btnRef = ref; }}
+                >
                     <Button
                         basic="Open popover"
-                        onClick={this.handlePopoverOpen} />
+                        onClick={this.handlePopoverOpen}
+                    />
                 </span>
 
                 {this.renderPopover()}

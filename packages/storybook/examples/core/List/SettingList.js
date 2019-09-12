@@ -25,7 +25,8 @@ function SettingList() {
                 <ListRow>
                     <Button
                         icon="add"
-                        basic="Add row" />
+                        basic="Add row"
+                    />
                 </ListRow>
             </List>
         </DebugBox>

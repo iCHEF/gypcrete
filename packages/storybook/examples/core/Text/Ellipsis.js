@@ -18,7 +18,8 @@ function EllipsisExample() {
                 <Text
                     basic={ellipsisLabel}
                     tag="tag"
-                    aside="Left-aligned" />
+                    aside="Left-aligned"
+                />
             </DebugBox>
 
             <DebugBox>
@@ -26,7 +27,8 @@ function EllipsisExample() {
                     align="center"
                     basic={ellipsisLabel}
                     tag="tag"
-                    aside="Center-aligned" />
+                    aside="Center-aligned"
+                />
             </DebugBox>
 
             <DebugBox>
@@ -34,7 +36,8 @@ function EllipsisExample() {
                     align="right"
                     basic={ellipsisLabel}
                     tag="tag"
-                    aside="Right-aligned" />
+                    aside="Right-aligned"
+                />
             </DebugBox>
         </div>
     );

@@ -14,13 +14,15 @@ function BasicUsage() {
             <DebugBox>
                 <EditableText
                     value="Controlled input"
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
 
             <DebugBox>
                 <EditableText
                     defaultValue="Uncontrolled input"
-                    onChange={action('change')} />
+                    onChange={action('change')}
+                />
             </DebugBox>
         </div>
     );

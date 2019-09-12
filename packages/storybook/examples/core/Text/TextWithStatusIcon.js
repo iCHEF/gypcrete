@@ -13,7 +13,8 @@ function TextWithStatusIconExample() {
                     basic="A Long Long Long Basic Text"
                     aside="I am left-aligned"
                     tag="Tag"
-                    statusIcon={<StatusIcon status="loading" />} />
+                    statusIcon={<StatusIcon status="loading" />}
+                />
             </DebugBox>
 
             <DebugBox>
@@ -22,7 +23,8 @@ function TextWithStatusIconExample() {
                     basic="Basic Text"
                     aside="I am center-aligned"
                     tag="Tag"
-                    statusIcon={<StatusIcon status="success" autohide={false} />} />
+                    statusIcon={<StatusIcon status="success" autohide={false} />}
+                />
             </DebugBox>
 
             <DebugBox>
@@ -31,7 +33,8 @@ function TextWithStatusIconExample() {
                     basic="A Long Long Long Basic Text"
                     aside="I am right-aligned"
                     tag="Tag"
-                    statusIcon={<StatusIcon status="error" />} />
+                    statusIcon={<StatusIcon status="error" />}
+                />
             </DebugBox>
         </div>
     );

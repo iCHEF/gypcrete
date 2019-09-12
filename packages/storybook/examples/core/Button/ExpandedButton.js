@@ -10,7 +10,8 @@ function ExpandedButtonExample() {
                 <Button
                     basic="Expanded Button"
                     align="center"
-                    minified={false} />
+                    minified={false}
+                />
             </FlexRow>
 
             <FlexRow>
@@ -19,7 +20,8 @@ function ExpandedButtonExample() {
                     color="red"
                     basic="Expanded Button"
                     align="center"
-                    minified={false} />
+                    minified={false}
+                />
             </FlexRow>
         </div>
     );

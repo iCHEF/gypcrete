@@ -10,7 +10,8 @@ function ButtonRow(props) {
         <ListRow>
             <Button
                 minified={false}
-                {...props} />
+                {...props}
+            />
         </ListRow>
     );
 }

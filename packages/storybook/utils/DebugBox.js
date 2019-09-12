@@ -26,11 +26,11 @@ function DebugBox({ width, height, style, children }) {
 DebugBox.propTypes = {
     width: PropTypes.oneOfType([
         PropTypes.number,
-        PropTypes.string
+        PropTypes.string,
     ]),
     height: PropTypes.oneOfType([
         PropTypes.number,
-        PropTypes.string
+        PropTypes.string,
     ]),
     style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };

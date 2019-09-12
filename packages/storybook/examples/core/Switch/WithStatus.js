@@ -9,7 +9,8 @@ function WithStatus() {
                 <Switch
                     turnedOn
                     status="loading"
-                    onChange={() => {}} />
+                    onChange={() => {}}
+                />
             </DebugBox>
 
             <DebugBox>
@@ -17,7 +18,8 @@ function WithStatus() {
                     turnedOn
                     status="success"
                     statusOptions={{ autohide: false }}
-                    onChange={() => {}} />
+                    onChange={() => {}}
+                />
             </DebugBox>
 
             <DebugBox>
@@ -25,7 +27,8 @@ function WithStatus() {
                     turnedOn={false}
                     status="error"
                     errorMsg="Network error"
-                    onChange={() => {}} />
+                    onChange={() => {}}
+                />
             </DebugBox>
         </div>
     );

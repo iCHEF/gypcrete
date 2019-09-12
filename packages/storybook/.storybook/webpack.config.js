@@ -25,7 +25,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
             parallel: true,
             terserOptions: {
                 mangle: false,
-            }
+            },
         })];
     }
 
@@ -55,7 +55,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
                 loader: 'sass-loader',
                 options: {
                     outputStyle: 'expanded',
-                }
+                },
             },
         ],
     });

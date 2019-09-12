@@ -11,7 +11,8 @@ function InputProps() {
                         id: 'dom-id',
                         title: 'Tooltip for <input>',
                         'data-prop': true,
-                    }} />
+                    }}
+                />
             </DebugBox>
         </div>
     );

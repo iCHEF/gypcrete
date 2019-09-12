@@ -16,7 +16,8 @@ storiesOf('@ichef/gypcrete-imageeditor|ImageEditor', module)
             control
             image={EXAMPLE_IMAGE}
             onLoadSuccess={handleLoadSuccess}
-            onCropChange={handleCropChange} />
+            onCropChange={handleCropChange}
+        />
     )))
     .add('Read-only mode', withInfo()(() => (
         <ImageEditor
@@ -24,7 +25,8 @@ storiesOf('@ichef/gypcrete-imageeditor|ImageEditor', module)
             control
             image={EXAMPLE_IMAGE}
             onLoadSuccess={handleLoadSuccess}
-            onCropChange={handleCropChange} />
+            onCropChange={handleCropChange}
+        />
     )))
     .add('Set init crop', withInfo()(() => (
         <ImageEditor
@@ -35,14 +37,16 @@ storiesOf('@ichef/gypcrete-imageeditor|ImageEditor', module)
                 y: 0.0647,
                 width: 0.3057,
                 height: 0.5882,
-            }} />
+            }}
+        />
     )))
     .add('Custom scale range', withInfo()(() => (
         <ImageEditor
             control
             minScale={1}
             maxScale={10}
-            image={EXAMPLE_IMAGE} />
+            image={EXAMPLE_IMAGE}
+        />
     )))
     .add('Placeholder', withInfo()(() => (
         <ImageEditor control />
@@ -51,6 +55,7 @@ storiesOf('@ichef/gypcrete-imageeditor|ImageEditor', module)
         <ImageEditor
             control
             loading
-            image={EXAMPLE_IMAGE} />
+            image={EXAMPLE_IMAGE}
+        />
     )))
     .add('props', getPropTables([ImageEditor]));

@@ -12,25 +12,29 @@ function DisabledButtonExample() {
                     disabled
                     basic="Black"
                     aside="Disabled"
-                    tag="tag" />
+                    tag="tag"
+                />
                 <Button
                     disabled
                     color="blue"
                     basic="Blue"
                     aside="Disabled"
-                    tag="tag" />
+                    tag="tag"
+                />
                 <Button
                     disabled
                     color="red"
                     basic="Red"
                     aside="Disabled"
-                    tag="tag" />
+                    tag="tag"
+                />
                 <Button
                     disabled
                     color="white"
                     basic="White"
                     aside="Disabled"
-                    tag="tag" />
+                    tag="tag"
+                />
             </FlexRow>
             <FlexRow>
                 <Button
@@ -39,28 +43,32 @@ function DisabledButtonExample() {
                     disabled
                     basic="Black"
                     aside="Disabled"
-                    tag="tag" />
+                    tag="tag"
+                />
                 <Button
                     solid
                     disabled
                     color="blue"
                     basic="Blue"
                     aside="Disabled"
-                    tag="tag" />
+                    tag="tag"
+                />
                 <Button
                     solid
                     disabled
                     color="red"
                     basic="Red"
                     aside="Disabled"
-                    tag="tag" />
+                    tag="tag"
+                />
                 <Button
                     solid
                     disabled
                     color="white"
                     basic="White"
                     aside="Disabled"
-                    tag="tag" />
+                    tag="tag"
+                />
             </FlexRow>
         </div>
     );

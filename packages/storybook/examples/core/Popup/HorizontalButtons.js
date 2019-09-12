@@ -11,7 +11,8 @@ function HorizontalButtonsExample() {
             bold
             align="center"
             basic="File generated"
-            aside="Please click “Download” to get your file." />
+            aside="Please click “Download” to get your file."
+        />
     );
     const buttons = [
         <PopupButton key="dismiss" basic="Dismiss" onClick={action('dismiss')} />,
@@ -22,7 +23,8 @@ function HorizontalButtonsExample() {
             message={message}
             icon="success"
             buttons={buttons}
-            buttonsDirection="horizontal" />
+            buttonsDirection="horizontal"
+        />
     );
 }
 

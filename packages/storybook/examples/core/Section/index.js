@@ -28,7 +28,8 @@ storiesOf('@ichef/gypcrete|Section', module)
             <Section
                 verticalSpacing={false}
                 title="Section title"
-                desc="Description text">
+                desc="Description text"
+            >
                 <DemoContent />
             </Section>
         </DebugBox>
@@ -40,7 +41,8 @@ storiesOf('@ichef/gypcrete|Section', module)
             <Section
                 bodySpacing={false}
                 title="Section title"
-                desc="Description text">
+                desc="Description text"
+            >
                 <DemoContent />
             </Section>
         </DebugBox>
