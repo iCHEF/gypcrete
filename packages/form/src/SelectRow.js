@@ -174,11 +174,14 @@ class SelectRow extends PureComponent {
         );
     }
 
-    renderRowValuesAside() {
+    renderRowValueLabel() {
         const { multiple, asideAllLabel, asideNoneLabel, asideSeparator } = this.props;
         const { cachedValue, valueLabelMap } = this.state;
 
-        if (cachedValue === undefined || (multiple && cachedValue.length === 0)) {
+        const isSingleEmptyValue = cachedValue === undefined || cachedValue === '';
+        const isMultipleEmptyValue = multiple && cachedValue.length === 0;
+
+        if (isSingleEmptyValue || isMultipleEmptyValue) {
             return <span className={BEM.placeholder.toString()}>{asideNoneLabel}</span>;
         }
 
@@ -248,7 +251,7 @@ class SelectRow extends PureComponent {
                     <Text
                         verticalOrder="reverse"
                         bold={!ineditable}
-                        basic={this.renderRowValuesAside()}
+                        basic={this.renderRowValueLabel()}
                         aside={label}
                     />
 
