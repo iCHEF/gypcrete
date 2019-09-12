@@ -216,13 +216,13 @@ describe('Pure <SelectRow>: Data', () => {
 
         wrapper.setProps({
             value: ['foo', 'bar'],
-            asideSeparator: ' + '
+            asideSeparator: ' + ',
         });
         expect(wrapper.find(Text).prop('basic')).toBe('Foo + Bar');
 
         wrapper.setProps({
             value: ['foo', 'bar', 'meh'],
-            asideAllLabel: 'Everything'
+            asideAllLabel: 'Everything',
         });
         expect(wrapper.find(Text).prop('basic')).toBe('Everything');
     });
@@ -233,7 +233,8 @@ describe('Pure <SelectRow>: Data', () => {
                 multiple
                 label="Select"
                 asideAllLabel={null}
-                value={['foo', 'bar', 'meh']}>
+                value={['foo', 'bar', 'meh']}
+            >
                 <Option label="Foo" value="foo" />
                 <Option label="Bar" value="bar" />
                 <Option label="Meh" value="meh" />

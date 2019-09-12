@@ -27,7 +27,7 @@ it('ignores children that are not <SelectOption>', () => {
     const children = [
         <SelectOption label="Foo" value="foo" />,
         'Hello World!',
-        <SelectOption label="Bar" value="bar" />
+        <SelectOption label="Bar" value="bar" />,
     ];
 
     expect(parseSelectOptions(children)).toMatchObject([

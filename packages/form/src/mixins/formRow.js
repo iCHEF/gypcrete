@@ -65,7 +65,8 @@ const formRow = ({
                     disabled={disabled}
                     readOnly={readOnly}
                     rowProps={rowProps}
-                    {...otherProps} />
+                    {...otherProps}
+                />
             );
         }
     }

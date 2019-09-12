@@ -99,7 +99,8 @@ class SwitchRow extends PureComponent {
                 <Switch
                     status={null}
                     onChange={this.handleSwitchButtonChange}
-                    {...switchProps} />
+                    {...switchProps}
+                />
 
                 {children}
             </ListRow>

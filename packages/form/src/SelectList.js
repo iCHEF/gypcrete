@@ -102,7 +102,7 @@ class SelectList extends PureComponent {
         } else if (this.props.multiple !== nextProps.multiple) {
             warning(false, '<SelectList>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.');
             this.setState({
-                checkedState: getInitialCheckedState([])
+                checkedState: getInitialCheckedState([]),
             });
         }
     }
@@ -236,7 +236,8 @@ class SelectList extends PureComponent {
                 label={checkAllLabel}
                 value={null}
                 checked={isAllChecked}
-                onChange={this.handleCheckAllOptionChange} />
+                onChange={this.handleCheckAllOptionChange}
+            />
         );
     }
 
