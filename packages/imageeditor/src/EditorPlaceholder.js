@@ -11,7 +11,8 @@ export function CenterIcon({ type, ...props }) {
         <Icon
             type={type}
             spinning={type === LOADING}
-            {...props} />
+            {...props}
+        />
     );
 }
 CenterIcon.propTypes = {
@@ -37,7 +38,8 @@ function EditorPlaceholder({
         <div style={wrapperStyle} {...wrapperProps}>
             <CenterIcon
                 type={iconType}
-                style={iconStyle} />
+                style={iconStyle}
+            />
         </div>
     );
 }

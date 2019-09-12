@@ -176,7 +176,8 @@ class ImageEditor extends PureComponent {
                     step="0.1"
                     min={minScale}
                     max={maxScale}
-                    onChange={this.handleSliderChange} />
+                    onChange={this.handleSliderChange}
+                />
             </div>
         );
     }
@@ -221,7 +222,8 @@ class ImageEditor extends PureComponent {
             <EditorPlaceholder
                 loading={loading}
                 className={BEM.placeholder.toString()}
-                canvasHeight={height} />
+                canvasHeight={height}
+            />
         );
         const canvas = (
             <AvatarEditor
@@ -235,7 +237,8 @@ class ImageEditor extends PureComponent {
                 onPositionChange={this.handleCanvasPosChange}
                 onLoadSuccess={this.handleCanvasLoadSuccess}
                 border={0}
-                {...avatarEditorProps} />
+                {...avatarEditorProps}
+            />
         );
 
         return (
