@@ -23,12 +23,12 @@ const COMPONENT_NAME = prefixClass('infinite-scroll');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
     root: ROOT_BEM,
-    footer: ROOT_BEM.element('footer')
+    footer: ROOT_BEM.element('footer'),
 };
 
 const FILL_SPACE_TYPE = {
     AUTO: 'auto',
-    MANUAL: 'manual'
+    MANUAL: 'manual',
 };
 
 class InfiniteScroll extends PureComponent {
@@ -43,7 +43,7 @@ class InfiniteScroll extends PureComponent {
         // Footer children
         loadingLabel: PropTypes.node,
         showMoreButton: PropTypes.node,
-        noNewestButton: PropTypes.node
+        noNewestButton: PropTypes.node,
     };
 
     static defaultProps = {
@@ -55,7 +55,7 @@ class InfiniteScroll extends PureComponent {
 
         loadingLabel: null,
         showMoreButton: null,
-        noNewestButton: null
+        noNewestButton: null,
     }
 
     componentDidMount() {
@@ -226,7 +226,8 @@ class InfiniteScroll extends PureComponent {
                 disabled
                 align="center"
                 icon={<Icon type="loading" spinning />}
-                basic={loadingLabel} />
+                basic={loadingLabel}
+            />
         );
     }
 
@@ -247,7 +248,8 @@ class InfiniteScroll extends PureComponent {
                 align="center"
                 basic={buttonItem}
                 minified={false}
-                onClick={onLoadMore} />
+                onClick={onLoadMore}
+            />
         );
     }
 
@@ -259,7 +261,7 @@ class InfiniteScroll extends PureComponent {
             isLoading,
             hasMore,
             showMoreButton,
-            noNewestButton
+            noNewestButton,
         } = this.props;
         let footerChild = null;
 
@@ -308,7 +310,8 @@ class InfiniteScroll extends PureComponent {
             <div
                 {...rootProps}
                 ref={(ref) => { this.scrollNode = ref; }}
-                className={rootClassName}>
+                className={rootClassName}
+            >
                 {children}
                 {this.renderFooter()}
             </div>

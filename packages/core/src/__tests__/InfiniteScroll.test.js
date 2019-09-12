@@ -36,7 +36,8 @@ describe('InfiniteScroll', () => {
         const wrapper = shallow(
             <InfiniteScroll
                 isLoading
-                onLoadMore={() => {}} />
+                onLoadMore={() => {}}
+            />
         );
 
         // show loading icon in default
@@ -57,7 +58,8 @@ describe('InfiniteScroll', () => {
         const wrapper = shallow(
             <InfiniteScroll
                 showMoreButton="show more"
-                onLoadMore={() => {}} />
+                onLoadMore={() => {}}
+            />
         );
 
         // showMoreButton as string
@@ -78,7 +80,8 @@ describe('InfiniteScroll', () => {
             <InfiniteScroll
                 showMoreButton="show more"
                 noNewestButton="all displayed"
-                onLoadMore={() => {}} />
+                onLoadMore={() => {}}
+            />
         );
 
         // Render showMoreButton if hasMore is true
@@ -122,7 +125,8 @@ describe('InfiniteScroll', () => {
         const wrapperNode = mount(
             <div style={{ overflow: 'auto', height: 300 }}>
                 <InfiniteScroll
-                    onLoadMore={onLoadMore}>
+                    onLoadMore={onLoadMore}
+                >
                     {FAKE_LIST}
                 </InfiniteScroll>
             </div>
@@ -142,7 +146,8 @@ describe('InfiniteScroll', () => {
         mount(
             <InfiniteScroll
                 usePageAsContainer
-                onLoadMore={onLoadMore}>
+                onLoadMore={onLoadMore}
+            >
                 {FAKE_LIST}
             </InfiniteScroll>
         );
@@ -162,7 +167,8 @@ describe('InfiniteScroll', () => {
             <InfiniteScroll
                 usePageAsContainer
                 fillSpace="auto"
-                onLoadMore={onLoadMore}>
+                onLoadMore={onLoadMore}
+            >
                 {FAKE_LIST}
             </InfiniteScroll>
         );

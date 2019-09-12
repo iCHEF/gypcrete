@@ -27,7 +27,8 @@ it('renders <Text> into wrapped component', () => {
             verticalOrder="reverse"
             basic="Basic text"
             tag="Tag"
-            aside="Aside text" />
+            aside="Aside text"
+        />
     );
     const textWrapper = wrapper.find(Foo).shallow().find(Text);
 
@@ -119,7 +120,8 @@ it('holds context for children components', () => {
             align="right"
             status="success"
             statusOptions={{ autoHide: true }}
-            errorMsg="foo-bar" />
+            errorMsg="foo-bar"
+        />
     );
     const context = wrapper.instance().getChildContext();
 

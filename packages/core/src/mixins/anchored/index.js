@@ -144,7 +144,8 @@ const anchored = ({
                     placement={placement}
                     arrowStyle={arrowPosition}
                     style={mergedStyle}
-                    nodeRef={this.setSelfNode} />
+                    nodeRef={this.setSelfNode}
+                />
             );
         }
     }

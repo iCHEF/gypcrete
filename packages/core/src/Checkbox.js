@@ -43,7 +43,7 @@ class Checkbox extends PureComponent {
         checked: undefined,
         defaultChecked: undefined,
         disabled: false,
-        onChange: undefined
+        onChange: undefined,
     };
 
     componentDidMount() {
@@ -72,7 +72,8 @@ class Checkbox extends PureComponent {
                     ref={(ref) => { this.inputRef = ref; }}
                     type="checkbox"
                     className={BEM.input}
-                    {...inputProps} />
+                    {...inputProps}
+                />
 
                 {overrideButton || CHECKBOX_BUTTON}
             </span>

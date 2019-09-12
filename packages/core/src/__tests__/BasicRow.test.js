@@ -11,7 +11,8 @@ it('renders without crashing', () => {
     const element = (
         <BasicRow
             basic="Basic text"
-            tag="Tag" />
+            tag="Tag"
+        />
     );
 
     ReactDOM.render(element, div);

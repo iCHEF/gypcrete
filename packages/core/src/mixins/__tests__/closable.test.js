@@ -13,7 +13,8 @@ const Foo = ({ onInsideClick }) => (
     <div
         id="foo"
         role="presentation"
-        onClick={onInsideClick}>
+        onClick={onInsideClick}
+    >
         Foo
     </div>
 );
@@ -50,7 +51,8 @@ it('takes runtime options', () => {
                 onEscape: false,
                 onClickOutside: true,
                 stopEventPropagation: false,
-            }} />
+            }}
+        />
     );
 
     expect(wrapper.instance().getOptions()).toMatchObject({

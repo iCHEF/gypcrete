@@ -42,7 +42,8 @@ function Icon({
         <span
             className={rootClassName}
             role="presentation"
-            {...otherProps} />
+            {...otherProps}
+        />
     );
 }
 

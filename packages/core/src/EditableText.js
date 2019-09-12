@@ -100,14 +100,16 @@ class EditableText extends PureComponent {
                 status={status}
                 readOnly={status === STATUS_CODE.LOADING}
                 onFocus={this.handleInputFocus}
-                onBlur={this.handleInputBlur} />
+                onBlur={this.handleInputBlur}
+            />
         );
 
         return (
             <PureText
                 basicRow={basicRow}
                 {...textProps}
-                {...statusProps} />
+                {...statusProps}
+            />
         );
     }
 }

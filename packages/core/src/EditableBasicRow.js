@@ -21,7 +21,7 @@ const TAG_INPUT = 'input';
 const TAG_TEXTAREA = 'textarea';
 export const ROW_INPUT_TAGS = {
     INPUT: TAG_INPUT,
-    TEXTAREA: TAG_TEXTAREA
+    TEXTAREA: TAG_TEXTAREA,
 };
 
 /**
@@ -165,7 +165,8 @@ class EditableBasicRow extends PureComponent {
             <BasicRow
                 className={rootClassName}
                 basic={basicLabel}
-                statusIcon={statusIcon}>
+                statusIcon={statusIcon}
+            >
                 <InputTag
                     ref={(ref) => { this.inputNode = ref; }}
                     type={inputType}
@@ -178,7 +179,8 @@ class EditableBasicRow extends PureComponent {
                     onChange={this.handleInputChange}
                     onFocus={this.handleInputFocus}
                     onBlur={this.handleInputBlur}
-                    {...inputProps} />
+                    {...inputProps}
+                />
             </BasicRow>
         );
     }

@@ -21,7 +21,7 @@ class IconLayout extends PureComponent {
     static propTypes = {
         icon: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.element
+            PropTypes.element,
         ]).isRequired,
         tooltip: PropTypes.bool,
 
@@ -60,7 +60,8 @@ class IconLayout extends PureComponent {
         return (
             <Tooltip
                 anchor={this.nodeRef}
-                style={{ pointerEvents: 'none' }}>
+                style={{ pointerEvents: 'none' }}
+            >
                 {this.props.errorMsg}
             </Tooltip>
         );
@@ -76,7 +77,8 @@ class IconLayout extends PureComponent {
                 ref={(ref) => { this.nodeRef = ref; }}
                 className={COMPONENT_NAME}
                 onMouseEnter={this.handleMouseEnter}
-                onMouseLeave={this.handleMouseLeave}>
+                onMouseLeave={this.handleMouseLeave}
+            >
                 {iconElement}
                 {showTooltip && this.renderTooltip()}
                 {statusIcon}

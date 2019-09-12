@@ -30,7 +30,7 @@ export const BEM = {
     body: ROOT_BEM.element('body'),
     message: ROOT_BEM.element('message'),
     button: ROOT_BEM.element('button'),
-    buttonsGroup: ROOT_BEM.element('buttons-group')
+    buttonsGroup: ROOT_BEM.element('buttons-group'),
 };
 
 export function PopupIcon({ type }) {
@@ -73,7 +73,8 @@ function renderPopupButtons(buttons, direction) {
         return (
             <PopupButton
                 key={button.key}
-                {...button.props} />
+                {...button.props}
+            />
         );
     });
 

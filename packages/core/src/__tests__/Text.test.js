@@ -14,7 +14,8 @@ describe('<withStatus(Text)>', () => {
                 align="right"
                 basic="Basic text"
                 aside="Aside text"
-                tag="Tag" />
+                tag="Tag"
+            />
         );
 
         ReactDOM.render(element, div);
@@ -48,7 +49,8 @@ describe('Pure <Text>', () => {
             <PureText
                 basic="Basic text"
                 tag="Tag"
-                statusIcon={icon} />
+                statusIcon={icon}
+            />
         );
         const rowWrapper = wrapper.find(BasicRow);
 
@@ -68,7 +70,8 @@ describe('Pure <Text>', () => {
                 basic="Basic text"
                 tag="Tag"
                 statusIcon={icon}
-                basicRow={customRow} />
+                basicRow={customRow}
+            />
         );
         const rowWrapper = wrapper.find(FooRow);
 

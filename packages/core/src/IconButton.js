@@ -37,7 +37,7 @@ function IconButton({
 IconButton.propTypes = {
     icon: PropTypes.oneOfType([
         PropTypes.string,
-        PropTypes.element
+        PropTypes.element,
     ]).isRequired,
     tinted: PropTypes.bool,
     color: EnhancedPropTypes.isEmpty,

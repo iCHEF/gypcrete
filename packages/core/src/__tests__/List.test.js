@@ -46,7 +46,8 @@ it('passes unknown props to wrapper <Section>', () => {
     const wrapper = mount(
         <List
             id="foo"
-            verticalSpacing={false} />
+            verticalSpacing={false}
+        />
     );
 
     expect(wrapper.find(Section).props()).toEqual(

@@ -196,7 +196,8 @@ class EditableTextLabel extends PureComponent {
                     status={status}
                     onDoubleClick={this.handleDoubleClick}
                     onTouchStart={this.handleTouchStart}
-                    {...labelProps} />
+                    {...labelProps}
+                />
             );
         }
 
@@ -212,7 +213,8 @@ class EditableTextLabel extends PureComponent {
                     autoFocus={stateInEdit}
                     onBlur={this.handleInputBlur}
                     onKeyDown={this.handleInputKeyDown}
-                    {...layoutProps} />
+                    {...layoutProps}
+                />
             </TextLabel>
         );
     }

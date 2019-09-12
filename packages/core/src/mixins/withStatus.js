@@ -59,7 +59,8 @@ const withStatus = ({
                 <StatusIcon
                     status={status}
                     {...defaultStatusOptions}
-                    {...statusOptions} />
+                    {...statusOptions}
+                />
             );
 
             const refProps = !withRef ? {} : {
@@ -73,7 +74,8 @@ const withStatus = ({
                     {...this.props}
                     {...optionalProps}
                     statusIcon={statusIcon}
-                    errorMsg={errorMsg} />
+                    errorMsg={errorMsg}
+                />
             );
         }
     }

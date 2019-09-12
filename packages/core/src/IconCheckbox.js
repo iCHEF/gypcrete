@@ -10,7 +10,8 @@ function IconCheckbox(props) {
         <Checkbox
             minified
             overrideButton={buttonWithStatus}
-            {...props}>
+            {...props}
+        >
             <span />
             {' ' /* to trick <RowComp> from rendering default content */}
         </Checkbox>

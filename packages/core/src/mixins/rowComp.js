@@ -32,7 +32,7 @@
 import React, {
     PureComponent,
     isValidElement,
-    cloneElement
+    cloneElement,
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -130,7 +130,7 @@ const rowComp = ({
             ]),
             icon: PropTypes.oneOfType([
                 PropTypes.string,
-                PropTypes.element
+                PropTypes.element,
             ]),
             basic: PropTypes.node,
             avatar: PropTypes.node,
@@ -232,7 +232,7 @@ const rowComp = ({
 
             return [
                 iconElement,
-                <Text key="comp-text" {...textProps} />
+                <Text key="comp-text" {...textProps} />,
             ];
         }
 
