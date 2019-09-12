@@ -23,7 +23,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 include: [
-                    path.resolve(packageDirname, 'src')
+                    path.resolve(packageDirname, 'src'),
                 ],
                 use: [
                     {
@@ -37,7 +37,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 include: [
-                    path.resolve(packageDirname, 'src')
+                    path.resolve(packageDirname, 'src'),
                 ],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
@@ -72,5 +72,5 @@ module.exports = {
 
     externals: {
         react: 'React',
-    }
+    },
 };

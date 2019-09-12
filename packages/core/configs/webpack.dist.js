@@ -12,18 +12,18 @@ module.exports = webpackMerge(defaultConfigs, {
             {
                 test: /\.(woff|woff2|otf|ttf|eot|svg)$/,
                 include: [
-                    path.resolve(packageDirname, 'src/fonts')
+                    path.resolve(packageDirname, 'src/fonts'),
                 ],
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
                             name: '[name]-[hash:6].[ext]',
-                            outputPath: 'fonts/'
-                        }
-                    }
-                ]
-            }
+                            outputPath: 'fonts/',
+                        },
+                    },
+                ],
+            },
         ],
     },
 });
