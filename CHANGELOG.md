@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+N/A
+
+## [4.0.0]
+
 ### Breaking
 - [Core] [Form] [ImageEditor] Peer dependency changes:
   * Change from `@babel/runtime-corejs2` to `@babel/runtime-corejs3`.
