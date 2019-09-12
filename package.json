@@ -23,7 +23,7 @@
     "release:canary": "lerna publish --canary --force-publish",
     "ghpages": "lerna run ghpages",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
-    "lint:eslint": "eslint ./packages --ignore-path=configs/.eslintignore ./",
+    "lint:eslint": "eslint --ignore-path=configs/.eslintignore ./",
     "lint:stylelint": "stylelint ./packages/**/*.scss",
     "test": "jest ./packages --config=configs/jest.config.json --coverage"
   },
