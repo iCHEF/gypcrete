@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "iCHEF web components library, built with React.",
   "homepage": "https://ichef.github.io/gypcrete",
   "repository": "https://github.com/iCHEF/gypcrete/tree/master/packages/core",
@@ -13,23 +13,24 @@
     "npm": ">= 3.10.10"
   },
   "main": "lib/index.js",
+  "module": "es/index.js",
   "files": [
     "dist/",
     "lib/",
-    "es5/",
+    "es/",
     "README.md",
     "package.json"
   ],
   "scripts": {
     "prepublish": "npm run clean && npm run build",
-    "build": "npm run build:dist && npm run build:lib && npm run build:es5",
+    "build": "npm run build:dist && npm run build:lib && npm run build:es",
     "build:dist": "webpack --config ./configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --root-mode=upward --out-dir lib",
-    "build:es5": "BABEL_ENV=es5 babel src --root-mode=upward --out-dir es5",
-    "clean": "rm -rf ./dist ./lib ./es5 ./deploy"
+    "build:es": "BABEL_ENV=es babel src --root-mode=upward --out-dir es",
+    "clean": "rm -rf ./dist ./lib ./es ./deploy"
   },
   "peerDependencies": {
-    "@babel/runtime-corejs2": "^7.1.0",
+    "@babel/runtime-corejs3": "^7.4.4",
     "prop-types": "^15.5.8",
     "react": "^16.6.0",
     "react-dom": "^16.6.0"
@@ -40,13 +41,13 @@
     "document-offset": "^1.0.4",
     "keycode": "^2.1.9",
     "memoize-one": "^4.0.3",
-    "react-textarea-autosize": "^7.1.0"
+    "react-textarea-autosize": "^7.1.0",
+    "warning": "^4.0.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.0",
+    "@babel/cli": "^7.4.4",
     "enzyme": "^3.7.0",
     "react-is": "^16.6.1",
-    "sinon": "^4.0.1",
     "webpack": "^3.10.0",
     "webpack-merge": "^4.1.2"
   }

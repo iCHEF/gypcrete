@@ -1,20 +1,12 @@
 import React, { PureComponent } from 'react';
 import { action } from '@storybook/addon-actions';
+
+import Button from '@ichef/gypcrete/src/Button';
 import Modal from '@ichef/gypcrete/src/Modal';
+
 import ModalHeader from './ModalHeader';
 
-
-function BasicModalExample({ children, ...props }) {
-    return (
-        <Modal {...props}>
-            <div>
-                {children}
-            </div>
-        </Modal>
-    );
-}
-
-class ClosableModalExample extends PureComponent {
+export default class ClosableModalExample extends PureComponent {
     state ={
         modalOpen: true
     };
@@ -29,27 +21,42 @@ class ClosableModalExample extends PureComponent {
     }
 
     render() {
+        const { children } = this.props;
         const { modalOpen } = this.state;
+
         const header = (
             <ModalHeader
                 onCancel={this.handleModalClose} />
         );
 
         if (!modalOpen) {
-            return null;
+            return (
+                <div>
+                    <Button
+                        solid
+                        color="blue"
+                        onClick={this.handleModalOpen}
+                        style={{ display: 'inline-block' }}
+                    >
+                        Open Modal
+                    </Button>
+                </div>
+            );
         }
 
         return (
-            <BasicModalExample
+            <Modal
                 header={header}
                 onClose={this.handleModalClose}
-                bodyPadding
-                {...this.props} />
+            >
+                Modal content
+                {children}
+            </Modal>
         );
     }
 }
 
-const MulitpleClosableModalExample = (props) => {
+export const MulitpleClosableModalExample = (props) => {
     const { depth, modalProp } = props;
     if (depth === 0) {
         return false;
@@ -61,6 +68,3 @@ const MulitpleClosableModalExample = (props) => {
         </ClosableModalExample>
     );
 };
-
-export { ClosableModalExample, MulitpleClosableModalExample };
-export default BasicModalExample;

@@ -1,13 +1,13 @@
 module.exports = {
     presets: [
-        ['@babel/preset-env', { useBuiltIns: 'usage' }],
+        '@babel/preset-env',
         '@babel/preset-react',
     ],
 
     plugins: [
         '@babel/plugin-proposal-class-properties',
         ['@babel/plugin-transform-runtime', {
-            corejs: 2,
+            corejs: 3,
         }],
         ['babel-plugin-module-resolver', {
             root: ['./'],
@@ -20,20 +20,17 @@ module.exports = {
             // Environment for Webpack. Empty for now.
             // Module: CommonJS
         },
-        es5: {
+        lib: {
             // Module: CommonJS
             plugins: [
                 'babel-plugin-strip-css-imports',
             ],
             ignore: ['**/__tests__/*'],
         },
-        lib: {
+        es: {
             // Module: ES Module
             presets: [
-                ['@babel/preset-env', {
-                    modules: false,
-                    useBuiltIns: 'usage',
-                }],
+                ['@babel/preset-env', { modules: false }],
             ],
             plugins: [
                 'babel-plugin-strip-css-imports',
@@ -45,6 +42,7 @@ module.exports = {
             presets: [
                 ['@babel/preset-env', {
                     useBuiltIns: 'usage',
+                    corejs: 3,
                     targets: {
                         node: 'current',
                     },
@@ -52,6 +50,10 @@ module.exports = {
             ],
             plugins: [
                 'babel-plugin-strip-css-imports',
+                ['@babel/plugin-transform-runtime', {
+                    // so `setTimeout` is not replaced with core-js 3 version.
+                    corejs: false,
+                }]
             ],
         },
     },

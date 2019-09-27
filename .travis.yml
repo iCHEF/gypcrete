@@ -3,11 +3,10 @@ language: node_js
 node_js:
     - lts/carbon
 
-before_install:
-    - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.12.1
-    - export PATH=$HOME/.yarn/bin:$PATH
-
-cache: yarn
+env:
+    global:
+        - TAG_TYPE=$(git for-each-ref refs/tags | grep "${TRAVIS_TAG}"$ | cut -c 42-47)
+        - GH_REPO=github.com/iCHEF/gypcrete.git
 
 install:
     - yarn
@@ -28,16 +27,17 @@ before_deploy:
 
 deploy:
     - provider: script
-      script: yarn release:canary
+      script: yarn release:canary --bump=preminor --yes --ignore-prepublish
       skip_cleanup: true
       on:
         branch: develop
 
     - provider: script
-      script: yarn release
+      script: bash scripts/deploy.sh
       skip_cleanup: true
       on:
-        branch: master
+        tags: true
+        condition: '"${TAG_TYPE}" == "commit"'
 
     - provider: pages
       skip_cleanup: true
@@ -46,8 +46,5 @@ deploy:
       local_dir: packages/storybook/public
       verbose: true
       on:
-        branch: master
-
-env:
-  global:
-    - GH_REPO: github.com/iCHEF/gypcrete.git
+        tags: true
+        condition: '"${TAG_TYPE}" == "commit"'

@@ -67,22 +67,27 @@ Gypcrete does not publish develop builds to the `dist` branch anymore. It now pu
   * When pushed to `master` branch --> publish a relase build
 
 ### Releasing
-When releasing a new build for Gypcrete, follow the steps:
+
+We're relying on Lerna for versioning and publishing. When you create a Release on Github, it will trigger task on Travis CI to publish with Lerna. It also converts the lightweight tag created by Github Release to an annotated tag for Lerna to calculate versions.
+
+When releasing a new version for Gypcrete, follow the steps:
 
 1. Create a release branch `release/x.y.z`
-2. *(Optionally)* release beta builds with `yarn release:beta --cd-version=prepatch` (or preminor/premajor).
+2. *(Optional)* Release beta builds with `yarn release:pre` locally to specify version.
 3. Bump version for `package.json` and `CHANGELOG`.
 4. Bump children packages version with script:
    ```sh
    yarn bumpversion
    ```
-   This will run `lerna publish`, which updates all `package.json` files in `packages/`.
+   This will run `lerna version`, which updates all `package.json` files in `packages/`.
 
 5. Commit above changes, then create a pull request for this release branch.
-6. Create a new release on Github once it's merged into `master`.
+6. *[Important]* Create a new Release on Github in format of `v3.4.5` once it's merged into `master`.
+   Please be sure to prefix the tag name with `v` as Lerna uses them to calculate changes.
+
 7. Backport changes from `master` back to `develop` by creating a `backport/x.y.y` branch and create a pull request for that.
 
-At the time relase PR is merged, it should trigger `yarn release` on Travis CI and publishes packages to npm.
+At the time Github Release is created, it should trigger `yarn release` on Travis CI and publishes packages to npm.
 
 ## LICENSE
 This project is licensed under the terms of the [Apache License 2.0](https://github.com/ichef/gypcrete/blob/master/LICENSE)

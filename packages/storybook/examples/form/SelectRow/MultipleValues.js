@@ -23,7 +23,7 @@ function MultipleValues() {
                 multiple
                 label="Minimal selection: 2"
                 minCheck={2}
-                defaultValues={['opt-c', 'opt-d']}>
+                defaultValue={['opt-c', 'opt-d']}>
                 <Option label="Option A" value="opt-a" />
                 <Option label="Option B" value="opt-b" />
                 <Option label="Option C" value="opt-c" />

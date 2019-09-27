@@ -3,65 +3,51 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import Modal, { PureModal } from '@ichef/gypcrete/src/Modal';
-import getPropTables from 'utils/getPropTables';
+import { getAddonOptions } from 'utils/getPropTables';
 
-import BasicModalExample, { ClosableModalExample, MulitpleClosableModalExample } from './BasicModal';
+import ContainsColumnView from '../SplitView/ContainsColumnView';
+import ClosableModalExample, { MulitpleClosableModalExample } from './ClosableModalExample';
 
 storiesOf('@ichef/gypcrete|Modal', module)
+    .addDecorator(withInfo)
     .add(
-        'basic usage',
-        withInfo()(() => (
-            <BasicModalExample bodyPadding>
-                Modal Content
-            </BasicModalExample>
-        ))
+        'basic modal',
+        () => (
+            <Modal header="Basic modal">
+                Hello World!
+            </Modal>
+        )
     )
     .add(
-        'small modal',
-        withInfo()(() => (
-            <BasicModalExample bodyPadding size="small" header="Small Modal">
-                Modal Content
-            </BasicModalExample>
-        ))
+        'closable modal',
+        () => <ClosableModalExample />
     )
     .add(
-        'large modal',
-        withInfo()(() => (
-            <BasicModalExample bodyPadding size="large" header="Large Modal">
-                Modal Content
-            </BasicModalExample>
-        ))
+        'with <SplitView>',
+        () => (
+            <Modal header="With <SplitView>" flexBody bodyPadding={{ bottom: 0 }}>
+                <ContainsColumnView />
+            </Modal>
+        )
     )
     .add(
-        'full modal',
-        withInfo()(() => (
-            <BasicModalExample bodyPadding size="full" header="Full Modal">
-                Modal Content
-            </BasicModalExample>
-        ))
+        'centered modal',
+        () => (
+            <Modal header="Vertically-centered modal">
+                Hello World!
+            </Modal>
+        )
     )
-    .add('closable modal', withInfo()(() => <ClosableModalExample />))
-    .add(
-        'closable overlaying modals',
-        withInfo()(() => (
-            <ClosableModalExample size="large">
-                <div>Outer Modal</div>
-                <ClosableModalExample size="small">
-                    <div>Inner Modal</div>
-                </ClosableModalExample>
-            </ClosableModalExample>
-        ))
-    )
-    .add('centered modal', withInfo()(() => (
-        <BasicModalExample bodyPadding centered>
-            Modal Content
-        </BasicModalExample>
-    )))
     .add(
         'multiple layer modals',
-        withInfo('Indented with 8px from each side for each layer. When number of layer > 7 we won\'t indent it')(() => (
-            <MulitpleClosableModalExample depth={8} />
-        ))
+        () => <MulitpleClosableModalExample depth={10} />,
+        {
+            info: 'Indented with 32px from each side for each layer. When number of layer > 7 we won\'t indent it',
+        }
     )
     // Props table
-    .add('props', getPropTables([PureModal, Modal]));
+    .add(
+        'props',
+        () => <div />,
+        { info: getAddonOptions([PureModal, Modal]) }
+    );

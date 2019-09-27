@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import warning from 'warning';
+
 import { Map as ImmutableMap } from 'immutable';
 
 import {
@@ -14,11 +16,12 @@ import Option, {
 import parseSelectOptions from './utils/parseSelectOptions';
 import getElementTypeSymbol from './utils/getElementTypeSymbol';
 
-function getInitialCheckedState(fromValues) {
+function getInitialCheckedState(selectedValue, multiple = true) {
     const checkedState = new ImmutableMap();
 
     return checkedState.withMutations((map) => {
-        fromValues.forEach(optionValue => map.set(optionValue, true));
+        const valueArray = (multiple) ? selectedValue : [selectedValue];
+        valueArray.forEach(optionValue => map.set(optionValue, true));
     });
 }
 
@@ -31,7 +34,7 @@ function getInitialCheckedState(fromValues) {
  * @example
  * Single response:
  * ```jsx
- * <SelectList values={[1]}>
+ * <SelectList value={1}>
  *     <Option label="Option A" value="1" readOnly />
  *     <Option label="Option B" value="2" />
  *     <Option label="Option C" value="3" />
@@ -40,7 +43,7 @@ function getInitialCheckedState(fromValues) {
  *
  * Multiple responses:
  * ```jsx
- * <SelectList multiple values={[1, 2]} minCheck={0}>
+ * <SelectList multiple value={[1, 2]} minCheck={0}>
  *     <Option label="Option A" value="1" readOnly />
  *     <Option label="Option B" value="2" />
  *     <Option label="Option C" value="3" />
@@ -53,9 +56,15 @@ class SelectList extends PureComponent {
         multiple: PropTypes.bool,
         showCheckAll: PropTypes.bool,
         minCheck: PropTypes.number,
-        allOptionLabel: PropTypes.node,
-        values: PropTypes.arrayOf(valueType),
-        defaultValues: PropTypes.arrayOf(valueType),
+        checkAllLabel: PropTypes.node,
+        value: PropTypes.oneOfType([
+            valueType,
+            PropTypes.arrayOf(valueType),
+        ]),
+        defaultValue: PropTypes.oneOfType([
+            valueType,
+            PropTypes.arrayOf(valueType),
+        ]),
         onChange: PropTypes.func,
         title: PropTypes.string,
         desc: PropTypes.node,
@@ -65,29 +74,55 @@ class SelectList extends PureComponent {
         multiple: false,
         showCheckAll: true,
         minCheck: 0,
-        allOptionLabel: 'All',
-        values: undefined,
-        defaultValues: [],
+        checkAllLabel: 'All',
+        value: undefined,
+        defaultValue: undefined,
         onChange: () => {},
         title: undefined,
         desc: undefined,
     };
 
     state = {
-        // eslint-disable-next-line react/destructuring-assignment
-        checkedState: getInitialCheckedState(this.props.values || this.props.defaultValues),
+        checkedState: getInitialCheckedState(
+            this.getInitialValue(),
+            this.props.multiple
+        ),
     };
 
     componentWillReceiveProps(nextProps) {
+        warning(
+            this.getIsControlled(this.props) === this.getIsControlled(nextProps),
+            '<SelectList> should not switch from controlled to uncontrolled (or vice versa).'
+        );
+
         if (this.getIsControlled(nextProps)) {
             this.setState({
-                checkedState: getInitialCheckedState(nextProps.values),
+                checkedState: getInitialCheckedState(nextProps.value, nextProps.multiple),
+            });
+        } else if (this.props.multiple !== nextProps.multiple) {
+            warning(false, '<SelectList>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.');
+            this.setState({
+                checkedState: getInitialCheckedState([])
             });
         }
     }
 
+    getInitialValue() {
+        const { value, defaultValue, multiple } = this.props;
+
+        if (value !== undefined) {
+            return value;
+        }
+
+        if (multiple && defaultValue === undefined) {
+            return [];
+        }
+
+        return defaultValue;
+    }
+
     getIsControlled(fromProps = this.props) {
-        return Array.isArray(fromProps.values);
+        return fromProps.value !== undefined;
     }
 
     getIsAllChecked() {
@@ -111,13 +146,13 @@ class SelectList extends PureComponent {
     }
 
     handleChange(nextCheckedState) {
-        const { onChange } = this.props;
+        const { onChange, multiple } = this.props;
         const nextValues = this.getValues(nextCheckedState);
 
         if (!this.getIsControlled()) {
             this.setState({ checkedState: nextCheckedState });
         }
-        onChange(nextValues);
+        onChange(multiple ? nextValues : nextValues[0]);
     }
 
     handleOptionChange = (optionValue, isChecked) => {
@@ -173,8 +208,7 @@ class SelectList extends PureComponent {
         this.handleChange(nextState);
     }
 
-    renderOptions() {
-        const { children } = this.props;
+    renderOptions(children = this.props.children) {
         const { checkedState } = this.state;
 
         return React.Children.map(children, (child) => {
@@ -184,17 +218,22 @@ class SelectList extends PureComponent {
                     onChange: this.handleOptionChange,
                 });
             }
+
+            if (child && child.type === React.Fragment) {
+                return this.renderOptions(child.props.children);
+            }
+
             return child;
         });
     }
 
     renderCheckAllOption() {
-        const { allOptionLabel } = this.props;
+        const { checkAllLabel } = this.props;
         const isAllChecked = this.getIsAllChecked();
 
         return (
             <Option
-                label={allOptionLabel}
+                label={checkAllLabel}
                 value={null}
                 checked={isAllChecked}
                 onChange={this.handleCheckAllOptionChange} />

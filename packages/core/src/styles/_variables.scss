@@ -69,7 +69,10 @@ $search-input-border-color: $c-black-30;
 $search-input-border-radius: 20px;
 $search-input-padding: 8px;
 
-$section-vertical-margin: 24px;
+$section-title-font-size: 18px;
+$section-title-line-height: 20px;
+$section-top-margin: 24px;
+$section-bottom-margin: 48px;
 $section-horizontal-padding: 16px;
 
 $list-border-radius: 8px;
@@ -98,19 +101,18 @@ $popover-bottom-padding: 16px;
 $popover-border-radius: 8px;
 $popover-drop-shadow: 0 2px 3px hsba(0, 0, 0, 40);
 
-$modal-width-small:      320px;
-$modal-width-base:       640px;
-$modal-width-large:      960px;
-$modal-width-full:       90%;
-$modal-height:           480px;
-$modal-max-height:       80vh;
+$modal-width:      720px;
+$modal-max-width:  90%;
+$modal-height:     480px;
+$modal-max-height: 90%;
 $modal-border-radius:    $popover-border-radius;
 $modal-box-shadow:       $poup-box-shadow;
 $modal-indent-layer-max: 7;
+$modal-indent: 16px;
 
 $splitview-narrow-min-width: 240px;
 $splitview-narrow-max-width: 400px;
-$splitview-wide-min-width:   360px;
+$splitview-wide-min-width:   320px;
 
 // -------------------------------------
 // Timing Functions

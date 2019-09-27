@@ -5,7 +5,52 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
 N/A
+
+## [4.0.0]
+
+### Breaking
+- [Core] [Form] [ImageEditor] Peer dependency changes:
+  * Change from `@babel/runtime-corejs2` to `@babel/runtime-corejs3`.
+- [Core] [Form] [ImageEditor] now exports CommonJS modules via "main" and ES modules via "module" field in `package.json`.
+- [Core] `<ColumnView>`:
+  * The `bottomPadding` prop is removed. Please use `bodyPadding` prop and pass an object instead.
+- [Core] `<Modal>`:
+  * `<Modal>` is refactored to render a `<ColumnView>` as its inner layout.
+  * `<Modal>` no longer takes `size`  and `bodyClassName` props.
+  * The `bodyPadding` prop now takes an object and is passed to `<ColumnView>`.
+- [Form] `<SelectList>`:
+    - Rename prop `values` to `value`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
+    - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
+    - Rename prop `allOptionLabel` to `checkAllLabel`.
+- [Form] `<SelectRow>`:
+    - Rename prop `values` to `value`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
+    - Rename prop `defaultValues` to `defaultValue`, and it receive a single value directly when is not `multiple`, and receive an array when `multiple` is true.
+    - Rename prop `asideAll` to `asideAllLabel`.
+    - Rename prop `asideNone` to `asideNoneLabel`.
+- [ImageEditor] The instance method `getImageCanvas()` of `<ImageEditor>` now returns a `<canvas>` in the same dimension as the editor itself by default.
+
+
+### Added
+- [Core] [Form] [ImageEditor] setup `warning@4.0.3`.
+- [Core] Add the `inline-info` icon to the selections of `<Icon>`.
+- [Core] Add `flexBody` prop for `<ColumnView>` (and also `<Modal>`) to render its body as a Flexbox.
+
+### Changed
+- [Core] Update `<Section>` title style and increase bottom margin.
+- [Core] Remove the only test cases that uses `sinon`; remove `sinon` from dev dependencies.
+- [Form] Update `<SelectRow>` and `<SwitchRow>` to adpat vertically-reversed appearance as `<TextInputRow>` in v3.0.
+- [Form] Add `desc` prop to `<SelectOption>`
+- [form] `<SelectRow>` now considers empty string `''` as unset.
+- [Storybook] Update examples for refactord `<ColumnView>` and `<Modal>`.
+
+### Upgrades
+- [Build] Upgrade to Babel v7.4.4 + `core-js` v3 to provide better polyfilling.
+- [Build] Upgrade to Lerna v3.16.4; changes publish steps.
+- [Build] Upgrade to `node-sass@4.12.0` for Node v10+ support.
+- [Build] Upgrade to `stylelint@^10.0`, `autoprefixer@^9.6` and `postcss-loader@^3` for better CSS support.
+- [Build] Upgrade other dev dependencies to address security alerts.
 
 ## [3.0.0]
 ### Breaking

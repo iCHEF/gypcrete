@@ -199,12 +199,20 @@ it('resets cached scale and position when image changes', () => {
     expect(wrapper.find(AvatarEditor).prop('position')).toEqual(DEFAULT_POSITION);
 });
 
-it('can get current image canvas via "getImageCanvas" method', () => {
-    const MOCKED_REF = { getImage: () => 'foo' };
+it('can get re-sized image canvas by default via "getImageCanvas" method', () => {
+    const MOCKED_REF = { getImageScaledToCanvas: () => 'foo' };
     const wrapper = shallow(<ImageEditor image={TRANSPARENT_IMAGE} />);
 
     wrapper.instance().editorRef.current = MOCKED_REF;
     expect(wrapper.instance().getImageCanvas()).toBe('foo');
+});
+
+it('can get original-sized image canvas via "getImageCanvas" method', () => {
+    const MOCKED_REF = { getImage: () => 'bar' };
+    const wrapper = shallow(<ImageEditor image={TRANSPARENT_IMAGE} />);
+
+    wrapper.instance().editorRef.current = MOCKED_REF;
+    expect(wrapper.instance().getImageCanvas({ originalSize: true })).toBe('bar');
 });
 
 it('can be controlled by "scale" & "onScaleChange" props', () => {

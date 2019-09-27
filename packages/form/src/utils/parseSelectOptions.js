@@ -1,4 +1,4 @@
-import { Children } from 'react';
+import { Fragment } from 'react';
 import { TYPE_SYMBOL } from '../SelectOption';
 
 import getElementTypeSymbol from './getElementTypeSymbol';
@@ -9,16 +9,20 @@ import getElementTypeSymbol from './getElementTypeSymbol';
  * @param {ReactChildren} children - children of `<SelectOptions>`
  * @returns {array}
  */
-function parseSelectOptions(children) {
-    const results = [];
+export default function parseSelectOptions(children) {
+    const childArray = Array.isArray(children) ? children : [children].filter(item => item);
 
-    Children.forEach(children, (child) => {
+    const results = childArray.map((child) => {
         if (getElementTypeSymbol(child) === TYPE_SYMBOL) {
-            results.push(child.props);
+            return child.props;
         }
+
+        if (child && child.type === Fragment) {
+            return parseSelectOptions(child.props.children);
+        }
+
+        return null;
     });
 
-    return results;
+    return results.flat().filter(item => item);
 }
-
-export default parseSelectOptions;
