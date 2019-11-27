@@ -32,6 +32,7 @@ module.exports = ({config, mode}) => {
     // Ref: Storybook webpack dev config https://git.io/fpJ6h
     const babelLoaderRule = config.module.rules[0];
     babelLoaderRule.include.push(includePath);
+    babelLoaderRule.use[0].options.sourceType = 'unambiguous';
 
     config.module.rules.push({
         test: /\.scss$/,
