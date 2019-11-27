@@ -5,7 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const includePath = path.resolve(__dirname, '../..'); // gypcrete/packages
 const excludePath = /node_modules/;
 
-module.exports = ({config, mode}) => {
+module.exports = ({ config, mode }) => {
     // Resolve modules in /storybook
     config.resolve.modules.push(
         path.join(__dirname, '..')
