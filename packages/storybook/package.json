@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/iCHEF/gypcrete#readme",
   "scripts": {
-    "storybook": "start-storybook -p 8100 -c .storybook --ci",
+    "storybook": "start-storybook -p 8100 -c .storybook --ci --quiet",
     "build:storybook": "build-storybook -o ./public",
     "clean": "rm -rf ./public",
     "ghpages": "npm run clean && npm run build:storybook"
