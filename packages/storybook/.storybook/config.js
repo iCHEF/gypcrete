@@ -35,14 +35,7 @@ setDefaults({
 //   Load Stories
 // -------------------------------------
 
-const reqContext = require.context(
-    '../examples/',
-    true,
-    /index\.js$/
-);
-
-function loadStories() {
-    reqContext.keys().forEach(reqContext);
-}
-
-configure(loadStories, module);
+configure([
+    require.context('../examples/', true, /\.stories\.(js|mdx)$/),
+    require.context('../examples/', true, /index\.js$/), // legacy
+], module);
