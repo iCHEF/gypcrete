@@ -1,6 +1,8 @@
-import { configure } from '@storybook/react';
+import { configure, addParameters } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import { setDefaults } from '@storybook/addon-info';
+
+import getComponentProps from '../utils/getComponentProps';
 
 import Code from './Code';
 
@@ -30,6 +32,14 @@ setDefaults({
         },
     },
     components: { codespan: Code },
+});
+
+addParameters({
+    docs: {
+        extractProps: component => ({
+            rows: getComponentProps(component),
+        }),
+    },
 });
 
 // -------------------------------------
