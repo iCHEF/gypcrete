@@ -27,8 +27,6 @@ export const BEM = {
 };
 
 /**
- * <ImageEditor>
- * =============
  * This component is built upon `mosch/react-avatar-editor`, offering pre-configured
  * scale slider, no-image placeholder and a loading indicator mode. It also supports
  * setting an initial cropping rectangle via `initCropRect` prop.
@@ -213,7 +211,7 @@ class ImageEditor extends PureComponent {
             .toString();
 
         const wrapperClass = classNames(className, wraperBEM);
-        const wrapperStyle = { ...style, width };
+        const wrapperStyle = { ...style, width, };
 
         const shouldShowPlaceholder = (!image || loading);
 
