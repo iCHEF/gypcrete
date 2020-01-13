@@ -26,29 +26,8 @@ function getInitialCheckedState(selectedValue, multiple = true) {
 }
 
 /**
- * <SelectList>
- * ============
  * A List providing multiple options for user to pick from.
- * It can be in either *single* or *multiple* response mode.
- *
- * @example
- * Single response:
- * ```jsx
- * <SelectList value={1}>
- *     <Option label="Option A" value="1" readOnly />
- *     <Option label="Option B" value="2" />
- *     <Option label="Option C" value="3" />
- * </SelectList>
- * ```
- *
- * Multiple responses:
- * ```jsx
- * <SelectList multiple value={[1, 2]} minCheck={0}>
- *     <Option label="Option A" value="1" readOnly />
- *     <Option label="Option B" value="2" />
- *     <Option label="Option C" value="3" />
- * </SelectList>
- * ```
+ * It can be in either **single** or **multiple** response mode.
  */
 
 class SelectList extends PureComponent {
