@@ -10,17 +10,18 @@ import {
 import formRow, { rowPropTypes } from './mixins/formRow';
 
 /**
- * <Switch>
- * ========
  * A row consisting a text label (on the left) and a switch button (on the right).
- * The aside of left label can be updated with the checked state of switch.
+ * The left value label (`asideOn/Off`) can be updated with the checked state of switch.
  *
- * All unknown props should go to the `<Switch>` from core package inside.
+ * All unknown props should go to the `<Switch>` from `@ichef/gypcrete` core package.
  */
 class SwitchRow extends PureComponent {
     static propTypes = {
+        /** row label */
         label: PropTypes.node.isRequired,
+        /** descriptive value label when switch is turned __on__ */
         asideOn: PropTypes.node,
+        /** descriptive value label when switch is turned __off__ */
         asideOff: PropTypes.node,
         // input props
         checked: PropTypes.bool,

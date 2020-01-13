@@ -22,7 +22,7 @@ export const BEM = {
 class Switch extends PureComponent {
     static propTypes = {
         /**
-         * Use `input` to inject props to the underlying <input>
+         * Use `input` to inject props to the underlying `<input>`
          */
         input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
         checked: PropTypes.bool,
