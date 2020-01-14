@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 ### Upgrade
-- [Storybook] Upgrade `@storybook` packages to `v5.3.0-rc`.
+- [Storybook] Upgrade `@storybook` packages to `v5.3.2`.
 
 ### Added
 - [Storybook] Add and configure storybook docs addon.
