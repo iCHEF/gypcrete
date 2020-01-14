@@ -3,13 +3,16 @@ import { action } from '@storybook/addon-actions';
 
 import Avatar from '@ichef/gypcrete/src/Avatar';
 import List from '@ichef/gypcrete/src/List';
-import SelectRow from '@ichef/gypcrete-form/src/SelectRow';
+import SelectRow, { PureSelectRow } from '@ichef/gypcrete-form/src/SelectRow';
 import SelectOption from '@ichef/gypcrete-form/src/SelectOption';
 
 export default {
     title: '@ichef/gypcrete-form|SelectRow',
-    component: SelectRow,
-    subcomponents: { SelectOption },
+    component: PureSelectRow,
+    subcomponents: {
+        'formRow()': SelectRow,
+        SelectOption,
+    },
 };
 
 export const basicUsage = () => (
