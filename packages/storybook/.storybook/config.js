@@ -1,6 +1,8 @@
-import { configure } from '@storybook/react';
+import { configure, addParameters } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import { setDefaults } from '@storybook/addon-info';
+
+import getComponentProps from '../utils/getComponentProps';
 
 import Code from './Code';
 
@@ -12,6 +14,7 @@ setOptions({
     name: 'iCHEF gypcrete',
     url: 'https://github.com/iCHEF/gypcrete',
     showDownPanel: true,
+    hierarchySeparator: /\./,
     hierarchyRootSeparator: /\|/,
 });
 
@@ -31,18 +34,19 @@ setDefaults({
     components: { codespan: Code },
 });
 
+addParameters({
+    docs: {
+        extractProps: component => ({
+            rows: getComponentProps(component),
+        }),
+    },
+});
+
 // -------------------------------------
 //   Load Stories
 // -------------------------------------
 
-const reqContext = require.context(
-    '../examples/',
-    true,
-    /index\.js$/
-);
-
-function loadStories() {
-    reqContext.keys().forEach(reqContext);
-}
-
-configure(loadStories, module);
+configure([
+    require.context('../examples/', true, /\.stories\.(js|mdx)$/),
+    require.context('../examples/', true, /index\.js$/), // legacy
+], module);
