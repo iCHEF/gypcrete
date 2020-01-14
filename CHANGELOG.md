@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - [Storybook] Add and configure storybook docs addon.
 
+### Changed
+- [Storybook] Revamp docs for `form` and `imageeditor` packages.
+
 
 ## [4.0.0]
 
