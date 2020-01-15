@@ -32,7 +32,7 @@ export const BEM = {
  * setting an initial cropping rectangle via `initCropRect` prop.
  *
  * This component passes unknown props to the inner `<AvatarEditor>`.
- * Plase refer to: https://git.io/vxhT8, for a full list of supported props.
+ * Please refer to: https://git.io/vxhT8, for a full list of supported props.
  *
  * ### Appearance configs
  * - `control`: toggles the scale slider
