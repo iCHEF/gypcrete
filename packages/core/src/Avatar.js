@@ -14,6 +14,7 @@ const SQUARE = 'square';
 const ROUNDED = 'rounded';
 const CIRCLE = 'circle';
 export const AVATAR_TYPE = { SQUARE, ROUNDED, CIRCLE };
+const AVATAR_TYPE_ARRAY = [SQUARE, ROUNDED, CIRCLE];
 
 function Avatar({
     className,
@@ -36,7 +37,7 @@ function Avatar({
 Avatar.propTypes = {
     src: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(Object.values(AVATAR_TYPE)),
+    type: PropTypes.oneOf(AVATAR_TYPE_ARRAY),
 };
 
 Avatar.defaultProps = {
