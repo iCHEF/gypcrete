@@ -29,8 +29,12 @@ export default function getComponentProps(component) {
                 };
             });
 
-        return inferredProps;
+        return {
+            sections: {
+                'Inffered props (not from docgen)': inferredProps
+            },
+        };
     }
 
-    return extractedProps;
+    return { rows: extractedProps };
 }
