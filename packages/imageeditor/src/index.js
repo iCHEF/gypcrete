@@ -26,6 +26,8 @@ export const BEM = {
     placeholder: ROOT_BEM.element('placeholder'),
 };
 
+export { AvatarEditor };
+
 /**
  * This component is built upon `mosch/react-avatar-editor`, offering pre-configured
  * scale slider, no-image placeholder and a loading indicator mode. It also supports

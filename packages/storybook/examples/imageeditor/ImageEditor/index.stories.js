@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ImageEditor from '@ichef/gypcrete-imageeditor/src/index';
+import ImageEditor, { AvatarEditor } from '@ichef/gypcrete-imageeditor/src/index';
 
 import handleLoadSuccess from './utils/handleLoadSuccess';
 import handleCropChange from './utils/handleCropChange';
@@ -10,6 +10,7 @@ const EXAMPLE_IMAGE = 'https://i.imgur.com/VfBVxsO.jpg';
 export default {
     title: '@ichef/gypcrete-imageeditor|ImageEditor',
     component: ImageEditor,
+    subcomponents: { AvatarEditor },
 };
 
 export const basicUsage = () => (
