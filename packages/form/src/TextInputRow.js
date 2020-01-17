@@ -6,6 +6,10 @@ import { ListRow, TextInput } from '@ichef/gypcrete';
 
 import formRow, { rowPropTypes } from './mixins/formRow';
 
+/**
+ * It's simply a `<TextInput>` inside a `<ListRow>` with vertically-reversed form layout.
+ * Most props should go into `<TextInput>`.
+ */
 function TextInputRow({
     // from formRow()
     ineditable, // unwanted prop

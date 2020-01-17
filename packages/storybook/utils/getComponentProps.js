@@ -4,12 +4,10 @@ function formatValue(value) {
     switch (typeof value) {
         case 'string':
             return `'${value}'`;
-        case 'boolean':
-            return `${value}`;
         case 'function':
             return '[function]';
         default:
-            return value;
+            return JSON.stringify(value);
     }
 }
 
@@ -25,12 +23,18 @@ export default function getComponentProps(component) {
                 return {
                     name: propName,
                     required,
-                    defaultValue: defaultValue && ({ summary: defaultValue }),
+                    defaultValue: (
+                        defaultValue === undefined ? undefined : { summary: defaultValue }
+                    ),
                 };
             });
 
-        return inferredProps;
+        return {
+            sections: {
+                'Inffered props (not from docgen)': inferredProps
+            },
+        };
     }
 
-    return extractedProps;
+    return { rows: extractedProps };
 }
