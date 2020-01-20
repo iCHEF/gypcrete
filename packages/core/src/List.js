@@ -23,6 +23,7 @@ const LIST_VARIANTS = [NORMAL, SETTING, BUTTON];
 
 export const TYPE_SYMBOL = Symbol('List');
 
+
 function List({
     variant,
     // <Section> props
@@ -59,8 +60,17 @@ function List({
 
 List.propTypes = {
     variant: PropTypes.oneOf(Object.values(LIST_VARIANTS)),
+    /**
+     * <Section> prop
+     */
     title: PropTypes.string,
+    /**
+     * <Section> prop
+     */
     desc: PropTypes.node,
+    /**
+     * <Section> prop
+     */
     titleSize: PropTypes.string,
 };
 

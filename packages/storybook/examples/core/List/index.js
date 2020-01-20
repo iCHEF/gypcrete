@@ -15,4 +15,4 @@ storiesOf('@ichef/gypcrete|List', module)
     .add('Setting list', withInfo()(SettingList))
     .add('Nested list', withInfo()(NestedList))
     // Props table
-    .add('props', getPropTables([List, ListRow]));
+    .add('props', getPropTables([List, ListRow]), { info: { propTables: [List, ListRow] } });
