@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - [Storybook] Add and configure storybook docs addon.
-- [Core] Add new icon `mapping`.
+- [Core] Add new icon `mapping`. (#241)
 
 ### Changed
 - [Storybook] Revamp docs for `form` and `imageeditor` packages.
