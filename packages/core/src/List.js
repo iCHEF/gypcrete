@@ -28,6 +28,7 @@ function List({
     // <Section> props
     title,
     desc,
+    titleSize,
     // React props
     className,
     children,
@@ -42,6 +43,7 @@ function List({
                 <Section
                     className={rootClassName}
                     title={title}
+                    titleSize={titleSize}
                     desc={desc}
                     bodySpacing={false}
                     verticalSpacing={spacing}
@@ -59,12 +61,14 @@ List.propTypes = {
     variant: PropTypes.oneOf(Object.values(LIST_VARIANTS)),
     title: PropTypes.string,
     desc: PropTypes.node,
+    titleSize: PropTypes.string,
 };
 
 List.defaultProps = {
     variant: NORMAL,
     title: undefined,
     desc: undefined,
+    titleSize: undefined,
 };
 
 // For `<ListRow>` to check if `nestedList` is a `<List>.

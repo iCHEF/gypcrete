@@ -17,6 +17,7 @@ export const BEM = {
 
 function Section({
     title,
+    titleSize,
     desc,
     verticalSpacing, // add margin to above and below <Section>
     bodySpacing, // add padding to body for components that are not row-based
@@ -37,7 +38,11 @@ function Section({
 
     // Conditional parts
     const titleArea = title && (
-        <div className={BEM.title.toString()}>
+        <div className={
+            BEM.title
+                .modifier(titleSize)
+                .toString()
+        }>
             {title}
         </div>
     );
@@ -63,6 +68,7 @@ Section.propTypes = {
     desc: PropTypes.node,
     verticalSpacing: PropTypes.bool,
     bodySpacing: PropTypes.bool,
+    titleSize: PropTypes.oneOf(['base', 'small']),
 };
 
 Section.defaultProps = {
@@ -70,6 +76,7 @@ Section.defaultProps = {
     desc: undefined,
     verticalSpacing: true,
     bodySpacing: true,
+    titleSize: 'base',
 };
 
 export default Section;

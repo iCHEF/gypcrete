@@ -17,11 +17,18 @@ $component-name: #{$prefix}-section;
     }
 
     &__title {
-        font-size: rem($section-title-font-size);
         line-height: rem($section-title-line-height);
         font-weight: $font-weight-bold;
         padding-bottom: rem(1px);
         border-bottom: 2px solid $c-section-divider;
+
+        // title font-size
+        &--base {
+            font-size: rem($section-title-font-size);
+        }
+        &--small {
+            font-size: rem($section-title-font-size-small);
+        }
 
         &:before {
             content: "\25a0";
