@@ -26,6 +26,7 @@ $component-name: #{$prefix}-section;
         &--base {
             font-size: rem($section-title-font-size);
         }
+
         &--small {
             font-size: rem($section-title-font-size-small);
         }

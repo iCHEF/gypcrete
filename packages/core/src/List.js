@@ -23,7 +23,6 @@ const LIST_VARIANTS = [NORMAL, SETTING, BUTTON];
 
 export const TYPE_SYMBOL = Symbol('List');
 
-
 function List({
     variant,
     // <Section> props
