@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - [Storybook] Add and configure storybook docs addon.
-- Add GitHub Action to auto assign reviews and assignee on PR opened and base on develop.
+- Add GitHub Action to auto assign reviews and assignee on PR opened and base on develop. (#243)
 
 ### Changed
 - [Storybook] Revamp docs for `form` and `imageeditor` packages.
