@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Storybook] Revamp docs for `form` and `imageeditor` packages.
 - [Core] Update `<List>`, `<Section>` to support `titleSize` option. (#242)
-
+- [Storybook] Update `getPropTables.js` to fix prop table on doc page. (#244)
 
 ## [4.0.0]
 
