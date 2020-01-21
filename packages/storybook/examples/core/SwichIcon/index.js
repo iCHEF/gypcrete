@@ -12,4 +12,4 @@ storiesOf('@ichef/gypcrete|SwitchIcon', module)
             to be like a 64x32 icon.`
         )(BasicUsage))
     // Props table
-    .add('props', getPropTables([SwitchIcon]));
+    .add('props', ...getPropTables([SwitchIcon]));

@@ -10,4 +10,4 @@ import BasicSearchInputExample from './BasicSearchInput';
 storiesOf('@ichef/gypcrete|SearchInput', module)
     .add('basic usage', withInfo()(() => <BasicSearchInputExample />))
     // Props table
-    .add('props', getPropTables([PureSearchInput, SearchInput]));
+    .add('props', ...getPropTables([PureSearchInput, SearchInput]));

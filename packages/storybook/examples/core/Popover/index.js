@@ -17,4 +17,4 @@ storiesOf('@ichef/gypcrete|Popover', module)
         )
     )
     // Props table
-    .add('props', getPropTables([PurePopover, Popover]));
+    .add('props', ...getPropTables([PurePopover, Popover]));

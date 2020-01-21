@@ -11,4 +11,4 @@ storiesOf('@ichef/gypcrete|StatusIcon', module)
     .add('basic usage', withInfo()(BasicStatusIconExample))
     .add('corner position', withInfo()(CornerStatusIconExample))
     // Props table
-    .add('props', getPropTables([StatusIcon]));
+    .add('props', ...getPropTables([StatusIcon]));

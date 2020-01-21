@@ -13,4 +13,4 @@ storiesOf('@ichef/gypcrete|EditableText', module)
     .add('Alignments', withInfo()(Alignments))
     .add('Mutiple lines', withInfo()(MultiLines))
     // Props table
-    .add('props', getPropTables([PureEditableText, EditableText]));
+    .add('props', ...getPropTables([PureEditableText, EditableText]));

@@ -18,4 +18,4 @@ storiesOf('@ichef/gypcrete|Button', module)
     .add('expanded button', withInfo()(ExpandedButtonExample))
     .add('with status', withInfo()(ButtonWithStatusExample))
     .add('custom tag', withInfo()(CustomTagButtonExample))
-    .add('props', getPropTables([PureButton, Button]));
+    .add('props', ...getPropTables([PureButton, Button]));

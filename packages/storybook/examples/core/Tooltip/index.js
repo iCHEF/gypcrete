@@ -17,4 +17,4 @@ storiesOf('@ichef/gypcrete|Tooltip', module)
         )
     )
     // Props table
-    .add('props', getPropTables([PureTooltip, Tooltip]));
+    .add('props', ...getPropTables([PureTooltip, Tooltip]));

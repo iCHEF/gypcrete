@@ -23,4 +23,4 @@ storiesOf('@ichef/gypcrete|Switch', module)
             via the 'input' prop.`
         )(InputProps))
     // Props table
-    .add('props', getPropTables([PureSwitch, Switch]));
+    .add('props', ...getPropTables([PureSwitch, Switch]));

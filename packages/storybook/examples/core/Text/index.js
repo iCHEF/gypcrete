@@ -13,4 +13,4 @@ storiesOf('@ichef/gypcrete|Text', module)
     .add('ellipsis-cropped', withInfo()(EllipsisExample))
     .add('with statusIcon', withInfo()(TextWithStatusIconExample))
     // Props table
-    .add('props', getPropTables([PureText, Text]));
+    .add('props', ...getPropTables([PureText, Text]));

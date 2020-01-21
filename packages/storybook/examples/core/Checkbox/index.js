@@ -16,4 +16,4 @@ storiesOf('@ichef/gypcrete|Checkbox', module)
             () => <CheckboxWithIndeterminateExample />
         ))
     .add('with status', withInfo()(CheckboxWithStatusExample))
-    .add('props', getPropTables([PureCheckbox, Checkbox]));
+    .add('props', ...getPropTables([PureCheckbox, Checkbox]));

@@ -46,4 +46,4 @@ storiesOf('@ichef/gypcrete|Section', module)
         </DebugBox>
     )))
 
-    .add('PropTypes', getPropTables([Section]), { info: { propTables: [Section] } });
+    .add('PropTypes', ...getPropTables([Section]));
