@@ -11,10 +11,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - [Storybook] Add and configure storybook docs addon.
+- [Core] Add new icon `mapping`. (#241)
 
 ### Changed
 - [Storybook] Revamp docs for `form` and `imageeditor` packages.
 - [Core] Update `<List>`, `<Section>` to support `titleSize` option. (#242)
+- [Storybook] Modify icon set source of `Basic icons set` page from `configs/fontello.config.json`. (#241)
+- [Storybook] Fix Icon props doc page. (#241)
 
 
 ## [4.0.0]

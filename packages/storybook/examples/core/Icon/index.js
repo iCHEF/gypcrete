@@ -26,4 +26,4 @@ storiesOf('@ichef/gypcrete|Icon', module)
     .add('large size', withInfo()(LargeIconExample))
     .add('color options', withInfo()(IconColorsExample))
     // Props table
-    .add('props', getPropTables([Icon]));
+    .add('props', getPropTables([Icon]), { info: { propTables: [Icon] } });
