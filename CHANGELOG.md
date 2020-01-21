@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - [Storybook] Revamp docs for `form` and `imageeditor` packages.
+- [Core] Update `<List>`, `<Section>` to support `titleSize` option. (#242)
 
 
 ## [4.0.0]
