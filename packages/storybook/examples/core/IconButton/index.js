@@ -13,6 +13,6 @@ storiesOf('@ichef/gypcrete|IconButton', module)
             BasicIconButtonExample
         ))
     .add('with status', withInfo()(IconButtonWithStatusExample))
-    .add('props', getPropTables([IconButton], {
+    .add('props', ...getPropTables([IconButton], {
         text: 'check `<Button>` props table for more available props.',
     }));

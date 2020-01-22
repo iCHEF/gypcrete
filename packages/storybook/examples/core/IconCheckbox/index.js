@@ -13,6 +13,6 @@ storiesOf('@ichef/gypcrete|IconCheckbox', module)
             BasicIconCheckboxExample
         ))
     .add('with status', withInfo()(IconCheckboxWithStatusExample))
-    .add('props', getPropTables([IconCheckbox], {
+    .add('props', ...getPropTables([IconCheckbox], {
         text: 'check `<Checkbox>` props table for more available props.',
     }));

@@ -18,4 +18,4 @@ storiesOf('@ichef/gypcrete|InfiniteScroll', module)
             () => <PageAsContainerExample />
         ))
     // Props table
-    .add('props', getPropTables([InfiniteScroll]));
+    .add('props', ...getPropTables([InfiniteScroll]));

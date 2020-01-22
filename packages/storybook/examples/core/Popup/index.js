@@ -11,4 +11,4 @@ storiesOf('@ichef/gypcrete|Popup', module)
     .add('basic usage', withInfo()(BasicPopupExample))
     .add('horizontal buttons', withInfo()(HorizontalButtonsExample))
     // Props table
-    .add('props', getPropTables([PurePopup, Popup]));
+    .add('props', ...getPropTables([PurePopup, Popup]));

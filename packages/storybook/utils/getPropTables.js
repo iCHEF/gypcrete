@@ -14,10 +14,17 @@ export function getAddonOptions(components = []) {
 }
 
 function getPropTables(components, options = {}) {
-    return withInfo({
-        ...getAddonOptions(components),
-        ...options,
-    })(EMPTY_COMPONENT);
+    return [
+        withInfo({
+            ...getAddonOptions(components),
+            ...options,
+        })(EMPTY_COMPONENT),
+        {
+            info: {
+                propTables: components
+            }
+        }
+    ];
 }
 
 export default getPropTables;

@@ -15,4 +15,4 @@ storiesOf('@ichef/gypcrete|TextLabel', module)
     .add('<Text> in child', withInfo()(TextLabelWithTextExample))
     .add('Editable', withInfo()(Editable))
     // Props table
-    .add('props', getPropTables([PureTextLabel, TextLabel]));
+    .add('props', ...getPropTables([PureTextLabel, TextLabel]));

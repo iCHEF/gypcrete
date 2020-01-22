@@ -9,4 +9,4 @@ import BasicAvatar from './BasicAvatar';
 storiesOf('@ichef/gypcrete|Avatar', module)
     .add('basic usage', withInfo()(BasicAvatar))
     // Props table
-    .add('props', getPropTables([Avatar]));
+    .add('props', ...getPropTables([Avatar]));

@@ -11,4 +11,4 @@ storiesOf('@ichef/gypcrete|Tag', module)
     .add('basic usage', withInfo()(BasicTagExample))
     .add('with parent color', withInfo()(TagWithParentColorExample))
     // Props table
-    .add('props', getPropTables([Tag]));
+    .add('props', ...getPropTables([Tag]));

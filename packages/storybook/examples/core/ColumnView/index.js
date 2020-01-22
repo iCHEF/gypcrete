@@ -7,4 +7,4 @@ import BasicUsage from './BasicUsage';
 
 storiesOf('@ichef/gypcrete|ColumnView', module)
     .add('basic usage', withInfo()(BasicUsage))
-    .add('props', getPropTables([ColumnView]));
+    .add('props', ...getPropTables([ColumnView]));

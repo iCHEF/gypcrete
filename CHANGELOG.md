@@ -17,9 +17,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Storybook] Revamp docs for `form` and `imageeditor` packages.
 - [Core] Update `<List>`, `<Section>` to support `titleSize` option. (#242)
+- [Storybook] Update `getPropTables.js` to fix prop table on doc page. (#244)
 - [Storybook] Modify icon set source of `Basic icons set` page from `configs/fontello.config.json`. (#241)
 - [Storybook] Fix Icon props doc page. (#241)
-
 
 ## [4.0.0]
 

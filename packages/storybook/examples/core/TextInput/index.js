@@ -13,4 +13,4 @@ storiesOf('@ichef/gypcrete|TextInput', module)
     .add('Multiple lines', withInfo()(MultiLines))
     .add('Custom rendering', withInfo()(CustomRendering))
     // Props table
-    .add('props', getPropTables([PureTextInput, TextInput]));
+    .add('props', ...getPropTables([PureTextInput, TextInput]));

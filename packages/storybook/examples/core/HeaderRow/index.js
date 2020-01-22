@@ -15,4 +15,4 @@ storiesOf('@ichef/gypcrete|HeaderRow', module)
     )
 
     // Props table
-    .add('props', getPropTables([HeaderRow]));
+    .add('props', ...getPropTables([HeaderRow]));
