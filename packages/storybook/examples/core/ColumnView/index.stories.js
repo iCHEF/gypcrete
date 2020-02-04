@@ -8,6 +8,11 @@ import TextLabel from '@ichef/gypcrete/src/TextLabel';
 import List from '@ichef/gypcrete/src/List';
 import ListRow from '@ichef/gypcrete/src/ListRow';
 
+export default {
+    title: '@ichef/gypcrete|ColumnView',
+    component: ColumnView,
+};
+
 function DemoRow({ label }) {
     return (
         <ListRow>
@@ -19,7 +24,7 @@ DemoRow.propTypes = {
     label: PropTypes.string.isRequired,
 };
 
-function BasicUsage() {
+export function BasicUsage() {
     const headerLabel = <TextLabel align="center" basic="Header Title" />;
     const header = <HeaderRow center={headerLabel} />;
     const rows = [];
@@ -38,5 +43,3 @@ function BasicUsage() {
         </div>
     );
 }
-
-export default BasicUsage;
