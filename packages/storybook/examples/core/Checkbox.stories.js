@@ -13,7 +13,12 @@ export default {
 
 
 export function BasicUsage() {
-    const rdAvatar = <Avatar type="square" alt="John Doe" src="https://api.adorable.io/avatars/285/johndoe@example.com" />;
+    const rdAvatar = (
+        <Avatar
+            type="square"
+            alt="John Doe"
+            src="https://api.adorable.io/avatars/285/johndoe@example.com" />
+    );
 
     return (
         <div>
