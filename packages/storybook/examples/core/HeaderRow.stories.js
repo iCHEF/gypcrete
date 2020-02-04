@@ -7,7 +7,12 @@ import TextEllipsis from '@ichef/gypcrete/src/TextEllipsis';
 
 import DebugBox from 'utils/DebugBox';
 
-function BasicUsage() {
+export default {
+    title: '@ichef/gypcrete|HeaderRow',
+    component: HeaderRow,
+};
+
+export function BasicUsage() {
     const leftBtn = <Button icon="prev" basic="Back" />;
     const rightBtn = <Button align="reverse" icon="row-padding" basic="Save" />;
     const centerLabel = (
@@ -28,4 +33,24 @@ function BasicUsage() {
     );
 }
 
-export default BasicUsage;
+export function OptionalArea() {
+    const rightBtn = <Button align="reverse" icon="row-padding" basic="Save" />;
+    const centerLabel = <TextLabel basic="Header Title" />;
+
+    return (
+        <DebugBox>
+            <HeaderRow
+                left={false}
+                center={centerLabel}
+                right={rightBtn} />
+        </DebugBox>
+    );
+}
+
+OptionalArea.story = {
+    parameters: {
+        docs: {
+            storyDescription: 'Remove an area from DOM by explictly setting it to false.',
+        },
+    },
+};
