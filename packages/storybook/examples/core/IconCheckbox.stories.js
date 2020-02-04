@@ -1,9 +1,24 @@
 import React from 'react';
-
 import IconCheckbox from '@ichef/gypcrete/src/IconCheckbox';
+
 import FlexRow from 'utils/FlexRow';
 
-function IconCheckboxWithStatusExample() {
+export default {
+    title: '@ichef/gypcrete|IconCheckbox',
+    component: IconCheckbox
+};
+
+export function BasicUsage() {
+    return (
+        <FlexRow>
+            <IconCheckbox />
+
+            <IconCheckbox indeterminate />
+        </FlexRow>
+    );
+}
+
+export function WithStatus() {
     return (
         <FlexRow>
             <IconCheckbox
@@ -20,5 +35,3 @@ function IconCheckboxWithStatusExample() {
         </FlexRow>
     );
 }
-
-export default IconCheckboxWithStatusExample;
