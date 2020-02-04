@@ -9,7 +9,12 @@ import Button, { COMPONENT_NAME } from './Button';
 import IconLayout from './IconLayout';
 
 /**
- * color & solid props are not invalid in <IconButton>
+ * <IconButton>
+ * ===
+ *
+ * IconButton is a variant of `<Button>`.
+ *
+ * However, color & solid props are invalid in `<IconButton>`
  */
 function IconButton({
     icon,
