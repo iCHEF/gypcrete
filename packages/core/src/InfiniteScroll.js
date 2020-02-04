@@ -1,11 +1,3 @@
-// *************************************
-//
-//   Inspired by react-infinite-scroller
-//
-//   @ref https://github.com/CassetteRocks/react-infinite-scroller
-//
-// *************************************
-
 import React, { PureComponent, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -31,6 +23,15 @@ const FILL_SPACE_TYPE = {
     MANUAL: 'manual'
 };
 
+
+/**
+ * <InfiniteScroll>
+ * ===
+ *
+ * Inspired by `react-infinite-scroller`.
+ *
+ * @ref https://github.com/CassetteRocks/react-infinite-scroller
+ */
 class InfiniteScroll extends PureComponent {
     static propTypes = {
         onLoadMore: PropTypes.func.isRequired,
