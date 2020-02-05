@@ -13,8 +13,6 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 const SQUARE = 'square';
 const ROUNDED = 'rounded';
 const CIRCLE = 'circle';
-export const AVATAR_TYPE = { SQUARE, ROUNDED, CIRCLE };
-const AVATAR_TYPE_ARRAY = [SQUARE, ROUNDED, CIRCLE];
 
 function Avatar({
     className,
@@ -37,7 +35,7 @@ function Avatar({
 Avatar.propTypes = {
     src: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(AVATAR_TYPE_ARRAY),
+    type: PropTypes.oneOf([SQUARE, ROUNDED, CIRCLE]),
 };
 
 Avatar.defaultProps = {
