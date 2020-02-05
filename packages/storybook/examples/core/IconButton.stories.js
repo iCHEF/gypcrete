@@ -1,16 +1,22 @@
 import React from 'react';
 
+import Button from '@ichef/gypcrete/src/Button';
 import IconButton from '@ichef/gypcrete/src/IconButton';
 import FlexRow from 'utils/FlexRow';
 
 export default {
     title: '@ichef/gypcrete|IconButton',
     component: IconButton,
+    subcomponents: {
+        Button,
+    },
 };
 
 export function BasicUsage() {
     return (
-        <IconButton icon="printer" />
+        <FlexRow>
+            <IconButton icon="printer" />
+        </FlexRow>
     );
 }
 
