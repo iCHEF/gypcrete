@@ -2,12 +2,14 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import EditableText, { PureEditableText } from '@ichef/gypcrete/src/EditableText';
+import { PureText } from '@ichef/gypcrete/src/Text';
 import DebugBox from 'utils/DebugBox';
 
 export default {
     title: '@ichef/gypcrete|EditableText',
     component: PureEditableText,
     subcomponents: {
+        PureText,
         'withStatus()': EditableText,
     },
 };
