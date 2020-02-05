@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HeaderRow from '@ichef/gypcrete/src/HeaderRow';
+import HeaderRow, { HeaderArea } from '@ichef/gypcrete/src/HeaderRow';
 import Button from '@ichef/gypcrete/src/Button';
 import TextLabel from '@ichef/gypcrete/src/TextLabel';
 import TextEllipsis from '@ichef/gypcrete/src/TextEllipsis';
@@ -10,6 +10,9 @@ import DebugBox from 'utils/DebugBox';
 export default {
     title: '@ichef/gypcrete|HeaderRow',
     component: HeaderRow,
+    subcomponents: {
+        HeaderArea,
+    },
 };
 
 export function BasicUsage() {
