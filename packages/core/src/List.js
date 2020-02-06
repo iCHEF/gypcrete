@@ -58,7 +58,7 @@ function List({
 }
 
 List.propTypes = {
-    variant: PropTypes.oneOf(Object.values(LIST_VARIANTS)),
+    variant: PropTypes.oneOf(LIST_VARIANTS),
     /** `<Section>` prop */
     title: PropTypes.string,
     /** `<Section>` prop */
