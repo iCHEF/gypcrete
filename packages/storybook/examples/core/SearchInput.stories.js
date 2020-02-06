@@ -12,8 +12,6 @@ export default {
     },
 };
 
-
-
 export function BasicSearchInputExample() {
     const [controlledInputValue, setValue] = useState('');
 
