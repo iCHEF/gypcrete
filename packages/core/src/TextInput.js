@@ -90,34 +90,10 @@ InnerInput.defaultProps = {
  * All unknown props are expected to be passed into the underlying `<input>`.
  *
  * What's different from other row component is:
- *   1. It doesn't have `basic` nor `aside`. Instead it holds `label` and `value`/`defaultValue`.
- *   2. It doesn't support status icons, error message nor tags
  *
- * @example
-```jsx
-# Single-line mode
-<TextInput
-    label="Welcome msg"
-    value="Hello world"
-    placeholder="(Unset)"
-    onChange={event => console.log(event.target.value)} />
-
-# Multi-line mode
-<TextInput
-    multiLine
-    minRows={5}
-    maxRows={10}
-    label="Comments"
-/>
-
-# Custom rendering
-<TextInput
-    label="Pick a color"
-    renderInput={inputProps => (
-        <input type="color" {...inputProps} />
-    )}
-/>
-```
+ *   1. It doesn't have `basic` nor `aside`. Instead it holds `label` and `value`/`defaultValue`.
+ *
+ *   2. It doesn't support status icons, error message nor tags.
  */
 
 function TextInput({
