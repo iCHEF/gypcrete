@@ -23,8 +23,12 @@ const ICON_HIDE_TIMEOUT = 2 * 1000;
 
 class StatusIcon extends PureComponent {
     static propTypes = {
-        status: PropTypes.oneOf(Object.values(STATUS_CODE)),
-        position: PropTypes.oneOf(Object.values(STATUS_POSITION)),
+        status: PropTypes.oneOf([LOADING, SUCCESS, ERROR]),
+        position: PropTypes.oneOf([INLINE, CORNER]),
+        /**
+         * if `true`, Auto hides status icon after being success for 2 secs,
+         * or shows icon when component leaves success state.
+         * */
         autohide: PropTypes.bool,
     };
 
