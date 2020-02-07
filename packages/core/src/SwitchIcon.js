@@ -17,6 +17,12 @@ const ON = 'on';
 const OFF = 'off';
 export const SWITCH_STATE = { ON, OFF };
 
+/**
+ * <SwitchIcon>
+ * ===
+ *
+ * A `<SwitchIcon>` is a visual element that is supposed to be like a 64x32 icon.
+ */
 function SwitchIcon({ state, className, ...otherProps }) {
     const bemClass = BEM.root.modifier(state);
     const rootClassName = classNames(className, `${bemClass}`);
@@ -29,7 +35,7 @@ function SwitchIcon({ state, className, ...otherProps }) {
 }
 
 SwitchIcon.propTypes = {
-    state: PropTypes.oneOf(Object.values(SWITCH_STATE)),
+    state: PropTypes.oneOf([ON, OFF]),
 };
 
 SwitchIcon.defaultProps = {
