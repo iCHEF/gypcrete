@@ -1,8 +1,13 @@
 import React from 'react';
-
 import SwitchIcon from '@ichef/gypcrete/src/SwitchIcon';
 
-function BasicUsage() {
+
+export default {
+    title: '@ichef/gypcrete|SwitchIcon',
+    component: SwitchIcon,
+};
+
+export function BasicUsage() {
     return (
         <div>
             <SwitchIcon />
@@ -10,5 +15,3 @@ function BasicUsage() {
         </div>
     );
 }
-
-export default BasicUsage;
