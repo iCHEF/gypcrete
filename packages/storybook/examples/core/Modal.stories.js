@@ -8,7 +8,7 @@ import Button from '@ichef/gypcrete/src/Button';
 import HeaderRow from '@ichef/gypcrete/src/HeaderRow';
 import TextLabel from '@ichef/gypcrete/src/TextLabel';
 
-import ContainsColumnView from './SplitView/ContainsColumnView';
+import { ContainsColumnView } from './SplitView.stories';
 
 export default {
     title: '@ichef/gypcrete|Modal',
