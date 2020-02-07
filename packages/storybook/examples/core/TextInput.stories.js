@@ -1,10 +1,18 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import TextInput from '@ichef/gypcrete/src/TextInput';
+import TextInput, { PureTextInput } from '@ichef/gypcrete/src/TextInput';
 import DebugBox from 'utils/DebugBox';
 
-function BasicUsage() {
+export default {
+    title: '@ichef/gypcrete|TextInput',
+    component: PureTextInput,
+    subcomponents: {
+        'rowComp()': TextInput,
+    },
+};
+
+export function BasicUsage() {
     return (
         <div>
             <DebugBox>
@@ -51,5 +59,32 @@ function BasicUsage() {
         </div>
     );
 }
+export function MultiLines() {
+    return (
+        <div>
+            <DebugBox>
+                <TextInput
+                    multiLine
+                    label="Controlled Textarea"
+                    value={'Controlled input\nin multiple lines'}
+                    onChange={action('change')}
+                />
+            </DebugBox>
+        </div>
+    );
+}
 
-export default BasicUsage;
+export function CustomRendering() {
+    return (
+        <DebugBox>
+            <TextInput
+                label="Pick a color"
+                defaultValue="#d94e41"
+                renderInput={inputProps => (
+                    <input type="color" {...inputProps} />
+                )}
+                onChange={action('change')}
+            />
+        </DebugBox>
+    );
+}
