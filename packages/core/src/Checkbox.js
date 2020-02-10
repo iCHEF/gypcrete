@@ -22,7 +22,7 @@ export const CHECKBOX_BUTTON = <Icon type="empty" className={`${BEM.button}`} />
 class Checkbox extends PureComponent {
     static propTypes = {
         /**
-         * Use `input` to inject props to the underlying <input>
+         * Use this to inject props to the underlying `<input />`
          */
         input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
         indeterminate: PropTypes.bool,

@@ -9,6 +9,7 @@ import { PureText } from './Text';
 /**
  * <EditableText>
  * ==============
+ *
  * The visual element which stands as an input version of `<Text>`.
  *
  * It actually renders a `<Text>` inside, but swaps its basic row to an editable version.
@@ -25,6 +26,7 @@ import { PureText } from './Text';
  * Besides these, it does take layout props (`align` and `noGrow`) and status props.
  *
  * @example
+ *
  * ```jsx
  * <EditableText
  *     value="Hello world"

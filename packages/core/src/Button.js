@@ -14,7 +14,6 @@ const BLUE = 'blue';
 const RED = 'red';
 const WHITE = 'white';
 const BLACK = 'black';
-export const BUTTON_COLOR = { BLUE, RED, WHITE, BLACK };
 
 function Button({
     color,
@@ -40,7 +39,7 @@ function Button({
 }
 
 Button.propTypes = {
-    color: PropTypes.oneOf(Object.values(BUTTON_COLOR)),
+    color: PropTypes.oneOf([BLUE, RED, WHITE, BLACK]),
     solid: PropTypes.bool,
     tagName: PropTypes.oneOf(['button', 'a', 'div']),
 };
