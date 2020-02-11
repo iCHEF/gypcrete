@@ -7,6 +7,7 @@ import Avatar from '@ichef/gypcrete/src/Avatar';
 import Button from '@ichef/gypcrete/src/Button';
 import Icon from '@ichef/gypcrete/src/Icon';
 import IconButton from '@ichef/gypcrete/src/IconButton';
+import Section from '@ichef/gypcrete/src/Section';
 import TextInput from '@ichef/gypcrete/src/TextInput';
 import TextLabel from '@ichef/gypcrete/src/TextLabel';
 
@@ -15,7 +16,7 @@ import DebugBox from 'utils/DebugBox';
 export default {
     title: '@ichef/gypcrete|List',
     component: List,
-    subcomponents: { ListRow },
+    subcomponents: { ListRow, Section },
 };
 
 export function NormalList() {
