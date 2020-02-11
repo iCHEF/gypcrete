@@ -16,6 +16,7 @@ const TOUCH_TIMEOUT_MS = 250;
 /**
  * <EditableTextLabel>
  * ===================
+ *
  * The row component which can either in **edit mode** or **display mode**.
  *
  * While it's in **display mode**, it's simply a `<TextLabel>`.
@@ -29,23 +30,6 @@ const TOUCH_TIMEOUT_MS = 250;
  *
  * Unlike `<TextInput>`, you should treat `<EditableTextLabel>` like a `<TextLabel>`.
  * It does not offer direct control to the `<input>` inside.
- *
- * @example
- * (Uncontrolled)
- * ```jsx
- * <EditableTextLabel
- *     basic="Text to be edited"
- *     onEditEnd={(value, event) => console.log(value, event)} />
- * ```
- *
- * (Controlled)
- * ```jsx
- * <EditableTextLabel
- *     basic="Text to be edited"
- *     inEdit={this.state.inEdit}
- *     onDblClick={() => this.setState({ inEdit: true })}
- *     onEditEnd={(value, event) => console.log(value, event)} />
- * ```
  */
 
 class EditableTextLabel extends PureComponent {
