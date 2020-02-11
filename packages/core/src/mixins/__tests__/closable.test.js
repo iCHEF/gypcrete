@@ -85,7 +85,7 @@ it('intercepts event propagation if instructed', () => {
             <ClosableFoo closable={{ stopEventPropagation: true }} />
         </div>
     );
-    wrapper.find('div#foo').simulate('click');
+    wrapper.find('div.gyp-closable').simulate('click');
     expect(handleClick).not.toHaveBeenCalled();
 
     wrapper = mount(
@@ -94,7 +94,7 @@ it('intercepts event propagation if instructed', () => {
         </div>
     );
 
-    wrapper.find('div#foo').simulate('click');
+    wrapper.find('div.gyp-closable').simulate('click');
     expect(handleClick).toHaveBeenCalled();
 });
 
