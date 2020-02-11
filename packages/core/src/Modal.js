@@ -99,8 +99,13 @@ Modal.propTypes = {
     header: PropTypes.node,
     centered: PropTypes.bool,
     onClose: PropTypes.func,
-    // <ColumnView> props
+    /**
+     *  See `<ColumnView>` props table.
+     */
     flexBody: ColumnView.propTypes.flexBody,
+    /**
+     *  See `<ColumnView>` props table.
+     */
     bodyPadding: ColumnView.propTypes.bodyPadding,
 };
 
