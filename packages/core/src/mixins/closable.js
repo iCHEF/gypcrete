@@ -131,14 +131,17 @@ const closable = ({
             } = this.props;
 
             return (
-                <div
-                    role="presentation"
-                    className={ROOT_BEM.toString()}
-                    onClick={this.handleOuterLayerClick}>
+                <>
+                    <div
+                        role="presentation"
+                        className={ROOT_BEM.toString()}
+                        onClick={this.handleOuterLayerClick}
+                    />
                     <WrappedComponent
                         onInsideClick={this.handleInsideClick}
-                        {...otherProps} />
-                </div>
+                        {...otherProps}
+                    />
+                </>
             );
         }
     }
