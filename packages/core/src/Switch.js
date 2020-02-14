@@ -19,6 +19,14 @@ export const BEM = {
     iconWrapper: ROOT_BEM.element('icon-wrapper'),
 };
 
+/**
+ * <Switch>
+ * ===
+ *
+ * A `<Switch>` is a row component which can be turned either on or off,
+ * with its underlying `<input type=checkbox>`.`
+ */
+
 class Switch extends PureComponent {
     static propTypes = {
         /**
@@ -28,8 +36,13 @@ class Switch extends PureComponent {
         checked: PropTypes.bool,
         defaultChecked: PropTypes.bool,
 
-        // <input type="checkbox" /> props
+        /**
+         * `<input type="checkbox" />` props
+         */
         disabled: PropTypes.bool,
+        /**
+         * `<input type="checkbox" />` props
+         */
         onChange: PropTypes.func,
     };
 

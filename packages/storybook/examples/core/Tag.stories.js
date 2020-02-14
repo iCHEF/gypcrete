@@ -2,7 +2,18 @@ import React from 'react';
 
 import Tag from '@ichef/gypcrete/src/Tag';
 
-function TagWithParentColorExample() {
+export default {
+    title: '@ichef/gypcrete|Tag',
+    component: Tag,
+};
+
+export function BasicTagExample() {
+    return (
+        <Tag>tag</Tag>
+    );
+}
+
+export function WithParentColor() {
     return (
         <div>
             <span style={{ color: 'blue' }}>
@@ -19,5 +30,3 @@ function TagWithParentColorExample() {
         </div>
     );
 }
-
-export default TagWithParentColorExample;
