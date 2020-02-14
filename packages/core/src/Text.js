@@ -48,7 +48,7 @@ export const VERTICAL_ORDER = {
 
 class Text extends PureComponent {
     static propTypes = {
-        align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
+        align: PropTypes.oneOf([LEFT, CENTER, RIGHT]),
         verticalOrder: PropTypes.oneOf([
             VERTICAL_ORDER.NORMAL,
             VERTICAL_ORDER.REVERSE,
