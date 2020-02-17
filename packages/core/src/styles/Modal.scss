@@ -50,6 +50,8 @@ $component: #{$prefix}-modal;
 
         .#{$prefix}-modal__container {
             border-radius: $modal-border-radius;
+            flex-basis: $modal-width;
+            flex-grow: 0;
         }
     }
 }
