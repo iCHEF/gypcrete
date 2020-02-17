@@ -12,9 +12,9 @@ import IconLayout from './IconLayout';
  * <IconButton>
  * ===
  *
- * IconButton is a variant of `<Button>`.
+ * `<IconButton>` is a variant of `<Button>`.
  *
- * However, color & solid props are invalid in `<IconButton>`
+ * However, `color` & `solid` props are invalid in `<IconButton>`
  */
 function IconButton({
     icon,
