@@ -6,7 +6,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-N/A
+
+## [4.1.0]
+
+### Upgrade
+- [Storybook] Upgrade `@storybook` packages to `v5.3.2`.
+
+### Added
+- [Storybook] Add and configure storybook docs addon.
+- Add GitHub Action to auto assign reviews and assignee on PR opened and base on develop. (#243)
+- [Core] Add new icon `mapping`. (#241)
+
+### Changed
+- [Storybook] Revamp all storybook docs with new `addon-docs`. (#239, #246 - #249, #251 - #253)
+- [Core] Update `<List>`, `<Section>` to support `titleSize` option. (#242)
+- [Storybook] Update `getPropTables.js` to fix prop table on doc page. (#244)
+- [Storybook] Modify icon set source of `Basic icons set` page from `configs/fontello.config.json`. (#241)
+- [Storybook] Fix Icon props doc page. (#241)
+- [Core] Fix centered modal width. (#254)
+- [Core] Fix anchored popover top position when document is scrollable. (#250)
 
 ## [4.0.0]
 

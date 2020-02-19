@@ -26,5 +26,6 @@ it('can change output length', () => {
 it('can change both output prefix and length', () => {
     const result = randId({ prefix: fooPrefix, length: 12 });
     expect(result).toEqual(expect.stringMatching(/^foo-/));
-    expect(result).toHaveLength(defaultPrefix.length + 12);
+    // plus 1 for default middle char '-'
+    expect(result).toHaveLength(fooPrefix.length + 12 + 1);
 });

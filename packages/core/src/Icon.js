@@ -14,7 +14,6 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 const GRAY = 'gray';
 const BLUE = 'blue';
 const RED = 'red';
-export const ICON_COLOR = { GRAY, BLUE, RED };
 
 function Icon({
     type,
@@ -48,7 +47,7 @@ function Icon({
 
 Icon.propTypes = {
     type: PropTypes.string.isRequired,
-    color: PropTypes.oneOf(Object.values(ICON_COLOR)),
+    color: PropTypes.oneOf([GRAY, BLUE, RED]),
     large: PropTypes.bool,
     spinning: PropTypes.bool,
 };

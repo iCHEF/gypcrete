@@ -5,9 +5,9 @@ const TerserPlugin = require('terser-webpack-plugin');
 const includePath = path.resolve(__dirname, '../..'); // gypcrete/packages
 const excludePath = /node_modules/;
 
-module.exports = (baseConfig, env, defaultConfig) => {
+module.exports = ({ config, mode }) => {
     // Resolve modules in /storybook
-    defaultConfig.resolve.modules.push(
+    config.resolve.modules.push(
         path.join(__dirname, '..')
     );
 
@@ -18,9 +18,9 @@ module.exports = (baseConfig, env, defaultConfig) => {
     // Following config customize the TerserPlugin to remove the mangling.
     // Note that this will make the total bundle size increase a little (2.9MB => 3.2MB).
     // Consider storybook is for developer this should be fine.
-    if (defaultConfig.optimization && env === 'PRODUCTION') {
+    if (config.optimization && mode === 'PRODUCTION') {
         // eslint-disable-next-line no-param-reassign
-        defaultConfig.optimization.minimizer = [new TerserPlugin({
+        config.optimization.minimizer = [new TerserPlugin({
             cache: true,
             parallel: true,
             terserOptions: {
@@ -30,10 +30,11 @@ module.exports = (baseConfig, env, defaultConfig) => {
     }
 
     // Ref: Storybook webpack dev config https://git.io/fpJ6h
-    const babelLoaderRule = defaultConfig.module.rules[0];
+    const babelLoaderRule = config.module.rules[0];
     babelLoaderRule.include.push(includePath);
+    babelLoaderRule.use[0].options.sourceType = 'unambiguous';
 
-    defaultConfig.module.rules.push({
+    config.module.rules.push({
         test: /\.scss$/,
         include: includePath,
         exclude: excludePath,
@@ -61,9 +62,9 @@ module.exports = (baseConfig, env, defaultConfig) => {
     });
 
     // eslint-disable-next-line no-param-reassign
-    defaultConfig.devServer = {
+    config.devServer = {
         stats: 'minimal',
     };
 
-    return defaultConfig;
+    return config;
 };

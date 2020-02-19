@@ -1,0 +1,25 @@
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+
+<Meta title="0 | Introduction" />
+
+# Introduction
+
+`gypcrete` is an in-house components library from iCHEF.
+It's currently split into 3 packages:
+
+- `@ichef/gypcrete` - core components and styles
+- `@ichef/gypcrete-form` - components built for form purposes
+- `@ichef/gypcrete-imageeditor` - a component that allows you to scale, rotate and crop images
+
+Here's a quick example of how you might use components from gypcrete:
+
+```jsx
+import React from 'react';
+import { Button } from '@ichef/gypcrete';
+
+const CustomComponent = () => (
+  <Button basic="Hello World!" />
+);
+
+export default CustomComponent;
+```

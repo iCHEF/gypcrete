@@ -25,7 +25,7 @@ export const BEM = {
 class SearchInput extends Component {
     static propTypes = {
         /**
-         * Use `inputProps` to inject props to the underlying <input>
+         * Use this to inject props to the underlying `<input>`.
          */
         inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
         placeholder: PropTypes.string,

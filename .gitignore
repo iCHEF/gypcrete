@@ -3,6 +3,7 @@ coverage/
 lib/
 dist/
 es/
+es5/
 build/
 deploy/
 public/
