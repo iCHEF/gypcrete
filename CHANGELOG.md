@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+
+## [4.1.0]
+
 ### Upgrade
 - [Storybook] Upgrade `@storybook` packages to `v5.3.2`.
 
