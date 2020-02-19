@@ -1,14 +1,19 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Storybook</title><style>html, body {
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Storybook</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>html, body {
     overflow: hidden;
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
-  }</style><script>try {
-    if (window.parent !== window) {
-      window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.parent.__REACT_DEVTOOLS_GLOBAL_HOOK__;
-      window.__VUE_DEVTOOLS_GLOBAL_HOOK__ = window.parent.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+  }</style><script>/* globals window */
+  /* eslint-disable no-underscore-dangle */
+  try {
+    if (window.top !== window) {
+      window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.top.__REACT_DEVTOOLS_GLOBAL_HOOK__;
     }
   } catch (e) {
-    console.warn('unable to connect to parent frame for connecting dev tools');
-  }</script></head><body><div id="root"></div><script src="static/runtime~manager.888715f9e03925b468d8.bundle.js"></script><script src="static/manager.5f653cfad10487793c6c.bundle.js"></script></body></html>
+    // eslint-disable-next-line no-console
+    console.warn('unable to connect to top frame for connecting dev tools');
+  }</script><style>#root[hidden],
+      #docs-root[hidden] {
+        display: none !important;
+      }</style></head><body><div id="root"></div><div id="docs-root"></div><script>window['DOCS_MODE'] = false;</script><script src="runtime~main.d658f4b31d2b61fc0046.bundle.js"></script><script src="vendors~main.8646e8feeb8c2b3a14ae.bundle.js"></script><script src="main.48831511b0f6ea987477.bundle.js"></script></body></html>
