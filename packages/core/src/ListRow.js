@@ -95,7 +95,6 @@ class ListRow extends PureComponent {
                         </div>
                     )}
                 </li>
-
             </ListSpacingContext.Provider>
         );
     }
