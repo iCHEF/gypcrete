@@ -40,7 +40,6 @@ function List({
                 const bemClass = BEM.root
                     .modifier(variant)
                     .modifier('sm-margin-bottom', !spacing && !!title)
-                    .modifier('nested-indent', !spacing);
 
                 const rootClassName = classNames(bemClass.toString(), className);
                 return (
