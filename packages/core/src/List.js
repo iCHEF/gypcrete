@@ -34,25 +34,30 @@ function List({
     children,
     ...otherProps
 }) {
-    const bemClass = BEM.root.modifier(variant);
-    const rootClassName = classNames(bemClass.toString(), className);
-
     return (
         <ListSpacingContext.Consumer>
-            {spacing => (
-                <Section
-                    className={rootClassName}
-                    title={title}
-                    titleSize={titleSize}
-                    desc={desc}
-                    bodySpacing={false}
-                    verticalSpacing={spacing}
-                    {...otherProps}>
-                    <ul className={BEM.body.toString()}>
-                        {children}
-                    </ul>
-                </Section>
-            )}
+            {(spacing) => {
+                const bemClass = BEM.root
+                    .modifier(variant)
+                    .modifier('sm-margin-bottom', !spacing && !!title)
+                    .modifier('nested-indent', !spacing);
+
+                const rootClassName = classNames(bemClass.toString(), className);
+                return (
+                    <Section
+                        className={rootClassName}
+                        title={title}
+                        titleSize={titleSize}
+                        desc={desc}
+                        bodySpacing={false}
+                        verticalSpacing={spacing || !!title}
+                        {...otherProps}>
+                        <ul className={BEM.body.toString()}>
+                            {children}
+                        </ul>
+                    </Section>
+                );
+            }}
         </ListSpacingContext.Consumer>
     );
 }
