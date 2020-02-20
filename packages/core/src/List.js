@@ -39,7 +39,7 @@ function List({
             {(spacing) => {
                 const bemClass = BEM.root
                     .modifier(variant)
-                    .modifier('sm-margin-bottom', !spacing && !!title)
+                    .modifier('sm-margin-bottom', !spacing && !!title);
 
                 const rootClassName = classNames(bemClass.toString(), className);
                 return (
