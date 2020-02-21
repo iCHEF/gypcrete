@@ -21,6 +21,7 @@ export const BEM = {
     root: ROOT_BEM,
     body: ROOT_BEM.element('body'),
     footer: ROOT_BEM.element('footer'),
+    nestedListWrapper: ROOT_BEM.element('nested-list-wrapper')
 };
 
 class ListRow extends PureComponent {
@@ -81,12 +82,18 @@ class ListRow extends PureComponent {
 
         return (
             <ListSpacingContext.Provider value={false}>
-                <li className={rootClassName} {...wrapperProps}>
-                    <div className={BEM.body.toString()}>
-                        {children}
+                <li>
+                    <div className={rootClassName} {...wrapperProps}>
+                        <div className={BEM.body.toString()}>
+                            {children}
+                        </div>
+                        {this.renderFooter()}
                     </div>
-                    {this.renderFooter()}
-                    {nestedList}
+                    {nestedList && (
+                        <div className={BEM.nestedListWrapper.toString()}>
+                            {nestedList}
+                        </div>
+                    )}
                 </li>
             </ListSpacingContext.Provider>
         );

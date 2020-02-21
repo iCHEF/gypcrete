@@ -75,3 +75,7 @@ $component: #{$prefix}-list-row;
         }
     }
 }
+
+.#{$component} + .#{$component}__nested-list-wrapper {
+    margin-left: rem($list-nested-indent);
+}
