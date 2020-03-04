@@ -71,6 +71,31 @@ it('passes a collected rowProps prop to wrapped component', () => {
     });
 });
 
+
+it('passes a custom rowProps prop to wrapped component', () => {
+    const wrapper = shallow(
+        <FormRowFoo
+            desc="foo"
+            rowProps={{
+                status: 'success'
+            }}
+            status="error"
+            errorMsg="bar" />
+    );
+    const fooProps = wrapper.find(Foo).props();
+
+    expect(fooProps).not.toHaveProperty('desc');
+    expect(fooProps).not.toHaveProperty('status');
+    expect(fooProps).not.toHaveProperty('errorMsg');
+
+    expect(fooProps.rowProps).toMatchObject({
+        desc: 'foo',
+        status: 'success',
+        errorMsg: 'bar',
+    });
+});
+
+
 it('can optionally keep a ref to wrapped component', () => {
     const wrapper = mount(<FormRowBarWithRef />);
 

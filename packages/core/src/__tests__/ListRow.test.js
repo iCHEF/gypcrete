@@ -53,7 +53,7 @@ it('handles highlight modifier', () => {
     const wrapper = shallow(<ListRow highlight>Foo</ListRow>);
     const expectedClassName = ROW_BEM.root.modifier('highlight').toString();
 
-    expect(wrapper.find('li').hasClass(expectedClassName)).toBeTruthy();
+    expect(wrapper.find('li').find('div').first().hasClass(expectedClassName)).toBeTruthy();
 });
 
 it('renders nested item inside <li> but outside of body wrapper', () => {

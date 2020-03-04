@@ -47,16 +47,11 @@ const formRow = ({
                 status,
                 statusOptions,
                 errorMsg,
+                rowProps,
                 ...otherProps
             } = this.props;
 
             const ineditable = disabled || readOnly;
-            const rowProps = {
-                desc,
-                status,
-                statusOptions,
-                errorMsg,
-            };
 
             return (
                 <WrappedComponent
@@ -64,7 +59,13 @@ const formRow = ({
                     ineditable={ineditable}
                     disabled={disabled}
                     readOnly={readOnly}
-                    rowProps={rowProps}
+                    rowProps={{
+                        desc,
+                        status,
+                        statusOptions,
+                        errorMsg,
+                        ...rowProps,
+                    }}
                     {...otherProps} />
             );
         }

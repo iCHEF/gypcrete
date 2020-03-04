@@ -34,4 +34,8 @@ $component: #{$prefix}-list;
     &--button {
         // #TODO: implement button list
     }
+
+    &--sm-margin-bottom {
+        margin-bottom: rem($section-top-margin);
+    }
 }

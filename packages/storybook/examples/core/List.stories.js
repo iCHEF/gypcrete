@@ -136,3 +136,43 @@ export function NestedList() {
         </DebugBox>
     );
 }
+
+export function NestedListWithTitle() {
+    const nestedList2nd = (
+        <List title="List Title 2">
+            <ListRow>
+                <TextLabel icon="inventory-item" basic="Nested A" />
+            </ListRow>
+            <ListRow>
+                <TextLabel icon="inventory-item" basic="Nested B" />
+            </ListRow>
+            <ListRow>
+                <TextLabel icon="inventory-item" basic="Nested C" />
+            </ListRow>
+        </List>
+    );
+
+    const nestedList1st = (
+        <List title="List Title">
+            <ListRow>
+                <TextLabel icon="printer" basic="3rd nested I" />
+            </ListRow>
+            <ListRow nestedList={nestedList2nd}>
+                <TextLabel icon="printer" basic="3rd nested II" />
+            </ListRow>
+        </List>
+    );
+
+    return (
+        <DebugBox width="30rem">
+            <List variant="normal" title="List title">
+                <ListRow>
+                    <TextLabel icon="tickets" basic="Hello World" />
+                </ListRow>
+                <ListRow nestedList={nestedList1st}>
+                    <TextLabel icon="tickets" basic="Row 2" />
+                </ListRow>
+            </List>
+        </DebugBox>
+    );
+}

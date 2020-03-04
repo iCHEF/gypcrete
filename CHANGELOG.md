@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [4.2.0]
+
+### Changed
+- [Core] Update `<ListRow>` & `<List>` styles for supporting nested list better. (#257)
+- [Core] Fix `rowProps` used to be replaced in mixin `formRow`.(#258)
 
 ## [4.1.0]
 
