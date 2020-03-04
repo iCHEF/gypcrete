@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- [Build] Fix deploy script to push back converted tags; bump minor for canary builds. (#261)
+
 ## [4.2.0]
 
 ### Changed
