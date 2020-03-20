@@ -54,11 +54,6 @@ const closable = ({
             closable: mixinConfigs,
         };
 
-        constructor(props) {
-            super(props);
-            this.clickedInside = false;
-        }
-
         componentDidMount() {
             document.addEventListener('keyup', this.handleDocumentKeyup);
         }
@@ -100,12 +95,6 @@ const closable = ({
                 event.stopPropagation();
             }
 
-            if (this.clickedInside) {
-                // ignoring click events bubbling up from inside
-                this.clickedInside = false;
-                return;
-            }
-
             if (options.onClickOutside) {
                 this.props.onClose(event);
             }
@@ -116,7 +105,6 @@ const closable = ({
          */
         handleInsideClick = (event) => {
             const options = this.getOptions();
-            this.clickedInside = true;
 
             if (options.onClickInside) {
                 this.props.onClose(event);

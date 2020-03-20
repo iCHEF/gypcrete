@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete-build",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "iCHEF web components library, built with React.",
   "private": true,
   "homepage": "https://ichef.github.io/gypcrete",
@@ -20,7 +20,7 @@
     "bumpversion": "lerna version --no-git-tag-version --no-push",
     "release": "lerna publish from-package",
     "release:pre": "lerna publish --dist-tag=prerelease",
-    "release:canary": "lerna publish --canary --force-publish --exact",
+    "release:canary": "lerna publish --canary minor --force-publish --exact",
     "ghpages": "lerna run ghpages",
     "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint ./packages --ignore-path=configs/.eslintignore ./",
