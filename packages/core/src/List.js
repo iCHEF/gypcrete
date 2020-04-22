@@ -64,7 +64,10 @@ function List({
 List.propTypes = {
     variant: PropTypes.oneOf(LIST_VARIANTS),
     /** `<Section>` prop */
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node,
+    ]),
     /** `<Section>` prop */
     desc: PropTypes.node,
     /** `<Section>` prop */
