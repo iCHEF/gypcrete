@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Breaking
 - [Core] Reduce icon font to only WOFF and WOFF2 formats. (#266)
 
+
+## [4.2.1]
+
 ### Changed
+- [Core] Fix that we have to click twice to close gyp-closable after click in wrapped component. (#262)
 - [Build] Fix deploy script to push back converted tags; bump minor for canary builds. (#261)
 
 ## [4.2.0]
