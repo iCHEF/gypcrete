@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Breaking
+- [Core] Reduce icon font to only WOFF and WOFF2 formats. (#266)
+
 ### Changed
 - [Build] Fix deploy script to push back converted tags; bump minor for canary builds. (#261)
 
