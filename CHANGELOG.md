@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Breaking
+- [Core] Reduce icon font to only WOFF and WOFF2 formats. (#266)
+
+
 ## [4.2.1]
 
 ### Changed
