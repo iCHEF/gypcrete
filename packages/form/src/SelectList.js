@@ -225,10 +225,11 @@ class SelectList extends PureComponent {
             showCheckAll,
             title,
             desc,
+            ...wrapperProps
         } = this.props;
 
         return (
-            <List title={title} desc={desc}>
+            <List title={title} desc={desc} {...wrapperProps}>
                 {multiple && showCheckAll && this.renderCheckAllOption()}
                 {this.renderOptions()}
             </List>
