@@ -65,6 +65,7 @@ function Modal({
     // React props
     className,
     children,
+    ...wrapperProps
 }) {
     const rootBem = BEM.root
         .modifier('centered', centered)
@@ -80,7 +81,7 @@ function Modal({
     const handleOverlayClick = createHandleOverlayClick(onClose);
 
     return (
-        <div className={rootClassName}>
+        <div className={rootClassName} {...wrapperProps}>
             <Overlay onClick={handleOverlayClick} />
 
             <ColumnView
