@@ -100,10 +100,11 @@ class StatusIcon extends PureComponent {
     }
 
     render() {
-        const rootClassName = ROOT_BEM.modifier(this.props.position);
+        const { status, position, ...wrapperProps } = this.props;
+        const rootClassName = ROOT_BEM.modifier(position);
         let icon = null;
 
-        switch (this.props.status) {
+        switch (status) {
             case LOADING:
                 icon = <Icon type="inline-loading" color="gray" spinning />;
                 break;
@@ -119,7 +120,11 @@ class StatusIcon extends PureComponent {
                 break;
         }
 
-        return (icon && <span className={rootClassName}>{icon}</span>);
+        return (icon && (
+            <span className={rootClassName} {...wrapperProps}>
+                {icon}
+            </span>
+        ));
     }
 }
 

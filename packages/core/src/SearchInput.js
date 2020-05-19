@@ -139,7 +139,7 @@ class SearchInput extends Component {
     }
 
     render() {
-        const { inputProps, value, placeholder, className } = this.props;
+        const { inputProps, value, placeholder, className, ...wrapperProps } = this.props;
         const { innerValue } = this.state;
 
         const inputValue = this.isControlled() ? value : innerValue;
@@ -147,7 +147,7 @@ class SearchInput extends Component {
         const rootClassName = classNames(className, `${BEM.root}`);
 
         return (
-            <div className={rootClassName}>
+            <div className={rootClassName} {...wrapperProps}>
                 <div className={BEM.inputWrapper}>
                     <Icon type="search" />
 

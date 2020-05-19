@@ -119,7 +119,14 @@ class Text extends PureComponent {
     }
 
     render() {
-        const { align, verticalOrder, noGrow, bold, className } = this.props;
+        const {
+            align,
+            verticalOrder,
+            noGrow,
+            bold,
+            className,
+            ...wrapperProps
+        } = this.props;
 
         const bemClass = BEM.root
             .modifier(align)
@@ -130,7 +137,7 @@ class Text extends PureComponent {
         const rootClassName = classNames(bemClass.toString(), className);
 
         return (
-            <div className={rootClassName}>
+            <div className={rootClassName} {...wrapperProps}>
                 {this.renderBasicRow()}
                 {this.renderAsideRow()}
             </div>
