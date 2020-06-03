@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Breaking
 - [Core] Reduce icon font to only WOFF and WOFF2 formats. (#266)
 
+### Changed
+- [Core] Add sort icon. (#268)
+
 
 ## [4.2.1]
 
