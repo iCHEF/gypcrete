@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import omit from 'lodash.omit';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
@@ -139,12 +140,14 @@ class SearchInput extends Component {
     }
 
     render() {
-        const { inputProps, value, placeholder, className, ...wrapperProps } = this.props;
+        const { inputProps, value, placeholder, className } = this.props;
         const { innerValue } = this.state;
 
         const inputValue = this.isControlled() ? value : innerValue;
         const isLoading = this.context.status === STATUS_CODE.LOADING;
         const rootClassName = classNames(className, `${BEM.root}`);
+
+        const wrapperProps = omit(this.props, Object.keys(SearchInput.propTypes));
 
         return (
             <div className={rootClassName} {...wrapperProps}>

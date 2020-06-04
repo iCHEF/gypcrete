@@ -18,6 +18,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import omit from 'lodash.omit';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
@@ -125,8 +126,8 @@ class Text extends PureComponent {
             noGrow,
             bold,
             className,
-            ...wrapperProps
         } = this.props;
+        const wrapperProps = omit(this.props, Object.keys(Text.propTypes));
 
         const bemClass = BEM.root
             .modifier(align)

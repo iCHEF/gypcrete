@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import omit from 'lodash.omit';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
@@ -100,7 +101,7 @@ class StatusIcon extends PureComponent {
     }
 
     render() {
-        const { status, position, ...wrapperProps } = this.props;
+        const { status, position } = this.props;
         const rootClassName = ROOT_BEM.modifier(position);
         let icon = null;
 
@@ -119,6 +120,8 @@ class StatusIcon extends PureComponent {
             default:
                 break;
         }
+
+        const wrapperProps = omit(this.props, Object.keys(StatusIcon.propTypes));
 
         return (icon && (
             <span className={rootClassName} {...wrapperProps}>
