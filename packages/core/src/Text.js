@@ -127,7 +127,7 @@ class Text extends PureComponent {
             bold,
             className,
         } = this.props;
-        const wrapperProps = getRemainingProps(this.props, Text);
+        const wrapperProps = getRemainingProps(this.props, Text.propTypes);
 
         const bemClass = BEM.root
             .modifier(align)

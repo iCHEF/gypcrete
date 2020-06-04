@@ -121,7 +121,7 @@ class StatusIcon extends PureComponent {
                 break;
         }
 
-        const wrapperProps = getRemainingProps(this.props, StatusIcon);
+        const wrapperProps = getRemainingProps(this.props, StatusIcon.propTypes);
 
         return (icon && (
             <span className={rootClassName} {...wrapperProps}>
