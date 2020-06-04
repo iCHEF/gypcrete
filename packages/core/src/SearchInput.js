@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import omit from 'lodash.omit';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+import getRemainingProps from './utils/getRemainingProps';
 import rowComp from './mixins/rowComp';
 import './styles/SearchInput.scss';
 
@@ -147,7 +147,7 @@ class SearchInput extends Component {
         const isLoading = this.context.status === STATUS_CODE.LOADING;
         const rootClassName = classNames(className, `${BEM.root}`);
 
-        const wrapperProps = omit(this.props, Object.keys(SearchInput.propTypes));
+        const wrapperProps = getRemainingProps(this.props, SearchInput.propTypes);
 
         return (
             <div className={rootClassName} {...wrapperProps}>

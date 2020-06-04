@@ -18,10 +18,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import omit from 'lodash.omit';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+import getRemainingProps from './utils/getRemainingProps';
 import withStatus, { withStatusPropTypes } from './mixins/withStatus';
 import './styles/Text.scss';
 
@@ -127,7 +127,7 @@ class Text extends PureComponent {
             bold,
             className,
         } = this.props;
-        const wrapperProps = omit(this.props, Object.keys(Text.propTypes));
+        const wrapperProps = getRemainingProps(this.props, Text);
 
         const bemClass = BEM.root
             .modifier(align)

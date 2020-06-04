@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash.omit';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+import getRemainingProps from './utils/getRemainingProps';
 import './styles/StatusIcon.scss';
 
 import Icon from './Icon';
@@ -121,7 +121,7 @@ class StatusIcon extends PureComponent {
                 break;
         }
 
-        const wrapperProps = omit(this.props, Object.keys(StatusIcon.propTypes));
+        const wrapperProps = getRemainingProps(this.props, StatusIcon);
 
         return (icon && (
             <span className={rootClassName} {...wrapperProps}>
