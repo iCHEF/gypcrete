@@ -21,6 +21,7 @@ import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+import getRemainingProps from './utils/getRemainingProps';
 import withStatus, { withStatusPropTypes } from './mixins/withStatus';
 import './styles/Text.scss';
 
@@ -125,8 +126,8 @@ class Text extends PureComponent {
             noGrow,
             bold,
             className,
-            ...wrapperProps
         } = this.props;
+        const wrapperProps = getRemainingProps(this.props, Text.propTypes);
 
         const bemClass = BEM.root
             .modifier(align)
