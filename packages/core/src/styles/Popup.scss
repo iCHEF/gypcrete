@@ -34,11 +34,11 @@ $component: #{$prefix}-popup;
         box-shadow: $popup-box-shadow;
         position: relative;
         overflow: hidden;
-        transition: width 0.15s;
+        transition: width .15s;
 
         // Active animation
         opacity: 0;
-        animation: anim-bounce-in 0.6s forwards;
+        animation: anim-bounce-in .6s forwards;
     }
 
     // Body
