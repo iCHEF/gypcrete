@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -12,7 +12,6 @@ import PopupButton from './PopupButton';
 
 import Icon from './Icon';
 import Overlay from './Overlay';
-import TextLabel from './TextLabel';
 
 import './styles/_animations.scss';
 import './styles/Popup.scss';
@@ -28,7 +27,9 @@ export const BEM = {
     root: ROOT_BEM,
     container: ROOT_BEM.element('container'),
     body: ROOT_BEM.element('body'),
-    message: ROOT_BEM.element('message'),
+    messageWrapper: ROOT_BEM.element('message-wrapper'),
+    messageTitle: ROOT_BEM.element('message-title'),
+    messageDesc: ROOT_BEM.element('message-desc'),
     button: ROOT_BEM.element('button'),
     buttonsGroup: ROOT_BEM.element('buttons-group')
 };
@@ -40,11 +41,25 @@ PopupIcon.propTypes = {
     type: PropTypes.string.isRequired,
 };
 
-export function PopupMessage({ text }) {
-    return <TextLabel align="center" basic={text} />;
+export function PopupMessage({ title, desc, bottomArea }) {
+    return (
+        <div className={BEM.messageWrapper}>
+            {title && (
+                <span className={BEM.messageTitle}>{title}</span>
+            )}
+            <span className={BEM.messageDesc}>{desc}</span>
+            {bottomArea}
+        </div>
+    );
 }
 PopupMessage.propTypes = {
-    text: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    desc: PropTypes.string.isRequired,
+    bottomArea: PropTypes.node,
+};
+PopupMessage.defaultProps = {
+    title: undefined,
+    bottomArea: undefined,
 };
 
 /**
@@ -90,9 +105,21 @@ function renderPopupButtons(buttons, direction) {
 
 function Popup({
     icon,
+
+    // message area props
+    messageArea,
+    messageTitle,
+    messageDesc,
+    messageBottomArea,
+    // message is a legacy prop, should be deprecated in future,
+    //   use `messageDesc` instead for string message,
+    //   use `messageArea` instead for node message
     message,
+
+    // button props
     buttons,
     buttonsDirection,
+
     // React props
     className,
     children,
@@ -107,7 +134,15 @@ function Popup({
             <div className={BEM.container}>
                 <div className={BEM.body}>
                     {icon && wrapIfNotElement(icon, { with: PopupIcon, via: 'type' })}
-                    {message && wrapIfNotElement(message, { with: PopupMessage, via: 'text' })}
+                    {messageArea}
+                    {(!messageArea && message) && isValidElement(message)
+                        ? message
+                        : (
+                            <PopupMessage
+                                title={messageTitle}
+                                desc={messageDesc || message}
+                                bottomArea={messageBottomArea} />
+                        )}
                 </div>
 
                 {renderPopupButtons(buttons, buttonsDirection)}
@@ -124,14 +159,22 @@ const StringOrElement = PropTypes.oneOfType([
 
 Popup.propTypes = {
     icon: StringOrElement,
+    messageArea: PropTypes.node,
+    messageTitle: PropTypes.string,
+    messageDesc: PropTypes.string,
     message: StringOrElement,
+    messageBottomArea: PropTypes.node,
     buttons: PropTypes.arrayOf(PropTypes.element),
     buttonsDirection: PropTypes.oneOf(Object.values(BUTTONS_DIRECTION)),
 };
 
 Popup.defaultProps = {
     icon: null,
+    messageArea: undefined,
+    messageTitle: undefined,
+    messageDesc: undefined,
     message: null,
+    messageBottomArea: undefined,
     buttons: [],
     buttonsDirection: BUTTONS_DIRECTION.VERTICAL,
 };
