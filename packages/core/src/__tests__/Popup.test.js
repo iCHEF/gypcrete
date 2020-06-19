@@ -31,11 +31,20 @@ describe('Pure <Popup>', () => {
         expect(wrapper.find(Overlay).exists()).toBeTruthy();
     });
 
+    it('render with custom node of messageArea', () => {
+        const customMessageArea = <img src="test-img" alt="test-img" />;
+        const wrapper = shallow(<PurePopup messageArea={customMessageArea} />);
+        expect(wrapper.find(customMessageArea).exists()).toBeFalsy();
+        expect(
+            wrapper.find('img[src="test-img"]').exists()
+        ).toBeTruthy();
+    });
+
     it('renders a string message with <PopupMessage>', () => {
         const wrapper = shallow(<PurePopup message="foo" />);
 
         expect(wrapper.find(PopupMessage).exists()).toBeTruthy();
-        expect(wrapper.find(PopupMessage).prop('text')).toBe('foo');
+        expect(wrapper.find(PopupMessage).prop('desc')).toBe('foo');
     });
 
     it('takes a valid element for message prop', () => {
@@ -102,8 +111,23 @@ describe('<PopupIcon>', () => {
 });
 
 describe('<PopupMessage>', () => {
-    it('returns a pre-configured <TextLabel> of given text', () => {
-        const wrapper = shallow(<PopupMessage text="foo" />);
-        expect(wrapper.matchesElement(<TextLabel align="center" basic="foo" />)).toBeTruthy();
+    it('returns a pre-configured layout of given props', () => {
+        const wrapper = shallow(<PopupMessage title="foo" desc="bar" bottomArea="bottomArea" />);
+        expect(wrapper.matchesElement(
+            <div>
+                <span>foo</span>
+                <span>bar</span>
+                bottomArea
+            </div>
+        )).toBeTruthy();
+    });
+
+    it('only render with desc prop', () => {
+        const wrapper = shallow(<PopupMessage desc="bar" />);
+        expect(wrapper.matchesElement(
+            <div>
+                <span>bar</span>
+            </div>
+        )).toBeTruthy();
     });
 });
