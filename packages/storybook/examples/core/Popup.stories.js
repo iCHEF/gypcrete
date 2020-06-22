@@ -67,7 +67,7 @@ export function HorizontalButtons() {
 export function CustomMessageArea(popupProps) {
     const [opened, setOpened] = useState(false);
 
-    const customMessageArea = (
+    const customMessageNode = (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
             <img alt="react" width={30} height={30} src={ReactLogo} />
             <span style={{ marginLeft: '10px', }}> is awesome!</span>
@@ -94,7 +94,7 @@ export function CustomMessageArea(popupProps) {
             </Button>
             {opened && (
                 <Popup
-                    messageArea={customMessageArea}
+                    customMessageNode={customMessageNode}
                     icon="success"
                     buttons={buttons}
                     {...popupProps} />

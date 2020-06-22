@@ -31,10 +31,10 @@ describe('Pure <Popup>', () => {
         expect(wrapper.find(Overlay).exists()).toBeTruthy();
     });
 
-    it('render with custom node of messageArea', () => {
-        const customMessageArea = <img src="test-img" alt="test-img" />;
-        const wrapper = shallow(<PurePopup messageArea={customMessageArea} />);
-        expect(wrapper.find(customMessageArea).exists()).toBeFalsy();
+    it('render with custom node of customMessageNode', () => {
+        const customMessageNode = <img src="test-img" alt="test-img" />;
+        const wrapper = shallow(<PurePopup customMessageNode={customMessageNode} />);
+        expect(wrapper.find(customMessageNode).exists()).toBeFalsy();
         expect(
             wrapper.find('img[src="test-img"]').exists()
         ).toBeTruthy();

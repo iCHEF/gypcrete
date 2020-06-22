@@ -107,13 +107,13 @@ function Popup({
     icon,
 
     // message area props
-    messageArea,
+    customMessageNode,
     messageTitle,
     messageDesc,
     messageBottomArea,
     // message is a legacy prop, should be deprecated in future,
     //   use `messageDesc` instead for string message,
-    //   use `messageArea` instead for node message
+    //   use `customMessageNode` instead for node message
     message,
 
     // button props
@@ -134,15 +134,17 @@ function Popup({
             <div className={BEM.container}>
                 <div className={BEM.body}>
                     {icon && wrapIfNotElement(icon, { with: PopupIcon, via: 'type' })}
-                    {messageArea}
-                    {(!messageArea && message) && isValidElement(message)
-                        ? message
-                        : (
-                            <PopupMessage
-                                title={messageTitle}
-                                desc={messageDesc || message}
-                                bottomArea={messageBottomArea} />
-                        )}
+                    {customMessageNode}
+                    {(!customMessageNode && message) && (
+                        isValidElement(message)
+                            ? message
+                            : (
+                                <PopupMessage
+                                    title={messageTitle}
+                                    desc={messageDesc || message}
+                                    bottomArea={messageBottomArea} />
+                            )
+                    )}
                 </div>
 
                 {renderPopupButtons(buttons, buttonsDirection)}
@@ -159,7 +161,7 @@ const StringOrElement = PropTypes.oneOfType([
 
 Popup.propTypes = {
     icon: StringOrElement,
-    messageArea: PropTypes.node,
+    customMessageNode: PropTypes.node,
     messageTitle: PropTypes.string,
     messageDesc: PropTypes.string,
     message: StringOrElement,
@@ -170,7 +172,7 @@ Popup.propTypes = {
 
 Popup.defaultProps = {
     icon: null,
-    messageArea: undefined,
+    customMessageNode: undefined,
     messageTitle: undefined,
     messageDesc: undefined,
     message: null,
