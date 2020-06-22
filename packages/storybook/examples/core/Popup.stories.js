@@ -37,7 +37,8 @@ export function BasicUsage(popupProps) {
                 solid
                 color="blue"
                 onClick={handlePopupOpen}
-                style={{ display: 'inline-block', }}>
+                style={{ display: 'inline-block', }}
+            >
                 Open Popup
             </Button>
             {opened && (
@@ -49,7 +50,8 @@ export function BasicUsage(popupProps) {
                     )}
                     icon="success"
                     buttons={buttons}
-                    {...popupProps} />
+                    {...popupProps}
+                />
             )}
         </div>
     );
@@ -97,7 +99,8 @@ export function CustomMessageArea(popupProps) {
                     customMessageNode={customMessageNode}
                     icon="success"
                     buttons={buttons}
-                    {...popupProps} />
+                    {...popupProps}
+                />
             )}
         </div>
     );

@@ -46,7 +46,8 @@ describe('Pure <Popup>', () => {
             <PurePopup
                 messageTitle="foo"
                 messageDesc="bar"
-                messageBottomArea={customBottomArea} />
+                messageBottomArea={customBottomArea}
+            />
         ));
 
         expect(wrapper.find(PopupMessage).exists()).toBeTruthy();

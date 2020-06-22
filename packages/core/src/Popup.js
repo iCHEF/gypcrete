@@ -88,7 +88,8 @@ function renderPopupButtons(buttons, direction) {
         return (
             <PopupButton
                 key={button.key}
-                {...button.props} />
+                {...button.props}
+            />
         );
     });
 
@@ -143,7 +144,8 @@ function Popup({
                     title={messageTitle}
                     // support for legacy string type `message` prop
                     desc={messageDesc || message}
-                    bottomArea={messageBottomArea} />
+                    bottomArea={messageBottomArea}
+                />
             );
         },
         [message, customMessageNode, messageTitle, messageDesc, messageBottomArea]
