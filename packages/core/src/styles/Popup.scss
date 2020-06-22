@@ -1,4 +1,4 @@
-@import "./mixins";
+@import './mixins';
 
 $component: #{$prefix}-popup;
 
@@ -31,7 +31,7 @@ $component: #{$prefix}-popup;
         max-width: $popup-container-width;
         background-color: $c-white;
         border-radius: $popup-border-radius;
-        box-shadow: $poup-box-shadow;
+        box-shadow: $popup-box-shadow;
         position: relative;
         overflow: hidden;
         transition: width .15s;
@@ -43,12 +43,30 @@ $component: #{$prefix}-popup;
 
     // Body
     &__body {
-        padding: rem(10px);
+        padding: rem(16px);
+        padding-top: rem(8px);
     }
 
-    // Message
-    &__message {
-        line-height: 1.3em;
+    // Message wrapper
+    &__message-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    // Message title
+    &__message-title {
+        font-size: rem(16px);
+        line-height: rem(19px);
+        font-weight: bold;
+        margin-bottom: rem(8px);
+    }
+
+    // Message desc
+    &__message-desc {
+        font-size: rem(14px);
+        line-height: rem(16px);
+        color: rgba(0, 0, 0, .7);
     }
 
     // Nested components

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 - [Core] Allow passing remaining props to wrapper DOM element. (#267, #269)
+- [Core] Add props for default popup UI layout and update tests. (#271)
 
 ### Changed
 - [Core] Add sort icon. (#268)
