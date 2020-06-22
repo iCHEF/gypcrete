@@ -44,7 +44,6 @@ $component: #{$prefix}-popup;
     // Body
     &__body {
         padding: rem(16px);
-        padding-top: rem(8px);
     }
 
     // Message wrapper
@@ -72,7 +71,7 @@ $component: #{$prefix}-popup;
     // Nested components
     .#{$prefix}-icon--large {
         margin-top: rem(-8px);
-        margin-bottom: rem(-16px);
+        margin-bottom: rem(-8px);
     }
 }
 

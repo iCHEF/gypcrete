@@ -45,9 +45,6 @@ export function BasicUsage(popupProps) {
                 <Popup
                     messageTitle="File generated"
                     messageDesc="Please click “Download” to get your file."
-                    messageBottomArea={(
-                        <Checkbox basic="Download zip file" />
-                    )}
                     icon="success"
                     buttons={buttons}
                     {...popupProps}
@@ -66,7 +63,22 @@ export function HorizontalButtons() {
 }
 
 
-export function CustomMessageArea(popupProps) {
+export function CustomMessageBottomArea() {
+    /*
+        <BasicUsage> will pass `messageBottomArea` into <Popup>.
+        See <BasicUsage> component code in Basic Usage example.
+    */
+    return (
+        <BasicUsage
+            messageBottomArea={(
+                <Checkbox basic="Download zip file" />
+            )}
+        />
+    );
+}
+
+
+export function CustomMessageNode(popupProps) {
     const [opened, setOpened] = useState(false);
 
     const customMessageNode = (
