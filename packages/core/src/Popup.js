@@ -1,4 +1,4 @@
-import React, { isValidElement } from 'react';
+import React, { useMemo, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -127,6 +127,28 @@ function Popup({
 }) {
     const rootClassName = classNames(BEM.root.toString(), className);
 
+    const messageArea = useMemo(
+        () => {
+            if (customMessageNode) {
+                return customMessageNode;
+            }
+
+            // support for legacy node type `message` prop
+            if (message && isValidElement(message)) {
+                return message;
+            }
+
+            return (
+                <PopupMessage
+                    title={messageTitle}
+                    // support for legacy string type `message` prop
+                    desc={messageDesc || message}
+                    bottomArea={messageBottomArea} />
+            );
+        },
+        [message, customMessageNode, messageTitle, messageDesc, messageBottomArea]
+    );
+
     return (
         <div className={rootClassName} {...popupProps}>
             <Overlay />
@@ -134,17 +156,7 @@ function Popup({
             <div className={BEM.container}>
                 <div className={BEM.body}>
                     {icon && wrapIfNotElement(icon, { with: PopupIcon, via: 'type' })}
-                    {customMessageNode}
-                    {(!customMessageNode && message) && (
-                        isValidElement(message)
-                            ? message
-                            : (
-                                <PopupMessage
-                                    title={messageTitle}
-                                    desc={messageDesc || message}
-                                    bottomArea={messageBottomArea} />
-                            )
-                    )}
+                    {messageArea}
                 </div>
 
                 {renderPopupButtons(buttons, buttonsDirection)}

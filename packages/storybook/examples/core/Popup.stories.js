@@ -43,7 +43,7 @@ export function BasicUsage(popupProps) {
             {opened && (
                 <Popup
                     messageTitle="File generated"
-                    message="Please click “Download” to get your file."
+                    messageDesc="Please click “Download” to get your file."
                     messageBottomArea={(
                         <Checkbox basic="Download zip file" />
                     )}
