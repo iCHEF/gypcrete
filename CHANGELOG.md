@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - [Core] Add sort icon. (#268)
+- [Core] Add announce icon. (#272)
 
 
 ## [4.2.1]
