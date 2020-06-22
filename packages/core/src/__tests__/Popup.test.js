@@ -40,6 +40,21 @@ describe('Pure <Popup>', () => {
         ).toBeTruthy();
     });
 
+    it('renders a string messageTitle and messageDesc with <PopupMessage>', () => {
+        const customBottomArea = <img src="test-bottom-area" alt="test-img" />;
+        const wrapper = shallow((
+            <PurePopup
+                messageTitle="foo"
+                messageDesc="bar"
+                messageBottomArea={customBottomArea} />
+        ));
+
+        expect(wrapper.find(PopupMessage).exists()).toBeTruthy();
+        expect(wrapper.find(PopupMessage).prop('title')).toBe('foo');
+        expect(wrapper.find(PopupMessage).prop('desc')).toBe('bar');
+        expect(wrapper.find(PopupMessage).prop('bottomArea')).toBe(customBottomArea);
+    });
+
     it('renders a string message with <PopupMessage>', () => {
         const wrapper = shallow(<PurePopup message="foo" />);
 
