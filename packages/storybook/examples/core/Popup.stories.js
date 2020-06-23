@@ -63,6 +63,16 @@ export function HorizontalButtons() {
 }
 
 
+export function PopupWithoutIcon() {
+    /*
+        <BasicUsage> will pass props into <Popup>.
+        See <BasicUsage> component code in Basic Usage example.
+    */
+    return (
+        <BasicUsage icon={undefined} />
+    );
+}
+
 export function LargePopup() {
     /*
         <BasicUsage> will pass props into <Popup>.
