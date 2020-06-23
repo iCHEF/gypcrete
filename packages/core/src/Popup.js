@@ -105,6 +105,7 @@ function renderPopupButtons(buttons, direction) {
 }
 
 function Popup({
+    large,
     icon,
 
     // message area props
@@ -155,8 +156,8 @@ function Popup({
         <div className={rootClassName} {...popupProps}>
             <Overlay />
 
-            <div className={BEM.container}>
-                <div className={BEM.body}>
+            <div className={BEM.container.modifier('large', large)}>
+                <div className={BEM.body.modifier('large', large)}>
                     {icon && wrapIfNotElement(icon, { with: PopupIcon, via: 'type' })}
                     {messageArea}
                 </div>
@@ -174,6 +175,7 @@ const StringOrElement = PropTypes.oneOfType([
 ]);
 
 Popup.propTypes = {
+    large: PropTypes.bool,
     icon: StringOrElement,
     customMessageNode: PropTypes.node,
     messageTitle: PropTypes.string,
@@ -185,6 +187,7 @@ Popup.propTypes = {
 };
 
 Popup.defaultProps = {
+    large: false,
     icon: null,
     customMessageNode: undefined,
     messageTitle: undefined,

@@ -39,11 +39,19 @@ $component: #{$prefix}-popup;
         // Active animation
         opacity: 0;
         animation: anim-bounce-in .6s forwards;
+
+        &--large {
+            max-width: $popup-container-width-large;
+        }
     }
 
     // Body
     &__body {
         padding: rem(16px);
+
+        &--large {
+            padding: rem(16px) rem(56px);
+        }
     }
 
     // Message wrapper

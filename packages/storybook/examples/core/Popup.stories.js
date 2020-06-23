@@ -56,16 +56,25 @@ export function BasicUsage(popupProps) {
 
 export function HorizontalButtons() {
     /*
-        <BasicUsage> will pass `buttonsDirection` into <Popup>.
+        <BasicUsage> will pass props into <Popup>.
         See <BasicUsage> component code in Basic Usage example.
     */
     return <BasicUsage buttonsDirection="horizontal" />;
 }
 
 
+export function LargePopup() {
+    /*
+        <BasicUsage> will pass props into <Popup>.
+        See <BasicUsage> component code in Basic Usage example.
+    */
+    return <BasicUsage large />;
+}
+
+
 export function CustomMessageBottomArea() {
     /*
-        <BasicUsage> will pass `messageBottomArea` into <Popup>.
+        <BasicUsage> will pass props into <Popup>.
         See <BasicUsage> component code in Basic Usage example.
     */
     return (
