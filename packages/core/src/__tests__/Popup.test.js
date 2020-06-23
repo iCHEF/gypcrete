@@ -63,6 +63,20 @@ describe('Pure <Popup>', () => {
         expect(wrapper.find(PopupMessage).prop('desc')).toBe('foo');
     });
 
+    it('renders popup with large class name', () => {
+        const wrapper = shallow(<PurePopup large messageDesc="foo" />);
+
+        expect(wrapper.find('.gyp-popup__body--large').exists()).toBeTruthy();
+        expect(wrapper.find('.gyp-popup__container--large').exists()).toBeTruthy();
+    });
+
+    it('renders popup without large class name', () => {
+        const wrapper = shallow(<PurePopup messageDesc="foo" />);
+
+        expect(wrapper.find('.gyp-popup__body--large').exists()).toBeFalsy();
+        expect(wrapper.find('.gyp-popup__container--large').exists()).toBeFalsy();
+    });
+
     it('takes a valid element for message prop', () => {
         const label = <TextLabel data-target basic="Foo" aside="bar" />;
         const wrapper = shallow(<PurePopup message={label} />);
