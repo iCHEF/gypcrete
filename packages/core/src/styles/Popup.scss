@@ -64,7 +64,7 @@ $component: #{$prefix}-popup;
     // Message title
     &__message-title {
         font-size: rem(16px);
-        line-height: rem(19px);
+        line-height: rem(22px);
         font-weight: bold;
         margin-bottom: rem(8px);
     }
@@ -72,13 +72,13 @@ $component: #{$prefix}-popup;
     // Message desc
     &__message-desc {
         font-size: rem(14px);
-        line-height: rem(16px);
+        line-height: rem(20px);
         color: rgba(0, 0, 0, .7);
     }
 
     // Nested components
     .#{$prefix}-icon--large {
-        margin-top: rem(-8px);
+        margin-top: rem(-16px);
         margin-bottom: rem(-8px);
     }
 }

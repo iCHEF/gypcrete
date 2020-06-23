@@ -68,7 +68,9 @@ export function LargePopup() {
         <BasicUsage> will pass props into <Popup>.
         See <BasicUsage> component code in Basic Usage example.
     */
-    return <BasicUsage large />;
+    return (
+        <BasicUsage large />
+    );
 }
 
 
