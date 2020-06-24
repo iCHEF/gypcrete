@@ -2,29 +2,25 @@
 
 $component: #{$prefix}-popup;
 
-// -------------------------------------
-//   Popup
-// -------------------------------------
-
 .#{$component} {
+    // -------------------------------------
+    //   Popup
+    // -------------------------------------
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-
     // Align center with flexbox
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-}
 
-// -------------------------------------
-//   Popup Elements
-// -------------------------------------
+    // -------------------------------------
+    //   Popup Elements
+    // -------------------------------------
 
-.#{$prefix}-popup {
     // Container
     &__container {
         width: 95%;
@@ -39,12 +35,19 @@ $component: #{$prefix}-popup;
         // Active animation
         opacity: 0;
         animation: anim-bounce-in .6s forwards;
+
+        .#{$component}--large & {
+            max-width: $popup-container-width-large;
+        }
     }
 
     // Body
     &__body {
         padding: rem(16px);
-        padding-top: rem(8px);
+
+        .#{$component}--large & {
+            padding: rem(16px) rem(56px);
+        }
     }
 
     // Message wrapper
@@ -57,7 +60,7 @@ $component: #{$prefix}-popup;
     // Message title
     &__message-title {
         font-size: rem(16px);
-        line-height: rem(19px);
+        line-height: rem(22px);
         font-weight: bold;
         margin-bottom: rem(8px);
     }
@@ -65,14 +68,14 @@ $component: #{$prefix}-popup;
     // Message desc
     &__message-desc {
         font-size: rem(14px);
-        line-height: rem(16px);
+        line-height: rem(20px);
         color: rgba(0, 0, 0, .7);
     }
 
     // Nested components
     .#{$prefix}-icon--large {
-        margin-top: rem(-8px);
-        margin-bottom: rem(-16px);
+        margin-top: rem(-16px);
+        margin-bottom: rem(-8px);
     }
 }
 

@@ -105,6 +105,7 @@ function renderPopupButtons(buttons, direction) {
 }
 
 function Popup({
+    large,
     icon,
 
     // message area props
@@ -126,7 +127,7 @@ function Popup({
     children,
     ...popupProps
 }) {
-    const rootClassName = classNames(BEM.root.toString(), className);
+    const rootClassName = classNames(BEM.root.modifier('large', large).toString(), className);
 
     const messageArea = useMemo(
         () => {
@@ -174,6 +175,7 @@ const StringOrElement = PropTypes.oneOfType([
 ]);
 
 Popup.propTypes = {
+    large: PropTypes.bool,
     icon: StringOrElement,
     customMessageNode: PropTypes.node,
     messageTitle: PropTypes.string,
@@ -185,6 +187,7 @@ Popup.propTypes = {
 };
 
 Popup.defaultProps = {
+    large: false,
     icon: null,
     customMessageNode: undefined,
     messageTitle: undefined,
