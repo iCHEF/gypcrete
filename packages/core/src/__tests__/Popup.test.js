@@ -66,8 +66,7 @@ describe('Pure <Popup>', () => {
     it('renders popup with large class name', () => {
         const wrapper = shallow(<PurePopup large messageDesc="foo" />);
 
-        expect(wrapper.find('.gyp-popup__body--large').exists()).toBeTruthy();
-        expect(wrapper.find('.gyp-popup__container--large').exists()).toBeTruthy();
+        expect(wrapper.find('.gyp-popup--large').exists()).toBeTruthy();
     });
 
     it('renders popup without large class name', () => {
