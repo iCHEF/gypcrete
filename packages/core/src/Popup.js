@@ -127,7 +127,7 @@ function Popup({
     children,
     ...popupProps
 }) {
-    const rootClassName = classNames(BEM.root.toString(), className);
+    const rootClassName = classNames(BEM.root.modifier('large', large).toString(), className);
 
     const messageArea = useMemo(
         () => {
@@ -156,8 +156,8 @@ function Popup({
         <div className={rootClassName} {...popupProps}>
             <Overlay />
 
-            <div className={BEM.container.modifier('large', large)}>
-                <div className={BEM.body.modifier('large', large)}>
+            <div className={BEM.container}>
+                <div className={BEM.body}>
                     {icon && wrapIfNotElement(icon, { with: PopupIcon, via: 'type' })}
                     {messageArea}
                 </div>
