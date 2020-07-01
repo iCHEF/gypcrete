@@ -24,6 +24,7 @@ function Section({
     // React props
     className,
     children,
+    ...wrapperProps
 }) {
     // Class names
     const rootClassName = classNames(
@@ -53,7 +54,7 @@ function Section({
     );
 
     return (
-        <div className={rootClassName}>
+        <div className={rootClassName} {...wrapperProps}>
             {titleArea}
             <div className={bodyClassName}>
                 {children}

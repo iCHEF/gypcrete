@@ -21,6 +21,7 @@ import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+import getRemainingProps from './utils/getRemainingProps';
 import withStatus, { withStatusPropTypes } from './mixins/withStatus';
 import './styles/Text.scss';
 
@@ -119,7 +120,14 @@ class Text extends PureComponent {
     }
 
     render() {
-        const { align, verticalOrder, noGrow, bold, className } = this.props;
+        const {
+            align,
+            verticalOrder,
+            noGrow,
+            bold,
+            className,
+        } = this.props;
+        const wrapperProps = getRemainingProps(this.props, Text.propTypes);
 
         const bemClass = BEM.root
             .modifier(align)
@@ -130,7 +138,7 @@ class Text extends PureComponent {
         const rootClassName = classNames(bemClass.toString(), className);
 
         return (
-            <div className={rootClassName}>
+            <div className={rootClassName} {...wrapperProps}>
                 {this.renderBasicRow()}
                 {this.renderAsideRow()}
             </div>

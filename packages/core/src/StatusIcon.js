@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+import getRemainingProps from './utils/getRemainingProps';
 import './styles/StatusIcon.scss';
 
 import Icon from './Icon';
@@ -100,10 +101,11 @@ class StatusIcon extends PureComponent {
     }
 
     render() {
-        const rootClassName = ROOT_BEM.modifier(this.props.position);
+        const { status, position } = this.props;
+        const rootClassName = ROOT_BEM.modifier(position);
         let icon = null;
 
-        switch (this.props.status) {
+        switch (status) {
             case LOADING:
                 icon = <Icon type="inline-loading" color="gray" spinning />;
                 break;
@@ -119,7 +121,13 @@ class StatusIcon extends PureComponent {
                 break;
         }
 
-        return (icon && <span className={rootClassName}>{icon}</span>);
+        const wrapperProps = getRemainingProps(this.props, StatusIcon.propTypes);
+
+        return (icon && (
+            <span className={rootClassName} {...wrapperProps}>
+                {icon}
+            </span>
+        ));
     }
 }
 

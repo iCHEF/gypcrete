@@ -91,8 +91,9 @@ $header-row-padding: 4px;
 $header-row-box-shadow: 0 3px 3px hsba(0, 0, 0, 16);
 
 $popup-container-width: 256px;
+$popup-container-width-large: 500px;
 $popup-border-radius: 8px;
-$poup-box-shadow: 0 2px 8px hsba(0, 0, 0, 40);
+$popup-box-shadow: 0 2px 8px hsba(0, 0, 0, 40);
 
 $popover-min-width: 240px;
 $popover-max-width: 320px;
@@ -108,7 +109,7 @@ $modal-max-width:  90%;
 $modal-height:     480px;
 $modal-max-height: 90%;
 $modal-border-radius:    $popover-border-radius;
-$modal-box-shadow:       $poup-box-shadow;
+$modal-box-shadow:       $popup-box-shadow;
 $modal-indent-layer-max: 7;
 $modal-indent: 16px;
 

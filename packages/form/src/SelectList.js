@@ -7,6 +7,7 @@ import { Map as ImmutableMap } from 'immutable';
 import {
     List,
 } from '@ichef/gypcrete';
+import getRemainingProps from '@ichef/gypcrete/lib/utils/getRemainingProps';
 
 import Option, {
     valueType,
@@ -226,9 +227,10 @@ class SelectList extends PureComponent {
             title,
             desc,
         } = this.props;
+        const wrapperProps = getRemainingProps(this.props, SelectList.propTypes);
 
         return (
-            <List title={title} desc={desc}>
+            <List title={title} desc={desc} {...wrapperProps}>
                 {multiple && showCheckAll && this.renderCheckAllOption()}
                 {this.renderOptions()}
             </List>

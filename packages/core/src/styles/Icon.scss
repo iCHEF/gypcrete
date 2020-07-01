@@ -2,13 +2,10 @@
 
 @font-face {
     font-family: "gyp-icon";
-    src: url("../fonts/gyp-icon.eot?97318047");
+    src: url("../fonts/gyp-icon.woff?97318047");
     src:
-        url("../fonts/gyp-icon.eot?97318047#iefix") format("embedded-opentype"),
         url("../fonts/gyp-icon.woff2?97318047") format("woff2"),
-        url("../fonts/gyp-icon.woff?97318047") format("woff"),
-        url("../fonts/gyp-icon.ttf?97318047") format("truetype"),
-        url("../fonts/gyp-icon.svg?97318047#ic-icon") format("svg");
+        url("../fonts/gyp-icon.woff?97318047") format("woff");
     font-weight: normal;
     font-style: normal;
 }
@@ -282,5 +279,11 @@
 }
 .#{$prefix}-icon-mapping:before {
     content: '\e815';
+}
+.#{$prefix}-icon-sort:before {
+    content: '\e816';
+}
+.#{$prefix}-icon-announce:before {
+    content: '\e831';
 }
 /* stylelint-enable */
