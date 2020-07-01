@@ -6,14 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-### Breaking
-- [Core] Reduce icon font to only WOFF and WOFF2 formats. (#266)
+
+## [4.3.0]
 
 ### Added
 - [Core] Allow passing remaining props to wrapper DOM element. (#267, #269)
 - [Core] Add props for default popup UI layout and update tests. (#271)
 
 ### Changed
+- [Core] Reduce icon font to only WOFF and WOFF2 formats. (#266)
 - [Core] Add sort icon. (#268)
 - [Core] Add announce icon. (#272)
 - [Core] Add `large` prop to `<Popup>`. (#273)
