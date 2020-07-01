@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete",
-  "version": "4.2.1",
+  "version": "4.3.0",
   "description": "iCHEF web components library, built with React.",
   "homepage": "https://ichef.github.io/gypcrete",
   "repository": "https://github.com/iCHEF/gypcrete/tree/master/packages/core",
