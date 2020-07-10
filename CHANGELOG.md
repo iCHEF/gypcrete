@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
+### Upgrade
+- [Core] Upgrade react devDependencies to 16.3.1. (#277)
 
 ## [4.3.0]
 
