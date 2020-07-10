@@ -8,8 +8,6 @@ import wrapIfNotElement from './utils/wrapIfNotElement';
 
 import renderToLayer from './mixins/renderToLayer';
 
-import PopupButton from './PopupButton';
-
 import Icon from './Icon';
 import Overlay from './Overlay';
 
@@ -74,32 +72,13 @@ function renderPopupButtons(buttons, direction) {
         return null;
     }
 
-    /**
-     * `<Popup>` expects an array of pre-configured `<PopupButton>`s.
-     * This transforms `<Button>` into `<PopupButton>` for compatibility.
-     *
-     * Should remove in v2 release.
-     * @deprecated
-     */
-    const popupButtons = buttons.map((button) => {
-        if (button.type === PopupButton) {
-            return button;
-        }
-        return (
-            <PopupButton
-                key={button.key}
-                {...button.props}
-            />
-        );
-    });
-
     const wrapperClass = BEM.buttonsGroup
         .modifier(direction)
         .toString();
 
     return (
         <div className={wrapperClass}>
-            {popupButtons}
+            {buttons}
         </div>
     );
 }

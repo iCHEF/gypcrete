@@ -10,7 +10,6 @@ import Popup, {
 } from '../Popup';
 import PopupButton from '../PopupButton';
 
-import Button from '../Button';
 import Icon from '../Icon';
 import Overlay from '../Overlay';
 import TextLabel from '../TextLabel';
@@ -110,20 +109,6 @@ describe('Pure <Popup>', () => {
         wrapper.setProps({ buttons });
         expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).exists()).toBeTruthy();
 
-        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).children()).toHaveLength(2);
-        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).containsAllMatchingElements([
-            <PopupButton basic="Label A" />,
-            <PopupButton basic="Label B" />,
-        ])).toBeTruthy();
-    });
-
-    it('transforms <Button> into <PopupButton> for compatibility', () => {
-        // #DEPRECATE: remove in v2 release
-        const buttons = [
-            <Button key="a" basic="Label A" />,
-            <Button key="b" basic="Label B" />,
-        ];
-        const wrapper = shallow(<PurePopup message="foo" buttons={buttons} />);
         expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).children()).toHaveLength(2);
         expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).containsAllMatchingElements([
             <PopupButton basic="Label A" />,
