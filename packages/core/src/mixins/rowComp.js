@@ -142,6 +142,7 @@ const rowComp = ({
             active: PropTypes.bool,
             highlight: PropTypes.bool,
             disabled: PropTypes.bool,
+            muted: PropTypes.bool,
 
             // status props
             status: statusPropTypes.status,
@@ -164,6 +165,7 @@ const rowComp = ({
             active: false,
             highlight: false,
             disabled: false,
+            muted: false,
 
             status: undefined,
             statusOptions: undefined,
@@ -251,6 +253,7 @@ const rowComp = ({
                 active,
                 highlight,
                 disabled,
+                muted,
 
                 status,
                 statusOptions,
@@ -271,6 +274,7 @@ const rowComp = ({
                 active,
                 highlight,
                 disabled,
+                muted,
                 error: status === STATUS_CODE.ERROR,
                 untouchable: status === STATUS_CODE.LOADING,
             });
