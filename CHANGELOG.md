@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Breaking
 - [Core] Remove deprecated behavior in Popup, which will treat element of `buttons` as props to `<PopupButton>`, if `element.type` is not `<PopupButton>`. (#276)
 
+### Added
+- [Core] Add `muted` prop on following component: (#278)
+    - `<Button>`
+    - `<Checkbox>`
+    - `<SearchInput>`
+    - `<Switch>`
+    - `<TextInput>`
+    - `<TextLabel>`
+    - `<ListRow>`
+
 ## [4.3.0]
 
 ### Added
