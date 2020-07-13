@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Breaking
+- [Core] Remove deprecated behavior in Popup, which will treat element of `buttons` as props to `<PopupButton>`, if `element.type` is not `<PopupButton>`. (#276)
 
 ## [4.3.0]
 
