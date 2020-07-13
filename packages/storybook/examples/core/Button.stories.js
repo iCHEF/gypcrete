@@ -164,6 +164,21 @@ export function DisabledButton() {
     );
 }
 
+export function MutedButton() {
+    return (
+        <FlexRow>
+            <Button
+                muted
+                basic="Muted Button"
+                aside="Muted button has disabled style, but clickable"
+                // eslint-disable-next-line no-alert
+                onClick={() => alert('I am clickable!')}
+                solid
+            />
+        </FlexRow>
+    );
+}
+
 export function ExpandedButton() {
     return (
         <div>
