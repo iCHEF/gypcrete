@@ -20,6 +20,10 @@
     pointer-events: none !important;
 }
 
+.#{$prefix-state}-muted {
+    opacity: .3 !important;
+}
+
 [hidden],
 .#{$prefix-state}-hidden {
     display: none;
