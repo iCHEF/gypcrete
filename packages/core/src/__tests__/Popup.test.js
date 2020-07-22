@@ -59,7 +59,7 @@ describe('Pure <Popup>', () => {
         const wrapper = shallow(<PurePopup message="foo" />);
 
         expect(wrapper.find(PopupMessage).exists()).toBeTruthy();
-        expect(wrapper.find(PopupMessage).prop('desc')).toBe('foo');
+        expect(wrapper.find(PopupMessage).prop('title')).toBe('foo');
     });
 
     it('renders popup with large class name', () => {

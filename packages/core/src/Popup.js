@@ -121,9 +121,9 @@ function Popup({
 
             return (
                 <PopupMessage
-                    title={messageTitle}
                     // support for legacy string type `message` prop
-                    desc={messageDesc || message}
+                    title={messageTitle || message}
+                    desc={messageDesc}
                     bottomArea={messageBottomArea}
                 />
             );
