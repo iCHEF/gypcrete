@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Breaking
 - [Core] Remove deprecated behavior in Popup, which will treat element of `buttons` as props to `<PopupButton>`, if `element.type` is not `<PopupButton>`. (#276)
 
+### Changed
+
+- [Core] when message prop of `<Popup>` is a string, pass it to `<PopupMessage>` as `title` prop. (#279)
+
 ### Added
 - [Core] Add `muted` prop on following component: (#278)
     - `<Button>`
@@ -30,6 +34,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Add sort icon. (#268)
 - [Core] Add announce icon. (#272)
 - [Core] Add `large` prop to `<Popup>`. (#273)
+- [Core] Add `messageTitle` and `messageDesc` prop to `<Popup>`.
 
 ## [4.2.1]
 
