@@ -45,7 +45,9 @@ export function PopupMessage({ title, desc, bottomArea }) {
             {title && (
                 <span className={BEM.messageTitle}>{title}</span>
             )}
-            <span className={BEM.messageDesc}>{desc}</span>
+            {desc && (
+                <span className={BEM.messageDesc}>{desc}</span>
+            )}
             {bottomArea}
         </div>
     );
