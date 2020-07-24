@@ -1,0 +1,15 @@
+<svg id="picture.svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <rect id="BG_のコピー_10" data-name="BG のコピー 10" class="cls-1" width="32" height="32"/>
+  <path id="角丸長方形_13_のコピー_3" data-name="角丸長方形 13 のコピー 3" class="cls-2" d="M4318,1138v-20h20v20h-20Zm18-18h-16v16h16v-16Zm-8,11,3-5,3,8h-12l4-6Zm-3-4a2,2,0,1,1,2-2A2.006,2.006,0,0,1,4325,1127Z" transform="translate(-4312 -1112)"/>
+</svg>

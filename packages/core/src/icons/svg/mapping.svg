@@ -1,0 +1,15 @@
+<svg id="mapping" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: rgba(255,255,255,0);
+        opacity: 0;
+      }
+    </style>
+  </defs>
+  <rect id="長方形_10388" data-name="長方形 10388" class="cls-1" width="32" height="32"/>
+  <path id="パス_981" data-name="パス 981" d="M568.932,1217.216h-13a1,1,0,0,1,0-2h13a1,1,0,0,1,0,2Z" transform="translate(-546.431 -1202.216)"/>
+  <path id="パス_982" data-name="パス 982" d="M568.932,1221.216h-13a1,1,0,0,1,0-2h13a1,1,0,0,1,0,2Z" transform="translate(-546.431 -1202.216)"/>
+  <path id="パス_983" data-name="パス 983" d="M568.933,1217.216a1,1,0,0,1-.783-.376l-4-5a1,1,0,0,1,1.563-1.249l4,5a1,1,0,0,1-.78,1.625Z" transform="translate(-546.431 -1202.216)"/>
+  <path id="パス_984" data-name="パス 984" d="M559.932,1226.216a1,1,0,0,1-.782-.375l-4-5a1,1,0,0,1,1.562-1.25l4,5a1,1,0,0,1-.78,1.625Z" transform="translate(-546.431 -1202.216)"/>
+</svg>

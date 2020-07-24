@@ -1,0 +1,15 @@
+<svg id="tickets.svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <rect id="BG_のコピー_10" data-name="BG のコピー 10" class="cls-1" width="32" height="32"/>
+  <path id="長方形_21_のコピー_6" data-name="長方形 21 のコピー 6" class="cls-2" d="M4333,1167v3h-13v-17h2v-3h13v17h-2Zm-11,1h1v-1h1v1h1v-1h1v1h1v-1h1v1h1v-1h1v1h1v-13h-9v13Zm11-16h-9v2h8v11h1v-13Zm-3,6h-7v-1h7v1Zm0,2h-7v-1h7v1Zm-1,2h-6v-1h6v1Z" transform="translate(-4312 -1144)"/>
+</svg>
