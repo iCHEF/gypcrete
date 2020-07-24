@@ -62,7 +62,6 @@ $component: #{$prefix}-popup;
         font-size: rem(16px);
         line-height: rem(22px);
         font-weight: bold;
-        margin-bottom: rem(8px);
     }
 
     // Message desc
@@ -70,6 +69,7 @@ $component: #{$prefix}-popup;
         font-size: rem(14px);
         line-height: rem(20px);
         color: rgba(0, 0, 0, .7);
+        margin-top: rem(8px);
     }
 
     // Nested components

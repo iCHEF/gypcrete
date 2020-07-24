@@ -45,7 +45,9 @@ export function PopupMessage({ title, desc, bottomArea }) {
             {title && (
                 <span className={BEM.messageTitle}>{title}</span>
             )}
-            <span className={BEM.messageDesc}>{desc}</span>
+            {desc && (
+                <span className={BEM.messageDesc}>{desc}</span>
+            )}
             {bottomArea}
         </div>
     );
@@ -121,9 +123,9 @@ function Popup({
 
             return (
                 <PopupMessage
-                    title={messageTitle}
                     // support for legacy string type `message` prop
-                    desc={messageDesc || message}
+                    title={messageTitle || message}
+                    desc={messageDesc}
                     bottomArea={messageBottomArea}
                 />
             );
