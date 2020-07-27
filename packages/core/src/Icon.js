@@ -61,6 +61,12 @@ function Icon({
     const rootClassName = classNames(
         className,
         bemClass.toString(),
+        /**
+         * For backward compatibility.
+         * For inline-svg implementaion we don't need this class name.
+         * But we had used this with icon font implementation.
+         */
+        `gyp-icon-${type}`
     );
 
     const SVGComponent = SVGMap[type];
