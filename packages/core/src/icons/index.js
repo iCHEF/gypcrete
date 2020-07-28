@@ -18,7 +18,7 @@ import crmMemberName from './components/CrmMemberName';
 import crmMemberNote from './components/CrmMemberNote';
 import crmPhoneLand from './components/CrmPhoneLand';
 import crmPhoneMobile from './components/CrmPhoneMobile';
-import deleteSVG from './components/Delete';
+import deleteSvg from './components/Delete';
 import download from './components/Download';
 import drag from './components/Drag';
 import dropdown from './components/Dropdown';
@@ -85,7 +85,7 @@ export default {
     'ctbc-direct': ctbcDirect,
     'ctbc-mpos': ctbcMpos,
     'custom-pay': customPay,
-    delete: deleteSVG,
+    delete: deleteSvg,
     download,
     drag,
     dropdown,

@@ -8,7 +8,7 @@ import prefixClass from './utils/prefixClass';
 import './styles/_animations.scss';
 import './styles/Icon.scss';
 
-import SVGMap from './icons';
+import SvgMap from './icons';
 
 const COMPONENT_NAME = prefixClass('icon');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -23,7 +23,7 @@ const COLORS = {
     gray: 'rgba(0, 0, 0, 0.7)',
 };
 
-function getSVGFill({ colorType, wrapperProps }) {
+function getSvgFill({ colorType, wrapperProps }) {
     if (colorType) {
         return COLORS[colorType];
     }
@@ -69,9 +69,9 @@ function Icon({
         `gyp-icon-${type}`
     );
 
-    const SVGComponent = SVGMap[type];
+    const SvgComponent = SvgMap[type];
 
-    const fill = getSVGFill({
+    const fill = getSvgFill({
         colorType: color,
         wrapperProps: otherProps,
     });
@@ -82,7 +82,7 @@ function Icon({
             role="presentation"
             {...otherProps}
         >
-            {SVGComponent && <SVGComponent fill={fill} {...svgProps} />}
+            {SvgComponent && <SvgComponent fill={fill} {...svgProps} />}
         </span>
     );
 }
