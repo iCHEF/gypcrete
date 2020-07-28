@@ -1,0 +1,15 @@
+<svg id="copypaste.svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <rect id="BG" class="cls-1" width="32" height="32"/>
+  <path id="C" class="cls-2" d="M4329,527v-2.641l-1,.642v-2h-1v4h-9V513h9v4h1v-2l1,0.638V513h9v14h-9Zm-4-8v-4h-5v10h5v-4h4v2l5-3-5-3v2h-4Zm11-4h-5v1.915l4,2.554v1.03l-4,2.572V525h5V515Zm-15,4h3v1h-3v-1Zm0-2h3v1h-3v-1Zm2,5h-2v-1h2v1Z" transform="translate(-4312 -504)"/>
+</svg>
