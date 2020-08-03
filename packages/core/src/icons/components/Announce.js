@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgAnnounce(props) {
+export default function SvgAnnounce(props) {
     return (
         <svg width="1em" height="1em" viewBox="0 0 32 32" {...props}>
             <path
@@ -11,5 +11,3 @@ function SvgAnnounce(props) {
         </svg>
     );
 }
-
-export default SvgAnnounce;

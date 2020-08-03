@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgQuestion(props) {
+export default function SvgQuestion(props) {
     return (
         <svg width="1em" height="1em" viewBox="0 0 32 32" {...props}>
             <defs>
@@ -15,5 +15,3 @@ function SvgQuestion(props) {
         </svg>
     );
 }
-
-export default SvgQuestion;

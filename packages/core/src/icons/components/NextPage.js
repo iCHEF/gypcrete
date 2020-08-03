@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgNextPage(props) {
+export default function SvgNextPage(props) {
     return (
         <svg viewBox="-1612 -5281 32 32" width="1em" height="1em" {...props}>
             <path
@@ -15,5 +15,3 @@ function SvgNextPage(props) {
         </svg>
     );
 }
-
-export default SvgNextPage;

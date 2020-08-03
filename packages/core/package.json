@@ -27,7 +27,7 @@
     "build:dist": "webpack --config ./configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --root-mode=upward --out-dir lib",
     "build:es": "BABEL_ENV=es babel src --root-mode=upward --out-dir es",
-    "generate-icon-components": "npx @svgr/cli --config-file configs/svgr/svgr.config.js --icon -d src/icons/components",
+    "generate-icon-components": "npx @svgr/cli --config-file configs/svgr/svgr.config.js --icon -d src/icons/components src/icons/svg",
     "clean": "rm -rf ./dist ./lib ./es ./deploy"
   },
   "peerDependencies": {

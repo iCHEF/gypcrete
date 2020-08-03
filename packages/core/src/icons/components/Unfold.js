@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgUnfold(props) {
+export default function SvgUnfold(props) {
     return (
         <svg width="1em" height="1em" viewBox="0 0 32 32" {...props}>
             <path
@@ -11,5 +11,3 @@ function SvgUnfold(props) {
         </svg>
     );
 }
-
-export default SvgUnfold;

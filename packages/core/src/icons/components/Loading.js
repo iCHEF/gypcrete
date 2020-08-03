@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgLoading(props) {
+export default function SvgLoading(props) {
     return (
         <svg
             id="loading_svg__loading_svg"
@@ -22,5 +22,3 @@ function SvgLoading(props) {
         </svg>
     );
 }
-
-export default SvgLoading;

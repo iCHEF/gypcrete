@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgRadioEmpty(props) {
+export default function SvgRadioEmpty(props) {
     return (
         <svg viewBox="-1980 -5001 32 32" width="1em" height="1em" {...props}>
             <path
@@ -15,5 +15,3 @@ function SvgRadioEmpty(props) {
         </svg>
     );
 }
-
-export default SvgRadioEmpty;

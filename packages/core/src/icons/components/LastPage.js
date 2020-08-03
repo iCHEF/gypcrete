@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgLastPage(props) {
+export default function SvgLastPage(props) {
     return (
         <svg viewBox="-1612 -5225 32 32" width="1em" height="1em" {...props}>
             <path
@@ -19,5 +19,3 @@ function SvgLastPage(props) {
         </svg>
     );
 }
-
-export default SvgLastPage;

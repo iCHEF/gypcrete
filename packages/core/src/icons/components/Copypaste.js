@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgCopypaste(props) {
+export default function SvgCopypaste(props) {
     return (
         <svg width="1em" height="1em" viewBox="0 0 32 32" {...props}>
             <path
@@ -10,5 +10,3 @@ function SvgCopypaste(props) {
         </svg>
     );
 }
-
-export default SvgCopypaste;
