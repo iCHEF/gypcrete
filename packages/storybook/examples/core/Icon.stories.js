@@ -2,7 +2,7 @@ import React from 'react';
 
 import Icon from '@ichef/gypcrete/src/Icon';
 
-import iconSet from '../../../../configs/fontello.config.json';
+import iconMap from '@ichef/gypcrete/src/icons/components';
 
 export default {
     title: '@ichef/gypcrete|Icon',
@@ -10,13 +10,17 @@ export default {
 };
 
 export function BasicUsage() {
+    /**
+     * Show all icons, ordering from a to z.
+     */
     return (
         <>
             {
-                iconSet.glyphs.map(({ css: iconName }) => (
+                Object.keys(iconMap).sort().map(iconType => (
                     <Icon
-                        type={iconName}
-                        spinning={iconName.includes('loading')} />
+                        type={iconType}
+                        spinning={iconType.includes('loading')}
+                    />
                 ))
             }
         </>
