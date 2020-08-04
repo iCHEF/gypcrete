@@ -4,6 +4,11 @@ function isUpperCase(char) {
     return char.toUpperCase() === char;
 }
 
+/**
+ * Transform upper camel case (pascal case) string to kebab case.
+ * e.g. `AddItem` -> `add-item`
+ * @param {string} inputString
+ */
 function upperCamelCaseToKebabCase(inputString) {
     let result = '';
     inputString.split('').forEach((char, i) => {
@@ -19,19 +24,28 @@ function upperCamelCaseToKebabCase(inputString) {
     return result;
 }
 /**
- *
- * @param {string[]} filePaths Array of component file absolute path.
+ * Receive icon component file absolut path array,
+ * return the content of `index.js`.
+ * See svgr document: https://react-svgr.com/docs/custom-templates/#custom-index-template
+ * @param {string[]} iconComponentFileAbsPaths Array of component file absolute path.
+ * @returns {string} Plain text for the index js file.
  */
-function indexTemplate(filePaths) {
-    const importStatements = filePaths.map((filePath) => {
-        const exportName = path.basename(filePath, path.extname(filePath));
-        return `import ${exportName} from './${exportName}';`;
+function indexTemplate(iconComponentFileAbsPaths) {
+    const importStatements = iconComponentFileAbsPaths.map((filePath) => {
+        const componentFileNameWithoutExt = path.basename(filePath, path.extname(filePath));
+        /* Let's assume component name is as same as filename */
+        return `import ${componentFileNameWithoutExt} from './${componentFileNameWithoutExt}';`;
     });
-    const exportStatements = filePaths.map((filePath) => {
-        const exportName = path.basename(filePath, path.extname(filePath));
-        const originalSvgName = upperCamelCaseToKebabCase(exportName);
+    const exportStatements = iconComponentFileAbsPaths.map((filePath) => {
+        const componentFileNameWithoutExt = path.basename(filePath, path.extname(filePath));
+        /**
+         * icon type on <Icon /> is kebab case.
+         * svgr will transform it to upper camel case(pascal case) for component.
+         * Here we just transform it back.
+         */
+        const originalSvgName = upperCamelCaseToKebabCase(componentFileNameWithoutExt);
         const keyString = originalSvgName.includes('-') ? `'${originalSvgName}'` : originalSvgName;
-        return `${keyString}: ${exportName},`;
+        return `${keyString}: ${componentFileNameWithoutExt},`;
     });
     return `${importStatements.join('\n')}
 
