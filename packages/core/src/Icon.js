@@ -8,7 +8,7 @@ import prefixClass from './utils/prefixClass';
 import './styles/_animations.scss';
 import './styles/Icon.scss';
 
-import SvgMap from './icons';
+import SvgMap from './icons/components';
 
 const COMPONENT_NAME = prefixClass('icon');
 const ROOT_BEM = icBEM(COMPONENT_NAME);

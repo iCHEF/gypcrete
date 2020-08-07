@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgRadioHalf(props) {
+export default function SvgRadioHalf(props) {
     return (
         <svg viewBox="-1980 -5057 32 32" width="1em" height="1em" {...props}>
             <path
@@ -15,5 +15,3 @@ function SvgRadioHalf(props) {
         </svg>
     );
 }
-
-export default SvgRadioHalf;

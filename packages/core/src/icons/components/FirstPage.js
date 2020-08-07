@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgFirstPage(props) {
+export default function SvgFirstPage(props) {
     return (
         <svg viewBox="-1612 -5393 32 32" width="1em" height="1em" {...props}>
             <path
@@ -19,5 +19,3 @@ function SvgFirstPage(props) {
         </svg>
     );
 }
-
-export default SvgFirstPage;

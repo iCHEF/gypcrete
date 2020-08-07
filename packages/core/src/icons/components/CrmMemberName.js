@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgCrmMemberName(props) {
+export default function SvgCrmMemberName(props) {
     return (
         <svg width="1em" height="1em" viewBox="0 0 1000 1000" {...props}>
             <path
@@ -11,5 +11,3 @@ function SvgCrmMemberName(props) {
         </svg>
     );
 }
-
-export default SvgCrmMemberName;

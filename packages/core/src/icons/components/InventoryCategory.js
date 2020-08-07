@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgInventoryCategory(props) {
+export default function SvgInventoryCategory(props) {
     return (
         <svg width="1em" height="1em" viewBox="0 0 1000 1000" {...props}>
             <path
@@ -11,5 +11,3 @@ function SvgInventoryCategory(props) {
         </svg>
     );
 }
-
-export default SvgInventoryCategory;

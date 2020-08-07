@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgInlineSuccess(props) {
+export default function SvgInlineSuccess(props) {
     return (
         <svg width="1em" height="1em" viewBox="0 0 1000 1000" {...props}>
             <path
@@ -11,5 +11,3 @@ function SvgInlineSuccess(props) {
         </svg>
     );
 }
-
-export default SvgInlineSuccess;

@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgTrashcan(props) {
+export default function SvgTrashcan(props) {
     return (
         <svg width="1em" height="1em" viewBox="0 0 32 32" {...props}>
             <path
@@ -10,5 +10,3 @@ function SvgTrashcan(props) {
         </svg>
     );
 }
-
-export default SvgTrashcan;

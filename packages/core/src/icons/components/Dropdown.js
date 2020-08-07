@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgDropdown(props) {
+export default function SvgDropdown(props) {
     return (
         <svg viewBox="-2148 -4721 32 32" width="1em" height="1em" {...props}>
             <path
@@ -12,5 +12,3 @@ function SvgDropdown(props) {
         </svg>
     );
 }
-
-export default SvgDropdown;

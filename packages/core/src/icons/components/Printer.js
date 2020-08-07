@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgPrinter(props) {
+export default function SvgPrinter(props) {
     return (
         <svg width="1em" height="1em" viewBox="0 0 32 32" {...props}>
             <path fill="none" d="M0 0h32v32H0z" />
@@ -11,5 +11,3 @@ function SvgPrinter(props) {
         </svg>
     );
 }
-
-export default SvgPrinter;

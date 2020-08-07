@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgInlineQuestion(props) {
+export default function SvgInlineQuestion(props) {
     return (
         <svg viewBox="-1084 -5225 32 32" width="1em" height="1em" {...props}>
             <path
@@ -15,5 +15,3 @@ function SvgInlineQuestion(props) {
         </svg>
     );
 }
-
-export default SvgInlineQuestion;

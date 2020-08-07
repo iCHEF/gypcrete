@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
-function SvgRemoveElement(props) {
+export default function SvgRemoveElement(props) {
     return (
         <svg viewBox="-2148 -4777 32 32" width="1em" height="1em" {...props}>
             <path
@@ -15,5 +15,3 @@ function SvgRemoveElement(props) {
         </svg>
     );
 }
-
-export default SvgRemoveElement;
