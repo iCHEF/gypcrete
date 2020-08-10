@@ -25,8 +25,11 @@
     "prepublish": "npm run clean && npm run build",
     "build": "npm run build:dist && npm run build:lib && npm run build:es",
     "build:dist": "webpack --config ./configs/webpack.dist.js --color",
-    "build:lib": "BABEL_ENV=lib babel src --root-mode=upward --out-dir lib",
-    "build:es": "BABEL_ENV=es babel src --root-mode=upward --out-dir es",
+    "build:lib": "BABEL_ENV=lib babel src --extensions \".ts,.tsx,.js,.jsx\" --root-mode=upward --out-dir lib",
+    "build:es": "BABEL_ENV=es babel src --extensions \".ts,.tsx,.js,.jsx\" --root-mode=upward --out-dir es",
+    "build:types": "tsc --emitDeclarationOnly",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
     "generate-icon-components": "npx @svgr/cli --config-file configs/svgr/svgr.config.js --icon -d src/icons/components src/icons/svg",
     "clean": "rm -rf ./dist ./lib ./es ./deploy"
   },

@@ -18,10 +18,14 @@ module.exports = {
         library: packageName,
     },
 
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.json']
+    },
+
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.(ts|js)x?$/,
                 include: [
                     path.resolve(packageDirname, 'src')
                 ],

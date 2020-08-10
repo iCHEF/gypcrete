@@ -14,13 +14,20 @@ const SQUARE = 'square';
 const ROUNDED = 'rounded';
 const CIRCLE = 'circle';
 
+type AvatarPropTypes = {
+    className?: string,
+    src: string,
+    alt: string,
+    type: typeof SQUARE | typeof ROUNDED | typeof CIRCLE,
+}
+
 function Avatar({
     className,
     src,
     alt,
     type,
     ...otherProps
-}) {
+}: AvatarPropTypes) {
     const bemClass = ROOT_BEM.modifier(type);
 
     const rootClassName = classNames(className, `${bemClass}`);
