@@ -34,6 +34,11 @@ module.exports = ({ config, mode }) => {
     babelLoaderRule.include.push(includePath);
     babelLoaderRule.use[0].options.sourceType = 'unambiguous';
 
+    // For typescript
+    config.resolve.extensions.push('.ts', '.tsx');
+    babelLoaderRule.test = /\.(ts|js)x?$/;
+    babelLoaderRule.use[0].options.presets.push('@babel/preset-typescript');
+
     config.module.rules.push({
         test: /\.scss$/,
         include: includePath,
