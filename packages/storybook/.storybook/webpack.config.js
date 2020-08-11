@@ -1,6 +1,7 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const TerserPlugin = require('terser-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const includePath = path.resolve(__dirname, '../..'); // gypcrete/packages
 const excludePath = /node_modules/;
@@ -38,6 +39,12 @@ module.exports = ({ config, mode }) => {
     config.resolve.extensions.push('.ts', '.tsx');
     babelLoaderRule.test = /\.(ts|js)x?$/;
     babelLoaderRule.use[0].options.presets.push('@babel/preset-typescript');
+
+    config.plugins.push(new ForkTsCheckerWebpackPlugin({
+        typescript: {
+            configFile: './.storybook/tsconfig.json',
+        },
+    }));
 
     config.module.rules.push({
         test: /\.scss$/,
