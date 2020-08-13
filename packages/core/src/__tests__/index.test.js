@@ -9,7 +9,7 @@ describe('Gypcrete Bundle', () => {
     it('is exports every file in src/', () => {
         const allFileNames = readdirSync(srcPath);
         const expectedFileNames = allFileNames.filter((fileName) => {
-            const isJsFile = fileName.match(/\.jsx?$/);
+            const isJsFile = fileName.match(/\.[j|t]sx?$/);
             const isIndexFile = fileName === 'index.js';
 
             return isJsFile && !isIndexFile;

@@ -11,5 +11,16 @@
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/(?!@ichef/)"
     ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "node",
+      "ts",
+      "tsx"
+    ],
+    "transform": {
+      "\\.(js|jsx|ts|tsx)$": "babel-jest"
+    },
     "setupTestFrameworkScriptFile": "<rootDir>/configs/jestSetup.js"
 }
