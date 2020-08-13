@@ -29,8 +29,7 @@
     "build:es": "BABEL_ENV=es babel src --extensions \".ts,.tsx,.js,.jsx\" --root-mode=upward --out-dir es",
     "build:types": "tsc --emitDeclarationOnly",
     "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
-    "generate-icon-components": "npx @svgr/cli --config-file configs/svgr/svgr.config.js --icon -d src/icons/components src/icons/svg",
+    "generate-icon-components": "npx @svgr/cli --icon -d src/icons/components",
     "clean": "rm -rf ./dist ./lib ./es ./deploy"
   },
   "peerDependencies": {
