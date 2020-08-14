@@ -11,5 +11,6 @@
         "ignorePath": "configs/.eslintignore"
     },
 
-    "jest.pathToConfig": "configs/jest.config.json"
+    "jest.pathToConfig": "configs/jest.config.json",
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
