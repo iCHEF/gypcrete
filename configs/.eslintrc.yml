@@ -1,4 +1,13 @@
-extends: ichef
+extends: [
+    ichef,
+    'plugin:@typescript-eslint/eslint-recommended',
+]
+
+parser: '@typescript-eslint/parser'
+
+plugins: [
+    '@typescript-eslint'
+]
 
 env:
     browser: true
