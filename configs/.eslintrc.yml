@@ -1,6 +1,7 @@
 extends: [
     ichef,
     'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:import/typescript'
 ]
 
 parser: '@typescript-eslint/parser'
@@ -8,6 +9,19 @@ parser: '@typescript-eslint/parser'
 plugins: [
     '@typescript-eslint'
 ]
+
+"rules":
+   "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ]
+
 
 env:
     browser: true
