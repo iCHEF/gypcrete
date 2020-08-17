@@ -4,6 +4,7 @@ lib/
 dist/
 es/
 es5/
+types/
 build/
 deploy/
 public/
