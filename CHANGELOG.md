@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `<TextInput>`
     - `<TextLabel>`
     - `<ListRow>`
+- Add TypeScript config. (#282)
 
 ## [4.3.0]
 
