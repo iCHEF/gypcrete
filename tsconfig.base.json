@@ -5,7 +5,6 @@
     "allowJs": true,
     "checkJs": false,
     "jsx": "preserve",
-    "declaration": true,
     "strict": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

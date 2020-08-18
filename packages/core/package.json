@@ -28,7 +28,7 @@
     "build:dist": "webpack --config ./configs/webpack.dist.js --color",
     "build:lib": "BABEL_ENV=lib babel src --extensions \".ts,.tsx,.js,.jsx\" --root-mode=upward --out-dir lib",
     "build:es": "BABEL_ENV=es babel src --extensions \".ts,.tsx,.js,.jsx\" --root-mode=upward --out-dir es",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build:types": "tsc --declaration --emitDeclarationOnly",
     "type-check": "tsc --noEmit",
     "generate-icon-components": "npx @svgr/cli --icon -d src/icons/components",
     "clean": "rm -rf ./dist ./lib ./es ./deploy ./types"
