@@ -30,7 +30,7 @@
     "build:es": "BABEL_ENV=es babel src --root-mode=upward --out-dir es",
     "build:types": "tsc --emitDeclarationOnly",
     "type-check": "tsc --noEmit",
-    "clean": "rm -rf ./dist ./lib ./es"
+    "clean": "rm -rf ./dist ./lib ./es ./types"
   },
   "peerDependencies": {
     "@babel/runtime-corejs3": "^7.4.4",

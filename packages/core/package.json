@@ -31,7 +31,7 @@
     "build:types": "tsc --emitDeclarationOnly",
     "type-check": "tsc --noEmit",
     "generate-icon-components": "npx @svgr/cli --icon -d src/icons/components",
-    "clean": "rm -rf ./dist ./lib ./es ./deploy"
+    "clean": "rm -rf ./dist ./lib ./es ./deploy ./types"
   },
   "peerDependencies": {
     "@babel/runtime-corejs3": "^7.4.4",
