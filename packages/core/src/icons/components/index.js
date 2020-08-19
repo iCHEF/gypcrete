@@ -59,6 +59,7 @@ import Retry from './Retry';
 import Search from './Search';
 import Sort from './Sort';
 import Success from './Success';
+import Takeout from './Takeout';
 import Tickets from './Tickets';
 import Trashcan from './Trashcan';
 import Unfold from './Unfold';
@@ -126,6 +127,7 @@ export default {
     search: Search,
     sort: Sort,
     success: Success,
+    takeout: Takeout,
     tickets: Tickets,
     trashcan: Trashcan,
     unfold: Unfold,
