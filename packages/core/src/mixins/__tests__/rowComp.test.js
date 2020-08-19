@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
-import Icon from 'src/Icon';
-import Text from 'src/Text';
+import Icon from '../../Icon';
+import Text from '../../Text';
 
 import rowComp from '../rowComp';
 

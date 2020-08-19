@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * rowComp() HOC mixin
  * ===================
@@ -32,7 +33,9 @@
 import React, {
     PureComponent,
     isValidElement,
-    cloneElement
+    cloneElement,
+    ComponentType,
+    ReactNode,
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -45,7 +48,7 @@ import getStateClassnames from '../utils/getStateClassnames';
 import { statusPropTypes } from './withStatus';
 
 import Icon from '../Icon';
-import Text, { VERTICAL_ORDER } from '../Text';
+import Text from '../Text';
 
 import { STATUS_CODE } from '../StatusIcon';
 
@@ -58,6 +61,17 @@ const LEFT = 'left';
 const CENTER = 'center';
 const RIGHT = 'right';
 const REVERSE = 'reverse';
+
+// Before we transform <Text> to tsx so we can get correct type
+// just keep it here
+const VERTICAL_ORDER_TUPLE = ['NORMAL', 'REVERSE'] as const;
+type verticalOrderKey = typeof VERTICAL_ORDER_TUPLE[number];
+
+const VERTICAL_ORDER: Record<verticalOrderKey, string> = {
+    NORMAL: 'normal',
+    REVERSE: 'reverse',
+};
+
 export const ROW_COMP_ALIGN = { LEFT, CENTER, RIGHT, REVERSE };
 
 export const textPropTypes = {
@@ -104,14 +118,41 @@ export function getTextLayoutProps(compAlign, hasIcon) {
     };
 }
 
+type RowCompProps = {
+    minified?: boolean,
+
+    // Text label props
+    align?: typeof LEFT | typeof CENTER | typeof RIGHT | typeof REVERSE,
+    verticalOrder?: verticalOrderKey,
+    icon?: string | JSX.Element,
+    basic?: ReactNode,
+    avatar?: ReactNode,
+    aside?: ReactNode,
+    tag?: ReactNode,
+    bold?: boolean,
+
+    // State props
+    active?: boolean,
+    highlight?: boolean,
+    disabled?: boolean,
+    muted?: boolean,
+    className?: string,
+
+    // status props
+    status?: string,
+    statusOptions?: object,
+    errorMsg?: string,
+}
+
 const rowComp = ({
     defaultMinified = false,
     defaultAlign = LEFT,
     defaultVerticalOrder = VERTICAL_ORDER.NORMAL,
-} = {}) => (WrappedComponent) => {
+// eslint-disable-next-line arrow-parens
+} = {}) => <P, >(WrappedComponent: React.ComponentType<P>) => {
     const componentName = getComponentName(WrappedComponent);
 
-    class RowComp extends PureComponent {
+    return class RowComp extends PureComponent<P & RowCompProps> {
         static displayName = `rowComp(${componentName})`;
 
         static propTypes = {
@@ -145,7 +186,7 @@ const rowComp = ({
             muted: PropTypes.bool,
 
             // status props
-            status: statusPropTypes.status,
+            status: PropTypes.oneOf(['loading', 'success', 'error']), // statusPropTypes.status,
             statusOptions: statusPropTypes.statusOptions,
             errorMsg: statusPropTypes.errorMsg,
         };
@@ -225,7 +266,7 @@ const rowComp = ({
 
             return isValidElement(icon)
                 ? cloneElement(icon, { key: 'comp-icon' })
-                : <Icon key="comp-icon" type={icon} />;
+                : <Icon key="comp-icon" type={icon as string} />;
         }
 
         renderContent() {
@@ -281,15 +322,13 @@ const rowComp = ({
             const wrapperClassName = classNames(className, stateClassNames, `${bemClass}`);
 
             return (
-                <WrappedComponent className={wrapperClassName} {...otherProps}>
+                <WrappedComponent className={wrapperClassName} {...otherProps as P}>
                     {avatar}
                     {children || this.renderContent()}
                 </WrappedComponent>
             );
         }
-    }
-
-    return RowComp;
+    };
 };
 
 export default rowComp;

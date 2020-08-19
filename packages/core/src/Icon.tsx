@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes, FunctionComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -41,15 +41,23 @@ function getSvgFill({ colorType, wrapperProps }) {
     return null;
 }
 
-function Icon({
+interface IconPropTypes extends HTMLAttributes<HTMLSpanElement> {
+    type: string,
+    color?: typeof GRAY | typeof BLUE | typeof RED,
+    large?: boolean,
+    spinning?: boolean,
+    svgProps?: HTMLAttributes<HTMLOrSVGElement>,
+}
+
+const Icon: FunctionComponent<IconPropTypes> = ({
     type,
     color,
-    large,
-    spinning,
+    large = false,
+    spinning = false,
     className,
-    svgProps,
+    svgProps = {},
     ...otherProps
-}) {
+}) => {
     let bemClass = ROOT_BEM
         .modifier('large', large)
         .modifier('spin', spinning);
@@ -85,7 +93,7 @@ function Icon({
             {SvgComponent && <SvgComponent fill={fill} {...svgProps} />}
         </span>
     );
-}
+};
 
 Icon.propTypes = {
     type: PropTypes.string.isRequired,

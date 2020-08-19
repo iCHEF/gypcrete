@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes, FunctionComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -15,15 +15,24 @@ const RED = 'red';
 const WHITE = 'white';
 const BLACK = 'black';
 
-function Button({
-    color,
-    solid,
-    tagName: ButtonTag,
+type ButtonPropTypes = HTMLAttributes<HTMLButtonElement>
+    & HTMLAttributes<HTMLDivElement>
+    & HTMLAttributes<HTMLAnchorElement>
+    & {
+    color?: typeof BLUE | typeof RED | typeof WHITE | typeof BLACK,
+    solid?: boolean,
+    tagName?: 'button' | 'a' | 'div',
+}
+
+const Button: FunctionComponent<ButtonPropTypes> = ({
+    color = BLACK,
+    solid = false,
+    tagName: ButtonTag = 'div',
     // React props
     className,
     children,
     ...otherProps
-}) {
+}) => {
     const bemClass = ROOT_BEM
         .modifier(color)
         .modifier('solid', solid);
@@ -36,7 +45,7 @@ function Button({
             {children}
         </ButtonTag>
     );
-}
+};
 
 Button.propTypes = {
     color: PropTypes.oneOf([BLUE, RED, WHITE, BLACK]),
