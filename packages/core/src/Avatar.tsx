@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -14,20 +14,19 @@ const SQUARE = 'square';
 const ROUNDED = 'rounded';
 const CIRCLE = 'circle';
 
-type AvatarPropTypes = {
-    className?: string,
+export interface AvatarPropTypes extends HTMLAttributes<HTMLDivElement> {
     src: string,
     alt: string,
-    type: typeof SQUARE | typeof ROUNDED | typeof CIRCLE,
+    type?: typeof SQUARE | typeof ROUNDED | typeof CIRCLE
 }
 
-function Avatar({
+const Avatar: React.FunctionComponent<AvatarPropTypes> = ({
     className,
     src,
     alt,
-    type,
+    type = SQUARE,
     ...otherProps
-}: AvatarPropTypes) {
+}) => {
     const bemClass = ROOT_BEM.modifier(type);
 
     const rootClassName = classNames(className, `${bemClass}`);
@@ -37,7 +36,7 @@ function Avatar({
             <img alt={alt} src={src} />
         </div>
     );
-}
+};
 
 Avatar.propTypes = {
     src: PropTypes.string.isRequired,
