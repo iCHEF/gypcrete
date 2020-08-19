@@ -9,7 +9,6 @@ export default function SvgTakeout(props) {
             fill="none"
             {...props}
         >
-            <path fill="#fff" d="M0 0h32v32H0z" />
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
