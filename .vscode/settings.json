@@ -8,8 +8,10 @@
     },
 
     "eslint.options": {
-        "ignorePath": "configs/.eslintignore"
+        "ignorePath": "configs/.eslintignore",
+        "extensions": [".js",".jsx",".ts",".tsx"]
     },
+    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
 
     "jest.pathToConfig": "configs/jest.config.json",
     "typescript.tsdk": "node_modules/typescript/lib"

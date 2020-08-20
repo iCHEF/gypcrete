@@ -1,16 +1,6 @@
-extends: [
-    ichef,
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:import/typescript'
-]
+extends: ichef
 
-parser: '@typescript-eslint/parser'
-
-plugins: [
-    '@typescript-eslint'
-]
-
-"rules":
+rules:
    "import/extensions": [
       "error",
       "ignorePackages",
@@ -31,6 +21,7 @@ env:
 settings:
     import/resolver:
         babel-module: {}
+        typescript: {}
 
 parserOptions:
     sourceType: module
