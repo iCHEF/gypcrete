@@ -18,7 +18,7 @@ type AvatarPropTypes = {
     className?: string,
     src: string,
     alt: string,
-    type?: typeof SQUARE | typeof ROUNDED | typeof CIRCLE,
+    type: typeof SQUARE | typeof ROUNDED | typeof CIRCLE,
 }
 
 function Avatar({
