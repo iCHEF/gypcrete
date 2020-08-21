@@ -15,7 +15,7 @@
  * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
  */
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent, ReactNode, ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -25,7 +25,7 @@ import getRemainingProps from './utils/getRemainingProps';
 import withStatus, { withStatusPropTypes } from './mixins/withStatus';
 import './styles/Text.scss';
 
-import BasicRow from './BasicRow';
+import BasicRow, { BasicRowProps } from './BasicRow';
 
 export const COMPONENT_NAME = prefixClass('text');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -40,14 +40,34 @@ export const BEM = {
 const LEFT = 'left';
 const CENTER = 'center';
 const RIGHT = 'right';
-export const TEXT_ALIGN = { LEFT, CENTER, RIGHT };
+type textAlignValueType = typeof LEFT | typeof CENTER | typeof RIGHT;
+type textAlignKeyType = 'LEFT' | 'CENTER' | 'RIGHT';
+export const TEXT_ALIGN: Record<textAlignKeyType, textAlignValueType> = { LEFT, CENTER, RIGHT };
 
-export const VERTICAL_ORDER = {
+const NORMAL = 'normal';
+const REVERSE = 'reverse';
+type verticalOrderValueType = typeof NORMAL | typeof REVERSE;
+type verticalOrderKeyType = 'NORMAL' | 'REVERSE';
+
+export const VERTICAL_ORDER: Record<verticalOrderKeyType, verticalOrderValueType> = {
     NORMAL: 'normal',
     REVERSE: 'reverse',
 };
 
-class Text extends PureComponent {
+interface TextProps extends BasicRowProps {
+    align?: textAlignValueType,
+    verticalOrder?: verticalOrderValueType,
+    aside?: ReactNode,
+    basicRow?: ReactElement,
+    noGrow?: boolean,
+    bold?: boolean,
+
+    errorMsg?: string,
+    status?: string,
+    statusIcon?: ReactNode,
+}
+
+class Text extends PureComponent<TextProps> {
     static propTypes = {
         align: PropTypes.oneOf([LEFT, CENTER, RIGHT]),
         verticalOrder: PropTypes.oneOf([
