@@ -5,7 +5,7 @@ import memoize from 'memoize-one';
 import getComponentName from '../../utils/getComponentName';
 import getPositionState, {
     PLACEMENT,
-    // eslint-disable-next-line import/named, no-unused-vars
+    // eslint-disable-next-line import/named, no-unused-vars, @typescript-eslint/no-unused-vars
     Placement, // type alias
 } from './getPositionState';
 
