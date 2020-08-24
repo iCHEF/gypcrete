@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import FlexCell from './FlexCell';
 import Tag from './Tag';
@@ -30,6 +31,12 @@ function BasicRow({ basic, tag, statusIcon, children, ...otherProps }: Props) {
         </div>
     );
 }
+
+BasicRow.propTypes = {
+    basic: PropTypes.node,
+    tag: PropTypes.node,
+    statusIcon: PropTypes.node,
+};
 
 BasicRow.defaultProps = {
     basic: undefined,

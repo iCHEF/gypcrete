@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
@@ -32,6 +33,16 @@ type State = any;
 type Props = OwnProps & typeof StatusIcon.defaultProps;
 
 class StatusIcon extends PureComponent<Props, State> {
+    static propTypes = {
+        status: PropTypes.oneOf([LOADING, SUCCESS, ERROR]),
+        position: PropTypes.oneOf([INLINE, CORNER]),
+        /**
+         * if `true`, Auto hides status icon after being success for 2 secs,
+         * or shows icon when component leaves success state.
+         * */
+        autohide: PropTypes.bool,
+    };
+
     static defaultProps = {
         status: undefined,
         position: INLINE,

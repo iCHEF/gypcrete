@@ -16,6 +16,7 @@
  */
 
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
@@ -64,6 +65,27 @@ type OwnProps = {
 type Props = OwnProps & typeof Text.defaultProps;
 
 class Text extends PureComponent<Props> {
+    static propTypes = {
+        align: PropTypes.oneOf([LEFT, CENTER, RIGHT]),
+        verticalOrder: PropTypes.oneOf([
+            VERTICAL_ORDER.NORMAL,
+            VERTICAL_ORDER.REVERSE,
+        ]),
+        aside: PropTypes.node,
+        basicRow: PropTypes.element,
+        noGrow: PropTypes.bool,
+        bold: PropTypes.bool,
+
+        ...withStatusPropTypes,
+        // errorMsg: string,
+        // statusIcon: node,
+
+        ...BasicRow.propTypes,
+        // basic: node,
+        // tag: node,
+        // statusIcon: node,
+    };
+
     static defaultProps = {
         align: LEFT,
         verticalOrder: VERTICAL_ORDER.NORMAL,

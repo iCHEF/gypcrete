@@ -42,6 +42,23 @@ type Props = OwnProps & typeof SearchInput.defaultProps;
 
 // a React.Component ensures it can be re-rendered when context changes
 class SearchInput extends Component<Props, State> {
+    static propTypes = {
+        /**
+         * Use this to inject props to the underlying `<input>`.
+         */
+        inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+        placeholder: PropTypes.string,
+        defaultValue: PropTypes.string,
+        value: PropTypes.string,
+        onChange: PropTypes.func,
+        onSearch: PropTypes.func,
+        onReset: PropTypes.func,
+        searchOnInputChange: PropTypes.bool,
+        searchOnInputBlur: PropTypes.bool,
+        blockDuplicateValueSearch: PropTypes.bool,
+        blockEmptyValueSearch: PropTypes.bool,
+    };
+
     static defaultProps = {
         inputProps: {},
         placeholder: 'Search',

@@ -10,7 +10,7 @@ describe('Gypcrete Bundle', () => {
         const allFileNames = readdirSync(srcPath);
         const expectedFileNames = allFileNames.filter((fileName) => {
             const isJsFile = fileName.match(/\.[j|t]sx?$/);
-            const isIndexFile = fileName === 'index.js';
+            const isIndexFile = fileName === 'index.ts';
 
             return isJsFile && !isIndexFile;
         });
