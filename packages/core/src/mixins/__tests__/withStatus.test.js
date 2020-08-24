@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 
-import StatusIcon from 'src/StatusIcon';
+import StatusIcon from '../../StatusIcon';
 
 import withStatus, { withStatusPropTypes } from '../withStatus';
 

@@ -21,6 +21,7 @@ import classNames from 'classnames';
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 import getRemainingProps from './utils/getRemainingProps';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import withStatus, { withStatusPropTypes } from './mixins/withStatus';
 import './styles/Text.scss';
 

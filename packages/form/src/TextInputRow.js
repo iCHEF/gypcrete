@@ -12,6 +12,7 @@ import formRow, { rowPropTypes } from './mixins/formRow';
  */
 function TextInputRow({
     // from formRow()
+    // eslint-disable-next-line react/prop-types
     ineditable, // unwanted prop
     readOnly,
     disabled,

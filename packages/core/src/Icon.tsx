@@ -15,6 +15,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 const GRAY = 'gray';
 const BLUE = 'blue';
 const RED = 'red';
+const colors = [GRAY, BLUE, RED] as const;
 
 const COLORS = {
     blue: '#45b0e6',
@@ -42,7 +43,7 @@ function getSvgFill({ colorType, wrapperProps }) {
 
 type OwnProps = {
     type: string;
-    color?: any; // TODO: PropTypes.oneOf([GRAY, BLUE, RED])
+    color?: typeof colors;
     large?: boolean;
     spinning?: boolean;
     svgProps?: {

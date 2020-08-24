@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import withStatus, { withStatusPropTypes, STATUS_CODE } from './mixins/withStatus';
 
 import EditableBasicRow from './EditableBasicRow';
@@ -10,7 +11,7 @@ type OwnProps = {
     onBlur?: (...args: any[]) => any;
     align?: any; // TODO: PureText.propTypes.align
     noGrow?: any; // TODO: PureText.propTypes.noGrow
-    status?: any; // TODO: withStatusPropTypes.status
+    status?: any; // withStatusPropTypes.status
     statusIcon?: any; // TODO: withStatusPropTypes.statusIcon
     errorMsg?: any; // TODO: withStatusPropTypes.errorMsg
 };

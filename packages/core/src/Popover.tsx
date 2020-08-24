@@ -7,6 +7,7 @@ import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 
 import anchored, {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     anchoredPropTypes,
     ANCHORED_PLACEMENT,
 } from './mixins/anchored';

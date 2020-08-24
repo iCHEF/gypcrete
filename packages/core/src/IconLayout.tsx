@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import withStatus, { withStatusPropTypes } from './mixins/withStatus';
 import wrapIfNotElement from './utils/wrapIfNotElement';
 import prefixClass from './utils/prefixClass';

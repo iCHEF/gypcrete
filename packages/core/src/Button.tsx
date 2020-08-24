@@ -14,8 +14,10 @@ const RED = 'red';
 const WHITE = 'white';
 const BLACK = 'black';
 
+const colors = [BLUE, RED, WHITE, BLACK] as const;
+
 type OwnProps = {
-    color?: any; // TODO: PropTypes.oneOf([BLUE, RED, WHITE, BLACK])
+    color?: typeof colors[number],
     solid?: boolean;
     tagName?: 'button' | 'a' | 'div';
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import EnhancedPropTypes from './utils/enhancedPropTypes';
 import icBEM from './utils/icBEM';
 

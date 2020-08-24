@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import ListSpacingContext from './contexts/listSpacing';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { statusPropTypes } from './mixins/withStatus';
 
 import prefixClass from './utils/prefixClass';

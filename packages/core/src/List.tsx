@@ -18,12 +18,12 @@ export const BEM = {
 const NORMAL = 'normal';
 const SETTING = 'setting'; // #TODO: design deprecated
 const BUTTON = 'button';
-const LIST_VARIANTS = [NORMAL, SETTING, BUTTON];
+const LIST_VARIANTS = [NORMAL, SETTING, BUTTON] as const;
 
 export const TYPE_SYMBOL = Symbol('List');
 
 type OwnProps = {
-    variant?: any; // TODO: PropTypes.oneOf(LIST_VARIANTS)
+    variant?: typeof LIST_VARIANTS;
     title?: React.ReactNode;
     desc?: React.ReactNode;
     titleSize?: string;
