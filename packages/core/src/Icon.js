@@ -23,6 +23,8 @@ const COLORS = {
     gray: 'rgba(0, 0, 0, 0.7)',
 };
 
+const DEFAULT_FILL = 'currentColor';
+
 function getSvgFill({ colorType, wrapperProps }) {
     if (colorType) {
         return COLORS[colorType];
@@ -80,9 +82,8 @@ function Icon({
         <span
             className={rootClassName}
             role="presentation"
-            {...otherProps}
-        >
-            {SvgComponent && <SvgComponent fill={fill} {...svgProps} />}
+            {...otherProps}>
+            {SvgComponent && <SvgComponent fill={fill || DEFAULT_FILL} {...svgProps} />}
         </span>
     );
 }
