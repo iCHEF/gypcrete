@@ -27,6 +27,52 @@ rules:
     # Will turn them on after migration completed.
     "max-len": "warn"
     "no-use-before-define": "warn"
+    # It's fix after upgrading eslint-plugin-react to v7.20.6
+    # to keep consistency with rule config in eslint-config-ichef.
+    # just add `static-variables` in the first line.
+    # Should remove after we upgrade eslint-plugin-react in eslint-config-ichef.
+    'react/sort-comp': ['error', {
+      order: [
+        'static-variables',
+        'static-methods',
+        'instance-variables',
+        'lifecycle',
+        'getters',
+        'setters',
+        '/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/',
+        'instance-methods',
+        'everything-else',
+        '/^(on|handle).+$/',
+        'rendering',
+      ],
+      groups: {
+        lifecycle: [
+          'displayName',
+          'propTypes',
+          'contextTypes',
+          'childContextTypes',
+          'mixins',
+          'statics',
+          'defaultProps',
+          'constructor',
+          'getDefaultProps',
+          'getInitialState',
+          'state',
+          'getChildContext',
+          'componentWillMount',
+          'componentDidMount',
+          'componentWillReceiveProps',
+          'shouldComponentUpdate',
+          'componentWillUpdate',
+          'componentDidUpdate',
+          'componentWillUnmount',
+        ],
+        rendering: [
+          '/^render.+$/',
+          'render',
+        ],
+      },
+    }]
 
 env:
     browser: true
