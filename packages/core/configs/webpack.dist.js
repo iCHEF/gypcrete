@@ -7,6 +7,8 @@ const defaultConfigs = require('../../../configs/webpack.dist');
 const packageDirname = process.cwd();
 
 module.exports = webpackMerge(defaultConfigs, {
+    entry: './src/index.ts',
+
     module: {
         rules: [
             {
