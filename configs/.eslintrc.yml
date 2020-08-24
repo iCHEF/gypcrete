@@ -23,7 +23,10 @@ rules:
     ]
     "no-unused-vars": "off"
     "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }]
-
+    # Temp turn off following rules because we're doing ts-migrate
+    # Will turn them on after migration completed.
+    "max-len": "warn"
+    "no-use-before-define": "warn"
 
 env:
     browser: true
