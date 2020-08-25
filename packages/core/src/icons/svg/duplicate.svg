@@ -1,10 +1,16 @@
 <svg id="duplicate.svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
   <defs>
     <style>
+      .cls-1 {
+        fill: #fff;
+        opacity: 0;
+      }
+
       .cls-2 {
         fill-rule: evenodd;
       }
     </style>
   </defs>
+  <rect id="BG" class="cls-1" width="32" height="32"/>
   <path id="長方形_2_のコピー_8" data-name="長方形 2 のコピー 8" class="cls-2" d="M4333,493v-2h1V481h-8v1h-2v-3h12v14h-3Zm-1,4h-12V483h12v14Zm-2-12h-8v10h8V485Zm-1,3h-6v-1h6v1Zm0,2h-6v-1h6v1Zm-1,2h-5v-1h5v1Z" transform="translate(-4312 -472)"/>
 </svg>

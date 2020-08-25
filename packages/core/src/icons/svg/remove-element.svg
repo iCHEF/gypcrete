@@ -1,5 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2148 -4777 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: rgba(255,255,255,0);
+      }
+    </style>
+  </defs>
   <g id="remove-element" transform="translate(-2452 -6137)">
+    <rect id="長方形_7838" data-name="長方形 7838" class="cls-1" width="32" height="32" transform="translate(304 1360)"/>
     <path id="合体_508" data-name="合体 508" d="M7357-9761a11.015,11.015,0,0,1,11-11,11.014,11.014,0,0,1,11,11,11.011,11.011,0,0,1-11,11A11.012,11.012,0,0,1,7357-9761Zm2,0a9.007,9.007,0,0,0,9,9,9.009,9.009,0,0,0,9-9,9.011,9.011,0,0,0-9-9A9.009,9.009,0,0,0,7359-9761Zm3,1v-2h12v2Z" transform="translate(-7048 11136.999)"/>
   </g>
 </svg>

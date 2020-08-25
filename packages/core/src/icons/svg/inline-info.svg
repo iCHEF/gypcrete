@@ -5,6 +5,7 @@
     </clipPath>
   </defs>
   <g id="inline-info" clip-path="url(#clip-path)">
+    <rect id="長方形_9335" data-name="長方形 9335" width="32" height="32" fill="#fff" opacity="0"/>
     <path id="前面オブジェクトで型抜き_126" data-name="前面オブジェクトで型抜き 126" d="M13.667,26.667H13a13,13,0,0,1-13-13V13A13,13,0,0,1,13,0h.666a13,13,0,0,1,13,13v.667a13,13,0,0,1-13,13Zm-.333-24a10.666,10.666,0,1,0,7.543,3.124A10.6,10.6,0,0,0,13.333,2.667Z" transform="translate(2.667 2.667)"/>
     <rect id="長方形_10395" data-name="長方形 10395" width="4" height="8" transform="translate(14 15)"/>
     <rect id="長方形_10396" data-name="長方形 10396" width="4" height="4" transform="translate(14 9)"/>
