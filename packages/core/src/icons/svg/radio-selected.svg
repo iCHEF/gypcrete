@@ -1,13 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-1980 -5113 32 32">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: rgba(255,255,255,0);
-      }
-    </style>
-  </defs>
   <g id="radio-selected" transform="translate(-2308 -5489)">
-    <rect id="長方形_7901" data-name="長方形 7901" class="cls-1" width="32" height="32" transform="translate(328 376)"/>
     <path id="前面オブジェクトで型抜き_8" data-name="前面オブジェクトで型抜き 8" d="M-2768-3701h-12a4.005,4.005,0,0,1-4-4v-12a4,4,0,0,1,4-4h12a4,4,0,0,1,4,4v12A4,4,0,0,1-2768-3701Zm-10.628-12.608-2.122,2.122,5.656,5.657,8.486-8.485-2.122-2.122-6.364,6.364-3.535-3.536Z" transform="translate(3118 4103)"/>
   </g>
 </svg>

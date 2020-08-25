@@ -1,13 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2148 -4721 32 32">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: rgba(255,255,255,0);
-      }
-    </style>
-  </defs>
   <g id="dropdown" transform="translate(-2436 -5065)">
-    <rect id="長方形_7893" data-name="長方形 7893" class="cls-1" width="32" height="32" transform="translate(288 344)"/>
     <path id="パス_5" data-name="パス 5" d="M1,1H15L8,11Z" transform="translate(296 355)"/>
   </g>
 </svg>
