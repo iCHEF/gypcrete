@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
@@ -13,6 +14,20 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 const ESCAPE = 'Escape';
 
+export type ClosableProps = {
+    /**
+     * Yes, this might receive both react synthetic event or native DOM event.
+     * Might be a design error.
+     */
+    onClose?: (event?: React.SyntheticEvent | KeyboardEvent) => void;
+    closable?: {
+        onEscape: boolean,
+        onClickOutside: boolean,
+        onClickInside: boolean,
+        stopEventPropagation: boolean,
+    },
+}
+
 /**
  * `closable()` HOC mixin
  * ====================
@@ -21,13 +36,12 @@ const ESCAPE = 'Escape';
  *
  * Formerlly `escapable()`.
  */
-// @ts-expect-error ts-migrate(4025) FIXME: Exported variable 'closable' has or is using priva... Remove this comment to see the full error message
-const closable = ({
+const closable = <P, >({
     onEscape = true,
     onClickOutside = false,
     onClickInside = false,
     stopEventPropagation = true,
-} = {}) => (WrappedComponent) => {
+} = {}) => (WrappedComponent: React.ComponentType<P>) => {
     const componentName = getComponentName(WrappedComponent);
 
     const mixinConfigs = {
@@ -37,7 +51,7 @@ const closable = ({
         stopEventPropagation,
     };
 
-    class Closable extends PureComponent {
+    return class Closable extends PureComponent<P & ClosableProps> {
         static displayName = `closable(${componentName})`;
 
         static propTypes = {
@@ -64,10 +78,8 @@ const closable = ({
         }
 
         getOptions() {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'closable' does not exist on type 'Readon... Remove this comment to see the full error message
             const { closable: runtimeOptions } = this.props;
 
-            /** @type {typeof mixinDefaults} */
             const actualOptions = {
                 ...mixinConfigs,
                 ...runtimeOptions,
@@ -76,22 +88,15 @@ const closable = ({
             return actualOptions;
         }
 
-        /**
-         * @param {KeyboardEvent} event
-         */
-        handleDocumentKeyup = (event) => {
+        handleDocumentKeyup = (event: KeyboardEvent) => {
             const options = this.getOptions();
 
             if (options.onEscape && event.keyCode === keycode(ESCAPE)) {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'onClose' does not exist on type 'Readonl... Remove this comment to see the full error message
                 this.props.onClose(event);
             }
         }
 
-        /**
-         * @param {React.MouseEvent} event
-         */
-        handleOuterLayerClick = (event) => {
+        handleOuterLayerClick = (event: React.SyntheticEvent) => {
             const options = this.getOptions();
 
             if (options.stopEventPropagation) {
@@ -99,28 +104,21 @@ const closable = ({
             }
 
             if (options.onClickOutside) {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'onClose' does not exist on type 'Readonl... Remove this comment to see the full error message
                 this.props.onClose(event);
             }
         }
 
-        /**
-         * @param {React.MouseEvent} event
-         */
-        handleInsideClick = (event) => {
+        handleInsideClick = (event: React.SyntheticEvent) => {
             const options = this.getOptions();
 
             if (options.onClickInside) {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'onClose' does not exist on type 'Readonl... Remove this comment to see the full error message
                 this.props.onClose(event);
             }
         }
 
         render() {
             const {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'onClose' does not exist on type 'Readonl... Remove this comment to see the full error message
                 onClose,
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'closable' does not exist on type 'Readon... Remove this comment to see the full error message
                 closable: runtimeOptions,
                 ...otherProps
             } = this.props;
@@ -133,13 +131,11 @@ const closable = ({
                         onClick={this.handleOuterLayerClick} />
                     <WrappedComponent
                         onInsideClick={this.handleInsideClick}
-                        {...otherProps} />
+                        {...otherProps as P} />
                 </>
             );
         }
-    }
-
-    return Closable;
+    };
 };
 
 export default closable;
