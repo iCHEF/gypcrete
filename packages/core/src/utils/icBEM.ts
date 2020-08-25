@@ -19,19 +19,26 @@ const ELEMENT_SEPARATOR = '__';
 const MODIFIER_SEPARATOR = '--';
 
 export class BEMFactory {
-    _block: any;
+    private _block: string;
 
-    _nonBemClasses: any;
+    private _element?: string;
 
-    constructor({ block, element, modifiers = [], nonBemClasses = [] }) {
+    private _nonBemClasses?: string[];
+
+    private _modifiers?: string[];
+
+    constructor({ block, element, modifiers = [], nonBemClasses = [] }: {
+        block: string,
+        element?: string,
+        modifiers?: string[],
+        nonBemClasses?: string[],
+    }) {
         if (!block) {
             throw new Error('block is required.');
         }
 
         this._block = block;
-        // @ts-expect-error ts-migrate(2551) FIXME: Property '_element' does not exist on type 'BEMFac... Remove this comment to see the full error message
         this._element = element;
-        // @ts-expect-error ts-migrate(2551) FIXME: Property '_modifiers' does not exist on type 'BEMF... Remove this comment to see the full error message
         this._modifiers = modifiers;
         this._nonBemClasses = nonBemClasses;
 
@@ -40,9 +47,6 @@ export class BEMFactory {
 
     /**
      * Set element scope
-
-     * @param {String}
-     * @return {BEMFactory}
      */
     element(elementIdentifier) {
         if (isNonEmptyString(elementIdentifier)) {
@@ -56,15 +60,11 @@ export class BEMFactory {
 
     /**
      * Add BEM modifier
-
-     * @param {String}
-     * @return {BEMFactory}
      */
     modifier(modifierIdentifier, isOn = true) {
         if (isOn && isNonEmptyString(modifierIdentifier)) {
             return new BEMFactory({
                 ...this.toHash(),
-                // @ts-expect-error ts-migrate(2551) FIXME: Property '_modifiers' does not exist on type 'BEMF... Remove this comment to see the full error message
                 modifiers: [...this._modifiers, modifierIdentifier]
             });
         }
@@ -90,11 +90,10 @@ export class BEMFactory {
     /**
      * Render BEM chain as full class name string
      *
-     * @param {Bool} stripBlock - Should remove Block from output.
-     * @return {String}
+     * @param stripBlock - Should remove Block from output.
+     * @returns full class name string.
      */
     toString({ stripBlock = false } = {}) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_element' does not exist on type 'BEMFac... Remove this comment to see the full error message
         const { _block, _element, _modifiers, _nonBemClasses } = this;
 
         const baseClass = (typeof _element !== 'undefined')
@@ -115,14 +114,12 @@ export class BEMFactory {
     /**
      * Export internal properties to a new Hash
      *
-     * @return {Hash}
+     * @returns arugments for next BEMFactory.
      */
     toHash() {
         return {
             block: this._block,
-            // @ts-expect-error ts-migrate(2551) FIXME: Property '_element' does not exist on type 'BEMFac... Remove this comment to see the full error message
             element: this._element,
-            // @ts-expect-error ts-migrate(2551) FIXME: Property '_modifiers' does not exist on type 'BEMF... Remove this comment to see the full error message
             modifiers: this._modifiers.slice(0),
             nonBemClasses: this._nonBemClasses.slice(0)
         };
@@ -134,9 +131,8 @@ export class BEMFactory {
 }
 
 // Creates BEM chain based on context type
-function icBEM(blockName) {
+function icBEM(blockName: string) {
     if (typeof blockName === 'string') {
-        // @ts-expect-error ts-migrate(2345) FIXME: Property 'element' is missing in type '{ block: st... Remove this comment to see the full error message
         return new BEMFactory({ block: blockName });
     }
     throw new Error('blockName should be a non-empty String.');
