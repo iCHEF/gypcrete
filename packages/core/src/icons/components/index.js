@@ -41,6 +41,7 @@ import LastPage from './LastPage';
 import Loading from './Loading';
 import Lock from './Lock';
 import Mapping from './Mapping';
+import More from './More';
 import NextPage from './NextPage';
 import Next from './Next';
 import Pause from './Pause';
@@ -109,6 +110,7 @@ export default {
     loading: Loading,
     lock: Lock,
     mapping: Mapping,
+    more: More,
     'next-page': NextPage,
     next: Next,
     pause: Pause,

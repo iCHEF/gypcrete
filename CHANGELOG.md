@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
     - `<TextInput>`
     - `<TextLabel>`
     - `<ListRow>`
+- [Core] Add new icons: `takeout` (#283), `more` (#287)
 
 ## [4.3.0]
 
