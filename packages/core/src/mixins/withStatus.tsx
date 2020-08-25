@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+/* eslint-disable indent */
+import React, { Component, ComponentElement } from 'react';
 import PropTypes from 'prop-types';
 
 import getComponentName from '../utils/getComponentName';
@@ -14,6 +15,18 @@ export const statusPropTypes = {
     errorMsg: PropTypes.string,
 };
 
+export interface StatusProps {
+    /**
+     * FIXME: Use type in StatusIcon
+     */
+    status?: 'loading' | 'success' | 'error'
+    /**
+     * FIXME: Refine this type after we type StatusIcon
+     */
+    statusOptions?: object
+    errorMsg?: string
+}
+
 // prop types for what's going to set on wrapped component
 export const withStatusPropTypes = {
     status: statusPropTypes.status,
@@ -21,15 +34,20 @@ export const withStatusPropTypes = {
     errorMsg: statusPropTypes.errorMsg,
 };
 
-// @ts-expect-error ts-migrate(4025) FIXME: Exported variable 'withStatus' has or is using pri... Remove this comment to see the full error message
-const withStatus = ({
+export type WithStatusProps = {
+    status?: StatusProps['status']
+    statusIcon?: React.ReactNode
+    errorMsg?: StatusProps['errorMsg']
+}
+
+const withStatus = <P, >({
     withRef = false,
     withRawStatus = false,
     ...defaultStatusOptions
-} = {}) => (WrappedComponent) => {
+} = {}) => (WrappedComponent: React.ComponentType<P>) => {
     const componentName = getComponentName(WrappedComponent);
 
-    class WithStatus extends Component {
+    return class WithStatus extends Component<P & WithStatusProps> {
         static displayName = `withStatus(${componentName})`;
 
         static contextTypes = {
@@ -39,16 +57,16 @@ const withStatus = ({
             // errorMsg,
         };
 
+        renderedComponentRef: React.Ref<React.ReactNode>
+
         getRenderedComponent() {
-            // @ts-expect-error ts-migrate(2551) FIXME: Property 'renderedComponentRef' does not exist on ... Remove this comment to see the full error message
             return this.renderedComponentRef;
         }
 
-        getOptionalProps() {
-            const props = {};
+        getOptionalProps(): { status?: StatusProps['status']} {
+            const props: { status?: StatusProps['status']} = {};
 
             if (withRawStatus) {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'status' does not exist on type '{}'.
                 props.status = this.context.status;
             }
 
@@ -66,7 +84,6 @@ const withStatus = ({
             );
 
             const refProps = !withRef ? {} : {
-                // @ts-expect-error ts-migrate(2551) FIXME: Property 'renderedComponentRef' does not exist on ... Remove this comment to see the full error message
                 ref: (ref) => { this.renderedComponentRef = ref; },
             };
             const optionalProps = this.getOptionalProps();
@@ -80,9 +97,7 @@ const withStatus = ({
                     errorMsg={errorMsg} />
             );
         }
-    }
-
-    return WithStatus;
+    };
 };
 
 export default withStatus;
