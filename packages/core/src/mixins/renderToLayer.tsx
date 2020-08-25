@@ -18,6 +18,10 @@ export function createLayer() {
     return layer;
 }
 
+interface RenderToLayerState {
+    inDOM: boolean
+}
+
 /**
  * renderToLayer() HOC mixin
  * =========================
@@ -29,14 +33,13 @@ export function createLayer() {
  * @example
  * const ExternalComponent = renderToLayer(Component);
  */
-// @ts-expect-error ts-migrate(4060) FIXME: Return type of exported function has or is using p... Remove this comment to see the full error message
-function renderToLayer(WrappedComponent) {
+function renderToLayer<P, >(WrappedComponent: React.ComponentType<P>) {
     const componentName = getComponentName(WrappedComponent);
 
-    class RenderToLayer extends Component {
+    return class RenderToLayer extends Component<P, RenderToLayerState> {
         static displayName = `renderToLayer(${componentName})`;
 
-        baseLayer: any;
+        baseLayer: HTMLDivElement;
 
         state = {
             inDOM: false,
@@ -69,13 +72,11 @@ function renderToLayer(WrappedComponent) {
             const { inDOM } = this.state;
 
             return inDOM && createPortal(
-                <WrappedComponent {...this.props} />,
+                <WrappedComponent {...this.props as P} />,
                 this.baseLayer,
             );
         }
-    }
-
-    return RenderToLayer;
+    };
 }
 
 export default renderToLayer;
