@@ -10,7 +10,14 @@ const CLASS_DISABLED = prefixClass(`${PREFIX}-disabled`);
 const CLASS_UNTOUCHABLE = prefixClass(`${PREFIX}-untouchable`);
 const CLASS_MUTED = prefixClass(`${PREFIX}-muted`);
 
-function getStateClassnames(stateProps) {
+function getStateClassnames(stateProps: {
+    active?: any,
+    highlight?: any,
+    error?: any,
+    disabled?: any,
+    untouchable?: any,
+    muted?: any,
+}) {
     const results = classNames({
         [CLASS_ACTIVE]: stateProps.active,
         [CLASS_HIGHLIGHT]: stateProps.highlight,
