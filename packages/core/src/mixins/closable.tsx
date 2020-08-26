@@ -14,7 +14,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 const ESCAPE = 'Escape';
 
-export type ClosableProps = {
+export interface ClosableProps {
     /**
      * Yes, this might receive both react synthetic event or native DOM event.
      * Might be a design error.
