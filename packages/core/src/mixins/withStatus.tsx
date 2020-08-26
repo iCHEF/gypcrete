@@ -34,7 +34,7 @@ export const withStatusPropTypes = {
     errorMsg: statusPropTypes.errorMsg,
 };
 
-export type WithStatusProps = {
+export interface WithStatusProps {
     status?: StatusProps['status']
     statusIcon?: React.ReactNode
     errorMsg?: StatusProps['errorMsg']
