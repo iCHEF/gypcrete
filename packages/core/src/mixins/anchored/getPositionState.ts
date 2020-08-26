@@ -3,36 +3,19 @@ import documentOffset from 'document-offset';
 
 const TOP = 'top';
 const BOTTOM = 'bottom';
+export type Placement = typeof TOP | typeof BOTTOM;
 export const PLACEMENT = { TOP, BOTTOM };
-
-/**
- * @typedef {typeof TOP| typeof BOTTOM} Placement
- *
- * @typedef {Object} SelfPosition
- * @prop {number} [top]
- * @prop {number} [left]
- *
- * @typedef {Object} ArrowPosition
- * @prop {number} [left]
- *
- * @typedef {SelfPosition} DocumentOffset
- *
- * @typedef {Object} ResultState
- * @prop {Placement} placement
- * @prop {SelfPosition} position
- * @prop {ArrowPosition} arrowPosition
- */
 
 /**
  * Determine whether *wrapped component* should be placed above or below
  * its *anchor*.
- *
- * @param {Placement} defaultPlacement
- * @param {number} anchorRectTop
- * @param {number} anchorHeight
- * @param {number} selfHeight
  */
-export function getPlacement(defaultPlacement, anchorRectTop, anchorHeight, selfHeight) {
+export function getPlacement(
+    defaultPlacement: Placement,
+    anchorRectTop: number,
+    anchorHeight: number,
+    selfHeight: number
+) {
     const hasSpaceToPlaceSelfAbove = anchorRectTop >= selfHeight;
     const hasSpaceToPlaceSelfBelow = (
         (anchorRectTop + anchorHeight + selfHeight) <= window.innerHeight
@@ -50,13 +33,13 @@ export function getPlacement(defaultPlacement, anchorRectTop, anchorHeight, self
 
 /**
  * Determine vertical position of *wrapped component*.
- *
- * @param {Placement} placement
- * @param {number} anchorOffsetTop
- * @param {number} anchorHeight
- * @param {number} selfHeight
  */
-export function getTopPosition(placement, anchorOffsetTop, anchorHeight, selfHeight) {
+export function getTopPosition(
+    placement: Placement,
+    anchorOffsetTop: number,
+    anchorHeight: number,
+    selfHeight: number
+) {
     let positionTop = 0;
 
     if (placement === TOP) {
@@ -84,19 +67,13 @@ export function getTopPosition(placement, anchorOffsetTop, anchorHeight, selfHei
 ╰╌┊╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┊╌╯
     arrow safe area
  ```
- *
- * @param {number} anchorRectLeft
- * @param {number} anchorOffsetLeft
- * @param {number} anchorWidth
- * @param {number} selfWidth
- * @param {number} edgePadding
  */
 export function getLeftPositionSet(
-    anchorRectLeft,
-    anchorOffsetLeft,
-    anchorWidth,
-    selfWidth,
-    edgePadding,
+    anchorRectLeft: number,
+    anchorOffsetLeft: number,
+    anchorWidth: number,
+    selfWidth: number,
+    edgePadding: number,
 ) {
     const anchorHalfWidth = anchorWidth / 2;
     const selfHalfWidth = selfWidth / 2;
@@ -146,6 +123,17 @@ export function getLeftPositionSet(
     };
 }
 
+export type PositionState = {
+    placement: Placement,
+    position: {
+        top?: number,
+        left?: number,
+    },
+    arrowPosition: {
+        left?: number,
+    },
+}
+
 /**
  * Get position of *wrapped component* based on spacing around
  * the *anchor element*.
@@ -155,13 +143,11 @@ export function getLeftPositionSet(
  *
  * ClientRect: element's positions related to browser window viewport.
  * Offset: element's position related to document.
- *
- * @param {Placement} defaultPlacement
- * @param {number} edgePadding
- * @returns {(anchorNode:HTMLElement, selfNode:HTMLElement) => ResultState}
  */
-
-const getPositionState = (defaultPlacement, edgePadding) => (anchorNode, selfNode) => {
+const getPositionState = (
+    defaultPlacement: Placement,
+    edgePadding: number
+) => (anchorNode: HTMLElement, selfNode: HTMLElement): PositionState => {
     if (!anchorNode || !selfNode) {
         return {
             placement: defaultPlacement,
