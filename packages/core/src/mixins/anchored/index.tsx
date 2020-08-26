@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 import memoize from 'memoize-one';
 
 import getComponentName from '../../utils/getComponentName';
-import getPositionState, {
-    PLACEMENT,
-    // @ts-expect-error ts-migrate(2724) FIXME: Module '"./getPositionState"' has no exported memb... Remove this comment to see the full error message
-    // eslint-disable-next-line import/named, no-unused-vars, @typescript-eslint/no-unused-vars
-    Placement, // type alias
-} from './getPositionState';
+import getPositionState, { PLACEMENT, Placement } from './getPositionState';
 
 export { PLACEMENT as ANCHORED_PLACEMENT };
 
@@ -23,6 +18,11 @@ function filterDOMNode(node) {
         return node;
     }
     return null;
+}
+
+interface AnchoredArgs {
+    defaultPlacement?: Placement,
+    edgePadding?: number,
 }
 
 /**
@@ -83,15 +83,13 @@ class Example extends React.Component {
  * @param {Placement} options.defaultPlacement - the default vertical placement
  * @param {number} options.edgePadding - the number to be deducted when calculating “safe area”
  */
-
-// @ts-expect-error ts-migrate(4025) FIXME: Exported variable 'anchored' has or is using priva... Remove this comment to see the full error message
 const anchored = ({
     defaultPlacement = PLACEMENT.BOTTOM,
     edgePadding = 16,
-} = {}) => (WrappedComponent) => {
+}: AnchoredArgs = {}) => (WrappedComponent) => {
     const componentName = getComponentName(WrappedComponent);
 
-    class Anchored extends Component {
+    return class Anchored extends Component {
         static displayName = `anchored(${componentName})`;
 
         static propTypes = {
@@ -151,9 +149,7 @@ const anchored = ({
                     nodeRef={this.setSelfNode} />
             );
         }
-    }
-
-    return Anchored;
+    };
 };
 
 export default anchored;
