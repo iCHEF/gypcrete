@@ -48,10 +48,12 @@ class StatusIcon extends PureComponent {
         hideIcon: false,
     };
 
+    // eslint-disable-next-line react/no-deprecated
     componentWillMount() {
         this.autoToggleStatusIcon();
     }
 
+    // eslint-disable-next-line react/no-deprecated
     componentWillReceiveProps(nextProps) {
         if (nextProps.status !== this.props.status) {
             this.autoToggleStatusIcon(nextProps.status);

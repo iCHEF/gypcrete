@@ -7,7 +7,7 @@ import SelectOption from '@ichef/gypcrete-form/src/SelectOption';
 export default {
     title: '@ichef/gypcrete-form|SelectList',
     component: SelectList,
-    subcomponents: { SelectOption }
+    subcomponents: { SelectOption },
 };
 
 export const singleUncontrolled = () => (

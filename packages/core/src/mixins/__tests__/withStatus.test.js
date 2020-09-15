@@ -15,7 +15,7 @@ function Foo({ statusIcon, errorMsg }) {
     );
 }
 Foo.propTypes = {
-    ...withStatusPropTypes
+    ...withStatusPropTypes,
 };
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -43,8 +43,8 @@ it('renders <StatusIcon> from context and passes to wrapped component', () => {
         {
             context: {
                 status: 'loading',
-                statusOptions: { position: 'corner' }
-            }
+                statusOptions: { position: 'corner' },
+            },
         }
     );
     const iconWrapper = wrapper.find(Foo).shallow().find(StatusIcon);

@@ -15,7 +15,7 @@ export const COMPONENT_NAME = prefixClass('tooltip');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 const BEM = {
     root: ROOT_BEM,
-    arrow: ROOT_BEM.element('arrow')
+    arrow: ROOT_BEM.element('arrow'),
 };
 
 const TOP = 'top';

@@ -13,7 +13,7 @@ function wrapIfNotElement(content, {
     }
 
     const wrapperProps = {
-        [prop]: content
+        [prop]: content,
     };
 
     return <Wrapper {...wrapperProps} />;

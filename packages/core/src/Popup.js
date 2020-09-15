@@ -29,7 +29,7 @@ export const BEM = {
     messageTitle: ROOT_BEM.element('message-title'),
     messageDesc: ROOT_BEM.element('message-desc'),
     button: ROOT_BEM.element('button'),
-    buttonsGroup: ROOT_BEM.element('buttons-group')
+    buttonsGroup: ROOT_BEM.element('buttons-group'),
 };
 
 export function PopupIcon({ type }) {

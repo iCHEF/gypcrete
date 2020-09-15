@@ -27,7 +27,7 @@ export function BasicUsage() {
     );
 }
 BasicUsage.story = {
-    name: 'Basic Icons Set'
+    name: 'Basic Icons Set',
 };
 
 export function CRMIconsSet() {
@@ -69,7 +69,7 @@ export function InlineIconsSet() {
 }
 
 InlineIconsSet.story = {
-    name: 'Inline-sized Icons Set'
+    name: 'Inline-sized Icons Set',
 };
 
 export function InventoryIconsSet() {

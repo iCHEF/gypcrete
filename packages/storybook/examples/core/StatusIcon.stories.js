@@ -65,9 +65,10 @@ AutoHideSuccessIcon.story = {
     parameters: {
         docs: {
             // eslint-disable-next-line no-multi-str
-            storyDescription: 'In this example, prop `autohide` is `true`, initially <StatusIcon> is loading; \
+            storyDescription: 'In this example, prop `autohide` is `true`, \
+            initially <StatusIcon> is loading; \
             When make it success, after a while(~2s) it will hide; \
             Then if you make it error it shows again.',
-        }
-    }
+        },
+    },
 };

@@ -102,7 +102,7 @@ HowToPassPropsToInput.story = {
     parameters: {
         docs: {
             storyDescription: `Pass additional props to the underlying \`<input type="checkbox">\`
-            via the 'input' prop.`
+            via the 'input' prop.`,
         },
     },
 };

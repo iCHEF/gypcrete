@@ -21,9 +21,9 @@ function getPropTables(components, options = {}) {
         })(EMPTY_COMPONENT),
         {
             info: {
-                propTables: components
-            }
-        }
+                propTables: components,
+            },
+        },
     ];
 }
 

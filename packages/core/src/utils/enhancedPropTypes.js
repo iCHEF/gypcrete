@@ -16,7 +16,7 @@ const EnhancedPropTypes = {
             return new Error(`<${componentName}> must not contains ${propName}.`);
         }
         return undefined;
-    }
+    },
 };
 
 export default EnhancedPropTypes;

@@ -17,11 +17,11 @@ function escapable(WrappedComponent) {
         static displayName = `escapable(${componentName})`;
 
         static propTypes = {
-            onEscape: PropTypes.func
+            onEscape: PropTypes.func,
         };
 
         static defaultProps = {
-            onEscape: () => {}
+            onEscape: () => {},
         };
 
 

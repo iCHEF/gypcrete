@@ -12,17 +12,17 @@ module.exports = webpackMerge(defaultConfigs, {
             {
                 test: /\.(woff|woff2|otf|ttf|eot)$/,
                 include: [
-                    path.resolve(packageDirname, 'src/fonts')
+                    path.resolve(packageDirname, 'src/fonts'),
                 ],
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
                             name: '[name]-[hash:6].[ext]',
-                            outputPath: 'fonts/'
-                        }
-                    }
-                ]
+                            outputPath: 'fonts/',
+                        },
+                    },
+                ],
             },
             {
                 test: /\.svg$/,
@@ -31,11 +31,11 @@ module.exports = webpackMerge(defaultConfigs, {
                         loader: 'file-loader',
                         options: {
                             name: '[name]-[hash:6].[ext]',
-                            outputPath: 'icons/'
+                            outputPath: 'icons/',
                         },
                     },
                 ],
-            }
+            },
         ],
     },
 });

@@ -15,12 +15,12 @@ const COMPONENT_NAME = prefixClass('infinite-scroll');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
     root: ROOT_BEM,
-    footer: ROOT_BEM.element('footer')
+    footer: ROOT_BEM.element('footer'),
 };
 
 const FILL_SPACE_TYPE = {
     AUTO: 'auto',
-    MANUAL: 'manual'
+    MANUAL: 'manual',
 };
 
 
@@ -44,7 +44,7 @@ class InfiniteScroll extends PureComponent {
         // Footer children
         loadingLabel: PropTypes.node,
         showMoreButton: PropTypes.node,
-        noNewestButton: PropTypes.node
+        noNewestButton: PropTypes.node,
     };
 
     static defaultProps = {
@@ -56,7 +56,7 @@ class InfiniteScroll extends PureComponent {
 
         loadingLabel: null,
         showMoreButton: null,
-        noNewestButton: null
+        noNewestButton: null,
     }
 
     componentDidMount() {
@@ -260,7 +260,7 @@ class InfiniteScroll extends PureComponent {
             isLoading,
             hasMore,
             showMoreButton,
-            noNewestButton
+            noNewestButton,
         } = this.props;
         let footerChild = null;
 

@@ -25,11 +25,11 @@ function FlexCell({ shrink, grow, basis, children }) {
 FlexCell.propTypes = {
     shrink: PropTypes.oneOfType([
         PropTypes.bool,
-        PropTypes.number
+        PropTypes.number,
     ]),
     grow: PropTypes.oneOfType([
         PropTypes.bool,
-        PropTypes.number
+        PropTypes.number,
     ]),
     basis: PropTypes.string,
 };

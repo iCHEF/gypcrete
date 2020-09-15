@@ -55,7 +55,7 @@ export function BasicUsage() {
 export function CheckboxWithIndeterminateExample() {
     const [{ item1Checked, item2Checked }, setItems] = useState({
         item1Checked: true,
-        item2Checked: false
+        item2Checked: false,
     });
 
     const handleCheckAll = () => {
@@ -67,7 +67,7 @@ export function CheckboxWithIndeterminateExample() {
 
         setItems({
             item1Checked: checkAllValue,
-            item2Checked: checkAllValue
+            item2Checked: checkAllValue,
         });
     };
 
@@ -75,7 +75,7 @@ export function CheckboxWithIndeterminateExample() {
         const { checked } = event.target;
         setItems(prevState => ({
             ...prevState,
-            [item]: checked
+            [item]: checked,
         }));
     };
 

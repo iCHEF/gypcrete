@@ -43,7 +43,7 @@ class Checkbox extends PureComponent {
         checked: undefined,
         defaultChecked: undefined,
         disabled: false,
-        onChange: undefined
+        onChange: undefined,
     };
 
     componentDidMount() {

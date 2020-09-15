@@ -5,7 +5,7 @@ module.exports = {
     template,
     indexTemplate,
     replaceAttrValues: {
-        '#000': 'currentColor'
+        '#000': 'currentColor',
     },
     prettier: true,
     prettierConfig: {

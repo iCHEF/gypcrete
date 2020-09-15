@@ -37,7 +37,7 @@ export function BasicUsage(popupProps) {
                 solid
                 color="blue"
                 onClick={handlePopupOpen}
-                style={{ display: 'inline-block', }}
+                style={{ display: 'inline-block' }}
             >
                 Open Popup
             </Button>
@@ -103,9 +103,9 @@ export function CustomMessageNode(popupProps) {
     const [opened, setOpened] = useState(false);
 
     const customMessageNode = (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <img alt="react" width={30} height={30} src={ReactLogo} />
-            <span style={{ marginLeft: '10px', }}> is awesome!</span>
+            <span style={{ marginLeft: '10px' }}> is awesome!</span>
         </div>
     );
 
@@ -124,7 +124,7 @@ export function CustomMessageNode(popupProps) {
                 solid
                 color="blue"
                 onClick={handlePopupOpen}
-                style={{ display: 'inline-block', }}>
+                style={{ display: 'inline-block' }}>
                 Open Popup
             </Button>
             {opened && (

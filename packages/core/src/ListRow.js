@@ -21,7 +21,7 @@ export const BEM = {
     root: ROOT_BEM,
     body: ROOT_BEM.element('body'),
     footer: ROOT_BEM.element('footer'),
-    nestedListWrapper: ROOT_BEM.element('nested-list-wrapper')
+    nestedListWrapper: ROOT_BEM.element('nested-list-wrapper'),
 };
 
 class ListRow extends PureComponent {

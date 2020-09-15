@@ -25,7 +25,7 @@ const cleanAction = decorateAction([
             event: `[${payload.event.constructor.name}]`,
         };
         return [cleanPayload];
-    }
+    },
 ]);
 export function UncontrolledEditableTextLabel() {
     return (

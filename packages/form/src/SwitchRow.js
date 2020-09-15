@@ -46,6 +46,7 @@ class SwitchRow extends PureComponent {
         checked: this.props.defaultChecked || this.props.checked,
     };
 
+    // eslint-disable-next-line react/no-deprecated
     componentWillReceiveProps(nextProps) {
         this.setState({ checked: nextProps.checked });
     }

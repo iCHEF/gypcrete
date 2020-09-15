@@ -21,7 +21,7 @@ class IconLayout extends PureComponent {
     static propTypes = {
         icon: PropTypes.oneOfType([
             PropTypes.string,
-            PropTypes.element
+            PropTypes.element,
         ]).isRequired,
         tooltip: PropTypes.bool,
 

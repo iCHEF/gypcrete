@@ -53,7 +53,7 @@ module.exports = {
                 ['@babel/plugin-transform-runtime', {
                     // so `setTimeout` is not replaced with core-js 3 version.
                     corejs: false,
-                }]
+                }],
             ],
         },
     },

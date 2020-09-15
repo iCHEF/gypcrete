@@ -77,7 +77,7 @@ it('passes a custom rowProps prop to wrapped component', () => {
         <FormRowFoo
             desc="foo"
             rowProps={{
-                status: 'success'
+                status: 'success',
             }}
             status="error"
             errorMsg="bar" />

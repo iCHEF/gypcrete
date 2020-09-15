@@ -129,5 +129,5 @@ export function InsideColumnView() {
 }
 
 InsideColumnView.story = {
-    name: 'inside <ColumnView>'
+    name: 'inside <ColumnView>',
 };

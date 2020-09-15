@@ -21,7 +21,7 @@ const TAG_INPUT = 'input';
 const TAG_TEXTAREA = 'textarea';
 export const ROW_INPUT_TAGS = {
     INPUT: TAG_INPUT,
-    TEXTAREA: TAG_TEXTAREA
+    TEXTAREA: TAG_TEXTAREA,
 };
 
 /**
@@ -93,6 +93,7 @@ class EditableBasicRow extends PureComponent {
         focused: false,
     };
 
+    // eslint-disable-next-line react/no-deprecated
     componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
             this.setState({ currentValue: nextProps.value });

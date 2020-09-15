@@ -42,7 +42,7 @@ export class BEMFactory {
         if (isNonEmptyString(elementIdentifier)) {
             return new BEMFactory({
                 ...this.toHash(),
-                element: elementIdentifier
+                element: elementIdentifier,
             });
         }
         return this;
@@ -58,7 +58,7 @@ export class BEMFactory {
         if (isOn && isNonEmptyString(modifierIdentifier)) {
             return new BEMFactory({
                 ...this.toHash(),
-                modifiers: [...this._modifiers, modifierIdentifier]
+                modifiers: [...this._modifiers, modifierIdentifier],
             });
         }
         return this;
@@ -74,7 +74,7 @@ export class BEMFactory {
         if (isNonEmptyString(className)) {
             return new BEMFactory({
                 ...this.toHash(),
-                nonBemClasses: [...this._nonBemClasses, className]
+                nonBemClasses: [...this._nonBemClasses, className],
             });
         }
         return this;
@@ -96,7 +96,7 @@ export class BEMFactory {
         const classes = [
             baseClass,
             ..._modifiers.map(modifier => `${baseClass}${MODIFIER_SEPARATOR}${modifier}`),
-            ..._nonBemClasses
+            ..._nonBemClasses,
         ];
 
         if (stripBlock) classes.shift();
@@ -114,7 +114,7 @@ export class BEMFactory {
             block: this._block,
             element: this._element,
             modifiers: this._modifiers.slice(0),
-            nonBemClasses: this._nonBemClasses.slice(0)
+            nonBemClasses: this._nonBemClasses.slice(0),
         };
     }
 

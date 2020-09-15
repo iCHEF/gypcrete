@@ -102,6 +102,7 @@ class ImageEditor extends PureComponent {
 
     editorRef = React.createRef();
 
+    // eslint-disable-next-line react/no-deprecated
     componentWillReceiveProps(nextProps) {
         // Consider current `scale`, `position` and `initCropRect` outdated when image changes
         if (nextProps.image !== this.props.image) {
@@ -213,7 +214,7 @@ class ImageEditor extends PureComponent {
             .toString();
 
         const wrapperClass = classNames(className, wraperBEM);
-        const wrapperStyle = { ...style, width, };
+        const wrapperStyle = { ...style, width };
 
         const shouldShowPlaceholder = (!image || loading);
 

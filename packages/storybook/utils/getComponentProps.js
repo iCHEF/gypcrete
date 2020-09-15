@@ -31,7 +31,7 @@ export default function getComponentProps(component) {
 
         return {
             sections: {
-                'Inffered props (not from docgen)': inferredProps
+                'Inffered props (not from docgen)': inferredProps,
             },
         };
     }

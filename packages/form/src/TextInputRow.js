@@ -12,19 +12,19 @@ import formRow, { rowPropTypes } from './mixins/formRow';
  */
 function TextInputRow({
     // from formRow()
-    ineditable, // unwanted prop
     readOnly,
     disabled,
     rowProps,
     children,
     ...inputProps
 }) {
+    const { ineditable, ...otherInputProps } = inputProps; // unwanted prop
     return (
         <ListRow {...rowProps}>
             <TextInput
                 readOnly={readOnly}
                 disabled={disabled}
-                {...inputProps}
+                {...otherInputProps}
             />
             {children}
         </ListRow>

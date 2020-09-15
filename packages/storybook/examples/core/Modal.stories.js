@@ -14,7 +14,7 @@ export default {
     title: '@ichef/gypcrete|Modal',
     component: PureModal,
     subcomponents: {
-        'renderToLayer()': Modal
+        'renderToLayer()': Modal,
     },
 };
 
@@ -138,8 +138,7 @@ export function MultilpleLayerModal() {
                             {currentLayer + 1}
                         </div>
                     )
-                    : 'This is the last modal.'
-                }
+                    : 'This is the last modal.'}
                 <MulitpleClosableModalExample depth={depth - 1} />
             </ClosableModal>
         );

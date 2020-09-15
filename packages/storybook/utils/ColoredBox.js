@@ -17,11 +17,11 @@ function ColoredBox({ width, height, color, children }) {
 ColoredBox.propTypes = {
     width: PropTypes.oneOfType([
         PropTypes.number,
-        PropTypes.string
+        PropTypes.string,
     ]),
     height: PropTypes.oneOfType([
         PropTypes.number,
-        PropTypes.string
+        PropTypes.string,
     ]),
     color: PropTypes.string,
 };

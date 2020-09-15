@@ -25,7 +25,7 @@ module.exports = ({ config, mode }) => {
             parallel: true,
             terserOptions: {
                 mangle: false,
-            }
+            },
         })];
     }
 
@@ -56,7 +56,7 @@ module.exports = ({ config, mode }) => {
                 loader: 'sass-loader',
                 options: {
                     outputStyle: 'expanded',
-                }
+                },
             },
         ],
     });

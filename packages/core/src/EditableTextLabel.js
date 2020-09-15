@@ -63,6 +63,7 @@ class EditableTextLabel extends PureComponent {
         dblTouchTimeout: null,
     };
 
+    // eslint-disable-next-line react/no-deprecated
     componentWillReceiveProps(nextProps) {
         /**
          * If the edit-state of <EditableTextLabel> is *controlled* by `inEdit` prop.

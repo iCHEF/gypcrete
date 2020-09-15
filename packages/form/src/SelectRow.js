@@ -98,6 +98,7 @@ class SelectRow extends PureComponent {
         cachedValue: this.getInitialValue(),
     };
 
+    // eslint-disable-next-line react/no-deprecated
     componentWillReceiveProps(nextProps) {
         this.setState({
             valueLabelMap: getValueToLabelAvatarMap(nextProps.children),

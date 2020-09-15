@@ -17,13 +17,13 @@ export function BasicUsage() {
     const rootContainerStyle = {
         height: 300,
         overflow: 'auto',
-        border: '1px solid #efefef'
+        border: '1px solid #efefef',
     };
 
     const initialState = {
         lastPage: 1,
         isLoading: false,
-        hasMore: true
+        hasMore: true,
     };
 
     const reducer = (state, { type }) => {
@@ -101,7 +101,7 @@ export function PageAsScrollContainer() {
     const initialState = {
         lastPage: 1,
         isLoading: false,
-        hasMore: true
+        hasMore: true,
     };
 
     const reducer = (state, { type }) => {
