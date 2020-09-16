@@ -4,20 +4,20 @@
  * See svgr document (https://react-svgr.com/docs/custom-templates/#custom-index-template)
  */
 function componentTemplate(
-    { template },
-    opts,
-    {
-        componentName,
-        props,
-        jsx,
-    },
+  { template },
+  opts,
+  {
+    componentName,
+    props,
+    jsx,
+  },
 ) {
-    /**
+  /**
      * Because we cannot keep line break with template.ast (https://babeljs.io/docs/en/next/babel-template.html#ast-1),
      * we have to write it like this to inject newline and other arguments.
      * See usage: https://babeljs.io/docs/en/next/babel-template.html#string-usage
      */
-    const code = `
+  const code = `
     import React from 'react';
     NEWLINE
 
@@ -25,13 +25,13 @@ function componentTemplate(
     return JSX;
     }
     `;
-    const plugins = ['jsx'];
-    const componentTpl = template.smart(code, { plugins });
-    return componentTpl({
-        COMPONENT_NAME: componentName,
-        JSX: jsx,
-        PROPS: props,
-        NEWLINE: '\n',
-    });
+  const plugins = ['jsx'];
+  const componentTpl = template.smart(code, { plugins });
+  return componentTpl({
+    COMPONENT_NAME: componentName,
+    JSX: jsx,
+    PROPS: props,
+    NEWLINE: '\n',
+  });
 }
 module.exports = componentTemplate;

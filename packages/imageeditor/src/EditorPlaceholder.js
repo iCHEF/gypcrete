@@ -7,48 +7,48 @@ const PICTURE = 'picture';
 const LOADING = 'loading';
 
 export function CenterIcon({ type, ...props }) {
-    return (
-        <Icon
-            type={type}
-            spinning={type === LOADING}
-            {...props} />
-    );
+  return (
+    <Icon
+      type={type}
+      spinning={type === LOADING}
+      {...props} />
+  );
 }
 CenterIcon.propTypes = {
-    type: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 function EditorPlaceholder({
-    canvasHeight,
-    loading,
-    ...wrapperProps
+  canvasHeight,
+  loading,
+  ...wrapperProps
 }) {
-    const wrapperStyle = {
-        height: canvasHeight,
-    };
+  const wrapperStyle = {
+    height: canvasHeight,
+  };
 
-    const iconType = loading ? LOADING : PICTURE;
-    const iconStyle = {
-        // 8 for total border size (4+4)
-        fontSize: Math.min(canvasHeight - 8, 96),
-    };
+  const iconType = loading ? LOADING : PICTURE;
+  const iconStyle = {
+    // 8 for total border size (4+4)
+    fontSize: Math.min(canvasHeight - 8, 96),
+  };
 
-    return (
-        <div style={wrapperStyle} {...wrapperProps}>
-            <CenterIcon
-                type={iconType}
-                style={iconStyle} />
-        </div>
-    );
+  return (
+    <div style={wrapperStyle} {...wrapperProps}>
+      <CenterIcon
+        type={iconType}
+        style={iconStyle} />
+    </div>
+  );
 }
 
 EditorPlaceholder.propTypes = {
-    canvasHeight: PropTypes.number.isRequired,
-    loading: PropTypes.bool,
+  canvasHeight: PropTypes.number.isRequired,
+  loading: PropTypes.bool,
 };
 
 EditorPlaceholder.defaultProps = {
-    loading: false,
+  loading: false,
 };
 
 export default EditorPlaceholder;

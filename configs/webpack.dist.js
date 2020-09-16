@@ -8,69 +8,69 @@ const fullPackageName = process.env.npm_package_name || process.env.GPT_PKG_NAME
 const packageName = fullPackageName.replace(/@ichef\//, '');
 
 module.exports = {
-    entry: './src/index.js',
+  entry: './src/index.js',
 
-    context: packageDirname,
+  context: packageDirname,
 
-    output: {
-        filename: `${packageName}.js`,
-        path: path.resolve(packageDirname, 'dist'),
-        library: packageName,
-    },
+  output: {
+    filename: `${packageName}.js`,
+    path: path.resolve(packageDirname, 'dist'),
+    library: packageName,
+  },
 
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                include: [
-                    path.resolve(packageDirname, 'src'),
-                ],
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            rootMode: 'upward',
-                        },
-                    },
-                ],
-            },
-            {
-                test: /\.scss$/,
-                include: [
-                    path.resolve(packageDirname, 'src'),
-                ],
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1,
-                            },
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: () => [autoprefixer],
-                            },
-                        },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                outputStyle: 'expanded',
-                            },
-                        },
-                    ],
-                }),
-            },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        include: [
+          path.resolve(packageDirname, 'src'),
         ],
-    },
-
-    plugins: [
-        new ExtractTextPlugin(`${packageName}.css`),
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              rootMode: 'upward',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.scss$/,
+        include: [
+          path.resolve(packageDirname, 'src'),
+        ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [autoprefixer],
+              },
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                outputStyle: 'expanded',
+              },
+            },
+          ],
+        }),
+      },
     ],
+  },
 
-    externals: {
-        react: 'React',
-    },
+  plugins: [
+    new ExtractTextPlugin(`${packageName}.css`),
+  ],
+
+  externals: {
+    react: 'React',
+  },
 };

@@ -6,8 +6,8 @@
  * @return {String} result
  */
 function randId({ length = 10, prefix = 'node' } = {}) {
-    const randHash = Math.random().toString(16).substr(2, length);
-    return `${prefix}-${randHash}`;
+  const randHash = Math.random().toString(16).substr(2, length);
+  return `${prefix}-${randHash}`;
 }
 
 export default randId;

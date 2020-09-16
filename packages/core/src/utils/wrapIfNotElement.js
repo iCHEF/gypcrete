@@ -5,18 +5,18 @@ import React from 'react';
  * to make sure the result will always be a HTML tag.
  */
 function wrapIfNotElement(content, {
-    with: Wrapper,
-    via: prop = 'children',
+  with: Wrapper,
+  via: prop = 'children',
 }) {
-    if (React.isValidElement(content)) {
-        return content;
-    }
+  if (React.isValidElement(content)) {
+    return content;
+  }
 
-    const wrapperProps = {
-        [prop]: content,
-    };
+  const wrapperProps = {
+    [prop]: content,
+  };
 
-    return <Wrapper {...wrapperProps} />;
+  return <Wrapper {...wrapperProps} />;
 }
 
 export default wrapIfNotElement;

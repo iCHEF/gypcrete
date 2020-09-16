@@ -15,31 +15,31 @@ const ROUNDED = 'rounded';
 const CIRCLE = 'circle';
 
 function Avatar({
-    className,
-    src,
-    alt,
-    type,
-    ...otherProps
+  className,
+  src,
+  alt,
+  type,
+  ...otherProps
 }) {
-    const bemClass = ROOT_BEM.modifier(type);
+  const bemClass = ROOT_BEM.modifier(type);
 
-    const rootClassName = classNames(className, `${bemClass}`);
+  const rootClassName = classNames(className, `${bemClass}`);
 
-    return (
-        <div className={rootClassName} {...otherProps}>
-            <img alt={alt} src={src} />
-        </div>
-    );
+  return (
+    <div className={rootClassName} {...otherProps}>
+      <img alt={alt} src={src} />
+    </div>
+  );
 }
 
 Avatar.propTypes = {
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([SQUARE, ROUNDED, CIRCLE]),
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([SQUARE, ROUNDED, CIRCLE]),
 };
 
 Avatar.defaultProps = {
-    type: SQUARE,
+  type: SQUARE,
 };
 
 export default Avatar;

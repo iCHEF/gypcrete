@@ -4,24 +4,24 @@ import memoize from 'memoize-one';
 
 import getComponentName from '../../utils/getComponentName';
 import getPositionState, {
-    PLACEMENT,
-    // eslint-disable-next-line import/named, no-unused-vars
-    Placement, // type alias
+  PLACEMENT,
+  // eslint-disable-next-line import/named, no-unused-vars
+  Placement, // type alias
 } from './getPositionState';
 
 export { PLACEMENT as ANCHORED_PLACEMENT };
 
 export const anchoredPropTypes = {
-    placement: PropTypes.oneOf(Object.values(PLACEMENT)),
-    arrowStyle: PropTypes.objectOf(PropTypes.number),
-    nodeRef: PropTypes.func,
+  placement: PropTypes.oneOf(Object.values(PLACEMENT)),
+  arrowStyle: PropTypes.objectOf(PropTypes.number),
+  nodeRef: PropTypes.func,
 };
 
 function filterDOMNode(node) {
-    if (node instanceof HTMLElement) {
-        return node;
-    }
-    return null;
+  if (node instanceof HTMLElement) {
+    return node;
+  }
+  return null;
 }
 
 /**
@@ -84,72 +84,72 @@ class Example extends React.Component {
  */
 
 const anchored = ({
-    defaultPlacement = PLACEMENT.BOTTOM,
-    edgePadding = 16,
+  defaultPlacement = PLACEMENT.BOTTOM,
+  edgePadding = 16,
 } = {}) => (WrappedComponent) => {
-    const componentName = getComponentName(WrappedComponent);
+  const componentName = getComponentName(WrappedComponent);
 
-    class Anchored extends Component {
+  class Anchored extends Component {
         static displayName = `anchored(${componentName})`;
 
         static propTypes = {
-            anchor: PropTypes.instanceOf(window.HTMLElement),
+          anchor: PropTypes.instanceOf(window.HTMLElement),
         };
 
         static defaultProps = {
-            anchor: null,
+          anchor: null,
         };
 
         state = {
-            selfNode: null,
+          selfNode: null,
         };
 
         getPositions = memoize(getPositionState(defaultPlacement, edgePadding));
 
         setSelfNode = (nodeRef) => {
-            this.setState({ selfNode: nodeRef });
+          this.setState({ selfNode: nodeRef });
         }
 
         render() {
-            const {
-                anchor,
-                style,
-                ...otherProps
-            } = this.props;
+          const {
+            anchor,
+            style,
+            ...otherProps
+          } = this.props;
 
-            const { selfNode } = this.state;
+          const { selfNode } = this.state;
 
-            if (!anchor) {
-                return null;
-            }
+          if (!anchor) {
+            return null;
+          }
 
-            const {
-                placement,
-                position,
-                arrowPosition,
-            } = this.getPositions(
-                filterDOMNode(anchor),
-                filterDOMNode(selfNode),
-            );
+          const {
+            placement,
+            position,
+            arrowPosition,
+          } = this.getPositions(
+            filterDOMNode(anchor),
+            filterDOMNode(selfNode),
+          );
 
-            const mergedStyle = {
-                position: 'absolute',
-                ...position,
-                ...style,
-            };
+          const mergedStyle = {
+            position: 'absolute',
+            ...position,
+            ...style,
+          };
 
-            return (
-                <WrappedComponent
-                    {...otherProps}
-                    placement={placement}
-                    arrowStyle={arrowPosition}
-                    style={mergedStyle}
-                    nodeRef={this.setSelfNode} />
-            );
+          return (
+            <WrappedComponent
+              {...otherProps}
+              placement={placement}
+              arrowStyle={arrowPosition}
+              style={mergedStyle}
+              nodeRef={this.setSelfNode} />
+          );
         }
-    }
+  }
 
-    return Anchored;
+  return Anchored;
 };
 
 export default anchored;
