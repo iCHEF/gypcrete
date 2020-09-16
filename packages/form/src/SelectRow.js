@@ -166,11 +166,13 @@ class SelectRow extends PureComponent {
           anchor={this.anchorNode}
           className={BEM.popover.toString()}
           closable={CLOSABLE_CONFIG}
-          onClose={this.handlePopoverClose}>
+          onClose={this.handlePopoverClose}
+        >
           <SelectList
             value={this.state.cachedValue}
             onChange={this.handleSelectChange}
-            {...selectListProps} />
+            {...selectListProps}
+          />
         </Popover>
       );
     }

@@ -52,7 +52,8 @@ export function AnchoredTooltip() {
         ref={textRef}
         onMouseEnter={handleTooltipShow}
         onMouseLeave={handleTooltipHide}
-        style={anchoredStyle}>
+        style={anchoredStyle}
+      >
         Hover on me
       </span>
 

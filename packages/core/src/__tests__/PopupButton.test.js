@@ -19,7 +19,8 @@ it('returns a pre-configured <Button> extending given props', () => {
       minified={false}
       align="center"
       basic="foo"
-      aside="bar" />
+      aside="bar"
+    />
   )).toBeTruthy();
 });
 

@@ -20,7 +20,8 @@ export function BasicExample() {
       <ListRow>
         <Button
           minified={false}
-          {...props} />
+          {...props}
+        />
       </ListRow>
     );
   }
@@ -58,7 +59,8 @@ export function AnchoredPopover() {
       <ListRow>
         <Button
           minified={false}
-          {...props} />
+          {...props}
+        />
       </ListRow>
     );
   }
@@ -100,13 +102,15 @@ export function AnchoredPopover() {
       >
         <Button
           basic="Open popover"
-          onClick={handlePopoverOpen} />
+          onClick={handlePopoverOpen}
+        />
       </span>
       {showPopover && (
         <Popover
           anchor={btn}
           placement="top"
-          onClose={handlePopoverClose}>
+          onClose={handlePopoverClose}
+        >
           <DemoList />
         </Popover>
       )}

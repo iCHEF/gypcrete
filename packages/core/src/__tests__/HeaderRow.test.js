@@ -36,7 +36,8 @@ describe('<HeaderRow>', () => {
       <HeaderRow
         left={mockedLeft}
         center={mockedCenter}
-        right={mockedRight} />
+        right={mockedRight}
+      />
     );
     expect(wrapper.containsAllMatchingElements([
       <HeaderArea content={mockedLeft} />,

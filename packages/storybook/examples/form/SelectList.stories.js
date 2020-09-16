@@ -41,7 +41,8 @@ export const multipleUncontrolled = () => (
   <SelectList
     multiple
     defaultValue={['1']}
-    onChange={action('change')}>
+    onChange={action('change')}
+  >
     <SelectOption label="Option A" value="1" />
     <SelectOption label="Option B" value="2" />
     <SelectOption label="Option C" value="3" />
@@ -55,7 +56,8 @@ export const multipleControlled = () => (
   <SelectList
     multiple
     value={['1', '2']}
-    onChange={action('change')}>
+    onChange={action('change')}
+  >
     <SelectOption label="Option A" value="1" />
     <SelectOption label="Option B" value="2" />
     <SelectOption label="Option C" value="3" />
@@ -75,7 +77,8 @@ export const multipleWithoutCheckAll = () => (
     multiple
     showCheckAll={false}
     defaultValue={['1']}
-    onChange={action('change')}>
+    onChange={action('change')}
+  >
     <SelectOption label="Option A" value="1" />
     <SelectOption label="Option B" value="2" />
     <SelectOption label="Option C" value="3" />
@@ -89,7 +92,8 @@ export const multipleWithReadOnly = () => (
   <SelectList
     multiple
     defaultValue={['1']}
-    onChange={action('change')}>
+    onChange={action('change')}
+  >
     <SelectOption label="Option A" value="1" readOnly />
     <SelectOption label="Option B" value="2" />
     <SelectOption label="Option C" value="3" />
@@ -104,7 +108,8 @@ export const minimumChecksRequired = () => (
     multiple
     minCheck={1}
     defaultValue={['1']}
-    onChange={action('change')}>
+    onChange={action('change')}
+  >
     <SelectOption label="Option A" value="1" />
     <SelectOption label="Option B" value="2" />
     <SelectOption label="Option C" value="3" />

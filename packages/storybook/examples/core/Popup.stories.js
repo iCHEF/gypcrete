@@ -124,7 +124,8 @@ export function CustomMessageNode(popupProps) {
         solid
         color="blue"
         onClick={handlePopupOpen}
-        style={{ display: 'inline-block' }}>
+        style={{ display: 'inline-block' }}
+      >
         Open Popup
       </Button>
       {opened && (

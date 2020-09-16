@@ -12,7 +12,8 @@ describe('formRow(TextInputRow)', () => {
     const element = (
       <TextInputRow
         label="foo"
-        defaultValue="bar" />
+        defaultValue="bar"
+      />
     );
 
     ReactDOM.render(element, div);

@@ -47,7 +47,8 @@ export function ClosableModal({
       <HeaderRow
         left={cancelBtn}
         center={label}
-        right={filterBtn} />
+        right={filterBtn}
+      />
     );
   };
 

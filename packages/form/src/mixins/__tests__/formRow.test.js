@@ -54,7 +54,8 @@ it('passes a collected rowProps prop to wrapped component', () => {
       desc="foo"
       status="error"
       statusOptions={{ autoHide: false }}
-      errorMsg="bar" />
+      errorMsg="bar"
+    />
   );
   const fooProps = wrapper.find(Foo).props();
 
@@ -80,7 +81,8 @@ it('passes a custom rowProps prop to wrapped component', () => {
         status: 'success',
       }}
       status="error"
-      errorMsg="bar" />
+      errorMsg="bar"
+    />
   );
   const fooProps = wrapper.find(Foo).props();
 

@@ -217,7 +217,8 @@ class SelectList extends PureComponent {
           label={checkAllLabel}
           value={null}
           checked={isAllChecked}
-          onChange={this.handleCheckAllOptionChange} />
+          onChange={this.handleCheckAllOptionChange}
+        />
       );
     }
 

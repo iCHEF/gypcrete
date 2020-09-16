@@ -85,7 +85,8 @@ export function BasicUsage() {
         hasMore={hasMore}
         loadingLabel="Loading..."
         showMoreButton="Show more"
-        noNewestButton="All items displayed">
+        noNewestButton="All items displayed"
+      >
         <ul>
           {renderListItems()}
         </ul>
@@ -163,7 +164,8 @@ export function PageAsScrollContainer() {
       isLoading={isLoading}
       hasMore={hasMore}
       showMoreButton="Show more"
-      noNewestButton="All items displayed">
+      noNewestButton="All items displayed"
+    >
       <ul>
         {renderListItems()}
       </ul>

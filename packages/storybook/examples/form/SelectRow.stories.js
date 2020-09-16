@@ -21,14 +21,16 @@ export const basicUsage = () => (
       label="Module default state on iPad"
       desc="Default is off"
       defaultValue="no"
-      onChange={action('change')}>
+      onChange={action('change')}
+    >
       <SelectOption label="Yes" value="yes" />
       <SelectOption label="No" value="no" />
     </SelectRow>
 
     <SelectRow
       disabled
-      label="Disabled row">
+      label="Disabled row"
+    >
       <SelectOption label="Yes" value="yes" />
       <SelectOption label="No" value="no" />
     </SelectRow>
@@ -38,7 +40,8 @@ export const basicUsage = () => (
       label="World peace"
       status="error"
       errorMsg="Cannot declare a war."
-      value="peace">
+      value="peace"
+    >
       <SelectOption label="Peace" value="peace" />
       <SelectOption label="War" value="war" />
     </SelectRow>
@@ -50,7 +53,8 @@ export const multipleValues = () => (
     <SelectRow
       multiple
       label="Enabled modules"
-      onChange={action('change')}>
+      onChange={action('change')}
+    >
       <SelectOption label="Module 1" value="mod1" />
       <SelectOption label="Module 2" value="mod2" />
       <SelectOption label="Module 3" value="mod3" />
@@ -62,7 +66,8 @@ export const multipleValues = () => (
       multiple
       label="Minimal selection: 2"
       minCheck={2}
-      defaultValue={['opt-c', 'opt-d']}>
+      defaultValue={['opt-c', 'opt-d']}
+    >
       <SelectOption label="Option A" value="opt-a" />
       <SelectOption label="Option B" value="opt-b" />
       <SelectOption label="Option C" value="opt-c" />
@@ -72,7 +77,8 @@ export const multipleValues = () => (
 
     <SelectRow
       multiple
-      label="Multiple selection with no options" />
+      label="Multiple selection with no options"
+    />
   </List>
 );
 
@@ -87,7 +93,8 @@ export const withAvatar = () => {
         label="Avatar"
         desc="Select One Avatar"
         defaultValue="Love"
-        onChange={action('change')}>
+        onChange={action('change')}
+      >
         <SelectOption label="Love" value="Love" avatar={loveAvatar} />
         <SelectOption label="Trumps" value="Trumps" avatar={trumpsAvatar} />
         <SelectOption label="Hate" value="Hate" avatar={hateAvatar} />
@@ -102,7 +109,8 @@ export const customizedLabels = () => (
       multiple
       label="Custom 'All' label"
       asideAllLabel="EVERYHTING SELECTED"
-      defaultValue={['opt-a', 'opt-b', 'opt-c']}>
+      defaultValue={['opt-a', 'opt-b', 'opt-c']}
+    >
       <SelectOption label="Option A" value="opt-a" />
       <SelectOption label="Option B" value="opt-b" />
       <SelectOption label="Option C" value="opt-c" />
@@ -112,7 +120,8 @@ export const customizedLabels = () => (
       multiple
       label="Turn off 'All' label"
       asideAllLabel={false}
-      defaultValue={['opt-a', 'opt-b', 'opt-c']}>
+      defaultValue={['opt-a', 'opt-b', 'opt-c']}
+    >
       <SelectOption label="Option A" value="opt-a" />
       <SelectOption label="Option B" value="opt-b" />
       <SelectOption label="Option C" value="opt-c" />
@@ -121,7 +130,8 @@ export const customizedLabels = () => (
     <SelectRow
       multiple
       label="Custom 'None' label"
-      asideNoneLabel="Nothing">
+      asideNoneLabel="Nothing"
+    >
       <SelectOption label="Option A" value="opt-a" />
       <SelectOption label="Option B" value="opt-b" />
       <SelectOption label="Option C" value="opt-c" />
@@ -132,7 +142,8 @@ export const customizedLabels = () => (
       label="Custom separator label"
       asideAllLabel={false}
       asideSeparator=" + "
-      defaultValue={['opt-a', 'opt-b', 'opt-c']}>
+      defaultValue={['opt-a', 'opt-b', 'opt-c']}
+    >
       <SelectOption label="Option A" value="opt-a" />
       <SelectOption label="Option B" value="opt-b" />
       <SelectOption label="Option C" value="opt-c" />

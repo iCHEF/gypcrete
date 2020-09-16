@@ -21,28 +21,32 @@ export function BasicUsage() {
         aside="Default color"
         tag="Tag"
         icon="add"
-        onClick={action('clicked')} />
+        onClick={action('clicked')}
+      />
 
       <Button
         color="blue"
         basic="Blue"
         aside="Variants"
         tag="Tag"
-        icon="add" />
+        icon="add"
+      />
 
       <Button
         color="red"
         basic="Red"
         aside="Variants"
         tag="Tag"
-        icon="add" />
+        icon="add"
+      />
 
       <Button
         color="white"
         basic="White"
         aside="Variants"
         tag="Tag"
-        icon="add" />
+        icon="add"
+      />
     </FlexRow>
   );
 }
@@ -54,21 +58,24 @@ export function ButtonWithStatus() {
         basic="Loading"
         tag="Tag"
         icon="add"
-        status="loading" />
+        status="loading"
+      />
 
       <Button
         basic="Success"
         tag="Tag"
         icon="add"
         status="success"
-        statusOptions={{ autohide: false }} />
+        statusOptions={{ autohide: false }}
+      />
 
       <Button
         basic="Error"
         tag="Tag"
         icon="add"
         status="error"
-        errorMsg="Save failed" />
+        errorMsg="Save failed"
+      />
     </FlexRow>
   );
 }
@@ -110,25 +117,29 @@ export function DisabledButton() {
           disabled
           basic="Black"
           aside="Disabled"
-          tag="tag" />
+          tag="tag"
+        />
         <Button
           disabled
           color="blue"
           basic="Blue"
           aside="Disabled"
-          tag="tag" />
+          tag="tag"
+        />
         <Button
           disabled
           color="red"
           basic="Red"
           aside="Disabled"
-          tag="tag" />
+          tag="tag"
+        />
         <Button
           disabled
           color="white"
           basic="White"
           aside="Disabled"
-          tag="tag" />
+          tag="tag"
+        />
       </FlexRow>
       <FlexRow>
         <Button
@@ -137,28 +148,32 @@ export function DisabledButton() {
           disabled
           basic="Black"
           aside="Disabled"
-          tag="tag" />
+          tag="tag"
+        />
         <Button
           solid
           disabled
           color="blue"
           basic="Blue"
           aside="Disabled"
-          tag="tag" />
+          tag="tag"
+        />
         <Button
           solid
           disabled
           color="red"
           basic="Red"
           aside="Disabled"
-          tag="tag" />
+          tag="tag"
+        />
         <Button
           solid
           disabled
           color="white"
           basic="White"
           aside="Disabled"
-          tag="tag" />
+          tag="tag"
+        />
       </FlexRow>
     </div>
   );
@@ -186,7 +201,8 @@ export function ExpandedButton() {
         <Button
           basic="Expanded Button"
           align="center"
-          minified={false} />
+          minified={false}
+        />
       </FlexRow>
 
       <FlexRow>
@@ -195,7 +211,8 @@ export function ExpandedButton() {
           color="red"
           basic="Expanded Button"
           align="center"
-          minified={false} />
+          minified={false}
+        />
       </FlexRow>
     </div>
   );
@@ -209,28 +226,32 @@ export function SolidButton() {
         solid
         basic="Black"
         aside="Aside text"
-        tag="Solid" />
+        tag="Solid"
+      />
 
       <Button
         solid
         color="blue"
         basic="Blue"
         aside="Aside text"
-        tag="Solid" />
+        tag="Solid"
+      />
 
       <Button
         solid
         color="red"
         basic="Red"
         aside="Aside text"
-        tag="Solid" />
+        tag="Solid"
+      />
 
       <Button
         solid
         color="white"
         basic="White"
         aside="Aside text"
-        tag="Solid" />
+        tag="Solid"
+      />
     </FlexRow>
   );
 }

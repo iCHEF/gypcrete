@@ -21,7 +21,8 @@ function ColumnHeader() {
   const label = (
     <TextLabel
       align="center"
-      basic="Column Header" />
+      basic="Column Header"
+    />
   );
 
   return (
@@ -53,7 +54,8 @@ export function BasicUsage() {
         <ColoredBox
           width="100%"
           height="30rem"
-          color="rgb(255, 235, 235)">
+          color="rgb(255, 235, 235)"
+        >
           Narrow Column
         </ColoredBox>
       </SplitViewColumn>
@@ -62,7 +64,8 @@ export function BasicUsage() {
         <ColoredBox
           width="100%"
           height="30rem"
-          color="rgb(235, 245, 255)">
+          color="rgb(235, 245, 255)"
+        >
           Wide Column
         </ColoredBox>
       </SplitViewColumn>
@@ -79,7 +82,8 @@ export function ContainsColumnView() {
           <ColoredBox
             width="100%"
             height="30rem"
-            color="rgb(255, 235, 235)">
+            color="rgb(255, 235, 235)"
+          >
             Narrow Column
           </ColoredBox>
         </DemoColumnView>
@@ -90,7 +94,8 @@ export function ContainsColumnView() {
           <ColoredBox
             width="100%"
             height="30rem"
-            color="rgb(235, 245, 255)">
+            color="rgb(235, 245, 255)"
+          >
             Wide Column
           </ColoredBox>
         </DemoColumnView>
@@ -110,7 +115,8 @@ export function InsideColumnView() {
           <ColoredBox
             width="100%"
             height="30rem"
-            color="rgb(255, 235, 235)">
+            color="rgb(255, 235, 235)"
+          >
             Narrow Column
           </ColoredBox>
         </SplitViewColumn>
@@ -119,7 +125,8 @@ export function InsideColumnView() {
           <ColoredBox
             width="100%"
             height="30rem"
-            color="rgb(235, 245, 255)">
+            color="rgb(235, 245, 255)"
+          >
             Wide Column
           </ColoredBox>
         </SplitViewColumn>

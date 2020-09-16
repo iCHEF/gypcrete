@@ -166,7 +166,8 @@ class EditableBasicRow extends PureComponent {
         <BasicRow
           className={rootClassName}
           basic={basicLabel}
-          statusIcon={statusIcon}>
+          statusIcon={statusIcon}
+        >
           <InputTag
             ref={(ref) => { this.inputNode = ref; }}
             type={inputType}
@@ -179,7 +180,8 @@ class EditableBasicRow extends PureComponent {
             onChange={this.handleInputChange}
             onFocus={this.handleInputFocus}
             onBlur={this.handleInputBlur}
-            {...inputProps} />
+            {...inputProps}
+          />
         </BasicRow>
       );
     }

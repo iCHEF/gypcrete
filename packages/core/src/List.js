@@ -50,7 +50,8 @@ function List({
             desc={desc}
             bodySpacing={false}
             verticalSpacing={spacing || !!title}
-            {...otherProps}>
+            {...otherProps}
+          >
             <ul className={BEM.body.toString()}>
               {children}
             </ul>

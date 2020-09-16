@@ -233,7 +233,8 @@ describe('Pure <SelectRow>: Data', () => {
         multiple
         label="Select"
         asideAllLabel={null}
-        value={['foo', 'bar', 'meh']}>
+        value={['foo', 'bar', 'meh']}
+      >
         <Option label="Foo" value="foo" />
         <Option label="Bar" value="bar" />
         <Option label="Meh" value="meh" />

@@ -88,19 +88,22 @@ Donec vitae nibh sem.
       <TextInputRow
         multiLine
         label="Module name"
-        defaultValue={EXAMPLE_TEXT} />
+        defaultValue={EXAMPLE_TEXT}
+      />
 
       <TextInputRow
         multiLine
         disabled
         label="Disabled row"
-        value={EXAMPLE_TEXT} />
+        value={EXAMPLE_TEXT}
+      />
 
       <TextInputRow
         multiLine
         readOnly
         label="Read-only row"
-        value={EXAMPLE_TEXT} />
+        value={EXAMPLE_TEXT}
+      />
 
 
       <TextInputRow
@@ -108,7 +111,8 @@ Donec vitae nibh sem.
         label="Secret code"
         value={EXAMPLE_TEXT}
         status="error"
-        errorMsg="Cannot authenticate with this code." />
+        errorMsg="Cannot authenticate with this code."
+      />
     </List>
   );
 };

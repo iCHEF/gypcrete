@@ -43,7 +43,8 @@ function Section({
       BEM.title
         .modifier(titleSize)
         .toString()
-    }>
+    }
+    >
       {title}
     </div>
   );

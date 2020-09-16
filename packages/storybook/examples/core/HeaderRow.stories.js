@@ -23,7 +23,8 @@ export function BasicUsage() {
       align="center"
       basic={
         <TextEllipsis>Lorem ipsum a slightly longer title</TextEllipsis>
-      } />
+      }
+    />
   );
 
   return (
@@ -31,7 +32,8 @@ export function BasicUsage() {
       <HeaderRow
         left={leftBtn}
         center={centerLabel}
-        right={rightBtn} />
+        right={rightBtn}
+      />
     </DebugBox>
   );
 }
@@ -45,7 +47,8 @@ export function OptionalArea() {
       <HeaderRow
         left={false}
         center={centerLabel}
-        right={rightBtn} />
+        right={rightBtn}
+      />
     </DebugBox>
   );
 }

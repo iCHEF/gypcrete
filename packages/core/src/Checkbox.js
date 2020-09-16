@@ -72,7 +72,8 @@ class Checkbox extends PureComponent {
             ref={(ref) => { this.inputRef = ref; }}
             type="checkbox"
             className={BEM.input}
-            {...inputProps} />
+            {...inputProps}
+          />
 
           {overrideButton || CHECKBOX_BUTTON}
         </span>

@@ -18,7 +18,8 @@ function PopupButton({
       {...props}
       className={buttonClass}
       minified={false}
-      align="center" />
+      align="center"
+    />
   );
 }
 

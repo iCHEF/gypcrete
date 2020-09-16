@@ -17,7 +17,8 @@ export function BasicUsage() {
     <Avatar
       type="square"
       alt="John Doe"
-      src="https://api.adorable.io/avatars/285/johndoe@example.com" />
+      src="https://api.adorable.io/avatars/285/johndoe@example.com"
+    />
   );
 
   return (
@@ -31,14 +32,16 @@ export function BasicUsage() {
           defaultChecked
           basic="Join pilot program"
           aside="Secondary helps"
-          tag="New" />
+          tag="New"
+        />
       </DebugBox>
 
       <DebugBox>
         <Checkbox
           defaultChecked
           basic="Join pilot program"
-          avatar={rdAvatar} />
+          avatar={rdAvatar}
+        />
       </DebugBox>
 
       <DebugBox>
@@ -46,7 +49,8 @@ export function BasicUsage() {
           defaultChecked
           basic="Turn the light"
           aside="center align"
-          align="center" />
+          align="center"
+        />
       </DebugBox>
     </div>
   );
@@ -88,17 +92,20 @@ export function CheckboxWithIndeterminateExample() {
                     && !(item1Checked && item2Checked)
         }
         checked={item1Checked && item2Checked}
-        onChange={handleCheckAll} />
+        onChange={handleCheckAll}
+      />
 
       <Checkbox
         basic="Item 1"
         checked={item1Checked}
-        onChange={handleItemCheck('item1Checked')} />
+        onChange={handleItemCheck('item1Checked')}
+      />
 
       <Checkbox
         basic="Item 2"
         checked={item2Checked}
-        onChange={handleItemCheck('item2Checked')} />
+        onChange={handleItemCheck('item2Checked')}
+      />
     </div>
   );
 }
@@ -119,7 +126,8 @@ export function CheckboxWithStatusExample() {
           indeterminate
           align="center"
           basic="Count me in"
-          status="loading" />
+          status="loading"
+        />
       </DebugBox>
 
       <DebugBox>
@@ -128,14 +136,16 @@ export function CheckboxWithStatusExample() {
           align="reverse"
           basic="Count me in"
           status="success"
-          statusOptions={{ autohide: false }} />
+          statusOptions={{ autohide: false }}
+        />
       </DebugBox>
 
       <DebugBox>
         <Checkbox
           basic="Count me in"
           status="error"
-          errorMsg="Unauthorized" />
+          errorMsg="Unauthorized"
+        />
       </DebugBox>
     </div>
   );

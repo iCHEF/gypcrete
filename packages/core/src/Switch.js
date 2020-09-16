@@ -64,7 +64,8 @@ class Switch extends PureComponent {
             ref={(ref) => { this.inputRef = ref; }}
             type="checkbox"
             className={BEM.input}
-            {...inputProps} />
+            {...inputProps}
+          />
 
           <IconLayout icon={button} tooltip={false} />
         </span>

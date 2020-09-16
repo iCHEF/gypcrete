@@ -16,7 +16,8 @@ function DemoContent() {
       lineHeight: '200px',
       textAlign: 'center',
       background: '#eee',
-    }}>
+    }}
+    >
       Section Content
     </div>
   );
@@ -62,7 +63,8 @@ export function WithoutVerticalSpacing() {
       <Section
         verticalSpacing={false}
         title="Section title"
-        desc="Description text">
+        desc="Description text"
+      >
         <DemoContent />
       </Section>
     </DebugBox>
@@ -82,7 +84,8 @@ export function WithoutBodyPadding() {
       <Section
         bodySpacing={false}
         title="Section title"
-        desc="Description text">
+        desc="Description text"
+      >
         <DemoContent />
       </Section>
     </DebugBox>

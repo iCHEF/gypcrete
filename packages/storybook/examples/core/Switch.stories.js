@@ -22,7 +22,8 @@ export function BasicUsage() {
       <DebugBox>
         <Switch
           basic="Switch with basic"
-          aside="Rare usage" />
+          aside="Rare usage"
+        />
       </DebugBox>
 
       <DebugBox>
@@ -43,13 +44,15 @@ export function ControlledInput() {
         <Switch
           defaultChecked
           basic="Uncontrolled"
-          aside="with defaults" />
+          aside="with defaults"
+        />
       </DebugBox>
       <DebugBox>
         <Switch
           checked
           basic="Controlled"
-          onChange={() => {}} />
+          onChange={() => {}}
+        />
       </DebugBox>
     </div>
   );
@@ -61,7 +64,8 @@ export function WithStatus() {
         <Switch
           turnedOn
           status="loading"
-          onChange={() => {}} />
+          onChange={() => {}}
+        />
       </DebugBox>
 
       <DebugBox>
@@ -69,7 +73,8 @@ export function WithStatus() {
           turnedOn
           status="success"
           statusOptions={{ autohide: false }}
-          onChange={() => {}} />
+          onChange={() => {}}
+        />
       </DebugBox>
 
       <DebugBox>
@@ -77,7 +82,8 @@ export function WithStatus() {
           turnedOn={false}
           status="error"
           errorMsg="Network error"
-          onChange={() => {}} />
+          onChange={() => {}}
+        />
       </DebugBox>
     </div>
   );
@@ -92,7 +98,8 @@ export function HowToPassPropsToInput() {
             id: 'dom-id',
             title: 'Tooltip for <input>',
             'data-prop': true,
-          }} />
+          }}
+        />
       </DebugBox>
     </div>
   );

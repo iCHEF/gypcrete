@@ -22,7 +22,8 @@ export function BasicUsage() {
           icon="printer"
           basic="Basic text"
           tag="Tag"
-          aside="left align (default)" />
+          aside="left align (default)"
+        />
       </DebugBox>
 
       <DebugBox>
@@ -31,7 +32,8 @@ export function BasicUsage() {
           basic="Basic text"
           tag="Tag"
           aside="center align"
-          align="center" />
+          align="center"
+        />
       </DebugBox>
 
       <DebugBox>
@@ -40,7 +42,8 @@ export function BasicUsage() {
           basic="Basic text"
           tag="Tag"
           aside="right align"
-          align="right" />
+          align="right"
+        />
       </DebugBox>
 
       <DebugBox>
@@ -49,7 +52,8 @@ export function BasicUsage() {
           basic="Basic text"
           tag="Tag"
           aside="reverse align"
-          align="reverse" />
+          align="reverse"
+        />
       </DebugBox>
     </div>
   );
@@ -65,7 +69,8 @@ export function TextLabelWithStatus() {
           tag="Tag"
           aside="Center align"
           align="center"
-          status="loading" />
+          status="loading"
+        />
       </DebugBox>
 
       <DebugBox>
@@ -76,7 +81,8 @@ export function TextLabelWithStatus() {
           aside="Reverse align"
           align="reverse"
           status="success"
-          statusOptions={{ autohide: false }} />
+          statusOptions={{ autohide: false }}
+        />
       </DebugBox>
 
       <DebugBox>
@@ -86,7 +92,8 @@ export function TextLabelWithStatus() {
           tag="Tag"
           aside="Left align"
           status="error"
-          errorMsg="Save failed" />
+          errorMsg="Save failed"
+        />
       </DebugBox>
     </div>
   );
@@ -137,7 +144,8 @@ export function UncontrolledEditableTextLabel() {
         aside="00:11:22:33"
         tag="Online"
         onDblClick={action('dblClick')}
-        onEditEnd={cleanAction('editEnd')} />
+        onEditEnd={cleanAction('editEnd')}
+      />
     </div>
   );
 }
@@ -175,7 +183,8 @@ export function ControlledEditableTextLabel() {
         tag="Online"
         onDblClick={handleDblClick}
         onEditEnd={handleEditEnd}
-        status={status} />
+        status={status}
+      />
     </DebugBox>
   );
 }

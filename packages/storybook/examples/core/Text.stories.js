@@ -28,7 +28,8 @@ export function BasicUsage() {
         <Text
           align="center"
           basic="Basic Text"
-          aside="I am center-aligned" />
+          aside="I am center-aligned"
+        />
       </DebugBox>
 
       <DebugBox>
@@ -36,14 +37,16 @@ export function BasicUsage() {
           align="right"
           basic="Basic Text"
           tag="Tag"
-          aside="I am right-aligned" />
+          aside="I am right-aligned"
+        />
       </DebugBox>
 
       <DebugBox>
         <Text
           basic={LONG_LABEL}
           tag="Tag"
-          aside="Multi-line basic" />
+          aside="Multi-line basic"
+        />
       </DebugBox>
 
       <DebugBox>
@@ -61,7 +64,8 @@ export function EllipsisExample() {
         <Text
           basic={ellipsisLabel}
           tag="tag"
-          aside="Left-aligned" />
+          aside="Left-aligned"
+        />
       </DebugBox>
 
       <DebugBox>
@@ -69,7 +73,8 @@ export function EllipsisExample() {
           align="center"
           basic={ellipsisLabel}
           tag="tag"
-          aside="Center-aligned" />
+          aside="Center-aligned"
+        />
       </DebugBox>
 
       <DebugBox>
@@ -77,7 +82,8 @@ export function EllipsisExample() {
           align="right"
           basic={ellipsisLabel}
           tag="tag"
-          aside="Right-aligned" />
+          aside="Right-aligned"
+        />
       </DebugBox>
     </div>
   );
@@ -94,7 +100,8 @@ export function WithStatusIcon() {
           basic="A Long Long Long Basic Text"
           aside="I am left-aligned"
           tag="Tag"
-          statusIcon={<StatusIcon status="loading" />} />
+          statusIcon={<StatusIcon status="loading" />}
+        />
       </DebugBox>
 
       <DebugBox>
@@ -103,7 +110,8 @@ export function WithStatusIcon() {
           basic="Basic Text"
           aside="I am center-aligned"
           tag="Tag"
-          statusIcon={<StatusIcon status="success" autohide={false} />} />
+          statusIcon={<StatusIcon status="success" autohide={false} />}
+        />
       </DebugBox>
 
       <DebugBox>
@@ -112,7 +120,8 @@ export function WithStatusIcon() {
           basic="A Long Long Long Basic Text"
           aside="I am right-aligned"
           tag="Tag"
-          statusIcon={<StatusIcon status="error" />} />
+          statusIcon={<StatusIcon status="error" />}
+        />
       </DebugBox>
     </div>
   );

@@ -27,7 +27,8 @@ class Overlay extends PureComponent {
     return (
       <div
         className={rootClassName}
-        {...overlayProps} />
+        {...overlayProps}
+      />
     );
   }
 }

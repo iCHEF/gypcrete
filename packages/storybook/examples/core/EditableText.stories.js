@@ -24,13 +24,15 @@ export function BasicUsage() {
       <DebugBox>
         <EditableText
           value="Controlled input"
-          onChange={action('change')} />
+          onChange={action('change')}
+        />
       </DebugBox>
 
       <DebugBox>
         <EditableText
           defaultValue="Uncontrolled input"
-          onChange={action('change')} />
+          onChange={action('change')}
+        />
       </DebugBox>
     </div>
   );
@@ -46,13 +48,15 @@ export function Alignments() {
       <DebugBox>
         <EditableText
           align="center"
-          value="center-aligned" />
+          value="center-aligned"
+        />
       </DebugBox>
 
       <DebugBox>
         <EditableText
           align="right"
-          value="right-aligned" />
+          value="right-aligned"
+        />
       </DebugBox>
     </div>
   );
@@ -64,21 +68,24 @@ export function MultiLines() {
       <DebugBox>
         <EditableText
           inputTag="textarea"
-          onChange={action('change')} />
+          onChange={action('change')}
+        />
       </DebugBox>
 
       <DebugBox>
         <EditableText
           inputTag="textarea"
           value={'Controlled input\nin multiple lines'}
-          onChange={action('change')} />
+          onChange={action('change')}
+        />
       </DebugBox>
 
       <DebugBox>
         <EditableText
           inputTag="textarea"
           defaultValue={'Unontrolled input\nin multiple lines'}
-          onChange={action('change')} />
+          onChange={action('change')}
+        />
       </DebugBox>
     </div>
   );

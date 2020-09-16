@@ -27,15 +27,18 @@ export function WithStatus() {
     <FlexRow>
       <IconCheckbox
         defaultChecked
-        status="loading" />
+        status="loading"
+      />
 
       <IconCheckbox
         status="success"
-        statusOptions={{ autohide: false }} />
+        statusOptions={{ autohide: false }}
+      />
 
       <IconCheckbox
         status="error"
-        errorMsg="Cannot add printer." />
+        errorMsg="Cannot add printer."
+      />
     </FlexRow>
   );
 }

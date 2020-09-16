@@ -66,7 +66,8 @@ const formRow = ({
                 errorMsg,
                 ...rowProps,
               }}
-              {...otherProps} />
+              {...otherProps}
+            />
           );
         }
   }

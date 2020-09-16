@@ -227,7 +227,8 @@ class InfiniteScroll extends PureComponent {
           disabled
           align="center"
           icon={<Icon type="loading" spinning />}
-          basic={loadingLabel} />
+          basic={loadingLabel}
+        />
       );
     }
 
@@ -248,7 +249,8 @@ class InfiniteScroll extends PureComponent {
           align="center"
           basic={buttonItem}
           minified={false}
-          onClick={onLoadMore} />
+          onClick={onLoadMore}
+        />
       );
     }
 
@@ -309,7 +311,8 @@ class InfiniteScroll extends PureComponent {
         <div
           {...rootProps}
           ref={(ref) => { this.scrollNode = ref; }}
-          className={rootClassName}>
+          className={rootClassName}
+        >
           {children}
           {this.renderFooter()}
         </div>

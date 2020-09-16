@@ -37,7 +37,8 @@ function SelectOption({
         aside={desc}
         avatar={avatar}
         onChange={handleCheckboxChange}
-        {...checkboxProps} />
+        {...checkboxProps}
+      />
     </ListRow>
   );
 }

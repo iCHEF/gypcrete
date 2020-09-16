@@ -82,7 +82,8 @@ function Icon({
     <span
       className={rootClassName}
       role="presentation"
-      {...otherProps}>
+      {...otherProps}
+    >
       {SvgComponent && (
         <SvgComponent fill={fill || DEFAULT_FILL} {...svgProps} />
       )}

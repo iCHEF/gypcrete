@@ -58,7 +58,8 @@ describe('Pure <Switch>', () => {
         checked
         defaultChecked
         disabled
-        onChange={handleChange} />
+        onChange={handleChange}
+      />
     );
     const inputWrapper = wrapper.find('input');
 

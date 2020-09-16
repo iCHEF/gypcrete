@@ -22,7 +22,8 @@ describe('Pure <SwitchRow>', () => {
       <PureSwitchRow
         label="foo"
         tabIndex="-1"
-        data-foo="bar" />
+        data-foo="bar"
+      />
     );
 
     expect(wrapper.find(Switch).exists()).toBeTruthy();
@@ -65,7 +66,8 @@ describe('Pure <SwitchRow>', () => {
         checked
         label="foo"
         asideOn="TEST_ON"
-        asideOff="TEST_OFF" />
+        asideOff="TEST_OFF"
+      />
     );
 
     expect(wrapper.find(TextLabel).prop('basic')).toBe('TEST_ON');

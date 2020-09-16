@@ -18,7 +18,8 @@ export const basicUsage = () => (
     control
     image={EXAMPLE_IMAGE}
     onLoadSuccess={handleLoadSuccess}
-    onCropChange={handleCropChange} />
+    onCropChange={handleCropChange}
+  />
 );
 
 export const readOnlyMode = () => (
@@ -27,7 +28,8 @@ export const readOnlyMode = () => (
     control
     image={EXAMPLE_IMAGE}
     onLoadSuccess={handleLoadSuccess}
-    onCropChange={handleCropChange} />
+    onCropChange={handleCropChange}
+  />
 );
 
 export const setInitialCrop = () => (
@@ -39,7 +41,8 @@ export const setInitialCrop = () => (
       y: 0.0647,
       width: 0.3057,
       height: 0.5882,
-    }} />
+    }}
+  />
 );
 
 export const customizeScaleRange = () => (
@@ -47,7 +50,8 @@ export const customizeScaleRange = () => (
     control
     minScale={1}
     maxScale={10}
-    image={EXAMPLE_IMAGE} />
+    image={EXAMPLE_IMAGE}
+  />
 );
 
 export const imagePlaceholder = () => (
@@ -58,5 +62,6 @@ export const loadingMode = () => (
   <ImageEditor
     control
     loading
-    image={EXAMPLE_IMAGE} />
+    image={EXAMPLE_IMAGE}
+  />
 );

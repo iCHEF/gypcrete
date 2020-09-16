@@ -52,7 +52,8 @@ function Popover({
         className={rootClassName}
         ref={nodeRef}
         onClick={handleWrapperClick}
-        {...otherProps}>
+        {...otherProps}
+      >
         <span className={BEM.arrow} style={arrowStyle} />
         <div className={BEM.container}>
           {children}
