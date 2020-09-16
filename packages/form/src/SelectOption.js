@@ -2,64 +2,65 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-    Checkbox,
-    ListRow,
+  Checkbox,
+  ListRow,
 } from '@ichef/gypcrete';
 
 export const valueType = PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.bool,
+  PropTypes.string,
+  PropTypes.number,
+  PropTypes.bool,
 ]);
 
 export const TYPE_SYMBOL = Symbol('SelectOption');
 
 function SelectOption({
-    label,
-    desc,
-    value,
-    avatar,
-    readOnly,
-    checked,
-    onChange,
-    ...checkboxProps
+  label,
+  desc,
+  value,
+  avatar,
+  readOnly,
+  checked,
+  onChange,
+  ...checkboxProps
 }) {
-    const handleCheckboxChange = (event) => {
-        onChange(value, event.target.checked);
-    };
+  const handleCheckboxChange = (event) => {
+    onChange(value, event.target.checked);
+  };
 
-    return (
-        <ListRow>
-            <Checkbox
-                checked={checked}
-                disabled={readOnly}
-                basic={label}
-                aside={desc}
-                avatar={avatar}
-                onChange={handleCheckboxChange}
-                {...checkboxProps} />
-        </ListRow>
-    );
+  return (
+    <ListRow>
+      <Checkbox
+        checked={checked}
+        disabled={readOnly}
+        basic={label}
+        aside={desc}
+        avatar={avatar}
+        onChange={handleCheckboxChange}
+        {...checkboxProps}
+      />
+    </ListRow>
+  );
 }
 
 SelectOption.propTypes = {
-    label: PropTypes.node.isRequired,
-    desc: PropTypes.node,
-    value: valueType,
-    avatar: PropTypes.node,
-    readOnly: PropTypes.bool,
-    // Set by <SelectList>
-    checked: PropTypes.bool,
-    onChange: PropTypes.func,
+  label: PropTypes.node.isRequired,
+  desc: PropTypes.node,
+  value: valueType,
+  avatar: PropTypes.node,
+  readOnly: PropTypes.bool,
+  // Set by <SelectList>
+  checked: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 SelectOption.defaultProps = {
-    desc: null,
-    value: null,
-    avatar: null,
-    readOnly: false,
-    checked: false,
-    onChange: () => {},
+  desc: null,
+  value: null,
+  avatar: null,
+  readOnly: false,
+  checked: false,
+  onChange: () => {},
 };
 
 /**

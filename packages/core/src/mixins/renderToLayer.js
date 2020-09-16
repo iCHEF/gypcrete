@@ -11,11 +11,11 @@ const COMPONENT_NAME = prefixClass('base-layer');
 const LAYER_ID_PREFIX = 'layer';
 
 export function createLayer() {
-    const layer = document.createElement('div');
-    layer.className = COMPONENT_NAME;
-    layer.id = randId({ prefix: LAYER_ID_PREFIX });
+  const layer = document.createElement('div');
+  layer.className = COMPONENT_NAME;
+  layer.id = randId({ prefix: LAYER_ID_PREFIX });
 
-    return layer;
+  return layer;
 }
 
 /**
@@ -30,24 +30,24 @@ export function createLayer() {
  * const ExternalComponent = renderToLayer(Component);
  */
 function renderToLayer(WrappedComponent) {
-    const componentName = getComponentName(WrappedComponent);
+  const componentName = getComponentName(WrappedComponent);
 
-    class RenderToLayer extends Component {
+  class RenderToLayer extends Component {
         static displayName = `renderToLayer(${componentName})`;
 
         state = {
-            inDOM: false,
+          inDOM: false,
         };
 
         constructor(props) {
-            super(props);
-            this.baseLayer = createLayer();
+          super(props);
+          this.baseLayer = createLayer();
         }
 
         componentDidMount() {
-            document.body.appendChild(this.baseLayer);
+          document.body.appendChild(this.baseLayer);
 
-            /**
+          /**
              * Render null before base layer is put in DOM for 'renderToLayer()' mixin.
              *
              * This is the current behavior of v1.x.
@@ -55,24 +55,24 @@ function renderToLayer(WrappedComponent) {
              * incorrect rects from self DOM node when calculating its own position,
              * due to its parent node (the layer) isn't inserted to DOM yet.
              */
-            this.setState({ inDOM: true });
+          this.setState({ inDOM: true });
         }
 
         componentWillUnmount() {
-            document.body.removeChild(this.baseLayer);
+          document.body.removeChild(this.baseLayer);
         }
 
         render() {
-            const { inDOM } = this.state;
+          const { inDOM } = this.state;
 
-            return inDOM && createPortal(
-                <WrappedComponent {...this.props} />,
-                this.baseLayer,
-            );
+          return inDOM && createPortal(
+            <WrappedComponent {...this.props} />,
+            this.baseLayer,
+          );
         }
-    }
+  }
 
-    return RenderToLayer;
+  return RenderToLayer;
 }
 
 export default renderToLayer;

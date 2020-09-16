@@ -16,38 +16,38 @@ const WHITE = 'white';
 const BLACK = 'black';
 
 function Button({
-    color,
-    solid,
-    tagName: ButtonTag,
-    // React props
-    className,
-    children,
-    ...otherProps
+  color,
+  solid,
+  tagName: ButtonTag,
+  // React props
+  className,
+  children,
+  ...otherProps
 }) {
-    const bemClass = ROOT_BEM
-        .modifier(color)
-        .modifier('solid', solid);
+  const bemClass = ROOT_BEM
+    .modifier(color)
+    .modifier('solid', solid);
 
-    const rootClassName = classNames(className, `${bemClass}`);
+  const rootClassName = classNames(className, `${bemClass}`);
 
-    // #TODO: Restore wrapper to <button> after Safari 11 goes mainstream
-    return (
-        <ButtonTag className={rootClassName} {...otherProps}>
-            {children}
-        </ButtonTag>
-    );
+  // #TODO: Restore wrapper to <button> after Safari 11 goes mainstream
+  return (
+    <ButtonTag className={rootClassName} {...otherProps}>
+      {children}
+    </ButtonTag>
+  );
 }
 
 Button.propTypes = {
-    color: PropTypes.oneOf([BLUE, RED, WHITE, BLACK]),
-    solid: PropTypes.bool,
-    tagName: PropTypes.oneOf(['button', 'a', 'div']),
+  color: PropTypes.oneOf([BLUE, RED, WHITE, BLACK]),
+  solid: PropTypes.bool,
+  tagName: PropTypes.oneOf(['button', 'a', 'div']),
 };
 
 Button.defaultProps = {
-    color: BLACK,
-    solid: false,
-    tagName: 'div',
+  color: BLACK,
+  solid: false,
+  tagName: 'div',
 };
 
 // export for tests

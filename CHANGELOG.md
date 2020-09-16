@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Core] when message prop of `<Popup>` is a string, pass it to `<PopupMessage>` as `title` prop. (#279)
 - [Core] Change `<Icon>` implementaion from icon-font to inline-svg. (#280)
+- [Core] Upgrade `eslint-config-ichef` packages to `v8.0.0`. (#290)
+- [Core] Use node 12 in travis CI. (#290)
 
 ### Added
 - [Core] Add `muted` prop on following component: (#278)

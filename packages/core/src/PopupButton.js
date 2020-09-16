@@ -8,18 +8,19 @@ import './styles/PopupButton.scss';
 export const COMPONENT_NAME = prefixClass('popup-button');
 
 function PopupButton({
-    className,
-    ...props
+  className,
+  ...props
 }) {
-    const buttonClass = classNames(COMPONENT_NAME, className);
+  const buttonClass = classNames(COMPONENT_NAME, className);
 
-    return (
-        <Button
-            {...props}
-            className={buttonClass}
-            minified={false}
-            align="center" />
-    );
+  return (
+    <Button
+      {...props}
+      className={buttonClass}
+      minified={false}
+      align="center"
+    />
+  );
 }
 
 export default PopupButton;

@@ -18,91 +18,92 @@ const BLUE = 'blue';
 const RED = 'red';
 
 const COLORS = {
-    blue: '#45b0e6',
-    red: '#d94e41',
-    gray: 'rgba(0, 0, 0, 0.7)',
+  blue: '#45b0e6',
+  red: '#d94e41',
+  gray: 'rgba(0, 0, 0, 0.7)',
 };
 
 const DEFAULT_FILL = 'currentColor';
 
 function getSvgFill({ colorType, wrapperProps }) {
-    if (colorType) {
-        return COLORS[colorType];
-    }
-    /**
+  if (colorType) {
+    return COLORS[colorType];
+  }
+  /**
      * This is for backward compatibility.
      * Because in old gypcrete, we didn't use svg but icon font for <Icon>.
      * So the icon color depends on wrapper <span> color style.
      * Though we change <Icon> implementaion to inline-svg, we should not break this behavior.
      * So just take the color from it and set this to `fill` of svg.
      */
-    const customColor = wrapperProps && wrapperProps.style && wrapperProps.style.color;
-    if (customColor) {
-        return customColor;
-    }
-    return null;
+  const customColor = wrapperProps && wrapperProps.style && wrapperProps.style.color;
+  if (customColor) {
+    return customColor;
+  }
+  return null;
 }
 
 function Icon({
-    type,
-    color,
-    large,
-    spinning,
-    className,
-    svgProps,
-    ...otherProps
+  type,
+  color,
+  large,
+  spinning,
+  className,
+  svgProps,
+  ...otherProps
 }) {
-    let bemClass = ROOT_BEM
-        .modifier('large', large)
-        .modifier('spin', spinning);
+  let bemClass = ROOT_BEM
+    .modifier('large', large)
+    .modifier('spin', spinning);
 
-    if (color) {
-        bemClass = bemClass.modifier(color);
-    }
+  if (color) {
+    bemClass = bemClass.modifier(color);
+  }
 
-    const rootClassName = classNames(
-        className,
-        bemClass.toString(),
-        /**
+  const rootClassName = classNames(
+    className,
+    bemClass.toString(),
+    /**
          * For backward compatibility.
          * For inline-svg implementaion we don't need this class name.
          * But we had used this with icon font implementation.
          */
-        `gyp-icon-${type}`
-    );
+    `gyp-icon-${type}`
+  );
 
-    const SvgComponent = SvgMap[type];
+  const SvgComponent = SvgMap[type];
 
-    const fill = getSvgFill({
-        colorType: color,
-        wrapperProps: otherProps,
-    });
+  const fill = getSvgFill({
+    colorType: color,
+    wrapperProps: otherProps,
+  });
 
-    return (
-        <span
-            className={rootClassName}
-            role="presentation"
-            {...otherProps}>
-            {SvgComponent && (
-                <SvgComponent fill={fill || DEFAULT_FILL} {...svgProps} />
-            )}
-        </span>
-    );
+  return (
+    <span
+      className={rootClassName}
+      role="presentation"
+      {...otherProps}
+    >
+      {SvgComponent && (
+        <SvgComponent fill={fill || DEFAULT_FILL} {...svgProps} />
+      )}
+    </span>
+  );
 }
 
 Icon.propTypes = {
-    type: PropTypes.string.isRequired,
-    color: PropTypes.oneOf([GRAY, BLUE, RED]),
-    large: PropTypes.bool,
-    spinning: PropTypes.bool,
-    svgProps: PropTypes.objectOf(PropTypes.any),
+  type: PropTypes.string.isRequired,
+  color: PropTypes.oneOf([GRAY, BLUE, RED]),
+  large: PropTypes.bool,
+  spinning: PropTypes.bool,
+  svgProps: PropTypes.objectOf(PropTypes.any),
 };
 
 Icon.defaultProps = {
-    color: undefined,
-    large: false,
-    spinning: false,
-    svgProps: {},
+  color: undefined,
+  large: false,
+  spinning: false,
+  svgProps: {},
 };
 
 export default Icon;

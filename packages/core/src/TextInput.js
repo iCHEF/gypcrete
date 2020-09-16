@@ -15,7 +15,7 @@ export const COMPONENT_NAME = prefixClass('text-input');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 export const BEM = {
-    input: ROOT_BEM.element('input'),
+  input: ROOT_BEM.element('input'),
 };
 
 
@@ -24,64 +24,64 @@ export const BEM = {
 // --------------------
 
 export function TextInputBasicRow({ basic, className }) {
-    return (
-        <div className={className}>
-            {basic}
-        </div>
-    );
+  return (
+    <div className={className}>
+      {basic}
+    </div>
+  );
 }
 
 TextInputBasicRow.propTypes = {
-    basic: PropTypes.node,
+  basic: PropTypes.node,
 };
 
 TextInputBasicRow.defaultProps = {
-    basic: undefined,
+  basic: undefined,
 };
 
 export function InnerInput({
-    multiLine,
-    minRows,
-    maxRows,
-    renderInput,
-    inputProps,
+  multiLine,
+  minRows,
+  maxRows,
+  renderInput,
+  inputProps,
 }) {
-    if (renderInput) {
-        return renderInput(inputProps);
-    }
+  if (renderInput) {
+    return renderInput(inputProps);
+  }
 
-    if (multiLine) {
-        return (
-            <AutoSizeTextarea
-                minRows={minRows}
-                maxRows={maxRows}
-                {...inputProps}
-            />
-        );
-    }
-
+  if (multiLine) {
     return (
-        <input
-            type="text"
-            {...inputProps}
-        />
+      <AutoSizeTextarea
+        minRows={minRows}
+        maxRows={maxRows}
+        {...inputProps}
+      />
     );
+  }
+
+  return (
+    <input
+      type="text"
+      {...inputProps}
+    />
+  );
 }
 
 InnerInput.propTypes = {
-    multiLine: PropTypes.bool,
-    minRows: PropTypes.number,
-    maxRows: PropTypes.number,
-    renderInput: PropTypes.func,
-    inputProps: PropTypes.objectOf(PropTypes.any),
+  multiLine: PropTypes.bool,
+  minRows: PropTypes.number,
+  maxRows: PropTypes.number,
+  renderInput: PropTypes.func,
+  inputProps: PropTypes.objectOf(PropTypes.any),
 };
 
 InnerInput.defaultProps = {
-    multiLine: false,
-    minRows: 2,
-    maxRows: undefined,
-    renderInput: undefined,
-    inputProps: {},
+  multiLine: false,
+  minRows: 2,
+  maxRows: undefined,
+  renderInput: undefined,
+  inputProps: {},
 };
 
 /**
@@ -97,79 +97,79 @@ InnerInput.defaultProps = {
  */
 
 function TextInput({
-    label,
-    readOnly,
-    disabled,
-    // <InnerInput> props
-    renderInput,
-    multiLine,
-    minRows,
-    maxRows,
-    // React props
-    className,
-    children,
-    ...inputProps
+  label,
+  readOnly,
+  disabled,
+  // <InnerInput> props
+  renderInput,
+  multiLine,
+  minRows,
+  maxRows,
+  // React props
+  className,
+  children,
+  ...inputProps
 }, context) {
-    const rootClassName = classNames(className, COMPONENT_NAME);
-    const { textProps } = context;
+  const rootClassName = classNames(className, COMPONENT_NAME);
+  const { textProps } = context;
 
-    const input = (
-        <InnerInput
-            multiLine={multiLine}
-            minRows={minRows}
-            maxRows={maxRows}
-            renderInput={renderInput}
-            inputProps={{
-                className: BEM.input.toString(),
-                placeholder: 'Unset',
-                readOnly,
-                disabled,
-                ...inputProps,
-            }}
-        />
-    );
+  const input = (
+    <InnerInput
+      multiLine={multiLine}
+      minRows={minRows}
+      maxRows={maxRows}
+      renderInput={renderInput}
+      inputProps={{
+        className: BEM.input.toString(),
+        placeholder: 'Unset',
+        readOnly,
+        disabled,
+        ...inputProps,
+      }}
+    />
+  );
 
-    const isEditable = !(readOnly || disabled);
+  const isEditable = !(readOnly || disabled);
 
-    return (
-        <div className={rootClassName}>
-            <PureText
-                {...textProps}
-                basicRow={<TextInputBasicRow />}
-                bold={isEditable}
-                basic={input}
-                aside={label}
-            />
-        </div>
-    );
+  return (
+    <div className={rootClassName}>
+      <PureText
+        {...textProps}
+        basicRow={<TextInputBasicRow />}
+        bold={isEditable}
+        basic={input}
+        aside={label}
+      />
+    </div>
+  );
 }
 
 TextInput.propTypes = {
-    label: PropTypes.node,
-    readOnly: PropTypes.bool,
-    disabled: PropTypes.bool,
-    // <InnerInput> props
-    renderInput: PropTypes.func,
-    multiLine: PropTypes.bool,
-    minRows: PropTypes.number,
-    maxRows: PropTypes.number,
+  label: PropTypes.node,
+  readOnly: PropTypes.bool,
+  disabled: PropTypes.bool,
+  // <InnerInput> props
+  renderInput: PropTypes.func,
+  multiLine: PropTypes.bool,
+  minRows: PropTypes.number,
+  maxRows: PropTypes.number,
 };
 
 TextInput.defaultProps = {
-    label: undefined,
-    readOnly: false,
-    disabled: false,
-    // <InnerInput> props
-    renderInput: undefined,
-    multiLine: undefined,
-    minRows: undefined,
-    maxRows: undefined,
+  label: undefined,
+  readOnly: false,
+  disabled: false,
+  // <InnerInput> props
+  renderInput: undefined,
+  multiLine: undefined,
+  minRows: undefined,
+  maxRows: undefined,
 };
 
 TextInput.contextTypes = {
-    textProps: PropTypes.shape({
-        align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
-    }),
+  textProps: PropTypes.shape({
+    align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
+  }),
 };
 
 export { TextInput as PureTextInput };

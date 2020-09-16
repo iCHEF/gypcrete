@@ -5,55 +5,55 @@ import { shallow } from 'enzyme';
 import Section, { BEM as SECTION_BEM } from '../Section';
 
 it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const element = <Section title="Title">Hello world</Section>;
+  const div = document.createElement('div');
+  const element = <Section title="Title">Hello world</Section>;
 
-    ReactDOM.render(element, div);
+  ReactDOM.render(element, div);
 });
 
 it('renders title in <div> only when specified', () => {
-    const wrapper = shallow(<Section>Foo</Section>);
-    expect(wrapper.find(`.${SECTION_BEM.title}`).exists()).toBeFalsy();
+  const wrapper = shallow(<Section>Foo</Section>);
+  expect(wrapper.find(`.${SECTION_BEM.title}`).exists()).toBeFalsy();
 
-    wrapper.setProps({ title: 'Bar' });
-    expect(wrapper.find(`.${SECTION_BEM.title}`)).toHaveLength(1);
-    expect(wrapper.find(`.${SECTION_BEM.title}`).text()).toBe('Bar');
+  wrapper.setProps({ title: 'Bar' });
+  expect(wrapper.find(`.${SECTION_BEM.title}`)).toHaveLength(1);
+  expect(wrapper.find(`.${SECTION_BEM.title}`).text()).toBe('Bar');
 });
 
 it('renders desc in <div> only when specified', () => {
-    const wrapper = shallow(<Section>Foo</Section>);
-    expect(wrapper.find(`.${SECTION_BEM.desc}`).exists()).toBeFalsy();
+  const wrapper = shallow(<Section>Foo</Section>);
+  expect(wrapper.find(`.${SECTION_BEM.desc}`).exists()).toBeFalsy();
 
-    wrapper.setProps({ desc: 'Bar' });
-    expect(wrapper.find(`.${SECTION_BEM.desc}`)).toHaveLength(1);
-    expect(wrapper.find(`.${SECTION_BEM.desc}`).text()).toBe('Bar');
+  wrapper.setProps({ desc: 'Bar' });
+  expect(wrapper.find(`.${SECTION_BEM.desc}`)).toHaveLength(1);
+  expect(wrapper.find(`.${SECTION_BEM.desc}`).text()).toBe('Bar');
 });
 
 it('renders children in a section body', () => {
-    const wrapper = shallow(<Section>Foo</Section>);
+  const wrapper = shallow(<Section>Foo</Section>);
 
-    expect(wrapper.find(`.${SECTION_BEM.body}`).exists()).toBeTruthy();
-    expect(wrapper.find(`.${SECTION_BEM.body}`).text()).toBe('Foo');
+  expect(wrapper.find(`.${SECTION_BEM.body}`).exists()).toBeTruthy();
+  expect(wrapper.find(`.${SECTION_BEM.body}`).text()).toBe('Foo');
 });
 
 it("removes class to discard padding for section body when 'bodySpacing' is false", () => {
-    const wrapper = shallow(<Section />);
-    const expectedClassName = SECTION_BEM.body.modifier('padded').toString();
-    expect(
-        wrapper.find(`.${SECTION_BEM.body}`).hasClass(expectedClassName)
-    ).toBeTruthy();
+  const wrapper = shallow(<Section />);
+  const expectedClassName = SECTION_BEM.body.modifier('padded').toString();
+  expect(
+    wrapper.find(`.${SECTION_BEM.body}`).hasClass(expectedClassName)
+  ).toBeTruthy();
 
-    wrapper.setProps({ bodySpacing: false });
-    expect(
-        wrapper.find(`.${SECTION_BEM.body}`).hasClass(expectedClassName)
-    ).toBeFalsy();
+  wrapper.setProps({ bodySpacing: false });
+  expect(
+    wrapper.find(`.${SECTION_BEM.body}`).hasClass(expectedClassName)
+  ).toBeFalsy();
 });
 
 it("adds class to remove vertical margin when 'verticalSpacing' is false", () => {
-    const wrapper = shallow(<Section />);
-    const expectedClassName = SECTION_BEM.root.modifier('no-margin').toString();
-    expect(wrapper.hasClass(expectedClassName)).toBeFalsy();
+  const wrapper = shallow(<Section />);
+  const expectedClassName = SECTION_BEM.root.modifier('no-margin').toString();
+  expect(wrapper.hasClass(expectedClassName)).toBeFalsy();
 
-    wrapper.setProps({ verticalSpacing: false });
-    expect(wrapper.hasClass(expectedClassName)).toBeTruthy();
+  wrapper.setProps({ verticalSpacing: false });
+  expect(wrapper.hasClass(expectedClassName)).toBeTruthy();
 });

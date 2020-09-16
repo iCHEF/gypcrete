@@ -11,31 +11,31 @@ import formRow, { rowPropTypes } from './mixins/formRow';
  * Most props should go into `<TextInput>`.
  */
 function TextInputRow({
-    // from formRow()
-    ineditable, // unwanted prop
-    readOnly,
-    disabled,
-    rowProps,
-    children,
-    ...inputProps
+  // from formRow()
+  readOnly,
+  disabled,
+  rowProps,
+  children,
+  ...inputProps
 }) {
-    return (
-        <ListRow {...rowProps}>
-            <TextInput
-                readOnly={readOnly}
-                disabled={disabled}
-                {...inputProps}
-            />
-            {children}
-        </ListRow>
-    );
+  const { ineditable, ...otherInputProps } = inputProps; // unwanted prop
+  return (
+    <ListRow {...rowProps}>
+      <TextInput
+        readOnly={readOnly}
+        disabled={disabled}
+        {...otherInputProps}
+      />
+      {children}
+    </ListRow>
+  );
 }
 
 TextInputRow.propTypes = {
-    // from formRow()
-    readOnly: PropTypes.bool.isRequired,
-    disabled: PropTypes.bool.isRequired,
-    rowProps: rowPropTypes.isRequired,
+  // from formRow()
+  readOnly: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  rowProps: rowPropTypes.isRequired,
 };
 
 export { TextInputRow as PureTextInputRow };

@@ -10,19 +10,19 @@ import getElementTypeSymbol from './getElementTypeSymbol';
  * @returns {array}
  */
 export default function parseSelectOptions(children) {
-    const childArray = Array.isArray(children) ? children : [children].filter(item => item);
+  const childArray = Array.isArray(children) ? children : [children].filter(item => item);
 
-    const results = childArray.map((child) => {
-        if (getElementTypeSymbol(child) === TYPE_SYMBOL) {
-            return child.props;
-        }
+  const results = childArray.map((child) => {
+    if (getElementTypeSymbol(child) === TYPE_SYMBOL) {
+      return child.props;
+    }
 
-        if (child && child.type === Fragment) {
-            return parseSelectOptions(child.props.children);
-        }
+    if (child && child.type === Fragment) {
+      return parseSelectOptions(child.props.children);
+    }
 
-        return null;
-    });
+    return null;
+  });
 
-    return results.flat().filter(item => item);
+  return results.flat().filter(item => item);
 }

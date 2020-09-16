@@ -7,48 +7,49 @@ import StatusIcon from '../StatusIcon';
 import Tag from '../Tag';
 
 it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const element = (
-        <BasicRow
-            basic="Basic text"
-            tag="Tag" />
-    );
+  const div = document.createElement('div');
+  const element = (
+    <BasicRow
+      basic="Basic text"
+      tag="Tag"
+    />
+  );
 
-    ReactDOM.render(element, div);
+  ReactDOM.render(element, div);
 });
 
 it('renders with only Basic text', () => {
-    const wrapper = shallow(<BasicRow basic="foo-bar" />);
-    expect(wrapper.children()).toHaveLength(1);
+  const wrapper = shallow(<BasicRow basic="foo-bar" />);
+  expect(wrapper.children()).toHaveLength(1);
 });
 
 it('renders with tag', () => {
-    const wrapper = shallow(<BasicRow basic="foo" tag="bar" />);
-    expect(wrapper.children()).toHaveLength(2);
-    expect(wrapper.find(Tag).shallow().text()).toBe('bar');
+  const wrapper = shallow(<BasicRow basic="foo" tag="bar" />);
+  expect(wrapper.children()).toHaveLength(2);
+  expect(wrapper.find(Tag).shallow().text()).toBe('bar');
 });
 
 it('renders with custom tag', () => {
-    const tag = <Tag>bar</Tag>;
-    const wrapper = shallow(<BasicRow basic="foo" tag={tag} />);
+  const tag = <Tag>bar</Tag>;
+  const wrapper = shallow(<BasicRow basic="foo" tag={tag} />);
 
-    expect(wrapper.children()).toHaveLength(2);
-    expect(wrapper.contains(tag)).toBeTruthy();
+  expect(wrapper.children()).toHaveLength(2);
+  expect(wrapper.contains(tag)).toBeTruthy();
 });
 
 it('renders with statusIcon', () => {
-    const icon = <StatusIcon status="loading" />;
-    const wrapper = shallow(<BasicRow basic="foo" statusIcon={icon} />);
+  const icon = <StatusIcon status="loading" />;
+  const wrapper = shallow(<BasicRow basic="foo" statusIcon={icon} />);
 
-    expect(wrapper.children()).toHaveLength(2);
-    expect(wrapper.contains(icon)).toBeTruthy();
+  expect(wrapper.children()).toHaveLength(2);
+  expect(wrapper.contains(icon)).toBeTruthy();
 });
 
 it('renders with both tag and statusIcon', () => {
-    const icon = <StatusIcon status="loading" />;
-    const wrapper = shallow(<BasicRow basic="foo" tag="bar" statusIcon={icon} />);
+  const icon = <StatusIcon status="loading" />;
+  const wrapper = shallow(<BasicRow basic="foo" tag="bar" statusIcon={icon} />);
 
-    expect(wrapper.children()).toHaveLength(3);
-    expect(wrapper.find(Tag).shallow().text()).toBe('bar');
-    expect(wrapper.contains(icon)).toBeTruthy();
+  expect(wrapper.children()).toHaveLength(3);
+  expect(wrapper.find(Tag).shallow().text()).toBe('bar');
+  expect(wrapper.contains(icon)).toBeTruthy();
 });

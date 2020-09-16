@@ -33,19 +33,19 @@ export const PLACEMENT = { TOP, BOTTOM };
  * @param {number} selfHeight
  */
 export function getPlacement(defaultPlacement, anchorRectTop, anchorHeight, selfHeight) {
-    const hasSpaceToPlaceSelfAbove = anchorRectTop >= selfHeight;
-    const hasSpaceToPlaceSelfBelow = (
-        (anchorRectTop + anchorHeight + selfHeight) <= window.innerHeight
-    );
+  const hasSpaceToPlaceSelfAbove = anchorRectTop >= selfHeight;
+  const hasSpaceToPlaceSelfBelow = (
+    (anchorRectTop + anchorHeight + selfHeight) <= window.innerHeight
+  );
 
-    if (defaultPlacement === TOP && !hasSpaceToPlaceSelfAbove) {
-        return BOTTOM;
-    }
-    if (defaultPlacement === BOTTOM && !hasSpaceToPlaceSelfBelow) {
-        return TOP;
-    }
+  if (defaultPlacement === TOP && !hasSpaceToPlaceSelfAbove) {
+    return BOTTOM;
+  }
+  if (defaultPlacement === BOTTOM && !hasSpaceToPlaceSelfBelow) {
+    return TOP;
+  }
 
-    return defaultPlacement;
+  return defaultPlacement;
 }
 
 /**
@@ -57,15 +57,15 @@ export function getPlacement(defaultPlacement, anchorRectTop, anchorHeight, self
  * @param {number} selfHeight
  */
 export function getTopPosition(placement, anchorOffsetTop, anchorHeight, selfHeight) {
-    let positionTop = 0;
+  let positionTop = 0;
 
-    if (placement === TOP) {
-        positionTop = anchorOffsetTop - selfHeight;
-    } else {
-        positionTop = anchorOffsetTop + anchorHeight;
-    }
+  if (placement === TOP) {
+    positionTop = anchorOffsetTop - selfHeight;
+  } else {
+    positionTop = anchorOffsetTop + anchorHeight;
+  }
 
-    return positionTop;
+  return positionTop;
 }
 
 /**
@@ -92,58 +92,58 @@ export function getTopPosition(placement, anchorOffsetTop, anchorHeight, selfHei
  * @param {number} edgePadding
  */
 export function getLeftPositionSet(
-    anchorRectLeft,
-    anchorOffsetLeft,
-    anchorWidth,
-    selfWidth,
-    edgePadding,
+  anchorRectLeft,
+  anchorOffsetLeft,
+  anchorWidth,
+  selfWidth,
+  edgePadding,
 ) {
-    const anchorHalfWidth = anchorWidth / 2;
-    const selfHalfWidth = selfWidth / 2;
+  const anchorHalfWidth = anchorWidth / 2;
+  const selfHalfWidth = selfWidth / 2;
 
-    const anchorCenterCoordXOnViewPort = anchorRectLeft + anchorHalfWidth;
+  const anchorCenterCoordXOnViewPort = anchorRectLeft + anchorHalfWidth;
 
-    const hasSpaceOnLeftOfAnchorCenter = anchorCenterCoordXOnViewPort >= selfHalfWidth;
-    const hasSpaceOnRightOfAnchorCenter = (
-        (window.innerWidth - anchorCenterCoordXOnViewPort) >= selfHalfWidth
-    );
+  const hasSpaceOnLeftOfAnchorCenter = anchorCenterCoordXOnViewPort >= selfHalfWidth;
+  const hasSpaceOnRightOfAnchorCenter = (
+    (window.innerWidth - anchorCenterCoordXOnViewPort) >= selfHalfWidth
+  );
 
-    let selfLeft = 0;
-    let arrowLeft = 0;
+  let selfLeft = 0;
+  let arrowLeft = 0;
 
-    switch (true) {
-        // Center-aligned
-        case (hasSpaceOnLeftOfAnchorCenter && hasSpaceOnRightOfAnchorCenter):
-            selfLeft = (anchorOffsetLeft + anchorHalfWidth) - selfHalfWidth;
-            arrowLeft = selfHalfWidth;
-            break;
+  switch (true) {
+    // Center-aligned
+    case (hasSpaceOnLeftOfAnchorCenter && hasSpaceOnRightOfAnchorCenter):
+      selfLeft = (anchorOffsetLeft + anchorHalfWidth) - selfHalfWidth;
+      arrowLeft = selfHalfWidth;
+      break;
 
-        // Right-align to the anchor
-        case (hasSpaceOnLeftOfAnchorCenter && !hasSpaceOnRightOfAnchorCenter):
-            selfLeft = (anchorOffsetLeft + anchorWidth) - selfWidth;
-            arrowLeft = selfWidth - anchorHalfWidth;
-            break;
+      // Right-align to the anchor
+    case (hasSpaceOnLeftOfAnchorCenter && !hasSpaceOnRightOfAnchorCenter):
+      selfLeft = (anchorOffsetLeft + anchorWidth) - selfWidth;
+      arrowLeft = selfWidth - anchorHalfWidth;
+      break;
 
-        // Left-align to the anchor
-        default:
-            selfLeft = anchorOffsetLeft;
-            arrowLeft = anchorHalfWidth;
-            break;
-    }
+      // Left-align to the anchor
+    default:
+      selfLeft = anchorOffsetLeft;
+      arrowLeft = anchorHalfWidth;
+      break;
+  }
 
-    // Calibrate to keep arrow stay in *wrapped component*
-    const arrowLeftMin = edgePadding;
-    const arrowLeftMax = selfWidth - edgePadding;
+  // Calibrate to keep arrow stay in *wrapped component*
+  const arrowLeftMin = edgePadding;
+  const arrowLeftMax = selfWidth - edgePadding;
 
-    arrowLeft = Math.max(
-        arrowLeftMin,
-        Math.min(arrowLeft, arrowLeftMax)
-    );
+  arrowLeft = Math.max(
+    arrowLeftMin,
+    Math.min(arrowLeft, arrowLeftMax)
+  );
 
-    return {
-        selfLeft,
-        arrowLeft,
-    };
+  return {
+    selfLeft,
+    arrowLeft,
+  };
 }
 
 /**
@@ -162,60 +162,60 @@ export function getLeftPositionSet(
  */
 
 const getPositionState = (defaultPlacement, edgePadding) => (anchorNode, selfNode) => {
-    if (!anchorNode || !selfNode) {
-        return {
-            placement: defaultPlacement,
-            position: {},
-            arrowPosition: {},
-        };
-    }
-
-    // -------------------------------------
-    //   Measuring anchor and self
-    // -------------------------------------
-
-    const anchorRect = anchorNode.getBoundingClientRect();
-    const selfRect = selfNode.getBoundingClientRect();
-
-    /** @type {DocumentOffset} */
-    const anchorOffset = documentOffset(anchorNode);
-
-    // -------------------------------------
-    //   Determine position
-    // -------------------------------------
-
-    const placement = getPlacement(
-        defaultPlacement,
-        anchorRect.top,
-        anchorRect.height,
-        selfRect.height,
-    );
-
-    const selfTop = getTopPosition(
-        placement,
-        anchorOffset.top,
-        anchorRect.height,
-        selfRect.height,
-    );
-
-    const { selfLeft, arrowLeft } = getLeftPositionSet(
-        anchorRect.left,
-        anchorOffset.left,
-        anchorRect.width,
-        selfRect.width,
-        edgePadding,
-    );
-
+  if (!anchorNode || !selfNode) {
     return {
-        placement,
-        position: {
-            top: selfTop,
-            left: selfLeft,
-        },
-        arrowPosition: {
-            left: arrowLeft,
-        },
+      placement: defaultPlacement,
+      position: {},
+      arrowPosition: {},
     };
+  }
+
+  // -------------------------------------
+  //   Measuring anchor and self
+  // -------------------------------------
+
+  const anchorRect = anchorNode.getBoundingClientRect();
+  const selfRect = selfNode.getBoundingClientRect();
+
+  /** @type {DocumentOffset} */
+  const anchorOffset = documentOffset(anchorNode);
+
+  // -------------------------------------
+  //   Determine position
+  // -------------------------------------
+
+  const placement = getPlacement(
+    defaultPlacement,
+    anchorRect.top,
+    anchorRect.height,
+    selfRect.height,
+  );
+
+  const selfTop = getTopPosition(
+    placement,
+    anchorOffset.top,
+    anchorRect.height,
+    selfRect.height,
+  );
+
+  const { selfLeft, arrowLeft } = getLeftPositionSet(
+    anchorRect.left,
+    anchorOffset.left,
+    anchorRect.width,
+    selfRect.width,
+    edgePadding,
+  );
+
+  return {
+    placement,
+    position: {
+      top: selfTop,
+      left: selfLeft,
+    },
+    arrowPosition: {
+      left: arrowLeft,
+    },
+  };
 };
 
 export default getPositionState;

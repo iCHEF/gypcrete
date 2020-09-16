@@ -6,10 +6,10 @@ import SelectList from './SelectList';
 import SelectOption from './SelectOption';
 
 export {
-    TextInputRow,
-    SwitchRow,
-    SelectRow,
+  TextInputRow,
+  SwitchRow,
+  SelectRow,
 
-    SelectList,
-    SelectOption,
+  SelectList,
+  SelectOption,
 };

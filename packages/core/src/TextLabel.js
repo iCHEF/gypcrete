@@ -7,13 +7,13 @@ import './styles/TextLabel.scss';
 export const COMPONENT_NAME = prefixClass('text-label');
 
 function TextLabel({ className, children, ...otherProps }) {
-    const rootClassName = classNames(className, COMPONENT_NAME);
+  const rootClassName = classNames(className, COMPONENT_NAME);
 
-    return (
-        <div className={rootClassName} {...otherProps}>
-            {children}
-        </div>
-    );
+  return (
+    <div className={rootClassName} {...otherProps}>
+      {children}
+    </div>
+  );
 }
 
 // export for tests

@@ -5,48 +5,48 @@ import SearchInput, { PureSearchInput } from '@ichef/gypcrete/src/SearchInput';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-    title: '@ichef/gypcrete|SearchInput',
-    component: PureSearchInput,
-    subcomponents: {
-        'rowComp()': SearchInput,
-    },
+  title: '@ichef/gypcrete|SearchInput',
+  component: PureSearchInput,
+  subcomponents: {
+    'rowComp()': SearchInput,
+  },
 };
 
 export function BasicSearchInputExample() {
-    const [controlledInputValue, setValue] = useState('');
+  const [controlledInputValue, setValue] = useState('');
 
-    const handleControlledInputChange = (e) => {
-        action('onChange')(e.target.value);
-        setValue(e.target.value);
-    };
+  const handleControlledInputChange = (e) => {
+    action('onChange')(e.target.value);
+    setValue(e.target.value);
+  };
 
-    const handleControlledInputReset = () => {
-        action('onReset')();
-        setValue('');
-    };
+  const handleControlledInputReset = () => {
+    action('onReset')();
+    setValue('');
+  };
 
-    return (
-        <div>
-            <DebugBox>
-                <SearchInput
-                    value={controlledInputValue}
-                    onChange={handleControlledInputChange}
-                    onSearch={action('onSearch')}
-                    onReset={handleControlledInputReset}
-                    // searchOnInputChange
-                    searchOnInputBlur
-                    blockDuplicateValueSearch
-                    blockEmptyValueSearch
-                />
-            </DebugBox>
+  return (
+    <div>
+      <DebugBox>
+        <SearchInput
+          value={controlledInputValue}
+          onChange={handleControlledInputChange}
+          onSearch={action('onSearch')}
+          onReset={handleControlledInputReset}
+          // searchOnInputChange
+          searchOnInputBlur
+          blockDuplicateValueSearch
+          blockEmptyValueSearch
+        />
+      </DebugBox>
 
-            <DebugBox>
-                <SearchInput defaultValue="Monkey King" />
-            </DebugBox>
+      <DebugBox>
+        <SearchInput defaultValue="Monkey King" />
+      </DebugBox>
 
-            <DebugBox>
-                <SearchInput defaultValue="Monkey King" status="loading" />
-            </DebugBox>
-        </div>
-    );
+      <DebugBox>
+        <SearchInput defaultValue="Monkey King" status="loading" />
+      </DebugBox>
+    </div>
+  );
 }
