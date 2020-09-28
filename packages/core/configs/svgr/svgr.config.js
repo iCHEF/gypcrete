@@ -10,5 +10,6 @@ module.exports = {
   prettier: true,
   prettierConfig: {
     singleQuote: true,
+    tabWidth: 2,
   },
 };
