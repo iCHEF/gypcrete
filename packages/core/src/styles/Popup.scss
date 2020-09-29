@@ -50,13 +50,6 @@ $component: #{$prefix}-popup;
         }
     }
 
-    // Message wrapper
-    &__message-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
     // Message title
     &__message-title {
         font-size: rem(16px);
@@ -91,23 +84,11 @@ $component: #{$prefix}-popup;
 
     $button: #{$prefix}-popup-button;
 
-    &--vertical {
-        .#{$button} {
-            flex-basis: 100%;
-        }
-
-        .#{$button} + .#{$button} {
-            border-top: 1px solid $c-popup-button-border;
-        }
+    .#{$button} {
+        flex-basis: 100%;
     }
 
-    &--horizontal {
-        .#{$button} {
-            flex: 1 1 50%;
-        }
-
-        .#{$button} + .#{$button} {
-            border-left: 1px solid $c-popup-button-border;
-        }
+    .#{$button} + .#{$button} {
+        border-top: 1px solid $c-popup-button-border;
     }
 }

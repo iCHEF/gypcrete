@@ -24,7 +24,6 @@ export const BEM = {
   root: ROOT_BEM,
   container: ROOT_BEM.element('container'),
   body: ROOT_BEM.element('body'),
-  messageWrapper: ROOT_BEM.element('message-wrapper'),
   messageTitle: ROOT_BEM.element('message-title'),
   messageDesc: ROOT_BEM.element('message-desc'),
   button: ROOT_BEM.element('button'),
