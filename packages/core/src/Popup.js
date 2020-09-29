@@ -99,7 +99,7 @@ function Popup({
           {messageBottomArea}
         </div>
 
-        {buttons && buttons.length && (
+        {buttons && (
           <div className={BEM.buttonsGroup}>
             {buttons}
           </div>
@@ -118,7 +118,7 @@ Popup.propTypes = {
   iconColor: PopupIcon.propTypes.color,
   message: PopupMessage.propTypes.message,
   messageBottomArea: PropTypes.node,
-  buttons: PropTypes.arrayOf(PropTypes.element),
+  buttons: PropTypes.node,
 };
 
 Popup.defaultProps = {

@@ -80,15 +80,9 @@ $component: #{$prefix}-popup;
 .#{$component}__buttons-group {
     display: flex;
     flex-wrap: wrap;
-    border-top: 1px solid $c-popup-button-border;
 
-    $button: #{$prefix}-popup-button;
-
-    .#{$button} {
-        flex-basis: 100%;
-    }
-
-    .#{$button} + .#{$button} {
+    .#{$prefix}-popup-button {
         border-top: 1px solid $c-popup-button-border;
+        flex-basis: 100%;
     }
 }
