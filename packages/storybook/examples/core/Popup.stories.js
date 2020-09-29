@@ -6,6 +6,7 @@ import PopupButton from '@ichef/gypcrete/src/PopupButton';
 
 import Checkbox from '@ichef/gypcrete/src/Checkbox';
 
+const reactLogoImg = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K';
 
 export default {
   title: '@ichef/gypcrete|Popup',
@@ -108,3 +109,31 @@ CustomContentBelowMessage.story = {
     },
   },
 };
+
+export function CustomIcon() {
+  const customIcon = <img src={reactLogoImg} alt="" width="48" />;
+  return (
+    <Popup
+      icon={customIcon}
+      message="custom icon"
+    />
+  );
+}
+
+export function CustomMessageNode() {
+  const customMessage = (
+    <div>
+      Hello
+      <b> world </b>
+      from React!
+    </div>
+  );
+
+  return (
+    <Popup
+      icon="success"
+      iconColor="blue"
+      message={customMessage}
+    />
+  );
+}
