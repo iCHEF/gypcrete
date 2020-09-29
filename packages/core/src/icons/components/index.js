@@ -30,6 +30,7 @@ import Fold from './Fold';
 import Folder from './Folder';
 import HeaderNext from './HeaderNext';
 import HeaderPrev from './HeaderPrev';
+import InlineDropdown from './InlineDropdown';
 import InlineError from './InlineError';
 import InlineInfo from './InlineInfo';
 import InlineLoading from './InlineLoading';
@@ -99,6 +100,7 @@ export default {
   folder: Folder,
   'header-next': HeaderNext,
   'header-prev': HeaderPrev,
+  'inline-dropdown': InlineDropdown,
   'inline-error': InlineError,
   'inline-info': InlineInfo,
   'inline-loading': InlineLoading,

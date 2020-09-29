@@ -50,7 +50,7 @@ function indexTemplate(iconComponentFileAbsPaths) {
   return `${importStatements.join('\n')}
 
 export default {
-${exportStatements.map(s => `    ${s}`).join('\n')}
+${exportStatements.map(s => `  ${s}`).join('\n')}
 };
 `;
 }
