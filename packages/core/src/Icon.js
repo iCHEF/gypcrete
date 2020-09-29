@@ -16,32 +16,8 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 const GRAY = 'gray';
 const BLUE = 'blue';
 const RED = 'red';
+const GREEN = 'green';
 
-const COLORS = {
-  blue: '#45b0e6',
-  red: '#d94e41',
-  gray: 'rgba(0, 0, 0, 0.7)',
-};
-
-const DEFAULT_FILL = 'currentColor';
-
-function getSvgFill({ colorType, wrapperProps }) {
-  if (colorType) {
-    return COLORS[colorType];
-  }
-  /**
-     * This is for backward compatibility.
-     * Because in old gypcrete, we didn't use svg but icon font for <Icon>.
-     * So the icon color depends on wrapper <span> color style.
-     * Though we change <Icon> implementaion to inline-svg, we should not break this behavior.
-     * So just take the color from it and set this to `fill` of svg.
-     */
-  const customColor = wrapperProps && wrapperProps.style && wrapperProps.style.color;
-  if (customColor) {
-    return customColor;
-  }
-  return null;
-}
 
 function Icon({
   type,
@@ -73,11 +49,6 @@ function Icon({
 
   const SvgComponent = SvgMap[type];
 
-  const fill = getSvgFill({
-    colorType: color,
-    wrapperProps: otherProps,
-  });
-
   return (
     <span
       className={rootClassName}
@@ -85,7 +56,7 @@ function Icon({
       {...otherProps}
     >
       {SvgComponent && (
-        <SvgComponent fill={fill || DEFAULT_FILL} {...svgProps} />
+        <SvgComponent fill="currentColor" {...svgProps} />
       )}
     </span>
   );
@@ -93,7 +64,7 @@ function Icon({
 
 Icon.propTypes = {
   type: PropTypes.string.isRequired,
-  color: PropTypes.oneOf([GRAY, BLUE, RED]),
+  color: PropTypes.oneOf([GRAY, BLUE, RED, GREEN]),
   large: PropTypes.bool,
   spinning: PropTypes.bool,
   svgProps: PropTypes.objectOf(PropTypes.any),
