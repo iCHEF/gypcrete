@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import Popup, { PurePopup } from '@ichef/gypcrete/src/Popup';
 import PopupButton from '@ichef/gypcrete/src/PopupButton';
 
-import Button from '@ichef/gypcrete/src/Button';
 import Checkbox from '@ichef/gypcrete/src/Checkbox';
 
-const ReactLogo = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K';
 
 export default {
   title: '@ichef/gypcrete|Popup',
@@ -15,127 +13,98 @@ export default {
   subcomponents: {
     'renderToLayer()': Popup,
   },
+  parameters: {
+    docs: {
+      inlineStories: false,
+      iframeHeight: 300,
+    },
+  },
 };
 
-
-export function BasicUsage(popupProps) {
-  const [opened, setOpened] = useState(false);
-
-  const handlePopupButtonClick = actionName => () => {
-    setOpened(false);
-    action(actionName);
-  };
-  const buttons = [
-    <PopupButton key="download" bold basic="Download" onClick={handlePopupButtonClick('download')} />,
-    <PopupButton key="dismiss" basic="Dismiss" onClick={handlePopupButtonClick('dismiss')} />,
-  ];
-  const handlePopupOpen = () => setOpened(true);
-
+export function BasicMessage() {
   return (
-    <div>
-      <Button
-        solid
-        color="blue"
-        onClick={handlePopupOpen}
-        style={{ display: 'inline-block' }}
-      >
-        Open Popup
-      </Button>
-      {opened && (
-        <Popup
-          messageTitle="File generated"
-          messageDesc="Please click “Download” to get your file."
-          icon="success"
-          buttons={buttons}
-          {...popupProps}
-        />
-      )}
-    </div>
-  );
-}
-
-export function HorizontalButtons() {
-  /*
-        <BasicUsage> will pass props into <Popup>.
-        See <BasicUsage> component code in Basic Usage example.
-    */
-  return <BasicUsage buttonsDirection="horizontal" />;
-}
-
-
-export function PopupWithoutIcon() {
-  /*
-        <BasicUsage> will pass props into <Popup>.
-        See <BasicUsage> component code in Basic Usage example.
-    */
-  return (
-    <BasicUsage icon={undefined} />
-  );
-}
-
-export function LargePopup() {
-  /*
-        <BasicUsage> will pass props into <Popup>.
-        See <BasicUsage> component code in Basic Usage example.
-    */
-  return (
-    <BasicUsage large />
-  );
-}
-
-
-export function CustomMessageBottomArea() {
-  /*
-        <BasicUsage> will pass props into <Popup>.
-        See <BasicUsage> component code in Basic Usage example.
-    */
-  return (
-    <BasicUsage
-      messageBottomArea={(
-        <Checkbox basic="Download zip file" />
+    <Popup
+      icon="error"
+      iconColor="red"
+      message="You have unsaved changes. Click “Confirm” to abandon changes."
+      buttons={(
+        <>
+          <PopupButton basic="Cancel" onClick={action('cancel')} />
+          <PopupButton basic="Confirm" onClick={action('confirm')} />
+        </>
       )}
     />
   );
 }
 
-
-export function CustomMessageNode(popupProps) {
-  const [opened, setOpened] = useState(false);
-
-  const customMessageNode = (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <img alt="react" width={30} height={30} src={ReactLogo} />
-      <span style={{ marginLeft: '10px' }}> is awesome!</span>
-    </div>
-  );
-
-  const handlePopupButtonClick = () => {
-    setOpened(false);
-  };
-
-  const buttons = [
-    <PopupButton key="agree" bold basic="Agree!" onClick={handlePopupButtonClick} />,
-  ];
-  const handlePopupOpen = () => setOpened(true);
-
+export function MessageWithTitle() {
   return (
-    <div>
-      <Button
-        solid
-        color="blue"
-        onClick={handlePopupOpen}
-        style={{ display: 'inline-block' }}
-      >
-        Open Popup
-      </Button>
-      {opened && (
-        <Popup
-          customMessageNode={customMessageNode}
-          icon="success"
-          buttons={buttons}
-          {...popupProps}
-        />
+    <Popup
+      icon="error"
+      iconColor="red"
+      message={{
+        title: 'Invalid inputs',
+        desc: 'Please check value of each fields.',
+      }}
+      buttons={(
+        <PopupButton basic="Confirm" onClick={action('confirm')} />
       )}
-    </div>
+    />
   );
 }
+
+export function LargePopup() {
+  return (
+    <Popup
+      size="large"
+      icon="error"
+      iconColor="red"
+      message={{
+        title: 'A very important notice',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      }}
+      buttons={(
+        <>
+          <PopupButton basic="Learn more" onClick={action('learn')} />
+          <PopupButton basic="Close" onClick={action('close')} />
+        </>
+      )}
+    />
+  );
+}
+LargePopup.story = {
+  parameters: {
+    docs: {
+      iframeHeight: 400,
+    },
+  },
+};
+
+export function CustomContentBelowMessage() {
+  return (
+    <Popup
+      icon="announce"
+      iconColor="green"
+      message={{
+        title: 'Website updated',
+        desc: 'We have added lots of new features!',
+      }}
+      messageBottomArea={(
+        <Checkbox align="center" basic="Do not show again" />
+      )}
+      buttons={(
+        <>
+          <PopupButton basic="Learn more" onClick={action('learn')} />
+          <PopupButton basic="Close" onClick={action('close')} />
+        </>
+      )}
+    />
+  );
+}
+CustomContentBelowMessage.story = {
+  parameters: {
+    docs: {
+      iframeHeight: 400,
+    },
+  },
+};
