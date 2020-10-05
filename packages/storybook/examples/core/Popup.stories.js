@@ -120,6 +120,20 @@ export function CustomIcon() {
   );
 }
 
+export function NoIcon() {
+  return (
+    <Popup
+      message={{
+        title: 'Website updated',
+        desc: 'We have added lots of new features!',
+      }}
+      buttons={(
+        <PopupButton basic="Close" onClick={action('close')} />
+      )}
+    />
+  );
+}
+
 export function CustomMessageNode() {
   const customMessage = (
     <div>
