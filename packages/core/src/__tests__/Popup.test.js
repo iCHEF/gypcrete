@@ -64,6 +64,15 @@ describe('<Popup> icon', () => {
 
     expect(iconWrapper.find('[data-target]').exists()).toBeTruthy();
   });
+
+  it('supports omitting icon', () => {
+    const wrapper = shallow(
+      <PurePopup message="foo" />
+    );
+    const iconWrapper = wrapper.find(PopupIcon).shallow();
+
+    expect(iconWrapper.find(Icon).exists()).toBeFalsy();
+  });
 });
 
 describe('<Popup> message', () => {

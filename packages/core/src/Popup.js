@@ -31,6 +31,10 @@ export const BEM = {
 };
 
 export function PopupIcon({ icon, color }) {
+  if (!icon) {
+    return null;
+  }
+
   return (
     <div>
       {isValidElement(icon)
@@ -43,10 +47,11 @@ PopupIcon.propTypes = {
   icon: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
-  ]).isRequired,
+  ]),
   color: PropTypes.string,
 };
 PopupIcon.defaultProps = {
+  icon: undefined,
   color: undefined,
 };
 
