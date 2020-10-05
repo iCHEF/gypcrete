@@ -37,9 +37,10 @@ export function PopupIcon({ icon, color }) {
 
   return (
     <div>
-      {isValidElement(icon)
+      {(isValidElement(icon)
         ? icon
-        : <Icon large type={icon} color={color} />}
+        : <Icon large type={icon} color={color} />
+      )}
     </div>
   );
 }
