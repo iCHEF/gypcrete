@@ -9,6 +9,7 @@ deploy/
 public/
 tmp/
 .cache/
+.idea/
 .DS_Store
 *-debug.log
 *-error.log
