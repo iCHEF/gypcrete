@@ -42,6 +42,7 @@ import LastPage from './LastPage';
 import Loading from './Loading';
 import Lock from './Lock';
 import Mapping from './Mapping';
+import MinusOne from './MinusOne';
 import More from './More';
 import NextPage from './NextPage';
 import Next from './Next';
@@ -49,6 +50,7 @@ import Pause from './Pause';
 import Pencil from './Pencil';
 import Picture from './Picture';
 import Play from './Play';
+import PlusOne from './PlusOne';
 import PrevPage from './PrevPage';
 import Prev from './Prev';
 import Printer from './Printer';
@@ -112,6 +114,7 @@ export default {
   loading: Loading,
   lock: Lock,
   mapping: Mapping,
+  'minus-one': MinusOne,
   more: More,
   'next-page': NextPage,
   next: Next,
@@ -119,6 +122,7 @@ export default {
   pencil: Pencil,
   picture: Picture,
   play: Play,
+  'plus-one': PlusOne,
   'prev-page': PrevPage,
   prev: Prev,
   printer: Printer,
