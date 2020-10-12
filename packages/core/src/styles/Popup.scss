@@ -25,12 +25,15 @@ $component: #{$prefix}-popup;
     &__container {
         width: 95%;
         max-width: $popup-container-width;
+        max-height: 80%;
         background-color: $c-white;
         border-radius: $popup-border-radius;
         box-shadow: $popup-box-shadow;
         position: relative;
         overflow: hidden;
         transition: width .15s;
+        display: flex;
+        flex-direction: column;
 
         // Active animation
         opacity: 0;
@@ -41,9 +44,16 @@ $component: #{$prefix}-popup;
         }
     }
 
+    &__icon {
+        flex: 0 0 auto;
+        transform: translateY(rem(16px));
+    }
+
     // Body
     &__body {
         padding: rem(16px);
+        flex: 0 1 auto;
+        overflow: auto;
 
         .#{$component}--large & {
             padding: rem(16px) rem(56px);
@@ -78,6 +88,7 @@ $component: #{$prefix}-popup;
 
 // Buttons group
 .#{$component}__buttons-group {
+    flex: 0 0 auto;
     display: flex;
     flex-wrap: wrap;
 

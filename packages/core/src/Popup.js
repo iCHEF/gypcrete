@@ -23,6 +23,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
   root: ROOT_BEM,
   container: ROOT_BEM.element('container'),
+  icon: ROOT_BEM.element('icon'),
   body: ROOT_BEM.element('body'),
   messageTitle: ROOT_BEM.element('message-title'),
   messageDesc: ROOT_BEM.element('message-desc'),
@@ -36,7 +37,7 @@ export function PopupIcon({ icon, color }) {
   }
 
   return (
-    <div>
+    <div className={BEM.icon}>
       {(isValidElement(icon)
         ? icon
         : <Icon large type={icon} color={color} />
@@ -99,8 +100,9 @@ function Popup({
       <Overlay />
 
       <div className={BEM.container}>
+        <PopupIcon icon={icon} color={iconColor} />
+
         <div className={BEM.body}>
-          <PopupIcon icon={icon} color={iconColor} />
           <PopupMessage message={message} />
           {messageBottomArea}
         </div>
