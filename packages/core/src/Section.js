@@ -13,7 +13,7 @@ export const BEM = {
   title: ROOT_BEM.element('title'),
   body: ROOT_BEM.element('body'),
   desc: ROOT_BEM.element('desc'),
-  titleRightArea: ROOT_BEM.element('titleRightArea'),
+  titleRightArea: ROOT_BEM.element('title-right-area'),
 };
 
 function Section({
