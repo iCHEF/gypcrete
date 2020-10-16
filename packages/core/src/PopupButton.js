@@ -15,11 +15,10 @@ function PopupButton({
 
   return (
     <Button
-      bold
+      {...props}
       className={buttonClass}
       minified={false}
       align="center"
-      {...props}
     />
   );
 }

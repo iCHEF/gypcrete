@@ -1,9 +1,10 @@
-import React, { isValidElement } from 'react';
+import React, { useMemo, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
+import wrapIfNotElement from './utils/wrapIfNotElement';
 
 import renderToLayer from './mixins/renderToLayer';
 
@@ -13,9 +14,9 @@ import Overlay from './Overlay';
 import './styles/_animations.scss';
 import './styles/Popup.scss';
 
-export const POPUP_SIZE = {
-  SMALL: 'small',
-  LARGE: 'large',
+export const BUTTONS_DIRECTION = {
+  VERTICAL: 'vertical',
+  HORIZONTAL: 'horizontal',
 };
 
 export const COMPONENT_NAME = prefixClass('popup');
@@ -23,119 +24,159 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
   root: ROOT_BEM,
   container: ROOT_BEM.element('container'),
-  icon: ROOT_BEM.element('icon'),
   body: ROOT_BEM.element('body'),
+  messageWrapper: ROOT_BEM.element('message-wrapper'),
   messageTitle: ROOT_BEM.element('message-title'),
   messageDesc: ROOT_BEM.element('message-desc'),
   button: ROOT_BEM.element('button'),
   buttonsGroup: ROOT_BEM.element('buttons-group'),
 };
 
-export function PopupIcon({ icon, color }) {
-  if (!icon) {
-    return null;
-  }
+export function PopupIcon({ type }) {
+  return <Icon large type={type} />;
+}
+PopupIcon.propTypes = {
+  type: PropTypes.string.isRequired,
+};
 
+export function PopupMessage({ title, desc, bottomArea }) {
   return (
-    <div className={BEM.icon}>
-      {(isValidElement(icon)
-        ? icon
-        : <Icon large type={icon} color={color} />
+    <div className={BEM.messageWrapper}>
+      {title && (
+        <span className={BEM.messageTitle}>{title}</span>
       )}
+      {desc && (
+        <span className={BEM.messageDesc}>{desc}</span>
+      )}
+      {bottomArea}
     </div>
   );
 }
-PopupIcon.propTypes = {
-  icon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]),
-  color: PropTypes.string,
+PopupMessage.propTypes = {
+  title: PropTypes.string,
+  desc: PropTypes.string.isRequired,
+  bottomArea: PropTypes.node,
 };
-PopupIcon.defaultProps = {
-  icon: undefined,
-  color: undefined,
+PopupMessage.defaultProps = {
+  title: undefined,
+  bottomArea: undefined,
 };
 
-export function PopupMessage({ message }) {
-  // variant: title + desc
-  if (message.title) {
-    return (
-      <>
-        <div className={BEM.messageTitle}>{message.title}</div>
-        <div className={BEM.messageDesc}>{message.desc}</div>
-      </>
-    );
+/**
+ * Render popup's buttons
+ *
+ * @param {Array} buttons
+ * @param {'vertical'|'horizontal'} direction
+ * @return {Array}
+ */
+function renderPopupButtons(buttons, direction) {
+  if (!buttons || buttons.length === 0) {
+    return null;
   }
 
-  // variant: simple message
-  return message;
+  const wrapperClass = BEM.buttonsGroup
+    .modifier(direction)
+    .toString();
+
+  return (
+    <div className={wrapperClass}>
+      {buttons}
+    </div>
+  );
 }
-PopupMessage.propTypes = {
-  message: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      desc: PropTypes.string.isRequired,
-    }),
-  ]).isRequired,
-};
-PopupMessage.defaultProps = {};
 
 function Popup({
-  size,
+  large,
   icon,
-  iconColor,
-  message,
+
+  // message area props
+  customMessageNode,
+  messageTitle,
+  messageDesc,
   messageBottomArea,
+  // message is a legacy prop, should be deprecated in future,
+  //   use `messageDesc` instead for string message,
+  //   use `customMessageNode` instead for node message
+  message,
+
+  // button props
   buttons,
+  buttonsDirection,
+
+  // React props
   className,
+  children,
   ...popupProps
 }) {
-  const rootBEM = BEM.root.modifier(size).toString();
-  const rootClassName = classNames(rootBEM, className);
+  const rootClassName = classNames(BEM.root.modifier('large', large).toString(), className);
+
+  const messageArea = useMemo(
+    () => {
+      if (customMessageNode) {
+        return customMessageNode;
+      }
+
+      // support for legacy node type `message` prop
+      if (message && isValidElement(message)) {
+        return message;
+      }
+
+      return (
+        <PopupMessage
+          // support for legacy string type `message` prop
+          title={messageTitle || message}
+          desc={messageDesc}
+          bottomArea={messageBottomArea}
+        />
+      );
+    },
+    [message, customMessageNode, messageTitle, messageDesc, messageBottomArea]
+  );
 
   return (
     <div className={rootClassName} {...popupProps}>
       <Overlay />
 
       <div className={BEM.container}>
-        <PopupIcon icon={icon} color={iconColor} />
-
         <div className={BEM.body}>
-          <PopupMessage message={message} />
-          {messageBottomArea}
+          {icon && wrapIfNotElement(icon, { with: PopupIcon, via: 'type' })}
+          {messageArea}
         </div>
 
-        {buttons && (
-          <div className={BEM.buttonsGroup}>
-            {buttons}
-          </div>
-        )}
+        {renderPopupButtons(buttons, buttonsDirection)}
+        {children}
       </div>
     </div>
   );
 }
 
+const StringOrElement = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.element,
+]);
+
 Popup.propTypes = {
-  size: PropTypes.oneOf([
-    POPUP_SIZE.SMALL,
-    POPUP_SIZE.LARGE,
-  ]),
-  icon: PopupIcon.propTypes.icon,
-  iconColor: PopupIcon.propTypes.color,
-  message: PopupMessage.propTypes.message,
+  large: PropTypes.bool,
+  icon: StringOrElement,
+  customMessageNode: PropTypes.node,
+  messageTitle: PropTypes.string,
+  messageDesc: PropTypes.string,
+  message: StringOrElement,
   messageBottomArea: PropTypes.node,
-  buttons: PropTypes.node,
+  buttons: PropTypes.arrayOf(PropTypes.element),
+  buttonsDirection: PropTypes.oneOf(Object.values(BUTTONS_DIRECTION)),
 };
 
 Popup.defaultProps = {
-  size: POPUP_SIZE.SMALL,
-  icon: PopupIcon.defaultProps.icon,
-  iconColor: PopupIcon.defaultProps.color,
-  message: PopupMessage.defaultProps.message,
+  large: false,
+  icon: null,
+  customMessageNode: undefined,
+  messageTitle: undefined,
+  messageDesc: undefined,
+  message: null,
   messageBottomArea: undefined,
-  buttons: undefined,
+  buttons: [],
+  buttonsDirection: BUTTONS_DIRECTION.VERTICAL,
 };
 
 // export for tests
