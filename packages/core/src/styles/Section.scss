@@ -17,6 +17,8 @@ $component-name: #{$prefix}-section;
     }
 
     &__title {
+        display: flex;
+        align-items: flex-end;
         line-height: rem($section-title-line-height);
         font-weight: $font-weight-bold;
         padding-bottom: rem(1px);
@@ -36,6 +38,13 @@ $component-name: #{$prefix}-section;
             display: inline-block;
             margin-right: .25em;
         }
+    }
+
+    &__titleRightArea {
+        margin-left: auto;
+        margin-bottom: 5px;
+        flex-grow: 0;
+        flex-shrink: 0;
     }
 
     &__desc {
