@@ -13,11 +13,13 @@ export const BEM = {
   title: ROOT_BEM.element('title'),
   body: ROOT_BEM.element('body'),
   desc: ROOT_BEM.element('desc'),
+  titleRightArea: ROOT_BEM.element('title-right-area'),
 };
 
 function Section({
   title,
   titleSize,
+  titleRightArea,
   desc,
   verticalSpacing, // add margin to above and below <Section>
   bodySpacing, // add padding to body for components that are not row-based
@@ -46,6 +48,9 @@ function Section({
     }
     >
       {title}
+      {titleRightArea && (
+        <div className={BEM.titleRightArea.toString()}>{titleRightArea}</div>
+      )}
     </div>
   );
   const descArea = desc && (
@@ -71,6 +76,7 @@ Section.propTypes = {
   verticalSpacing: PropTypes.bool,
   bodySpacing: PropTypes.bool,
   titleSize: PropTypes.oneOf(['base', 'small']),
+  titleRightArea: PropTypes.node,
 };
 
 Section.defaultProps = {
@@ -79,6 +85,7 @@ Section.defaultProps = {
   verticalSpacing: true,
   bodySpacing: true,
   titleSize: 'base',
+  titleRightArea: undefined,
 };
 
 export default Section;

@@ -181,3 +181,32 @@ export function NestedListWithTitle() {
     </DebugBox>
   );
 }
+
+export function ListWithTitleRightButton() {
+  const button = (
+    <Button solid color="red" basic="I am a button" />
+  );
+  return (
+    <List title="List title" desc="Help text here" titleRightArea={button}>
+      <ListRow>
+        <Avatar alt="iCHEF" src="https://api.adorable.io/avatars/285/hello@ichef.tw" />
+        <TextLabel basic="Hello World" />
+      </ListRow>
+    </List>
+  );
+}
+
+export function ListWithLongTextAndTitleRightButton() {
+  const button = (
+    <Button solid color="red" basic="I am a button" />
+  );
+  const longText = '臣亮言：先帝創業未半，而中道崩殂。今天下三分，益州疲敝，此誠危急存亡之秋也！然侍衞之臣，不懈於內；忠志之士，忘身於外者，蓋追先帝之殊遇，欲報之於陛下也。誠宜開張聖聽，以光先帝遺德，恢弘志士之氣；不宜妄自菲薄，引喻失義，以塞忠諫之路也。';
+  return (
+    <List title={longText} titleRightArea={button}>
+      <ListRow>
+        <Avatar alt="iCHEF" src="https://api.adorable.io/avatars/285/hello@ichef.tw" />
+        <TextLabel basic="Hello World" />
+      </ListRow>
+    </List>
+  );
+}
