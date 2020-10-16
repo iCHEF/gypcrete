@@ -21,7 +21,7 @@ $component-name: #{$prefix}-section;
         align-items: flex-end;
         line-height: rem($section-title-line-height);
         font-weight: $font-weight-bold;
-        padding-bottom: rem(1px);
+        padding-bottom: rem(5px);
         border-bottom: 2px solid $c-section-divider;
 
         // title font-size
@@ -42,7 +42,6 @@ $component-name: #{$prefix}-section;
 
     &__titleRightArea {
         margin-left: auto;
-        margin-bottom: 5px;
         flex-grow: 0;
         flex-shrink: 0;
     }
