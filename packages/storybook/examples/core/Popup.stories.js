@@ -43,10 +43,8 @@ export function MessageWithTitle() {
     <Popup
       icon="error"
       iconColor="red"
-      message={{
-        title: 'Invalid inputs',
-        desc: 'Please check value of each fields.',
-      }}
+      title="Invalid inputs"
+      message="Please check value of each fields."
       buttons={(
         <PopupButton basic="Confirm" onClick={action('confirm')} />
       )}
@@ -60,10 +58,8 @@ export function LargePopup() {
       size="large"
       icon="error"
       iconColor="red"
-      message={{
-        title: 'A very important notice',
-        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      }}
+      title="A very important notice"
+      message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       buttons={(
         <>
           <PopupButton basic="Learn more" onClick={action('learn')} />
@@ -86,10 +82,8 @@ export function CustomContentBelowMessage() {
     <Popup
       icon="announce"
       iconColor="green"
-      message={{
-        title: 'Website updated',
-        desc: 'We have added lots of new features!',
-      }}
+      title="Website updated"
+      message="We have added lots of new features!"
       messageBottomArea={(
         <Checkbox align="center" basic="Do not show again" />
       )}
@@ -123,10 +117,8 @@ export function CustomIcon() {
 export function NoIcon() {
   return (
     <Popup
-      message={{
-        title: 'Website updated',
-        desc: 'We have added lots of new features!',
-      }}
+      title="Website updated"
+      message="We have added lots of new features!"
       buttons={(
         <PopupButton basic="Close" onClick={action('close')} />
       )}
