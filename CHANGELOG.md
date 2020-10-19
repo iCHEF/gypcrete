@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Breaking
 - [Core] Remove deprecated behavior in Popup, which will treat element of `buttons` as props to `<PopupButton>`, if `element.type` is not `<PopupButton>`. (#276)
-- [Core] `<Popup>` is revised to match latest design spec: (#292)
+- [Core] `<Popup>` is revised to match latest design spec: (#293)
   * no longer supports horizontal buttons.
   * ~takes a `{ title, desc }` object format for `message` prop.~
   * supports optional `title` prop. (from #300, dropping change from prev line.)
