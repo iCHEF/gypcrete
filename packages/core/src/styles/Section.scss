@@ -42,6 +42,7 @@ $component-name: #{$prefix}-section;
 
     &__title-right-area {
         margin-left: auto;
+        padding-left: rem(5px);
         flex-grow: 0;
         flex-shrink: 0;
     }
