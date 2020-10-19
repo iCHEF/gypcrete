@@ -76,17 +76,9 @@ describe('<Popup> icon', () => {
 });
 
 describe('<Popup> message', () => {
-  it('passes "message" prop to <PopupMessage>', () => {
-    const wrapper = shallow(<PurePopup message="foo" />);
-
-    expect(
-      wrapper.containsMatchingElement(<PopupMessage message="foo" />)
-    ).toBeTruthy();
-  });
-
-  it('supports { title, desc } message format', () => {
+  it('supports message with optional title', () => {
     const wrapper = shallow(
-      <PurePopup message={{ title: 'foo', desc: 'bar' }} />
+      <PurePopup title="foo" message="bar" />
     );
     const messageWrapper = wrapper.find(PopupMessage).shallow();
 

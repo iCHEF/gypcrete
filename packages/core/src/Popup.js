@@ -57,13 +57,13 @@ PopupIcon.defaultProps = {
   color: undefined,
 };
 
-export function PopupMessage({ message }) {
+export function PopupMessage({ title, message }) {
   // variant: title + desc
-  if (message.title) {
+  if (title) {
     return (
       <>
-        <div className={BEM.messageTitle}>{message.title}</div>
-        <div className={BEM.messageDesc}>{message.desc}</div>
+        <div className={BEM.messageTitle}>{title}</div>
+        <div className={BEM.messageDesc}>{message}</div>
       </>
     );
   }
@@ -72,20 +72,18 @@ export function PopupMessage({ message }) {
   return message;
 }
 PopupMessage.propTypes = {
-  message: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      desc: PropTypes.string.isRequired,
-    }),
-  ]).isRequired,
+  title: PropTypes.node,
+  message: PropTypes.node.isRequired,
 };
-PopupMessage.defaultProps = {};
+PopupMessage.defaultProps = {
+  title: undefined,
+};
 
 function Popup({
   size,
   icon,
   iconColor,
+  title,
   message,
   messageBottomArea,
   buttons,
@@ -103,7 +101,7 @@ function Popup({
         <PopupIcon icon={icon} color={iconColor} />
 
         <div className={BEM.body}>
-          <PopupMessage message={message} />
+          <PopupMessage title={title} message={message} />
           {messageBottomArea}
         </div>
 
@@ -124,6 +122,7 @@ Popup.propTypes = {
   ]),
   icon: PopupIcon.propTypes.icon,
   iconColor: PopupIcon.propTypes.color,
+  title: PopupMessage.propTypes.title,
   message: PopupMessage.propTypes.message,
   messageBottomArea: PropTypes.node,
   buttons: PropTypes.node,
@@ -133,6 +132,7 @@ Popup.defaultProps = {
   size: POPUP_SIZE.SMALL,
   icon: PopupIcon.defaultProps.icon,
   iconColor: PopupIcon.defaultProps.color,
+  title: PopupMessage.defaultProps.title,
   message: PopupMessage.defaultProps.message,
   messageBottomArea: undefined,
   buttons: undefined,
