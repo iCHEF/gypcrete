@@ -4,6 +4,7 @@ export default function SvgLoading(props) {
   return (
     <svg
       id="loading_svg__loading_svg"
+      xmlns="http://www.w3.org/2000/svg"
       width="1em"
       height="1em"
       viewBox="0 0 32 32"

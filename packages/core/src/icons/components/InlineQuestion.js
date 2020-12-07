@@ -2,7 +2,13 @@ import React from 'react';
 
 export default function SvgInlineQuestion(props) {
   return (
-    <svg viewBox="-1084 -5225 32 32" width="1em" height="1em" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="-1084 -5225 32 32"
+      width="1em"
+      height="1em"
+      {...props}
+    >
       <path
         data-name="\u524D\u9762\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3067\u578B\u629C\u304D 126"
         d="M-1067.666-5195.666h-.667a13 13 0 01-13-13v-.667a13 13 0 0113-13h.666a13 13 0 0113 13v.667a13 13 0 01-13 13zm-.333-24a10.666 10.666 0 107.543 3.124 10.6 10.6 0 00-7.544-3.124z"

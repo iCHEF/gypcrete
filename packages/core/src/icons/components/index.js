@@ -28,6 +28,7 @@ import Error from './Error';
 import FirstPage from './FirstPage';
 import Fold from './Fold';
 import Folder from './Folder';
+import Gear from './Gear';
 import HeaderNext from './HeaderNext';
 import HeaderPrev from './HeaderPrev';
 import InlineDropdown from './InlineDropdown';
@@ -100,6 +101,7 @@ export default {
   'first-page': FirstPage,
   fold: Fold,
   folder: Folder,
+  gear: Gear,
   'header-next': HeaderNext,
   'header-prev': HeaderPrev,
   'inline-dropdown': InlineDropdown,

@@ -2,7 +2,13 @@ import React from 'react';
 
 export default function SvgPause(props) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 1000 1000" {...props}>
+    <svg
+      width="1em"
+      height="1em"
+      viewBox="0 0 1000 1000"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"

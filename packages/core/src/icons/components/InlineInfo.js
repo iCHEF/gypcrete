@@ -2,7 +2,13 @@ import React from 'react';
 
 export default function SvgInlineInfo(props) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 32 32" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 32 32"
+      {...props}
+    >
       <defs>
         <clipPath id="inline-info_svg__a">
           <path d="M0 0h32v32H0z" />

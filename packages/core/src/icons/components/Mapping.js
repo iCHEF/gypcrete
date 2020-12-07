@@ -2,7 +2,13 @@ import React from 'react';
 
 export default function SvgMapping(props) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 32 32" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 32 32"
+      {...props}
+    >
       <path
         data-name="\u30D1\u30B9 981"
         d="M22.501 15h-13a1 1 0 010-2h13a1 1 0 010 2z"

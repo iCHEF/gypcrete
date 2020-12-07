@@ -2,7 +2,13 @@ import React from 'react';
 
 export default function SvgRadioEmpty(props) {
   return (
-    <svg viewBox="-1980 -5001 32 32" width="1em" height="1em" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="-1980 -5001 32 32"
+      width="1em"
+      height="1em"
+      {...props}
+    >
       <path
         data-name="\u9577\u65B9\u5F62 7898"
         fill="transparent"
