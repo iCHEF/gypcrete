@@ -10,7 +10,6 @@ export default function SvgGear(props) {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path fill="#fff" d="M0 0h32v32H0z" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
