@@ -30,6 +30,7 @@ function Popover({
   placement,
   arrowStyle,
   nodeRef,
+  remainingSpace,
   // from closable()
   onInsideClick,
   // React props
@@ -45,6 +46,8 @@ function Popover({
     onClick(event);
   };
 
+  const popoverPadding = 24;
+
   return (
     <ListSpacingContext.Provider value={false}>
       <div
@@ -55,7 +58,10 @@ function Popover({
         {...otherProps}
       >
         <span className={BEM.arrow} style={arrowStyle} />
-        <div className={BEM.container}>
+        <div
+          className={BEM.container}
+          style={{ maxHeight: remainingSpace ? remainingSpace - popoverPadding : undefined }}
+        >
           {children}
         </div>
       </div>
@@ -68,6 +74,7 @@ Popover.propTypes = {
   placement: anchoredPropTypes.placement,
   arrowStyle: anchoredPropTypes.arrowStyle,
   nodeRef: anchoredPropTypes.nodeRef,
+  remainingSpace: anchoredPropTypes.remainingSpace,
   onInsideClick: PropTypes.func.isRequired,
 };
 
@@ -76,6 +83,7 @@ Popover.defaultProps = {
   placement: ANCHORED_PLACEMENT.BOTTOM,
   arrowStyle: {},
   nodeRef: undefined,
+  remainingSpace: undefined,
 };
 
 export { Popover as PurePopover };

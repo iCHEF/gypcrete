@@ -31,21 +31,37 @@ export const PLACEMENT = { TOP, BOTTOM };
  * @param {number} anchorRectTop
  * @param {number} anchorHeight
  * @param {number} selfHeight
+ * @returns {{ placement: Placement, remainingSpace: number }}
  */
-export function getPlacement(defaultPlacement, anchorRectTop, anchorHeight, selfHeight) {
+export function getPlacementAndRemainingSpace(
+  defaultPlacement,
+  anchorRectTop,
+  anchorHeight,
+  selfHeight
+) {
   const hasSpaceToPlaceSelfAbove = anchorRectTop >= selfHeight;
   const hasSpaceToPlaceSelfBelow = (
     (anchorRectTop + anchorHeight + selfHeight) <= window.innerHeight
   );
-
+  const topSpace = anchorRectTop;
+  const bottomSpace = window.innerHeight - anchorRectTop - anchorHeight;
+  if (!hasSpaceToPlaceSelfBelow && !hasSpaceToPlaceSelfAbove) {
+    return {
+      placement: topSpace > bottomSpace ? TOP : BOTTOM,
+      remainingSpace: topSpace > bottomSpace ? topSpace : bottomSpace,
+    };
+  }
   if (defaultPlacement === TOP && !hasSpaceToPlaceSelfAbove) {
-    return BOTTOM;
+    return { placement: BOTTOM, remainingSpace: bottomSpace };
   }
-  if (defaultPlacement === BOTTOM && !hasSpaceToPlaceSelfBelow && hasSpaceToPlaceSelfAbove) {
-    return TOP;
+  if (defaultPlacement === BOTTOM && !hasSpaceToPlaceSelfBelow) {
+    return { placement: TOP, remainingSpace: topSpace };
   }
 
-  return defaultPlacement;
+  return {
+    placement: defaultPlacement,
+    remainingSpace: defaultPlacement === TOP ? topSpace : bottomSpace,
+  };
 }
 
 /**
@@ -60,7 +76,8 @@ export function getTopPosition(placement, anchorOffsetTop, anchorHeight, selfHei
   let positionTop = 0;
 
   if (placement === TOP) {
-    positionTop = anchorOffsetTop - selfHeight;
+    // Make sure user can see whole wrapped component when placement is TOP.
+    positionTop = Math.max(anchorOffsetTop - selfHeight, 0);
   } else {
     positionTop = anchorOffsetTop + anchorHeight;
   }
@@ -184,7 +201,7 @@ const getPositionState = (defaultPlacement, edgePadding) => (anchorNode, selfNod
   //   Determine position
   // -------------------------------------
 
-  const placement = getPlacement(
+  const { placement, remainingSpace } = getPlacementAndRemainingSpace(
     defaultPlacement,
     anchorRect.top,
     anchorRect.height,
@@ -208,6 +225,7 @@ const getPositionState = (defaultPlacement, edgePadding) => (anchorNode, selfNod
 
   return {
     placement,
+    remainingSpace,
     position: {
       top: selfTop,
       left: selfLeft,
