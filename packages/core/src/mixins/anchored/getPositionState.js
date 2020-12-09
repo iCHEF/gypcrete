@@ -41,7 +41,7 @@ export function getPlacement(defaultPlacement, anchorRectTop, anchorHeight, self
   if (defaultPlacement === TOP && !hasSpaceToPlaceSelfAbove) {
     return BOTTOM;
   }
-  if (defaultPlacement === BOTTOM && !hasSpaceToPlaceSelfBelow) {
+  if (defaultPlacement === BOTTOM && !hasSpaceToPlaceSelfBelow && hasSpaceToPlaceSelfAbove) {
     return TOP;
   }
 
