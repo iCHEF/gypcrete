@@ -24,6 +24,8 @@ export const BEM = {
   container: ROOT_BEM.element('container'),
 };
 
+const POPOVER_PADDING = 24;
+
 function Popover({
   onClick,
   // from anchored()
@@ -40,13 +42,18 @@ function Popover({
 }) {
   const bemClass = BEM.root.modifier(placement);
   const rootClassName = classNames(bemClass.toString(), className);
+  /**
+   * The `remainingSpace` is the space for whole popover.
+   * What we want here is to always show keep `remainingSpace === popoverHeight`
+   * The `maxHeight` is for `BEM.container`, which doesn't include root class padding.
+   * So we need to minus POPOVER_PADDING here.
+   */
+  const maxHeight = remainingSpace ? remainingSpace - POPOVER_PADDING : undefined;
 
   const handleWrapperClick = (event) => {
     onInsideClick(event);
     onClick(event);
   };
-
-  const popoverPadding = 24;
 
   return (
     <ListSpacingContext.Provider value={false}>
@@ -60,7 +67,7 @@ function Popover({
         <span className={BEM.arrow} style={arrowStyle} />
         <div
           className={BEM.container}
-          style={{ maxHeight: remainingSpace ? remainingSpace - popoverPadding : undefined }}
+          style={{ maxHeight }}
         >
           {children}
         </div>
