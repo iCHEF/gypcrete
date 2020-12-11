@@ -1,7 +1,7 @@
 import documentOffset from 'document-offset';
 
 import getPositionState, {
-  getPlacement,
+  getPlacementAndRemainingSpace,
   getTopPosition,
   getLeftPositionSet,
   PLACEMENT,
@@ -31,23 +31,28 @@ jest.mock('document-offset', () => (
 describe('getPlacement()', () => {
   const { TOP, BOTTOM } = PLACEMENT;
   const runTest = it.each`
-        expected  | defaultVal | situation       | anchorTop | anchorHeight | selfHeight
-        ${TOP}    | ${TOP}     | ${'enough'}     | ${120}    | ${30}        | ${100}
-        ${BOTTOM} | ${TOP}     | ${'not enough'} | ${90}     | ${30}        | ${100}
-        ${TOP}    | ${BOTTOM}  | ${'not enough'} | ${600}    | ${100}       | ${100}
-        ${BOTTOM} | ${BOTTOM}  | ${'enough'}     | ${300}    | ${100}       | ${100}
+        expected  | defaultVal | situation                                      | anchorTop | anchorHeight | selfHeight | remainingSpace
+        ${TOP}    | ${TOP}     | ${'enough'}                                    | ${120}    | ${30}        | ${100}     | ${120}
+        ${BOTTOM} | ${TOP}     | ${'not enough for top'}                        | ${90}     | ${30}        | ${100}     | ${648}
+        ${TOP}    | ${BOTTOM}  | ${'not enough for bottom'}                     | ${600}    | ${100}       | ${100}     | ${600}
+        ${BOTTOM} | ${BOTTOM}  | ${'enough'}                                    | ${300}    | ${100}       | ${100}     | ${368}
+        ${BOTTOM} | ${BOTTOM}  | ${'not enough for both, but bottom is larger'} | ${300}    | ${100}       | ${400}     | ${368}
+        ${TOP}    | ${BOTTOM}  | ${'not enough for both, but top is larger'}    | ${450}    | ${100}       | ${500}     | ${450}
     `;
 
   runTest(
-    'returns $expected when default is $defaultVal, and there is $situation space',
-    ({ expected, defaultVal, anchorTop, anchorHeight, selfHeight }) => {
-      const result = getPlacement(
+    'returns $expected when default is $defaultVal, and the space is $situation',
+    ({
+      expected, defaultVal, anchorTop, anchorHeight, selfHeight, remainingSpace,
+    }) => {
+      const result = getPlacementAndRemainingSpace(
         defaultVal,
         anchorTop,
         anchorHeight,
         selfHeight,
       );
-      expect(result).toBe(expected);
+      expect(result.placement).toBe(expected);
+      expect(result.remainingSpace).toBe(remainingSpace);
     }
   );
 });

@@ -15,6 +15,7 @@ export const anchoredPropTypes = {
   placement: PropTypes.oneOf(Object.values(PLACEMENT)),
   arrowStyle: PropTypes.objectOf(PropTypes.number),
   nodeRef: PropTypes.func,
+  remainingSpace: PropTypes.number.isRequired,
 };
 
 function filterDOMNode(node) {
@@ -127,6 +128,7 @@ const anchored = ({
             placement,
             position,
             arrowPosition,
+            remainingSpace,
           } = this.getPositions(
             filterDOMNode(anchor),
             filterDOMNode(selfNode),
@@ -142,6 +144,7 @@ const anchored = ({
             <WrappedComponent
               {...otherProps}
               placement={placement}
+              remainingSpace={remainingSpace}
               arrowStyle={arrowPosition}
               style={mergedStyle}
               nodeRef={this.setSelfNode}

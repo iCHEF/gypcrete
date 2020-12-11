@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Upgrade `eslint-config-ichef` packages to `v8.0.0`. (#290)
 - [Core] Use node 12 in travis CI. (#290)
 - [Core] Add `titleRightArea` on `<Section>` / `<List>`. (#297)
+- [Core] Fix popover placement when there is no enough space on top or bottom of content. (#303)
 
 ### Added
 - [Core] Add `muted` prop on following component: (#278)
