@@ -4,6 +4,7 @@ import SelectRow from './SelectRow';
 
 import SelectList from './SelectList';
 import SelectOption from './SelectOption';
+import parseSelectOptions from './utils/parseSelectOptions';
 
 export {
   TextInputRow,
@@ -12,4 +13,5 @@ export {
 
   SelectList,
   SelectOption,
+  parseSelectOptions,
 };
