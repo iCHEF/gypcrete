@@ -76,7 +76,7 @@ describe('<Popup> icon', () => {
 });
 
 describe('<Popup> message', () => {
-  it('supports message with optional title', () => {
+  it('supports message with title', () => {
     const wrapper = shallow(
       <PurePopup title="foo" message="bar" />
     );
@@ -85,8 +85,19 @@ describe('<Popup> message', () => {
     expect(
       messageWrapper.containsAllMatchingElements([
         <div className={POPUP_BEM.messageTitle}>foo</div>,
-        <div className={POPUP_BEM.messageDesc}>bar</div>,
+        <div className={POPUP_BEM.messageDescWithTitle}>bar</div>,
       ])
+    ).toBeTruthy();
+  });
+
+  it('supports message without title', () => {
+    const wrapper = shallow(
+      <PurePopup message="foo" />
+    );
+    const messageWrapper = wrapper.find(PopupMessage).shallow();
+
+    expect(
+      messageWrapper.containsMatchingElement(<div className={POPUP_BEM.messageDesc}>foo</div>)
     ).toBeTruthy();
   });
 
