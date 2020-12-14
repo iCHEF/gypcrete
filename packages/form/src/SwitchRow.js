@@ -92,7 +92,7 @@ class SwitchRow extends PureComponent {
       return (
         <ListRow className={className} {...rowProps}>
           <TextLabel
-            bold={!ineditable}
+            disabled={ineditable}
             verticalOrder="reverse"
             basic={this.getSwitchAside()}
             aside={label}
