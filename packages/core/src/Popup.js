@@ -27,6 +27,7 @@ export const BEM = {
   body: ROOT_BEM.element('body'),
   messageTitle: ROOT_BEM.element('message-title'),
   messageDesc: ROOT_BEM.element('message-desc'),
+  messageDescWithTitle: ROOT_BEM.element('message-desc').modifier('with-title'),
   button: ROOT_BEM.element('button'),
   buttonsGroup: ROOT_BEM.element('buttons-group'),
 };
@@ -63,13 +64,15 @@ export function PopupMessage({ title, message }) {
     return (
       <>
         <div className={BEM.messageTitle}>{title}</div>
-        <div className={BEM.messageDesc}>{message}</div>
+        <div className={BEM.messageDescWithTitle}>{message}</div>
       </>
     );
   }
 
   // variant: simple message
-  return message;
+  return (
+    <div className={BEM.messageDesc}>{message}</div>
+  );
 }
 PopupMessage.propTypes = {
   title: PropTypes.node,
