@@ -69,6 +69,10 @@ $component: #{$prefix}-popup;
 
     // Message desc
     &__message-desc {
+        white-space: pre-line;
+    }
+
+    &__message-desc--with-title {
         font-size: rem(14px);
         line-height: rem(20px);
         color: rgba(0, 0, 0, .7);

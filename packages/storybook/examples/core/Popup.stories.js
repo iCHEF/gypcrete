@@ -145,7 +145,11 @@ export function CustomMessageNode() {
 }
 
 export function VeryLongMessage() {
-  const MESSAGE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae finibus elit. In ante odio, pretium vel convallis ut, mattis eget turpis. Praesent eget mattis neque. Fusce sit amet libero magna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam vehicula vel justo vitae varius. Nulla vitae dui libero. Mauris aliquam orci nunc, sit amet aliquet libero bibendum nec. Nulla metus ante, mattis sagittis tortor vitae, consequat ultricies neque. Integer vel urna fermentum, finibus justo ornare, malesuada erat.';
+  const MESSAGE = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+   Mauris vitae finibus elit. In ante odio, pretium vel convallis ut, mattis eget turpis.
+   Praesent eget mattis neque. Fusce sit amet libero magna. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam vehicula vel justo vitae varius.
+   Nulla vitae dui libero. Mauris aliquam orci nunc, sit amet aliquet libero bibendum nec. Nulla metus ante, mattis sagittis tortor vitae, consequat ultricies neque. Integer vel urna fermentum, finibus justo ornare, malesuada erat.
+  `;
 
   return (
     <Popup
