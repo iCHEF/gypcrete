@@ -11,7 +11,10 @@ export { STATUS_CODE };
 export const statusPropTypes = {
   status: PropTypes.oneOf(Object.values(STATUS_CODE)),
   statusOptions: PropTypes.object,
-  errorMsg: PropTypes.string,
+  errorMsg: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
 
 // prop types for what's going to set on wrapped component

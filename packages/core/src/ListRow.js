@@ -52,8 +52,8 @@ class ListRow extends PureComponent {
 
       return (
         <div className={BEM.footer.toString()}>
-          {errorMsg && wrapIfNotElement(errorMsg, { with: 'p' })}
-          {desc && wrapIfNotElement(desc, { with: 'p' })}
+          {errorMsg && wrapIfNotElement(errorMsg, { with: 'div' })}
+          {desc && wrapIfNotElement(desc, { with: 'div' })}
         </div>
       );
     }

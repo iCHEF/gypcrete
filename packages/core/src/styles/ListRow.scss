@@ -35,7 +35,7 @@ $component: #{$prefix}-list-row;
         padding-bottom: rem($list-row-footer-padding-bottom);
         white-space: pre-wrap;
 
-        p {
+        & > div {
             margin: 0 0 rem($list-row-footer-padding-bottom);
         }
     }
