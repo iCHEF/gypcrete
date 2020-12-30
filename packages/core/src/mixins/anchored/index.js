@@ -15,7 +15,7 @@ export const anchoredPropTypes = {
   placement: PropTypes.oneOf(Object.values(PLACEMENT)),
   arrowStyle: PropTypes.objectOf(PropTypes.number),
   nodeRef: PropTypes.func,
-  remainingSpace: PropTypes.number.isRequired,
+  remainingSpace: PropTypes.number,
 };
 
 function filterDOMNode(node) {
