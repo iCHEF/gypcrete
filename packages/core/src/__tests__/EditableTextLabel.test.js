@@ -181,11 +181,11 @@ describe('Double-touch simulation', () => {
     expect(handleDblClick).not.toHaveBeenCalled();
 
     return new Promise((resolve) => {
-      wrapper.simulate('touchstart');
+      wrapper.simulate('touchend');
       expect(wrapper.state('touchCount')).toBe(1);
 
       setTimeout(() => {
-        wrapper.simulate('touchstart');
+        wrapper.simulate('touchend');
         resolve();
       }, 200);
     }).then(() => {
