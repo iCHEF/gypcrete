@@ -105,7 +105,7 @@ class EditableTextLabel extends PureComponent {
       onDblClick(event);
     }
 
-    handleTouchStart = (event) => {
+    handleTouchEnd = (event) => {
       const { touchCount, dblTouchTimeout } = this.state;
       const currentCount = touchCount + 1;
 
@@ -180,7 +180,7 @@ class EditableTextLabel extends PureComponent {
           <TextLabel
             status={status}
             onDoubleClick={this.handleDoubleClick}
-            onTouchStart={this.handleTouchStart}
+            onTouchEnd={this.handleTouchEnd}
             {...labelProps}
           />
         );
