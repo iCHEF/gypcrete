@@ -210,3 +210,28 @@ export function ListWithLongTextAndTitleRightButton() {
     </List>
   );
 }
+
+export function ListWithTopArea() {
+  const topAreaContent = (
+    <div>
+      Tips: this list has a top area for free content.
+    </div>
+  );
+
+  return (
+    <List
+      title="List with Top Area"
+      topArea={topAreaContent}
+    >
+      <ListRow>
+        <TextLabel basic="Hello World" />
+      </ListRow>
+      <ListRow>
+        <TextLabel basic="Row 2" />
+      </ListRow>
+      <ListRow>
+        <TextLabel basic="Row 3" />
+      </ListRow>
+    </List>
+  );
+}
