@@ -14,6 +14,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
   root: ROOT_BEM,
   body: ROOT_BEM.element('body'),
+  topArea: ROOT_BEM.element('top-area'),
 };
 
 const NORMAL = 'normal';
@@ -25,6 +26,7 @@ export const TYPE_SYMBOL = Symbol('List');
 
 function List({
   variant,
+  topArea,
   // <Section> props
   title,
   desc,
@@ -52,6 +54,12 @@ function List({
             verticalSpacing={spacing || !!title}
             {...otherProps}
           >
+            {topArea && (
+              <div className={BEM.topArea.toString()}>
+                {topArea}
+              </div>
+            )}
+
             <ul className={BEM.body.toString()}>
               {children}
             </ul>
@@ -64,6 +72,8 @@ function List({
 
 List.propTypes = {
   variant: PropTypes.oneOf(LIST_VARIANTS),
+  topArea: PropTypes.node,
+
   /** `<Section>` prop */
   title: PropTypes.node,
 
@@ -76,6 +86,7 @@ List.propTypes = {
 
 List.defaultProps = {
   variant: NORMAL,
+  topArea: undefined,
   title: undefined,
   desc: undefined,
   titleSize: undefined,
