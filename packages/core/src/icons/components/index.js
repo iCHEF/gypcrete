@@ -47,6 +47,7 @@ import MinusOne from './MinusOne';
 import More from './More';
 import NextPage from './NextPage';
 import Next from './Next';
+import OnlinePoints from './OnlinePoints';
 import Pause from './Pause';
 import Pencil from './Pencil';
 import Picture from './Picture';
@@ -120,6 +121,7 @@ export default {
   more: More,
   'next-page': NextPage,
   next: Next,
+  'online-points': OnlinePoints,
   pause: Pause,
   pencil: Pencil,
   picture: Picture,
