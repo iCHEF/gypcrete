@@ -49,6 +49,7 @@ import NextPage from './NextPage';
 import Next from './Next';
 import Pause from './Pause';
 import Pencil from './Pencil';
+import People from './People';
 import Picture from './Picture';
 import Play from './Play';
 import PlusOne from './PlusOne';
@@ -122,6 +123,7 @@ export default {
   next: Next,
   pause: Pause,
   pencil: Pencil,
+  people: People,
   picture: Picture,
   play: Play,
   'plus-one': PlusOne,
