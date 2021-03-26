@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './styles/ColumnView.scss';
@@ -24,7 +24,7 @@ function ColumnView({
   className,
   children,
   ...wrapperProps
-}) {
+}, ref) {
   const rootClassName = classNames(`${BEM.root}`, className);
   const bodyClassName = BEM.body.modifier('flex', flexBody);
 
@@ -35,20 +35,39 @@ function ColumnView({
     paddingRight: bodyPadding.right,
   };
 
+  const columnHeaderRef = useRef();
+  const columnBodyRef = useRef();
+  const columnFooterRef = useRef();
+
+  useImperativeHandle(ref,
+    () => ({
+      columnHeader: () => columnHeaderRef.current,
+      columnBody: () => columnBodyRef.current,
+      columnFooter: () => columnFooterRef.current,
+    }));
+
   return (
-    <div className={rootClassName} {...wrapperProps}>
+    <div
+      className={rootClassName}
+      {...wrapperProps}
+      ref={columnHeaderRef}
+    >
       {header && (
         <div className={`${BEM.header}`}>
           {header}
         </div>
       )}
 
-      <div className={`${bodyClassName}`} style={bodyStyle}>
+      <div
+        className={`${bodyClassName}`}
+        style={bodyStyle}
+        ref={columnBodyRef}
+      >
         {children}
       </div>
 
       {footer && (
-        <div className={`${BEM.footer}`}>
+        <div className={`${BEM.footer}`} ref={columnFooterRef}>
           {footer}
         </div>
       )}
