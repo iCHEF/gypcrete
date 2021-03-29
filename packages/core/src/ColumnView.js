@@ -15,7 +15,7 @@ export const BEM = {
   footer: ROOT_BEM.element('footer'),
 };
 
-function ColumnView({
+const ColumnView = React.forwardRef(({
   header,
   footer,
   flexBody,
@@ -24,7 +24,7 @@ function ColumnView({
   className,
   children,
   ...wrapperProps
-}, ref) {
+}, ref) => {
   const rootClassName = classNames(`${BEM.root}`, className);
   const bodyClassName = BEM.body.modifier('flex', flexBody);
 
@@ -35,25 +35,27 @@ function ColumnView({
     paddingRight: bodyPadding.right,
   };
 
-  const columnHeaderRef = useRef();
-  const columnBodyRef = useRef();
-  const columnFooterRef = useRef();
+  const headerRef = useRef();
+  const bodyRef = useRef();
+  const footerRef = useRef();
 
   useImperativeHandle(ref,
     () => ({
-      columnHeader: () => columnHeaderRef.current,
-      columnBody: () => columnBodyRef.current,
-      columnFooter: () => columnFooterRef.current,
+      header: () => headerRef.current,
+      body: () => bodyRef.current,
+      footer: () => footerRef.current,
     }));
 
   return (
     <div
       className={rootClassName}
       {...wrapperProps}
-      ref={columnHeaderRef}
     >
       {header && (
-        <div className={`${BEM.header}`}>
+        <div
+          className={`${BEM.header}`}
+          ref={headerRef}
+        >
           {header}
         </div>
       )}
@@ -61,19 +63,23 @@ function ColumnView({
       <div
         className={`${bodyClassName}`}
         style={bodyStyle}
-        ref={columnBodyRef}
+        ref={bodyRef}
       >
         {children}
       </div>
 
       {footer && (
-        <div className={`${BEM.footer}`} ref={columnFooterRef}>
+        <div
+          className={`${BEM.footer}`}
+          ref={footerRef}
+        >
           {footer}
         </div>
       )}
     </div>
   );
-}
+});
+
 
 ColumnView.propTypes = {
   header: PropTypes.node,
