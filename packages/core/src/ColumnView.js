@@ -14,14 +14,16 @@ export const BEM = {
   body: ROOT_BEM.element('body'),
   footer: ROOT_BEM.element('footer'),
 };
-
-function ColumnView({
+export default function ColumnView({
   header,
   footer,
   flexBody,
   bodyPadding,
   // React props
   className,
+  headerRef,
+  bodyRef,
+  footerRef,
   children,
   ...wrapperProps
 }) {
@@ -36,25 +38,39 @@ function ColumnView({
   };
 
   return (
-    <div className={rootClassName} {...wrapperProps}>
+    <div
+      className={rootClassName}
+      {...wrapperProps}
+    >
       {header && (
-        <div className={`${BEM.header}`}>
+        <div
+          className={`${BEM.header}`}
+          ref={headerRef}
+        >
           {header}
         </div>
       )}
 
-      <div className={`${bodyClassName}`} style={bodyStyle}>
+      <div
+        className={`${bodyClassName}`}
+        style={bodyStyle}
+        ref={bodyRef}
+      >
         {children}
       </div>
 
       {footer && (
-        <div className={`${BEM.footer}`}>
+        <div
+          className={`${BEM.footer}`}
+          ref={footerRef}
+        >
           {footer}
         </div>
       )}
     </div>
   );
 }
+
 
 ColumnView.propTypes = {
   header: PropTypes.node,
@@ -66,6 +82,12 @@ ColumnView.propTypes = {
     left: PropTypes.number,
     right: PropTypes.number,
   }),
+  // eslint-disable-next-line react/forbid-prop-types
+  headerRef: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  bodyRef: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  footerRef: PropTypes.any,
 };
 
 ColumnView.defaultProps = {
@@ -73,6 +95,7 @@ ColumnView.defaultProps = {
   footer: undefined,
   flexBody: false,
   bodyPadding: { bottom: 24 },
+  headerRef: undefined,
+  bodyRef: undefined,
+  footerRef: undefined,
 };
-
-export default ColumnView;
