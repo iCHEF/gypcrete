@@ -7,18 +7,7 @@ import {
   TextLabel,
 } from '@ichef/gypcrete';
 
-import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
-import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
-
 import formRow, { rowPropTypes } from './mixins/formRow';
-import './styles/SwitchRow.scss';
-
-export const COMPONENT_NAME = prefixClass('form-switch');
-const ROOT_BEM = icBEM(COMPONENT_NAME);
-export const BEM = {
-  root: ROOT_BEM,
-  switch: ROOT_BEM.element('switch'),
-};
 
 /**
  * A row consisting a text label (on the left) and a switch button (on the right).
@@ -112,7 +101,7 @@ class SwitchRow extends PureComponent {
           <Switch
             status={null}
             onChange={this.handleSwitchButtonChange}
-            className={BEM.switch.toString()}
+            minified
             {...switchProps}
           />
 
