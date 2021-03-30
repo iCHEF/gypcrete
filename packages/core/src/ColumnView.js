@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './styles/ColumnView.scss';
@@ -14,17 +14,19 @@ export const BEM = {
   body: ROOT_BEM.element('body'),
   footer: ROOT_BEM.element('footer'),
 };
-
-const ColumnView = React.forwardRef(({
+export default function ColumnView({
   header,
   footer,
   flexBody,
   bodyPadding,
   // React props
   className,
+  headerRef,
+  bodyRef,
+  footerRef,
   children,
   ...wrapperProps
-}, ref) => {
+}) {
   const rootClassName = classNames(`${BEM.root}`, className);
   const bodyClassName = BEM.body.modifier('flex', flexBody);
 
@@ -34,17 +36,6 @@ const ColumnView = React.forwardRef(({
     paddingLeft: bodyPadding.left,
     paddingRight: bodyPadding.right,
   };
-
-  const headerRef = useRef();
-  const bodyRef = useRef();
-  const footerRef = useRef();
-
-  useImperativeHandle(ref,
-    () => ({
-      header: () => headerRef.current,
-      body: () => bodyRef.current,
-      footer: () => footerRef.current,
-    }));
 
   return (
     <div
@@ -78,7 +69,7 @@ const ColumnView = React.forwardRef(({
       )}
     </div>
   );
-});
+}
 
 
 ColumnView.propTypes = {
@@ -91,6 +82,12 @@ ColumnView.propTypes = {
     left: PropTypes.number,
     right: PropTypes.number,
   }),
+  // eslint-disable-next-line react/forbid-prop-types
+  headerRef: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  bodyRef: PropTypes.any,
+  // eslint-disable-next-line react/forbid-prop-types
+  footerRef: PropTypes.any,
 };
 
 ColumnView.defaultProps = {
@@ -98,6 +95,7 @@ ColumnView.defaultProps = {
   footer: undefined,
   flexBody: false,
   bodyPadding: { bottom: 24 },
+  headerRef: undefined,
+  bodyRef: undefined,
+  footerRef: undefined,
 };
-
-export default ColumnView;
