@@ -60,6 +60,7 @@ import Question from './Question';
 import RadioEmpty from './RadioEmpty';
 import RadioHalf from './RadioHalf';
 import RadioSelected from './RadioSelected';
+import Refresh from './Refresh';
 import RemoveElement from './RemoveElement';
 import Retry from './Retry';
 import Search from './Search';
@@ -134,6 +135,7 @@ export default {
   'radio-empty': RadioEmpty,
   'radio-half': RadioHalf,
   'radio-selected': RadioSelected,
+  refresh: Refresh,
   'remove-element': RemoveElement,
   retry: Retry,
   search: Search,
