@@ -200,6 +200,7 @@ class SelectRow extends PureComponent {
           const valueMap = valueLabelMap.get(value) || {};
           return valueMap.label;
         })
+        .filter(label => Boolean(label))
         .join(asideSeparator);
     }
 
