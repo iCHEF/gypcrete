@@ -31,6 +31,7 @@ import Folder from './Folder';
 import Gear from './Gear';
 import HeaderNext from './HeaderNext';
 import HeaderPrev from './HeaderPrev';
+import Import from './Import';
 import InlineDropdown from './InlineDropdown';
 import InlineError from './InlineError';
 import InlineInfo from './InlineInfo';
@@ -106,6 +107,7 @@ export default {
   gear: Gear,
   'header-next': HeaderNext,
   'header-prev': HeaderPrev,
+  import: Import,
   'inline-dropdown': InlineDropdown,
   'inline-error': InlineError,
   'inline-info': InlineInfo,
