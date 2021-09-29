@@ -67,6 +67,7 @@ class SelectRow extends PureComponent {
       asideNoneLabel: PropTypes.string,
       asideSeparator: PropTypes.string,
       disabled: PropTypes.bool,
+      renderRowValueLabel: PropTypes.func,
       // <SelectList> props
       multiple: SelectList.propTypes.multiple,
       value: SelectList.propTypes.value,
@@ -82,6 +83,7 @@ class SelectRow extends PureComponent {
       asideNoneLabel: '(Unset)',
       asideSeparator: ', ',
       disabled: false,
+      renderRowValueLabel: undefined,
       // <SelectList> props
       multiple: SelectList.defaultProps.multiple,
       value: SelectList.defaultProps.value,
@@ -178,8 +180,18 @@ class SelectRow extends PureComponent {
     }
 
     renderRowValueLabel() {
-      const { multiple, asideAllLabel, asideNoneLabel, asideSeparator } = this.props;
+      const {
+        multiple,
+        asideAllLabel,
+        asideNoneLabel,
+        asideSeparator,
+        renderRowValueLabel,
+      } = this.props;
       const { cachedValue, valueLabelMap } = this.state;
+
+      if (typeof renderRowValueLabel === 'function') {
+        return renderRowValueLabel({ values: cachedValue, valueLabelMap });
+      }
 
       const isSingleEmptyValue = cachedValue === undefined || cachedValue === '';
       const isMultipleEmptyValue = multiple && cachedValue.length === 0;
@@ -200,6 +212,7 @@ class SelectRow extends PureComponent {
           const valueMap = valueLabelMap.get(value) || {};
           return valueMap.label;
         })
+        .filter(label => Boolean(label))
         .join(asideSeparator);
     }
 

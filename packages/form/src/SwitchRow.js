@@ -101,6 +101,7 @@ class SwitchRow extends PureComponent {
           <Switch
             status={null}
             onChange={this.handleSwitchButtonChange}
+            minified
             {...switchProps}
           />
 

@@ -31,6 +31,7 @@ import Folder from './Folder';
 import Gear from './Gear';
 import HeaderNext from './HeaderNext';
 import HeaderPrev from './HeaderPrev';
+import Import from './Import';
 import InlineDropdown from './InlineDropdown';
 import InlineError from './InlineError';
 import InlineInfo from './InlineInfo';
@@ -49,6 +50,7 @@ import NextPage from './NextPage';
 import Next from './Next';
 import Pause from './Pause';
 import Pencil from './Pencil';
+import People from './People';
 import Picture from './Picture';
 import Play from './Play';
 import PlusOne from './PlusOne';
@@ -59,6 +61,7 @@ import Question from './Question';
 import RadioEmpty from './RadioEmpty';
 import RadioHalf from './RadioHalf';
 import RadioSelected from './RadioSelected';
+import Refresh from './Refresh';
 import RemoveElement from './RemoveElement';
 import Retry from './Retry';
 import Search from './Search';
@@ -104,6 +107,7 @@ export default {
   gear: Gear,
   'header-next': HeaderNext,
   'header-prev': HeaderPrev,
+  import: Import,
   'inline-dropdown': InlineDropdown,
   'inline-error': InlineError,
   'inline-info': InlineInfo,
@@ -122,6 +126,7 @@ export default {
   next: Next,
   pause: Pause,
   pencil: Pencil,
+  people: People,
   picture: Picture,
   play: Play,
   'plus-one': PlusOne,
@@ -132,6 +137,7 @@ export default {
   'radio-empty': RadioEmpty,
   'radio-half': RadioHalf,
   'radio-selected': RadioSelected,
+  refresh: Refresh,
   'remove-element': RemoveElement,
   retry: Retry,
   search: Search,
