@@ -259,7 +259,7 @@ class SelectRow extends PureComponent {
             />
 
             <span ref={(ref) => { this.anchorNode = ref; }}>
-              <Icon type="dropdown" />
+              <Icon type="dropdown" disabled={ineditable} />
             </span>
 
             {isPopoverOpen && this.renderPopover(selectListProps)}
