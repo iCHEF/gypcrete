@@ -16,7 +16,7 @@ export default function SvgCopyLink(props) {
       </g>
       <defs>
         <clipPath id="copy-link_svg__clip0">
-          <path fill="#fff" transform="translate(8 8)" d="M0 0h16v16H0z" />
+          <path fill="transparent" transform="translate(8 8)" d="M0 0h16v16H0z" />
         </clipPath>
       </defs>
     </svg>
