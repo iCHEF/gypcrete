@@ -4,6 +4,7 @@ import Add from './Add';
 import Announce from './Announce';
 import Cash from './Cash';
 import ClearItem from './ClearItem';
+import CopyLink from './CopyLink';
 import Copypaste from './Copypaste';
 import CreditCard from './CreditCard';
 import CrmAddress from './CrmAddress';
@@ -80,6 +81,7 @@ export default {
   announce: Announce,
   cash: Cash,
   'clear-item': ClearItem,
+  'copy-link': CopyLink,
   copypaste: Copypaste,
   'credit-card': CreditCard,
   'crm-address': CrmAddress,
