@@ -49,6 +49,7 @@ import MinusOne from './MinusOne';
 import More from './More';
 import NextPage from './NextPage';
 import Next from './Next';
+import OrderSheet from './OrderSheet';
 import Pause from './Pause';
 import Pencil from './Pencil';
 import People from './People';
@@ -68,6 +69,7 @@ import Retry from './Retry';
 import Search from './Search';
 import Sort from './Sort';
 import Success from './Success';
+import Table from './Table';
 import Takeout from './Takeout';
 import Tickets from './Tickets';
 import Trashcan from './Trashcan';
@@ -126,6 +128,7 @@ export default {
   more: More,
   'next-page': NextPage,
   next: Next,
+  'order-sheet': OrderSheet,
   pause: Pause,
   pencil: Pencil,
   people: People,
@@ -145,6 +148,7 @@ export default {
   search: Search,
   sort: Sort,
   success: Success,
+  table: Table,
   takeout: Takeout,
   tickets: Tickets,
   trashcan: Trashcan,
