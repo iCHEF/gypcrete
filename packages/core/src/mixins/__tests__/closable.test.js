@@ -192,3 +192,26 @@ describe.each`
     expect(handleClose).toHaveBeenCalledTimes(shouldBeCalled ? 1 : 0);
   });
 });
+
+it('prevent render closable overlay on runtime by passing skip=true', () => {
+  const ClosableFoo = closable({
+    onEscape: true,
+    onClickOutside: true,
+  })(Foo);
+  const handleClose = jest.fn();
+
+  const wrapper = mount((
+    <ClosableFoo
+      onClose={handleClose}
+      closable={{
+        skip: true,
+      }}
+    />
+  ));
+
+  expect(wrapper.find('div.gyp-closable')).toHaveLength(0);
+
+  const event = new KeyboardEvent('keyup', { keyCode: keycode('Escape') });
+  document.dispatchEvent(event);
+  expect(handleClose).not.toHaveBeenCalled();
+});
