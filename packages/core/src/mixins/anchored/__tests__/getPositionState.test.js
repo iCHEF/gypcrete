@@ -31,25 +31,33 @@ jest.mock('document-offset', () => (
 describe('getPlacement()', () => {
   const { TOP, BOTTOM } = PLACEMENT;
   const runTest = it.each`
-        expected  | defaultVal | situation                                      | anchorTop | anchorHeight | selfHeight | remainingSpace
-        ${TOP}    | ${TOP}     | ${'enough'}                                    | ${120}    | ${30}        | ${100}     | ${120}
-        ${BOTTOM} | ${TOP}     | ${'not enough for top'}                        | ${90}     | ${30}        | ${100}     | ${648}
-        ${TOP}    | ${BOTTOM}  | ${'not enough for bottom'}                     | ${600}    | ${100}       | ${100}     | ${600}
-        ${BOTTOM} | ${BOTTOM}  | ${'enough'}                                    | ${300}    | ${100}       | ${100}     | ${368}
-        ${BOTTOM} | ${BOTTOM}  | ${'not enough for both, but bottom is larger'} | ${300}    | ${100}       | ${400}     | ${368}
-        ${TOP}    | ${BOTTOM}  | ${'not enough for both, but top is larger'}    | ${450}    | ${100}       | ${500}     | ${450}
+        expected  | defaultVal | situation                                             | anchorTop | anchorHeight | selfHeight | remainingSpace | distanceFromAnchor
+        ${TOP}    | ${TOP}     | ${'enough'}                                           | ${120}    | ${30}        | ${100}     | ${120}         | ${0}
+        ${BOTTOM} | ${TOP}     | ${'not enough for top'}                               | ${90}     | ${30}        | ${100}     | ${648}         | ${0}
+        ${BOTTOM} | ${TOP}     | ${'not enough for top consider distance from anchor'} | ${100}    | ${30}        | ${100}     | ${638}         | ${10}
+        ${TOP}    | ${BOTTOM}  | ${'not enough for bottom'}                            | ${600}    | ${100}       | ${100}     | ${600}         | ${0}
+        ${BOTTOM} | ${BOTTOM}  | ${'enough'}                                           | ${300}    | ${100}       | ${100}     | ${368}         | ${0}
+        ${BOTTOM} | ${BOTTOM}  | ${'not enough for both, but bottom is larger'}        | ${300}    | ${100}       | ${400}     | ${368}         | ${0}
+        ${TOP}    | ${BOTTOM}  | ${'not enough for both, but top is larger'}           | ${450}    | ${100}       | ${500}     | ${450}         | ${0}
     `;
 
   runTest(
     'returns $expected when default is $defaultVal, and the space is $situation',
     ({
-      expected, defaultVal, anchorTop, anchorHeight, selfHeight, remainingSpace,
+      expected,
+      defaultVal,
+      anchorTop,
+      anchorHeight,
+      selfHeight,
+      remainingSpace,
+      distanceFromAnchor,
     }) => {
       const result = getPlacementAndRemainingSpace(
         defaultVal,
         anchorTop,
         anchorHeight,
         selfHeight,
+        distanceFromAnchor
       );
       expect(result.placement).toBe(expected);
       expect(result.remainingSpace).toBe(remainingSpace);
@@ -60,19 +68,28 @@ describe('getPlacement()', () => {
 describe('getTopPosition()', () => {
   const { TOP, BOTTOM } = PLACEMENT;
   const runTest = it.each`
-        expected  | placement  | anchorTop | anchorHeight | selfHeight
-        ${20}     | ${TOP}     | ${120}    | ${30}        | ${100}
-        ${400}    | ${BOTTOM}  | ${300}    | ${100}       | ${100}
+        expected  | placement  | anchorTop | anchorHeight | selfHeight | distanceFromAnchor
+        ${20}     | ${TOP}     | ${120}    | ${30}        | ${100}     | ${0}
+        ${10}     | ${TOP}     | ${120}    | ${30}        | ${100}     | ${10}
+        ${400}    | ${BOTTOM}  | ${300}    | ${100}       | ${100}     | ${0}
     `;
 
   runTest(
     'returns $expected when placed on $placement of anchor (y=$anchorTop, h=$anchorHeight)',
-    ({ expected, placement, anchorTop, anchorHeight, selfHeight }) => {
+    ({
+      expected,
+      placement,
+      anchorTop,
+      anchorHeight,
+      selfHeight,
+      distanceFromAnchor,
+    }) => {
       const result = getTopPosition(
         placement,
         anchorTop,
         anchorHeight,
         selfHeight,
+        distanceFromAnchor
       );
       expect(result).toBe(expected);
     }
@@ -234,7 +251,7 @@ describe('getPositionState()', () => {
       left: 10,
     });
 
-    const result = getterFunc(anchorNode, selfNode);
+    const result = getterFunc(anchorNode, selfNode, 0);
 
     expect(anchorNode.getBoundingClientRect).toHaveBeenCalled();
     expect(selfNode.getBoundingClientRect).toHaveBeenCalled();

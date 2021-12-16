@@ -88,5 +88,6 @@ it('passed anchor and self nodes to getter function for position config', () => 
   expect(mockedGetterFunc).toHaveBeenCalledWith(
     anchorRef.current,
     wrapper.state().selfNode,
+    0
   );
 });

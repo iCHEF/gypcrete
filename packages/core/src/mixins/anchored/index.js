@@ -97,11 +97,13 @@ const anchored = ({
         static propTypes = {
           anchor: PropTypes.instanceOf(window.HTMLElement),
           refreshOnWindowResize: PropTypes.bool,
+          distanceFromAnchor: PropTypes.number,
         };
 
         static defaultProps = {
           anchor: null,
           refreshOnWindowResize: false,
+          distanceFromAnchor: 0,
         };
 
         state = {
@@ -131,11 +133,15 @@ const anchored = ({
         }
 
         getPositions = (anchor, selfNode) => {
-          const { refreshOnWindowResize } = this.props;
+          const { refreshOnWindowResize, distanceFromAnchor } = this.props;
           if (!refreshOnWindowResize) {
-            return defaultGetPositionState(anchor, selfNode);
+            return defaultGetPositionState(anchor, selfNode, distanceFromAnchor);
           }
-          return getPositionState(defaultPlacement, edgePadding)(anchor, selfNode)
+          return getPositionState(defaultPlacement, edgePadding)(
+            anchor,
+            selfNode,
+            distanceFromAnchor
+          );
         }
 
         setSelfNode = (nodeRef) => {
@@ -146,6 +152,7 @@ const anchored = ({
           const {
             anchor,
             style,
+            distanceFromAnchor,
             refreshOnWindowResize,
             ...otherProps
           } = this.props;
