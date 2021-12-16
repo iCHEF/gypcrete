@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Fix popover placement when there is no enough space on top or bottom of content. (#303)
 - [Core] Change `<EditableTextLabel>` onTouchStart event handler to onTouchEnd event handler (#310)
 - [Core] Disable dropdown icon when `<SelectRow>` is ineditable. (#320)
+- [Core] Add `skip` prop on `closable` mixin. (#324)
+- [Core] Add `refreshOnWindowResize` and `distanceFromAnchor` prop on `anchored`. (#324)
 
 ### Added
 - [Core] Add `muted` prop on following component: (#278)
