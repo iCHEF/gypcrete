@@ -89,23 +89,60 @@ const anchored = ({
   edgePadding = 16,
 } = {}) => (WrappedComponent) => {
   const componentName = getComponentName(WrappedComponent);
+  const defaultGetPositionState = memoize(getPositionState(defaultPlacement, edgePadding));
 
   class Anchored extends Component {
         static displayName = `anchored(${componentName})`;
 
         static propTypes = {
           anchor: PropTypes.instanceOf(window.HTMLElement),
+          refreshOnWindowResize: PropTypes.bool,
+          distanceFromAnchor: PropTypes.number,
         };
 
         static defaultProps = {
           anchor: null,
+          refreshOnWindowResize: false,
+          distanceFromAnchor: 0,
         };
 
         state = {
           selfNode: null,
         };
 
-        getPositions = memoize(getPositionState(defaultPlacement, edgePadding));
+        componentDidMount() {
+          const { refreshOnWindowResize } = this.props;
+          if (refreshOnWindowResize) {
+            this.resizeHandler = () => {
+              requestAnimationFrame(() => {
+                this.setState(({ rerenderFlag, ...otherState }) => ({
+                  flagForRerender: !rerenderFlag,
+                  ...otherState,
+                }));
+              });
+            };
+
+            window.addEventListener('resize', this.resizeHandler);
+          }
+        }
+
+        componentWillUnmount() {
+          if (this.resizeHandler) {
+            window.removeEventListener('resize', this.resizeHandler);
+          }
+        }
+
+        getPositions = (anchor, selfNode) => {
+          const { refreshOnWindowResize, distanceFromAnchor } = this.props;
+          if (!refreshOnWindowResize) {
+            return defaultGetPositionState(anchor, selfNode, distanceFromAnchor);
+          }
+          return getPositionState(defaultPlacement, edgePadding)(
+            anchor,
+            selfNode,
+            distanceFromAnchor
+          );
+        }
 
         setSelfNode = (nodeRef) => {
           this.setState({ selfNode: nodeRef });
@@ -115,6 +152,8 @@ const anchored = ({
           const {
             anchor,
             style,
+            distanceFromAnchor,
+            refreshOnWindowResize,
             ...otherProps
           } = this.props;
 

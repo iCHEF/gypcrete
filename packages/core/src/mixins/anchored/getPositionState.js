@@ -31,17 +31,19 @@ export const PLACEMENT = { TOP, BOTTOM };
  * @param {number} anchorRectTop
  * @param {number} anchorHeight
  * @param {number} selfHeight
+ * @param {number} distanceFromAnchor
  * @returns {{ placement: Placement, remainingSpace: number }}
  */
 export function getPlacementAndRemainingSpace(
   defaultPlacement,
   anchorRectTop,
   anchorHeight,
-  selfHeight
+  selfHeight,
+  distanceFromAnchor,
 ) {
-  const hasSpaceToPlaceSelfAbove = anchorRectTop >= selfHeight;
+  const hasSpaceToPlaceSelfAbove = anchorRectTop >= selfHeight + distanceFromAnchor;
   const hasSpaceToPlaceSelfBelow = (
-    (anchorRectTop + anchorHeight + selfHeight) <= window.innerHeight
+    (anchorRectTop + anchorHeight + selfHeight + distanceFromAnchor) <= window.innerHeight
   );
   const topSpace = anchorRectTop;
   const bottomSpace = window.innerHeight - anchorRectTop - anchorHeight;
@@ -71,15 +73,22 @@ export function getPlacementAndRemainingSpace(
  * @param {number} anchorOffsetTop
  * @param {number} anchorHeight
  * @param {number} selfHeight
+ * @param {number} distanceFromAnchor
  */
-export function getTopPosition(placement, anchorOffsetTop, anchorHeight, selfHeight) {
+export function getTopPosition(
+  placement,
+  anchorOffsetTop,
+  anchorHeight,
+  selfHeight,
+  distanceFromAnchor,
+) {
   let positionTop = 0;
 
   if (placement === TOP) {
     // Make sure user can see whole wrapped component when placement is TOP.
-    positionTop = Math.max(anchorOffsetTop - selfHeight, 0);
+    positionTop = Math.max(anchorOffsetTop - selfHeight - distanceFromAnchor, 0);
   } else {
-    positionTop = anchorOffsetTop + anchorHeight;
+    positionTop = anchorOffsetTop + anchorHeight + distanceFromAnchor;
   }
 
   return positionTop;
@@ -175,10 +184,18 @@ export function getLeftPositionSet(
  *
  * @param {Placement} defaultPlacement
  * @param {number} edgePadding
- * @returns {(anchorNode:HTMLElement, selfNode:HTMLElement) => ResultState}
+ * @returns {(
+ *  anchorNode:HTMLElement,
+ *  selfNode:HTMLElement,
+ *  distanceFromAnchor: number
+ * ) => ResultState}
  */
 
-const getPositionState = (defaultPlacement, edgePadding) => (anchorNode, selfNode) => {
+const getPositionState = (defaultPlacement, edgePadding) => (
+  anchorNode,
+  selfNode,
+  distanceFromAnchor = 0,
+) => {
   if (!anchorNode || !selfNode) {
     return {
       placement: defaultPlacement,
@@ -206,6 +223,7 @@ const getPositionState = (defaultPlacement, edgePadding) => (anchorNode, selfNod
     anchorRect.top,
     anchorRect.height,
     selfRect.height,
+    distanceFromAnchor,
   );
 
   const selfTop = getTopPosition(
@@ -213,6 +231,7 @@ const getPositionState = (defaultPlacement, edgePadding) => (anchorNode, selfNod
     anchorOffset.top,
     anchorRect.height,
     selfRect.height,
+    distanceFromAnchor,
   );
 
   const { selfLeft, arrowLeft } = getLeftPositionSet(

@@ -46,6 +46,7 @@ const closable = ({
             onClickOutside: PropTypes.bool,
             onClickInside: PropTypes.bool,
             stopEventPropagation: PropTypes.bool,
+            skip: PropTypes.bool,
           }),
         };
 
@@ -55,11 +56,15 @@ const closable = ({
         };
 
         componentDidMount() {
-          document.addEventListener('keyup', this.handleDocumentKeyup);
+          if (!this.props.closable.skip) {
+            document.addEventListener('keyup', this.handleDocumentKeyup);
+          }
         }
 
         componentWillUnmount() {
-          document.removeEventListener('keyup', this.handleDocumentKeyup);
+          if (!this.props.closable.skip) {
+            document.removeEventListener('keyup', this.handleDocumentKeyup);
+          }
         }
 
         getOptions() {
@@ -120,11 +125,13 @@ const closable = ({
 
           return (
             <>
-              <div
-                role="presentation"
-                className={ROOT_BEM.toString()}
-                onClick={this.handleOuterLayerClick}
-              />
+              {!runtimeOptions.skip && (
+                <div
+                  role="presentation"
+                  className={ROOT_BEM.toString()}
+                  onClick={this.handleOuterLayerClick}
+                />
+              )}
               <WrappedComponent
                 onInsideClick={this.handleInsideClick}
                 {...otherProps}
