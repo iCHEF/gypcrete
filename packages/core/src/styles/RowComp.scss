@@ -39,4 +39,30 @@
     &--minified {
         flex: 0 0 auto;
     }
+
+    &--aside-control-clickable {
+        &.#{$prefix-state}-disabled {
+          opacity: 1 !important;
+        }
+
+        .#{$prefix}-text__basic {
+          opacity: .3 !important;
+        }
+
+        .#{$prefix}-icon {
+          opacity: .3 !important;
+        }
+
+        .#{$prefix}-text__aside {
+          display: block;
+          * {
+            /* 原本 .gyp-state-disabled opacity 乘上 .gyp-text__aside opacity: 0.3 * 0.7 */
+            opacity: .21;
+          }
+          a, button {
+            opacity: 1;
+            pointer-events: auto;
+          }
+        }
+    }
 }

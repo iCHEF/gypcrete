@@ -137,6 +137,7 @@ const rowComp = ({
           aside: PropTypes.node,
           tag: PropTypes.node,
           bold: PropTypes.bool,
+          asideControlClickableOnDisabled: PropTypes.bool,
 
           // State props
           active: PropTypes.bool,
@@ -161,6 +162,7 @@ const rowComp = ({
           aside: null,
           tag: null,
           bold: false,
+          asideControlClickableOnDisabled: false,
 
           active: false,
           highlight: false,
@@ -202,9 +204,17 @@ const rowComp = ({
             aside,
             tag,
             bold,
+            asideControlClickableOnDisabled,
           } = this.props;
 
           const textLayoutProps = getTextLayoutProps(align, !!icon);
+          const asideControlClickableProps = (
+            asideControlClickableOnDisabled
+              ? {
+                onClick: (event) => { event.stopPropagation(); }
+              }
+              : undefined
+          );
 
           return {
             verticalOrder,
@@ -212,6 +222,7 @@ const rowComp = ({
             aside,
             tag,
             bold,
+            ...asideControlClickableProps,
             ...textLayoutProps,
           };
         }
@@ -249,6 +260,7 @@ const rowComp = ({
             aside,
             tag,
             bold,
+            asideControlClickableOnDisabled,
 
             active,
             highlight,
@@ -268,7 +280,8 @@ const rowComp = ({
 
           const bemClass = ROOT_BEM
             .modifier('minified', minified)
-            .modifier(align);
+            .modifier(align)
+            .modifier('aside-control-clickable', asideControlClickableOnDisabled);
 
           const stateClassNames = getStateClassnames({
             active,
