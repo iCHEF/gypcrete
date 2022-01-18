@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Add new icons: `takeout` (#283), `more` (#287), `table` & `order-sheet` (#323).
 - [Core] Add `topArea` prop to `<List>`. (#311)
 - [Core] Add `people` in `<Icon>`. (#313)
+- [Core] Add `asideClickableOnDisabled` prop to `<RowComp>`. (#325)
 
 ## [4.3.0]
 
