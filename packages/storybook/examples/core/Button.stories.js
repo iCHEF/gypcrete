@@ -179,6 +179,26 @@ export function DisabledButton() {
   );
 }
 
+export function AsideControlClickableOnDisabledButton() {
+  return (
+    <Button
+      bold
+      color="Black"
+      basic="Black"
+      aside={(
+        <>
+          Some text
+          <a target="_blank" rel="noreferrer" href="https://www.google.com">Click me</a>
+        </>
+      )}
+      asideControlClickableOnDisabled
+      disabled
+      // eslint-disable-next-line no-alert
+      onClick={() => alert('not trigger.')}
+    />
+  );
+}
+
 export function MutedButton() {
   return (
     <FlexRow>

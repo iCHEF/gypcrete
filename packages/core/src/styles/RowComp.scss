@@ -39,4 +39,27 @@
     &--minified {
         flex: 0 0 auto;
     }
+
+    &--aside-control-clickable {
+        &.#{$prefix-state}-disabled {
+          opacity: 1 !important;
+        }
+
+        .#{$prefix}-text__basic {
+          opacity: .3 !important;
+        }
+
+        .#{$prefix}-icon {
+          opacity: .3 !important;
+        }
+
+        .#{$prefix}-text__aside {
+          display: block;
+
+          a, button {
+            opacity: 1;
+            pointer-events: auto;
+          }
+        }
+    }
 }
