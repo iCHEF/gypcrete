@@ -54,6 +54,7 @@ $component: #{$prefix}-popup;
         padding: rem(16px);
         flex: 0 1 auto;
         overflow: auto;
+        max-height: 564px;
 
         .#{$component}--large & {
             padding: rem(16px) rem(56px);
