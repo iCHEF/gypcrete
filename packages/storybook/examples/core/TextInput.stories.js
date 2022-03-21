@@ -79,6 +79,19 @@ export function MultiLines() {
   );
 }
 
+export function PostFix() {
+  return (
+    <DebugBox>
+      <TextInput
+        label="Disk Size"
+        value="3.1415926"
+        postfix="TB"
+        onChange={action('change')}
+      />
+    </DebugBox>
+  );
+}
+
 export function CustomRendering() {
   return (
     <DebugBox>
