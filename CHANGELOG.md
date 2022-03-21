@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Disable dropdown icon when `<SelectRow>` is ineditable. (#320)
 - [Core] Add `skip` prop on `closable` mixin. (#324)
 - [Core] Add `refreshOnWindowResize` and `distanceFromAnchor` prop on `anchored`. (#324)
+- [Core] Add `postfix` prop on `<TextInput>` / `<TextInputRow>`. (#327)
 
 ### Added
 - [Core] Add `muted` prop on following component: (#278)
