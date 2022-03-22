@@ -63,6 +63,16 @@ export const disabledRow = () => (
   </List>
 );
 
+export const PostfixRow = () => (
+  <List>
+    <TextInputRow
+      label="Price"
+      onChange={action('change')}
+      postfix="Dollars"
+    />
+  </List>
+);
+
 export const errorState = () => (
   <List>
     <TextInputRow

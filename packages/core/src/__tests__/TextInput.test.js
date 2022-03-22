@@ -170,4 +170,11 @@ describe('pure <TextInput>', () => {
       },
     });
   });
+
+  it('show postfix given postfix prop', () => {
+    const wrapper = shallow(<PureTextInput postfix="Dollars" />);
+    const postfixWrapper = wrapper.find('.gyp-text-input__postfix');
+
+    expect(postfixWrapper.text()).toEqual('Dollars');
+  });
 });

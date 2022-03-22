@@ -16,6 +16,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 export const BEM = {
   input: ROOT_BEM.element('input'),
+  postfix: ROOT_BEM.element('postfix'),
 };
 
 
@@ -100,6 +101,7 @@ function TextInput({
   label,
   readOnly,
   disabled,
+  postfix,
   // <InnerInput> props
   renderInput,
   multiLine,
@@ -140,6 +142,8 @@ function TextInput({
         basic={input}
         aside={label}
       />
+
+      {postfix && <div className={BEM.postfix}>{postfix}</div>}
     </div>
   );
 }
@@ -148,6 +152,7 @@ TextInput.propTypes = {
   label: PropTypes.node,
   readOnly: PropTypes.bool,
   disabled: PropTypes.bool,
+  postfix: PropTypes.node,
   // <InnerInput> props
   renderInput: PropTypes.func,
   multiLine: PropTypes.bool,
@@ -159,6 +164,7 @@ TextInput.defaultProps = {
   label: undefined,
   readOnly: false,
   disabled: false,
+  postfix: undefined,
   // <InnerInput> props
   renderInput: undefined,
   multiLine: undefined,
