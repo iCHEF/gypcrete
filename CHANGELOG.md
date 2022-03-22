@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [4.4.0]
+
 ### Breaking
 - [Core] Remove deprecated behavior in Popup, which will treat element of `buttons` as props to `<PopupButton>`, if `element.type` is not `<PopupButton>`. (#276)
 - [Core] `<Popup>` is revised to match latest design spec: (#293)
@@ -27,6 +29,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Add `skip` prop on `closable` mixin. (#324)
 - [Core] Add `refreshOnWindowResize` and `distanceFromAnchor` prop on `anchored`. (#324)
 - [Core] Add `postfix` prop on `<TextInput>` / `<TextInputRow>`. (#327)
+- [Core] Remove css property. (#329)
 
 ### Added
 - [Core] Add `muted` prop on following component: (#278)
