@@ -1,0 +1,15 @@
+<svg id="success.svg" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: 0;
+      }
+
+      .cls-2 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <rect id="BG_のコピー_10" data-name="BG のコピー 10" class="cls-1" width="32" height="32"/>
+  <path id="楕円形_2_のコピー" data-name="楕円形 2 のコピー" class="cls-2" d="M4328,1008a8,8,0,1,1,8-8A8,8,0,0,1,4328,1008Zm4.8-10.442a0.994,0.994,0,0,0-1.41,0l-3.95,3.952-2.12-2.123a1,1,0,0,0-1.42,1.413l2.83,2.83a1,1,0,0,0,1.41,0l4.66-4.658A1,1,0,0,0,4332.8,997.558Z" transform="translate(-4312 -984)"/>
+</svg>

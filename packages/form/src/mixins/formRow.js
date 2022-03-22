@@ -5,73 +5,74 @@ import getComponentName from '@ichef/gypcrete/lib/utils/getComponentName';
 import { statusPropTypes } from '@ichef/gypcrete/lib/mixins/withStatus';
 
 export const rowPropTypes = PropTypes.shape({
-    desc: PropTypes.node,
-    ...statusPropTypes,
+  desc: PropTypes.node,
+  ...statusPropTypes,
 });
 
 const formRow = ({
-    withRef = false,
+  withRef = false,
 } = {}) => (WrappedComponent) => {
-    class FormRow extends PureComponent {
+  class FormRow extends PureComponent {
         static displayName = `formRow(${getComponentName(WrappedComponent)})`;
 
         static propTypes = {
-            disabled: PropTypes.bool,
-            readOnly: PropTypes.bool,
-            desc: PropTypes.node,
-            ...statusPropTypes,
-            // status
-            // statusOptions
-            // errorMsg
+          disabled: PropTypes.bool,
+          readOnly: PropTypes.bool,
+          desc: PropTypes.node,
+          ...statusPropTypes,
+          // status
+          // statusOptions
+          // errorMsg
         };
 
         static defaultProps = {
-            disabled: false,
-            readOnly: false,
-            desc: undefined,
+          disabled: false,
+          readOnly: false,
+          desc: undefined,
         };
 
         getWrappedComponent() {
-            return this.componentRef;
+          return this.componentRef;
         }
 
         handleRef = (ref) => {
-            this.componentRef = ref;
+          this.componentRef = ref;
         }
 
         render() {
-            const {
-                disabled,
-                readOnly,
+          const {
+            disabled,
+            readOnly,
+            desc,
+            status,
+            statusOptions,
+            errorMsg,
+            rowProps,
+            ...otherProps
+          } = this.props;
+
+          const ineditable = disabled || readOnly;
+
+          return (
+            <WrappedComponent
+              ref={withRef ? this.handleRef : undefined}
+              ineditable={ineditable}
+              disabled={disabled}
+              readOnly={readOnly}
+              rowProps={{
                 desc,
                 status,
                 statusOptions,
                 errorMsg,
-                rowProps,
-                ...otherProps
-            } = this.props;
-
-            const ineditable = disabled || readOnly;
-
-            return (
-                <WrappedComponent
-                    ref={withRef ? this.handleRef : undefined}
-                    ineditable={ineditable}
-                    disabled={disabled}
-                    readOnly={readOnly}
-                    rowProps={{
-                        desc,
-                        status,
-                        statusOptions,
-                        errorMsg,
-                        ...rowProps,
-                    }}
-                    {...otherProps} />
-            );
+                ...rowProps,
+              }}
+              {...otherProps}
+            />
+          );
         }
-    }
+  }
 
-    return FormRow;
+  return FormRow;
 };
 
 export default formRow;

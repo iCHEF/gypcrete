@@ -5,12 +5,12 @@ import { action } from '@storybook/addon-actions';
  * `HTMLImageElement` node, since it's way too large.
  */
 function handleLoadSuccess({ resource, ...imgInfo }) {
-    const patchedImgInfo = {
-        ...imgInfo,
-        resource: '[HTMLImageElement]',
-    };
+  const patchedImgInfo = {
+    ...imgInfo,
+    resource: '[HTMLImageElement]',
+  };
 
-    return action('loadSuccess')(patchedImgInfo);
+  return action('loadSuccess')(patchedImgInfo);
 }
 
 export default handleLoadSuccess;

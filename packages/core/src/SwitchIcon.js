@@ -9,8 +9,8 @@ import './styles/SwitchIcon.scss';
 export const COMPONENT_NAME = prefixClass('switch-icon');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
-    root: ROOT_BEM,
-    inner: ROOT_BEM.element('inner'),
+  root: ROOT_BEM,
+  inner: ROOT_BEM.element('inner'),
 };
 
 const ON = 'on';
@@ -24,22 +24,22 @@ export const SWITCH_STATE = { ON, OFF };
  * A `<SwitchIcon>` is a visual element that is supposed to be like a 64x32 icon.
  */
 function SwitchIcon({ state, className, ...otherProps }) {
-    const bemClass = BEM.root.modifier(state);
-    const rootClassName = classNames(className, `${bemClass}`);
+  const bemClass = BEM.root.modifier(state);
+  const rootClassName = classNames(className, `${bemClass}`);
 
-    return (
-        <span className={rootClassName} {...otherProps}>
-            <span className={BEM.inner} />
-        </span>
-    );
+  return (
+    <span className={rootClassName} {...otherProps}>
+      <span className={BEM.inner} />
+    </span>
+  );
 }
 
 SwitchIcon.propTypes = {
-    state: PropTypes.oneOf([ON, OFF]),
+  state: PropTypes.oneOf([ON, OFF]),
 };
 
 SwitchIcon.defaultProps = {
-    state: OFF,
+  state: OFF,
 };
 
 export default SwitchIcon;

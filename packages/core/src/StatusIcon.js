@@ -24,47 +24,49 @@ const ICON_HIDE_TIMEOUT = 2 * 1000;
 
 class StatusIcon extends PureComponent {
     static propTypes = {
-        status: PropTypes.oneOf([LOADING, SUCCESS, ERROR]),
-        position: PropTypes.oneOf([INLINE, CORNER]),
-        /**
+      status: PropTypes.oneOf([LOADING, SUCCESS, ERROR]),
+      position: PropTypes.oneOf([INLINE, CORNER]),
+      /**
          * if `true`, Auto hides status icon after being success for 2 secs,
          * or shows icon when component leaves success state.
          * */
-        autohide: PropTypes.bool,
+      autohide: PropTypes.bool,
     };
 
     static defaultProps = {
-        status: undefined,
-        position: INLINE,
-        autohide: true,
+      status: undefined,
+      position: INLINE,
+      autohide: true,
     };
 
     constructor(props) {
-        super(props);
-        this.hideIconTimeout = null;
+      super(props);
+      this.hideIconTimeout = null;
     }
 
     state = {
-        hideIcon: false,
+      hideIcon: false,
     };
 
+    // eslint-disable-next-line react/no-deprecated
     componentWillMount() {
-        this.autoToggleStatusIcon();
+      this.autoToggleStatusIcon();
     }
 
+    // eslint-disable-next-line react/no-deprecated
     componentWillReceiveProps(nextProps) {
-        if (nextProps.status !== this.props.status) {
-            this.autoToggleStatusIcon(nextProps.status);
-        }
+      if (nextProps.status !== this.props.status) {
+        this.autoToggleStatusIcon(nextProps.status);
+      }
 
-        // If 'autohide' is turned off, make icon visible immediately
-        if (!nextProps.autohide && this.state.hideIcon) {
-            this.setState({ hideIcon: false });
-        }
+      // If 'autohide' is turned off, make icon visible immediately
+      if (!nextProps.autohide && this.state.hideIcon) {
+        this.setState({ hideIcon: false });
+      }
     }
 
     componentWillUnmount() {
-        clearTimeout(this.hideIconTimeout);
+      clearTimeout(this.hideIconTimeout);
     }
 
     /**
@@ -80,54 +82,54 @@ class StatusIcon extends PureComponent {
      * @param {String} status - current or next 'status'
      */
     autoToggleStatusIcon(status = this.props.status) {
-        // Ignore if autohide === false
-        if (!this.props.autohide) {
-            return;
-        }
+      // Ignore if autohide === false
+      if (!this.props.autohide) {
+        return;
+      }
 
-        // LOADING|ERROR|null -> SUCCESS
-        if (status === SUCCESS) {
-            this.hideIconTimeout = setTimeout(() => {
-                this.setState({ hideIcon: true });
-                this.hideIconTimeout = null;
-            }, ICON_HIDE_TIMEOUT);
+      // LOADING|ERROR|null -> SUCCESS
+      if (status === SUCCESS) {
+        this.hideIconTimeout = setTimeout(() => {
+          this.setState({ hideIcon: true });
+          this.hideIconTimeout = null;
+        }, ICON_HIDE_TIMEOUT);
 
-            return;
-        }
+        return;
+      }
 
-        // SUCCESS -> LOADING|ERROR|null
-        clearTimeout(this.hideIconTimeout);
-        this.setState({ hideIcon: false });
+      // SUCCESS -> LOADING|ERROR|null
+      clearTimeout(this.hideIconTimeout);
+      this.setState({ hideIcon: false });
     }
 
     render() {
-        const { status, position } = this.props;
-        const rootClassName = ROOT_BEM.modifier(position);
-        let icon = null;
+      const { status, position } = this.props;
+      const rootClassName = ROOT_BEM.modifier(position);
+      let icon = null;
 
-        switch (status) {
-            case LOADING:
-                icon = <Icon type="inline-loading" color="gray" spinning />;
-                break;
-            case SUCCESS:
-                if (!this.state.hideIcon) {
-                    icon = <Icon type="inline-success" color="blue" />;
-                }
-                break;
-            case ERROR:
-                icon = <Icon type="inline-error" color="red" />;
-                break;
-            default:
-                break;
-        }
+      switch (status) {
+        case LOADING:
+          icon = <Icon type="inline-loading" color="gray" spinning />;
+          break;
+        case SUCCESS:
+          if (!this.state.hideIcon) {
+            icon = <Icon type="inline-success" color="blue" />;
+          }
+          break;
+        case ERROR:
+          icon = <Icon type="inline-error" color="red" />;
+          break;
+        default:
+          break;
+      }
 
-        const wrapperProps = getRemainingProps(this.props, StatusIcon.propTypes);
+      const wrapperProps = getRemainingProps(this.props, StatusIcon.propTypes);
 
-        return (icon && (
-            <span className={rootClassName} {...wrapperProps}>
-                {icon}
-            </span>
-        ));
+      return (icon && (
+        <span className={rootClassName} {...wrapperProps}>
+          {icon}
+        </span>
+      ));
     }
 }
 

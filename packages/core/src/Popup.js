@@ -1,14 +1,11 @@
-import React, { useMemo, isValidElement } from 'react';
+import React, { isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
-import wrapIfNotElement from './utils/wrapIfNotElement';
 
 import renderToLayer from './mixins/renderToLayer';
-
-import PopupButton from './PopupButton';
 
 import Icon from './Icon';
 import Overlay from './Overlay';
@@ -16,186 +13,132 @@ import Overlay from './Overlay';
 import './styles/_animations.scss';
 import './styles/Popup.scss';
 
-export const BUTTONS_DIRECTION = {
-    VERTICAL: 'vertical',
-    HORIZONTAL: 'horizontal',
+export const POPUP_SIZE = {
+  SMALL: 'small',
+  LARGE: 'large',
 };
 
 export const COMPONENT_NAME = prefixClass('popup');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
 export const BEM = {
-    root: ROOT_BEM,
-    container: ROOT_BEM.element('container'),
-    body: ROOT_BEM.element('body'),
-    messageWrapper: ROOT_BEM.element('message-wrapper'),
-    messageTitle: ROOT_BEM.element('message-title'),
-    messageDesc: ROOT_BEM.element('message-desc'),
-    button: ROOT_BEM.element('button'),
-    buttonsGroup: ROOT_BEM.element('buttons-group')
+  root: ROOT_BEM,
+  container: ROOT_BEM.element('container'),
+  icon: ROOT_BEM.element('icon'),
+  body: ROOT_BEM.element('body'),
+  messageTitle: ROOT_BEM.element('message-title'),
+  messageDesc: ROOT_BEM.element('message-desc'),
+  messageDescWithTitle: ROOT_BEM.element('message-desc').modifier('with-title'),
+  button: ROOT_BEM.element('button'),
+  buttonsGroup: ROOT_BEM.element('buttons-group'),
 };
 
-export function PopupIcon({ type }) {
-    return <Icon large type={type} />;
+export function PopupIcon({ icon, color }) {
+  if (!icon) {
+    return null;
+  }
+
+  return (
+    <div className={BEM.icon}>
+      {(isValidElement(icon)
+        ? icon
+        : <Icon large type={icon} color={color} />
+      )}
+    </div>
+  );
 }
 PopupIcon.propTypes = {
-    type: PropTypes.string.isRequired,
-};
-
-export function PopupMessage({ title, desc, bottomArea }) {
-    return (
-        <div className={BEM.messageWrapper}>
-            {title && (
-                <span className={BEM.messageTitle}>{title}</span>
-            )}
-            <span className={BEM.messageDesc}>{desc}</span>
-            {bottomArea}
-        </div>
-    );
-}
-PopupMessage.propTypes = {
-    title: PropTypes.string,
-    desc: PropTypes.string.isRequired,
-    bottomArea: PropTypes.node,
-};
-PopupMessage.defaultProps = {
-    title: undefined,
-    bottomArea: undefined,
-};
-
-/**
- * Render popup's buttons
- *
- * @param {Array} buttons
- * @param {'vertical'|'horizontal'} direction
- * @return {Array}
- */
-function renderPopupButtons(buttons, direction) {
-    if (!buttons || buttons.length === 0) {
-        return null;
-    }
-
-    /**
-     * `<Popup>` expects an array of pre-configured `<PopupButton>`s.
-     * This transforms `<Button>` into `<PopupButton>` for compatibility.
-     *
-     * Should remove in v2 release.
-     * @deprecated
-     */
-    const popupButtons = buttons.map((button) => {
-        if (button.type === PopupButton) {
-            return button;
-        }
-        return (
-            <PopupButton
-                key={button.key}
-                {...button.props}
-            />
-        );
-    });
-
-    const wrapperClass = BEM.buttonsGroup
-        .modifier(direction)
-        .toString();
-
-    return (
-        <div className={wrapperClass}>
-            {popupButtons}
-        </div>
-    );
-}
-
-function Popup({
-    large,
-    icon,
-
-    // message area props
-    customMessageNode,
-    messageTitle,
-    messageDesc,
-    messageBottomArea,
-    // message is a legacy prop, should be deprecated in future,
-    //   use `messageDesc` instead for string message,
-    //   use `customMessageNode` instead for node message
-    message,
-
-    // button props
-    buttons,
-    buttonsDirection,
-
-    // React props
-    className,
-    children,
-    ...popupProps
-}) {
-    const rootClassName = classNames(BEM.root.modifier('large', large).toString(), className);
-
-    const messageArea = useMemo(
-        () => {
-            if (customMessageNode) {
-                return customMessageNode;
-            }
-
-            // support for legacy node type `message` prop
-            if (message && isValidElement(message)) {
-                return message;
-            }
-
-            return (
-                <PopupMessage
-                    title={messageTitle}
-                    // support for legacy string type `message` prop
-                    desc={messageDesc || message}
-                    bottomArea={messageBottomArea}
-                />
-            );
-        },
-        [message, customMessageNode, messageTitle, messageDesc, messageBottomArea]
-    );
-
-    return (
-        <div className={rootClassName} {...popupProps}>
-            <Overlay />
-
-            <div className={BEM.container}>
-                <div className={BEM.body}>
-                    {icon && wrapIfNotElement(icon, { with: PopupIcon, via: 'type' })}
-                    {messageArea}
-                </div>
-
-                {renderPopupButtons(buttons, buttonsDirection)}
-                {children}
-            </div>
-        </div>
-    );
-}
-
-const StringOrElement = PropTypes.oneOfType([
+  icon: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
-]);
+  ]),
+  color: PropTypes.string,
+};
+PopupIcon.defaultProps = {
+  icon: undefined,
+  color: undefined,
+};
+
+export function PopupMessage({ title, message }) {
+  // variant: title + desc
+  if (title) {
+    return (
+      <>
+        <div className={BEM.messageTitle}>{title}</div>
+        <div className={BEM.messageDescWithTitle}>{message}</div>
+      </>
+    );
+  }
+
+  // variant: simple message
+  return (
+    <div className={BEM.messageDesc}>{message}</div>
+  );
+}
+PopupMessage.propTypes = {
+  title: PropTypes.node,
+  message: PropTypes.node.isRequired,
+};
+PopupMessage.defaultProps = {
+  title: undefined,
+};
+
+function Popup({
+  size,
+  icon,
+  iconColor,
+  title,
+  message,
+  messageBottomArea,
+  buttons,
+  className,
+  ...popupProps
+}) {
+  const rootBEM = BEM.root.modifier(size).toString();
+  const rootClassName = classNames(rootBEM, className);
+
+  return (
+    <div className={rootClassName} {...popupProps}>
+      <Overlay />
+
+      <div className={BEM.container}>
+        <PopupIcon icon={icon} color={iconColor} />
+
+        <div className={BEM.body}>
+          <PopupMessage title={title} message={message} />
+          {messageBottomArea}
+        </div>
+
+        {buttons && (
+          <div className={BEM.buttonsGroup}>
+            {buttons}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 Popup.propTypes = {
-    large: PropTypes.bool,
-    icon: StringOrElement,
-    customMessageNode: PropTypes.node,
-    messageTitle: PropTypes.string,
-    messageDesc: PropTypes.string,
-    message: StringOrElement,
-    messageBottomArea: PropTypes.node,
-    buttons: PropTypes.arrayOf(PropTypes.element),
-    buttonsDirection: PropTypes.oneOf(Object.values(BUTTONS_DIRECTION)),
+  size: PropTypes.oneOf([
+    POPUP_SIZE.SMALL,
+    POPUP_SIZE.LARGE,
+  ]),
+  icon: PopupIcon.propTypes.icon,
+  iconColor: PopupIcon.propTypes.color,
+  title: PopupMessage.propTypes.title,
+  message: PopupMessage.propTypes.message,
+  messageBottomArea: PropTypes.node,
+  buttons: PropTypes.node,
 };
 
 Popup.defaultProps = {
-    large: false,
-    icon: null,
-    customMessageNode: undefined,
-    messageTitle: undefined,
-    messageDesc: undefined,
-    message: null,
-    messageBottomArea: undefined,
-    buttons: [],
-    buttonsDirection: BUTTONS_DIRECTION.VERTICAL,
+  size: POPUP_SIZE.SMALL,
+  icon: PopupIcon.defaultProps.icon,
+  iconColor: PopupIcon.defaultProps.color,
+  title: PopupMessage.defaultProps.title,
+  message: PopupMessage.defaultProps.message,
+  messageBottomArea: undefined,
+  buttons: undefined,
 };
 
 // export for tests

@@ -17,9 +17,11 @@ $component-name: #{$prefix}-section;
     }
 
     &__title {
+        display: flex;
+        align-items: flex-end;
         line-height: rem($section-title-line-height);
         font-weight: $font-weight-bold;
-        padding-bottom: rem(1px);
+        padding-bottom: rem(5px);
         border-bottom: 2px solid $c-section-divider;
 
         // title font-size
@@ -36,6 +38,13 @@ $component-name: #{$prefix}-section;
             display: inline-block;
             margin-right: .25em;
         }
+    }
+
+    &__title-right-area {
+        margin-left: auto;
+        padding-left: rem(5px);
+        flex-grow: 0;
+        flex-shrink: 0;
     }
 
     &__desc {

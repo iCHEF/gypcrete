@@ -4,24 +4,25 @@ import memoize from 'memoize-one';
 
 import getComponentName from '../../utils/getComponentName';
 import getPositionState, {
-    PLACEMENT,
-    // eslint-disable-next-line import/named, no-unused-vars
-    Placement, // type alias
+  PLACEMENT,
+  // eslint-disable-next-line import/named, no-unused-vars
+  Placement, // type alias
 } from './getPositionState';
 
 export { PLACEMENT as ANCHORED_PLACEMENT };
 
 export const anchoredPropTypes = {
-    placement: PropTypes.oneOf(Object.values(PLACEMENT)),
-    arrowStyle: PropTypes.objectOf(PropTypes.number),
-    nodeRef: PropTypes.func,
+  placement: PropTypes.oneOf(Object.values(PLACEMENT)),
+  arrowStyle: PropTypes.objectOf(PropTypes.number),
+  nodeRef: PropTypes.func,
+  remainingSpace: PropTypes.number,
 };
 
 function filterDOMNode(node) {
-    if (node instanceof HTMLElement) {
-        return node;
-    }
-    return null;
+  if (node instanceof HTMLElement) {
+    return node;
+  }
+  return null;
 }
 
 /**
@@ -84,72 +85,114 @@ class Example extends React.Component {
  */
 
 const anchored = ({
-    defaultPlacement = PLACEMENT.BOTTOM,
-    edgePadding = 16,
+  defaultPlacement = PLACEMENT.BOTTOM,
+  edgePadding = 16,
 } = {}) => (WrappedComponent) => {
-    const componentName = getComponentName(WrappedComponent);
+  const componentName = getComponentName(WrappedComponent);
+  const defaultGetPositionState = memoize(getPositionState(defaultPlacement, edgePadding));
 
-    class Anchored extends Component {
+  class Anchored extends Component {
         static displayName = `anchored(${componentName})`;
 
         static propTypes = {
-            anchor: PropTypes.instanceOf(window.HTMLElement),
+          anchor: PropTypes.instanceOf(window.HTMLElement),
+          refreshOnWindowResize: PropTypes.bool,
+          distanceFromAnchor: PropTypes.number,
         };
 
         static defaultProps = {
-            anchor: null,
+          anchor: null,
+          refreshOnWindowResize: false,
+          distanceFromAnchor: 0,
         };
 
         state = {
-            selfNode: null,
+          selfNode: null,
         };
 
-        getPositions = memoize(getPositionState(defaultPlacement, edgePadding));
+        componentDidMount() {
+          const { refreshOnWindowResize } = this.props;
+          if (refreshOnWindowResize) {
+            this.resizeHandler = () => {
+              requestAnimationFrame(() => {
+                this.setState(({ rerenderFlag, ...otherState }) => ({
+                  flagForRerender: !rerenderFlag,
+                  ...otherState,
+                }));
+              });
+            };
+
+            window.addEventListener('resize', this.resizeHandler);
+          }
+        }
+
+        componentWillUnmount() {
+          if (this.resizeHandler) {
+            window.removeEventListener('resize', this.resizeHandler);
+          }
+        }
+
+        getPositions = (anchor, selfNode) => {
+          const { refreshOnWindowResize, distanceFromAnchor } = this.props;
+          if (!refreshOnWindowResize) {
+            return defaultGetPositionState(anchor, selfNode, distanceFromAnchor);
+          }
+          return getPositionState(defaultPlacement, edgePadding)(
+            anchor,
+            selfNode,
+            distanceFromAnchor
+          );
+        }
 
         setSelfNode = (nodeRef) => {
-            this.setState({ selfNode: nodeRef });
+          this.setState({ selfNode: nodeRef });
         }
 
         render() {
-            const {
-                anchor,
-                style,
-                ...otherProps
-            } = this.props;
+          const {
+            anchor,
+            style,
+            distanceFromAnchor,
+            refreshOnWindowResize,
+            ...otherProps
+          } = this.props;
 
-            const { selfNode } = this.state;
+          const { selfNode } = this.state;
 
-            if (!anchor) {
-                return null;
-            }
+          if (!anchor) {
+            return null;
+          }
 
-            const {
-                placement,
-                position,
-                arrowPosition,
-            } = this.getPositions(
-                filterDOMNode(anchor),
-                filterDOMNode(selfNode),
-            );
+          const {
+            placement,
+            position,
+            arrowPosition,
+            remainingSpace,
+          } = this.getPositions(
+            filterDOMNode(anchor),
+            filterDOMNode(selfNode),
+          );
 
-            const mergedStyle = {
-                position: 'absolute',
-                ...position,
-                ...style,
-            };
+          const mergedStyle = {
+            position: 'absolute',
+            ...position,
+            ...style,
+          };
 
-            return (
-                <WrappedComponent
-                    {...otherProps}
-                    placement={placement}
-                    arrowStyle={arrowPosition}
-                    style={mergedStyle}
-                    nodeRef={this.setSelfNode} />
-            );
+          return (
+            <WrappedComponent
+              {...otherProps}
+              placement={placement}
+              remainingSpace={remainingSpace}
+              arrowStyle={arrowPosition}
+              style={mergedStyle}
+              nodeRef={this.setSelfNode}
+            />
+          );
         }
-    }
+  }
 
-    return Anchored;
+  return Anchored;
 };
 
 export default anchored;

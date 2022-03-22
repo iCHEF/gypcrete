@@ -17,42 +17,42 @@ import IconLayout from './IconLayout';
  * However, `color` & `solid` props are invalid in `<IconButton>`
  */
 function IconButton({
-    icon,
-    tinted,
-    color,
-    solid,
-    // React props
-    className,
-    ...buttonProps
+  icon,
+  tinted,
+  color,
+  solid,
+  // React props
+  className,
+  ...buttonProps
 }) {
-    const bemClass = icBEM(COMPONENT_NAME)
-        .modifier('icon-only')
-        .modifier('tinted', tinted)
-        .toString({ stripBlock: true });
+  const bemClass = icBEM(COMPONENT_NAME)
+    .modifier('icon-only')
+    .modifier('tinted', tinted)
+    .toString({ stripBlock: true });
 
-    const rootClass = classNames(bemClass, className);
+  const rootClass = classNames(bemClass, className);
 
-    return (
-        <Button className={rootClass} {...buttonProps}>
-            <IconLayout icon={icon} />
-        </Button>
-    );
+  return (
+    <Button className={rootClass} {...buttonProps}>
+      <IconLayout icon={icon} />
+    </Button>
+  );
 }
 
 IconButton.propTypes = {
-    icon: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.element
-    ]).isRequired,
-    tinted: PropTypes.bool,
-    color: EnhancedPropTypes.isEmpty,
-    solid: EnhancedPropTypes.isEmpty,
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]).isRequired,
+  tinted: PropTypes.bool,
+  color: EnhancedPropTypes.isEmpty,
+  solid: EnhancedPropTypes.isEmpty,
 };
 
 IconButton.defaultProps = {
-    tinted: false,
-    color: undefined,
-    solid: undefined,
+  tinted: false,
+  color: undefined,
+  solid: undefined,
 };
 
 export default IconButton;

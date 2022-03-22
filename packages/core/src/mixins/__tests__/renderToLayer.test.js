@@ -13,7 +13,7 @@ jest.mock('../../utils/randId');
 // --------------------
 
 function Foo() {
-    return <div className="bar">Hello World!</div>;
+  return <div className="bar">Hello World!</div>;
 }
 
 const LayerFoo = renderToLayer(Foo);
@@ -24,40 +24,40 @@ const LayerFoo = renderToLayer(Foo);
 // --------------------
 
 it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const element = <LayerFoo />;
+  const div = document.createElement('div');
+  const element = <LayerFoo />;
 
-    ReactDOM.render(element, div);
+  ReactDOM.render(element, div);
 });
 
 it('creates a layer with unique ID on creation', () => {
-    randId.mockReturnValueOnce('MOCKED_ID');
+  randId.mockReturnValueOnce('MOCKED_ID');
 
-    const wrapper = shallow(<LayerFoo />);
+  const wrapper = shallow(<LayerFoo />);
 
-    expect(randId).toHaveBeenCalled();
-    expect(wrapper.instance().baseLayer.id = 'MOCKED_ID');
+  expect(randId).toHaveBeenCalled();
+  expect(wrapper.instance().baseLayer.id = 'MOCKED_ID');
 });
 
 it('append layer to body on mount and removes on unmount', () => {
-    const layerId = 'layer-1234';
-    randId.mockReturnValueOnce(layerId);
+  const layerId = 'layer-1234';
+  randId.mockReturnValueOnce(layerId);
 
-    const wrapper = shallow(<LayerFoo />);
+  const wrapper = shallow(<LayerFoo />);
 
-    expect(document.getElementById(layerId)).toBe(wrapper.instance().baseLayer);
+  expect(document.getElementById(layerId)).toBe(wrapper.instance().baseLayer);
 
-    wrapper.unmount();
-    expect(document.getElementById(layerId)).toBeNull();
+  wrapper.unmount();
+  expect(document.getElementById(layerId)).toBeNull();
 });
 
 it('renders wrapped component via ReactPortal after layer is in DOM', () => {
-    const wrapper = shallow(<LayerFoo />, { disableLifecycleMethods: true });
-    expect(wrapper.children().exists()).toBeFalsy();
+  const wrapper = shallow(<LayerFoo />, { disableLifecycleMethods: true });
+  expect(wrapper.children().exists()).toBeFalsy();
 
-    // Triggers layer appending
-    wrapper.instance().componentDidMount();
+  // Triggers layer appending
+  wrapper.instance().componentDidMount();
 
-    expect(wrapper.type()).toBe(ReactIs.Portal);
-    expect(wrapper.children().is(Foo)).toBeTruthy();
+  expect(wrapper.type()).toBe(ReactIs.Portal);
+  expect(wrapper.children().is(Foo)).toBeTruthy();
 });

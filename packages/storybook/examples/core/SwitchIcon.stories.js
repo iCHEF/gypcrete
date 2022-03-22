@@ -3,15 +3,15 @@ import SwitchIcon from '@ichef/gypcrete/src/SwitchIcon';
 
 
 export default {
-    title: '@ichef/gypcrete|SwitchIcon',
-    component: SwitchIcon,
+  title: '@ichef/gypcrete|SwitchIcon',
+  component: SwitchIcon,
 };
 
 export function BasicUsage() {
-    return (
-        <div>
-            <SwitchIcon />
-            <SwitchIcon state="on" />
-        </div>
-    );
+  return (
+    <div>
+      <SwitchIcon />
+      <SwitchIcon state="on" />
+    </div>
+  );
 }

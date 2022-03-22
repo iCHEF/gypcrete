@@ -18,4 +18,11 @@
         padding: 0;
         outline: none;
     }
+
+    &__postfix {
+      margin-left: 0.5rem;
+      justify-content: flex-end;
+      align-self: flex-end;
+      font-weight: 700;
+    }
 }

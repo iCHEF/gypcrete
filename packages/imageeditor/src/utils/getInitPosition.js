@@ -9,19 +9,19 @@
  * @returns {{ x: number, y: number }}
  */
 function getInitPosition(initCropRect) {
-    if (!initCropRect) return null;
+  if (!initCropRect) return null;
 
-    const {
-        x: xRatio,
-        y: yRatio,
-        width: widthRatio,
-        height: heightRatio,
-    } = initCropRect;
+  const {
+    x: xRatio,
+    y: yRatio,
+    width: widthRatio,
+    height: heightRatio,
+  } = initCropRect;
 
-    return {
-        x: xRatio + (widthRatio / 2),
-        y: yRatio + (heightRatio / 2),
-    };
+  return {
+    x: xRatio + (widthRatio / 2),
+    y: yRatio + (heightRatio / 2),
+  };
 }
 
 export default getInitPosition;

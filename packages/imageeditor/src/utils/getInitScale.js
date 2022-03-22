@@ -12,17 +12,17 @@
  * @returns {number?}
  */
 function getInitScale(initCropRect) {
-    if (!initCropRect) return null;
+  if (!initCropRect) return null;
 
-    const { width: widthRatio, height: heightRatio } = initCropRect;
-    const isWidthBasedScale = widthRatio > heightRatio;
+  const { width: widthRatio, height: heightRatio } = initCropRect;
+  const isWidthBasedScale = widthRatio > heightRatio;
 
-    const inferredScale = isWidthBasedScale ? (1 / widthRatio) : (1 / heightRatio);
+  const inferredScale = isWidthBasedScale ? (1 / widthRatio) : (1 / heightRatio);
 
-    if (Number.isNaN(inferredScale)) return null;
+  if (Number.isNaN(inferredScale)) return null;
 
-    // Shrink scale fraction to one digit
-    return Number.parseFloat(inferredScale.toFixed(1));
+  // Shrink scale fraction to one digit
+  return Number.parseFloat(inferredScale.toFixed(1));
 }
 
 export default getInitScale;

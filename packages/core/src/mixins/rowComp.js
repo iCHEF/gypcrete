@@ -30,9 +30,9 @@
  */
 
 import React, {
-    PureComponent,
-    isValidElement,
-    cloneElement
+  PureComponent,
+  isValidElement,
+  cloneElement,
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -61,13 +61,13 @@ const REVERSE = 'reverse';
 export const ROW_COMP_ALIGN = { LEFT, CENTER, RIGHT, REVERSE };
 
 export const textPropTypes = {
-    align: PropTypes.string,
-    noGrow: PropTypes.bool,
-    verticalOrder: PropTypes.string,
-    basic: PropTypes.node,
-    aside: PropTypes.node,
-    tag: PropTypes.node,
-    bold: PropTypes.bool,
+  align: PropTypes.string,
+  noGrow: PropTypes.bool,
+  verticalOrder: PropTypes.string,
+  basic: PropTypes.node,
+  aside: PropTypes.node,
+  tag: PropTypes.node,
+  bold: PropTypes.bool,
 };
 
 /**
@@ -79,15 +79,15 @@ export const textPropTypes = {
  * @return {String} textAlign
  */
 function determineTextAlign(compAlign, hasIcon) {
-    switch (compAlign) {
-        case RIGHT:
-        case REVERSE:
-            return RIGHT;
-        case CENTER:
-            if (!hasIcon) return CENTER;
-        default: // eslint-disable-line no-fallthrough
-            return LEFT;
-    }
+  switch (compAlign) {
+    case RIGHT:
+    case REVERSE:
+      return RIGHT;
+    case CENTER:
+      if (!hasIcon) return CENTER;
+    default: // eslint-disable-line no-fallthrough
+      return LEFT;
+  }
 }
 
 /**
@@ -98,194 +98,211 @@ function determineTextAlign(compAlign, hasIcon) {
  * @param  {boolean}   hasIcon
  */
 export function getTextLayoutProps(compAlign, hasIcon) {
-    return {
-        align: determineTextAlign(compAlign, hasIcon),
-        noGrow: compAlign === CENTER,
-    };
+  return {
+    align: determineTextAlign(compAlign, hasIcon),
+    noGrow: compAlign === CENTER,
+  };
 }
 
 const rowComp = ({
-    defaultMinified = false,
-    defaultAlign = LEFT,
-    defaultVerticalOrder = VERTICAL_ORDER.NORMAL,
+  defaultMinified = false,
+  defaultAlign = LEFT,
+  defaultVerticalOrder = VERTICAL_ORDER.NORMAL,
 } = {}) => (WrappedComponent) => {
-    const componentName = getComponentName(WrappedComponent);
+  const componentName = getComponentName(WrappedComponent);
 
-    class RowComp extends PureComponent {
+  class RowComp extends PureComponent {
         static displayName = `rowComp(${componentName})`;
 
         static propTypes = {
-            minified: PropTypes.bool,
+          minified: PropTypes.bool,
 
-            // Text label props
-            align: PropTypes.oneOf([
-                ROW_COMP_ALIGN.LEFT,
-                ROW_COMP_ALIGN.CENTER,
-                ROW_COMP_ALIGN.RIGHT,
-                ROW_COMP_ALIGN.REVERSE,
-            ]),
-            verticalOrder: PropTypes.oneOf([
-                VERTICAL_ORDER.NORMAL,
-                VERTICAL_ORDER.REVERSE,
-            ]),
-            icon: PropTypes.oneOfType([
-                PropTypes.string,
-                PropTypes.element
-            ]),
-            basic: PropTypes.node,
-            avatar: PropTypes.node,
-            aside: PropTypes.node,
-            tag: PropTypes.node,
-            bold: PropTypes.bool,
+          // Text label props
+          align: PropTypes.oneOf([
+            ROW_COMP_ALIGN.LEFT,
+            ROW_COMP_ALIGN.CENTER,
+            ROW_COMP_ALIGN.RIGHT,
+            ROW_COMP_ALIGN.REVERSE,
+          ]),
+          verticalOrder: PropTypes.oneOf([
+            VERTICAL_ORDER.NORMAL,
+            VERTICAL_ORDER.REVERSE,
+          ]),
+          icon: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.element,
+          ]),
+          basic: PropTypes.node,
+          avatar: PropTypes.node,
+          aside: PropTypes.node,
+          tag: PropTypes.node,
+          bold: PropTypes.bool,
+          asideControlClickableOnDisabled: PropTypes.bool,
 
-            // State props
-            active: PropTypes.bool,
-            highlight: PropTypes.bool,
-            disabled: PropTypes.bool,
+          // State props
+          active: PropTypes.bool,
+          highlight: PropTypes.bool,
+          disabled: PropTypes.bool,
+          muted: PropTypes.bool,
 
-            // status props
-            status: statusPropTypes.status,
-            statusOptions: statusPropTypes.statusOptions,
-            errorMsg: statusPropTypes.errorMsg,
+          // status props
+          status: statusPropTypes.status,
+          statusOptions: statusPropTypes.statusOptions,
+          errorMsg: statusPropTypes.errorMsg,
         };
 
         static defaultProps = {
-            minified: defaultMinified,
+          minified: defaultMinified,
 
-            align: defaultAlign,
-            verticalOrder: defaultVerticalOrder,
-            icon: null,
-            basic: null,
-            avatar: null,
-            aside: null,
-            tag: null,
-            bold: false,
+          align: defaultAlign,
+          verticalOrder: defaultVerticalOrder,
+          icon: null,
+          basic: null,
+          avatar: null,
+          aside: null,
+          tag: null,
+          bold: false,
+          asideControlClickableOnDisabled: false,
 
-            active: false,
-            highlight: false,
-            disabled: false,
+          active: false,
+          highlight: false,
+          disabled: false,
+          muted: false,
 
-            status: undefined,
-            statusOptions: undefined,
-            errorMsg: undefined,
+          status: undefined,
+          statusOptions: undefined,
+          errorMsg: undefined,
         };
 
         static childContextTypes = {
-            textProps: PropTypes.shape(textPropTypes),
-            ...statusPropTypes,
-            // status,
-            // statusOptions,
-            // errorMsg,
+          textProps: PropTypes.shape(textPropTypes),
+          ...statusPropTypes,
+          // status,
+          // statusOptions,
+          // errorMsg,
         };
 
         getChildContext() {
-            const { status, statusOptions, errorMsg } = this.props;
-            const textProps = this.getTextProps();
+          const { status, statusOptions, errorMsg } = this.props;
+          const textProps = this.getTextProps();
 
-            return {
-                status,
-                statusOptions,
-                errorMsg,
-                // for <TextInput>
-                textProps,
-            };
+          return {
+            status,
+            statusOptions,
+            errorMsg,
+            // for <TextInput>
+            textProps,
+          };
         }
 
         getTextProps() {
-            const {
-                align,
-                verticalOrder,
-                icon,
-                basic,
-                aside,
-                tag,
-                bold,
-            } = this.props;
+          const {
+            align,
+            verticalOrder,
+            icon,
+            basic,
+            aside,
+            tag,
+            bold,
+            asideControlClickableOnDisabled,
+          } = this.props;
 
-            const textLayoutProps = getTextLayoutProps(align, !!icon);
+          const textLayoutProps = getTextLayoutProps(align, !!icon);
+          const asideControlClickableProps = (
+            asideControlClickableOnDisabled
+              ? {
+                onClick: (event) => { event.stopPropagation(); }
+              }
+              : undefined
+          );
 
-            return {
-                verticalOrder,
-                basic,
-                aside,
-                tag,
-                bold,
-                ...textLayoutProps,
-            };
+          return {
+            verticalOrder,
+            basic,
+            aside,
+            tag,
+            bold,
+            ...asideControlClickableProps,
+            ...textLayoutProps,
+          };
         }
 
         renderIconElement() {
-            const { icon } = this.props;
+          const { icon } = this.props;
 
-            if (!icon) {
-                return null;
-            }
+          if (!icon) {
+            return null;
+          }
 
-            return isValidElement(icon)
-                ? cloneElement(icon, { key: 'comp-icon' })
-                : <Icon key="comp-icon" type={icon} />;
+          return isValidElement(icon)
+            ? cloneElement(icon, { key: 'comp-icon' })
+            : <Icon key="comp-icon" type={icon} />;
         }
 
         renderContent() {
-            const iconElement = this.renderIconElement();
-            const textProps = this.getTextProps();
+          const iconElement = this.renderIconElement();
+          const textProps = this.getTextProps();
 
-            return [
-                iconElement,
-                <Text key="comp-text" {...textProps} />
-            ];
+          return [
+            iconElement,
+            <Text key="comp-text" {...textProps} />,
+          ];
         }
 
         render() {
-            const {
-                minified,
-                avatar,
-                align,
-                verticalOrder,
-                icon,
-                basic,
-                aside,
-                tag,
-                bold,
+          const {
+            minified,
+            avatar,
+            align,
+            verticalOrder,
+            icon,
+            basic,
+            aside,
+            tag,
+            bold,
+            asideControlClickableOnDisabled,
 
-                active,
-                highlight,
-                disabled,
+            active,
+            highlight,
+            disabled,
+            muted,
 
-                status,
-                statusOptions,
-                errorMsg,
+            status,
+            statusOptions,
+            errorMsg,
 
-                // React props
-                className,
-                children,
+            // React props
+            className,
+            children,
 
-                ...otherProps
-            } = this.props;
+            ...otherProps
+          } = this.props;
 
-            const bemClass = ROOT_BEM
-                .modifier('minified', minified)
-                .modifier(align);
+          const bemClass = ROOT_BEM
+            .modifier('minified', minified)
+            .modifier(align)
+            .modifier('aside-control-clickable', asideControlClickableOnDisabled);
 
-            const stateClassNames = getStateClassnames({
-                active,
-                highlight,
-                disabled,
-                error: status === STATUS_CODE.ERROR,
-                untouchable: status === STATUS_CODE.LOADING,
-            });
-            const wrapperClassName = classNames(className, stateClassNames, `${bemClass}`);
+          const stateClassNames = getStateClassnames({
+            active,
+            highlight,
+            disabled,
+            muted,
+            error: status === STATUS_CODE.ERROR,
+            untouchable: status === STATUS_CODE.LOADING,
+          });
+          const wrapperClassName = classNames(className, stateClassNames, `${bemClass}`);
 
-            return (
-                <WrappedComponent className={wrapperClassName} {...otherProps}>
-                    {avatar}
-                    {children || this.renderContent()}
-                </WrappedComponent>
-            );
+          return (
+            <WrappedComponent className={wrapperClassName} {...otherProps}>
+              {avatar}
+              {children || this.renderContent()}
+            </WrappedComponent>
+          );
         }
-    }
+  }
 
-    return RowComp;
+  return RowComp;
 };
 
 export default rowComp;

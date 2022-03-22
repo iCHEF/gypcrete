@@ -3,160 +3,170 @@ import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 
 import Popup, {
-    PurePopup,
-    PopupMessage,
-    PopupIcon,
-    BEM as POPUP_BEM,
+  PurePopup,
+  PopupMessage,
+  PopupIcon,
+  BEM as POPUP_BEM,
 } from '../Popup';
 import PopupButton from '../PopupButton';
 
-import Button from '../Button';
 import Icon from '../Icon';
 import Overlay from '../Overlay';
-import TextLabel from '../TextLabel';
 
 describe('<Popup> with mixins', () => {
-    it('should render without crashing', () => {
-        const div = document.createElement('div');
-        const element = <Popup />;
+  it('should render without crashing', () => {
+    const div = document.createElement('div');
+    const element = <Popup message="foo" />;
 
-        ReactDOM.render(element, div);
-    });
+    ReactDOM.render(element, div);
+  });
 });
 
-describe('Pure <Popup>', () => {
-    it('contains an <Overlay>', () => {
-        const wrapper = shallow(<PurePopup message="foo" />);
+describe('<Popup> icon', () => {
+  it('passes "icon" and "iconColor" to <PopupIcon>', () => {
+    const wrapper = shallow(
+      <PurePopup icon="success" iconColor="green" message="foo" />
+    );
 
-        expect(wrapper.find(Overlay).exists()).toBeTruthy();
-    });
+    expect(
+      wrapper.containsMatchingElement(<PopupIcon icon="success" color="green" />)
+    ).toBeTruthy();
+  });
 
-    it('render with custom node of customMessageNode', () => {
-        const customMessageNode = <img src="test-img" alt="test-img" />;
-        const wrapper = shallow(<PurePopup customMessageNode={customMessageNode} />);
-        expect(wrapper.find(customMessageNode).exists()).toBeFalsy();
-        expect(
-            wrapper.find('img[src="test-img"]').exists()
-        ).toBeTruthy();
-    });
+  it('renders a large icon of given type', () => {
+    const wrapper = shallow(
+      <PurePopup icon="success" message="foo" />
+    );
+    const iconWrapper = wrapper.find(PopupIcon).shallow();
 
-    it('renders a string messageTitle and messageDesc with <PopupMessage>', () => {
-        const customBottomArea = <img src="test-bottom-area" alt="test-img" />;
-        const wrapper = shallow((
-            <PurePopup
-                messageTitle="foo"
-                messageDesc="bar"
-                messageBottomArea={customBottomArea}
-            />
-        ));
+    expect(iconWrapper.containsMatchingElement(
+      <Icon large type="success" />
+    )).toBeTruthy();
+  });
 
-        expect(wrapper.find(PopupMessage).exists()).toBeTruthy();
-        expect(wrapper.find(PopupMessage).prop('title')).toBe('foo');
-        expect(wrapper.find(PopupMessage).prop('desc')).toBe('bar');
-        expect(wrapper.find(PopupMessage).prop('bottomArea')).toBe(customBottomArea);
-    });
+  it('renders a colored large icon of given type', () => {
+    const wrapper = shallow(
+      <PurePopup icon="success" iconColor="green" message="foo" />
+    );
+    const iconWrapper = wrapper.find(PopupIcon).shallow();
 
-    it('renders a string message with <PopupMessage>', () => {
-        const wrapper = shallow(<PurePopup message="foo" />);
+    expect(iconWrapper.containsMatchingElement(
+      <Icon large type="success" color="green" />
+    )).toBeTruthy();
+  });
 
-        expect(wrapper.find(PopupMessage).exists()).toBeTruthy();
-        expect(wrapper.find(PopupMessage).prop('desc')).toBe('foo');
-    });
+  it('supports custom React node for "icon" prop', () => {
+    const icon = <Icon data-target spinning type="loading" />;
+    const wrapper = shallow(
+      <PurePopup icon={icon} message="foo" />
+    );
+    const iconWrapper = wrapper.find(PopupIcon).shallow();
 
-    it('renders popup with large class name', () => {
-        const wrapper = shallow(<PurePopup large messageDesc="foo" />);
+    expect(iconWrapper.find('[data-target]').exists()).toBeTruthy();
+  });
 
-        expect(wrapper.find('.gyp-popup--large').exists()).toBeTruthy();
-    });
+  it('supports omitting icon', () => {
+    const wrapper = shallow(
+      <PurePopup message="foo" />
+    );
+    const iconWrapper = wrapper.find(PopupIcon).shallow();
 
-    it('renders popup without large class name', () => {
-        const wrapper = shallow(<PurePopup messageDesc="foo" />);
-
-        expect(wrapper.find('.gyp-popup__body--large').exists()).toBeFalsy();
-        expect(wrapper.find('.gyp-popup__container--large').exists()).toBeFalsy();
-    });
-
-    it('takes a valid element for message prop', () => {
-        const label = <TextLabel data-target basic="Foo" aside="bar" />;
-        const wrapper = shallow(<PurePopup message={label} />);
-
-        expect(wrapper.find(PopupMessage).exists()).toBeFalsy();
-        expect(wrapper.find('[data-target]').exists()).toBeTruthy();
-    });
-
-    it('renders a string icon with <PopupIcon>', () => {
-        const wrapper = shallow(<PurePopup icon="success" />);
-
-        expect(wrapper.find(PopupIcon).exists()).toBeTruthy();
-        expect(wrapper.find(PopupIcon).prop('type')).toBe('success');
-    });
-
-    it('takes a valid element for icon prop', () => {
-        const icon = <Icon data-target type="success" />;
-        const wrapper = shallow(<PurePopup icon={icon} />);
-
-        expect(wrapper.find(PopupIcon).exists()).toBeFalsy();
-        expect(wrapper.find('[data-target]').exists()).toBeTruthy();
-    });
-
-    it('renders <PopupButton>s in a buttons-group section when specified', () => {
-        const buttons = [
-            <PopupButton key="a" basic="Label A" />,
-            <PopupButton key="b" basic="Label B" />,
-        ];
-        const wrapper = shallow(<PurePopup message="foo" />);
-        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).exists()).toBeFalsy();
-
-        wrapper.setProps({ buttons });
-        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).exists()).toBeTruthy();
-
-        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).children()).toHaveLength(2);
-        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).containsAllMatchingElements([
-            <PopupButton basic="Label A" />,
-            <PopupButton basic="Label B" />,
-        ])).toBeTruthy();
-    });
-
-    it('transforms <Button> into <PopupButton> for compatibility', () => {
-        // #DEPRECATE: remove in v2 release
-        const buttons = [
-            <Button key="a" basic="Label A" />,
-            <Button key="b" basic="Label B" />,
-        ];
-        const wrapper = shallow(<PurePopup message="foo" buttons={buttons} />);
-        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).children()).toHaveLength(2);
-        expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).containsAllMatchingElements([
-            <PopupButton basic="Label A" />,
-            <PopupButton basic="Label B" />,
-        ])).toBeTruthy();
-    });
+    expect(iconWrapper.find(Icon).exists()).toBeFalsy();
+  });
 });
 
-describe('<PopupIcon>', () => {
-    it('returns a pre-configured <Icon> of given type', () => {
-        const wrapper = shallow(<PopupIcon type="foo" />);
-        expect(wrapper.matchesElement(<Icon large type="foo" />)).toBeTruthy();
-    });
+describe('<Popup> message', () => {
+  it('supports message with title', () => {
+    const wrapper = shallow(
+      <PurePopup title="foo" message="bar" />
+    );
+    const messageWrapper = wrapper.find(PopupMessage).shallow();
+
+    expect(
+      messageWrapper.containsAllMatchingElements([
+        <div className={POPUP_BEM.messageTitle}>foo</div>,
+        <div className={POPUP_BEM.messageDescWithTitle}>bar</div>,
+      ])
+    ).toBeTruthy();
+  });
+
+  it('supports message without title', () => {
+    const wrapper = shallow(
+      <PurePopup message="foo" />
+    );
+    const messageWrapper = wrapper.find(PopupMessage).shallow();
+
+    expect(
+      messageWrapper.containsMatchingElement(<div className={POPUP_BEM.messageDesc}>foo</div>)
+    ).toBeTruthy();
+  });
+
+  it('supports simple string message format', () => {
+    const wrapper = shallow(<PurePopup message="foo" />);
+    const messageWrapper = wrapper.find(PopupMessage).shallow();
+
+    expect(messageWrapper.text()).toBe('foo');
+  });
+
+  it('supports custom React node for "message" prop', () => {
+    const messageNode = <span>foo</span>;
+    const wrapper = shallow(<PurePopup message={messageNode} />);
+    const messageWrapper = wrapper.find(PopupMessage).shallow();
+
+    expect(
+      messageWrapper.containsMatchingElement(<span>foo</span>)
+    ).toBeTruthy();
+  });
+
+  it('provides a "bottomArea" content slot below <PopupMessage>', () => {
+    const customContent = <span>bar</span>;
+    const wrapper = shallow(
+      <PurePopup message="foo" messageBottomArea={customContent} />
+    );
+
+    expect(wrapper.find('PopupMessage + span').text()).toBe('bar');
+  });
 });
 
-describe('<PopupMessage>', () => {
-    it('returns a pre-configured layout of given props', () => {
-        const wrapper = shallow(<PopupMessage title="foo" desc="bar" bottomArea="bottomArea" />);
-        expect(wrapper.matchesElement(
-            <div>
-                <span>foo</span>
-                <span>bar</span>
-                bottomArea
-            </div>
-        )).toBeTruthy();
-    });
+describe('<Popup> buttons', () => {
+  it('does not render buttons-group wrapper when buttons not given', () => {
+    const wrapper = shallow(<PurePopup message="foo" />);
 
-    it('only render with desc prop', () => {
-        const wrapper = shallow(<PopupMessage desc="bar" />);
-        expect(wrapper.matchesElement(
-            <div>
-                <span>bar</span>
-            </div>
-        )).toBeTruthy();
-    });
+    expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).exists()).toBeFalsy();
+  });
+
+  it('renders <PopupButton>s in a buttons-group section when specified', () => {
+    const buttons = (
+      <>
+        <PopupButton basic="Button A" />
+        <PopupButton basic="Button B" />
+      </>
+    );
+    const wrapper = shallow(<PurePopup message="foo" buttons={buttons} />);
+
+    expect(wrapper.find(`.${POPUP_BEM.buttonsGroup}`).containsAllMatchingElements([
+      <PopupButton basic="Button A" />,
+      <PopupButton basic="Button B" />,
+    ])).toBeTruthy();
+  });
+});
+
+describe('layout', () => {
+  it('contains an <Overlay>', () => {
+    const wrapper = shallow(<PurePopup message="foo" />);
+
+    expect(wrapper.find(Overlay).exists()).toBeTruthy();
+  });
+
+  it('renders in small size by default', () => {
+    const wrapper = shallow(<PurePopup message="foo" />);
+
+    expect(wrapper.hasClass('gyp-popup--small')).toBeTruthy();
+  });
+
+  it('renders popup with large class name', () => {
+    const wrapper = shallow(<PurePopup size="large" message="foo" />);
+
+    expect(wrapper.hasClass('gyp-popup--large')).toBeTruthy();
+  });
 });

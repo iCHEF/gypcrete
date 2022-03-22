@@ -6,6 +6,44 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [4.4.0]
+
+### Breaking
+- [Core] Remove deprecated behavior in Popup, which will treat element of `buttons` as props to `<PopupButton>`, if `element.type` is not `<PopupButton>`. (#276)
+- [Core] `<Popup>` is revised to match latest design spec: (#293)
+  * no longer supports horizontal buttons.
+  * ~takes a `{ title, desc }` object format for `message` prop.~
+  * supports optional `title` prop. (from #300, dropping change from prev line.)
+  * uses `size` prop instead of `large` boolean prop.
+  * drops the following props: `customMessageNode`, `messageTitle`, `messageDesc`, `buttonsDirection`.
+
+### Changed
+- [Core] when message prop of `<Popup>` is a string, pass it to `<PopupMessage>` as `title` prop. (#279)
+- [Core] Change `<Icon>` implementaion from icon-font to inline-svg. (#280)
+- [Core] Upgrade `eslint-config-ichef` packages to `v8.0.0`. (#290)
+- [Core] Use node 12 in travis CI. (#290)
+- [Core] Add `titleRightArea` on `<Section>` / `<List>`. (#297)
+- [Core] Fix popover placement when there is no enough space on top or bottom of content. (#303)
+- [Core] Change `<EditableTextLabel>` onTouchStart event handler to onTouchEnd event handler (#310)
+- [Core] Disable dropdown icon when `<SelectRow>` is ineditable. (#320)
+- [Core] Add `skip` prop on `closable` mixin. (#324)
+- [Core] Add `refreshOnWindowResize` and `distanceFromAnchor` prop on `anchored`. (#324)
+- [Core] Add `postfix` prop on `<TextInput>` / `<TextInputRow>`. (#327)
+- [Core] Remove css property. (#329)
+
+### Added
+- [Core] Add `muted` prop on following component: (#278)
+    - `<Button>`
+    - `<Checkbox>`
+    - `<SearchInput>`
+    - `<Switch>`
+    - `<TextInput>`
+    - `<TextLabel>`
+    - `<ListRow>`
+- [Core] Add new icons: `takeout` (#283), `more` (#287), `table` & `order-sheet` (#323).
+- [Core] Add `topArea` prop to `<List>`. (#311)
+- [Core] Add `people` in `<Icon>`. (#313)
+- [Core] Add `asideClickableOnDisabled` prop to `<RowComp>`. (#325)
 
 ## [4.3.0]
 
@@ -18,6 +56,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Add sort icon. (#268)
 - [Core] Add announce icon. (#272)
 - [Core] Add `large` prop to `<Popup>`. (#273)
+- [Core] Add `messageTitle` and `messageDesc` prop to `<Popup>`.
 
 ## [4.2.1]
 

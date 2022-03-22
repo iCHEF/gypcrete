@@ -8,7 +8,7 @@ import { action } from '@storybook/addon-actions';
  * Log without payload prevents the later to be laggy.
  */
 function handleCropChange() {
-    return action('cropChange')('[Cropping Rect]');
+  return action('cropChange')('[Cropping Rect]');
 }
 
 export default handleCropChange;
