@@ -36,7 +36,6 @@ $component: #{$prefix}-popup;
         flex-direction: column;
 
         // Active animation
-        opacity: 0;
         animation: anim-bounce-in .6s forwards;
 
         .#{$component}--large & {
