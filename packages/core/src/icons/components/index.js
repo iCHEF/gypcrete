@@ -1,4 +1,5 @@
 import AddItem from './AddItem';
+import AddLocation from './AddLocation';
 import AddMultiItems from './AddMultiItems';
 import Add from './Add';
 import Announce from './Announce';
@@ -78,6 +79,7 @@ import Unlock from './Unlock';
 
 export default {
   'add-item': AddItem,
+  'add-location': AddLocation,
   'add-multi-items': AddMultiItems,
   add: Add,
   announce: Announce,
