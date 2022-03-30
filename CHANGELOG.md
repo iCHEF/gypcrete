@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- [Core] Should not apply asideControlClickableOnDisabled if not disabled. (#332)
+
 ## [4.4.0]
 
 ### Breaking
