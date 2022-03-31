@@ -205,13 +205,14 @@ const rowComp = ({
             tag,
             bold,
             asideControlClickableOnDisabled,
+            disabled,
           } = this.props;
 
           const textLayoutProps = getTextLayoutProps(align, !!icon);
           const asideControlClickableProps = (
-            asideControlClickableOnDisabled
+            (asideControlClickableOnDisabled && disabled)
               ? {
-                onClick: (event) => { event.stopPropagation(); }
+                onClick: (event) => { event.stopPropagation(); },
               }
               : undefined
           );
