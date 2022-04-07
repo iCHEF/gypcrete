@@ -44,6 +44,7 @@ import InventoryCategory from './InventoryCategory';
 import InventoryItem from './InventoryItem';
 import LastPage from './LastPage';
 import Loading from './Loading';
+import Location from './Location';
 import Lock from './Lock';
 import Mapping from './Mapping';
 import MinusOne from './MinusOne';
@@ -124,6 +125,7 @@ export default {
   'inventory-item': InventoryItem,
   'last-page': LastPage,
   loading: Loading,
+  location: Location,
   lock: Lock,
   mapping: Mapping,
   'minus-one': MinusOne,
