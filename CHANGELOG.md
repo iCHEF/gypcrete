@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - [Core] Should not apply asideControlClickableOnDisabled if not disabled. (#332)
 
+### Added
+- [Core] Add new icon: Location. (#333)
+
 ## [4.4.0]
 
 ### Breaking
