@@ -7,7 +7,7 @@
   "repository": "iCHEF/gypcrete",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">= 8.2.1",
+    "node": ">= 8.2.1 <= 12",
     "npm": ">= 5.10.0",
     "yarn": ">= 1.10.0"
   },
