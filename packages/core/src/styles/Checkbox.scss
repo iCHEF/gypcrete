@@ -24,7 +24,7 @@
 
     &__input:checked + &__button,
     &__input:checked + .#{$prefix}-iconlayout > &__button {
-        background: url('../icons/svg/radio-selected.svg');
+        background: url('../icons/svg/checkbox-selected.svg');
     }
 
     &__input:indeterminate + &__button,

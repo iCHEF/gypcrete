@@ -64,7 +64,7 @@ import Printer from './Printer';
 import Question from './Question';
 import CheckboxEmpty from './CheckboxEmpty';
 import CheckboxHalf from './CheckboxHalf';
-import RadioSelected from './RadioSelected';
+import CheckboxSelected from './CheckboxSelected';
 import Refresh from './Refresh';
 import RemoveElement from './RemoveElement';
 import Retry from './Retry';
@@ -145,7 +145,7 @@ export default {
   question: Question,
   'checkbox-empty': CheckboxEmpty,
   'checkbox-half': CheckboxHalf,
-  'radio-selected': RadioSelected,
+  'checkbox-selected': CheckboxSelected,
   refresh: Refresh,
   'remove-element': RemoveElement,
   retry: Retry,
