@@ -19,7 +19,7 @@
     &__button {
         position: relative;
         z-index: 1;
-        background: url('../icons/svg/radio-empty.svg');
+        background: url('../icons/svg/checkbox-empty.svg');
     }
 
     &__input:checked + &__button,
