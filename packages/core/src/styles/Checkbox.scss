@@ -29,6 +29,6 @@
 
     &__input:indeterminate + &__button,
     &__input:indeterminate + .#{$prefix}-iconlayout > &__button {
-        background: url('../icons/svg/radio-half.svg');
+        background: url('../icons/svg/checkbox-half.svg');
     }
 }
