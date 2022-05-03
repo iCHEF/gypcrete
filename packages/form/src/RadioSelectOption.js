@@ -22,7 +22,7 @@ function RadioSelectOption({
   readOnly,
   checked,
   onChange,
-  ...checkboxProps
+  ...radioProps
 }) {
   const handleRadioChange = (event) => {
     onChange(value, event.target.checked);
@@ -37,7 +37,7 @@ function RadioSelectOption({
         aside={desc}
         avatar={avatar}
         onChange={handleRadioChange}
-        {...checkboxProps}
+        {...radioProps}
       />
     </ListRow>
   );
@@ -49,7 +49,7 @@ RadioSelectOption.propTypes = {
   value: valueType,
   avatar: PropTypes.node,
   readOnly: PropTypes.bool,
-  // Set by <SelectList>
+  // Set by <RadioSelectList>
   checked: PropTypes.bool,
   onChange: PropTypes.func,
 };
