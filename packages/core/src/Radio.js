@@ -47,7 +47,6 @@ function Radio({
           className={BEM.input}
           {...inputProps}
         />
-
         {RADIO_BUTTON}
       </span>
       {children}
