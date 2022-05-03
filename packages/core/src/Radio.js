@@ -64,7 +64,6 @@ Radio.propTypes = {
 
 Radio.defaultProps = {
   input: {},
-
   checked: undefined,
   defaultChecked: undefined,
   disabled: false,
