@@ -62,9 +62,9 @@ import PrevPage from './PrevPage';
 import Prev from './Prev';
 import Printer from './Printer';
 import Question from './Question';
-import RadioEmpty from './RadioEmpty';
-import RadioHalf from './RadioHalf';
-import RadioSelected from './RadioSelected';
+import CheckboxEmpty from './CheckboxEmpty';
+import CheckboxHalf from './CheckboxHalf';
+import CheckboxSelected from './CheckboxSelected';
 import Refresh from './Refresh';
 import RemoveElement from './RemoveElement';
 import Retry from './Retry';
@@ -143,9 +143,9 @@ export default {
   prev: Prev,
   printer: Printer,
   question: Question,
-  'radio-empty': RadioEmpty,
-  'radio-half': RadioHalf,
-  'radio-selected': RadioSelected,
+  'checkbox-empty': CheckboxEmpty,
+  'checkbox-half': CheckboxHalf,
+  'checkbox-selected': CheckboxSelected,
   refresh: Refresh,
   'remove-element': RemoveElement,
   retry: Retry,
