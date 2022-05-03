@@ -13,7 +13,6 @@ import Option, {
   valueType,
   TYPE_SYMBOL as CHECKBOX_OPTION_TYPE_SYMBOL,
 } from './SelectOption';
-
 import {
   TYPE_SYMBOL as RADIO_OPTION_TYPE_SYMBOL,
 } from './RadioSelectOption';
