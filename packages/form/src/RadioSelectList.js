@@ -4,18 +4,27 @@ import PropTypes from 'prop-types';
 import { valueType } from './RadioSelectOption';
 import SelectList from './SelectList';
 
-
 export default function RadioSelectList({
-  // TODO: omit
+  value,
+  defaultValue,
+  onChange,
+  title,
+  desc,
   ...otherProps
 }) {
   return (
     <SelectList
+      value={value}
+      defaultValue={defaultValue}
+      onChange={onChange}
+      title={title}
+      desc={desc}
       {...otherProps}
+      // default props for RadioSelectList
       multiple={false}
       showCheckAll={false}
       checkAllLabel={null}
-      minCheck={0}
+      minCheck={undefined}
     />
   );
 }
