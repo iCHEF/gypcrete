@@ -12,18 +12,6 @@ on:
       - develop
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
-    - name: Install packages with cache
-      uses: './.github/actions/install_package_with_cache'
-    - name: Build static assets
-      run: yarn build
-
   test:
     name: Lint and test
     runs-on: ubuntu-latest
