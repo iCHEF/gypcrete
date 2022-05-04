@@ -3,7 +3,7 @@ extends: stylelint-config-standard
 configBasedir: ../
 
 rules:
-    indentation: 4
+    indentation: 2
     number-leading-zero: never
     selector-pseudo-element-colon-notation: single
 
