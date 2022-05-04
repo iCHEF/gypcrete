@@ -1,9 +1,5 @@
 name: 'Install Package With Cache'
-description: 'Install Package through yarn, with npm auth token and cache'
-inputs:
-  npm-token:
-    description: 'NPM Token for private package'
-    required: true
+description: 'Install Package through yarn, with cache'
 runs:
   using: 'composite'
   steps:
