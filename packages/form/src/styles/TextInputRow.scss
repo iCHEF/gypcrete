@@ -3,74 +3,74 @@ $font-weight-base: 400;
 $font-weight-bold: 700;
 
 %main-text {
-    color: #000;
-    font-size: 16px;
-    line-height: 18px;
-    font-weight: $font-weight-bold;
+  color: #000;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: $font-weight-bold;
 }
 
 %aside-text {
-    color: #4d4d4d;
-    font-size: 14px;
-    line-height: 16px;
-    font-weight: $font-weight-base;
+  color: #4d4d4d;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: $font-weight-base;
 }
 
 %text-transition {
-    transition-property: font-size, font-weight;
-    transition-duration: 150ms;
-    transition-timing-function: ease-out;
-    will-change: font-size, font-weight, line-height;
+  transition-property: font-size, font-weight;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+  will-change: font-size, font-weight, line-height;
 }
 
 .#{$component-name} {
-    ::placeholder {
-        color: rgba(0, 0, 0, .5);
+  ::placeholder {
+    color: rgba(0, 0, 0, .5);
+  }
+
+  // Elements
+  &__label {
+    @extend %main-text;
+  }
+
+  &__input {
+    @extend %aside-text;
+
+    width: 100%;
+    background: none;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    border: none;
+    padding: 0;
+    outline: none;
+  }
+
+  // Modifiers
+  &--focused {
+    .#{$component-name}__label {
+      @extend %aside-text;
+      @extend %text-transition;
     }
 
-    // Elements
-    &__label {
-        @extend %main-text;
+    .#{$component-name}__input {
+      @extend %main-text;
+      @extend %text-transition;
     }
+  }
 
-    &__input {
-        @extend %aside-text;
-
-        width: 100%;
-        background: none;
-        color: inherit;
-        font-size: inherit;
-        line-height: inherit;
-        border: none;
-        padding: 0;
-        outline: none;
+  &--ineditable {
+    .#{$component-name}__label,
+    .#{$component-name}__input {
+      font-weight: $font-weight-base;
     }
+  }
 
-    // Modifiers
-    &--focused {
-        .#{$component-name}__label {
-            @extend %aside-text;
-            @extend %text-transition;
-        }
-
-        .#{$component-name}__input {
-            @extend %main-text;
-            @extend %text-transition;
-        }
+  // States
+  &.gyp-state-error {
+    .#{$component-name}__label,
+    .#{$component-name}__input {
+      color: inherit;
     }
-
-    &--ineditable {
-        .#{$component-name}__label,
-        .#{$component-name}__input {
-            font-weight: $font-weight-base;
-        }
-    }
-
-    // States
-    &.gyp-state-error {
-        .#{$component-name}__label,
-        .#{$component-name}__input {
-            color: inherit;
-        }
-    }
+  }
 }

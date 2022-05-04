@@ -1,11 +1,11 @@
 @import "./variables";
 
 .#{$prefix}-infinite-scroll {
-    &--overflow {
-        overflow: auto;
-    }
+  &--overflow {
+    overflow: auto;
+  }
 
-    &__footer {
-        display: flex;
-    }
+  &__footer {
+    display: flex;
+  }
 }

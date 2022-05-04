@@ -2,86 +2,86 @@
 $component: #{$prefix}-list-row;
 
 .#{$component} {
-    min-height: rem($row-base-height);
-    padding: 0 rem($list-row-padding-horizontal);
-    box-sizing: border-box;
+  min-height: rem($row-base-height);
+  padding: 0 rem($list-row-padding-horizontal);
+  box-sizing: border-box;
 
-    &:hover {
-        background-color: $c-row-bg-hover;
+  &:hover {
+    background-color: $c-row-bg-hover;
+  }
+
+  // --------------------
+  //  Elements
+  // --------------------
+  &__body {
+    display: flex;
+    align-items: flex-start;
+    padding: rem($list-row-padding-vertical) 0;
+    box-shadow: inset 0 -1px 0 $c-row-divider;
+
+    & > :first-child {
+      margin-left: -$component-padding;
     }
 
-    // --------------------
-    //  Elements
-    // --------------------
+    & > :last-child {
+      margin-right: -$component-padding;
+    }
+  }
+
+  &__footer {
+    font-size: $list-row-footer-font-size;
+    line-height: rem($list-row-footer-line-height);
+    padding-top: rem($list-row-footer-padding-top);
+    padding-bottom: rem($list-row-footer-padding-bottom);
+    white-space: pre-wrap;
+
+    & > div {
+      margin: 0 0 rem($list-row-footer-padding-bottom);
+    }
+  }
+
+  // --------------------
+  //  Modifiers / States
+  // --------------------
+  &--highlight {
+    background-color: $c-row-bg-highlight !important;
+
+    .#{$component}__body {
+      box-shadow: inset 0 -1px 0 $c-row-divider-highlight;
+    }
+  }
+
+  .#{$prefix-state}-error & {
     &__body {
-        display: flex;
-        align-items: flex-start;
-        padding: rem($list-row-padding-vertical) 0;
-        box-shadow: inset 0 -1px 0 $c-row-divider;
-
-        & > :first-child {
-            margin-left: -$component-padding;
-        }
-
-        & > :last-child {
-            margin-right: -$component-padding;
-        }
+      box-shadow: inset 0 -1px 0 currentColor;
     }
+  }
 
-    &__footer {
-        font-size: $list-row-footer-font-size;
-        line-height: rem($list-row-footer-line-height);
-        padding-top: rem($list-row-footer-padding-top);
-        padding-bottom: rem($list-row-footer-padding-bottom);
-        white-space: pre-wrap;
+  // --------------------
+  //  Nested list
+  // --------------------
+  & .#{$prefix}-list & {
+    padding-right: 0;
+  }
 
-        & > div {
-            margin: 0 0 rem($list-row-footer-padding-bottom);
-        }
+  // --------------------
+  //  In other component
+  // --------------------
+  .#{$prefix}-list--setting & {
+    &:last-of-type {
+      .#{$component}__body {
+        box-shadow: none;
+      }
     }
+  }
 
-    // --------------------
-    //  Modifiers / States
-    // --------------------
-    &--highlight {
-        background-color: $c-row-bg-highlight !important;
-
-        .#{$component}__body {
-            box-shadow: inset 0 -1px 0 $c-row-divider-highlight;
-        }
-    }
-
-    .#{$prefix-state}-error & {
-        &__body {
-            box-shadow: inset 0 -1px 0 currentColor;
-        }
-    }
-
-    // --------------------
-    //  Nested list
-    // --------------------
-    & .#{$prefix}-list & {
-        padding-right: 0;
-    }
-
-    // --------------------
-    //  In other component
-    // --------------------
-    .#{$prefix}-list--setting & {
-        &:last-of-type {
-            .#{$component}__body {
-                box-shadow: none;
-            }
-        }
-    }
-
-    .#{$prefix}-list__top-area + .#{$prefix}-list__body li:first-of-type &__body {
-        box-shadow:
-            inset 0 1px 0 $c-row-divider,
-            inset 0 -1px 0 $c-row-divider;
-    }
+  .#{$prefix}-list__top-area + .#{$prefix}-list__body li:first-of-type &__body {
+    box-shadow:
+      inset 0 1px 0 $c-row-divider,
+      inset 0 -1px 0 $c-row-divider;
+  }
 }
 
 .#{$component} + .#{$component}__nested-list-wrapper {
-    margin-left: rem($list-nested-indent);
+  margin-left: rem($list-nested-indent);
 }

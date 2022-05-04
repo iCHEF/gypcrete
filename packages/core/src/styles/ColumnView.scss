@@ -2,40 +2,40 @@
 $component: #{$prefix}-column-view;
 
 .#{$component} {
-    width: 100%;
-    height: 100%;
-    background-color: $c-column-bg;
-    display: flex;
-    flex-direction: column;
-    // when placed in another Flexbox
+  width: 100%;
+  height: 100%;
+  background-color: $c-column-bg;
+  display: flex;
+  flex-direction: column;
+  // when placed in another Flexbox
+  flex: 1 1 100%;
+
+  // --------------------
+  //  Elements
+  // --------------------
+
+  &__header,
+  &__footer {
+    flex: 0 0 auto;
+  }
+
+  &__header {
+    z-index: 2;
+  }
+
+  &__body {
     flex: 1 1 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1;
 
-    // --------------------
-    //  Elements
-    // --------------------
-
-    &__header,
-    &__footer {
-        flex: 0 0 auto;
+    &--flex {
+      display: flex;
+      flex-direction: column;
     }
+  }
 
-    &__header {
-        z-index: 2;
-    }
-
-    &__body {
-        flex: 1 1 100%;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        z-index: 1;
-
-        &--flex {
-            display: flex;
-            flex-direction: column;
-        }
-    }
-
-    &__footer {
-        border-top: 1px solid $c-divider-header;
-    }
+  &__footer {
+    border-top: 1px solid $c-divider-header;
+  }
 }
