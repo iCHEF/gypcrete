@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
-import { TYPE_SYMBOL } from '../SelectOption';
+import { TYPE_SYMBOL as CHECKBOX_OPTION_TYPE_SYMBOL } from '../SelectOption';
+import { TYPE_SYMBOL as RADIO_OPTION_TYPE_SYMBOL } from '../RadioSelectOption';
 
 import getElementTypeSymbol from './getElementTypeSymbol';
 
@@ -13,7 +14,11 @@ export default function parseSelectOptions(children) {
   const childArray = Array.isArray(children) ? children : [children].filter(item => item);
 
   const results = childArray.map((child) => {
-    if (getElementTypeSymbol(child) === TYPE_SYMBOL) {
+    const elementTypeSymbol = getElementTypeSymbol(child);
+    if (
+      elementTypeSymbol === CHECKBOX_OPTION_TYPE_SYMBOL
+      || elementTypeSymbol === RADIO_OPTION_TYPE_SYMBOL
+    ) {
       return child.props;
     }
 
