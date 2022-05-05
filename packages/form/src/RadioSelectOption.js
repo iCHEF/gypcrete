@@ -63,6 +63,16 @@ RadioSelectOption.defaultProps = {
   onChange: () => {},
 };
 
+/**
+ * The same reason in the SelectOption.js.
+ *
+ * `react-hot-loader` v4 wraps every single component with a proxy for its
+ * internal uses. This breaks the comparison of this component and type from
+ * any React.Element, because the later will always be a hot-loader proxy.
+ *
+ * I'm trying to add a new way for comparison so we can still be sure if an
+ * element is created from <SelectOption>.
+ */
 RadioSelectOption.typeSymbol = TYPE_SYMBOL;
 
 export default RadioSelectOption;
