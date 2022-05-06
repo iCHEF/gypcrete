@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  test:
+    name: Lint and test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Install packages with cache
+      uses: iCHEF/npm-install-with-cache-action@v1
+      with:
+        is-monorepo: true
+    - name: Run linter
+      run: yarn lint
+    - name: Run tests
+      run: yarn test
+    - name: Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: "./coverage/coverage-final.json"

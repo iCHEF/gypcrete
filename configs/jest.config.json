@@ -1,6 +1,6 @@
 {
     "rootDir": "../",
-    "coverageReporters": ["cobertura", "lcov", "text"],
+    "coverageReporters": ["clover", "json", "lcov", "text"],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "<rootDir>/packages/\\w+/lib/"
