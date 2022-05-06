@@ -21,7 +21,9 @@ jobs:
       with:
         node-version: '12.x'
     - name: Install packages with cache
-      uses: './.github/actions/install_package_with_cache'
+      uses: iCHEF/npm-install-with-cache-action@v1
+      with:
+        is-monorepo: true
     - name: Run linter
       run: yarn lint
     - name: Run tests

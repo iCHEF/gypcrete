@@ -19,16 +19,16 @@
   &__button {
     position: relative;
     z-index: 1;
-    background: url('../icons/svg/radio-empty.svg');
+    background: url('../icons/svg/checkbox-empty.svg');
   }
 
   &__input:checked + &__button,
   &__input:checked + .#{$prefix}-iconlayout > &__button {
-    background: url('../icons/svg/radio-selected.svg');
+    background: url('../icons/svg/checkbox-selected.svg');
   }
 
   &__input:indeterminate + &__button,
   &__input:indeterminate + .#{$prefix}-iconlayout > &__button {
-    background: url('../icons/svg/radio-half.svg');
+    background: url('../icons/svg/checkbox-half.svg');
   }
 }

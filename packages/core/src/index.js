@@ -27,6 +27,7 @@ import IconCheckbox from './IconCheckbox';
 import Switch from './Switch';
 import TextInput from './TextInput';
 import SearchInput from './SearchInput';
+import Radio from './Radio';
 
 // Containers
 import InfiniteScroll from './InfiniteScroll';
@@ -68,6 +69,7 @@ export {
   Switch,
   TextInput,
   SearchInput,
+  Radio,
 
   InfiniteScroll,
   HeaderRow,

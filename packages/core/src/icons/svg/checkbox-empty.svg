@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1980 -5001 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: rgba(255,255,255,0);
+      }
+    </style>
+  </defs>
+  <g id="checkbox-empty" transform="translate(-2028 -5329)">
+    <rect id="長方形_7898" data-name="長方形 7898" class="cls-1" width="32" height="32" transform="translate(48 328)"/>
+    <path id="前面オブジェクトで型抜き_9" data-name="前面オブジェクトで型抜き 9" d="M-2768-3701h-12a4.005,4.005,0,0,1-4-4v-12a4,4,0,0,1,4-4h12a4,4,0,0,1,4,4v12A4,4,0,0,1-2768-3701Zm-12-18a2,2,0,0,0-2,2v12a2,2,0,0,0,2,2h12a2,2,0,0,0,2-2v-12a2,2,0,0,0-2-2Z" transform="translate(2838 4055)"/>
+  </g>
+</svg>
