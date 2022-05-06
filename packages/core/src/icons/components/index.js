@@ -4,6 +4,9 @@ import AddMultiItems from './AddMultiItems';
 import Add from './Add';
 import Announce from './Announce';
 import Cash from './Cash';
+import CheckboxEmpty from './CheckboxEmpty';
+import CheckboxHalf from './CheckboxHalf';
+import CheckboxSelected from './CheckboxSelected';
 import ClearItem from './ClearItem';
 import CopyLink from './CopyLink';
 import Copypaste from './Copypaste';
@@ -63,7 +66,6 @@ import Prev from './Prev';
 import Printer from './Printer';
 import Question from './Question';
 import RadioEmpty from './RadioEmpty';
-import RadioHalf from './RadioHalf';
 import RadioSelected from './RadioSelected';
 import Refresh from './Refresh';
 import RemoveElement from './RemoveElement';
@@ -85,6 +87,9 @@ export default {
   add: Add,
   announce: Announce,
   cash: Cash,
+  'checkbox-empty': CheckboxEmpty,
+  'checkbox-half': CheckboxHalf,
+  'checkbox-selected': CheckboxSelected,
   'clear-item': ClearItem,
   'copy-link': CopyLink,
   copypaste: Copypaste,
@@ -144,7 +149,6 @@ export default {
   printer: Printer,
   question: Question,
   'radio-empty': RadioEmpty,
-  'radio-half': RadioHalf,
   'radio-selected': RadioSelected,
   refresh: Refresh,
   'remove-element': RemoveElement,

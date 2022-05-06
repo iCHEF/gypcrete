@@ -11,8 +11,11 @@ import getRemainingProps from '@ichef/gypcrete/lib/utils/getRemainingProps';
 
 import Option, {
   valueType,
-  TYPE_SYMBOL as OPTION_TYPE_SYMBOL,
+  TYPE_SYMBOL as CHECKBOX_OPTION_TYPE_SYMBOL,
 } from './SelectOption';
+import {
+  TYPE_SYMBOL as RADIO_OPTION_TYPE_SYMBOL,
+} from './RadioSelectOption';
 
 import parseSelectOptions from './utils/parseSelectOptions';
 import getElementTypeSymbol from './utils/getElementTypeSymbol';
@@ -193,7 +196,11 @@ class SelectList extends PureComponent {
       const { checkedState } = this.state;
 
       return React.Children.map(children, (child) => {
-        if (getElementTypeSymbol(child) === OPTION_TYPE_SYMBOL) {
+        const elementTypeSymbol = getElementTypeSymbol(child);
+        if (
+          elementTypeSymbol === CHECKBOX_OPTION_TYPE_SYMBOL
+          || elementTypeSymbol === RADIO_OPTION_TYPE_SYMBOL
+        ) {
           return React.cloneElement(child, {
             checked: checkedState.get(child.props.value),
             onChange: this.handleOptionChange,
