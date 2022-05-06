@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [Core] Rename radio-empty.svg to checkbox-empty.svg (#337)
 - [Core] Rename radio-half.svg to checkbox-half.svg (#337)
 - [Core] Rename radio-selected.svg to checkbox-selected.svg (#337)
+- [Core] Fix the svgr/cli version at v5.5.0(#347)
 
 ## [4.4.0]
 
