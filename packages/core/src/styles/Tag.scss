@@ -10,22 +10,22 @@
 // -------------------------------------
 
 .#{$prefix}-tag {
-    background-color: $c-black;
-    background-color: currentColor;
-    color: inherit;
-    font-size: rem($tag-font-size); // 12px
-    line-height: 1em;
-    padding: rem($tag-vertical-padding) rem($tag-horizontal-padding);
-    border: rem(1px) solid transparent;
-    border-radius: rem($tag-border-radius);
-    background-clip: padding-box;
-    display: inline-block;
-    vertical-align: text-top;
-    white-space: pre-wrap;
+  background-color: $c-black;
+  background-color: currentColor;
+  color: inherit;
+  font-size: rem($tag-font-size); // 12px
+  line-height: 1em;
+  padding: rem($tag-vertical-padding) rem($tag-horizontal-padding);
+  border: rem(1px) solid transparent;
+  border-radius: rem($tag-border-radius);
+  background-clip: padding-box;
+  display: inline-block;
+  vertical-align: text-top;
+  white-space: pre-wrap;
 
-    & > span {
-        color: $c-white;
-    }
+  & > span {
+    color: $c-white;
+  }
 }
 
 // -------------------------------------
@@ -33,11 +33,11 @@
 // -------------------------------------
 
 .#{$prefix}-tag {
-    .#{$prefix-state}-highlight & {
-        color: $c-row-bg-highlight;
-    }
+  .#{$prefix-state}-highlight & {
+    color: $c-row-bg-highlight;
+  }
 
-    .#{$prefix-state}-highlight .#{$prefix-state}-error & {
-        color: $c-text-error;
-    }
+  .#{$prefix-state}-highlight .#{$prefix-state}-error & {
+    color: $c-text-error;
+  }
 }

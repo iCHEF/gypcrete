@@ -2,16 +2,16 @@
 @import "./states";
 
 html {
-    font-size: $root-font-size;
+  font-size: $root-font-size;
 }
 
 body {
-    font-size: rem($component-base-font-size);
-    font-family: system-ui, sans-serif;
-    font-weight: $font-weight-base;
+  font-size: rem($component-base-font-size);
+  font-family: system-ui, sans-serif;
+  font-weight: $font-weight-base;
 
-    &.#{$prefix}-has-overlay {
-        // Prevent body scrolling
-        overflow: hidden !important;
-    }
+  &.#{$prefix}-has-overlay {
+    // Prevent body scrolling
+    overflow: hidden !important;
+  }
 }

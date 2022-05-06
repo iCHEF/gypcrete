@@ -6,46 +6,46 @@
 // Thus we're using variables from <Tag>.
 
 .#{$prefix}-tooltip {
-    background-color: $c-black;
-    color: $c-white;
-    font-size: rem($tag-font-size); // 12px
-    line-height: 1em;
-    padding: rem($tag-vertical-padding) rem($tag-horizontal-padding);
-    border: rem(1px) solid transparent;
-    border-radius: rem($tag-border-radius);
-    background-clip: padding-box;
-    display: inline-block;
-    vertical-align: text-top;
-    position: relative;
-    white-space: pre-wrap;
+  background-color: $c-black;
+  color: $c-white;
+  font-size: rem($tag-font-size); // 12px
+  line-height: 1em;
+  padding: rem($tag-vertical-padding) rem($tag-horizontal-padding);
+  border: rem(1px) solid transparent;
+  border-radius: rem($tag-border-radius);
+  background-clip: padding-box;
+  display: inline-block;
+  vertical-align: text-top;
+  position: relative;
+  white-space: pre-wrap;
 
-    // ----------------------
-    //  <Tooltip> elements
-    // ----------------------
-    &__arrow {
-        position: absolute;
-        display: block;
-        width: 0;
-        height: 0;
-        border-color: transparent;
-        border-style: solid;
-        border-width: rem($tooltip-arrow-size);
-    }
+  // ----------------------
+  //  <Tooltip> elements
+  // ----------------------
+  &__arrow {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: rem($tooltip-arrow-size);
+  }
 
-    // ----------------------
-    //  <Tooltip> placements
-    // ----------------------
-    &--top &__arrow {
-        border-top-color: $c-black;
-        top: 100%;
-        left: 50%;
-        margin-left: rem(-$tooltip-arrow-size);
-    }
+  // ----------------------
+  //  <Tooltip> placements
+  // ----------------------
+  &--top &__arrow {
+    border-top-color: $c-black;
+    top: 100%;
+    left: 50%;
+    margin-left: rem(-$tooltip-arrow-size);
+  }
 
-    &--bottom &__arrow {
-        border-bottom-color: $c-black;
-        bottom: 100%;
-        left: 50%;
-        margin-left: rem(-$tooltip-arrow-size);
-    }
+  &--bottom &__arrow {
+    border-bottom-color: $c-black;
+    bottom: 100%;
+    left: 50%;
+    margin-left: rem(-$tooltip-arrow-size);
+  }
 }

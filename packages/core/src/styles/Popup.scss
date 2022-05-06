@@ -3,86 +3,86 @@
 $component: #{$prefix}-popup;
 
 .#{$component} {
-    // -------------------------------------
-    //   Popup
-    // -------------------------------------
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    // Align center with flexbox
+  // -------------------------------------
+  //   Popup
+  // -------------------------------------
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  // Align center with flexbox
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  // -------------------------------------
+  //   Popup Elements
+  // -------------------------------------
+
+  // Container
+  &__container {
+    width: 95%;
+    max-width: $popup-container-width;
+    max-height: 80%;
+    background-color: $c-white;
+    border-radius: $popup-border-radius;
+    box-shadow: $popup-box-shadow;
+    position: relative;
+    overflow: hidden;
+    transition: width .15s;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    flex-direction: column;
 
-    // -------------------------------------
-    //   Popup Elements
-    // -------------------------------------
+    // Active animation
+    animation: anim-bounce-in .6s forwards;
 
-    // Container
-    &__container {
-        width: 95%;
-        max-width: $popup-container-width;
-        max-height: 80%;
-        background-color: $c-white;
-        border-radius: $popup-border-radius;
-        box-shadow: $popup-box-shadow;
-        position: relative;
-        overflow: hidden;
-        transition: width .15s;
-        display: flex;
-        flex-direction: column;
-
-        // Active animation
-        animation: anim-bounce-in .6s forwards;
-
-        .#{$component}--large & {
-            max-width: $popup-container-width-large;
-        }
+    .#{$component}--large & {
+      max-width: $popup-container-width-large;
     }
+  }
 
-    &__icon {
-        flex: 0 0 auto;
-        transform: translateY(rem(16px));
+  &__icon {
+    flex: 0 0 auto;
+    transform: translateY(rem(16px));
+  }
+
+  // Body
+  &__body {
+    padding: rem(16px);
+    flex: 0 1 auto;
+    overflow: auto;
+
+    .#{$component}--large & {
+      padding: rem(16px) rem(56px);
     }
+  }
 
-    // Body
-    &__body {
-        padding: rem(16px);
-        flex: 0 1 auto;
-        overflow: auto;
+  // Message title
+  &__message-title {
+    font-size: rem(16px);
+    line-height: rem(22px);
+    font-weight: bold;
+  }
 
-        .#{$component}--large & {
-            padding: rem(16px) rem(56px);
-        }
-    }
+  // Message desc
+  &__message-desc {
+    white-space: pre-line;
+  }
 
-    // Message title
-    &__message-title {
-        font-size: rem(16px);
-        line-height: rem(22px);
-        font-weight: bold;
-    }
+  &__message-desc--with-title {
+    font-size: rem(14px);
+    line-height: rem(20px);
+    color: rgba(0, 0, 0, .7);
+    margin-top: rem(8px);
+  }
 
-    // Message desc
-    &__message-desc {
-        white-space: pre-line;
-    }
-
-    &__message-desc--with-title {
-        font-size: rem(14px);
-        line-height: rem(20px);
-        color: rgba(0, 0, 0, .7);
-        margin-top: rem(8px);
-    }
-
-    // Nested components
-    .#{$prefix}-icon--large {
-        margin-top: rem(-16px);
-        margin-bottom: rem(-8px);
-    }
+  // Nested components
+  .#{$prefix}-icon--large {
+    margin-top: rem(-16px);
+    margin-bottom: rem(-8px);
+  }
 }
 
 // -------------------------------------
@@ -91,12 +91,12 @@ $component: #{$prefix}-popup;
 
 // Buttons group
 .#{$component}__buttons-group {
-    flex: 0 0 auto;
-    display: flex;
-    flex-wrap: wrap;
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
 
-    .#{$prefix}-popup-button {
-        border-top: 1px solid $c-popup-button-border;
-        flex-basis: 100%;
-    }
+  .#{$prefix}-popup-button {
+    border-top: 1px solid $c-popup-button-border;
+    flex-basis: 100%;
+  }
 }

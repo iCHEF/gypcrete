@@ -3,81 +3,81 @@
 $block-name: #{$prefix}-editable-basic-row;
 
 .#{$block-name} {
-    position: relative;
+  position: relative;
 
-    // ---------------------
-    //  Elements
-    // ---------------------
-    &__basic-label {
-        color: $c-input-text;
-        opacity: 1;
-        will-change: opacity;
-        white-space: pre-wrap;
+  // ---------------------
+  //  Elements
+  // ---------------------
+  &__basic-label {
+    color: $c-input-text;
+    opacity: 1;
+    will-change: opacity;
+    white-space: pre-wrap;
+  }
+
+  &__input {
+    width: 100%;
+    height: 100%;
+    background: none;
+    color: $c-input-text;
+    font: inherit;
+    border: none;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    z-index: 6;
+    cursor: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: opacity;
+    outline: none;
+
+    &:focus {
+      opacity: 1;
     }
 
-    &__input {
-        width: 100%;
-        height: 100%;
-        background: none;
-        color: $c-input-text;
-        font: inherit;
-        border: none;
-        margin: 0;
-        padding: 0;
-        opacity: 0;
-        z-index: 6;
-        cursor: inherit;
-        position: absolute;
-        top: 0;
-        left: 0;
-        will-change: opacity;
-        outline: none;
-
-        &:focus {
-            opacity: 1;
-        }
-
-        @at-root textarea#{&} {
-            // Event when <textarea> has the same height of content,
-            // it can still have a scroll bar for navigating around 1~2px.
-            // This forces to remove the useless scroll bar.
-            height: calc(100% + 2px);
-            overflow: hidden;
-        }
+    @at-root textarea#{&} {
+      // Event when <textarea> has the same height of content,
+      // it can still have a scroll bar for navigating around 1~2px.
+      // This forces to remove the useless scroll bar.
+      height: calc(100% + 2px);
+      overflow: hidden;
     }
+  }
 
-    ::placeholder {
-        color: $c-input-placeholder;
-    }
+  ::placeholder {
+    color: $c-input-placeholder;
+  }
 
-    // ---------------------
-    //  Modifiers
-    // ---------------------
-    &--empty &__basic-label {
-        color: $c-input-placeholder;
-    }
+  // ---------------------
+  //  Modifiers
+  // ---------------------
+  &--empty &__basic-label {
+    color: $c-input-placeholder;
+  }
 
-    &--focused &__basic-label,
-    &--disabled &__basic-label {
-        opacity: 0;
-    }
+  &--focused &__basic-label,
+  &--disabled &__basic-label {
+    opacity: 0;
+  }
 
-    &--focused {
-        box-shadow: 0 -2px 0 $c-input-border inset;
-    }
+  &--focused {
+    box-shadow: 0 -2px 0 $c-input-border inset;
+  }
 
-    // ---------------------
-    //  States/Interactions
-    // ---------------------
-    .#{$prefix}-text--center &__input {
-        text-align: center;
-    }
+  // ---------------------
+  //  States/Interactions
+  // ---------------------
+  .#{$prefix}-text--center &__input {
+    text-align: center;
+  }
 
-    .#{$prefix}-text--right &__input {
-        text-align: right;
-    }
+  .#{$prefix}-text--right &__input {
+    text-align: right;
+  }
 
-    .#{$prefix-state}-error &__basic-label {
-        color: inherit;
-    }
+  .#{$prefix-state}-error &__basic-label {
+    color: inherit;
+  }
 }

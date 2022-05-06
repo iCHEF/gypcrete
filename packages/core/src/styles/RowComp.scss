@@ -2,65 +2,65 @@
 @import "./states";
 
 .#{$prefix}-row-comp {
-    font-size: rem($basic-text-font-size);
-    line-height: rem($basic-text-line-height);
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex: 1 1 $component-flex-basis;
-    align-items: flex-start;
-    justify-content: flex-start;
+  font-size: rem($basic-text-font-size);
+  line-height: rem($basic-text-line-height);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex: 1 1 $component-flex-basis;
+  align-items: flex-start;
+  justify-content: flex-start;
 
-    &--center {
-        justify-content: center;
+  &--center {
+    justify-content: center;
+  }
+
+  &--reverse {
+    flex-direction: row-reverse;
+  }
+
+  @at-root {
+    &,
+    button#{&} {
+      padding: rem($component-padding);
     }
+  }
 
-    &--reverse {
-        flex-direction: row-reverse;
-    }
+  // ----------------------
+  //  <RowComp> states
+  // ----------------------
+  &.#{$prefix-state}-active {
+    background: $c-comp-bg-active;
+  }
 
-    @at-root {
-        &,
-        button#{&} {
-            padding: rem($component-padding);
+  // ----------------------
+  //  <RowComp> modifiers
+  // ----------------------
+  &--minified {
+    flex: 0 0 auto;
+  }
+
+  &--aside-control-clickable {
+    &.#{$prefix-state}-disabled {
+      opacity: 1 !important;
+
+      .#{$prefix}-text__basic {
+        opacity: .3 !important;
+      }
+
+      .#{$prefix}-icon {
+        opacity: .3 !important;
+      }
+
+      .#{$prefix}-text__aside {
+        display: block;
+
+        a,
+        button {
+          opacity: 1;
+          pointer-events: auto;
         }
+      }
     }
-
-    // ----------------------
-    //  <RowComp> states
-    // ----------------------
-    &.#{$prefix-state}-active {
-        background: $c-comp-bg-active;
-    }
-
-    // ----------------------
-    //  <RowComp> modifiers
-    // ----------------------
-    &--minified {
-        flex: 0 0 auto;
-    }
-
-    &--aside-control-clickable {
-        &.#{$prefix-state}-disabled {
-            opacity: 1 !important;
-
-            .#{$prefix}-text__basic {
-                opacity: .3 !important;
-            }
-
-            .#{$prefix}-icon {
-                opacity: .3 !important;
-            }
-
-            .#{$prefix}-text__aside {
-                display: block;
-
-                a,
-                button {
-                    opacity: 1;
-                    pointer-events: auto;
-                }
-            }
-        }
-    }
+  }
 }
