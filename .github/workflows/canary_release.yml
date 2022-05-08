@@ -46,7 +46,7 @@ jobs:
       - name: Retrieve package version
         uses: nyaayaya/package-version@v1
         with:
-          path: packages/core/package.jsonㄅ
+          path: packages/core/package.json
 
       - name: Format canary version
         run: echo "CANARY_VERSION=$PACKAGE_VERSION" | cut -d "+" -f 1 > $GITHUB_ENV
