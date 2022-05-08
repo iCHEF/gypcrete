@@ -1,0 +1,80 @@
+name: Release
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      # update this after complete
+      - chore/test_release_workflow_123
+
+jobs:
+  release:
+    if: github.event.pull_request.merged && startsWith(github.head_ref, 'release/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set release version
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+        run: echo "RELEASE_VERSION=${BRANCH_NAME/release\/}" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: master
+          token: ${{ secrets.ICHEF_BOT_TOKEN }}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+          registry-url: 'https://registry.npmjs.org'
+      - uses: "./.github/actions/get_runner_env_version"
+        id: get-runner-env-version
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: "**/node_modules/"
+          key: ${{ steps.get-runner-env-version.outputs.os }}-node${{ steps.get-runner-env-version.outputs.node }}-yarn-${{ hashFiles('yarn.lock') }}
+      - name: Install packages
+        uses: './.github/actions/install_package'
+        with:
+          npm-token: ${{ secrets.NPM_TOKEN }}
+      - name: Update package version
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          npm version "$RELEASE_VERSION" --no-git-tag-version
+          yarn changelog
+          git add .
+          git commit -m "build: bump version to $RELEASE_VERSION"
+          yarn lerna version "$RELEASE_VERSION" --amend --yes
+          git push --tags origin master
+      - name: Get latest commit hash
+        run: echo "LATEST_COMMIT=$(git rev-parse HEAD)" > $GITHUB_ENV
+      - name: Retrieve package version
+        uses: nyaayaya/package-version@v1
+      - name: start deployment
+        uses: bobheadxi/deployments@v0.4.3
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: production
+          ref: ${{ env.LATEST_COMMIT }}
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn lerna publish from-git --yes
+      - name: update deployment status
+        uses: bobheadxi/deployments@v0.4.3
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: ${{ format('https://www.npmjs.com/package/@ichef/gypcrete/v/{0}', env.PACKAGE_VERSION) }}
+      - name: Create Github release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: release-drafter/release-drafter@v5
+        with:
+          version: ${{ env.PACKAGE_VERSION }}
+          publish: true
