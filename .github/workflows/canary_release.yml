@@ -1,0 +1,62 @@
+name: Canary Build
+
+on:
+# todo: remove this after complete
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+#  push:
+#    branches:
+#      - develop
+
+jobs:
+  canary-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install packages with cache
+        uses: iCHEF/npm-install-with-cache-action@v1
+        with:
+          is-monorepo: true
+
+      - name: start deployment
+        uses: bobheadxi/deployments@v0.4.3
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: canary
+          ref: ${{ github.head_ref }}
+
+      - name: Publish canary build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          RUN_NUMBER: ${{ github.run_number }}
+        run: yarn release:canary --yes --preid="alpha.${RUN_NUMBER}" --no-git-reset --dist-tag="alpha"
+
+      - name: Retrieve package version
+        uses: nyaayaya/package-version@v1
+        with:
+          path: packages/core/package.jsonㄅ
+
+      - name: Format canary version
+        run: echo "CANARY_VERSION=$PACKAGE_VERSION" | cut -d "+" -f 1 > $GITHUB_ENV
+
+      - name: update deployment status
+        uses: bobheadxi/deployments@v0.4.3
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: ${{ format('https://www.npmjs.com/package/@ichef/gypcrete/v/{0}', env.CANARY_VERSION) }}
