@@ -1,15 +1,14 @@
 name: Canary Build
 
 on:
-# todo: remove this after complete
   pull_request:
     types:
       - opened
       - synchronize
       - reopened
-#  push:
-#    branches:
-#      - develop
+  push:
+    branches:
+      - develop
 
 jobs:
   canary-release:
