@@ -4,8 +4,7 @@ on:
     types:
       - closed
     branches:
-      # update this after complete
-      - chore/test_release_workflow_123
+      - master
 
 jobs:
   release:
