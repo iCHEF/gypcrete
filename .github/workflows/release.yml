@@ -41,7 +41,7 @@ jobs:
       - name: Get latest commit hash
         run: echo "LATEST_COMMIT=$(git rev-parse HEAD)" > $GITHUB_ENV
       - name: Retrieve package version
-        uses: nyaayaya/package-version@v1
+        uses: nyaa8/package-version@v1
       - name: start deployment
         uses: bobheadxi/deployments@v0.4.3
         id: deployment

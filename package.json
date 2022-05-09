@@ -26,7 +26,8 @@
     "lint:eslint": "eslint ./packages --ignore-path=configs/.eslintignore ./",
     "lint:stylelint": "stylelint ./packages/**/*.scss",
     "test": "jest ./packages --config=configs/jest.config.json --coverage",
-    "test:watch": "jest --config=configs/jest.config.json --runInBand --watch --verbose"
+    "test:watch": "jest --config=configs/jest.config.json --runInBand --watch --verbose",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
