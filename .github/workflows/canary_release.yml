@@ -44,7 +44,7 @@ jobs:
         run: yarn release:canary --yes --preid="alpha.${RUN_NUMBER}" --no-git-reset --dist-tag="alpha"
 
       - name: Retrieve package version
-        uses: nyaayaya/package-version@v1
+        uses: nyaa8/package-version@v1
         with:
           path: packages/core/package.json
 
