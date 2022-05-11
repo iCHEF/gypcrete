@@ -1,8 +1,14 @@
-import * as React from 'react';
+import React from 'react';
 
 export default function SvgRadioSelected(props) {
   return (
-    <svg width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg
+      width="1em"
+      height="1em"
+      viewBox="0 0 32 32"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
       <rect
         x={7}
         y={7}
