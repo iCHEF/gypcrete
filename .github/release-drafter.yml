@@ -1,0 +1,5 @@
+tag-template: 'v$RESOLVED_VERSION'
+change-template: '- #$NUMBER $TITLE (@$AUTHOR)'
+template: |
+  ## What's in this release
+  $CHANGES
