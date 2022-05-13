@@ -1,16 +1,16 @@
-name: 'Auto Assign Assignees and Reviewers on PR'
+name: Auto Assign Assignees and Reviewers on PR
 
 on:
   pull_request:
-    types: 
+    types:
       - opened
-    branches:
-      - develop
+      - ready_for_review
 
 jobs:
   add-reviews:
     runs-on: ubuntu-latest
     steps:
-      - uses: kentaro-m/auto-assign-action@v1.0.1
+      - uses: iCHEF/action-request-review@v1
         with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          token: ${{ secrets.ICHEF_BOT_TOKEN }}
+          config_gist_id: 91ffd6e7318cdf5a02353af0a15e2bcf
