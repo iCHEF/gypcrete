@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete-imageeditor",
-  "version": "4.4.0",
+  "version": "5.0.0",
   "description": "Image cropper built with Gypcrete",
   "homepage": "https://ichef.github.io/gypcrete",
   "repository": "https://github.com/iCHEF/gypcrete/tree/master/packages/imageeditor",
@@ -35,7 +35,7 @@
     "react": "^16.6.0"
   },
   "dependencies": {
-    "@ichef/gypcrete": "^4.4.0",
+    "@ichef/gypcrete": "^5.0.0",
     "classnames": "^2.2.5",
     "react-avatar-editor": "^11.0.2",
     "warning": "^4.0.3"
