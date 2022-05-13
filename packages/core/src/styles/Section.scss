@@ -3,69 +3,69 @@
 $component-name: #{$prefix}-section;
 
 .#{$component-name} {
-    margin-top: rem($section-top-margin);
-    margin-bottom: rem($section-bottom-margin);
+  margin-top: rem($section-top-margin);
+  margin-bottom: rem($section-bottom-margin);
 
-    // --------------------
-    //  Elements
-    // --------------------
-    &__title,
-    &__desc {
-        white-space: pre-wrap;
-        margin-left: rem($section-horizontal-padding);
-        margin-right: rem($section-horizontal-padding);
+  // --------------------
+  //  Elements
+  // --------------------
+  &__title,
+  &__desc {
+    white-space: pre-wrap;
+    margin-left: rem($section-horizontal-padding);
+    margin-right: rem($section-horizontal-padding);
+  }
+
+  &__title {
+    display: flex;
+    align-items: flex-end;
+    line-height: rem($section-title-line-height);
+    font-weight: $font-weight-bold;
+    padding-bottom: rem(5px);
+    border-bottom: 2px solid $c-section-divider;
+
+    // title font-size
+    &--base {
+      font-size: rem($section-title-font-size);
     }
 
-    &__title {
-        display: flex;
-        align-items: flex-end;
-        line-height: rem($section-title-line-height);
-        font-weight: $font-weight-bold;
-        padding-bottom: rem(5px);
-        border-bottom: 2px solid $c-section-divider;
-
-        // title font-size
-        &--base {
-            font-size: rem($section-title-font-size);
-        }
-
-        &--small {
-            font-size: rem($section-title-font-size-small);
-        }
-
-        &:before {
-            content: "\25a0";
-            display: inline-block;
-            margin-right: .25em;
-        }
+    &--small {
+      font-size: rem($section-title-font-size-small);
     }
 
-    &__title-right-area {
-        margin-left: auto;
-        padding-left: rem(5px);
-        flex-grow: 0;
-        flex-shrink: 0;
+    &:before {
+      content: "\25a0";
+      display: inline-block;
+      margin-right: .25em;
     }
+  }
 
-    &__desc {
-        @include small-text;
-        // take padding from row layout as reference
-        padding-top: rem(2px);
-    }
+  &__title-right-area {
+    margin-left: auto;
+    padding-left: rem(5px);
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
 
-    &__body {
-        &--padded {
-            // for aligning non-row components
-            padding-left: rem($section-horizontal-padding);
-            padding-right: rem($section-horizontal-padding);
-        }
-    }
+  &__desc {
+    @include small-text;
+    // take padding from row layout as reference
+    padding-top: rem(2px);
+  }
 
-    // --------------------
-    //  Modifiers
-    // --------------------
-    &--no-margin {
-        margin-top: 0;
-        margin-bottom: 0;
+  &__body {
+    &--padded {
+      // for aligning non-row components
+      padding-left: rem($section-horizontal-padding);
+      padding-right: rem($section-horizontal-padding);
     }
+  }
+
+  // --------------------
+  //  Modifiers
+  // --------------------
+  &--no-margin {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }

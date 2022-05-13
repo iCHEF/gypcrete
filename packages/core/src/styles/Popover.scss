@@ -2,52 +2,52 @@
 $component-name: #{$prefix}-popover;
 
 .#{$component-name} {
-    background-color: $c-popover-background;
-    min-width: rem($popover-min-width);
-    max-width: rem($popover-max-width);
-    padding-top: rem($popover-top-padding);
-    padding-bottom: rem($popover-bottom-padding);
-    border-radius: $popover-border-radius;
-    filter: drop-shadow($popover-drop-shadow);
-    position: relative;
+  background-color: $c-popover-background;
+  min-width: rem($popover-min-width);
+  max-width: rem($popover-max-width);
+  padding-top: rem($popover-top-padding);
+  padding-bottom: rem($popover-bottom-padding);
+  border-radius: $popover-border-radius;
+  filter: drop-shadow($popover-drop-shadow);
+  position: relative;
 
-    // Elements
-    &__arrow {
-        width: 0;
-        height: 0;
-        display: block;
-        border-color: transparent;
-        border-style: solid;
-        border-width: $popover-arrow-size;
-        position: absolute;
-        left: 50%;
-        margin-left: -$popover-arrow-size;
-    }
+  // Elements
+  &__arrow {
+    width: 0;
+    height: 0;
+    display: block;
+    border-color: transparent;
+    border-style: solid;
+    border-width: $popover-arrow-size;
+    position: absolute;
+    left: 50%;
+    margin-left: -$popover-arrow-size;
+  }
 
-    &__container {
-        max-height: rem($popover-max-height);
-        overflow-x: hidden;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        // Fix popover content might exceed container boundary on Safari & Chrome
-        // by force-create a stacking context here
-        transform: scale(1);
-    }
+  &__container {
+    max-height: rem($popover-max-height);
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    // Fix popover content might exceed container boundary on Safari & Chrome
+    // by force-create a stacking context here
+    transform: scale(1);
+  }
 
-    // Position
-    &--bottom {
-        .#{$component-name}__arrow {
-            top: -$popover-arrow-size;
-            border-top-width: 0;
-            border-bottom-color: $c-popover-background;
-        }
+  // Position
+  &--bottom {
+    .#{$component-name}__arrow {
+      top: -$popover-arrow-size;
+      border-top-width: 0;
+      border-bottom-color: $c-popover-background;
     }
+  }
 
-    &--top {
-        .#{$component-name}__arrow {
-            bottom: -$popover-arrow-size;
-            border-bottom-width: 0;
-            border-top-color: $c-popover-background;
-        }
+  &--top {
+    .#{$component-name}__arrow {
+      bottom: -$popover-arrow-size;
+      border-bottom-width: 0;
+      border-top-color: $c-popover-background;
     }
+  }
 }

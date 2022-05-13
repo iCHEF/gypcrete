@@ -12,48 +12,48 @@ $component: #{$prefix}-modal;
 // -------------------------------------
 
 .#{$prefix}-modal {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    padding-top: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  padding-top: 0;
 }
 
 // -------------------------------------
 //   Modal Elements
 // -------------------------------------
 .#{$prefix}-modal {
-    &__container {
-        width: $modal-width;
-        max-width: $modal-max-width;
-        height: auto;
-        min-height: $modal-height;
-        max-height: $modal-max-height;
-        background-color: $c-bg-light;
-        border-radius: 0 0 $modal-border-radius $modal-border-radius;
-        margin: 0 auto;
-        position: relative;
-        overflow: hidden;
-        animation: anim-slide-down .4s forwards;
-    }
+  &__container {
+    width: $modal-width;
+    max-width: $modal-max-width;
+    height: auto;
+    min-height: $modal-height;
+    max-height: $modal-max-height;
+    background-color: $c-bg-light;
+    border-radius: 0 0 $modal-border-radius $modal-border-radius;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    animation: anim-slide-down .4s forwards;
+  }
 }
 
 // -------------------------------------
 //   Modal Position
 // -------------------------------------
 .#{$prefix}-modal {
-    &--centered {
-        display: flex;
-        align-items: center;
+  &--centered {
+    display: flex;
+    align-items: center;
 
-        .#{$prefix}-modal__container {
-            border-radius: $modal-border-radius;
-            flex-basis: $modal-width;
-            flex-grow: 0;
-        }
+    .#{$prefix}-modal__container {
+      border-radius: $modal-border-radius;
+      flex-basis: $modal-width;
+      flex-grow: 0;
     }
+  }
 }
 
 // -------------------------------------
@@ -61,19 +61,19 @@ $component: #{$prefix}-modal;
 // -------------------------------------
 
 @for $i from 1 through $modal-indent-layer-max - 1 {
-    // ---------------------------------
-    // this will generate selector like `.#{$prefix}-base-layer ~ .#{$prefix}-base-layer .#{$prefix-modal}`
-    // which is long and ugly, but
-    // 1. it's more complicated and error prone to handle layer count in React side
-    // 2. it's rare to use multiple modal in our use cases.
-    // so we handle indent by css.
-    // ---------------------------------
-    #{repeat-str('.#{$prefix}-base-layer ~', $i)} .#{$prefix}-base-layer {
-        .#{$prefix}-modal {
-            &__container {
-                width: $modal-width - ($i * $modal-indent * 2);
-                height: $modal-height - ($i * $modal-indent);
-            }
-        }
+  // ---------------------------------
+  // this will generate selector like `.#{$prefix}-base-layer ~ .#{$prefix}-base-layer .#{$prefix-modal}`
+  // which is long and ugly, but
+  // 1. it's more complicated and error prone to handle layer count in React side
+  // 2. it's rare to use multiple modal in our use cases.
+  // so we handle indent by css.
+  // ---------------------------------
+  #{repeat-str('.#{$prefix}-base-layer ~', $i)} .#{$prefix}-base-layer {
+    .#{$prefix}-modal {
+      &__container {
+        width: $modal-width - ($i * $modal-indent * 2);
+        height: $modal-height - ($i * $modal-indent);
+      }
     }
+  }
 }

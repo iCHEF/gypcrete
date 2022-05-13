@@ -5,42 +5,42 @@
 // Ref: https://git.io/v6FLS
 //
 @function hsv-to-hsl($h, $s: 0, $v: 0) {
-    @if type-of($h) == "list" {
-        $v: nth($h, 3);
-        $s: nth($h, 2);
-        $h: nth($h, 1);
-    }
+  @if type-of($h) == "list" {
+    $v: nth($h, 3);
+    $s: nth($h, 2);
+    $h: nth($h, 1);
+  }
 
-    @if unit($h) == "deg" {
-        $h: 3.1415 * 2 * ($h / 360deg);
-    }
+  @if unit($h) == "deg" {
+    $h: 3.1415 * 2 * ($h / 360deg);
+  }
 
-    @if unit($s) == "%" {
-        $s: 0 + ($s / 100%);
-    }
+  @if unit($s) == "%" {
+    $s: 0 + ($s / 100%);
+  }
 
-    @if unit($v) == "%" {
-        $v: 0 + ($v / 100%);
-    }
+  @if unit($v) == "%" {
+    $v: 0 + ($v / 100%);
+  }
 
-    $ss: $s * $v;
-    $ll: (2 - $s) * $v;
+  $ss: $s * $v;
+  $ll: (2 - $s) * $v;
 
-    @if ($ll == 2 or $ll == 0) {
-        $ss: 0;
-    }
+  @if ($ll == 2 or $ll == 0) {
+    $ss: 0;
+  }
 
-    @else if $ll <= 1 {
-        $ss: $ss / $ll;
-    }
+  @else if $ll <= 1 {
+    $ss: $ss / $ll;
+  }
 
-    @else {
-        $ss: $ss / (2 - $ll);
-    }
+  @else {
+    $ss: $ss / (2 - $ll);
+  }
 
-    $ll: $ll / 2;
+  $ll: $ll / 2;
 
-    @return 360deg * $h / (3.1415 * 2), percentage(max(0, min(1, $ss))), percentage(max(0, min(1, $ll)));
+  @return 360deg * $h / (3.1415 * 2), percentage(max(0, min(1, $ss))), percentage(max(0, min(1, $ll)));
 }
 
 // ***
@@ -54,16 +54,16 @@
 // @return {Color}
 // ***
 @function hsba($h, $s, $b, $a: 100) {
-    $hue: $h * 1deg;
-    $saturation: $s * 1%;
-    $brightness: $b * 1%;
+  $hue: $h * 1deg;
+  $saturation: $s * 1%;
+  $brightness: $b * 1%;
 
-    $hsl: hsv-to-hsl($hue, $saturation, $brightness);
-    $alpha: $a / 100;
+  $hsl: hsv-to-hsl($hue, $saturation, $brightness);
+  $alpha: $a / 100;
 
-    @return hsla(nth($hsl, 1), nth($hsl, 2), nth($hsl, 3), $alpha);
+  @return hsla(nth($hsl, 1), nth($hsl, 2), nth($hsl, 3), $alpha);
 }
 
 @function hsb($h, $s, $b) {
-    @return hsba($h, $s, $b);
+  @return hsba($h, $s, $b);
 }

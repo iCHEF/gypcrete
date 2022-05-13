@@ -5,13 +5,13 @@
 // -------------------------------------
 
 @function repeat-str($str, $times) {
-    $ret: '';
+  $ret: '';
 
-    @for $i from 1 through $times {
-        $ret: $ret + $str;
-    }
+  @for $i from 1 through $times {
+    $ret: $ret + $str;
+  }
 
-    @return $ret;
+  @return $ret;
 }
 
 // -------------------------------------
@@ -19,11 +19,11 @@
 // -------------------------------------
 
 @function relative($target-size, $base-size: $component-base-font-size, $unit: 1em) {
-    @return ($target-size / $base-size * $unit);
+  @return ($target-size / $base-size * $unit);
 }
 
 @function rem($target-size) {
-    @return relative($target-size, $root-font-size, 1rem);
+  @return relative($target-size, $root-font-size, 1rem);
 }
 
 // -------------------------------------
@@ -31,13 +31,13 @@
 // -------------------------------------
 
 @mixin overflow-ellipsis($_width: null) {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
-    @if $_width {
-        width: $_width;
-    }
+  @if $_width {
+    width: $_width;
+  }
 }
 
 // -------------------------------------
@@ -45,31 +45,31 @@
 // -------------------------------------
 
 @mixin remove-button-appearance {
-    color: inherit;
-    background: transparent;
-    border: 0;
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    text-align: inherit;
-    appearance: none;
-    user-select: none;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  text-align: inherit;
+  appearance: none;
+  user-select: none;
 }
 
 // -------------------------------------
 //   Default typography
 // -------------------------------------
 @mixin small-text {
-    font-size: rem($font-size-small);
-    line-height: rem($line-height-small);
+  font-size: rem($font-size-small);
+  line-height: rem($line-height-small);
 }
 
 @mixin base-text {
-    font-size: rem($font-size-base);
-    line-height: rem($line-height-base);
+  font-size: rem($font-size-base);
+  line-height: rem($line-height-base);
 }
 
 @mixin large-text {
-    font-size: rem($font-size-large);
-    line-height: rem($line-height-large);
+  font-size: rem($font-size-large);
+  line-height: rem($line-height-large);
 }

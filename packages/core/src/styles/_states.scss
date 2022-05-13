@@ -3,28 +3,28 @@
 // Styles for shared states
 
 .#{$prefix-state}-editable {
-    color: $c-text-editable !important;
+  color: $c-text-editable !important;
 }
 
 .#{$prefix-state}-error {
-    color: $c-text-error !important;
+  color: $c-text-error !important;
 }
 
 .#{$prefix-state}-untouchable {
-    pointer-events: none !important;
+  pointer-events: none !important;
 }
 
 [disabled],
 .#{$prefix-state}-disabled {
-    opacity: .3 !important;
-    pointer-events: none !important;
+  opacity: .3 !important;
+  pointer-events: none !important;
 }
 
 .#{$prefix-state}-muted {
-    opacity: .3 !important;
+  opacity: .3 !important;
 }
 
 [hidden],
 .#{$prefix-state}-hidden {
-    display: none;
+  display: none;
 }

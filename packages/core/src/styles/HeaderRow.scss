@@ -2,30 +2,30 @@
 $component: #{$prefix}-header-row;
 
 .#{$component} {
-    min-height: rem($row-base-height);
-    background-color: $c-header-bg;
-    padding: rem($header-row-padding);
-    box-sizing: border-box;
+  min-height: rem($row-base-height);
+  background-color: $c-header-bg;
+  padding: rem($header-row-padding);
+  box-sizing: border-box;
+  display: flex;
+  box-shadow: $header-row-box-shadow;
+  // Create a new stacking context so box-shadow is harder to be blocked
+  position: relative;
+
+  &__left,
+  &__right {
+    // Yield the most space for center block with a small flex-basis.
+    // But it grows at the same rate as the center block, as soon as the space is plenty.
+    flex: 1 3 2rem;
     display: flex;
-    box-shadow: $header-row-box-shadow;
-    // Create a new stacking context so box-shadow is harder to be blocked
-    position: relative;
+  }
 
-    &__left,
-    &__right {
-        // Yield the most space for center block with a small flex-basis.
-        // But it grows at the same rate as the center block, as soon as the space is plenty.
-        flex: 1 3 2rem;
-        display: flex;
-    }
+  &__right {
+    justify-content: flex-end;
+  }
 
-    &__right {
-        justify-content: flex-end;
-    }
-
-    &__center {
-        flex: 1 1 auto;
-        display: flex;
-        overflow: hidden;
-    }
+  &__center {
+    flex: 1 1 auto;
+    display: flex;
+    overflow: hidden;
+  }
 }

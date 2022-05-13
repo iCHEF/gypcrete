@@ -1,34 +1,34 @@
 @import "./mixins";
 
 .#{$prefix}-checkbox {
-    &__icon-wrapper {
-        position: relative;
-        flex: 0 0 auto;
-    }
+  &__icon-wrapper {
+    position: relative;
+    flex: 0 0 auto;
+  }
 
-    &__input {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        opacity: 0;
-        z-index: 2;
-        cursor: pointer;
-    }
+  &__input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+  }
 
-    &__button {
-        position: relative;
-        z-index: 1;
-        background: url('../icons/svg/radio-empty.svg');
-    }
+  &__button {
+    position: relative;
+    z-index: 1;
+    background: url('../icons/svg/checkbox-empty.svg');
+  }
 
-    &__input:checked + &__button,
-    &__input:checked + .#{$prefix}-iconlayout > &__button {
-        background: url('../icons/svg/radio-selected.svg');
-    }
+  &__input:checked + &__button,
+  &__input:checked + .#{$prefix}-iconlayout > &__button {
+    background: url('../icons/svg/checkbox-selected.svg');
+  }
 
-    &__input:indeterminate + &__button,
-    &__input:indeterminate + .#{$prefix}-iconlayout > &__button {
-        background: url('../icons/svg/radio-half.svg');
-    }
+  &__input:indeterminate + &__button,
+  &__input:indeterminate + .#{$prefix}-iconlayout > &__button {
+    background: url('../icons/svg/checkbox-half.svg');
+  }
 }

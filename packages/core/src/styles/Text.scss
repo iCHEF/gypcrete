@@ -7,16 +7,16 @@
 // ===============
 
 .#{$prefix}-text {
-    min-height: rem($element-base-height);
-    font-size: rem($basic-text-font-size);
-    line-height: rem($basic-text-line-height);
-    flex: 1 1 auto;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    white-space: pre-wrap;
+  min-height: rem($element-base-height);
+  font-size: rem($basic-text-font-size);
+  line-height: rem($basic-text-line-height);
+  flex: 1 1 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  white-space: pre-wrap;
 }
 
 // ===============
@@ -24,22 +24,22 @@
 // ===============
 
 .#{$prefix}-text {
-    &__row {
-        display: flex;
-        align-items: flex-start;
-        white-space: pre-wrap;
-    }
+  &__row {
+    display: flex;
+    align-items: flex-start;
+    white-space: pre-wrap;
+  }
 
-    &__basic {
-        font-size: inherit;
-        line-height: inherit;
-    }
+  &__basic {
+    font-size: inherit;
+    line-height: inherit;
+  }
 
-    &__aside {
-        font-size: rem($aside-text-font-size);
-        line-height: rem($aside-text-line-height);
-        opacity: $aside-text-opacity;
-    }
+  &__aside {
+    font-size: rem($aside-text-font-size);
+    line-height: rem($aside-text-line-height);
+    opacity: $aside-text-opacity;
+  }
 }
 
 // ===============
@@ -47,37 +47,37 @@
 // ===============
 
 .#{$prefix}-text {
-    &--no-grow {
-        flex-grow: 0;
+  &--no-grow {
+    flex-grow: 0;
+  }
+
+  &--bold {
+    .#{$prefix}-text__basic {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &--center {
+    .#{$prefix}-text__row {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  &--right {
+    .#{$prefix}-text__row {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+  }
+
+  &--v-reverse {
+    .#{$prefix}-text__basic {
+      order: 2;
     }
 
-    &--bold {
-        .#{$prefix}-text__basic {
-            font-weight: $font-weight-bold;
-        }
+    .#{$prefix}-text__aside {
+      order: 1;
     }
-
-    &--center {
-        .#{$prefix}-text__row {
-            justify-content: center;
-            text-align: center;
-        }
-    }
-
-    &--right {
-        .#{$prefix}-text__row {
-            flex-direction: row-reverse;
-            text-align: right;
-        }
-    }
-
-    &--v-reverse {
-        .#{$prefix}-text__basic {
-            order: 2;
-        }
-
-        .#{$prefix}-text__aside {
-            order: 1;
-        }
-    }
+  }
 }

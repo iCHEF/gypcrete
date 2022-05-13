@@ -5,19 +5,19 @@
 // -----------------
 
 .#{$prefix}-status-icon {
-    background-color: $c-white;
-    width: 1em;
-    height: 1em;
-    line-height: 1em;
-    border-radius: 50%;
-    position: relative;
-    display: inline-block;
-    z-index: 5;
+  background-color: $c-white;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+  z-index: 5;
 
-    .#{$prefix}-icon {
-        font-size: inherit;
-        vertical-align: top;
-    }
+  .#{$prefix}-icon {
+    font-size: inherit;
+    vertical-align: top;
+  }
 }
 
 // -------------
@@ -25,14 +25,14 @@
 // -------------
 
 .#{$prefix}-status-icon {
-    &--inline {
-        font-size: rem($status-icon-inline-size);
-    }
+  &--inline {
+    font-size: rem($status-icon-inline-size);
+  }
 
-    &--corner {
-        font-size: rem($status-icon-corner-size);
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+  &--corner {
+    font-size: rem($status-icon-corner-size);
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }

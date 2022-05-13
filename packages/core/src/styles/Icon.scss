@@ -1,13 +1,13 @@
 @import "./mixins";
 
 @font-face {
-    font-family: "gyp-icon";
-    src: url("../fonts/gyp-icon.woff?97318047");
-    src:
-        url("../fonts/gyp-icon.woff2?97318047") format("woff2"),
-        url("../fonts/gyp-icon.woff?97318047") format("woff");
-    font-weight: normal;
-    font-style: normal;
+  font-family: "gyp-icon";
+  src: url("../fonts/gyp-icon.woff?97318047");
+  src:
+    url("../fonts/gyp-icon.woff2?97318047") format("woff2"),
+    url("../fonts/gyp-icon.woff?97318047") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 // -------------------------------------
@@ -16,72 +16,72 @@
 .#{$prefix}-icon,
 [class^="#{$prefix}-icon-"],
 [class*=" #{$prefix}-icon-"] {
-    width: 1em;
-    height: 1em;
-    line-height: 1em;
-    font-size: rem($icon-base-size);
-    font-family: "gyp-icon";
-    font-style: normal;
-    font-weight: normal;
-    text-align: center;
-    display: inline-block;
-    text-decoration: inherit;
-    vertical-align: middle;
-    speak: none;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  font-size: rem($icon-base-size);
+  font-family: "gyp-icon";
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  display: inline-block;
+  text-decoration: inherit;
+  vertical-align: middle;
+  speak: none;
 
-    /* For safety - reset parent styles, that can break glyph codes */
-    font-variant: normal;
-    text-transform: none;
+  /* For safety - reset parent styles, that can break glyph codes */
+  font-variant: normal;
+  text-transform: none;
 
-    /* Font smoothing. That was taken from TWBS */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .#{$prefix}-icon--large {
-    font-size: rem($icon-large-size);
+  font-size: rem($icon-large-size);
 }
 
 // -------------------------------------
 // Icon Stack
 // -------------------------------------
 .#{$prefix}-icon-stack {
-    width: auto;
-    position: relative;
+  width: auto;
+  position: relative;
 
-    & > * {
-        vertical-align: top;
-    }
+  & > * {
+    vertical-align: top;
+  }
 }
 
 // -------------------------------------
 // Icon animation
 // -------------------------------------
 .#{$prefix}-icon {
-    &--spin {
-        animation: anim-spin 2s infinite linear;
-    }
+  &--spin {
+    animation: anim-spin 2s infinite linear;
+  }
 }
 
 // -------------------------------------
 // Icon Colors
 // -------------------------------------
 .#{$prefix}-icon {
-    &--gray {
-        color: $c-gray;
-    }
+  &--gray {
+    color: $c-gray;
+  }
 
-    &--blue {
-        color: $c-blue;
-    }
+  &--blue {
+    color: $c-blue;
+  }
 
-    &--red {
-        color: $c-red;
-    }
+  &--red {
+    color: $c-red;
+  }
 
-    &--green {
-        color: #32a58b;
-    }
+  &--green {
+    color: #32a58b;
+  }
 }
 
 // -------------------------------------
@@ -89,6 +89,6 @@
 // -------------------------------------
 
 .#{$prefix}-icon-row-padding {
-    // #DEPRECATE: remove in v2
-    width: 0;
+  // #DEPRECATE: remove in v2
+  width: 0;
 }
