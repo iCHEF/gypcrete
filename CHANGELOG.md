@@ -1,3 +1,13 @@
+## [5.0.1](https://github.com/iCHEF/gypcrete/compare/v5.0.0...v5.0.1) (2022-05-26)
+
+
+### Features
+
+* add `release-drafter.yml` ([64195e5](https://github.com/iCHEF/gypcrete/commit/64195e5131784313dd78e8c8e1ad545ac1b912de))
+* upgrade auto assign workflow ([faa0ab4](https://github.com/iCHEF/gypcrete/commit/faa0ab4fe7752aeb3ea14b4d33d15e8bc4fa8cce))
+
+
+
 # [5.0.0](https://github.com/iCHEF/gypcrete/compare/v4.4.0...v5.0.0) (2022-05-13)
 
 
