@@ -22,11 +22,20 @@ it('renders title in <div> only when specified', () => {
 
 it('renders desc in <div> only when specified', () => {
   const wrapper = shallow(<Section>Foo</Section>);
-  expect(wrapper.find(`.${SECTION_BEM.desc}`).exists()).toBeFalsy();
+  expect(wrapper.find(`.${SECTION_BEM.footer}`).exists()).toBeFalsy();
 
   wrapper.setProps({ desc: 'Bar' });
-  expect(wrapper.find(`.${SECTION_BEM.desc}`)).toHaveLength(1);
-  expect(wrapper.find(`.${SECTION_BEM.desc}`).text()).toBe('Bar');
+  expect(wrapper.find(`.${SECTION_BEM.footer}`)).toHaveLength(1);
+  expect(wrapper.find(`.${SECTION_BEM.footer}`).text()).toContain('Bar');
+});
+
+it('renders errorMsg in <div> only when specified', () => {
+  const wrapper = shallow(<Section>Foo</Section>);
+  expect(wrapper.find(`.${SECTION_BEM.footer}`).exists()).toBeFalsy();
+
+  wrapper.setProps({ errorMsg: 'Bar' });
+  expect(wrapper.find(`.${SECTION_BEM.footer}`)).toHaveLength(1);
+  expect(wrapper.find(`.${SECTION_BEM.footer}`).text()).toContain('Bar');
 });
 
 it('renders children in a section body', () => {

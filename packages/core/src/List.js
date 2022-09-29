@@ -8,6 +8,7 @@ import icBEM from './utils/icBEM';
 
 import Section from './Section';
 import ListSpacingContext from './contexts/listSpacing';
+import { statusPropTypes } from './mixins/withStatus';
 
 export const COMPONENT_NAME = prefixClass('list');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -31,6 +32,8 @@ function List({
   title,
   desc,
   titleSize,
+  status,
+  errorMsg,
   // React props
   className,
   children,
@@ -50,6 +53,8 @@ function List({
             title={title}
             titleSize={titleSize}
             desc={desc}
+            errorMsg={errorMsg}
+            status={status}
             bodySpacing={false}
             verticalSpacing={spacing || !!title}
             {...otherProps}
@@ -82,6 +87,8 @@ List.propTypes = {
 
   /** `<Section>` prop */
   titleSize: PropTypes.string,
+  status: statusPropTypes.status,
+  errorMsg: statusPropTypes.errorMsg,
 };
 
 List.defaultProps = {
@@ -90,6 +97,8 @@ List.defaultProps = {
   title: undefined,
   desc: undefined,
   titleSize: undefined,
+  status: undefined,
+  errorMsg: undefined,
 };
 
 // For `<ListRow>` to check if `nestedList` is a `<List>.
