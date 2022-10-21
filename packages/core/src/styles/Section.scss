@@ -10,7 +10,7 @@ $component-name: #{$prefix}-section;
   //  Elements
   // --------------------
   &__title,
-  &__desc {
+  &__footer {
     white-space: pre-wrap;
     margin-left: rem($section-horizontal-padding);
     margin-right: rem($section-horizontal-padding);
@@ -47,7 +47,7 @@ $component-name: #{$prefix}-section;
     flex-shrink: 0;
   }
 
-  &__desc {
+  &__footer {
     @include small-text;
     // take padding from row layout as reference
     padding-top: rem(2px);
@@ -67,5 +67,12 @@ $component-name: #{$prefix}-section;
   &--no-margin {
     margin-top: 0;
     margin-bottom: 0;
+  }
+
+  &--error {
+    .#{$component-name}__body,
+    .#{$component-name}__footer {
+      color: #d94e41;
+    }
   }
 }
