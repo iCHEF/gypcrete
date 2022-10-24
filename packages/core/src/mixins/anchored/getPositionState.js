@@ -30,27 +30,14 @@ export const PLACEMENT = { TOP, BOTTOM, LEFT, RIGHT };
  * Determine whether *wrapped component* should be placed above or below
  * its *anchor*.
  *
- * @param {Placement} defaultPlacement
- * @param {number} anchorRectTop
- * @param {number} anchorHeight
- * @param {number} selfHeight
- * @param {number} distanceFromAnchor
  * @returns {{ placement: Placement, remainingSpace: number }}
  */
-export function getPlacementAndRemainingSpace(
+export function getPlacementAndRemainingSpace({
   defaultPlacement,
-  anchorRectTop,
-  anchorHeight,
-  selfHeight,
+  anchorRect,
+  selfRect,
   distanceFromAnchor,
-) {
-  const anchorRect = {
-    top: anchorRectTop,
-    height: anchorHeight,
-  };
-  const selfRect = {
-    height: selfHeight,
-  };
+}) {
   const {
     canPlace: hasSpaceToPlaceSelfAbove,
     remainingSpace: topSpace,
@@ -239,13 +226,12 @@ const getPositionState = (defaultPlacement, edgePadding) => (
   //   Determine position
   // -------------------------------------
 
-  const { placement, remainingSpace } = getPlacementAndRemainingSpace(
+  const { placement, remainingSpace } = getPlacementAndRemainingSpace({
     defaultPlacement,
-    anchorRect.top,
-    anchorRect.height,
-    selfRect.height,
+    anchorRect,
+    selfRect,
     distanceFromAnchor,
-  );
+  });
 
   const selfTop = getTopPosition(
     placement,
