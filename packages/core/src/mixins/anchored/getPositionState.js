@@ -1,9 +1,12 @@
 // @ts-check
 import documentOffset from 'document-offset';
+import { bottomPlacementStrategy, topPlacementStrategy } from './placementStrategies';
 
 const TOP = 'top';
 const BOTTOM = 'bottom';
-export const PLACEMENT = { TOP, BOTTOM };
+const LEFT = 'left';
+const RIGHT = 'right';
+export const PLACEMENT = { TOP, BOTTOM, LEFT, RIGHT };
 
 /**
  * @typedef {typeof TOP| typeof BOTTOM} Placement
@@ -41,12 +44,30 @@ export function getPlacementAndRemainingSpace(
   selfHeight,
   distanceFromAnchor,
 ) {
-  const hasSpaceToPlaceSelfAbove = anchorRectTop >= selfHeight + distanceFromAnchor;
-  const hasSpaceToPlaceSelfBelow = (
-    (anchorRectTop + anchorHeight + selfHeight + distanceFromAnchor) <= window.innerHeight
-  );
-  const topSpace = anchorRectTop;
-  const bottomSpace = window.innerHeight - anchorRectTop - anchorHeight;
+  const anchorRect = {
+    top: anchorRectTop,
+    height: anchorHeight,
+  };
+  const selfRect = {
+    height: selfHeight,
+  };
+  const {
+    canPlace: hasSpaceToPlaceSelfAbove,
+    remainingSpace: topSpace,
+  } = topPlacementStrategy.canPlace({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  });
+  const {
+    canPlace: hasSpaceToPlaceSelfBelow,
+    remainingSpace: bottomSpace,
+  } = bottomPlacementStrategy.canPlace({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  });
+
   if (!hasSpaceToPlaceSelfBelow && !hasSpaceToPlaceSelfAbove) {
     return {
       placement: topSpace > bottomSpace ? TOP : BOTTOM,
