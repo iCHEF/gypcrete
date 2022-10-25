@@ -124,23 +124,6 @@ const getPositionState = (defaultPlacement, edgePadding) => (
     distanceFromAnchor,
   });
 
-  /*
-  const selfTop = getTopPosition(
-    placement,
-    anchorOffset.top,
-    anchorRect.height,
-    selfRect.height,
-    distanceFromAnchor,
-  );
-
-  const { selfLeft, arrowLeft } = getLeftPositionSet(
-    anchorRect.left,
-    anchorOffset.left,
-    anchorRect.width,
-    selfRect.width,
-    edgePadding,
-  ); */
-
   const { arrowPosition, position } = placementStrategies[placement].getPosition({
     anchorRect,
     anchorOffset,
