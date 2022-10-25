@@ -1,12 +1,10 @@
 // @ts-check
 import documentOffset from 'document-offset';
-import { bottomPlacementStrategy, topPlacementStrategy } from './placementStrategies';
+import placementStrategies from './placementStrategies';
+import PLACEMENT from './constants/placement';
 
-const TOP = 'top';
-const BOTTOM = 'bottom';
-const LEFT = 'left';
-const RIGHT = 'right';
-export const PLACEMENT = { TOP, BOTTOM, LEFT, RIGHT };
+export { PLACEMENT };
+const { TOP, BOTTOM } = PLACEMENT;
 
 /**
  * @typedef {typeof TOP| typeof BOTTOM} Placement
@@ -41,7 +39,7 @@ export function getPlacementAndRemainingSpace({
   const {
     canPlace: hasSpaceToPlaceSelfAbove,
     remainingSpace: topSpace,
-  } = topPlacementStrategy.canPlace({
+  } = placementStrategies[TOP].canPlace({
     anchorRect,
     selfRect,
     distanceFromAnchor,
@@ -49,7 +47,7 @@ export function getPlacementAndRemainingSpace({
   const {
     canPlace: hasSpaceToPlaceSelfBelow,
     remainingSpace: bottomSpace,
-  } = bottomPlacementStrategy.canPlace({
+  } = placementStrategies[BOTTOM].canPlace({
     anchorRect,
     selfRect,
     distanceFromAnchor,
@@ -254,21 +252,14 @@ const getPositionState = (defaultPlacement, edgePadding) => (
     anchorRect.width,
     selfRect.width,
     edgePadding,
-  );*/
+  ); */
 
-  const { arrowPosition, position } = placement === TOP
-    ? topPlacementStrategy.getPosition({
-      anchorRect,
-      selfRect,
-      distanceFromAnchor,
-      edgePadding,
-    })
-    : bottomPlacementStrategy.getPosition({
-      anchorRect,
-      selfRect,
-      distanceFromAnchor,
-      edgePadding
-    });
+  const { arrowPosition, position } = placementStrategies[placement].getPosition({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+    edgePadding,
+  });
 
   return {
     placement,
