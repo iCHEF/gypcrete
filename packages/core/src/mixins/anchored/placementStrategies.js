@@ -258,8 +258,44 @@ const rightPlacementStrategy = {
   },
 };
 
+const leftPlacementStrategy = {
+  canPlace: ({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  }) => ({
+    canPlace: (
+      (
+        selfRect.width
+        + distanceFromAnchor
+      ) <= anchorRect.left
+    ),
+    remainingSpace: anchorRect.left,
+  }),
+  getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
+    const { arrowTop, selfTop } = getTopPositionSetForHorizontalPlacement(
+      anchorRect.top,
+      anchorOffset.top,
+      anchorRect.height,
+      selfRect.height,
+      edgePadding,
+    );
+    return {
+      position: {
+        top: selfTop,
+        left: anchorOffset.left - selfRect.width - distanceFromAnchor,
+      },
+      arrowPosition: {
+        top: arrowTop,
+        left: selfRect.width,
+      },
+    };
+  },
+};
+
 const placementStrategies = {
   [PLACEMENT.TOP]: topPlacementStrategy,
+  [PLACEMENT.LEFT]: leftPlacementStrategy,
   [PLACEMENT.BOTTOM]: bottomPlacementStrategy,
   [PLACEMENT.RIGHT]: rightPlacementStrategy,
 };
