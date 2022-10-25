@@ -1,3 +1,5 @@
+import PLACEMENT from './constants/placement';
+
 /**
  * Determine horizontal positions of *wrapped component* and its
  * inner *arrow element*.
@@ -140,3 +142,10 @@ export const bottomPlacementStrategy = {
     };
   },
 };
+
+const placementStrategies = {
+  [PLACEMENT.TOP]: topPlacementStrategy,
+  [PLACEMENT.BOTTOM]: bottomPlacementStrategy,
+};
+
+export default placementStrategies;
