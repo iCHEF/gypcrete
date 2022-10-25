@@ -162,6 +162,7 @@ const anchored = ({
             style,
             distanceFromAnchor,
             refreshOnWindowResize,
+            defaultPlacement: omittedDefaultPlacement,
             ...otherProps
           } = this.props;
 
