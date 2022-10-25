@@ -65,7 +65,7 @@ describe('getPlacement()', () => {
 });
 
 describe('getPositionState()', () => {
-  const getterFunc = getPositionState(PLACEMENT.TOP, 8);
+  const getterFunc = getPositionState(8);
 
   it('takes a config set and then returns a getter function', () => {
     expect(typeof getterFunc).toBe('function');
@@ -79,11 +79,11 @@ describe('getPositionState()', () => {
     };
 
     expect(
-      getterFunc(document.createElement('div'), null)
+      getterFunc(PLACEMENT.TOP, document.createElement('div'), null)
     ).toMatchObject(expectedFallback);
 
     expect(
-      getterFunc(null, document.createElement('div'))
+      getterFunc(PLACEMENT.TOP, null, document.createElement('div'))
     ).toMatchObject(expectedFallback);
   });
 
@@ -112,7 +112,7 @@ describe('getPositionState()', () => {
       left: 10,
     });
 
-    const result = getterFunc(anchorNode, selfNode, 0);
+    const result = getterFunc(PLACEMENT.TOP, anchorNode, selfNode, 0);
 
     expect(anchorNode.getBoundingClientRect).toHaveBeenCalled();
     expect(selfNode.getBoundingClientRect).toHaveBeenCalled();

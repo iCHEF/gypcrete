@@ -85,16 +85,17 @@ export function getPlacementAndRemainingSpace({
  * ClientRect: element's positions related to browser window viewport.
  * Offset: element's position related to document.
  *
- * @param {Placement} defaultPlacement
  * @param {number} edgePadding
  * @returns {(
+ *  defaultPlacement: Placement,
  *  anchorNode:HTMLElement,
  *  selfNode:HTMLElement,
  *  distanceFromAnchor: number
  * ) => ResultState}
  */
 
-const getPositionState = (defaultPlacement, edgePadding) => (
+const getPositionState = edgePadding => (
+  defaultPlacement,
   anchorNode,
   selfNode,
   distanceFromAnchor = 0,

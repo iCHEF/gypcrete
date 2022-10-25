@@ -58,7 +58,7 @@ it('renders null if anchor is not set', () => {
 it('creates a position config getter function and memoize it', () => {
   mount(<AnchoredBox />);
 
-  expect(getPositionState).toHaveBeenLastCalledWith(ANCHORED_PLACEMENT.TOP, 8);
+  expect(getPositionState).toHaveBeenLastCalledWith(8);
   expect(memoize).toHaveBeenLastCalledWith(mockedGetterFunc);
 });
 
@@ -66,7 +66,7 @@ it('has default configs for placement and edge-padding', () => {
   const DefaultAnchoredBox = anchored()(Box);
   mount(<DefaultAnchoredBox />);
 
-  expect(getPositionState).toHaveBeenLastCalledWith(ANCHORED_PLACEMENT.BOTTOM, 16);
+  expect(getPositionState).toHaveBeenLastCalledWith(16);
 });
 
 it('passed anchor and self nodes to getter function for position config', () => {
@@ -86,6 +86,7 @@ it('passed anchor and self nodes to getter function for position config', () => 
 
   const wrapper = mount(<AnchoredBox anchor={anchorRef.current} />);
   expect(mockedGetterFunc).toHaveBeenCalledWith(
+    ANCHORED_PLACEMENT.TOP,
     anchorRef.current,
     wrapper.state().selfNode,
     0
