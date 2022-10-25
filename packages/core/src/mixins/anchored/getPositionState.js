@@ -216,11 +216,17 @@ const getPositionState = (defaultPlacement, edgePadding) => (
   //   Measuring anchor and self
   // -------------------------------------
 
-  const anchorRect = anchorNode.getBoundingClientRect();
-  const selfRect = selfNode.getBoundingClientRect();
-
   /** @type {DocumentOffset} */
   const anchorOffset = documentOffset(anchorNode);
+  const anchorBoundingClientRect = anchorNode.getBoundingClientRect();
+
+  const anchorRect = {
+    top: anchorOffset.top,
+    left: anchorOffset.left,
+    width: anchorBoundingClientRect.width,
+    height: anchorBoundingClientRect.height,
+  };
+  const selfRect = selfNode.getBoundingClientRect();
 
   // -------------------------------------
   //   Determine position
@@ -233,6 +239,7 @@ const getPositionState = (defaultPlacement, edgePadding) => (
     distanceFromAnchor,
   });
 
+  /*
   const selfTop = getTopPosition(
     placement,
     anchorOffset.top,
@@ -247,17 +254,28 @@ const getPositionState = (defaultPlacement, edgePadding) => (
     anchorRect.width,
     selfRect.width,
     edgePadding,
-  );
+  );*/
+
+  const { arrowPosition, position } = placement === TOP
+    ? topPlacementStrategy.getPosition({
+      anchorRect,
+      selfRect,
+      distanceFromAnchor,
+      edgePadding,
+    })
+    : bottomPlacementStrategy.getPosition({
+      anchorRect,
+      selfRect,
+      distanceFromAnchor,
+      edgePadding
+    });
 
   return {
     placement,
     remainingSpace,
-    position: {
-      top: selfTop,
-      left: selfLeft,
-    },
+    position,
     arrowPosition: {
-      left: arrowLeft,
+      left: arrowPosition.left,
     },
   };
 };
