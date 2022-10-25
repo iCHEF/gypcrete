@@ -121,6 +121,27 @@ describe('getLeftPositionSet()', () => {
 
   /**
      * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+     * ╎       □                ╎
+     * ╎    ┌╌╌^╌╌┐             ╎
+     * ╎    └╌╌╌╌╌┘             ╎
+     * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+     */
+  it('returns coord sets for center-align sceanario -- when document left is differed from screen', () => {
+    const result = getLeftPositionSet(
+      200, // anchor screen left
+      300, // anchor document left
+      30, // anchor width
+      200, // self width
+      8, // edge padding
+    );
+    expect(result).toEqual({
+      selfLeft: 215,
+      arrowLeft: 100,
+    });
+  });
+
+  /**
+     * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
      * ╎ □                      ╎
      * ╎┌^╌╌╌╌┐                 ╎
      * ╎└╌╌╌╌╌┘                 ╎
