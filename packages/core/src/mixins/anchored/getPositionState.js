@@ -139,9 +139,7 @@ const getPositionState = (defaultPlacement, edgePadding) => (
     placement,
     remainingSpace,
     position,
-    arrowPosition: {
-      left: arrowPosition.left,
-    },
+    arrowPosition,
   };
 };
 
