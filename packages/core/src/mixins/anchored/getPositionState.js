@@ -4,7 +4,9 @@ import placementStrategies from './placementStrategies';
 import PLACEMENT from './constants/placement';
 
 export { PLACEMENT };
-const { TOP, BOTTOM } = PLACEMENT;
+const { TOP, BOTTOM, LEFT, RIGHT } = PLACEMENT;
+const verticalPlacements = [TOP, BOTTOM];
+const horizontalPlacements = [LEFT, RIGHT];
 
 /**
  * @typedef {typeof TOP| typeof BOTTOM} Placement
@@ -30,46 +32,81 @@ const { TOP, BOTTOM } = PLACEMENT;
  *
  * @returns {{ placement: Placement, remainingSpace: number }}
  */
-export function getPlacementAndRemainingSpace({
+export function getPlacementAndRemainingSpaceImpl({
+  possiblePlacements,
   defaultPlacement,
   anchorRect,
   selfRect,
   distanceFromAnchor,
 }) {
   const {
-    canPlace: hasSpaceToPlaceSelfAbove,
-    remainingSpace: topSpace,
-  } = placementStrategies[TOP].canPlace({
+    canPlace,
+    remainingSpace,
+  } = placementStrategies[defaultPlacement].canPlace({
     anchorRect,
     selfRect,
     distanceFromAnchor,
   });
-  const {
-    canPlace: hasSpaceToPlaceSelfBelow,
-    remainingSpace: bottomSpace,
-  } = placementStrategies[BOTTOM].canPlace({
-    anchorRect,
-    selfRect,
-    distanceFromAnchor,
-  });
-
-  if (!hasSpaceToPlaceSelfBelow && !hasSpaceToPlaceSelfAbove) {
+  if (canPlace) {
     return {
-      placement: topSpace > bottomSpace ? TOP : BOTTOM,
-      remainingSpace: topSpace > bottomSpace ? topSpace : bottomSpace,
+      placement: defaultPlacement,
+      remainingSpace,
     };
   }
-  if (defaultPlacement === TOP && !hasSpaceToPlaceSelfAbove) {
-    return { placement: BOTTOM, remainingSpace: bottomSpace };
+  const oppositePlacement = possiblePlacements.find(placement => placement !== defaultPlacement);
+  const {
+    canPlace: canPlaceInOpposite,
+    remainingSpace: remainingSpaceInOpposite,
+  } = placementStrategies[oppositePlacement].canPlace({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  });
+  if (canPlaceInOpposite) {
+    return {
+      placement: oppositePlacement,
+      remainingSpace: remainingSpaceInOpposite,
+    };
   }
-  if (defaultPlacement === BOTTOM && !hasSpaceToPlaceSelfBelow) {
-    return { placement: TOP, remainingSpace: topSpace };
-  }
-
+  const placementWithLargerRemaingSpace = (
+    remainingSpace >= remainingSpaceInOpposite
+      ? defaultPlacement
+      : oppositePlacement
+  );
   return {
-    placement: defaultPlacement,
-    remainingSpace: defaultPlacement === TOP ? topSpace : bottomSpace,
+    placement: placementWithLargerRemaingSpace,
+    remainingSpace: (
+      placementWithLargerRemaingSpace === defaultPlacement
+        ? remainingSpace
+        : remainingSpaceInOpposite
+    ),
   };
+}
+
+/**
+ * Determine whether *wrapped component* should be placed above or below
+ * its *anchor*.
+ *
+ * @returns {{ placement: Placement, remainingSpace: number }}
+ */
+export function getPlacementAndRemainingSpace({
+  defaultPlacement,
+  anchorRect,
+  selfRect,
+  distanceFromAnchor,
+}) {
+  const possiblePlacements = (
+    verticalPlacements.includes(defaultPlacement)
+      ? verticalPlacements
+      : horizontalPlacements
+  );
+  return getPlacementAndRemainingSpaceImpl({
+    possiblePlacements,
+    defaultPlacement,
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  });
 }
 
 /**
