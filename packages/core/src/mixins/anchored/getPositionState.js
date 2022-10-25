@@ -32,63 +32,6 @@ const horizontalPlacements = [LEFT, RIGHT];
  *
  * @returns {{ placement: Placement, remainingSpace: number }}
  */
-export function getPlacementAndRemainingSpaceImpl({
-  possiblePlacements,
-  defaultPlacement,
-  anchorRect,
-  selfRect,
-  distanceFromAnchor,
-}) {
-  const {
-    canPlace,
-    remainingSpace,
-  } = placementStrategies[defaultPlacement].canPlace({
-    anchorRect,
-    selfRect,
-    distanceFromAnchor,
-  });
-  if (canPlace) {
-    return {
-      placement: defaultPlacement,
-      remainingSpace,
-    };
-  }
-  const oppositePlacement = possiblePlacements.find(placement => placement !== defaultPlacement);
-  const {
-    canPlace: canPlaceInOpposite,
-    remainingSpace: remainingSpaceInOpposite,
-  } = placementStrategies[oppositePlacement].canPlace({
-    anchorRect,
-    selfRect,
-    distanceFromAnchor,
-  });
-  if (canPlaceInOpposite) {
-    return {
-      placement: oppositePlacement,
-      remainingSpace: remainingSpaceInOpposite,
-    };
-  }
-  const placementWithLargerRemaingSpace = (
-    remainingSpace >= remainingSpaceInOpposite
-      ? defaultPlacement
-      : oppositePlacement
-  );
-  return {
-    placement: placementWithLargerRemaingSpace,
-    remainingSpace: (
-      placementWithLargerRemaingSpace === defaultPlacement
-        ? remainingSpace
-        : remainingSpaceInOpposite
-    ),
-  };
-}
-
-/**
- * Determine whether *wrapped component* should be placed above or below
- * its *anchor*.
- *
- * @returns {{ placement: Placement, remainingSpace: number }}
- */
 export function getPlacementAndRemainingSpace({
   defaultPlacement,
   anchorRect,
@@ -100,13 +43,36 @@ export function getPlacementAndRemainingSpace({
       ? verticalPlacements
       : horizontalPlacements
   );
-  return getPlacementAndRemainingSpaceImpl({
-    possiblePlacements,
-    defaultPlacement,
+  const defaultPlacementResult = placementStrategies[defaultPlacement].canPlace({
     anchorRect,
     selfRect,
     distanceFromAnchor,
   });
+  if (defaultPlacementResult.canPlace) {
+    return {
+      placement: defaultPlacement,
+      remainingSpace: defaultPlacementResult.remainingSpace,
+    };
+  }
+  const oppositePlacement = possiblePlacements.find(placement => placement !== defaultPlacement);
+  const oppositePlacementResult = placementStrategies[oppositePlacement].canPlace({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  });
+  const placement = (
+    defaultPlacementResult.remainingSpace >= oppositePlacementResult.remainingSpace
+      ? defaultPlacement
+      : oppositePlacement
+  );
+  return {
+    placement,
+    remainingSpace: (
+      placement === defaultPlacement
+        ? defaultPlacementResult.remainingSpace
+        : oppositePlacementResult.remainingSpace
+    ),
+  };
 }
 
 /**
