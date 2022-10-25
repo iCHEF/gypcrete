@@ -24,6 +24,7 @@ import PLACEMENT from './constants/placement';
  * @param {number} edgePadding
  */
 export function getLeftPositionSetForVerticalPlacement({
+  anchorOffset,
   anchorRect,
   selfRect,
   edgePadding,
@@ -44,19 +45,19 @@ export function getLeftPositionSetForVerticalPlacement({
   switch (true) {
     // Center-aligned
     case (hasSpaceOnLeftOfAnchorCenter && hasSpaceOnRightOfAnchorCenter):
-      selfLeft = (anchorRect.left + anchorHalfWidth) - selfHalfWidth;
+      selfLeft = (anchorOffset.left + anchorHalfWidth) - selfHalfWidth;
       arrowLeft = selfHalfWidth;
       break;
 
       // Right-align to the anchor
     case (hasSpaceOnLeftOfAnchorCenter && !hasSpaceOnRightOfAnchorCenter):
-      selfLeft = (anchorRect.left + anchorRect.width) - selfRect.width;
+      selfLeft = (anchorOffset.left + anchorOffset.width) - selfRect.width;
       arrowLeft = selfRect.width - anchorHalfWidth;
       break;
 
       // Left-align to the anchor
     default:
-      selfLeft = anchorRect.left;
+      selfLeft = anchorOffset.left;
       arrowLeft = anchorHalfWidth;
       break;
   }
@@ -86,16 +87,17 @@ export const topPlacementStrategy = {
     remainingSpace: anchorRect.top,
   }),
 
-  getPosition: ({ anchorRect, selfRect, distanceFromAnchor, edgePadding }) => {
+  getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
     const { arrowLeft, selfLeft } = getLeftPositionSetForVerticalPlacement({
       anchorRect,
+      anchorOffset,
       selfRect,
       edgePadding,
     });
 
     return {
       position: {
-        top: Math.max(anchorRect.top - selfRect.height - distanceFromAnchor, 0),
+        top: Math.max(anchorOffset.top - selfRect.height - distanceFromAnchor, 0),
         left: selfLeft,
       },
       arrowPosition: {
@@ -123,16 +125,17 @@ export const bottomPlacementStrategy = {
     remainingSpace: window.innerHeight - anchorRect.top - anchorRect.height,
   }),
 
-  getPosition: ({ anchorRect, selfRect, distanceFromAnchor, edgePadding }) => {
+  getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
     const { arrowLeft, selfLeft } = getLeftPositionSetForVerticalPlacement({
       anchorRect,
+      anchorOffset,
       selfRect,
       edgePadding,
     });
 
     return {
       position: {
-        top: anchorRect.top + anchorRect.height + distanceFromAnchor,
+        top: anchorOffset.top + anchorRect.height + distanceFromAnchor,
         left: selfLeft,
       },
       arrowPosition: {
