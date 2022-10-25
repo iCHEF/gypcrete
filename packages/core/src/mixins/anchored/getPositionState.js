@@ -5,8 +5,8 @@ import PLACEMENT from './constants/placement';
 
 export { PLACEMENT };
 const { TOP, BOTTOM, LEFT, RIGHT } = PLACEMENT;
-const verticalPlacements = [TOP, BOTTOM];
-const horizontalPlacements = [LEFT, RIGHT];
+export const verticalPlacements = [TOP, BOTTOM];
+export const horizontalPlacements = [LEFT, RIGHT];
 
 /**
  * @typedef {typeof TOP| typeof BOTTOM} Placement
