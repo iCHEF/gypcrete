@@ -216,14 +216,7 @@ const getPositionState = (defaultPlacement, edgePadding) => (
 
   /** @type {DocumentOffset} */
   const anchorOffset = documentOffset(anchorNode);
-  const anchorBoundingClientRect = anchorNode.getBoundingClientRect();
-
-  const anchorRect = {
-    top: anchorOffset.top,
-    left: anchorOffset.left,
-    width: anchorBoundingClientRect.width,
-    height: anchorBoundingClientRect.height,
-  };
+  const anchorRect = anchorNode.getBoundingClientRect();
   const selfRect = selfNode.getBoundingClientRect();
 
   // -------------------------------------
@@ -256,6 +249,7 @@ const getPositionState = (defaultPlacement, edgePadding) => (
 
   const { arrowPosition, position } = placementStrategies[placement].getPosition({
     anchorRect,
+    anchorOffset,
     selfRect,
     distanceFromAnchor,
     edgePadding,
