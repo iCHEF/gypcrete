@@ -23,7 +23,7 @@ import PLACEMENT from './constants/placement';
  * @param {number} selfWidth
  * @param {number} edgePadding
  */
- export function getLeftPositionSetForVerticalPlacement(
+export function getLeftPositionSetForVerticalPlacement(
   anchorRectLeft,
   anchorOffsetLeft,
   anchorWidth,
@@ -77,6 +77,78 @@ import PLACEMENT from './constants/placement';
     arrowLeft,
   };
 }
+
+/**
+ * Determine vertical positions of *wrapped component* and its
+ * inner *arrow element*.
+ *
+ * The *arrow element* is expected to point to the center of *anchor element*.
+ * It should also vertically stay inside the “safe area”, which is the height
+ * of *wrapped component* deducted by `edgePadding` from both edges.
+ *
+ * Also see the diagram of `getLeftPositionSetForVerticalPlacement` and turn it 90 degrees.
+ *
+ * @param {number} anchorRectTop
+ * @param {number} anchorOffsetTop
+ * @param {number} anchorHeight
+ * @param {number} selfHeight
+ * @param {number} edgePadding
+ */
+export function getTopPositionSetForHorizontalPlacement(
+  anchorRectTop,
+  anchorOffsetTop,
+  anchorHeight,
+  selfHeight,
+  edgePadding,
+) {
+  const anchorHalfHeight = anchorHeight / 2;
+  const selfHalfHeight = selfHeight / 2;
+
+  const anchorCenterCoordYOnViewPort = anchorRectTop + anchorHalfHeight;
+
+  const hasSpaceOnTopOfAnchorCenter = anchorCenterCoordYOnViewPort >= selfHalfHeight;
+  const hasSpaceOnBottomOfAnchorCenter = (
+    (window.innerHeight - anchorCenterCoordYOnViewPort) >= selfHalfHeight
+  );
+
+  let selfTop = 0;
+  let arrowTop = 0;
+
+  switch (true) {
+    // Center-aligned
+    case (hasSpaceOnTopOfAnchorCenter && hasSpaceOnBottomOfAnchorCenter):
+      selfTop = (anchorOffsetTop + anchorHalfHeight) - selfHalfHeight;
+      arrowTop = selfHalfHeight;
+      break;
+
+    // Bottom-align to the anchor
+    case (hasSpaceOnTopOfAnchorCenter && !hasSpaceOnBottomOfAnchorCenter):
+      selfTop = (anchorOffsetTop + anchorHeight) - selfHeight;
+      arrowTop = selfHeight - anchorHalfHeight;
+      break;
+
+    // Top-align to the anchor
+    default:
+      selfTop = anchorOffsetTop;
+      arrowTop = anchorHalfHeight;
+      break;
+  }
+
+  // Calibrate to keep arrow stay in *wrapped component*
+  const arrowTopMin = edgePadding;
+  const arrowTopMax = selfHeight - edgePadding;
+
+  arrowTop = Math.max(
+    arrowTopMin,
+    Math.min(arrowTop, arrowTopMax)
+  );
+
+  return {
+    selfTop,
+    arrowTop,
+  };
+}
+
 
 export const topPlacementStrategy = {
   canPlace: ({
@@ -149,9 +221,47 @@ export const bottomPlacementStrategy = {
   },
 };
 
+const rightPlacementStrategy = {
+  canPlace: ({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  }) => ({
+    canPlace: (
+      (
+        anchorRect.left
+        + anchorRect.width
+        + selfRect.width
+        + distanceFromAnchor
+      ) <= window.innerWidth
+    ),
+    remainingSpace: window.innerWidth - anchorRect.left - anchorRect.width,
+  }),
+  getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
+    const { arrowTop, selfTop } = getTopPositionSetForHorizontalPlacement(
+      anchorRect.top,
+      anchorOffset.top,
+      anchorRect.height,
+      selfRect.height,
+      edgePadding,
+    );
+    return {
+      position: {
+        top: selfTop,
+        left: anchorOffset.left + anchorRect.width + distanceFromAnchor,
+      },
+      arrowPosition: {
+        top: arrowTop,
+        left: -distanceFromAnchor,
+      },
+    };
+  },
+};
+
 const placementStrategies = {
   [PLACEMENT.TOP]: topPlacementStrategy,
   [PLACEMENT.BOTTOM]: bottomPlacementStrategy,
+  [PLACEMENT.RIGHT]: rightPlacementStrategy,
 };
 
 export default placementStrategies;
