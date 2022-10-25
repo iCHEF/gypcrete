@@ -175,7 +175,6 @@ export const topPlacementStrategy = {
         left: selfLeft,
       },
       arrowPosition: {
-        top: selfRect.height,
         left: arrowLeft,
       },
     };
@@ -214,7 +213,6 @@ export const bottomPlacementStrategy = {
         left: selfLeft,
       },
       arrowPosition: {
-        top: 0,
         left: arrowLeft,
       },
     };
@@ -252,7 +250,6 @@ const rightPlacementStrategy = {
       },
       arrowPosition: {
         top: arrowTop,
-        left: -distanceFromAnchor,
       },
     };
   },
@@ -287,7 +284,6 @@ const leftPlacementStrategy = {
       },
       arrowPosition: {
         top: arrowTop,
-        left: selfRect.width,
       },
     };
   },
