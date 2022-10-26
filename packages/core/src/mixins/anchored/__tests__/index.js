@@ -92,3 +92,21 @@ it('passed anchor and self nodes to getter function for position config', () => 
     0
   );
 });
+
+it('can pass defaultPlacement through anchored component to getter function for position config', () => {
+  const anchorRef = React.createRef();
+  mount(<><div ref={anchorRef} /></>);
+
+  const wrapper = mount(
+    <AnchoredBox
+      defaultPlacement={ANCHORED_PLACEMENT.BOTTOM}
+      anchor={anchorRef.current}
+    />
+  );
+  expect(mockedGetterFunc).toHaveBeenCalledWith(
+    ANCHORED_PLACEMENT.BOTTOM,
+    anchorRef.current,
+    wrapper.state().selfNode,
+    0
+  );
+});
