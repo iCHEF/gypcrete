@@ -1,3 +1,12 @@
+# [5.1.0](https://github.com/iCHEF/gypcrete/compare/v5.0.1...v5.1.0) (2022-10-21)
+
+
+### Features
+
+* add test case ([2c3e460](https://github.com/iCHEF/gypcrete/commit/2c3e4605c00599fe1d730e81c08f9d4ab0ba5ee3))
+
+
+
 ## [5.0.1](https://github.com/iCHEF/gypcrete/compare/v5.0.0...v5.0.1) (2022-05-26)
 
 
