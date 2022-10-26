@@ -389,3 +389,46 @@ describe('left placement strategy', () => {
     );
   });
 });
+
+describe('right placement strategy', () => {
+  const rightPlacementStrategy = placementStrategies[PLACEMENT.RIGHT];
+  describe('getPosition', () => {
+    it.each`
+      resultLeft | anchorLeft | anchorWidth  | selfWidth  | distanceFromAnchor
+      ${150}     | ${120}     | ${30}        | ${200}     | ${0}
+      ${160}     | ${120}     | ${30}        | ${200}     | ${10}
+    `(
+      'left value should be $resultLeft when placed on LEFT of anchor (y=$anchorLeft, h=$anchorWidth)',
+      ({
+        resultLeft,
+        anchorLeft,
+        anchorWidth,
+        selfWidth,
+        distanceFromAnchor,
+      }) => {
+        const anchorRect = {
+          left: anchorLeft,
+          top: 0,
+          width: anchorWidth,
+          height: 100,
+        };
+        const anchorOffset = {
+          top: 0,
+          left: anchorLeft,
+        };
+        const selfRect = {
+          width: 100,
+          height: selfWidth,
+        };
+        const { position } = rightPlacementStrategy.getPosition({
+          anchorRect,
+          anchorOffset,
+          selfRect,
+          distanceFromAnchor,
+          edgePadding: 10,
+        });
+        expect(position.left).toEqual(resultLeft);
+      }
+    );
+  });
+});
