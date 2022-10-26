@@ -27,19 +27,17 @@ jest.mock('document-offset', () => (
  */
 
 describe('getPlacement()', () => {
-  const { TOP, BOTTOM } = PLACEMENT;
-  const runTest = it.each`
-        expected  | defaultPlacement | situation                                             | anchorTop | anchorHeight | selfHeight | remainingSpace | distanceFromAnchor
-        ${TOP}    | ${TOP}           | ${'enough'}                                           | ${120}    | ${30}        | ${100}     | ${120}         | ${0}
-        ${BOTTOM} | ${TOP}           | ${'not enough for top'}                               | ${90}     | ${30}        | ${100}     | ${648}         | ${0}
-        ${BOTTOM} | ${TOP}           | ${'not enough for top consider distance from anchor'} | ${100}    | ${30}        | ${100}     | ${638}         | ${10}
-        ${TOP}    | ${BOTTOM}        | ${'not enough for bottom'}                            | ${600}    | ${100}       | ${100}     | ${600}         | ${0}
-        ${BOTTOM} | ${BOTTOM}        | ${'enough'}                                           | ${300}    | ${100}       | ${100}     | ${368}         | ${0}
-        ${BOTTOM} | ${BOTTOM}        | ${'not enough for both, but bottom is larger'}        | ${300}    | ${100}       | ${400}     | ${368}         | ${0}
-        ${TOP}    | ${BOTTOM}        | ${'not enough for both, but top is larger'}           | ${450}    | ${100}       | ${500}     | ${450}         | ${0}
-    `;
-
-  runTest(
+  const { TOP, BOTTOM, LEFT, RIGHT } = PLACEMENT;
+  it.each`
+    expected  | defaultPlacement | situation                                             | anchorTop | anchorHeight | selfHeight | remainingSpace | distanceFromAnchor
+    ${TOP}    | ${TOP}           | ${'enough'}                                           | ${120}    | ${30}        | ${100}     | ${120}         | ${0}
+    ${BOTTOM} | ${TOP}           | ${'not enough for top'}                               | ${90}     | ${30}        | ${100}     | ${648}         | ${0}
+    ${BOTTOM} | ${TOP}           | ${'not enough for top consider distance from anchor'} | ${100}    | ${30}        | ${100}     | ${638}         | ${10}
+    ${TOP}    | ${BOTTOM}        | ${'not enough for bottom'}                            | ${600}    | ${100}       | ${100}     | ${600}         | ${0}
+    ${BOTTOM} | ${BOTTOM}        | ${'enough'}                                           | ${300}    | ${100}       | ${100}     | ${368}         | ${0}
+    ${BOTTOM} | ${BOTTOM}        | ${'not enough for both, but bottom is larger'}        | ${300}    | ${100}       | ${400}     | ${368}         | ${0}
+    ${TOP}    | ${BOTTOM}        | ${'not enough for both, but top is larger'}           | ${450}    | ${100}       | ${500}     | ${450}         | ${0}
+  `(
     'returns $expected when default is $defaultVal, and the space is $situation',
     ({
       expected,
@@ -52,6 +50,39 @@ describe('getPlacement()', () => {
     }) => {
       const anchorRect = { top: anchorTop, height: anchorHeight };
       const selfRect = { height: selfHeight };
+      const result = getPlacementAndRemainingSpace({
+        defaultPlacement,
+        anchorRect,
+        selfRect,
+        distanceFromAnchor,
+      });
+      expect(result.placement).toBe(expected);
+      expect(result.remainingSpace).toBe(remainingSpace);
+    }
+  );
+
+  it.each`
+    expected | defaultPlacement | situation                                              | anchorLeft | anchorWidth | selfWidth | remainingSpace | distanceFromAnchor
+    ${LEFT}  | ${LEFT}          | ${'enough'}                                            | ${120}    | ${30}        | ${100}     | ${120}         | ${0}
+    ${RIGHT} | ${LEFT}          | ${'not enough for left'}                               | ${90}     | ${30}        | ${100}     | ${904}         | ${0}
+    ${RIGHT} | ${LEFT}          | ${'not enough for left consider distance from anchor'} | ${100}    | ${30}        | ${100}     | ${894}         | ${10}
+    ${LEFT}  | ${RIGHT}         | ${'not enough for right'}                              | ${800}    | ${100}       | ${400}     | ${800}         | ${0}
+    ${RIGHT} | ${RIGHT}         | ${'enough'}                                            | ${800}    | ${100}       | ${100}     | ${124}         | ${0}
+    ${RIGHT} | ${RIGHT}         | ${'not enough for both, but right is larger'}          | ${300}    | ${100}       | ${400}     | ${624}         | ${0}
+    ${LEFT}  | ${RIGHT}         | ${'not enough for both, but left is larger'}           | ${600}    | ${100}       | ${700}     | ${600}         | ${0}
+  `(
+    'returns $expected when default is $defaultVal, and the space is $situation',
+    ({
+      expected,
+      defaultPlacement,
+      anchorLeft,
+      anchorWidth,
+      selfWidth,
+      remainingSpace,
+      distanceFromAnchor,
+    }) => {
+      const anchorRect = { left: anchorLeft, width: anchorWidth };
+      const selfRect = { width: selfWidth };
       const result = getPlacementAndRemainingSpace({
         defaultPlacement,
         anchorRect,
