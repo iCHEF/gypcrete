@@ -50,4 +50,35 @@ describe('Pure <Popover>', () => {
         left: 100,
       });
   });
+
+  describe('container max height', () => {
+    it('compute maxHeight on vertical placement', () => {
+      const wrapper = shallow(
+        <PurePopover
+          placement="top"
+          remainingSpace={50}
+        />
+      );
+      const containerClassName = BEM.container.toString();
+
+      expect(wrapper.find(`.${containerClassName}`).prop('style'))
+        .toMatchObject({
+          maxHeight: 26,
+        });
+    });
+    it('wont compute maxHeight on horizontal placement', () => {
+      const wrapper = shallow(
+        <PurePopover
+          placement="left"
+          remainingSpace={50}
+        />
+      );
+      const containerClassName = BEM.container.toString();
+
+      expect(wrapper.find(`.${containerClassName}`).prop('style'))
+        .toMatchObject({
+          maxHeight: undefined,
+        });
+    });
+  });
 });

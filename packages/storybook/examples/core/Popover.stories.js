@@ -53,7 +53,7 @@ export function BasicExample() {
   );
 }
 
-export function AnchoredPopover() {
+export function AnchoredPopover(popoverProps) {
   function ButtonRow(props) {
     return (
       <ListRow>
@@ -110,6 +110,7 @@ export function AnchoredPopover() {
           anchor={btn}
           placement="top"
           onClose={handlePopoverClose}
+          {...popoverProps}
         >
           <DemoList />
         </Popover>
@@ -125,3 +126,7 @@ AnchoredPopover.story = {
     },
   },
 };
+
+export function RightPlacementAnchoredPopover() {
+  return <AnchoredPopover defaultPlacement="right" />;
+}

@@ -15,6 +15,7 @@ import closable from './mixins/closable';
 import renderToLayer from './mixins/renderToLayer';
 
 import './styles/Popover.scss';
+import { verticalPlacements } from './mixins/anchored/getPositionState';
 
 export const COMPONENT_NAME = prefixClass('popover');
 const ROOT_BEM = icBEM(COMPONENT_NAME);
@@ -48,7 +49,11 @@ function Popover({
    * The `maxHeight` is for `BEM.container`, which doesn't include root class padding.
    * So we need to minus POPOVER_PADDING here.
    */
-  const maxHeight = remainingSpace ? remainingSpace - POPOVER_PADDING : undefined;
+  const maxHeight = (
+    (remainingSpace && verticalPlacements.includes(placement))
+      ? remainingSpace - POPOVER_PADDING
+      : undefined
+  );
 
   const handleWrapperClick = (event) => {
     onInsideClick(event);
