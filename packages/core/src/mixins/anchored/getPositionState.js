@@ -1,9 +1,10 @@
 // @ts-check
 import documentOffset from 'document-offset';
+import placementStrategies from './placementStrategies';
+import PLACEMENT from './constants/placement';
 
-const TOP = 'top';
-const BOTTOM = 'bottom';
-export const PLACEMENT = { TOP, BOTTOM };
+export { PLACEMENT };
+const { TOP, BOTTOM } = PLACEMENT;
 
 /**
  * @typedef {typeof TOP| typeof BOTTOM} Placement
@@ -27,26 +28,31 @@ export const PLACEMENT = { TOP, BOTTOM };
  * Determine whether *wrapped component* should be placed above or below
  * its *anchor*.
  *
- * @param {Placement} defaultPlacement
- * @param {number} anchorRectTop
- * @param {number} anchorHeight
- * @param {number} selfHeight
- * @param {number} distanceFromAnchor
  * @returns {{ placement: Placement, remainingSpace: number }}
  */
-export function getPlacementAndRemainingSpace(
+export function getPlacementAndRemainingSpace({
   defaultPlacement,
-  anchorRectTop,
-  anchorHeight,
-  selfHeight,
+  anchorRect,
+  selfRect,
   distanceFromAnchor,
-) {
-  const hasSpaceToPlaceSelfAbove = anchorRectTop >= selfHeight + distanceFromAnchor;
-  const hasSpaceToPlaceSelfBelow = (
-    (anchorRectTop + anchorHeight + selfHeight + distanceFromAnchor) <= window.innerHeight
-  );
-  const topSpace = anchorRectTop;
-  const bottomSpace = window.innerHeight - anchorRectTop - anchorHeight;
+}) {
+  const {
+    canPlace: hasSpaceToPlaceSelfAbove,
+    remainingSpace: topSpace,
+  } = placementStrategies[TOP].canPlace({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  });
+  const {
+    canPlace: hasSpaceToPlaceSelfBelow,
+    remainingSpace: bottomSpace,
+  } = placementStrategies[BOTTOM].canPlace({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  });
+
   if (!hasSpaceToPlaceSelfBelow && !hasSpaceToPlaceSelfAbove) {
     return {
       placement: topSpace > bottomSpace ? TOP : BOTTOM,
@@ -208,24 +214,23 @@ const getPositionState = (defaultPlacement, edgePadding) => (
   //   Measuring anchor and self
   // -------------------------------------
 
-  const anchorRect = anchorNode.getBoundingClientRect();
-  const selfRect = selfNode.getBoundingClientRect();
-
   /** @type {DocumentOffset} */
   const anchorOffset = documentOffset(anchorNode);
+  const anchorRect = anchorNode.getBoundingClientRect();
+  const selfRect = selfNode.getBoundingClientRect();
 
   // -------------------------------------
   //   Determine position
   // -------------------------------------
 
-  const { placement, remainingSpace } = getPlacementAndRemainingSpace(
+  const { placement, remainingSpace } = getPlacementAndRemainingSpace({
     defaultPlacement,
-    anchorRect.top,
-    anchorRect.height,
-    selfRect.height,
+    anchorRect,
+    selfRect,
     distanceFromAnchor,
-  );
+  });
 
+  /*
   const selfTop = getTopPosition(
     placement,
     anchorOffset.top,
@@ -240,17 +245,22 @@ const getPositionState = (defaultPlacement, edgePadding) => (
     anchorRect.width,
     selfRect.width,
     edgePadding,
-  );
+  ); */
+
+  const { arrowPosition, position } = placementStrategies[placement].getPosition({
+    anchorRect,
+    anchorOffset,
+    selfRect,
+    distanceFromAnchor,
+    edgePadding,
+  });
 
   return {
     placement,
     remainingSpace,
-    position: {
-      top: selfTop,
-      left: selfLeft,
-    },
+    position,
     arrowPosition: {
-      left: arrowLeft,
+      left: arrowPosition.left,
     },
   };
 };

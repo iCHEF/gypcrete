@@ -31,34 +31,35 @@ jest.mock('document-offset', () => (
 describe('getPlacement()', () => {
   const { TOP, BOTTOM } = PLACEMENT;
   const runTest = it.each`
-        expected  | defaultVal | situation                                             | anchorTop | anchorHeight | selfHeight | remainingSpace | distanceFromAnchor
-        ${TOP}    | ${TOP}     | ${'enough'}                                           | ${120}    | ${30}        | ${100}     | ${120}         | ${0}
-        ${BOTTOM} | ${TOP}     | ${'not enough for top'}                               | ${90}     | ${30}        | ${100}     | ${648}         | ${0}
-        ${BOTTOM} | ${TOP}     | ${'not enough for top consider distance from anchor'} | ${100}    | ${30}        | ${100}     | ${638}         | ${10}
-        ${TOP}    | ${BOTTOM}  | ${'not enough for bottom'}                            | ${600}    | ${100}       | ${100}     | ${600}         | ${0}
-        ${BOTTOM} | ${BOTTOM}  | ${'enough'}                                           | ${300}    | ${100}       | ${100}     | ${368}         | ${0}
-        ${BOTTOM} | ${BOTTOM}  | ${'not enough for both, but bottom is larger'}        | ${300}    | ${100}       | ${400}     | ${368}         | ${0}
-        ${TOP}    | ${BOTTOM}  | ${'not enough for both, but top is larger'}           | ${450}    | ${100}       | ${500}     | ${450}         | ${0}
+        expected  | defaultPlacement | situation                                             | anchorTop | anchorHeight | selfHeight | remainingSpace | distanceFromAnchor
+        ${TOP}    | ${TOP}           | ${'enough'}                                           | ${120}    | ${30}        | ${100}     | ${120}         | ${0}
+        ${BOTTOM} | ${TOP}           | ${'not enough for top'}                               | ${90}     | ${30}        | ${100}     | ${648}         | ${0}
+        ${BOTTOM} | ${TOP}           | ${'not enough for top consider distance from anchor'} | ${100}    | ${30}        | ${100}     | ${638}         | ${10}
+        ${TOP}    | ${BOTTOM}        | ${'not enough for bottom'}                            | ${600}    | ${100}       | ${100}     | ${600}         | ${0}
+        ${BOTTOM} | ${BOTTOM}        | ${'enough'}                                           | ${300}    | ${100}       | ${100}     | ${368}         | ${0}
+        ${BOTTOM} | ${BOTTOM}        | ${'not enough for both, but bottom is larger'}        | ${300}    | ${100}       | ${400}     | ${368}         | ${0}
+        ${TOP}    | ${BOTTOM}        | ${'not enough for both, but top is larger'}           | ${450}    | ${100}       | ${500}     | ${450}         | ${0}
     `;
 
   runTest(
     'returns $expected when default is $defaultVal, and the space is $situation',
     ({
       expected,
-      defaultVal,
+      defaultPlacement,
       anchorTop,
       anchorHeight,
       selfHeight,
       remainingSpace,
       distanceFromAnchor,
     }) => {
-      const result = getPlacementAndRemainingSpace(
-        defaultVal,
-        anchorTop,
-        anchorHeight,
-        selfHeight,
-        distanceFromAnchor
-      );
+      const anchorRect = { top: anchorTop, height: anchorHeight };
+      const selfRect = { height: selfHeight };
+      const result = getPlacementAndRemainingSpace({
+        defaultPlacement,
+        anchorRect,
+        selfRect,
+        distanceFromAnchor,
+      });
       expect(result.placement).toBe(expected);
       expect(result.remainingSpace).toBe(remainingSpace);
     }
@@ -114,6 +115,27 @@ describe('getLeftPositionSet()', () => {
     );
     expect(result).toEqual({
       selfLeft: 115,
+      arrowLeft: 100,
+    });
+  });
+
+  /**
+     * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
+     * ╎       □                ╎
+     * ╎    ┌╌╌^╌╌┐             ╎
+     * ╎    └╌╌╌╌╌┘             ╎
+     * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
+     */
+  it('returns coord sets for center-align sceanario -- when document left is differed from screen', () => {
+    const result = getLeftPositionSet(
+      200, // anchor screen left
+      300, // anchor document left
+      30, // anchor width
+      200, // self width
+      8, // edge padding
+    );
+    expect(result).toEqual({
+      selfLeft: 215,
       arrowLeft: 100,
     });
   });
