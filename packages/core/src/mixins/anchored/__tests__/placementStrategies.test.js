@@ -1,9 +1,9 @@
 import placementStrategies, {
-  getLeftPositionSetForVerticalPlacement, getTopPositionSetForHorizontalPlacement,
+  getPositionSetForArrowSidePlacementImpl,
 } from '../placementStrategies';
 import PLACEMENT from '../constants/placement';
 
-describe('getLeftPositionSetForVerticalPlacement()', () => {
+describe('getPositionSetForArrowSidePlacementImpl()', () => {
   /**
    * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
    * ╎       □                ╎
@@ -12,7 +12,7 @@ describe('getLeftPositionSetForVerticalPlacement()', () => {
    * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
    */
   it('returns coord sets for center-align sceanario', () => {
-    const result = getLeftPositionSetForVerticalPlacement(
+    const result = getPositionSetForArrowSidePlacementImpl(
       200, // anchor screen left
       200, // anchor document left
       30, // anchor width
@@ -33,7 +33,7 @@ describe('getLeftPositionSetForVerticalPlacement()', () => {
    * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
    */
   it('returns coord sets for center-align sceanario -- when document left is differed from screen', () => {
-    const result = getLeftPositionSetForVerticalPlacement(
+    const result = getPositionSetForArrowSidePlacementImpl(
       200, // anchor screen left
       300, // anchor document left
       30, // anchor width
@@ -54,7 +54,7 @@ describe('getLeftPositionSetForVerticalPlacement()', () => {
    * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
    */
   it('returns coord sets for left-align sceanario', () => {
-    const result = getLeftPositionSetForVerticalPlacement(
+    const result = getPositionSetForArrowSidePlacementImpl(
       10, // anchor screen left
       10, // anchor document left
       30, // anchor width
@@ -75,7 +75,7 @@ describe('getLeftPositionSetForVerticalPlacement()', () => {
    * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
    */
   it('returns coord sets for right-align sceanario', () => {
-    const result = getLeftPositionSetForVerticalPlacement(
+    const result = getPositionSetForArrowSidePlacementImpl(
       980, // anchor screen left
       980, // anchor document left
       30, // anchor width
@@ -96,7 +96,7 @@ describe('getLeftPositionSetForVerticalPlacement()', () => {
    * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
    */
   it('arrow should stay in safe area for left-align, tiny anchor sceanario', () => {
-    const result = getLeftPositionSetForVerticalPlacement(
+    const result = getPositionSetForArrowSidePlacementImpl(
       10, // anchor screen left
       10, // anchor document left
       10, // anchor width
@@ -117,7 +117,7 @@ describe('getLeftPositionSetForVerticalPlacement()', () => {
    * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
    */
   it('arrow should stay in safe area for right-align, tiny anchor sceanario', () => {
-    const result = getLeftPositionSetForVerticalPlacement(
+    const result = getPositionSetForArrowSidePlacementImpl(
       1010, // anchor screen left
       1010, // anchor document left
       10, // anchor width
@@ -127,136 +127,6 @@ describe('getLeftPositionSetForVerticalPlacement()', () => {
     expect(result).toEqual({
       selfLeft: 820,
       arrowLeft: 192, // minimun padding from right edge
-    });
-  });
-});
-
-describe('getTopPositionSetForHorizontalPlacement()', () => {
-  /**
-   * 和 getLeftPositionSetForVerticalPlacement 的 test case 類似，
-   * 故不另繪示意圖，以下示意圖請右轉九十度觀看。
-   * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
-   * ╎       □                ╎
-   * ╎    ┌╌╌^╌╌┐             ╎
-   * ╎    └╌╌╌╌╌┘             ╎
-   * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
-   */
-  it('returns coord sets for center-align sceanario', () => {
-    const result = getTopPositionSetForHorizontalPlacement(
-      200, // anchor screen top
-      200, // anchor document top
-      30, // anchor height
-      200, // self height
-      8, // edge padding
-    );
-    expect(result).toEqual({
-      selfTop: 115,
-      arrowTop: 100,
-    });
-  });
-
-  /**
-   * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
-   * ╎       □                ╎
-   * ╎    ┌╌╌^╌╌┐             ╎
-   * ╎    └╌╌╌╌╌┘             ╎
-   * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
-   */
-  it('returns coord sets for center-align sceanario -- when document top is differed from screen', () => {
-    const result = getTopPositionSetForHorizontalPlacement(
-      200, // anchor screen top
-      300, // anchor document top
-      30, // anchor height
-      200, // self height
-      8, // edge padding
-    );
-    expect(result).toEqual({
-      selfTop: 215,
-      arrowTop: 100,
-    });
-  });
-
-  /**
-   * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
-   * ╎ □                      ╎
-   * ╎┌^╌╌╌╌┐                 ╎
-   * ╎└╌╌╌╌╌┘                 ╎
-   * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
-   */
-  it('returns coord sets for top-align sceanario', () => {
-    const result = getTopPositionSetForHorizontalPlacement(
-      10, // anchor screen top
-      10, // anchor document top
-      30, // anchor height
-      200, // self height
-      8, // edge padding
-    );
-    expect(result).toEqual({
-      selfTop: 10,
-      arrowTop: 15,
-    });
-  });
-
-  /**
-   * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
-   * ╎                      □ ╎
-   * ╎                 ┌╌╌╌╌^┐╎
-   * ╎                 └╌╌╌╌╌┘╎
-   * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
-   */
-  it('returns coord sets for bottom-align sceanario', () => {
-    const result = getTopPositionSetForHorizontalPlacement(
-      980, // anchor screen top
-      980, // anchor document top
-      30, // anchor height
-      200, // self height
-      8, // edge padding
-    );
-    expect(result).toEqual({
-      selfTop: 810,
-      arrowTop: 185,
-    });
-  });
-
-  /**
-   * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
-   * ╎|                       ╎
-   * ╎┌^╌╌╌╌┐                 ╎
-   * ╎└╌╌╌╌╌┘                 ╎
-   * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
-   */
-  it('arrow should stay in safe area for top-align, tiny anchor sceanario', () => {
-    const result = getTopPositionSetForHorizontalPlacement(
-      10, // anchor screen top
-      10, // anchor document top
-      10, // anchor height
-      200, // self height
-      8, // edge padding
-    );
-    expect(result).toEqual({
-      selfTop: 10,
-      arrowTop: 8, // minimun padding from top edge
-    });
-  });
-
-  /**
-   * ┌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┐
-   * ╎                       |╎
-   * ╎                 ┌╌╌╌╌^┐╎
-   * ╎                 └╌╌╌╌╌┘╎
-   * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
-   */
-  it('arrow should stay in safe area for bottom-align, tiny anchor sceanario', () => {
-    const result = getTopPositionSetForHorizontalPlacement(
-      1010, // anchor screen top
-      1010, // anchor document top
-      10, // anchor height
-      200, // self height
-      8, // edge padding
-    );
-    expect(result).toEqual({
-      selfTop: 820,
-      arrowTop: 192, // minimun padding from bottom edge
     });
   });
 });

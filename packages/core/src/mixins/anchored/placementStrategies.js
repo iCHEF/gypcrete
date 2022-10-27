@@ -1,12 +1,14 @@
 import PLACEMENT from './constants/placement';
 
 /**
- * Determine horizontal positions of *wrapped component* and its
+ * Determine positions of *wrapped component* and its
  * inner *arrow element*.
  *
  * The *arrow element* is expected to point to the center of *anchor element*.
  * It should also horizontally stay inside the “safe area”, which is the width
  * of *wrapped component* deducted by `edgePadding` from both edges.
+ *
+ * Note that the same algorithm can be used for vertical / horizontal placement.
  *
  ```
         arrow        edge padding
@@ -23,7 +25,7 @@ import PLACEMENT from './constants/placement';
  * @param {number} selfWidth
  * @param {number} edgePadding
  */
-export function getLeftPositionSetForVerticalPlacement(
+export function getPositionSetForArrowSidePlacementImpl(
   anchorRectLeft,
   anchorOffsetLeft,
   anchorWidth,
@@ -79,73 +81,38 @@ export function getLeftPositionSetForVerticalPlacement(
 }
 
 /**
- * Determine vertical positions of *wrapped component* and its
+ * Determine positions of *wrapped component* and its
  * inner *arrow element*.
  *
- * The *arrow element* is expected to point to the center of *anchor element*.
- * It should also vertically stay inside the “safe area”, which is the height
- * of *wrapped component* deducted by `edgePadding` from both edges.
- *
- * Also see the diagram of `getLeftPositionSetForVerticalPlacement` and turn it 90 degrees.
- *
- * @param {number} anchorRectTop
- * @param {number} anchorOffsetTop
- * @param {number} anchorHeight
- * @param {number} selfHeight
- * @param {number} edgePadding
+ * See detail algorithm in `getPositionSetForArrowSidePlacementImpl`.
  */
-export function getTopPositionSetForHorizontalPlacement(
-  anchorRectTop,
-  anchorOffsetTop,
-  anchorHeight,
-  selfHeight,
+function getPositionSetForArrowSidePlacement({
+  placement,
+  anchorRect,
+  anchorOffset,
+  selfRect,
   edgePadding,
-) {
-  const anchorHalfHeight = anchorHeight / 2;
-  const selfHalfHeight = selfHeight / 2;
-
-  const anchorCenterCoordYOnViewPort = anchorRectTop + anchorHalfHeight;
-
-  const hasSpaceOnTopOfAnchorCenter = anchorCenterCoordYOnViewPort >= selfHalfHeight;
-  const hasSpaceOnBottomOfAnchorCenter = (
-    (window.innerHeight - anchorCenterCoordYOnViewPort) >= selfHalfHeight
-  );
-
-  let selfTop = 0;
-  let arrowTop = 0;
-
-  switch (true) {
-    // Center-aligned
-    case (hasSpaceOnTopOfAnchorCenter && hasSpaceOnBottomOfAnchorCenter):
-      selfTop = (anchorOffsetTop + anchorHalfHeight) - selfHalfHeight;
-      arrowTop = selfHalfHeight;
-      break;
-
-    // Bottom-align to the anchor
-    case (hasSpaceOnTopOfAnchorCenter && !hasSpaceOnBottomOfAnchorCenter):
-      selfTop = (anchorOffsetTop + anchorHeight) - selfHeight;
-      arrowTop = selfHeight - anchorHalfHeight;
-      break;
-
-    // Top-align to the anchor
-    default:
-      selfTop = anchorOffsetTop;
-      arrowTop = anchorHalfHeight;
-      break;
+}) {
+  if ([PLACEMENT.TOP, PLACEMENT.BOTTOM].includes(placement)) {
+    return getPositionSetForArrowSidePlacementImpl(
+      anchorRect.left,
+      anchorOffset.left,
+      anchorRect.width,
+      selfRect.width,
+      edgePadding,
+    );
   }
-
-  // Calibrate to keep arrow stay in *wrapped component*
-  const arrowTopMin = edgePadding;
-  const arrowTopMax = selfHeight - edgePadding;
-
-  arrowTop = Math.max(
-    arrowTopMin,
-    Math.min(arrowTop, arrowTopMax)
+  const { selfLeft, arrowLeft } = getPositionSetForArrowSidePlacementImpl(
+    anchorRect.top,
+    anchorOffset.top,
+    anchorRect.height,
+    selfRect.height,
+    edgePadding,
   );
 
   return {
-    selfTop,
-    arrowTop,
+    selfTop: selfLeft,
+    arrowTop: arrowLeft,
   };
 }
 
@@ -161,13 +128,13 @@ export const topPlacementStrategy = {
   }),
 
   getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
-    const { arrowLeft, selfLeft } = getLeftPositionSetForVerticalPlacement(
-      anchorRect.left,
-      anchorOffset.left,
-      anchorRect.width,
-      selfRect.width,
+    const { arrowLeft, selfLeft } = getPositionSetForArrowSidePlacement({
+      placement: PLACEMENT.TOP,
+      anchorOffset,
+      anchorRect,
+      selfRect,
       edgePadding,
-    );
+    });
 
     return {
       position: {
@@ -199,13 +166,13 @@ export const bottomPlacementStrategy = {
   }),
 
   getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
-    const { arrowLeft, selfLeft } = getLeftPositionSetForVerticalPlacement(
-      anchorRect.left,
-      anchorOffset.left,
-      anchorRect.width,
-      selfRect.width,
+    const { arrowLeft, selfLeft } = getPositionSetForArrowSidePlacement({
+      placement: PLACEMENT.BOTTOM,
+      anchorOffset,
+      anchorRect,
+      selfRect,
       edgePadding,
-    );
+    });
 
     return {
       position: {
@@ -236,13 +203,13 @@ const rightPlacementStrategy = {
     remainingSpace: window.innerWidth - anchorRect.left - anchorRect.width,
   }),
   getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
-    const { arrowTop, selfTop } = getTopPositionSetForHorizontalPlacement(
-      anchorRect.top,
-      anchorOffset.top,
-      anchorRect.height,
-      selfRect.height,
+    const { arrowTop, selfTop } = getPositionSetForArrowSidePlacement({
+      placement: PLACEMENT.RIGHT,
+      anchorOffset,
+      anchorRect,
+      selfRect,
       edgePadding,
-    );
+    });
     return {
       position: {
         top: selfTop,
@@ -270,13 +237,13 @@ const leftPlacementStrategy = {
     remainingSpace: anchorRect.left,
   }),
   getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
-    const { arrowTop, selfTop } = getTopPositionSetForHorizontalPlacement(
-      anchorRect.top,
-      anchorOffset.top,
-      anchorRect.height,
-      selfRect.height,
+    const { arrowTop, selfTop } = getPositionSetForArrowSidePlacement({
+      placement: PLACEMENT.LEFT,
+      anchorOffset,
+      anchorRect,
+      selfRect,
       edgePadding,
-    );
+    });
     return {
       position: {
         top: selfTop,
