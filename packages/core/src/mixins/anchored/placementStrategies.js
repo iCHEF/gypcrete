@@ -1,12 +1,14 @@
 import PLACEMENT from './constants/placement';
 
 /**
- * Determine horizontal positions of *wrapped component* and its
+ * Determine positions of *wrapped component* and its
  * inner *arrow element*.
  *
  * The *arrow element* is expected to point to the center of *anchor element*.
  * It should also horizontally stay inside the “safe area”, which is the width
  * of *wrapped component* deducted by `edgePadding` from both edges.
+ *
+ * Note that the same algorithm can be used for vertical / horizontal placement.
  *
  ```
         arrow        edge padding
@@ -23,7 +25,7 @@ import PLACEMENT from './constants/placement';
  * @param {number} selfWidth
  * @param {number} edgePadding
  */
- export function getLeftPositionSetForVerticalPlacement(
+export function getPositionSetForArrowSidePlacementImpl(
   anchorRectLeft,
   anchorOffsetLeft,
   anchorWidth,
@@ -78,6 +80,43 @@ import PLACEMENT from './constants/placement';
   };
 }
 
+/**
+ * Determine positions of *wrapped component* and its
+ * inner *arrow element*.
+ *
+ * See detail algorithm in `getPositionSetForArrowSidePlacementImpl`.
+ */
+function getPositionSetForArrowSidePlacement({
+  placement,
+  anchorRect,
+  anchorOffset,
+  selfRect,
+  edgePadding,
+}) {
+  if ([PLACEMENT.TOP, PLACEMENT.BOTTOM].includes(placement)) {
+    return getPositionSetForArrowSidePlacementImpl(
+      anchorRect.left,
+      anchorOffset.left,
+      anchorRect.width,
+      selfRect.width,
+      edgePadding,
+    );
+  }
+  const { selfLeft, arrowLeft } = getPositionSetForArrowSidePlacementImpl(
+    anchorRect.top,
+    anchorOffset.top,
+    anchorRect.height,
+    selfRect.height,
+    edgePadding,
+  );
+
+  return {
+    selfTop: selfLeft,
+    arrowTop: arrowLeft,
+  };
+}
+
+
 export const topPlacementStrategy = {
   canPlace: ({
     anchorRect,
@@ -89,13 +128,13 @@ export const topPlacementStrategy = {
   }),
 
   getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
-    const { arrowLeft, selfLeft } = getLeftPositionSetForVerticalPlacement(
-      anchorRect.left,
-      anchorOffset.left,
-      anchorRect.width,
-      selfRect.width,
+    const { arrowLeft, selfLeft } = getPositionSetForArrowSidePlacement({
+      placement: PLACEMENT.TOP,
+      anchorOffset,
+      anchorRect,
+      selfRect,
       edgePadding,
-    );
+    });
 
     return {
       position: {
@@ -103,7 +142,6 @@ export const topPlacementStrategy = {
         left: selfLeft,
       },
       arrowPosition: {
-        top: selfRect.height,
         left: arrowLeft,
       },
     };
@@ -128,13 +166,13 @@ export const bottomPlacementStrategy = {
   }),
 
   getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
-    const { arrowLeft, selfLeft } = getLeftPositionSetForVerticalPlacement(
-      anchorRect.left,
-      anchorOffset.left,
-      anchorRect.width,
-      selfRect.width,
+    const { arrowLeft, selfLeft } = getPositionSetForArrowSidePlacement({
+      placement: PLACEMENT.BOTTOM,
+      anchorOffset,
+      anchorRect,
+      selfRect,
       edgePadding,
-    );
+    });
 
     return {
       position: {
@@ -142,8 +180,77 @@ export const bottomPlacementStrategy = {
         left: selfLeft,
       },
       arrowPosition: {
-        top: 0,
         left: arrowLeft,
+      },
+    };
+  },
+};
+
+const rightPlacementStrategy = {
+  canPlace: ({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  }) => ({
+    canPlace: (
+      (
+        anchorRect.left
+        + anchorRect.width
+        + selfRect.width
+        + distanceFromAnchor
+      ) <= window.innerWidth
+    ),
+    remainingSpace: window.innerWidth - anchorRect.left - anchorRect.width,
+  }),
+  getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
+    const { arrowTop, selfTop } = getPositionSetForArrowSidePlacement({
+      placement: PLACEMENT.RIGHT,
+      anchorOffset,
+      anchorRect,
+      selfRect,
+      edgePadding,
+    });
+    return {
+      position: {
+        top: selfTop,
+        left: anchorOffset.left + anchorRect.width + distanceFromAnchor,
+      },
+      arrowPosition: {
+        top: arrowTop,
+      },
+    };
+  },
+};
+
+const leftPlacementStrategy = {
+  canPlace: ({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  }) => ({
+    canPlace: (
+      (
+        selfRect.width
+        + distanceFromAnchor
+      ) <= anchorRect.left
+    ),
+    remainingSpace: anchorRect.left,
+  }),
+  getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
+    const { arrowTop, selfTop } = getPositionSetForArrowSidePlacement({
+      placement: PLACEMENT.LEFT,
+      anchorOffset,
+      anchorRect,
+      selfRect,
+      edgePadding,
+    });
+    return {
+      position: {
+        top: selfTop,
+        left: anchorOffset.left - selfRect.width - distanceFromAnchor,
+      },
+      arrowPosition: {
+        top: arrowTop,
       },
     };
   },
@@ -151,7 +258,9 @@ export const bottomPlacementStrategy = {
 
 const placementStrategies = {
   [PLACEMENT.TOP]: topPlacementStrategy,
+  [PLACEMENT.LEFT]: leftPlacementStrategy,
   [PLACEMENT.BOTTOM]: bottomPlacementStrategy,
+  [PLACEMENT.RIGHT]: rightPlacementStrategy,
 };
 
 export default placementStrategies;

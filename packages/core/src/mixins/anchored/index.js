@@ -89,7 +89,7 @@ const anchored = ({
   edgePadding = 16,
 } = {}) => (WrappedComponent) => {
   const componentName = getComponentName(WrappedComponent);
-  const defaultGetPositionState = memoize(getPositionState(defaultPlacement, edgePadding));
+  const defaultGetPositionState = memoize(getPositionState(edgePadding));
 
   class Anchored extends Component {
         static displayName = `anchored(${componentName})`;
@@ -98,12 +98,14 @@ const anchored = ({
           anchor: PropTypes.instanceOf(window.HTMLElement),
           refreshOnWindowResize: PropTypes.bool,
           distanceFromAnchor: PropTypes.number,
+          defaultPlacement: PropTypes.oneOf(Object.values(PLACEMENT)),
         };
 
         static defaultProps = {
           anchor: null,
           refreshOnWindowResize: false,
           distanceFromAnchor: 0,
+          defaultPlacement,
         };
 
         state = {
@@ -135,9 +137,15 @@ const anchored = ({
         getPositions = (anchor, selfNode) => {
           const { refreshOnWindowResize, distanceFromAnchor } = this.props;
           if (!refreshOnWindowResize) {
-            return defaultGetPositionState(anchor, selfNode, distanceFromAnchor);
+            return defaultGetPositionState(
+              this.props.defaultPlacement,
+              anchor,
+              selfNode,
+              distanceFromAnchor
+            );
           }
-          return getPositionState(defaultPlacement, edgePadding)(
+          return getPositionState(edgePadding)(
+            this.props.defaultPlacement,
             anchor,
             selfNode,
             distanceFromAnchor

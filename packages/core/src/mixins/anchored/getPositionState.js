@@ -4,7 +4,9 @@ import placementStrategies from './placementStrategies';
 import PLACEMENT from './constants/placement';
 
 export { PLACEMENT };
-const { TOP, BOTTOM } = PLACEMENT;
+const { TOP, BOTTOM, LEFT, RIGHT } = PLACEMENT;
+const verticalPlacements = [TOP, BOTTOM];
+const horizontalPlacements = [LEFT, RIGHT];
 
 /**
  * @typedef {typeof TOP| typeof BOTTOM} Placement
@@ -36,39 +38,40 @@ export function getPlacementAndRemainingSpace({
   selfRect,
   distanceFromAnchor,
 }) {
-  const {
-    canPlace: hasSpaceToPlaceSelfAbove,
-    remainingSpace: topSpace,
-  } = placementStrategies[TOP].canPlace({
+  const possiblePlacements = (
+    verticalPlacements.includes(defaultPlacement)
+      ? verticalPlacements
+      : horizontalPlacements
+  );
+  const defaultPlacementResult = placementStrategies[defaultPlacement].canPlace({
     anchorRect,
     selfRect,
     distanceFromAnchor,
   });
-  const {
-    canPlace: hasSpaceToPlaceSelfBelow,
-    remainingSpace: bottomSpace,
-  } = placementStrategies[BOTTOM].canPlace({
-    anchorRect,
-    selfRect,
-    distanceFromAnchor,
-  });
-
-  if (!hasSpaceToPlaceSelfBelow && !hasSpaceToPlaceSelfAbove) {
+  if (defaultPlacementResult.canPlace) {
     return {
-      placement: topSpace > bottomSpace ? TOP : BOTTOM,
-      remainingSpace: topSpace > bottomSpace ? topSpace : bottomSpace,
+      placement: defaultPlacement,
+      remainingSpace: defaultPlacementResult.remainingSpace,
     };
   }
-  if (defaultPlacement === TOP && !hasSpaceToPlaceSelfAbove) {
-    return { placement: BOTTOM, remainingSpace: bottomSpace };
-  }
-  if (defaultPlacement === BOTTOM && !hasSpaceToPlaceSelfBelow) {
-    return { placement: TOP, remainingSpace: topSpace };
-  }
-
+  const oppositePlacement = possiblePlacements.find(placement => placement !== defaultPlacement);
+  const oppositePlacementResult = placementStrategies[oppositePlacement].canPlace({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  });
+  const placement = (
+    defaultPlacementResult.remainingSpace >= oppositePlacementResult.remainingSpace
+      ? defaultPlacement
+      : oppositePlacement
+  );
   return {
-    placement: defaultPlacement,
-    remainingSpace: defaultPlacement === TOP ? topSpace : bottomSpace,
+    placement,
+    remainingSpace: (
+      placement === defaultPlacement
+        ? defaultPlacementResult.remainingSpace
+        : oppositePlacementResult.remainingSpace
+    ),
   };
 }
 
@@ -82,16 +85,17 @@ export function getPlacementAndRemainingSpace({
  * ClientRect: element's positions related to browser window viewport.
  * Offset: element's position related to document.
  *
- * @param {Placement} defaultPlacement
  * @param {number} edgePadding
  * @returns {(
+ *  defaultPlacement: Placement,
  *  anchorNode:HTMLElement,
  *  selfNode:HTMLElement,
  *  distanceFromAnchor: number
  * ) => ResultState}
  */
 
-const getPositionState = (defaultPlacement, edgePadding) => (
+const getPositionState = edgePadding => (
+  defaultPlacement,
   anchorNode,
   selfNode,
   distanceFromAnchor = 0,
@@ -136,9 +140,7 @@ const getPositionState = (defaultPlacement, edgePadding) => (
     placement,
     remainingSpace,
     position,
-    arrowPosition: {
-      left: arrowPosition.left,
-    },
+    arrowPosition,
   };
 };
 
