@@ -1,9 +1,12 @@
 // @ts-check
 import documentOffset from 'document-offset';
+import placementStrategies from './placementStrategies';
+import PLACEMENT from './constants/placement';
 
-const TOP = 'top';
-const BOTTOM = 'bottom';
-export const PLACEMENT = { TOP, BOTTOM };
+export { PLACEMENT };
+const { TOP, BOTTOM, LEFT, RIGHT } = PLACEMENT;
+export const verticalPlacements = [TOP, BOTTOM];
+export const horizontalPlacements = [LEFT, RIGHT];
 
 /**
  * @typedef {typeof TOP| typeof BOTTOM} Placement
@@ -27,148 +30,48 @@ export const PLACEMENT = { TOP, BOTTOM };
  * Determine whether *wrapped component* should be placed above or below
  * its *anchor*.
  *
- * @param {Placement} defaultPlacement
- * @param {number} anchorRectTop
- * @param {number} anchorHeight
- * @param {number} selfHeight
- * @param {number} distanceFromAnchor
  * @returns {{ placement: Placement, remainingSpace: number }}
  */
-export function getPlacementAndRemainingSpace(
+export function getPlacementAndRemainingSpace({
   defaultPlacement,
-  anchorRectTop,
-  anchorHeight,
-  selfHeight,
+  anchorRect,
+  selfRect,
   distanceFromAnchor,
-) {
-  const hasSpaceToPlaceSelfAbove = anchorRectTop >= selfHeight + distanceFromAnchor;
-  const hasSpaceToPlaceSelfBelow = (
-    (anchorRectTop + anchorHeight + selfHeight + distanceFromAnchor) <= window.innerHeight
+}) {
+  const possiblePlacements = (
+    verticalPlacements.includes(defaultPlacement)
+      ? verticalPlacements
+      : horizontalPlacements
   );
-  const topSpace = anchorRectTop;
-  const bottomSpace = window.innerHeight - anchorRectTop - anchorHeight;
-  if (!hasSpaceToPlaceSelfBelow && !hasSpaceToPlaceSelfAbove) {
+  const defaultPlacementResult = placementStrategies[defaultPlacement].canPlace({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  });
+  if (defaultPlacementResult.canPlace) {
     return {
-      placement: topSpace > bottomSpace ? TOP : BOTTOM,
-      remainingSpace: topSpace > bottomSpace ? topSpace : bottomSpace,
+      placement: defaultPlacement,
+      remainingSpace: defaultPlacementResult.remainingSpace,
     };
   }
-  if (defaultPlacement === TOP && !hasSpaceToPlaceSelfAbove) {
-    return { placement: BOTTOM, remainingSpace: bottomSpace };
-  }
-  if (defaultPlacement === BOTTOM && !hasSpaceToPlaceSelfBelow) {
-    return { placement: TOP, remainingSpace: topSpace };
-  }
-
-  return {
-    placement: defaultPlacement,
-    remainingSpace: defaultPlacement === TOP ? topSpace : bottomSpace,
-  };
-}
-
-/**
- * Determine vertical position of *wrapped component*.
- *
- * @param {Placement} placement
- * @param {number} anchorOffsetTop
- * @param {number} anchorHeight
- * @param {number} selfHeight
- * @param {number} distanceFromAnchor
- */
-export function getTopPosition(
-  placement,
-  anchorOffsetTop,
-  anchorHeight,
-  selfHeight,
-  distanceFromAnchor,
-) {
-  let positionTop = 0;
-
-  if (placement === TOP) {
-    // Make sure user can see whole wrapped component when placement is TOP.
-    positionTop = Math.max(anchorOffsetTop - selfHeight - distanceFromAnchor, 0);
-  } else {
-    positionTop = anchorOffsetTop + anchorHeight + distanceFromAnchor;
-  }
-
-  return positionTop;
-}
-
-/**
- * Determine horizontal positions of *wrapped component* and its
- * inner *arrow element*.
- *
- * The *arrow element* is expected to point to the center of *anchor element*.
- * It should also horizontally stay inside the “safe area”, which is the width
- * of *wrapped component* deducted by `edgePadding` from both edges.
- *
- ```
-        arrow        edge padding
-╭╌┊╌╌╌╌╌╌╌/\╌╌╌╌╌╌╌╌┊╌╮
-╎ ┊                 ┊ ╎
-╎ ┊                 ┊ ╎
-╰╌┊╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┊╌╯
-    arrow safe area
- ```
- *
- * @param {number} anchorRectLeft
- * @param {number} anchorOffsetLeft
- * @param {number} anchorWidth
- * @param {number} selfWidth
- * @param {number} edgePadding
- */
-export function getLeftPositionSet(
-  anchorRectLeft,
-  anchorOffsetLeft,
-  anchorWidth,
-  selfWidth,
-  edgePadding,
-) {
-  const anchorHalfWidth = anchorWidth / 2;
-  const selfHalfWidth = selfWidth / 2;
-
-  const anchorCenterCoordXOnViewPort = anchorRectLeft + anchorHalfWidth;
-
-  const hasSpaceOnLeftOfAnchorCenter = anchorCenterCoordXOnViewPort >= selfHalfWidth;
-  const hasSpaceOnRightOfAnchorCenter = (
-    (window.innerWidth - anchorCenterCoordXOnViewPort) >= selfHalfWidth
+  const oppositePlacement = possiblePlacements.find(placement => placement !== defaultPlacement);
+  const oppositePlacementResult = placementStrategies[oppositePlacement].canPlace({
+    anchorRect,
+    selfRect,
+    distanceFromAnchor,
+  });
+  const placement = (
+    defaultPlacementResult.remainingSpace >= oppositePlacementResult.remainingSpace
+      ? defaultPlacement
+      : oppositePlacement
   );
-
-  let selfLeft = 0;
-  let arrowLeft = 0;
-
-  switch (true) {
-    // Center-aligned
-    case (hasSpaceOnLeftOfAnchorCenter && hasSpaceOnRightOfAnchorCenter):
-      selfLeft = (anchorOffsetLeft + anchorHalfWidth) - selfHalfWidth;
-      arrowLeft = selfHalfWidth;
-      break;
-
-      // Right-align to the anchor
-    case (hasSpaceOnLeftOfAnchorCenter && !hasSpaceOnRightOfAnchorCenter):
-      selfLeft = (anchorOffsetLeft + anchorWidth) - selfWidth;
-      arrowLeft = selfWidth - anchorHalfWidth;
-      break;
-
-      // Left-align to the anchor
-    default:
-      selfLeft = anchorOffsetLeft;
-      arrowLeft = anchorHalfWidth;
-      break;
-  }
-
-  // Calibrate to keep arrow stay in *wrapped component*
-  const arrowLeftMin = edgePadding;
-  const arrowLeftMax = selfWidth - edgePadding;
-
-  arrowLeft = Math.max(
-    arrowLeftMin,
-    Math.min(arrowLeft, arrowLeftMax)
-  );
-
   return {
-    selfLeft,
-    arrowLeft,
+    placement,
+    remainingSpace: (
+      placement === defaultPlacement
+        ? defaultPlacementResult.remainingSpace
+        : oppositePlacementResult.remainingSpace
+    ),
   };
 }
 
@@ -182,16 +85,17 @@ export function getLeftPositionSet(
  * ClientRect: element's positions related to browser window viewport.
  * Offset: element's position related to document.
  *
- * @param {Placement} defaultPlacement
  * @param {number} edgePadding
  * @returns {(
+ *  defaultPlacement: Placement,
  *  anchorNode:HTMLElement,
  *  selfNode:HTMLElement,
  *  distanceFromAnchor: number
  * ) => ResultState}
  */
 
-const getPositionState = (defaultPlacement, edgePadding) => (
+const getPositionState = edgePadding => (
+  defaultPlacement,
   anchorNode,
   selfNode,
   distanceFromAnchor = 0,
@@ -208,50 +112,35 @@ const getPositionState = (defaultPlacement, edgePadding) => (
   //   Measuring anchor and self
   // -------------------------------------
 
-  const anchorRect = anchorNode.getBoundingClientRect();
-  const selfRect = selfNode.getBoundingClientRect();
-
   /** @type {DocumentOffset} */
   const anchorOffset = documentOffset(anchorNode);
+  const anchorRect = anchorNode.getBoundingClientRect();
+  const selfRect = selfNode.getBoundingClientRect();
 
   // -------------------------------------
   //   Determine position
   // -------------------------------------
 
-  const { placement, remainingSpace } = getPlacementAndRemainingSpace(
+  const { placement, remainingSpace } = getPlacementAndRemainingSpace({
     defaultPlacement,
-    anchorRect.top,
-    anchorRect.height,
-    selfRect.height,
+    anchorRect,
+    selfRect,
     distanceFromAnchor,
-  );
+  });
 
-  const selfTop = getTopPosition(
-    placement,
-    anchorOffset.top,
-    anchorRect.height,
-    selfRect.height,
+  const { arrowPosition, position } = placementStrategies[placement].getPosition({
+    anchorRect,
+    anchorOffset,
+    selfRect,
     distanceFromAnchor,
-  );
-
-  const { selfLeft, arrowLeft } = getLeftPositionSet(
-    anchorRect.left,
-    anchorOffset.left,
-    anchorRect.width,
-    selfRect.width,
     edgePadding,
-  );
+  });
 
   return {
     placement,
     remainingSpace,
-    position: {
-      top: selfTop,
-      left: selfLeft,
-    },
-    arrowPosition: {
-      left: arrowLeft,
-    },
+    position,
+    arrowPosition,
   };
 };
 

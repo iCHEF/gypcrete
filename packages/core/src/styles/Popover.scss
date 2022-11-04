@@ -50,4 +50,19 @@ $component-name: #{$prefix}-popover;
       border-top-color: $c-popover-background;
     }
   }
+
+  &--right {
+    .#{$component-name}__arrow {
+      left: -$popover-arrow-size;
+      border-right-color: $c-popover-background;
+    }
+  }
+
+  &--left {
+    .#{$component-name}__arrow {
+      left: unset;
+      right: -$popover-arrow-size * 2;
+      border-left-color: $c-popover-background;
+    }
+  }
 }
