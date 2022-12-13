@@ -222,6 +222,14 @@ it('can get original-sized image canvas via "getImageCanvas" method', () => {
   expect(wrapper.instance().getImageCanvas({ originalSize: true })).toBe('bar');
 });
 
+it('can get croppingRect via "getCroppingRect" method', () => {
+  const MOCKED_REF = { getCroppingRect: () => 'bar' };
+  const wrapper = shallow(<ImageEditor image={TRANSPARENT_IMAGE} />);
+
+  wrapper.instance().editorRef.current = MOCKED_REF;
+  expect(wrapper.instance().getCroppingRect()).toBe('bar');
+});
+
 it('can be controlled by "scale" & "onScaleChange" props', () => {
   const mockedHandleScaleChange = jest.fn();
   const wrapper = shallow(

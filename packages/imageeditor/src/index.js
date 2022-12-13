@@ -120,6 +120,14 @@ class ImageEditor extends PureComponent {
       return this.editorRef.current.getImageScaledToCanvas();
     }
 
+    getCroppingRect = () => {
+      if (!this.editorRef.current) {
+        return null;
+      }
+
+      return this.editorRef.current.getCroppingRect();
+    }
+
     handleSliderChange = (event) => {
       const newScale = Number(event.target.value);
 
