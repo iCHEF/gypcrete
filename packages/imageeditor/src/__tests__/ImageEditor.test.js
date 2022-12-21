@@ -4,10 +4,10 @@ import { shallow } from 'enzyme';
 
 import AvatarEditor from 'react-avatar-editor';
 
-import ImageEditor, { DEFAULT_SCALE, DEFAULT_POSITION } from '../index';
+import ImageEditor, { DEFAULT_SCALE, DEFAULT_POSITION } from '../ImageEditor';
 import EditorPlaceholder from '../EditorPlaceholder';
 
-import getInitScale from '../utils/getInitScale';
+import getScaleFromCropRect from '../utils/getScaleFromCropRect';
 import getInitPosition from '../utils/getInitPosition';
 
 // from: https://css-tricks.com/snippets/html/base64-encode-of-1x1px-transparent-gif/
@@ -179,7 +179,7 @@ it('takes an initial cropping rect to set scale and position', () => {
   );
 
   expect(wrapper.find(AvatarEditor).prop('scale'))
-    .toEqual(getInitScale(cropRect));
+    .toEqual(getScaleFromCropRect(cropRect));
   expect(wrapper.find(AvatarEditor).prop('position'))
     .toEqual(getInitPosition(cropRect));
 });
