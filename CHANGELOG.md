@@ -1,3 +1,27 @@
+# [5.2.0](https://github.com/iCHEF/gypcrete/compare/v5.1.0...v5.2.0) (2022-11-04)
+
+
+### Bug Fixes
+
+* dont compute maxHeight of popover on horizontal placement ([581fc6c](https://github.com/iCHEF/gypcrete/commit/581fc6cfc7ca5f6b1bc4b170556e26d8839a4afc))
+* offset is different from client rect ([15709f4](https://github.com/iCHEF/gypcrete/commit/15709f480ae05efd2f02c7a365709abb82b04f12))
+* omit defaultPlacement ([25447fd](https://github.com/iCHEF/gypcrete/commit/25447fd118f9ddc3a1313bac13b4f65ff57851c8))
+* should not consider another side arrow position ([c8350f1](https://github.com/iCHEF/gypcrete/commit/c8350f127bf6c2b50b00da8a2893ab467cca1515))
+
+
+### Features
+
+* add left placement strategies ([04cdd75](https://github.com/iCHEF/gypcrete/commit/04cdd75e953d30d1dfff609bf2d8af80c4aa8292))
+* add right / left placement style ([0c70168](https://github.com/iCHEF/gypcrete/commit/0c70168355567b0f5638ce5d6dd9f63fd6429ebb))
+* add right placement strategy ([80a851f](https://github.com/iCHEF/gypcrete/commit/80a851f4276a45ea9663438127a07a4a368a6763))
+* add top and bottom placement strategy ([deadab0](https://github.com/iCHEF/gypcrete/commit/deadab04f3cec936a5c3c410d368370a0eef31d0))
+* make arrowPosition consider top and left ([0998cce](https://github.com/iCHEF/gypcrete/commit/0998cce139064b63aba15821788c7cb336da12bb))
+* make defaultPlacement changeable for anchored component ([5e84517](https://github.com/iCHEF/gypcrete/commit/5e84517c7c77c84866013930289f06ceef63c8b7))
+* move getPosition logic into placement strategy ([51f4d62](https://github.com/iCHEF/gypcrete/commit/51f4d623c5a78377f196953f9d5d2eed409adbf9))
+* simplify logic ([ff78d60](https://github.com/iCHEF/gypcrete/commit/ff78d60cfda3693898d22e4ecb9a578ea3158ce8))
+
+
+
 # [5.1.0](https://github.com/iCHEF/gypcrete/compare/v5.0.1...v5.1.0) (2022-10-21)
 
 
