@@ -11,7 +11,7 @@
  * @param {{ width: number, height: number }} initCropRect
  * @returns {number?}
  */
-function getInitScale(initCropRect) {
+function getScaleFromCropRect(initCropRect) {
   if (!initCropRect) return null;
 
   const { width: widthRatio, height: heightRatio } = initCropRect;
@@ -25,4 +25,4 @@ function getInitScale(initCropRect) {
   return Number.parseFloat(inferredScale.toFixed(1));
 }
 
-export default getInitScale;
+export default getScaleFromCropRect;
