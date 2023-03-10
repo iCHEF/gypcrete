@@ -1,3 +1,18 @@
+# [5.3.0](https://github.com/iCHEF/gypcrete/compare/v5.2.0...v5.3.0) (2023-03-10)
+
+
+### Bug Fixes
+
+* fix export ([399e9c6](https://github.com/iCHEF/gypcrete/commit/399e9c62dac933dad9a83a3dd6350983183df798))
+
+
+### Features
+
+* add getCroppingRect method on image editor ([a33b299](https://github.com/iCHEF/gypcrete/commit/a33b2995e06c11f20aeba901911815f17602424b))
+* export getScaleFromCropRect ([c76b03a](https://github.com/iCHEF/gypcrete/commit/c76b03a86dd16e5ea397c04c034eddfe301654a4))
+
+
+
 # [5.2.0](https://github.com/iCHEF/gypcrete/compare/v5.1.0...v5.2.0) (2022-11-04)
 
 

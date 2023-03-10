@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete-imageeditor",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "description": "Image cropper built with Gypcrete",
   "homepage": "https://ichef.github.io/gypcrete",
   "repository": "https://github.com/iCHEF/gypcrete/tree/master/packages/imageeditor",
