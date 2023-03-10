@@ -1,7 +1,7 @@
-import getInitScale from '../getInitScale';
+import getScaleFromCropRect from '../getScaleFromCropRect';
 
 it('infers scale from init cropping rect where width ratio is larger', () => {
-  expect(getInitScale({
+  expect(getScaleFromCropRect({
     x: 0,
     y: 0,
     width: 0.6,
@@ -10,7 +10,7 @@ it('infers scale from init cropping rect where width ratio is larger', () => {
 });
 
 it('infers scale from init cropping rect where height ratio is larger', () => {
-  expect(getInitScale({
+  expect(getScaleFromCropRect({
     x: 0,
     y: 0,
     width: 0.2,
@@ -19,5 +19,5 @@ it('infers scale from init cropping rect where height ratio is larger', () => {
 });
 
 it('returns null if cropping rect is broken', () => {
-  expect(getInitScale({})).toBe(null);
+  expect(getScaleFromCropRect({})).toBe(null);
 });

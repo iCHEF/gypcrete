@@ -4,10 +4,10 @@ import { shallow } from 'enzyme';
 
 import AvatarEditor from 'react-avatar-editor';
 
-import ImageEditor, { DEFAULT_SCALE, DEFAULT_POSITION } from '../index';
+import ImageEditor, { DEFAULT_SCALE, DEFAULT_POSITION } from '../ImageEditor';
 import EditorPlaceholder from '../EditorPlaceholder';
 
-import getInitScale from '../utils/getInitScale';
+import getScaleFromCropRect from '../utils/getScaleFromCropRect';
 import getInitPosition from '../utils/getInitPosition';
 
 // from: https://css-tricks.com/snippets/html/base64-encode-of-1x1px-transparent-gif/
@@ -179,7 +179,7 @@ it('takes an initial cropping rect to set scale and position', () => {
   );
 
   expect(wrapper.find(AvatarEditor).prop('scale'))
-    .toEqual(getInitScale(cropRect));
+    .toEqual(getScaleFromCropRect(cropRect));
   expect(wrapper.find(AvatarEditor).prop('position'))
     .toEqual(getInitPosition(cropRect));
 });
@@ -220,6 +220,14 @@ it('can get original-sized image canvas via "getImageCanvas" method', () => {
 
   wrapper.instance().editorRef.current = MOCKED_REF;
   expect(wrapper.instance().getImageCanvas({ originalSize: true })).toBe('bar');
+});
+
+it('can get croppingRect via "getCroppingRect" method', () => {
+  const MOCKED_REF = { getCroppingRect: () => 'bar' };
+  const wrapper = shallow(<ImageEditor image={TRANSPARENT_IMAGE} />);
+
+  wrapper.instance().editorRef.current = MOCKED_REF;
+  expect(wrapper.instance().getCroppingRect()).toBe('bar');
 });
 
 it('can be controlled by "scale" & "onScaleChange" props', () => {
