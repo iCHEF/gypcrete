@@ -77,10 +77,10 @@ class EditableTextLabel extends PureComponent {
     // eslint-disable-next-line react/no-deprecated, camelcase
     UNSAFE_componentWillReceiveProps(nextProps) {
       /**
-         * If the edit-state of <EditableTextLabel> is *controlled* by `inEdit` prop.
-         * If the prop is `undefined`, this component became *uncontrolled*
-         * and should run itself.
-         */
+       * If the edit-state of <EditableTextLabel> is *controlled* by `inEdit` prop.
+       * If the prop is `undefined`, this component became *uncontrolled*
+       * and should run itself.
+       */
       if (this.getEditabilityControlled(nextProps)) {
         this.setState({ inEdit: nextProps.inEdit });
       }
@@ -94,9 +94,9 @@ class EditableTextLabel extends PureComponent {
 
     handleDoubleClick = (event) => {
       /**
-         * If `inEdit` isn't controlled, this component by default
-         * goes into edit mode on double click/touch.
-         */
+       * If `inEdit` isn't controlled, this component by default
+       * goes into edit mode on double click/touch.
+       */
       if (!this.getEditabilityControlled()) {
         this.setState({ inEdit: true });
       }
