@@ -125,7 +125,7 @@ describe.each`
     const handleClose = jest.fn();
     const closableOptions = { onClickInside, onClickOutside };
 
-    mount(
+    const wrapper = mount(
       <ClosableFoo closable={closableOptions} onClose={handleClose} />,
       { attachTo: rootNode },
     );
@@ -139,6 +139,8 @@ describe.each`
     keyEvent = new KeyboardEvent('keyup', { keyCode: keycode('Escape') });
     document.dispatchEvent(keyEvent);
     expect(handleClose).toHaveBeenCalledTimes(shouldBeCalled ? 1 : 0);
+
+    wrapper.unmount();
   });
 });
 
