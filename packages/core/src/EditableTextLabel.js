@@ -63,18 +63,6 @@ class EditableTextLabel extends PureComponent {
       dblTouchTimeout: null,
     };
 
-    // eslint-disable-next-line react/no-deprecated
-    componentWillReceiveProps(nextProps) {
-      /**
-         * If the edit-state of <EditableTextLabel> is *controlled* by `inEdit` prop.
-         * If the prop is `undefined`, this component became *uncontrolled*
-         * and should run itself.
-         */
-      if (this.getEditabilityControlled(nextProps)) {
-        this.setState({ inEdit: nextProps.inEdit });
-      }
-    }
-
     getEditabilityControlled(fromProps = this.props) {
       return fromProps.inEdit !== undefined;
     }
@@ -84,6 +72,18 @@ class EditableTextLabel extends PureComponent {
         touchCount: 0,
         dblTouchTimeout: null,
       });
+    }
+
+    // eslint-disable-next-line react/no-deprecated, camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      /**
+         * If the edit-state of <EditableTextLabel> is *controlled* by `inEdit` prop.
+         * If the prop is `undefined`, this component became *uncontrolled*
+         * and should run itself.
+         */
+      if (this.getEditabilityControlled(nextProps)) {
+        this.setState({ inEdit: nextProps.inEdit });
+      }
     }
 
     leaveEditModeIfNotControlled() {

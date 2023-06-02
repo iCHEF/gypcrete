@@ -93,8 +93,8 @@ class EditableBasicRow extends PureComponent {
       focused: false,
     };
 
-    // eslint-disable-next-line react/no-deprecated
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line react/no-deprecated, camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.value !== this.props.value) {
         this.setState({ currentValue: nextProps.value });
       }
