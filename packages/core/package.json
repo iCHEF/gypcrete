@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "create-react-context": "^0.2.3",
     "document-offset": "^1.0.4",
     "keycode": "^2.1.9",
     "lodash.omit": "^4.5.0",
