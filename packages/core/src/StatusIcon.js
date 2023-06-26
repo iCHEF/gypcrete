@@ -48,13 +48,17 @@ class StatusIcon extends PureComponent {
       hideIcon: false,
     };
 
-    // eslint-disable-next-line react/no-deprecated
-    componentWillMount() {
+    componentWillUnmount() {
+      clearTimeout(this.hideIconTimeout);
+    }
+
+    // eslint-disable-next-line react/no-deprecated, camelcase
+    UNSAFE_componentWillMount() {
       this.autoToggleStatusIcon();
     }
 
-    // eslint-disable-next-line react/no-deprecated
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line react/no-deprecated, camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.status !== this.props.status) {
         this.autoToggleStatusIcon(nextProps.status);
       }
@@ -63,10 +67,6 @@ class StatusIcon extends PureComponent {
       if (!nextProps.autohide && this.state.hideIcon) {
         this.setState({ hideIcon: false });
       }
-    }
-
-    componentWillUnmount() {
-      clearTimeout(this.hideIconTimeout);
     }
 
     /**
