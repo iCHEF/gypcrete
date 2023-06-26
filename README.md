@@ -66,28 +66,17 @@ Gypcrete does not publish develop builds to the `dist` branch anymore. It now pu
   * When pushed to `develop` branch --> publish a canary build
   * When pushed to `master` branch --> publish a relase build
 
-### Releasing
+## Release
 
-We're relying on Lerna for versioning and publishing. When you create a Release on Github, it will trigger task on Travis CI to publish with Lerna. It also converts the lightweight tag created by Github Release to an annotated tag for Lerna to calculate versions.
-
-When releasing a new version for Gypcrete, follow the steps:
-
-1. Create a release branch `release/x.y.z`
-2. *(Optional)* Release beta builds with `yarn release:pre` locally to specify version.
-3. Bump version for `package.json` and `CHANGELOG`.
-4. Bump children packages version with script:
-   ```sh
-   yarn bumpversion
-   ```
-   This will run `lerna version`, which updates all `package.json` files in `packages/`.
-
-5. Commit above changes, then create a pull request for this release branch.
-6. *[Important]* Create a new Release on Github in format of `v3.4.5` once it's merged into `master`.
-   Please be sure to prefix the tag name with `v` as Lerna uses them to calculate changes.
-
-7. Backport changes from `master` back to `develop` by creating a `backport/x.y.y` branch and create a pull request for that.
-
-At the time Github Release is created, it should trigger `yarn release` on Travis CI and publishes packages to npm.
+1. 從 develop 開出新的 release branch，release branch 的格式必須符合 `release/x.y.z`，例如 `release/1.2.3`。`x.y.z` 的部分為欲發佈的版號，必須符合 semantic versioning。
+2. 以這支新的 release branch 開出新的 PR，base branch 設為 `master`。
+3. 當 PR 被 merge 時，會觸發 github action 的 [Release workflow](https://github.com/iCHEF/fe-modules/blob/master/.github/workflows/release.yml)，此 workflow 會在 master branch 做下列動作：
+    - 更新 package.json 的 version 並 commit
+    - 執行 `yarn changelog` 更新 CHANGELOG.md
+    - 打 git tag 並將 tag push 上 github
+    - 發佈新版本到 npm
+    - 開出 backport 到 develop branch 的 PR
+4. merge backport PR。至此完成 release 流程。
 
 ## LICENSE
 This project is licensed under the terms of the [Apache License 2.0](https://github.com/ichef/gypcrete/blob/master/LICENSE)
