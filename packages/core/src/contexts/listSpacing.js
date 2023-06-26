@@ -1,6 +1,5 @@
-// #FIXME: use React navive context API when upgraded to v16+
-import createReactContext from 'create-react-context';
+import React from 'react';
 
-const ListSpacingContext = createReactContext(true);
+const ListSpacingContext = React.createContext(true);
 
 export default ListSpacingContext;
