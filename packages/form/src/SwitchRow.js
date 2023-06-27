@@ -46,11 +46,6 @@ class SwitchRow extends PureComponent {
       checked: this.props.defaultChecked || this.props.checked,
     };
 
-    // eslint-disable-next-line react/no-deprecated
-    componentWillReceiveProps(nextProps) {
-      this.setState({ checked: nextProps.checked });
-    }
-
     getIsControlled() {
       const isControlled = this.props.checked !== undefined
             && this.props.checked !== null;
@@ -62,6 +57,11 @@ class SwitchRow extends PureComponent {
       const { asideOn, asideOff } = this.props;
 
       return this.state.checked ? asideOn : asideOff;
+    }
+
+    // eslint-disable-next-line react/no-deprecated, camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      this.setState({ checked: nextProps.checked });
     }
 
     handleSwitchButtonChange = (event) => {

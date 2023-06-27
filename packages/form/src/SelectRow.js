@@ -100,25 +100,6 @@ class SelectRow extends PureComponent {
       cachedValue: this.getInitialValue(),
     };
 
-    // eslint-disable-next-line react/no-deprecated
-    componentWillReceiveProps(nextProps) {
-      this.setState({
-        valueLabelMap: getValueToLabelAvatarMap(nextProps.children),
-      });
-
-      warning(
-        this.getIsControlled(this.props) === this.getIsControlled(nextProps),
-        '<SelectRow> should not switch from controlled to uncontrolled (or vice versa).'
-      );
-
-      if (this.getIsControlled(nextProps)) {
-        this.setState({ cachedValue: nextProps.value });
-      } else if (this.props.multiple !== nextProps.multiple) {
-        warning(false, '<SelectRow>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.');
-        this.setState({ cachedValue: (nextProps.multiple) ? [] : null });
-      }
-    }
-
     getInitialValue() {
       const { value, defaultValue, multiple } = this.props;
 
@@ -141,6 +122,25 @@ class SelectRow extends PureComponent {
       const { multiple } = this.props;
       const { cachedValue } = this.state;
       return (multiple) ? cachedValue : [cachedValue].filter(val => val !== undefined);
+    }
+
+    // eslint-disable-next-line react/no-deprecated, camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      this.setState({
+        valueLabelMap: getValueToLabelAvatarMap(nextProps.children),
+      });
+
+      warning(
+        this.getIsControlled(this.props) === this.getIsControlled(nextProps),
+        '<SelectRow> should not switch from controlled to uncontrolled (or vice versa).'
+      );
+
+      if (this.getIsControlled(nextProps)) {
+        this.setState({ cachedValue: nextProps.value });
+      } else if (this.props.multiple !== nextProps.multiple) {
+        warning(false, '<SelectRow>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.');
+        this.setState({ cachedValue: (nextProps.multiple) ? [] : null });
+      }
     }
 
     handleButtonClick = () => {

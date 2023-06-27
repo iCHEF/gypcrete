@@ -37,108 +37,108 @@ const closable = ({
   };
 
   class Closable extends PureComponent {
-        static displayName = `closable(${componentName})`;
+    static displayName = `closable(${componentName})`;
 
-        static propTypes = {
-          onClose: PropTypes.func,
-          closable: PropTypes.shape({
-            onEscape: PropTypes.bool,
-            onClickOutside: PropTypes.bool,
-            onClickInside: PropTypes.bool,
-            stopEventPropagation: PropTypes.bool,
-            skip: PropTypes.bool,
-          }),
-        };
+    static propTypes = {
+      onClose: PropTypes.func,
+      closable: PropTypes.shape({
+        onEscape: PropTypes.bool,
+        onClickOutside: PropTypes.bool,
+        onClickInside: PropTypes.bool,
+        stopEventPropagation: PropTypes.bool,
+        skip: PropTypes.bool,
+      }),
+    };
 
-        static defaultProps = {
-          onClose: () => {},
-          closable: mixinConfigs,
-        };
+    static defaultProps = {
+      onClose: () => {},
+      closable: mixinConfigs,
+    };
 
-        componentDidMount() {
-          if (!this.props.closable.skip) {
-            document.addEventListener('keyup', this.handleDocumentKeyup);
-          }
-        }
+    componentDidMount() {
+      if (!this.props.closable.skip) {
+        document.addEventListener('keyup', this.handleDocumentKeyup);
+      }
+    }
 
-        componentWillUnmount() {
-          if (!this.props.closable.skip) {
-            document.removeEventListener('keyup', this.handleDocumentKeyup);
-          }
-        }
+    componentWillUnmount() {
+      if (!this.props.closable.skip) {
+        document.removeEventListener('keyup', this.handleDocumentKeyup);
+      }
+    }
 
-        getOptions() {
-          const { closable: runtimeOptions } = this.props;
+    getOptions() {
+      const { closable: runtimeOptions } = this.props;
 
-          /** @type {typeof mixinDefaults} */
-          const actualOptions = {
-            ...mixinConfigs,
-            ...runtimeOptions,
-          };
+      /** @type {typeof mixinDefaults} */
+      const actualOptions = {
+        ...mixinConfigs,
+        ...runtimeOptions,
+      };
 
-          return actualOptions;
-        }
+      return actualOptions;
+    }
 
-        /**
-         * @param {KeyboardEvent} event
-         */
-        handleDocumentKeyup = (event) => {
-          const options = this.getOptions();
+    /**
+     * @param {KeyboardEvent} event
+     */
+    handleDocumentKeyup = (event) => {
+      const options = this.getOptions();
 
-          if (options.onEscape && event.keyCode === keycode(ESCAPE)) {
-            this.props.onClose(event);
-          }
-        }
+      if (options.onEscape && event.keyCode === keycode(ESCAPE)) {
+        this.props.onClose(event);
+      }
+    }
 
-        /**
-         * @param {React.MouseEvent} event
-         */
-        handleOuterLayerClick = (event) => {
-          const options = this.getOptions();
+    /**
+     * @param {React.MouseEvent} event
+     */
+    handleOuterLayerClick = (event) => {
+      const options = this.getOptions();
 
-          if (options.stopEventPropagation) {
-            event.stopPropagation();
-          }
+      if (options.stopEventPropagation) {
+        event.stopPropagation();
+      }
 
-          if (options.onClickOutside) {
-            this.props.onClose(event);
-          }
-        }
+      if (options.onClickOutside) {
+        this.props.onClose(event);
+      }
+    }
 
-        /**
-         * @param {React.MouseEvent} event
-         */
-        handleInsideClick = (event) => {
-          const options = this.getOptions();
+    /**
+     * @param {React.MouseEvent} event
+     */
+    handleInsideClick = (event) => {
+      const options = this.getOptions();
 
-          if (options.onClickInside) {
-            this.props.onClose(event);
-          }
-        }
+      if (options.onClickInside) {
+        this.props.onClose(event);
+      }
+    }
 
-        render() {
-          const {
-            onClose,
-            closable: runtimeOptions,
-            ...otherProps
-          } = this.props;
+    render() {
+      const {
+        onClose,
+        closable: runtimeOptions,
+        ...otherProps
+      } = this.props;
 
-          return (
-            <>
-              {!runtimeOptions.skip && (
-                <div
-                  role="presentation"
-                  className={ROOT_BEM.toString()}
-                  onClick={this.handleOuterLayerClick}
-                />
-              )}
-              <WrappedComponent
-                onInsideClick={this.handleInsideClick}
-                {...otherProps}
-              />
-            </>
-          );
-        }
+      return (
+        <>
+          {!runtimeOptions.skip && (
+            <div
+              role="presentation"
+              className={ROOT_BEM.toString()}
+              onClick={this.handleOuterLayerClick}
+            />
+          )}
+          <WrappedComponent
+            onInsideClick={this.handleInsideClick}
+            {...otherProps}
+          />
+        </>
+      );
+    }
   }
 
   return Closable;

@@ -72,25 +72,6 @@ class SelectList extends PureComponent {
       ),
     };
 
-    // eslint-disable-next-line react/no-deprecated
-    componentWillReceiveProps(nextProps) {
-      warning(
-        this.getIsControlled(this.props) === this.getIsControlled(nextProps),
-        '<SelectList> should not switch from controlled to uncontrolled (or vice versa).'
-      );
-
-      if (this.getIsControlled(nextProps)) {
-        this.setState({
-          checkedState: getInitialCheckedState(nextProps.value, nextProps.multiple),
-        });
-      } else if (this.props.multiple !== nextProps.multiple) {
-        warning(false, '<SelectList>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.');
-        this.setState({
-          checkedState: getInitialCheckedState([]),
-        });
-      }
-    }
-
     getInitialValue() {
       const { value, defaultValue, multiple } = this.props;
 
@@ -127,6 +108,25 @@ class SelectList extends PureComponent {
       return allOptions
         .filter(option => fromCheckedState.get(option.value))
         .map(option => option.value);
+    }
+
+    // eslint-disable-next-line react/no-deprecated, camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      warning(
+        this.getIsControlled(this.props) === this.getIsControlled(nextProps),
+        '<SelectList> should not switch from controlled to uncontrolled (or vice versa).'
+      );
+
+      if (this.getIsControlled(nextProps)) {
+        this.setState({
+          checkedState: getInitialCheckedState(nextProps.value, nextProps.multiple),
+        });
+      } else if (this.props.multiple !== nextProps.multiple) {
+        warning(false, '<SelectList>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.');
+        this.setState({
+          checkedState: getInitialCheckedState([]),
+        });
+      }
     }
 
     handleChange(nextCheckedState) {
