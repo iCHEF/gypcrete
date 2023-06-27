@@ -1,3 +1,13 @@
+# [6.0.0](https://github.com/iCHEF/gypcrete/compare/v5.3.0...v6.0.0) (2023-06-27)
+
+
+### Features
+
+* replace create-react-context with the native React Context API ([39b825c](https://github.com/iCHEF/gypcrete/commit/39b825ccf92f6ad3073841285931b516fffa3dc8))
+* upgrade react-textarea-autosize ([58ac7b7](https://github.com/iCHEF/gypcrete/commit/58ac7b762606bc72ff71a2cf03394a11821e35fe))
+
+
+
 # [5.3.0](https://github.com/iCHEF/gypcrete/compare/v5.2.0...v5.3.0) (2023-03-10)
 
 
