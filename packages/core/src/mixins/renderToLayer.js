@@ -1,4 +1,6 @@
+import omit from 'lodash.omit';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
 import prefixClass from '../utils/prefixClass';
@@ -10,10 +12,13 @@ import '../styles/RenderToLayer.scss';
 const COMPONENT_NAME = prefixClass('base-layer');
 const LAYER_ID_PREFIX = 'layer';
 
-export function createLayer() {
+export function createLayer({ zIndex = null } = {}) {
   const layer = document.createElement('div');
   layer.className = COMPONENT_NAME;
   layer.id = randId({ prefix: LAYER_ID_PREFIX });
+  if (typeof zIndex === 'number') {
+    layer.style.zIndex = zIndex;
+  }
 
   return layer;
 }
@@ -35,13 +40,23 @@ function renderToLayer(WrappedComponent) {
   class RenderToLayer extends Component {
         static displayName = `renderToLayer(${componentName})`;
 
+        static propTypes = {
+          ...WrappedComponent.propTypes,
+          zIndex: PropTypes.number,
+        }
+
+        static defaultProps = {
+          ...WrappedComponent.defaultProps,
+          zIndex: undefined,
+        }
+
         state = {
           inDOM: false,
         };
 
         constructor(props) {
           super(props);
-          this.baseLayer = createLayer();
+          this.baseLayer = createLayer({ zIndex: props.zIndex });
         }
 
         componentDidMount() {
@@ -64,9 +79,10 @@ function renderToLayer(WrappedComponent) {
 
         render() {
           const { inDOM } = this.state;
+          const childrenProps = omit(this.props, ['zIndex']);
 
           return inDOM && createPortal(
-            <WrappedComponent {...this.props} />,
+            <WrappedComponent {...childrenProps} />,
             this.baseLayer,
           );
         }

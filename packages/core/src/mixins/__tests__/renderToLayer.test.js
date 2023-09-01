@@ -61,3 +61,10 @@ it('renders wrapped component via ReactPortal after layer is in DOM', () => {
   expect(wrapper.type()).toBe(ReactIs.Portal);
   expect(wrapper.children().is(Foo)).toBeTruthy();
 });
+
+it('set zIndex style on layer given zIndex prop', () => {
+  const zIndex = 200;
+  const wrapper = shallow(<LayerFoo zIndex={zIndex} />);
+
+  expect(wrapper.instance().baseLayer.style.zIndex).toBe(zIndex.toString());
+});
