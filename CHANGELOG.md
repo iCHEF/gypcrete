@@ -1,3 +1,13 @@
+# [6.1.0](https://github.com/iCHEF/gypcrete/compare/v6.0.0...v6.1.0) (2023-09-15)
+
+
+### Features
+
+* add 'upload' icon ([380c79c](https://github.com/iCHEF/gypcrete/commit/380c79c70a03b37b4c1725015e8fb3fa5ccae971))
+* add zIndex prop to renderToLayer hoc ([8dc8de2](https://github.com/iCHEF/gypcrete/commit/8dc8de2dccd46618eb8456fad0a55f819afc9ec1))
+
+
+
 # [6.0.0](https://github.com/iCHEF/gypcrete/compare/v5.3.0...v6.0.0) (2023-06-27)
 
 
