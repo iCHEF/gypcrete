@@ -79,6 +79,7 @@ import Tickets from './Tickets';
 import Trashcan from './Trashcan';
 import Unfold from './Unfold';
 import Unlock from './Unlock';
+import Upload from './Upload';
 
 export default {
   'add-item': AddItem,
@@ -162,4 +163,5 @@ export default {
   trashcan: Trashcan,
   unfold: Unfold,
   unlock: Unlock,
+  upload: Upload,
 };
