@@ -4,7 +4,7 @@ import Avatar from '@ichef/gypcrete/src/Avatar';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-  title: '@ichef/gypcrete|Radio',
+  title: 'gypcrete/Radio',
   component: PureRadio,
   subcomponents: {
     'rowComp()': Radio,

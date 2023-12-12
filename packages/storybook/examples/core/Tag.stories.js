@@ -3,7 +3,7 @@ import React from 'react';
 import Tag from '@ichef/gypcrete/src/Tag';
 
 export default {
-  title: '@ichef/gypcrete|Tag',
+  title: 'gypcrete/Tag',
   component: Tag,
 };
 

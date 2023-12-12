@@ -5,7 +5,7 @@ import Section from '@ichef/gypcrete/src/Section';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-  title: '@ichef/gypcrete|Section',
+  title: 'gypcrete/Section',
   component: Section,
 };
 

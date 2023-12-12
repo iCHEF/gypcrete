@@ -9,7 +9,7 @@ import List from '@ichef/gypcrete/src/List';
 import ListRow from '@ichef/gypcrete/src/ListRow';
 
 export default {
-  title: '@ichef/gypcrete|ColumnView',
+  title: 'gypcrete/ColumnView',
   component: ColumnView,
 };
 

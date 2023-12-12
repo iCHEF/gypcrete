@@ -4,7 +4,7 @@ import Avatar from '@ichef/gypcrete/src/Avatar';
 import FlexRow from 'utils/FlexRow';
 
 export default {
-  title: '@ichef/gypcrete|Avatar',
+  title: 'gypcrete/Avatar',
   component: Avatar,
 };
 

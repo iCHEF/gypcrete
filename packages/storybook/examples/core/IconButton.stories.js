@@ -5,7 +5,7 @@ import IconButton from '@ichef/gypcrete/src/IconButton';
 import FlexRow from 'utils/FlexRow';
 
 export default {
-  title: '@ichef/gypcrete|IconButton',
+  title: 'gypcrete/IconButton',
   component: IconButton,
   subcomponents: {
     Button,

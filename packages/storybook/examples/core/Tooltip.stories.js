@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import Tooltip, { PureTooltip } from '@ichef/gypcrete/src/Tooltip';
 
 export default {
-  title: '@ichef/gypcrete|Tooltip',
+  title: 'gypcrete/Tooltip',
   component: PureTooltip,
   subcomponents: {
     'renderToLayer(anchored({})': Tooltip,

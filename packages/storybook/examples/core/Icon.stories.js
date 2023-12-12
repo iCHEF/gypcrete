@@ -5,7 +5,7 @@ import Icon from '@ichef/gypcrete/src/Icon';
 import iconMap from '@ichef/gypcrete/src/icons/components';
 
 export default {
-  title: '@ichef/gypcrete|Icon',
+  title: 'gypcrete/Icon',
   component: Icon,
 };
 
