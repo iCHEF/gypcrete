@@ -1,13 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const packageDirname = process.cwd();
 const fullPackageName = process.env.npm_package_name || process.env.GPT_PKG_NAME;
 const packageName = fullPackageName.replace(/@ichef\//, '');
 
+function toCamelCase(str) {
+  return str.replace(/([-_]\w)/g, g => g[1].toUpperCase());
+}
+
+
 module.exports = {
+  mode: 'production',
+
   entry: './src/index.js',
 
   context: packageDirname,
@@ -15,7 +22,10 @@ module.exports = {
   output: {
     filename: `${packageName}.js`,
     path: path.resolve(packageDirname, 'dist'),
-    library: packageName,
+    library: {
+      name: toCamelCase(packageName),
+      type: 'var',
+    },
   },
 
   module: {
@@ -39,35 +49,41 @@ module.exports = {
         include: [
           path.resolve(packageDirname, 'src'),
         ],
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [autoprefixer],
               },
             },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => [autoprefixer],
-              },
-            },
-            {
-              loader: 'sass-loader',
-              options: {
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
                 outputStyle: 'expanded',
               },
             },
-          ],
-        }),
+          },
+        ],
       },
     ],
   },
 
   plugins: [
-    new ExtractTextPlugin(`${packageName}.css`),
+    new MiniCssExtractPlugin({
+      filename: `${packageName}.css`,
+    }),
   ],
 
   externals: {

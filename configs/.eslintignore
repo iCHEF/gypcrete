@@ -5,3 +5,4 @@ es/
 lib/
 public/
 !.storybook/
+packages/core/src/icons/components

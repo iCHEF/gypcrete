@@ -49,13 +49,17 @@ module.exports = ({ config, mode }) => {
       {
         loader: 'postcss-loader',
         options: {
-          plugins: () => [autoprefixer],
+          postcssOptions: {
+            plugins: [autoprefixer],
+          },
         },
       },
       {
         loader: 'sass-loader',
         options: {
-          outputStyle: 'expanded',
+          sassOptions: {
+            outputStyle: 'expanded',
+          },
         },
       },
     ],
