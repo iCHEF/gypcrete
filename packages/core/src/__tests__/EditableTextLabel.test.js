@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render, waitFor } from '@testing-library/react';
+import { screen, render, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import EditableTextLabel from '../EditableTextLabel';
 
@@ -112,5 +112,30 @@ describe('EditableTextLabel', () => {
       value: 'new text',
       event: expect.any(Object),
     }));
+  });
+
+
+  it('do not call onDblClick when only touched once', () => {
+    render(<EditableTextLabel {...defaultProps} />);
+    fireEvent.touchEnd(screen.getByText(defaultProps.basic));
+    expect(defaultProps.onDblClick).toHaveBeenCalledTimes(0);
+  });
+
+  it('do not call onDblClick when touched twice but over 250ms', () => {
+    jest.useFakeTimers();
+
+    render(<EditableTextLabel {...defaultProps} />);
+
+    fireEvent.touchEnd(screen.getByText(defaultProps.basic));
+    jest.advanceTimersByTime(300);
+    fireEvent.touchEnd(screen.getByText(defaultProps.basic));
+    expect(defaultProps.onDblClick).toHaveBeenCalledTimes(0);
+  });
+
+  it('call onDblClick when touched twice', () => {
+    render(<EditableTextLabel {...defaultProps} />);
+    fireEvent.touchEnd(screen.getByText(defaultProps.basic));
+    fireEvent.touchEnd(screen.getByText(defaultProps.basic));
+    expect(defaultProps.onDblClick).toHaveBeenCalledTimes(1);
   });
 });
