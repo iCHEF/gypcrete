@@ -134,7 +134,7 @@ const SelectRow = React.memo(({
   useEffect(
     () => {
       warning(
-        isControlled === prevIsControlled && prevIsControlled !== undefined,
+        isControlled === prevIsControlled || prevIsControlled === undefined,
         '<SelectRow> should not switch from controlled to uncontrolled (or vice versa).'
       );
 
