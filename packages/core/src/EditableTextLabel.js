@@ -164,9 +164,6 @@ const EditableTextLabel = React.memo(({
   );
 });
 
-export default EditableTextLabel;
-
-
 EditableTextLabel.propTypes = {
   inEdit: PropTypes.bool,
   onEditEnd: PropTypes.func,
@@ -188,3 +185,5 @@ EditableTextLabel.defaultProps = {
   align: TextLabel.defaultProps.align,
   status: TextLabel.defaultProps.status,
 };
+
+export default EditableTextLabel;

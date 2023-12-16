@@ -115,8 +115,6 @@ const StatusIcon = React.memo(({
 });
 
 
-export default StatusIcon;
-
 StatusIcon.propTypes = {
   status: PropTypes.oneOf([LOADING, SUCCESS, ERROR]),
   position: PropTypes.oneOf([INLINE, CORNER]),
@@ -132,3 +130,6 @@ StatusIcon.defaultProps = {
   position: INLINE,
   autohide: true,
 };
+
+
+export default StatusIcon;
