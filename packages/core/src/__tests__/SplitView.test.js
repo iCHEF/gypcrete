@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import SplitView, { BEM } from '../SplitView';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <SplitView />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('renders with BEM class as column of <SplitView>', () => {

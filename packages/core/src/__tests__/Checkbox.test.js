@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow, mount } from 'enzyme';
 
 import Checkbox, { PureCheckbox, BEM } from '../Checkbox';
@@ -10,10 +10,9 @@ function BarButton() {
 
 describe('rowComp(Checkbox)', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = <Checkbox basic="Basic text" />;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 });
 

@@ -1,13 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 import SwitchIcon from '../SwitchIcon';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <SwitchIcon />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 

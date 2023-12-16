@@ -1,15 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Radio, { PureRadio } from '../Radio';
 
 describe('rowComp(Radio)', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = <Radio basic="Basic text" />;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 });
 

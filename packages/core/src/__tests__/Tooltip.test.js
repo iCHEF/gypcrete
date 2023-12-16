@@ -1,15 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Tooltip, { PureTooltip } from '../Tooltip';
 
 describe('<Tooltip> with mixins', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = <Tooltip>Content</Tooltip>;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 });
 

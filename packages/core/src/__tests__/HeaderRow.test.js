@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import HeaderRow, { HeaderArea } from '../HeaderRow';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <HeaderRow left="Left" center="Title" right="Right" />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 describe('<HeaderArea> helper component', () => {

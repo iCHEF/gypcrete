@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Tooltip from '../Tooltip';
@@ -9,10 +9,9 @@ import StatusIcon from '../StatusIcon';
 
 describe('<withStatus(IconLayout)>', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = <IconLayout icon="printer" />;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 
   it('receives props from withStatus() mixin', () => {

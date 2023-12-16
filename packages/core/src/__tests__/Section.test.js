@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Section, { BEM as SECTION_BEM } from '../Section';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <Section title="Title">Hello world</Section>;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('renders title in <div> only when specified', () => {

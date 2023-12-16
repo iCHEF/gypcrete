@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import BasicRow from '../BasicRow';
@@ -8,7 +8,6 @@ import Text, { PureText } from '../Text';
 
 describe('<withStatus(Text)>', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = (
       <Text
         align="right"
@@ -18,7 +17,7 @@ describe('<withStatus(Text)>', () => {
       />
     );
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 
   it('works with withStatus() mixin', () => {

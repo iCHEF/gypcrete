@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import BasicRow from '../BasicRow';
@@ -7,7 +7,6 @@ import StatusIcon from '../StatusIcon';
 import Tag from '../Tag';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = (
     <BasicRow
       basic="Basic text"
@@ -15,7 +14,7 @@ it('renders without crashing', () => {
     />
   );
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('renders with only Basic text', () => {

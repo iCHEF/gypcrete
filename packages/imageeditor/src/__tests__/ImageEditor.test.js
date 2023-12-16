@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import AvatarEditor from 'react-avatar-editor';
@@ -19,10 +19,9 @@ const BLACK_IMAGE = (
 );
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <ImageEditor />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('shows placeholder with canvas height when image not specified', () => {
