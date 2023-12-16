@@ -201,8 +201,6 @@ const SelectList = React.memo(({
   );
 });
 
-export default SelectList;
-
 SelectList.propTypes = {
   multiple: PropTypes.bool,
   showCheckAll: PropTypes.bool,
@@ -232,3 +230,5 @@ SelectList.defaultProps = {
   title: undefined,
   desc: undefined,
 };
+
+export default SelectList;
