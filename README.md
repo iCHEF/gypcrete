@@ -23,22 +23,21 @@ Here is a quick example to get you started:
 **./App.js**
 ```jsx
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import CustomComponent from './CustomComponent';
 
 import '@ichef/gypcrete/dist/gypcrete.css';
 
 const App = () => (
-    <div>
-        <CustomComponent />
-    </div>
+  <div>
+    <CustomComponent />
+  </div>
 );
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('app')
-);
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(<App />);
 ```
 
 **./CustomComponent.js**
