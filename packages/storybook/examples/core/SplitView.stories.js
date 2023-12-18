@@ -41,7 +41,7 @@ function DemoColumnView({ children, ...props }) {
 }
 
 export default {
-  title: '@ichef/gypcrete|SplitView',
+  title: 'gypcrete/SplitView',
   component: SplitView,
   subcomponents: { SplitViewColumn },
   decorators: [debugDecorator],

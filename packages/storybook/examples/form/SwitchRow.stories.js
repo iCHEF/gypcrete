@@ -5,7 +5,7 @@ import { PureSwitch } from '@ichef/gypcrete/src/Switch';
 import SwitchRow, { PureSwitchRow } from '@ichef/gypcrete-form/src/SwitchRow';
 
 export default {
-  title: '@ichef/gypcrete-form|SwitchRow',
+  title: 'gypcrete-form/SwitchRow',
   component: PureSwitchRow,
   subcomponents: {
     'formRow()': SwitchRow,

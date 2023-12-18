@@ -6,7 +6,7 @@ import { PureText } from '@ichef/gypcrete/src/Text';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-  title: '@ichef/gypcrete|EditableText',
+  title: 'gypcrete/EditableText',
   component: PureEditableText,
   subcomponents: {
     PureText,

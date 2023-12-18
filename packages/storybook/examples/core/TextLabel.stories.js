@@ -7,7 +7,7 @@ import TextLabel, { PureTextLabel } from '@ichef/gypcrete/src/TextLabel';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-  title: '@ichef/gypcrete|TextLabel',
+  title: 'gypcrete/TextLabel',
   component: PureTextLabel,
   subcomponents: {
     'rowComp()': TextLabel,

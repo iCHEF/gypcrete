@@ -7,7 +7,7 @@ import SelectRow, { PureSelectRow } from '@ichef/gypcrete-form/src/SelectRow';
 import SelectOption from '@ichef/gypcrete-form/src/SelectOption';
 
 export default {
-  title: '@ichef/gypcrete-form|SelectRow',
+  title: 'gypcrete-form/SelectRow',
   component: PureSelectRow,
   subcomponents: {
     'formRow()': SelectRow,

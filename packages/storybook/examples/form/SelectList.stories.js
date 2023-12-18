@@ -5,7 +5,7 @@ import SelectList from '@ichef/gypcrete-form/src/SelectList';
 import SelectOption from '@ichef/gypcrete-form/src/SelectOption';
 
 export default {
-  title: '@ichef/gypcrete-form|SelectList',
+  title: 'gypcrete-form/SelectList',
   component: SelectList,
   subcomponents: { SelectOption },
 };

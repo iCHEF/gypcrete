@@ -5,7 +5,7 @@ import Button, { PureButton } from '@ichef/gypcrete/src/Button';
 import FlexRow from 'utils/FlexRow';
 
 export default {
-  title: '@ichef/gypcrete|Button',
+  title: 'gypcrete/Button',
   component: PureButton,
   subcomponents: {
     'rowComp()': Button,
