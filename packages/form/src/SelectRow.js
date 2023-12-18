@@ -38,9 +38,12 @@ const CLOSABLE_CONFIG = {
 function usePrevious(value) {
   const ref = useRef();
 
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
+  useEffect(
+    () => {
+      ref.current = value;
+    },
+    [value]
+  );
 
   return ref.current;
 }
