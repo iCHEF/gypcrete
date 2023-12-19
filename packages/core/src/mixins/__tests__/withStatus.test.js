@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow, mount } from 'enzyme';
 
 import StatusIcon from 'src/StatusIcon';
@@ -31,10 +31,9 @@ const FooWithRawStatus = withStatus({ withRawStatus: true })(Foo);
 const BarWithRef = withStatus({ withRef: true })(Bar);
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <FooWithStatus />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('renders <StatusIcon> from context and passes to wrapped component', () => {

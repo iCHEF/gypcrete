@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import AutoSizeTextarea from 'react-textarea-autosize';
@@ -67,10 +67,9 @@ describe('<InnerInput> helper component', () => {
 
 describe('rowComp(TextInput)', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = <TextInput />;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 
   it('has reversed vertical order by default', () => {

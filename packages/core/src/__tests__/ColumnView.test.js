@@ -1,15 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import ColumnView, { BEM as COLUMN_BEM } from '../ColumnView';
 
 describe('<ColumnView>', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = <ColumnView>Foo bar</ColumnView>;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 
   it('renders childen in a body wrapper', () => {

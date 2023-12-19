@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import PropTypes from 'prop-types';
 
 import { mount } from 'enzyme';
@@ -23,12 +23,11 @@ Foo.propTypes = {
 };
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const ClosableFoo = closable()(Foo);
 
   const element = <ClosableFoo />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('has default configs', () => {

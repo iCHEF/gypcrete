@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow, mount } from 'enzyme';
 
 import List from '../List';
@@ -8,10 +8,9 @@ import Section from '../Section';
 import ListSpacingContext from '../contexts/listSpacing';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <List title="Title">Hello world</List>;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('consumes context to render a <Section> with spacing configs', () => {
