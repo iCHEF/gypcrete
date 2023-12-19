@@ -1,88 +1,51 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { mount, shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import SwitchRow from '../SwitchRow';
 
-import { Switch, TextLabel } from '@ichef/gypcrete';
-import SwitchRow, { PureSwitchRow } from '../SwitchRow';
+describe('SwitchRow', () => {
+  const mockOnChange = jest.fn();
+  const defaultProps = {
+    label: 'Test Label',
+    asideOn: 'ON',
+    asideOff: 'OFF',
+    defaultChecked: false,
+    onChange: mockOnChange,
+  };
 
-describe('formRow(SwitchRow)', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const element = (
-      <SwitchRow label="foo" />
-    );
-
-    ReactDOM.render(element, div);
-  });
-});
-
-describe('Pure <SwitchRow>', () => {
-  it('renders a <Switch> from @ichef/gypcrete with all unknown props', () => {
-    const wrapper = mount(
-      <PureSwitchRow
-        label="foo"
-        tabIndex="-1"
-        data-foo="bar"
-      />
-    );
-
-    expect(wrapper.find(Switch).exists()).toBeTruthy();
-    expect(wrapper.find(Switch).props()).not.toHaveProperty('label');
-    expect(wrapper.find(Switch).props()).toMatchObject({
-      tabIndex: '-1',
-      'data-foo': 'bar',
-    });
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('observes checked state of inner <Switch> and cache in state', () => {
-    // Default Switch
-    let wrapper = mount(<PureSwitchRow label="foo" />);
-    expect(wrapper.state('checked')).toBeFalsy();
-
-    // Uncontrolled Switch
-    wrapper = mount(<PureSwitchRow label="foo" defaultChecked />);
-    expect(wrapper.state('checked')).toBeTruthy();
-
-    wrapper.find('input').simulate('change', { target: { checked: false } });
-    expect(wrapper.state('checked')).toBeFalsy();
-
-    wrapper.find('input').simulate('change', { target: { checked: true } });
-    expect(wrapper.state('checked')).toBeTruthy();
-
-    // Controller Switch
-    wrapper = mount(<PureSwitchRow label="foo" checked />);
-    expect(wrapper.state('checked')).toBeTruthy();
-
-    wrapper.setProps({ checked: false });
-    expect(wrapper.state('checked')).toBeFalsy();
-
-    wrapper.find('input').simulate('change', { target: { checked: true } });
-    expect(wrapper.state('checked')).toBeFalsy();
+  it('renders correctly with default props', () => {
+    render(<SwitchRow {...defaultProps} />);
+    expect(screen.getByText(defaultProps.label)).toBeInTheDocument();
+    expect(screen.getByRole('checkbox')).toBeInTheDocument();
+    expect(screen.getByText(defaultProps.asideOff)).toBeInTheDocument();
   });
 
-  it('shows different basic with checked state', () => {
-    const wrapper = shallow(
-      <PureSwitchRow
-        checked
-        label="foo"
-        asideOn="TEST_ON"
-        asideOff="TEST_OFF"
-      />
-    );
-
-    expect(wrapper.find(TextLabel).prop('basic')).toBe('TEST_ON');
-
-    wrapper.setProps({ checked: false });
-    expect(wrapper.find(TextLabel).prop('basic')).toBe('TEST_OFF');
+  it('updates switch state correctly when it is uncontrolled', () => {
+    render(<SwitchRow {...defaultProps} />);
+    const switchElement = screen.getByRole('checkbox');
+    userEvent.click(switchElement);
+    expect(mockOnChange).toHaveBeenCalledTimes(1);
+    expect(screen.getByText(defaultProps.asideOn)).toBeInTheDocument();
   });
 
-  it('accepts additional children', () => {
-    const wrapper = mount(
-      <PureSwitchRow label="foo">
-        <span data-foo />
-      </PureSwitchRow>
-    );
+  it('does not update switch state when it is controlled', () => {
+    render(<SwitchRow {...defaultProps} checked={false} />);
+    const switchElement = screen.getByRole('checkbox');
+    userEvent.click(switchElement);
+    expect(mockOnChange).toHaveBeenCalledTimes(1);
+    expect(screen.getByText(defaultProps.asideOff)).toBeInTheDocument();
+  });
 
-    expect(wrapper.containsMatchingElement(<span data-foo />)).toBeTruthy();
+  it('renders children correctly', () => {
+    render(
+      <SwitchRow {...defaultProps}>
+        <div>Test Children</div>
+      </SwitchRow>
+    );
+    expect(screen.getByText('Test Children')).toBeInTheDocument();
   });
 });

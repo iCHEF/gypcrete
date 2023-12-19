@@ -67,6 +67,7 @@ export const multipleValues = () => (
       label="Minimal selection: 2"
       minCheck={2}
       defaultValue={['opt-c', 'opt-d']}
+      onChange={action('change')}
     >
       <SelectOption label="Option A" value="opt-a" />
       <SelectOption label="Option B" value="opt-b" />

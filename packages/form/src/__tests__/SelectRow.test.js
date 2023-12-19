@@ -1,254 +1,223 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import SelectRow from '../SelectRow';
+import SelectOption from '../SelectOption';
 
-import {
-  Avatar,
-  Button,
-  Popover,
-  Text,
-  TextLabel,
-} from '@ichef/gypcrete';
+describe('SelectRow', () => {
+  const mockFn = jest.fn();
 
-import SelectRow, { PureSelectRow, BEM } from '../SelectRow';
-import SelectList from '../SelectList';
-import Option from '../SelectOption';
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-describe('formRow(SelectRow)', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const element = (
-      <SelectRow label="Select">
-        <Option label="Option A" value="a" />
-        <Option label="Option B" value="b" />
-        <Option label="Option C" value="c" />
+  it('should render selected option with controlled value correctly', () => {
+    const { rerender } = render(
+      <SelectRow label="Test Label" value="no" onChange={mockFn}>
+        <SelectOption label="Yes" value="yes" />
+        <SelectOption label="No" value="no" />
       </SelectRow>
     );
 
-    ReactDOM.render(element, div);
-  });
-});
+    expect(screen.getByText('No')).toBeInTheDocument();
 
-describe('Pure <SelectRow>: UI', () => {
-  it('renders a <Button> if the row is editable', () => {
-    const wrapper = shallow(
-      <PureSelectRow label="Select" />
+    rerender(
+      <SelectRow label="Test Label" value="yes" onChange={mockFn}>
+        <SelectOption label="Yes" value="yes" />
+        <SelectOption label="No" value="no" />
+      </SelectRow>
     );
 
-    expect(wrapper.find(Button).exists()).toBeTruthy();
-    expect(wrapper.find(TextLabel).exists()).toBeFalsy();
+    expect(screen.getByText('Yes')).toBeInTheDocument();
   });
 
-  it('renders a <TextLabel> if the row is not editable', () => {
-    const wrapper = shallow(
-      <PureSelectRow ineditable label="Select" />
+
+  it('handle onChange event in single mode', () => {
+    render(
+      <SelectRow label="Test Label" onChange={mockFn}>
+        <SelectOption label="Yes" value="yes" />
+        <SelectOption label="No" value="no" />
+      </SelectRow>
     );
 
-    expect(wrapper.find(Button).exists()).toBeFalsy();
-    expect(wrapper.find(TextLabel).exists()).toBeTruthy();
+    const dropdownButton = screen.getByRole('presentation');
+    userEvent.click(dropdownButton);
+
+    const checkboxes = screen.getAllByRole('checkbox');
+    const yesOptionCheckbox = checkboxes[0];
+    const noOptionCheckbox = checkboxes[1];
+    userEvent.click(yesOptionCheckbox);
+
+    expect(mockFn).toHaveBeenCalledWith('yes');
+
+    // should close popover
+    expect(noOptionCheckbox).not.toBeInTheDocument();
+    expect(screen.queryByText('No')).not.toBeInTheDocument();
   });
 
-  it('renders an anchored <Popover> with a <SelectList> when click on <Button>', () => {
-    const wrapper = shallow(
-      <PureSelectRow label="Select" />
-    );
-    expect(wrapper.find(Popover).exists()).toBeFalsy();
-    expect(wrapper.state('isPopoverOpen')).toBeFalsy();
-
-    expect(wrapper.find(Button).simulate('click'));
-    expect(wrapper.find(Popover).exists()).toBeTruthy();
-    expect(wrapper.state('isPopoverOpen')).toBeTruthy();
-
-    expect(wrapper.find(Popover).find(SelectList).exists()).toBeTruthy();
-  });
-
-  it('removes <Popover> when it requests close', () => {
-    const wrapper = shallow(
-      <PureSelectRow label="Select" />
-    );
-    wrapper.setState({ isPopoverOpen: true });
-    expect(wrapper.find(Popover).exists()).toBeTruthy();
-
-    wrapper.find(Popover).simulate('close');
-    wrapper.setState({ isPopoverOpen: false });
-    expect(wrapper.find(Popover).exists()).toBeFalsy();
-  });
-
-  it('removes <Popover> when value change under single-select mode', () => {
-    const wrapper = shallow(
-      <PureSelectRow label="Select" />
-    );
-
-    // Single-select mode: auto close Popover
-    expect(wrapper.find(Button).simulate('click'));
-    expect(wrapper.find(Popover).exists()).toBeTruthy();
-
-    wrapper.find(SelectList).simulate('change', [1]);
-    expect(wrapper.find(Popover).exists()).toBeFalsy();
-
-    // Multi-select mode: Popover remains
-    wrapper.setProps({ multiple: true });
-
-    expect(wrapper.find(Button).simulate('click'));
-    expect(wrapper.find(Popover).exists()).toBeTruthy();
-
-    wrapper.find(SelectList).simulate('change', [2]);
-    expect(wrapper.find(Popover).exists()).toBeTruthy();
-  });
-
-  it('passes children to <SelectList> inside <Popover>', () => {
-    const element = (
-      <PureSelectRow label="Select">
-        <Option label="foo" />
-      </PureSelectRow>
-    );
-    const wrapper = shallow(element);
-    wrapper.setState({ isPopoverOpen: true });
-
-    expect(element.props.children)
-      .toEqual(wrapper.find(SelectList).prop('children'));
-  });
-});
-
-describe('Pure <SelectRow>: Data', () => {
-  it('caches selected value from <SelectList> when uncontrolled', () => {
-    const wrapper = shallow(
-      <PureSelectRow multiple label="Select" />
-    );
-    wrapper.setState({ isPopoverOpen: true });
-    wrapper.find(SelectList).simulate('change', [1, 2]);
-    expect(wrapper.state('cachedValue')).toEqual([1, 2]);
-  });
-
-  it('does not cache value from <SelectList> when controlled', () => {
-    const wrapper = shallow(
-      <PureSelectRow multiple label="Select" value={[1]} />
-    );
-    wrapper.setState({ isPopoverOpen: true });
-    expect(wrapper.state('cachedValue')).toEqual([1]);
-
-    wrapper.find(SelectList).simulate('change', [1, 2]);
-    expect(wrapper.state('cachedValue')).toEqual([1]);
-  });
-
-  it('updates cached value from props when controlled', () => {
-    const wrapper = shallow(
-      <PureSelectRow label="Select" value={1} />
-    );
-    expect(wrapper.state('cachedValue')).toEqual(1);
-
-    wrapper.setProps({ multiple: true, value: [1, 2] });
-    expect(wrapper.state('cachedValue')).toEqual([1, 2]);
-  });
-
-  it('if change `multiple` prop when uncontrolled, it will auto reset cachedValue', () => {
-    const wrapper = shallow(
-      <PureSelectRow label="Select" defaultValue={1} />
-    );
-    expect(wrapper.state('cachedValue')).toEqual(1);
-
-    wrapper.setProps({ multiple: true, defaultValue: [1, 2] });
-    expect(wrapper.state('cachedValue')).toEqual([]);
-
-    wrapper.setProps({ multiple: false, defaultValue: 87 });
-    expect(wrapper.state('cachedValue')).toEqual(null);
-  });
-
-  it('controls <SelectList> with cached value', () => {
-    const wrapper = shallow(<PureSelectRow label="Select" />);
-    wrapper.setState({
-      cachedValue: 1,
-      isPopoverOpen: true,
-    });
-    expect(wrapper.find(SelectList).prop('value')).toEqual(1);
-
-    wrapper.setProps({ multiple: true });
-    wrapper.setState({ cachedValue: [1, 2, 3] });
-    expect(wrapper.find(SelectList).prop('value')).toEqual([1, 2, 3]);
-  });
-
-  it('renders current value on <Text basic="value">', () => {
-    const wrapper = shallow(
-      <PureSelectRow multiple label="Select" value={[]}>
-        <Option label="Foo" value="foo" />
-        <Option label="Bar" value="bar" />
-        <Option label="Meh" value="meh" />
-      </PureSelectRow>
-    );
-    expect(wrapper.find(Text).prop('basic'))
-      .toEqual(<span className={BEM.placeholder.toString()}>(Unset)</span>);
-
-    wrapper.setProps({ value: ['foo', 'bar'] });
-    expect(wrapper.find(Text).prop('basic')).toBe('Foo, Bar');
-
-    wrapper.setProps({ value: ['foo', 'bar', 'meh'] });
-    expect(wrapper.find(Text).prop('basic')).toBe('All');
-  });
-
-  it('renders the avatar', () => {
-    const fooAvatar = <Avatar alt="foo" src="FOO_SRC" />;
-    const barAvatar = <Avatar alt="bar" src="BAR_SRC" />;
-
-    const wrapper = shallow(
-      <PureSelectRow label="Select" value="foo">
-        <Option label="foo" value="foo" avatar={fooAvatar} />
-        <Option label="bar" value="bar" avatar={barAvatar} />
-      </PureSelectRow>
-    );
-
-    expect(wrapper.find(Avatar).prop('src')).toEqual('FOO_SRC');
-
-    wrapper.setProps({ value: 'bar' });
-    expect(wrapper.find(Avatar).prop('src')).toEqual('BAR_SRC');
-  });
-
-  it('can customize value labels', () => {
-    const wrapper = shallow(
-      <PureSelectRow multiple label="Select" value={[]} asideNoneLabel="None">
-        <Option label="Foo" value="foo" />
-        <Option label="Bar" value="bar" />
-        <Option label="Meh" value="meh" />
-      </PureSelectRow>
-    );
-
-    expect(wrapper.find(Text).prop('basic'))
-      .toEqual(<span className={BEM.placeholder.toString()}>None</span>);
-
-    wrapper.setProps({
-      value: ['foo', 'bar'],
-      asideSeparator: ' + ',
-    });
-    expect(wrapper.find(Text).prop('basic')).toBe('Foo + Bar');
-
-    wrapper.setProps({
-      value: ['foo', 'bar', 'meh'],
-      asideAllLabel: 'Everything',
-    });
-    expect(wrapper.find(Text).prop('basic')).toBe('Everything');
-  });
-
-  it('can disable "All" label by overriding with null', () => {
-    const wrapper = shallow(
-      <PureSelectRow
+  // 測試多個選項渲染正確及處理 onChange 事件
+  it('should render selected options and handle onChange event with multiple options', () => {
+    render(
+      <SelectRow
+        label="Test Label"
         multiple
-        label="Select"
-        asideAllLabel={null}
-        value={['foo', 'bar', 'meh']}
+        defaultValue={['option1', 'option2']}
+        onChange={mockFn}
       >
-        <Option label="Foo" value="foo" />
-        <Option label="Bar" value="bar" />
-        <Option label="Meh" value="meh" />
-      </PureSelectRow>
+        <SelectOption label="Option 1" value="option1" />
+        <SelectOption label="Option 2" value="option2" />
+        <SelectOption label="Option 3" value="option3" />
+      </SelectRow>
     );
-    expect(wrapper.find(Text).prop('basic')).toBe('Foo, Bar, Meh');
+
+    expect(screen.getByText('Option 1, Option 2')).toBeInTheDocument();
+
+    const dropdownButton = screen.getByRole('presentation');
+    userEvent.click(dropdownButton);
+
+    const checkboxes = screen.getAllByRole('checkbox');
+    const option3Checkbox = checkboxes[3];
+    userEvent.click(option3Checkbox);
+
+    expect(mockFn).toHaveBeenCalledWith(['option1', 'option2', 'option3']);
   });
 
-  it('does not display "All" on single <SelectRow> with only one option', () => {
-    const wrapper = shallow(
-      <PureSelectRow label="Select" value="foo">
-        <Option label="Foo" value="foo" />
-      </PureSelectRow>
+  it('should show unset when no defaultValue is provided in multiple mode', () => {
+    render(
+      <SelectRow
+        label="Test Label"
+        multiple
+        onChange={mockFn}
+      >
+        <SelectOption label="Option 1" value="option1" />
+        <SelectOption label="Option 2" value="option2" />
+        <SelectOption label="Option 3" value="option3" />
+      </SelectRow>
     );
-    expect(wrapper.find(Text).prop('basic')).toBe('Foo');
+
+    expect(screen.getByText('(Unset)')).toBeInTheDocument();
+  });
+
+  // 測試禁用情境
+  it('dropdown icon should not be clickable when disabled', () => {
+    render(
+      <SelectRow disabled label="Disabled row">
+        <SelectOption label="Yes" value="yes" />
+        <SelectOption label="No" value="no" />
+      </SelectRow>
+    );
+
+    const dropdownButton = screen.getByRole('presentation');
+    userEvent.click(dropdownButton);
+
+    expect(screen.queryByText('Yes')).not.toBeInTheDocument();
+    expect(screen.queryByText('No')).not.toBeInTheDocument();
+  });
+
+  // ListRow props 測試
+  it('should display an error message', () => {
+    render(
+      <SelectRow
+        checked
+        label="Error Test"
+        status="error"
+        errorMsg="error message"
+        value="test"
+        onChange={mockFn}
+      >
+        <SelectOption label="Test" value="test" />
+      </SelectRow>
+    );
+
+    expect(screen.getByText('error message')).toBeInTheDocument();
+  });
+
+  // 測試自訂 'All' 文字
+  it('should render with a custom All label', () => {
+    render(
+      <SelectRow
+        multiple
+        label="Custom All Test"
+        asideAllLabel="ALL SELECTED"
+        defaultValue={['option1', 'option2', 'option3']}
+        onChange={mockFn}
+      >
+        <SelectOption label="Option 1" value="option1" />
+        <SelectOption label="Option 2" value="option2" />
+        <SelectOption label="Option 3" value="option3" />
+      </SelectRow>
+    );
+
+    expect(screen.getByText('ALL SELECTED')).toBeInTheDocument();
+  });
+
+  // 測試自訂分隔符號
+  it('should render with a custom separator', () => {
+    render(
+      <SelectRow
+        multiple
+        label="Custom Separator Test"
+        asideAllLabel={false}
+        asideSeparator=" + "
+        defaultValue={['option1', 'option2']}
+        onChange={mockFn}
+      >
+        <SelectOption label="Option 1" value="option1" />
+        <SelectOption label="Option 2" value="option2" />
+        <SelectOption label="Option 3" value="option3" />
+      </SelectRow>
+    );
+
+    expect(screen.getByText('Option 1 + Option 2')).toBeInTheDocument();
+  });
+
+  it('render with custom renderRowValueLabel', () => {
+    render(
+      <SelectRow
+        label="Custom RenderRowValueLabel Test"
+        renderRowValueLabel={() => 'Custom RenderRowValueLabel'}
+        value="test"
+        onChange={mockFn}
+      >
+        <SelectOption label="Test" value="test" />
+      </SelectRow>
+    );
+
+    expect(screen.getByText('Custom RenderRowValueLabel')).toBeInTheDocument();
+  });
+
+  it('reset cached value when multiple is false', () => {
+    const mockConsoleError = jest.fn();
+    jest.spyOn(console, 'error').mockImplementation(mockConsoleError);
+
+    const { rerender } = render(
+      <SelectRow
+        label="Test Label"
+        multiple
+        defaultValue={['option1', 'option2']}
+        onChange={mockFn}
+      >
+        <SelectOption label="Option 1" value="option1" />
+        <SelectOption label="Option 2" value="option2" />
+        <SelectOption label="Option 3" value="option3" />
+      </SelectRow>
+    );
+
+    rerender(
+      <SelectRow
+        label="Test Label"
+        multiple={false}
+        defaultValue="option1"
+        onChange={mockFn}
+      >
+        <SelectOption label="Option 1" value="option1" />
+        <SelectOption label="Option 2" value="option2" />
+        <SelectOption label="Option 3" value="option3" />
+      </SelectRow>
+    );
+
+    expect(mockConsoleError).toHaveBeenCalledWith(
+      'Warning: <SelectRow>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.'
+    );
   });
 });

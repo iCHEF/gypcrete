@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import warning from 'warning';
@@ -35,6 +35,19 @@ const CLOSABLE_CONFIG = {
   onClickInside: false,
 };
 
+function usePrevious(value) {
+  const ref = useRef();
+
+  useEffect(
+    () => {
+      ref.current = value;
+    },
+    [value]
+  );
+
+  return ref.current;
+}
+
 /**
  * Generate a value-label map from all `<SelectOption>`s.
  *
@@ -57,231 +70,231 @@ function getValueToLabelAvatarMap(fromChildren = []) {
   return resultMap;
 }
 
-class SelectRow extends PureComponent {
-    static propTypes = {
-      label: PropTypes.node.isRequired,
-      asideAllLabel: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.bool, // can pass false to disable 'All' label
-      ]),
-      asideNoneLabel: PropTypes.string,
-      asideSeparator: PropTypes.string,
-      disabled: PropTypes.bool,
-      renderRowValueLabel: PropTypes.func,
-      // <SelectList> props
-      multiple: SelectList.propTypes.multiple,
-      value: SelectList.propTypes.value,
-      defaultValue: SelectList.propTypes.defaultValue,
-      onChange: PropTypes.func,
-      // from formRow()
-      ineditable: PropTypes.bool,
-      rowProps: rowPropTypes,
-    };
+const SelectRow = React.memo(({
+  label,
+  asideAllLabel,
+  asideNoneLabel,
+  asideSeparator,
+  disabled,
+  renderRowValueLabel: renderRowValueLabelProp,
+  multiple,
+  value,
+  defaultValue,
+  onChange,
+  ineditable,
+  rowProps,
+  className,
+  children,
+  ...restProps
+}) => {
+  const getInitialValue = () => {
+    if (value !== undefined) {
+      return value;
+    }
 
-    static defaultProps = {
-      asideAllLabel: 'All',
-      asideNoneLabel: '(Unset)',
-      asideSeparator: ', ',
-      disabled: false,
-      renderRowValueLabel: undefined,
-      // <SelectList> props
-      multiple: SelectList.defaultProps.multiple,
-      value: SelectList.defaultProps.value,
-      defaultValue: SelectList.defaultProps.defaultValue,
-      onChange: () => {},
-      // from formRow()
-      ineditable: false,
-      rowProps: {},
-    };
+    if (multiple && defaultValue === undefined) {
+      return [];
+    }
 
-    state = {
-      isPopoverOpen: false,
-      valueLabelMap: getValueToLabelAvatarMap(this.props.children),
-      cachedValue: this.getInitialValue(),
-    };
+    return defaultValue;
+  };
 
-    getInitialValue() {
-      const { value, defaultValue, multiple } = this.props;
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [valueLabelMap, setValueLabelMap] = useState(getValueToLabelAvatarMap(children));
+  const [cachedValue, setCachedValue] = useState(getInitialValue());
 
-      if (value !== undefined) {
-        return value;
+  const anchorNode = useRef(null);
+
+  const prevMultiple = usePrevious(multiple);
+  const isControlled = value !== undefined;
+  const prevIsControlled = usePrevious(isControlled);
+
+  const cacheValueArray = (multiple) ? cachedValue : [cachedValue].filter(val => val !== undefined);
+
+  // Handle change of "multiple" prop
+  useEffect(
+    () => {
+      if (!isControlled && (multiple !== prevMultiple) && prevMultiple !== undefined) {
+        warning(
+          false,
+          '<SelectRow>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.'
+        );
+        setCachedValue((multiple) ? [] : null);
       }
+    },
+    [isControlled, multiple, prevMultiple]
+  );
 
-      if (multiple && defaultValue === undefined) {
-        return [];
-      }
+  // Handle children changes
+  useEffect(
+    () => {
+      setValueLabelMap(getValueToLabelAvatarMap(children));
+    },
+    [children]
+  );
 
-      return defaultValue;
-    }
-
-    getIsControlled(fromProps = this.props) {
-      return fromProps.value !== undefined;
-    }
-
-    getCacheValueArray = () => {
-      const { multiple } = this.props;
-      const { cachedValue } = this.state;
-      return (multiple) ? cachedValue : [cachedValue].filter(val => val !== undefined);
-    }
-
-    // eslint-disable-next-line react/no-deprecated, camelcase
-    UNSAFE_componentWillReceiveProps(nextProps) {
-      this.setState({
-        valueLabelMap: getValueToLabelAvatarMap(nextProps.children),
-      });
-
+  // Handle controlled/uncontrolled switch
+  useEffect(
+    () => {
       warning(
-        this.getIsControlled(this.props) === this.getIsControlled(nextProps),
+        isControlled === prevIsControlled || prevIsControlled === undefined,
         '<SelectRow> should not switch from controlled to uncontrolled (or vice versa).'
       );
 
-      if (this.getIsControlled(nextProps)) {
-        this.setState({ cachedValue: nextProps.value });
-      } else if (this.props.multiple !== nextProps.multiple) {
-        warning(false, '<SelectRow>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.');
-        this.setState({ cachedValue: (nextProps.multiple) ? [] : null });
+      if (isControlled) {
+        setCachedValue(value);
+      }
+    },
+    [value, isControlled, prevIsControlled]
+  );
+
+  const handleButtonClick = () => {
+    setIsPopoverOpen(true);
+  };
+
+  const handlePopoverClose = () => {
+    setIsPopoverOpen(false);
+  };
+
+  const handleSelectChange = (nextValue) => {
+    if (!isControlled) {
+      setCachedValue(nextValue);
+    }
+    onChange(nextValue);
+
+    if (!multiple) {
+      handlePopoverClose();
+    }
+  };
+
+  const renderPopover = selectListProps => (
+    <Popover
+      anchor={anchorNode.current}
+      className={BEM.popover.toString()}
+      closable={CLOSABLE_CONFIG}
+      onClose={handlePopoverClose}
+    >
+      <SelectList
+        value={cachedValue}
+        onChange={handleSelectChange}
+        {...selectListProps}
+      />
+    </Popover>
+  );
+
+  const renderRowValueLabel = () => {
+    if (typeof renderRowValueLabelProp === 'function') {
+      return renderRowValueLabelProp({ values: cachedValue, valueLabelMap });
+    }
+
+    const isSingleEmptyValue = cachedValue === undefined || cachedValue === '';
+    const isMultipleEmptyValue = multiple && cachedValue.length === 0;
+
+    if (isSingleEmptyValue || isMultipleEmptyValue) {
+      return <span className={BEM.placeholder.toString()}>{asideNoneLabel}</span>;
+    }
+
+    if (multiple) {
+      // Can turn off 'All' display by passing `false`.
+      if (asideAllLabel && cachedValue.length === valueLabelMap.size) {
+        return asideAllLabel;
       }
     }
 
-    handleButtonClick = () => {
-      this.setState({ isPopoverOpen: true });
-    }
+    return cacheValueArray
+      .map((_value) => {
+        const valueMap = valueLabelMap.get(_value) || {};
+        return valueMap.label;
+      })
+      .filter(_label => Boolean(_label))
+      .join(asideSeparator);
+  };
 
-    handlePopoverClose = () => {
-      this.setState({ isPopoverOpen: false });
-    }
+  const renderAvatar = () => (
+    cacheValueArray
+      .map((_value) => {
+        const valueMap = valueLabelMap.get(_value) || {};
+        return (
+          <React.Fragment key={_value}>
+            {valueMap.avatar}
+          </React.Fragment>
+        );
+      })
+  );
 
-    handleSelectChange = (nextValue) => {
-      if (!this.getIsControlled()) {
-        this.setState({ cachedValue: nextValue });
-      }
-      this.props.onChange(nextValue);
+  const wrapperClassName = classNames(
+    COMPONENT_NAME,
+    className,
+  );
 
-      if (!this.props.multiple) {
-        this.handlePopoverClose();
-      }
-    }
+  const Content = ineditable ? TextLabel : Button;
+  const contentProps = ineditable ? {} : {
+    onClick: handleButtonClick,
+  };
 
-    renderPopover(selectListProps) {
-      return (
-        <Popover
-          anchor={this.anchorNode}
-          className={BEM.popover.toString()}
-          closable={CLOSABLE_CONFIG}
-          onClose={this.handlePopoverClose}
-        >
-          <SelectList
-            value={this.state.cachedValue}
-            onChange={this.handleSelectChange}
-            {...selectListProps}
-          />
-        </Popover>
-      );
-    }
+  const selectListProps = {
+    multiple,
+    children,
+    ...restProps,
+  };
 
-    renderRowValueLabel() {
-      const {
-        multiple,
-        asideAllLabel,
-        asideNoneLabel,
-        asideSeparator,
-        renderRowValueLabel,
-      } = this.props;
-      const { cachedValue, valueLabelMap } = this.state;
+  return (
+    <ListRow className={wrapperClassName} {...rowProps}>
+      {renderAvatar()}
+      <Content minified={false} disabled={disabled} {...contentProps}>
+        <Text
+          verticalOrder="reverse"
+          bold={!ineditable}
+          basic={renderRowValueLabel()}
+          aside={label}
+        />
 
-      if (typeof renderRowValueLabel === 'function') {
-        return renderRowValueLabel({ values: cachedValue, valueLabelMap });
-      }
+        <span ref={anchorNode}>
+          <Icon type="dropdown" disabled={ineditable} />
+        </span>
 
-      const isSingleEmptyValue = cachedValue === undefined || cachedValue === '';
-      const isMultipleEmptyValue = multiple && cachedValue.length === 0;
+        {isPopoverOpen && renderPopover(selectListProps)}
+      </Content>
+    </ListRow>
+  );
+});
 
-      if (isSingleEmptyValue || isMultipleEmptyValue) {
-        return <span className={BEM.placeholder.toString()}>{asideNoneLabel}</span>;
-      }
+SelectRow.propTypes = {
+  label: PropTypes.node.isRequired,
+  asideAllLabel: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool, // can pass false to disable 'All' label
+  ]),
+  asideNoneLabel: PropTypes.string,
+  asideSeparator: PropTypes.string,
+  disabled: PropTypes.bool,
+  renderRowValueLabel: PropTypes.func,
+  // <SelectList> props
+  multiple: SelectList.propTypes.multiple,
+  value: SelectList.propTypes.value,
+  defaultValue: SelectList.propTypes.defaultValue,
+  onChange: PropTypes.func,
+  // from formRow()
+  ineditable: PropTypes.bool,
+  rowProps: rowPropTypes,
+};
 
-      if (multiple) {
-        // Can turn off 'All' display by passing `false`.
-        if (asideAllLabel && cachedValue.length === valueLabelMap.size) {
-          return asideAllLabel;
-        }
-      }
+SelectRow.defaultProps = {
+  asideAllLabel: 'All',
+  asideNoneLabel: '(Unset)',
+  asideSeparator: ', ',
+  disabled: false,
+  renderRowValueLabel: undefined,
+  // <SelectList> props
+  multiple: SelectList.defaultProps.multiple,
+  value: SelectList.defaultProps.value,
+  defaultValue: SelectList.defaultProps.defaultValue,
+  onChange: () => {},
+  // from formRow()
+  ineditable: false,
+  rowProps: {},
+};
 
-      return this.getCacheValueArray()
-        .map((value) => {
-          const valueMap = valueLabelMap.get(value) || {};
-          return valueMap.label;
-        })
-        .filter(label => Boolean(label))
-        .join(asideSeparator);
-    }
-
-    renderAvatar() {
-      const { valueLabelMap } = this.state;
-      return this.getCacheValueArray()
-        .map((value) => {
-          const valueMap = valueLabelMap.get(value) || {};
-          return (
-            <React.Fragment key={value}>
-              {valueMap.avatar}
-            </React.Fragment>
-          );
-        });
-    }
-
-    render() {
-      const {
-        label,
-        asideAllLabel,
-        asideNoneLabel,
-        asideSeparator,
-        disabled,
-        renderRowValueLabel,
-        // <ListRow> props (intercepted from it)
-        // multiple,
-        value,
-        defaultValue,
-        onChange,
-        // from formRow()
-        ineditable,
-        rowProps,
-        // React props
-        className,
-        ...selectListProps
-      } = this.props;
-      const { isPopoverOpen } = this.state;
-
-      const wrapperClassName = classNames(
-        COMPONENT_NAME,
-        className,
-      );
-
-      const Content = ineditable ? TextLabel : Button;
-      const contentProps = ineditable ? {} : {
-        onClick: this.handleButtonClick,
-      };
-
-      return (
-        <ListRow className={wrapperClassName} {...rowProps}>
-          {this.renderAvatar()}
-          <Content minified={false} disabled={disabled} {...contentProps}>
-            <Text
-              verticalOrder="reverse"
-              bold={!ineditable}
-              basic={this.renderRowValueLabel()}
-              aside={label}
-            />
-
-            <span ref={(ref) => { this.anchorNode = ref; }}>
-              <Icon type="dropdown" disabled={ineditable} />
-            </span>
-
-            {isPopoverOpen && this.renderPopover(selectListProps)}
-          </Content>
-        </ListRow>
-      );
-    }
-}
 
 export { SelectRow as PureSelectRow };
 export default formRow()(SelectRow);
