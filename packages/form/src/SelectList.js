@@ -94,15 +94,18 @@ const SelectList = React.memo(({
   );
 
   // Check if the component is switching between controlled and uncontrolled
-  useEffect(() => {
-    warning(
-      isControlled === prevIsControlled.current,
-      '<SelectList> should not switch from controlled to uncontrolled (or vice versa).'
-    );
+  useEffect(
+    () => {
+      warning(
+        isControlled === prevIsControlled.current,
+        '<SelectList> should not switch from controlled to uncontrolled (or vice versa).'
+      );
 
-    // Saving current value for the next comparison
-    prevIsControlled.current = isControlled;
-  }, [isControlled]);
+      // Saving current value for the next comparison
+      prevIsControlled.current = isControlled;
+    },
+    [isControlled]
+  );
 
   const handleChange = (nextCheckedState) => {
     if (!isControlled) {

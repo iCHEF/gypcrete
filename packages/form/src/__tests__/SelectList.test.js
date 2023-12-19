@@ -5,10 +5,6 @@ import SelectList from '../SelectList';
 import SelectOption from '../SelectOption';
 
 describe('SelectList', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('renders SelectList with default props', () => {
     render(<SelectList title="List Title" />);
     expect(screen.getByText('List Title')).toBeInTheDocument();
