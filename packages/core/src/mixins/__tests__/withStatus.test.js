@@ -72,7 +72,9 @@ it('passes down "errorMsg" to wrapped component', () => {
     { context: { status: 'error', errorMsg: 'Just error' } }
   );
 
-  expect(wrapper.find(Foo).shallow().text()).toBe('<StatusIcon />Just error');
+  const iconWrapper = wrapper.find(Foo).shallow().find(StatusIcon);
+  expect(iconWrapper.prop('status')).toBe('error');
+  expect(wrapper.find(Foo).prop('errorMsg')).toBe('Just error');
 });
 
 it('passes down other props to wrapped component', () => {
