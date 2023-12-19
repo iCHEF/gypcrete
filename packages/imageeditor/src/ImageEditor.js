@@ -102,6 +102,17 @@ class ImageEditor extends PureComponent {
 
     editorRef = React.createRef();
 
+    componentDidUpdate(prevProps) {
+      const { image } = this.props;
+      if (image !== prevProps.image) {
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({
+          scale: DEFAULT_SCALE,
+          position: DEFAULT_POSITION,
+        });
+      }
+    }
+
     getImageCanvas = ({ originalSize = false } = {}) => {
       if (originalSize) {
         return this.editorRef.current.getImage();
@@ -115,17 +126,6 @@ class ImageEditor extends PureComponent {
       }
 
       return this.editorRef.current.getCroppingRect();
-    }
-
-    // eslint-disable-next-line react/no-deprecated, camelcase
-    UNSAFE_componentWillReceiveProps(nextProps) {
-      // Consider current `scale`, `position` and `initCropRect` outdated when image changes
-      if (nextProps.image !== this.props.image) {
-        this.setState({
-          scale: DEFAULT_SCALE,
-          position: DEFAULT_POSITION,
-        });
-      }
     }
 
     handleSliderChange = (event) => {
