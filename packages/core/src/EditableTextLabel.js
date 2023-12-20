@@ -1,4 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 
@@ -40,9 +45,9 @@ const EditableTextLabel = React.memo(({
   ...labelProps
 }) => {
   const [inEdit, setInEdit] = useState(inEditProp || false);
-  const [touchCount, setTouchCount] = useState(0);
   // For simulating double-touch
-  const [dblTouchTimeout, setDblTouchTimeout] = useState(null);
+  const touchCountRef = useRef(0);
+  const touchTimeoutRef = useRef(null);
 
   const getEditabilityControlled = useCallback(
     () => inEditProp !== undefined,
@@ -50,8 +55,8 @@ const EditableTextLabel = React.memo(({
   );
 
   const resetDblTouchSimulation = () => {
-    setTouchCount(0);
-    setDblTouchTimeout(null);
+    touchCountRef.current = 0;
+    touchTimeoutRef.current = null;
   };
 
   useEffect(
@@ -61,6 +66,15 @@ const EditableTextLabel = React.memo(({
       }
     },
     [getEditabilityControlled, inEditProp]
+  );
+
+  useEffect(
+    () => () => {
+      if (touchTimeoutRef.current) {
+        clearTimeout(touchTimeoutRef.current);
+      }
+    },
+    []
   );
 
   const leaveEditModeIfNotControlled = () => {
@@ -82,7 +96,7 @@ const EditableTextLabel = React.memo(({
   };
 
   const handleTouchEnd = (event) => {
-    const currentCount = touchCount + 1;
+    const currentCount = touchCountRef.current + 1;
 
     if (currentCount === 2) {
       // Simulates “double touch”
@@ -92,17 +106,17 @@ const EditableTextLabel = React.memo(({
     }
 
     /**
-       * Clears prev timeout to keep touch counts, and then
-       * create new timeout to reset touch counts.
-       */
-    global.clearTimeout(dblTouchTimeout);
+     * Clears prev timeout to keep touch counts, and then
+     * create new timeout to reset touch counts.
+     */
+    global.clearTimeout(touchTimeoutRef.current);
     const resetTimeout = global.setTimeout(
       resetDblTouchSimulation,
       TOUCH_TIMEOUT_MS
     );
 
-    setTouchCount(currentCount);
-    setDblTouchTimeout(resetTimeout);
+    touchCountRef.current = currentCount;
+    touchTimeoutRef.current = resetTimeout;
   };
 
   const handleInputBlur = (event) => {
