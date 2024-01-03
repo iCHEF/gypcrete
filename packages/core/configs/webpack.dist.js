@@ -14,27 +14,17 @@ module.exports = webpackMerge(defaultConfigs, {
         include: [
           path.resolve(packageDirname, 'src/fonts'),
         ],
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name]-[hash:6].[ext]',
-              outputPath: 'fonts/',
-            },
-          },
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name]-[hash:6][ext]',
+        },
       },
       {
         test: /\.svg$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name]-[hash:6].[ext]',
-              outputPath: 'icons/',
-            },
-          },
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: 'icons/[name]-[hash:6][ext]',
+        },
       },
     ],
   },
