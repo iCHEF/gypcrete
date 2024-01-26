@@ -21,7 +21,6 @@ module.exports = ({ config, mode }) => {
   if (config.optimization && mode === 'PRODUCTION') {
     // eslint-disable-next-line no-param-reassign
     config.optimization.minimizer = [new TerserPlugin({
-      cache: true,
       parallel: true,
       terserOptions: {
         mangle: false,
@@ -49,13 +48,17 @@ module.exports = ({ config, mode }) => {
       {
         loader: 'postcss-loader',
         options: {
-          plugins: () => [autoprefixer],
+          postcssOptions: {
+            plugins: [autoprefixer],
+          },
         },
       },
       {
         loader: 'sass-loader',
         options: {
-          outputStyle: 'expanded',
+          sassOptions: {
+            outputStyle: 'expanded',
+          },
         },
       },
     ],

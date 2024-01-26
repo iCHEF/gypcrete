@@ -1,212 +1,141 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
-import keycode from 'keycode';
-
-import { getTextLayoutProps, ROW_COMP_ALIGN } from '../mixins/rowComp';
-
-import EditableText from '../EditableText';
+import { screen, render, waitFor, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import EditableTextLabel from '../EditableTextLabel';
-import Icon from '../Icon';
-import TextLabel from '../TextLabel';
 
-describe('rendering', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const element = <EditableTextLabel />;
+describe('EditableTextLabel', () => {
+  const defaultProps = {
+    inEdit: undefined,
+    onEditEnd: jest.fn(),
+    onDblClick: jest.fn(),
+    icon: 'icon',
+    basic: 'basic text',
+    align: 'center',
+    status: 'status',
+  };
 
-    ReactDOM.render(element, div);
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('renders like a typical <TextLabel> when not inEdit or loading', () => {
-    const wrapper = shallow(<EditableTextLabel basic="Foo" />);
+  it('renders in display mode by default', () => {
+    render(<EditableTextLabel {...defaultProps} />);
 
-    expect(wrapper.is(TextLabel)).toBeTruthy();
-    expect(wrapper.prop('basic')).toBe('Foo');
-    expect(wrapper.prop('children')).toBeUndefined();
+    expect(screen.getByText(defaultProps.basic)).toBeInTheDocument();
   });
 
-  it('renders <EditableText> inside <TextLabel> when in edit mode', () => {
-    const wrapper = shallow(<EditableTextLabel basic="Foo" inEdit />);
+  it('enters edit mode on double click when inEdit is not controlled', () => {
+    render(<EditableTextLabel {...defaultProps} />);
 
-    expect(wrapper.is(TextLabel)).toBeTruthy();
-    expect(wrapper.find(EditableText).exists()).toBeTruthy();
-    expect(wrapper.find(EditableText).prop('defaultValue')).toBe('Foo');
+    userEvent.dblClick(screen.getByText(defaultProps.basic));
 
-    wrapper.setProps({ inEdit: false });
-    expect(wrapper.find(EditableText).exists()).toBeFalsy();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
   });
 
-  it('renders icon no matter in edit mode or not', () => {
-    const wrapper = shallow(<EditableTextLabel icon="printer" basic="Foo" />);
+  it('does not enter edit mode on double click when inEdit is controlled as false', () => {
+    const props = { ...defaultProps, inEdit: false };
 
-    // Icon is rendered by <TextLabel> when not inEdit
-    expect(wrapper.dive().contains(<Icon type="printer" />)).toBeTruthy();
+    render(<EditableTextLabel {...props} />);
 
-    // Icon is passed into <TextLabel> by <EditableTextLabel> when inEdit
-    wrapper.setProps({ inEdit: true });
-    expect(wrapper.contains(<Icon type="printer" />)).toBeTruthy();
+    userEvent.dblClick(screen.getByText(defaultProps.basic));
+    expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
   });
 
-  it('renders <EditableText> with layout props the same as rowComp() in edit mode', () => {
-    const wrapper = shallow(<EditableTextLabel basic="Foo" align="left" inEdit />);
+  it('does not enter edit mode on double click when inEdit is controlled as true', () => {
+    const props = { ...defaultProps, inEdit: true };
 
-    Object.values(ROW_COMP_ALIGN).forEach((alignment) => {
-      let layoutProps = getTextLayoutProps(alignment, false);
-      wrapper.setProps({ align: alignment, icon: undefined });
+    render(<EditableTextLabel {...props} />);
 
-      expect(wrapper.find(EditableText).prop('align')).toBe(layoutProps.align);
-      expect(wrapper.find(EditableText).prop('noGrow')).toBe(layoutProps.noGrow);
-
-      layoutProps = getTextLayoutProps(alignment, true);
-      wrapper.setProps({ align: alignment, icon: 'printer' });
-
-      expect(wrapper.find(EditableText).prop('align')).toBe(layoutProps.align);
-      expect(wrapper.find(EditableText).prop('noGrow')).toBe(layoutProps.noGrow);
-    });
-  });
-});
-
-describe('input event handlers', () => {
-  it('fires onEditEnd with input value on input blurs', () => {
-    const handleEditEnd = jest.fn(() => EditableTextLabel.defaultProps.onEditEnd());
-    const wrapper = shallow(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
-
-    expect(handleEditEnd).not.toHaveBeenCalled();
-
-    // Blur without changing input value
-    wrapper.find(EditableText).simulate('blur', { currentTarget: { value: 'foo' } });
-    expect(handleEditEnd).toHaveBeenLastCalledWith(
-      expect.objectContaining({ value: 'foo' })
-    );
-
-    // Blur with a different value
-    wrapper.find(EditableText).simulate('blur', { currentTarget: { value: 'bar' } });
-    expect(handleEditEnd).toHaveBeenLastCalledWith(
-      expect.objectContaining({ value: 'bar' })
-    );
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
   });
 
-  it('blurs input on Enter key', () => {
-    const wrapper = shallow(<EditableTextLabel basic="foo" inEdit />);
-    const mockedBlur = jest.fn();
-
-    expect(mockedBlur).not.toHaveBeenCalled();
-
-    wrapper.find(EditableText).simulate('keydown', {
-      currentTarget: { blur: mockedBlur },
-      keyCode: keycode('Enter'),
-    });
-    expect(mockedBlur).toHaveBeenCalledTimes(1);
+  it('calls onDblClick when double clicked', () => {
+    render(<EditableTextLabel {...defaultProps} />);
+    userEvent.dblClick(screen.getByText(defaultProps.basic));
+    expect(defaultProps.onDblClick).toHaveBeenCalledTimes(1);
   });
 
-  it('fires onEditEnd with value as null on Escape key', () => {
-    const handleEditEnd = jest.fn();
-    const wrapper = shallow(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
+  it('inEdit is not controlled: call onEditEnd with input value and do not change the value when it blurs', async () => {
+    render(<EditableTextLabel {...defaultProps} />);
 
-    expect(handleEditEnd).not.toHaveBeenCalled();
+    userEvent.dblClick(screen.getByText(defaultProps.basic));
+    const input = screen.getByRole('textbox');
+    userEvent.clear(input);
+    userEvent.type(input, 'new text');
+    userEvent.tab();
 
-    wrapper.find(EditableText).simulate('keydown', { keyCode: keycode('Escape') });
-    expect(handleEditEnd).toHaveBeenLastCalledWith(
-      expect.objectContaining({ value: null })
-    );
+    await waitFor(() => expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
+      value: 'new text',
+      event: expect.any(Object),
+    }));
+
+    expect(screen.getByText(defaultProps.basic)).toBeInTheDocument();
   });
 
-  it('does not fire onEditEnd on other keys', () => {
-    const handleEditEnd = jest.fn();
-    const wrapper = shallow(<EditableTextLabel basic="foo" onEditEnd={handleEditEnd} inEdit />);
+  it('inEdit is controlled: call onEditEnd with input value and change the value when it blurs', async () => {
+    render(<EditableTextLabel {...defaultProps} inEdit />);
 
-    expect(handleEditEnd).not.toHaveBeenCalled();
+    const input = screen.getByRole('textbox');
+    userEvent.clear(input);
+    userEvent.type(input, 'new text');
+    userEvent.tab();
 
-    wrapper.find(EditableText).simulate('keydown', { keyCode: keycode('A') });
-    expect(handleEditEnd).not.toHaveBeenCalled();
+    await waitFor(() => expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
+      value: 'new text',
+      event: expect.any(Object),
+    }));
 
-    wrapper.find(EditableText).simulate('keydown', { keyCode: keycode('Ctrl') });
-    expect(handleEditEnd).not.toHaveBeenCalled();
-
-    wrapper.find(EditableText).simulate('keydown', { keyCode: keycode('Delete') });
-    expect(handleEditEnd).not.toHaveBeenCalled();
-  });
-});
-
-describe('behaviors as controlled/uncontrolled component', () => {
-  it("goes edit mode on double click if 'inEdit' is uncontrolled", () => {
-    const wrapper = shallow(<EditableTextLabel basic="Foo" />);
-    expect(wrapper.state('inEdit')).toBeFalsy();
-
-    wrapper.simulate('dblclick');
-    expect(wrapper.state('inEdit')).toBeTruthy();
+    expect(screen.getByText('new text')).toBeInTheDocument();
   });
 
-  it("stays in edit mode as long as 'inEdit' is uncontrolled", () => {
-    const wrapper = shallow(<EditableTextLabel basic="Foo" />);
-    wrapper.setState({ inEdit: true });
-    wrapper.setProps({ icon: 'printer' });
 
-    expect(wrapper.state('inEdit')).toBeTruthy();
+  it('calls onEditEnd with null when escape key is pressed', async () => {
+    render(<EditableTextLabel {...defaultProps} />);
+    userEvent.dblClick(screen.getByText(defaultProps.basic));
+    const input = screen.getByRole('textbox');
+    userEvent.type(input, '{esc}');
+    await waitFor(() => expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
+      value: null,
+      event: expect.any(Object),
+    }));
   });
 
-  it("leaves edit mode on blur if 'inEdit' is uncontrolled", () => {
-    const wrapper = shallow(<EditableTextLabel basic="foo" />);
+  it('calls onEditEnd with input value when enter key is pressed', async () => {
+    render(<EditableTextLabel {...defaultProps} />);
+    userEvent.dblClick(screen.getByText(defaultProps.basic));
+    const input = screen.getByRole('textbox');
 
-    wrapper.setState({ inEdit: true });
-    wrapper.find(EditableText).simulate('blur', { currentTarget: {} });
+    userEvent.clear(input);
+    userEvent.type(input, 'new text{enter}');
 
-    expect(wrapper.state('inEdit')).toBeFalsy();
+    await waitFor(() => expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
+      value: 'new text',
+      event: expect.any(Object),
+    }));
   });
 
-  it("leaves edit mode on Esc if 'inEdit' is uncontrolled", () => {
-    const wrapper = shallow(<EditableTextLabel basic="foo" />);
 
-    wrapper.setState({ inEdit: true });
-    wrapper.find(EditableText).simulate('keydown', { keyCode: keycode('Escape') });
-
-    expect(wrapper.state('inEdit')).toBeFalsy();
+  it('do not call onDblClick when only touched once', () => {
+    render(<EditableTextLabel {...defaultProps} />);
+    fireEvent.touchEnd(screen.getByText(defaultProps.basic));
+    expect(defaultProps.onDblClick).toHaveBeenCalledTimes(0);
   });
 
-  it("does not go edit mode on double click if 'inEdit' is controlled", () => {
-    const wrapper = shallow(<EditableTextLabel basic="Foo" inEdit={false} />);
-    expect(wrapper.state('inEdit')).toBeFalsy();
+  it('do not call onDblClick when touched twice but over 250ms', () => {
+    jest.useFakeTimers();
 
-    wrapper.simulate('dblclick');
-    expect(wrapper.state('inEdit')).toBeFalsy();
-  });
-});
+    render(<EditableTextLabel {...defaultProps} />);
 
-describe('Double-touch simulation', () => {
-  it('triggers dblClick callback when touch twice with in 250ms', () => {
-    const handleDblClick = jest.fn();
-    const wrapper = shallow(<EditableTextLabel basic="foo" onDblClick={handleDblClick} />);
-
-    expect(handleDblClick).not.toHaveBeenCalled();
-
-    return new Promise((resolve) => {
-      wrapper.simulate('touchend');
-      expect(wrapper.state('touchCount')).toBe(1);
-
-      setTimeout(() => {
-        wrapper.simulate('touchend');
-        resolve();
-      }, 200);
-    }).then(() => {
-      expect(handleDblClick).toHaveBeenCalledTimes(1);
-    });
+    fireEvent.touchEnd(screen.getByText(defaultProps.basic));
+    jest.advanceTimersByTime(300);
+    fireEvent.touchEnd(screen.getByText(defaultProps.basic));
+    expect(defaultProps.onDblClick).toHaveBeenCalledTimes(0);
   });
 
-  it('does not trigger dblClick callback when touch twice in over 250ms', () => {
-    const handleDblClick = jest.fn();
-    const wrapper = shallow(<EditableTextLabel basic="foo" onDblClick={handleDblClick} />);
-
-    expect(handleDblClick).not.toHaveBeenCalled();
-
-    return new Promise((resolve) => {
-      wrapper.simulate('touchstart');
-      setTimeout(() => {
-        wrapper.simulate('touchstart');
-        resolve();
-      }, 500);
-    }).then(() => {
-      expect(handleDblClick).not.toHaveBeenCalled();
-    });
+  it('call onDblClick when touched twice', () => {
+    render(<EditableTextLabel {...defaultProps} />);
+    fireEvent.touchEnd(screen.getByText(defaultProps.basic));
+    fireEvent.touchEnd(screen.getByText(defaultProps.basic));
+    expect(defaultProps.onDblClick).toHaveBeenCalledTimes(1);
   });
 });

@@ -7,7 +7,7 @@ import TextLabel from '@ichef/gypcrete/src/TextLabel';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-  title: '@ichef/gypcrete|EditableTextLabel',
+  title: 'gypcrete/EditableTextLabel',
   component: EditableTextLabel,
   subcomponents: { TextLabel },
 };

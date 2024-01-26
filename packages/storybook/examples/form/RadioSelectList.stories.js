@@ -5,7 +5,7 @@ import RadioSelectList from '@ichef/gypcrete-form/src/RadioSelectList';
 import RadioSelectOption from '@ichef/gypcrete-form/src/RadioSelectOption';
 
 export default {
-  title: '@ichef/gypcrete-form|RadioSelectList',
+  title: 'gypcrete-form/RadioSelectList',
   component: RadioSelectList,
   subcomponents: { RadioSelectOption },
 };

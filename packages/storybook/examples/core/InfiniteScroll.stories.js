@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import InfiniteScroll from '@ichef/gypcrete/src/InfiniteScroll';
 
 export default {
-  title: '@ichef/gypcrete|InfiniteScroll',
+  title: 'gypcrete/InfiniteScroll',
   component: InfiniteScroll,
 };
 

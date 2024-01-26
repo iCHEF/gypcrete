@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow, mount } from 'enzyme';
 
 import formRow from '../formRow';
@@ -18,10 +18,9 @@ class Bar extends PureComponent {
 const FormRowBarWithRef = formRow({ withRef: true })(Bar);
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <FormRowFoo />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('passes ineditable prop to wrapped component', () => {

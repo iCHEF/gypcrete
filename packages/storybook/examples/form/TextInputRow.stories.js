@@ -6,7 +6,7 @@ import { PureTextInput } from '@ichef/gypcrete/src/TextInput';
 import TextInputRow, { PureTextInputRow } from '@ichef/gypcrete-form/src/TextInputRow';
 
 export default {
-  title: '@ichef/gypcrete-form|TextInputRow',
+  title: 'gypcrete-form/TextInputRow',
   component: PureTextInputRow,
   subcomponents: {
     'formRow()': TextInputRow,

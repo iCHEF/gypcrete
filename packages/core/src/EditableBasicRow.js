@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './styles/EditableBasicRow.scss';
@@ -57,134 +57,130 @@ export const ROW_INPUT_TAGS = {
  * ```
  */
 
-class EditableBasicRow extends PureComponent {
-    static propTypes = {
-      inputTag: PropTypes.oneOf(Object.values(ROW_INPUT_TAGS)),
-      // <input> props
-      value: PropTypes.string,
-      defaultValue: PropTypes.string,
-      placeholder: PropTypes.string,
-      readOnly: PropTypes.bool,
-      disabled: PropTypes.bool,
-      onChange: PropTypes.func,
-      onFocus: PropTypes.func,
-      onBlur: PropTypes.func,
-      // status props
-      status: PropTypes.string,
-      statusIcon: PropTypes.element,
-    };
+const EditableBasicRow = React.memo(({
+  inputTag: InputTag,
+  // <input> props
+  placeholder,
+  readOnly,
+  disabled,
+  // event handlers, should not go into <input> directly
+  onChange,
+  onFocus,
+  onBlur,
+  // status props
+  status, // digested by this component and should not go into <input>
+  statusIcon,
+  // React props
+  className,
+  // <BasicRow> props from <Text>, should ignore
+  basic, // eslint-disable-line react/prop-types
+  tag, // eslint-disable-line react/prop-types
+  ...inputProps
+}) => {
+  const [currentValue, setCurrentValue] = useState(inputProps.value || inputProps.defaultValue || '');
+  const [focused, setFocused] = useState(false);
+  const inputNodeRef = useRef();
 
-    static defaultProps = {
-      inputTag: TAG_INPUT,
-      value: undefined,
-      defaultValue: undefined,
-      placeholder: 'Unset',
-      readOnly: false,
-      disabled: false,
-      onChange: () => {},
-      onFocus: () => {},
-      onBlur: () => {},
-      status: undefined,
-      statusIcon: undefined,
-    };
+  useEffect(
+    () => {
+      setCurrentValue(inputProps.value);
+    },
+    [inputProps.value]
+  );
 
-    state = {
-      currentValue: this.props.value || this.props.defaultValue || '',
-      focused: false,
-    };
+  const handleInputFocus = (event) => {
+    setFocused(true);
+    onFocus(event);
+  };
 
-    // eslint-disable-next-line react/no-deprecated, camelcase
-    UNSAFE_componentWillReceiveProps(nextProps) {
-      if (nextProps.value !== this.props.value) {
-        this.setState({ currentValue: nextProps.value });
-      }
+  const handleInputBlur = (event) => {
+    setFocused(false);
+    onBlur(event);
+  };
+
+  const handleInputChange = (event) => {
+    // Only update if <input> isn't controlled
+    if (!inputProps.value) {
+      setCurrentValue(event.currentTarget.value);
     }
 
-    handleInputFocus = (event) => {
-      this.setState({ focused: true });
-      this.props.onFocus(event);
-    }
+    onChange(event);
+  };
 
-    handleInputBlur = (event) => {
-      this.setState({ focused: false });
-      this.props.onBlur(event);
-    }
+  const bemClass = BEM.root
+    .modifier('empty', !currentValue)
+    .modifier('focused', focused)
+    .modifier('disabled', disabled);
+  const rootClassName = classNames(bemClass.toString(), className);
 
-    handleInputChange = (event) => {
-      // Only update if <input> isn't controlled
-      if (!this.props.value) {
-        this.setState({ currentValue: event.currentTarget.value });
-      }
+  const inputType = (InputTag === TAG_INPUT) ? 'text' : undefined;
+  const inputTabIndex = (readOnly || disabled) ? -1 : undefined;
 
-      this.props.onChange(event);
-    }
+  /**
+     * Append an extra line-break,
+     * or the last empty line in <textarea> will be invisible on browser
+     */
+  const basicLabel = (
+    <span className={BEM.basicLabel}>
+      {currentValue || placeholder}
+      {InputTag === TAG_TEXTAREA && '\n'}
+    </span>
+  );
 
-    render() {
-      const {
-        inputTag: InputTag,
-        // <input> props
-        placeholder,
-        readOnly,
-        disabled,
-        // event handlers, should not go into <input> directly
-        onChange,
-        onFocus,
-        onBlur,
-        // status props
-        status, // digested by this component and should not go into <input>
-        statusIcon,
-        // React props
-        className,
-        // <BasicRow> props from <Text>, should ignore
-        basic, // eslint-disable-line react/prop-types
-        tag, // eslint-disable-line react/prop-types
-        ...inputProps
-      } = this.props;
-      const { currentValue, focused } = this.state;
+  return (
+    <BasicRow
+      className={rootClassName}
+      basic={basicLabel}
+      statusIcon={statusIcon}
+    >
+      <InputTag
+        ref={inputNodeRef}
+        type={inputType}
+        value={currentValue}
+        placeholder={placeholder}
+        className={BEM.input.toString()}
+        readOnly={readOnly}
+        disabled={disabled}
+        tabIndex={inputTabIndex}
+        onChange={handleInputChange}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        {...inputProps}
+      />
+    </BasicRow>
+  );
+});
 
-      const bemClass = BEM.root
-        .modifier('empty', !currentValue)
-        .modifier('focused', focused)
-        .modifier('disabled', disabled);
-      const rootClassName = classNames(bemClass.toString(), className);
+EditableBasicRow.propTypes = {
+  inputTag: PropTypes.oneOf(Object.values(ROW_INPUT_TAGS)),
+  // <input> props
+  value: PropTypes.string,
+  defaultValue: PropTypes.string,
+  placeholder: PropTypes.string,
+  readOnly: PropTypes.bool,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  // status props
+  status: PropTypes.string,
+  statusIcon: PropTypes.element,
+};
 
-      const inputType = (InputTag === TAG_INPUT) ? 'text' : undefined;
-      const inputTabIndex = (readOnly || disabled) ? -1 : undefined;
 
-      /**
-         * Append an extra line-break,
-         * or the last empty line in <textarea> will be invisible on browser
-         */
-      const basicLabel = (
-        <span className={BEM.basicLabel}>
-          {currentValue || placeholder}
-          {InputTag === TAG_TEXTAREA && '\n'}
-        </span>
-      );
+EditableBasicRow.defaultProps = {
+  inputTag: TAG_INPUT,
+  value: undefined,
+  defaultValue: undefined,
+  placeholder: 'Unset',
+  readOnly: false,
+  disabled: false,
+  onChange: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  status: undefined,
+  statusIcon: undefined,
+};
 
-      return (
-        <BasicRow
-          className={rootClassName}
-          basic={basicLabel}
-          statusIcon={statusIcon}
-        >
-          <InputTag
-            ref={(ref) => { this.inputNode = ref; }}
-            type={inputType}
-            value={currentValue}
-            placeholder={placeholder}
-            className={BEM.input.toString()}
-            readOnly={readOnly}
-            disabled={disabled}
-            tabIndex={inputTabIndex}
-            onChange={this.handleInputChange}
-            onFocus={this.handleInputFocus}
-            onBlur={this.handleInputBlur}
-            {...inputProps}
-          />
-        </BasicRow>
-      );
-    }
-}
 
 export default EditableBasicRow;

@@ -1,12 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import RadioSelectList from '../RadioSelectList';
 import RadioSelectOption from '../RadioSelectOption';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = (
     <RadioSelectList>
       <RadioSelectOption label="Foo" value="foo" />
@@ -14,7 +13,7 @@ it('renders without crashing', () => {
     </RadioSelectList>
   );
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('pass default props to SelectList', () => {

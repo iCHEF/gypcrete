@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import { Icon } from '@ichef/gypcrete';
@@ -7,10 +7,9 @@ import EditorPlaceholder, { CenterIcon } from '../EditorPlaceholder';
 
 describe('<EditorPlaceholder>', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = <EditorPlaceholder canvasHeight={200} />;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 
   it('shows an icon inside for normal mode or loading mode', () => {

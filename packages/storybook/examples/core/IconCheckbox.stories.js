@@ -5,7 +5,7 @@ import IconCheckbox from '@ichef/gypcrete/src/IconCheckbox';
 import FlexRow from 'utils/FlexRow';
 
 export default {
-  title: '@ichef/gypcrete|IconCheckbox',
+  title: 'gypcrete/IconCheckbox',
   component: IconCheckbox,
   subcomponents: {
     Checkbox,

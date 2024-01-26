@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 import memoize from 'memoize-one';
 
@@ -43,10 +43,9 @@ const AnchoredBox = anchored({
 // --------------------
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <AnchoredBox />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('renders null if anchor is not set', () => {

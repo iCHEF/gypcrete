@@ -3,7 +3,7 @@ import SwitchIcon from '@ichef/gypcrete/src/SwitchIcon';
 
 
 export default {
-  title: '@ichef/gypcrete|SwitchIcon',
+  title: 'gypcrete/SwitchIcon',
   component: SwitchIcon,
 };
 

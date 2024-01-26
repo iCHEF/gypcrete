@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow, mount } from 'enzyme';
 
 import StatusIcon from 'src/StatusIcon';
@@ -31,10 +31,9 @@ const FooWithRawStatus = withStatus({ withRawStatus: true })(Foo);
 const BarWithRef = withStatus({ withRef: true })(Bar);
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <FooWithStatus />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('renders <StatusIcon> from context and passes to wrapped component', () => {
@@ -72,7 +71,9 @@ it('passes down "errorMsg" to wrapped component', () => {
     { context: { status: 'error', errorMsg: 'Just error' } }
   );
 
-  expect(wrapper.find(Foo).shallow().text()).toBe('<StatusIcon />Just error');
+  const iconWrapper = wrapper.find(Foo).shallow().find(StatusIcon);
+  expect(iconWrapper.prop('status')).toBe('error');
+  expect(wrapper.find(Foo).prop('errorMsg')).toBe('Just error');
 });
 
 it('passes down other props to wrapped component', () => {

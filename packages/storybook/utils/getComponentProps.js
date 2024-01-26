@@ -1,4 +1,4 @@
-import { extractProps } from '@storybook/addon-docs/dist/frameworks/react/extractProps';
+import { extractProps } from '@storybook/addon-docs';
 
 function formatValue(value) {
   switch (typeof value) {

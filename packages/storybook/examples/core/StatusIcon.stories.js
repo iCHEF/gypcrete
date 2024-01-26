@@ -7,7 +7,7 @@ import DebugBox from 'utils/DebugBox';
 import FlexRow from 'utils/FlexRow';
 
 export default {
-  title: '@ichef/gypcrete|StatusIcon',
+  title: 'gypcrete/StatusIcon',
   component: StatusIcon,
 };
 

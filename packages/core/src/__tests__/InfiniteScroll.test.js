@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow, mount } from 'enzyme';
 
 import InfiniteScroll, { BEM } from '../InfiniteScroll';
@@ -18,14 +18,13 @@ const FAKE_LIST = (
 
 describe('InfiniteScroll', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = (
       <InfiniteScroll onLoadMore={() => {}}>
         {FAKE_LIST}
       </InfiniteScroll>
     );
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 
   // -------------------------------------

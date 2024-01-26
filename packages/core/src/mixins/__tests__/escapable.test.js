@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 import keycode from 'keycode';
 
@@ -16,10 +16,9 @@ const EscapableFoo = escapable(Foo);
 // --------------------
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <EscapableFoo />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('should trigger onEscape when clicked Esc key', () => {

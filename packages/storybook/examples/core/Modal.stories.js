@@ -11,7 +11,7 @@ import TextLabel from '@ichef/gypcrete/src/TextLabel';
 import { ContainsColumnView } from './SplitView.stories';
 
 export default {
-  title: '@ichef/gypcrete|Modal',
+  title: 'gypcrete/Modal',
   component: PureModal,
   subcomponents: {
     'renderToLayer()': Modal,

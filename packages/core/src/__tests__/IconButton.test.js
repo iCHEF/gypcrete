@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Button from '../Button';
@@ -8,10 +8,9 @@ import IconLayout from '../IconLayout';
 
 describe('<IconButton>', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = <IconButton icon="printer" status="loading" />;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 
   it('renders as a custom-configured variant of <Button>', () => {

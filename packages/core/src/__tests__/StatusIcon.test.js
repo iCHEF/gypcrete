@@ -1,85 +1,78 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import {
+  render,
+  act,
+  cleanup,
+  waitFor,
+  screen,
+} from '@testing-library/react';
+import StatusIcon, { STATUS_CODE } from '../StatusIcon';
 
-import Icon from '../Icon';
-import StatusIcon from '../StatusIcon';
+// Mocking setTimeout and clearTimeout
+jest.useFakeTimers();
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  const element = <StatusIcon status="loading" />;
+describe('<StatusIcon />', () => {
+  afterEach(cleanup);
 
-  ReactDOM.render(element, div);
-});
+  it('renders without crashing', () => {
+    render(<StatusIcon />);
+  });
 
-it('renders icon corresponding to status', () => {
-  const wrapper = shallow(<StatusIcon status="success" />);
-  expect(wrapper.find(Icon).prop('type')).toBe('inline-success');
+  it('renders loading icon', () => {
+    render(<StatusIcon status={STATUS_CODE.LOADING} />);
+    expect(screen.getByRole('presentation')).toHaveClass('gyp-icon-inline-loading');
+  });
 
-  wrapper.setProps({ status: 'loading' });
-  expect(wrapper.find(Icon).prop('type')).toBe('inline-loading');
+  it('renders success icon', () => {
+    render(<StatusIcon status={STATUS_CODE.SUCCESS} />);
+    expect(screen.getByRole('presentation')).toHaveClass('gyp-icon-inline-success');
+  });
 
-  wrapper.setProps({ status: 'error' });
-  expect(wrapper.find(Icon).prop('type')).toBe('inline-error');
-});
+  it('renders error icon', () => {
+    render(<StatusIcon status={STATUS_CODE.ERROR} />);
+    expect(screen.getByRole('presentation')).toHaveClass('gyp-icon-inline-error');
+  });
 
-it('renders nothing when status not valid', () => {
-  const wrapper = shallow(<StatusIcon />);
-  expect(wrapper.equals(null));
-});
+  it('auto-hides success icon after 2 seconds', async () => {
+    render(<StatusIcon status={STATUS_CODE.SUCCESS} />);
+    act(() => {
+      jest.advanceTimersByTime(2000);
+    });
+    await waitFor(() => expect(screen.queryByRole('presentation')).toBeNull());
+  });
 
-it('hides success icon after 2 secs', () => {
-  jest.useFakeTimers();
+  it('does not auto-hide the success icon when autohide prop is false', () => {
+    render(<StatusIcon status={STATUS_CODE.SUCCESS} autohide={false} />);
+    act(() => {
+      jest.advanceTimersByTime(2000);
+    });
+    expect(screen.getByRole('presentation')).toBeInTheDocument();
+  });
 
-  const wrapper = shallow(<StatusIcon status="success" />);
+  it('clears timeout when status changes from SUCCESS to ERROR', () => {
+    const { rerender } = render(<StatusIcon status={STATUS_CODE.SUCCESS} />);
+    rerender(<StatusIcon status={STATUS_CODE.ERROR} />);
+    act(() => {
+      jest.advanceTimersByTime(2000);
+    });
+    expect(screen.getByRole('presentation')).toBeInTheDocument();
+  });
 
-  expect(setTimeout).toHaveBeenCalledTimes(1);
-  expect(setTimeout.mock.calls[0][1]).toBe(2000);
-  expect(wrapper.find(Icon).prop('type')).toBe('inline-success');
+  it('clears timeout when status changes from SUCCESS to LOADING', () => {
+    const { rerender } = render(<StatusIcon status={STATUS_CODE.SUCCESS} />);
+    rerender(<StatusIcon status={STATUS_CODE.LOADING} />);
+    act(() => {
+      jest.advanceTimersByTime(2000);
+    });
+    expect(screen.getByRole('presentation')).toBeInTheDocument();
+  });
 
-  jest.runAllTimers();
-
-  expect(wrapper.state('hideIcon')).toBeTruthy();
-  expect(wrapper.find(Icon).exists()).toBeFalsy();
-});
-
-it('should clear auto-hide timeout on unmount', () => {
-  jest.useFakeTimers();
-
-  const wrapper = shallow(<StatusIcon status="success" />);
-  jest.runAllTimers();
-  wrapper.unmount();
-
-  expect(clearTimeout).toHaveBeenCalledTimes(1);
-});
-
-it('should restore hidden icon when status changes', () => {
-  jest.useFakeTimers();
-
-  const wrapper = shallow(<StatusIcon status="success" />);
-  jest.runAllTimers();
-
-  wrapper.setProps({ status: 'loading' });
-
-  expect(wrapper.state('hideIcon')).toBeFalsy();
-  expect(wrapper.instance().hideIconTimeout).toBeNull();
-});
-
-it('should restore hidden icon when autohide changed to false', () => {
-  jest.useFakeTimers();
-
-  const wrapper = shallow(<StatusIcon status="success" />);
-  jest.runAllTimers();
-
-  wrapper.setProps({ autohide: false });
-
-  expect(wrapper.state('hideIcon')).toBeFalsy();
-  expect(wrapper.instance().hideIconTimeout).toBeNull();
-});
-
-it('should ignore to hide icon if autohide is false', () => {
-  jest.useFakeTimers();
-  shallow(<StatusIcon status="success" autohide={false} />);
-
-  expect(setTimeout).toHaveBeenCalledTimes(0);
+  it('show icon immediately when autohide is turned off', () => {
+    const { rerender } = render(<StatusIcon status={STATUS_CODE.SUCCESS} />);
+    rerender(<StatusIcon status={STATUS_CODE.SUCCESS} autohide={false} />);
+    act(() => {
+      jest.advanceTimersByTime(2000);
+    });
+    expect(screen.getByRole('presentation')).toBeInTheDocument();
+  });
 });

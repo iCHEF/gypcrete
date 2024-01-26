@@ -5,7 +5,7 @@ import SearchInput, { PureSearchInput } from '@ichef/gypcrete/src/SearchInput';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-  title: '@ichef/gypcrete|SearchInput',
+  title: 'gypcrete/SearchInput',
   component: PureSearchInput,
   subcomponents: {
     'rowComp()': SearchInput,

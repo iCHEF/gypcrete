@@ -4,7 +4,7 @@ import Avatar from '@ichef/gypcrete/src/Avatar';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-  title: '@ichef/gypcrete|Checkbox',
+  title: 'gypcrete/Checkbox',
   component: PureCheckbox,
   subcomponents: {
     'rowComp()': Checkbox,
