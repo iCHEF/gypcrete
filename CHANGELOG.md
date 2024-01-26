@@ -1,3 +1,17 @@
+# [7.0.0](https://github.com/iCHEF/gypcrete/compare/v6.1.0...v7.0.0) (2024-01-26)
+
+
+### Bug Fixes
+
+* Fix warning message in SelectRow.js ([26f200f](https://github.com/iCHEF/gypcrete/commit/26f200f8fab14f3bb67dedb69a2deb44eee00749))
+
+
+### Features
+
+* upgrade react to v18 ([f6366f4](https://github.com/iCHEF/gypcrete/commit/f6366f452ccde2955931984a556bc3637b56bb7a))
+
+
+
 # [6.1.0](https://github.com/iCHEF/gypcrete/compare/v6.0.0...v6.1.0) (2023-09-15)
 
 
