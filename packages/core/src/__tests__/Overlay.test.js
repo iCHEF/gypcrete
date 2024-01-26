@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 
 import Overlay from '../Overlay';
@@ -7,10 +7,9 @@ import Overlay from '../Overlay';
 const bodyClassList = document.body.classList;
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <Overlay />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('should add "has-overlay" className on body when mounted', () => {

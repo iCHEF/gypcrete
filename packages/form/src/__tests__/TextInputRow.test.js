@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import { ListRow, TextInput } from '@ichef/gypcrete';
@@ -8,7 +8,6 @@ import TextInputRow, { PureTextInputRow } from '../TextInputRow';
 
 describe('formRow(TextInputRow)', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = (
       <TextInputRow
         label="foo"
@@ -16,7 +15,7 @@ describe('formRow(TextInputRow)', () => {
       />
     );
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 });
 

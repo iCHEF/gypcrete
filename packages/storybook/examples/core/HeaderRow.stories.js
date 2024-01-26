@@ -8,7 +8,7 @@ import TextEllipsis from '@ichef/gypcrete/src/TextEllipsis';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-  title: '@ichef/gypcrete|HeaderRow',
+  title: 'gypcrete/HeaderRow',
   component: HeaderRow,
   subcomponents: {
     HeaderArea,

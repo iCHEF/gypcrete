@@ -5,7 +5,7 @@ import TextInput, { PureTextInput } from '@ichef/gypcrete/src/TextInput';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-  title: '@ichef/gypcrete|TextInput',
+  title: 'gypcrete/TextInput',
   component: PureTextInput,
   subcomponents: {
     'rowComp()': TextInput,

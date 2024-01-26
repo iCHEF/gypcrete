@@ -1,15 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Avatar from '../Avatar';
 
 describe('<Avatar>', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = <Avatar src="LINK" alt="ALT" />;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 
   it('handles type modifiers', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Switch, { PureSwitch } from '../Switch';
@@ -8,10 +8,9 @@ import IconLayout from '../IconLayout';
 
 describe('rowComp(Switch)', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
     const element = <Switch />;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 
   it('is reverse-aligned by default', () => {

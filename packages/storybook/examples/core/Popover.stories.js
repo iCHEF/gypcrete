@@ -7,7 +7,7 @@ import List from '@ichef/gypcrete/src/List';
 import ListRow from '@ichef/gypcrete/src/ListRow';
 
 export default {
-  title: '@ichef/gypcrete|Popover',
+  title: 'gypcrete/Popover',
   component: PurePopover,
   subcomponents: {
     'renderToLayer(closable(anchored(Popover))': Popover,

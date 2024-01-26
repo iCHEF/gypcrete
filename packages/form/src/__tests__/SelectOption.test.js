@@ -1,17 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 
 import { Checkbox } from '@ichef/gypcrete';
 import SelectOption from '../SelectOption';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = (
     <SelectOption label="foo" value="bar" />
   );
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('renders <Checkbox> inside', () => {

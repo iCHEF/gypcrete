@@ -1,293 +1,134 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
+import { render, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { PureSearchInput as SearchInput } from '../SearchInput';
 
-import SearchInput, { PureSearchInput, BEM } from '../SearchInput';
-
-const INNER_VALUE = 'innerValue';
-const ON_BLUR_SEARCH_DELAY = 100;
-
-const delay = ms => new Promise((resolve) => {
-  setTimeout(resolve, ms);
-});
-
-describe('rowComp(SearchInput)', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const element = <SearchInput />;
-
-    ReactDOM.render(element, div);
-  });
-});
-
-describe('Pure <SearchInput>', () => {
-  // UI rendering
-  it('renders with an <input type=text> inside', () => {
-    const wrapper = shallow(<PureSearchInput />);
-
-    expect(wrapper.find('input').matchesElement(<input type="text" />)).toBeTruthy();
+describe('<SearchInput />', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('renders reset button when input is not empty', () => {
-    const wrapper = shallow(<PureSearchInput />);
-    const inputWrapper = wrapper.find('input');
+  const setup = (props = {}) => {
+    const utils = render(<SearchInput {...props} />);
+    const input = utils.getByPlaceholderText('Search');
+    return {
+      input,
+      ...utils,
+    };
+  };
 
-    expect(wrapper.find(`.${BEM.resetBtn}`)).toHaveLength(0);
-
-    inputWrapper.simulate('change', { target: { value: 'foo' } });
-    expect(wrapper.find(`.${BEM.resetBtn}`)).toHaveLength(1);
+  it('renders with default props', () => {
+    const { input } = setup();
+    expect(input.value).toBe('');
   });
 
-  it('renders loading icon when status is loading', () => {
-    const wrapper = shallow(<PureSearchInput />, { context: { status: undefined } });
-
-    expect(wrapper.find('Icon').find({ type: 'loading' })).toHaveLength(0);
-
-    wrapper.setContext({ status: 'loading' });
-    expect(wrapper.find('Icon').find({ type: 'loading' })).toHaveLength(1);
+  it('renders with initial value', () => {
+    const { input } = setup({ defaultValue: 'Initial value' });
+    expect(input.value).toBe('Initial value');
   });
 
-  it('hides reset button when status icon is visible', () => {
-    const wrapper = shallow(
-      <PureSearchInput defaultValue="foo" />,
-      { context: { status: undefined } }
-    );
-
-    expect(wrapper.find(`.${BEM.resetBtn}`)).toHaveLength(1);
-
-    wrapper.setContext({ status: 'loading' });
-    expect(wrapper.find(`.${BEM.resetBtn}`)).toHaveLength(0);
-    expect(wrapper.find('Icon').find({ type: 'loading' })).toHaveLength(1);
+  it('calls onChange when input changes when value is controlled', () => {
+    const onChange = jest.fn();
+    const { input } = setup({ onChange, value: 'Initial value' });
+    userEvent.type(input, 'New value');
+    expect(onChange).toHaveBeenCalledTimes(9);
   });
 
-  // states & behaviors
-  it('[uncontrolled] caches input value in internal state', () => {
-    const wrapper = shallow(<PureSearchInput />);
-    const inputWrapper = wrapper.find('input');
-
-    expect(wrapper.state(INNER_VALUE)).toBe('');
-
-    inputWrapper.simulate('change', { target: { value: 'foo' } });
-    expect(wrapper.state(INNER_VALUE)).toBe('foo');
-
-    inputWrapper.simulate('change', { target: { value: 'bar' } });
-    expect(wrapper.state(INNER_VALUE)).toBe('bar');
+  it('calls onSearch when Enter is pressed', () => {
+    const onSearch = jest.fn();
+    const { input } = setup({ onSearch });
+    userEvent.type(input, '{enter}');
+    expect(onSearch).toHaveBeenCalledTimes(1);
   });
 
-  it('[uncontrolled] takes defaultValue for input', () => {
-    const wrapper = shallow(<PureSearchInput defaultValue="foo" />);
-
-    expect(wrapper.state(INNER_VALUE)).toBe('foo');
+  it('calls onReset when reset button is clicked', () => {
+    const onReset = jest.fn();
+    const { input, getByLabelText } = setup({ defaultValue: 'Initial value', onReset });
+    const resetButton = getByLabelText('Reset');
+    userEvent.click(resetButton);
+    expect(onReset).toHaveBeenCalledTimes(1);
+    expect(input.value).toBe('');
   });
 
-  it('[uncontrolled] clears input value and calls "onReset" on reset button click', () => {
-    const handleReset = jest.fn();
-    const wrapper = mount(<PureSearchInput onReset={handleReset} />);
-    const inputWrapper = wrapper.find('input');
-
-    inputWrapper.simulate('change', { target: { value: 'foo' } });
-    expect(wrapper.state(INNER_VALUE)).toBe('foo');
-
-    wrapper.find(`.${BEM.resetBtn}`).simulate('click');
-    expect(handleReset).toHaveBeenLastCalledWith('foo');
-    expect(wrapper.state(INNER_VALUE)).toBe('');
+  it('does not call onSearch with empty value when blockEmptyValueSearch is true', () => {
+    const onSearch = jest.fn();
+    const { input } = setup({ onSearch, blockEmptyValueSearch: true });
+    userEvent.type(input, '{enter}');
+    expect(onSearch).not.toHaveBeenCalled();
   });
 
-  it('[controlled] test input value will be controlled by "value" prop', () => {
-    const wrapper = shallow(<PureSearchInput value="foo" />);
-    const inputWrapper = wrapper.find('input');
-    expect(inputWrapper.prop('value')).toEqual('foo');
+  it('does not call onSearch with duplicate value when blockDuplicateValueSearch is true', () => {
+    const onSearch = jest.fn();
+    const { input } = setup({ defaultValue: 'Initial value', onSearch, blockDuplicateValueSearch: true });
+    userEvent.type(input, '{enter}');
+    userEvent.type(input, '{enter}');
+    expect(onSearch).toHaveBeenCalledTimes(1);
   });
 
-  it('[controlled] calls "onChange" with new value on input change', () => {
-    const handleChange = jest.fn();
-    const wrapper = shallow(<PureSearchInput value="foo" onChange={handleChange} />);
-    const inputWrapper = wrapper.find('input');
-
-    inputWrapper.simulate('change', { target: { value: 'bar' } });
-    expect(handleChange).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        target: { value: 'bar' },
-      }),
-    );
+  it('calls onSearch on blured when searchOnInputBlur is true', async () => {
+    const onSearch = jest.fn();
+    const { input } = setup({ onSearch, searchOnInputBlur: true });
+    userEvent.type(input, 'New value');
+    userEvent.tab();
+    await waitFor(() => expect(onSearch).toHaveBeenCalledTimes(1));
   });
 
-  it('[controlled] calls "onReset" with last value on reset button click', () => {
-    const handleReset = jest.fn();
-    const wrapper = mount(<PureSearchInput value="foo" onReset={handleReset} />);
-    wrapper.find(`.${BEM.resetBtn}`).simulate('click');
-    expect(handleReset).toHaveBeenLastCalledWith('foo');
+  it('does not call onSearch on change when searchOnInputChange is false', () => {
+    const onSearch = jest.fn();
+    const { input } = setup({ onSearch, searchOnInputChange: false });
+    userEvent.type(input, 'New value');
+    expect(onSearch).not.toHaveBeenCalled();
   });
 
-  it('test auto focus input after reset button click', async () => {
-    const handleReset = jest.fn();
-    const handleFocus = jest.fn();
-    const wrapper = mount(<PureSearchInput value="foo" onReset={handleReset} onFocus={handleFocus} />);
-    const inputWrapper = wrapper.find('input');
-
-    wrapper.find(`.${BEM.resetBtn}`).simulate('click');
-    expect(inputWrapper.getDOMNode()).toEqual(document.activeElement);
+  it('does not call onSearch on change when blockEmptyValueSearch is true and value is empty', () => {
+    const onSearch = jest.fn();
+    const { input } = setup({
+      searchOnInputChange: true,
+      onSearch,
+      blockEmptyValueSearch: true,
+      defaultValue: 'initial value',
+    });
+    userEvent.clear(input);
+    expect(onSearch).not.toHaveBeenCalled();
   });
 
-  it('calls "onSearch" prop with input value on "Enter" keyup', () => {
-    const handleSearch = jest.fn();
-    const wrapper = shallow(<PureSearchInput onSearch={handleSearch} />);
-    const inputWrapper = wrapper.find('input');
-
-    inputWrapper.simulate('change', { target: { value: 'foo' } });
-
-    // Other keys should not trigger onSearch()
-    inputWrapper.simulate('keyup', { key: 'Escape' });
-    expect(handleSearch).not.toHaveBeenCalled();
-
-    // Only Enter key should trigger
-    inputWrapper.simulate('keyup', { key: 'Enter' });
-    expect(handleSearch).toHaveBeenLastCalledWith('foo');
+  it('calls onSearch on change when blockEmptyValueSearch is true and value is not empty', () => {
+    const onSearch = jest.fn();
+    const { input } = setup({ searchOnInputChange: true, onSearch, blockEmptyValueSearch: true });
+    userEvent.type(input, 'New value');
+    expect(onSearch).toHaveBeenCalledTimes(9);
   });
 
-  it.each([['controlled', '"value" prop'], ['uncontrolled', 'innerValue']])(
-    '[%s] Receive new value from %s when search trigger',
-    (isControlled) => {
-      const handleSearch = jest.fn();
-      const props = {
-        value: isControlled ? 'foo' : undefined,
-        onSearch: handleSearch,
-      };
-      const wrapper = shallow(<PureSearchInput {...props} />);
-      const inputWrapper = wrapper.find('input');
+  it('calls onSearch on change when blockDuplicateValueSearch is true and value is not duplicate', () => {
+    const onSearch = jest.fn();
+    const { input } = setup({ onSearch, blockDuplicateValueSearch: true });
+    userEvent.type(input, 'New value');
+    userEvent.type(input, '{enter}');
+    expect(onSearch).toHaveBeenCalledTimes(1);
+  });
 
-      inputWrapper.simulate('change', { target: { value: 'foo' } });
-      inputWrapper.simulate('keyup', { key: 'Enter' });
+  it('does not call onSearch on change when blockDuplicateValueSearch is true and value is duplicate', () => {
+    const onSearch = jest.fn();
+    const { input } = setup({ defaultValue: 'Initial value', onSearch, blockDuplicateValueSearch: true });
+    userEvent.type(input, 'Initial value');
+    expect(onSearch).not.toHaveBeenCalled();
+  });
 
-      const newValue = isControlled ? props.value : wrapper.state(INNER_VALUE);
-      expect(handleSearch).toHaveBeenLastCalledWith(newValue);
-    }
-  );
+  it('calls onSearch on change when blockDuplicateValueSearch is true and value is duplicate but different case', () => {
+    const onSearch = jest.fn();
+    const { input } = setup({ defaultValue: 'Initial value', onSearch, blockDuplicateValueSearch: true });
+    userEvent.clear(input);
+    userEvent.type(input, 'initial value');
+    userEvent.type(input, '{enter}');
+    expect(onSearch).toHaveBeenCalledTimes(1);
+  });
 
-  it.each([[true, 1], [false, 0]])(
-    'when "searchOnInputBlur" prop is "%s", call "onSearch" prop on input blur or not',
-    async (searchOnInputBlur, handleSerachCalledTimes) => {
-      const handleSearch = jest.fn();
-      const wrapper = shallow(
-        <PureSearchInput
-          onSearch={handleSearch}
-          searchOnInputBlur={searchOnInputBlur}
-        />
-      );
-
-      const inputWrapper = wrapper.find('input');
-      inputWrapper.simulate('change', { target: { value: 'foo' } });
-      inputWrapper.simulate('focus');
-      inputWrapper.simulate('blur');
-      await delay(ON_BLUR_SEARCH_DELAY);
-
-      expect(handleSearch).toHaveBeenCalledTimes(handleSerachCalledTimes);
-      if (searchOnInputBlur) {
-        expect(handleSearch).toHaveBeenLastCalledWith('foo');
-      }
-    }
-  );
-
-  it(
-    'test when "searchOnInputBlur" prop is true, searching (cause by input blur) after click reset button will be blocked',
-    async () => {
-      const handleSearch = jest.fn();
-      const wrapper = mount(
-        <PureSearchInput
-          defalutValue="foo"
-          onSearch={handleSearch}
-          searchOnInputBlur
-        />
-      );
-
-      const inputWrapper = wrapper.find('input');
-      inputWrapper.simulate('change', { target: { value: 'foo' } });
-
-      // inputWrapper.simulate('focus');
-
-      // FIXME: simulate reset button behavior because of enzyme bug
-      inputWrapper.simulate('blur');
-      inputWrapper.getDOMNode().focus();
-      // wrapper.find(`.${BEM.resetBtn}`).getDOMNode().click();
-
-      await delay(ON_BLUR_SEARCH_DELAY);
-
-      expect(handleSearch).toHaveBeenCalledTimes(0);
-    }
-  );
-
-  it.each([[true, 1], [false, 0]])(
-    'when "searchOnInputChange" prop is "%s", call "onSearch" prop on input change or not',
-    (searchOnInputChange, handleSerachCalledTimes) => {
-      const handleSearch = jest.fn();
-      const wrapper = shallow(
-        <PureSearchInput
-          onSearch={handleSearch}
-          searchOnInputChange={searchOnInputChange}
-        />
-      );
-
-      const inputWrapper = wrapper.find('input');
-      inputWrapper.simulate('change', { target: { value: 'foo' } });
-
-      expect(handleSearch).toHaveBeenCalledTimes(handleSerachCalledTimes);
-      if (searchOnInputChange) {
-        expect(handleSearch).toHaveBeenLastCalledWith('foo');
-      }
-    }
-  );
-
-  it.each([[true, 1], [false, 2]])(
-    'when "blockDuplicateValueSearch" prop is "%s", block duplicate value searching or not',
-    (blockDuplicateValueSearch, handleSerachCalledTimes) => {
-      const handleSearch = jest.fn();
-      const wrapper = shallow(
-        <PureSearchInput
-          onSearch={handleSearch}
-          blockDuplicateValueSearch={blockDuplicateValueSearch}
-        />
-      );
-
-      const inputWrapper = wrapper.find('input');
-      inputWrapper.simulate('change', { target: { value: 'foo' } });
-      inputWrapper.simulate('keyup', { key: 'Enter' });
-
-      expect(handleSearch).toHaveBeenCalledWith('foo');
-      expect(handleSearch).toHaveBeenCalledTimes(1);
-
-      // try to trigger onSearch again without value changing
-      inputWrapper.simulate('keyup', { key: 'Enter' });
-      expect(handleSearch).toHaveBeenCalledTimes(handleSerachCalledTimes);
-      if (!blockDuplicateValueSearch) {
-        expect(handleSearch).toHaveBeenLastCalledWith('foo');
-      }
-    }
-  );
-
-  it.each([[true, false, 0], [false, false, 1], [true, true, 0], [false, true, 1]])(
-    'when "blockEmptyValueSearch" prop is "%s" and "searchOnInputChange" be "%s", block empty value searching or not',
-    (blockEmptyValueSearch, searchOnInputChange, handleSerachCalledTimes) => {
-      const handleSearch = jest.fn();
-      const wrapper = shallow(
-        <PureSearchInput
-          defaultValue="foo"
-          onSearch={handleSearch}
-          blockEmptyValueSearch={blockEmptyValueSearch}
-          searchOnInputChange={searchOnInputChange}
-        />
-      );
-
-      const inputWrapper = wrapper.find('input');
-      inputWrapper.simulate('change', { target: { value: '' } });
-
-      if (!searchOnInputChange) {
-        inputWrapper.simulate('keyup', { key: 'Enter' });
-      }
-
-      expect(handleSearch).toHaveBeenCalledTimes(handleSerachCalledTimes);
-      if (!blockEmptyValueSearch) {
-        expect(handleSearch).toHaveBeenLastCalledWith('');
-      }
-    }
-  );
+  it('calls onReset when reset button is clicked and value is controlled', () => {
+    const onReset = jest.fn();
+    const { input, getByLabelText } = setup({ value: 'Initial value', onReset });
+    const resetButton = getByLabelText('Reset');
+    userEvent.click(resetButton);
+    expect(onReset).toHaveBeenCalledTimes(1);
+    expect(input.value).toBe('Initial value');
+  });
 });

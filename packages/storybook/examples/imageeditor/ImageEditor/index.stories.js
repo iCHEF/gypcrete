@@ -8,7 +8,7 @@ import handleCropChange from './utils/handleCropChange';
 const EXAMPLE_IMAGE = 'https://i.imgur.com/VfBVxsO.jpg';
 
 export default {
-  title: '@ichef/gypcrete-imageeditor|ImageEditor',
+  title: 'gypcrete-imageeditor/ImageEditor',
   component: ImageEditor,
   subcomponents: { AvatarEditor },
 };

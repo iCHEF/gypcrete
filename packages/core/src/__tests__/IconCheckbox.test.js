@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Checkbox, { CHECKBOX_BUTTON } from '../Checkbox';
@@ -7,10 +7,9 @@ import IconCheckbox from '../IconCheckbox';
 import IconLayout from '../IconLayout';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <IconCheckbox status="loading" />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('renders as a custom-configured, minified variant of <Checkbox>', () => {

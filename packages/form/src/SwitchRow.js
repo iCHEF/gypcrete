@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -15,101 +15,92 @@ import formRow, { rowPropTypes } from './mixins/formRow';
  *
  * All unknown props should go to the `<Switch>` from `@ichef/gypcrete` core package.
  */
-class SwitchRow extends PureComponent {
-    static propTypes = {
-      /** row label */
-      label: PropTypes.node.isRequired,
-      /** descriptive value label when switch is turned __on__ */
-      asideOn: PropTypes.node,
-      /** descriptive value label when switch is turned __off__ */
-      asideOff: PropTypes.node,
-      // input props
-      checked: PropTypes.bool,
-      defaultChecked: PropTypes.bool,
-      onChange: PropTypes.func,
-      // from formRow()
-      ineditable: PropTypes.bool,
-      rowProps: rowPropTypes,
-    };
+const SwitchRow = React.memo(({
+  label,
+  asideOn,
+  asideOff,
+  // input props
+  checked,
+  defaultChecked,
+  onChange,
+  // from formRow()
+  ineditable,
+  rowProps,
+  // react props
+  className,
+  children,
+  ...restProps
+}) => {
+  const [checkedState, setCheckedState] = useState(defaultChecked || checked);
+  const isControlled = checked !== undefined && checked !== null;
+  const switchAside = (checkedState) ? asideOn : asideOff;
 
-    static defaultProps = {
-      asideOn: 'ON',
-      asideOff: 'OFF',
-      checked: undefined,
-      defaultChecked: undefined,
-      onChange: () => {},
-      ineditable: false,
-      rowProps: {},
-    };
+  useEffect(
+    () => {
+      setCheckedState(checked);
+    },
+    [checked]
+  );
 
-    state = {
-      checked: this.props.defaultChecked || this.props.checked,
-    };
-
-    getIsControlled() {
-      const isControlled = this.props.checked !== undefined
-            && this.props.checked !== null;
-
-      return isControlled;
+  const handleSwitchButtonChange = (event) => {
+    if (!isControlled) {
+      setCheckedState(event.target.checked);
     }
+    onChange(event);
+  };
 
-    getSwitchAside() {
-      const { asideOn, asideOff } = this.props;
+  const switchProps = {
+    ...restProps,
+    checked,
+    defaultChecked,
+  };
 
-      return this.state.checked ? asideOn : asideOff;
-    }
+  return (
+    <ListRow className={className} {...rowProps}>
+      <TextLabel
+        disabled={ineditable}
+        verticalOrder="reverse"
+        basic={switchAside}
+        aside={label}
+      />
 
-    // eslint-disable-next-line react/no-deprecated, camelcase
-    UNSAFE_componentWillReceiveProps(nextProps) {
-      this.setState({ checked: nextProps.checked });
-    }
+      <Switch
+        status={null}
+        onChange={handleSwitchButtonChange}
+        minified
+        {...switchProps}
+      />
 
-    handleSwitchButtonChange = (event) => {
-      if (!this.getIsControlled()) {
-        this.setState({ checked: event.target.checked });
-      }
-      this.props.onChange(event);
-    }
+      {children}
+    </ListRow>
+  );
+});
 
-    render() {
-      const {
-        label,
-        asideOn,
-        asideOff,
-        // input props
-        // checked,
-        // defaultChecked,
-        onChange,
-        // from formRow()
-        ineditable,
-        rowProps,
-        // React props
-        className,
-        children,
-        ...switchProps
-      } = this.props;
+SwitchRow.propTypes = {
+  /** row label */
+  label: PropTypes.node.isRequired,
+  /** descriptive value label when switch is turned __on__ */
+  asideOn: PropTypes.node,
+  /** descriptive value label when switch is turned __off__ */
+  asideOff: PropTypes.node,
+  // input props
+  checked: PropTypes.bool,
+  defaultChecked: PropTypes.bool,
+  onChange: PropTypes.func,
+  // from formRow()
+  ineditable: PropTypes.bool,
+  rowProps: rowPropTypes,
+};
 
-      return (
-        <ListRow className={className} {...rowProps}>
-          <TextLabel
-            disabled={ineditable}
-            verticalOrder="reverse"
-            basic={this.getSwitchAside()}
-            aside={label}
-          />
-
-          <Switch
-            status={null}
-            onChange={this.handleSwitchButtonChange}
-            minified
-            {...switchProps}
-          />
-
-          {children}
-        </ListRow>
-      );
-    }
-}
+SwitchRow.defaultProps = {
+  asideOn: 'ON',
+  asideOff: 'OFF',
+  checked: undefined,
+  defaultChecked: undefined,
+  onChange: () => {},
+  ineditable: false,
+  rowProps: {},
+};
 
 export { SwitchRow as PureSwitchRow };
 export default formRow()(SwitchRow);

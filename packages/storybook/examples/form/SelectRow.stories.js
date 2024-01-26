@@ -7,7 +7,7 @@ import SelectRow, { PureSelectRow } from '@ichef/gypcrete-form/src/SelectRow';
 import SelectOption from '@ichef/gypcrete-form/src/SelectOption';
 
 export default {
-  title: '@ichef/gypcrete-form|SelectRow',
+  title: 'gypcrete-form/SelectRow',
   component: PureSelectRow,
   subcomponents: {
     'formRow()': SelectRow,
@@ -67,6 +67,7 @@ export const multipleValues = () => (
       label="Minimal selection: 2"
       minCheck={2}
       defaultValue={['opt-c', 'opt-d']}
+      onChange={action('change')}
     >
       <SelectOption label="Option A" value="opt-a" />
       <SelectOption label="Option B" value="opt-b" />

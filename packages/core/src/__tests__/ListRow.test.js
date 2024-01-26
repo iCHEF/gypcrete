@@ -1,15 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import ListRow, { BEM as ROW_BEM } from '../ListRow';
 import ListSpacingContext from '../contexts/listSpacing';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <ListRow>Hello world</ListRow>;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('renders a <li> element with class name of root wrapper', () => {

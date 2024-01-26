@@ -1,15 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Button from '../Button';
 import PopupButton, { COMPONENT_NAME } from '../PopupButton';
 
 it('should render without crashing', () => {
-  const div = document.createElement('div');
   const element = <PopupButton />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('returns a pre-configured <Button> extending given props', () => {

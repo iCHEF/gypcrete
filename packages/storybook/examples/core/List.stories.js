@@ -14,7 +14,7 @@ import TextLabel from '@ichef/gypcrete/src/TextLabel';
 import DebugBox from 'utils/DebugBox';
 
 export default {
-  title: '@ichef/gypcrete|List',
+  title: 'gypcrete/List',
   component: List,
   subcomponents: { ListRow, Section },
 };

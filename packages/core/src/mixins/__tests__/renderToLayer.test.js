@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 import * as ReactIs from 'react-is';
 
@@ -24,10 +24,9 @@ const LayerFoo = renderToLayer(Foo);
 // --------------------
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
   const element = <LayerFoo />;
 
-  ReactDOM.render(element, div);
+  render(element);
 });
 
 it('creates a layer with unique ID on creation', () => {

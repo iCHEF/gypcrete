@@ -5,7 +5,7 @@ import DebugBox from 'utils/DebugBox';
 
 
 export default {
-  title: '@ichef/gypcrete|Switch',
+  title: 'gypcrete/Switch',
   component: PureSwitch,
   subcomponents: {
     'rowComp()': Switch,

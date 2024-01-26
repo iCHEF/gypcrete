@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Popup, {
@@ -15,10 +15,9 @@ import Overlay from '../Overlay';
 
 describe('<Popup> with mixins', () => {
   it('should render without crashing', () => {
-    const div = document.createElement('div');
     const element = <Popup message="foo" />;
 
-    ReactDOM.render(element, div);
+    render(element);
   });
 });
 
