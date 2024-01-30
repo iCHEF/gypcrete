@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete-storybook",
-  "version": "6.1.0",
+  "version": "7.0.0",
   "description": "React Storybook for Gypcrete",
   "private": true,
   "repository": "iCHEF/gypcrete",
@@ -20,14 +20,14 @@
     "ghpages": "npm run clean && npm run build:storybook"
   },
   "dependencies": {
-    "@ichef/gypcrete": "^6.1.0",
-    "@ichef/gypcrete-form": "^6.1.0",
-    "@ichef/gypcrete-imageeditor": "^6.1.0",
-    "@storybook/builder-webpack5": "^6.5.12",
-    "@storybook/manager-webpack5": "^6.5.12",
+    "@ichef/gypcrete": "^7.0.0",
+    "@ichef/gypcrete-form": "^7.0.0",
+    "@ichef/gypcrete-imageeditor": "^7.0.0",
     "@storybook/addon-actions": "^6.5.12",
     "@storybook/addon-docs": "^6.5.12",
     "@storybook/addons": "^6.5.12",
+    "@storybook/builder-webpack5": "^6.5.12",
+    "@storybook/manager-webpack5": "^6.5.12",
     "@storybook/react": "^6.5.12",
     "autoprefixer": "^7.2.5",
     "mini-css-extract-plugin": "^2.7.6",
