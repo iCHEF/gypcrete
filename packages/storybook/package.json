@@ -1,6 +1,6 @@
 {
   "name": "@ichef/gypcrete-storybook",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "React Storybook for Gypcrete",
   "private": true,
   "repository": "iCHEF/gypcrete",
