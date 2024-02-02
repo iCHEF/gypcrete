@@ -1,0 +1,49 @@
+name: Storybook
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+  push:
+    branches:
+      - master
+      - develop
+
+jobs:
+  build-and-publish-storybook:
+    name: Build and publish storybook
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    if: >
+      github.event.pull_request.draft == false &&
+      !contains(github.event.pull_request.labels.*.name, 'skip storybook')
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Chromatic needs the full Git history to keep track of changes
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+      - name: Install packages with cache
+        uses: iCHEF/npm-install-with-cache-action@v1
+        with:
+          is-monorepo: true
+      - name: Build
+        run: yarn prepublish
+
+      - name: "Build storybook"
+        run: cd packages/storybook && yarn build:storybook --quiet --loglevel error
+      - name: "Push storybook to Chromatic"
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          exitZeroOnChanges: true
+          exitOnceUploaded: true # we use linked project so don't need to wait for build results
+          autoAcceptChanges: master|develop # all changes should be reviewed in PRs
+          storybookBuildDir: storybook-static
+          workingDir: packages/storybook
+          onlyChanged: true

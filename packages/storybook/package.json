@@ -15,8 +15,8 @@
   "homepage": "https://github.com/iCHEF/gypcrete#readme",
   "scripts": {
     "storybook": "start-storybook -p 8100 -c .storybook --ci --quiet",
-    "build:storybook": "build-storybook -o ./public",
-    "clean": "rm -rf ./public",
+    "build:storybook": "build-storybook --webpack-stats-json",
+    "clean": "rm -rf ./storybook-static",
     "ghpages": "npm run clean && npm run build:storybook"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "@storybook/manager-webpack5": "^6.5.12",
     "@storybook/react": "^6.5.12",
     "autoprefixer": "^7.2.5",
+    "chromatic": "10.6.1",
     "mini-css-extract-plugin": "^2.7.6",
     "prop-types": "^15.6.2",
     "react": "^18.2.0",
