@@ -1,3 +1,12 @@
+## [7.0.1](https://github.com/iCHEF/gypcrete/compare/v7.0.0...v7.0.1) (2024-02-02)
+
+
+### Features
+
+* integrate storybook with chromatic ([dd911b8](https://github.com/iCHEF/gypcrete/commit/dd911b82ea31f4e1d1534574d2f70f19ac551c96))
+
+
+
 # [7.0.0](https://github.com/iCHEF/gypcrete/compare/v6.1.0...v7.0.0) (2024-01-26)
 
 
