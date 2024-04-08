@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 import Icon from 'src/Icon';
@@ -145,4 +145,15 @@ it('takes defaults to its <RowComp> wrapper-component', () => {
 
   expect(Comp.defaultProps.align).toBe('center');
   expect(Comp.defaultProps.minified).toBeTruthy();
+});
+
+it('pass down disabled prop to wrapped component', () => {
+  const Input = ({ children, ...props }) => <input {...props} />;
+  const RowInput = rowComp()(Input);
+
+  render(<RowInput disabled />);
+
+  const wrapper = screen.getByRole('textbox');
+
+  expect(wrapper).toHaveAttribute('disabled');
 });
