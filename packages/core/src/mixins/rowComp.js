@@ -112,195 +112,195 @@ const rowComp = ({
   const componentName = getComponentName(WrappedComponent);
 
   class RowComp extends PureComponent {
-        static displayName = `rowComp(${componentName})`;
+      static displayName = `rowComp(${componentName})`;
 
-        static propTypes = {
-          minified: PropTypes.bool,
+      static propTypes = {
+        minified: PropTypes.bool,
 
-          // Text label props
-          align: PropTypes.oneOf([
-            ROW_COMP_ALIGN.LEFT,
-            ROW_COMP_ALIGN.CENTER,
-            ROW_COMP_ALIGN.RIGHT,
-            ROW_COMP_ALIGN.REVERSE,
-          ]),
-          verticalOrder: PropTypes.oneOf([
-            VERTICAL_ORDER.NORMAL,
-            VERTICAL_ORDER.REVERSE,
-          ]),
-          icon: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.element,
-          ]),
-          basic: PropTypes.node,
-          avatar: PropTypes.node,
-          aside: PropTypes.node,
-          tag: PropTypes.node,
-          bold: PropTypes.bool,
-          asideControlClickableOnDisabled: PropTypes.bool,
+        // Text label props
+        align: PropTypes.oneOf([
+          ROW_COMP_ALIGN.LEFT,
+          ROW_COMP_ALIGN.CENTER,
+          ROW_COMP_ALIGN.RIGHT,
+          ROW_COMP_ALIGN.REVERSE,
+        ]),
+        verticalOrder: PropTypes.oneOf([
+          VERTICAL_ORDER.NORMAL,
+          VERTICAL_ORDER.REVERSE,
+        ]),
+        icon: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.element,
+        ]),
+        basic: PropTypes.node,
+        avatar: PropTypes.node,
+        aside: PropTypes.node,
+        tag: PropTypes.node,
+        bold: PropTypes.bool,
+        asideControlClickableOnDisabled: PropTypes.bool,
 
-          // State props
-          active: PropTypes.bool,
-          highlight: PropTypes.bool,
-          disabled: PropTypes.bool,
-          muted: PropTypes.bool,
+        // State props
+        active: PropTypes.bool,
+        highlight: PropTypes.bool,
+        disabled: PropTypes.bool,
+        muted: PropTypes.bool,
 
-          // status props
-          status: statusPropTypes.status,
-          statusOptions: statusPropTypes.statusOptions,
-          errorMsg: statusPropTypes.errorMsg,
+        // status props
+        status: statusPropTypes.status,
+        statusOptions: statusPropTypes.statusOptions,
+        errorMsg: statusPropTypes.errorMsg,
+      };
+
+      static defaultProps = {
+        minified: defaultMinified,
+
+        align: defaultAlign,
+        verticalOrder: defaultVerticalOrder,
+        icon: null,
+        basic: null,
+        avatar: null,
+        aside: null,
+        tag: null,
+        bold: false,
+        asideControlClickableOnDisabled: false,
+
+        active: false,
+        highlight: false,
+        disabled: false,
+        muted: false,
+
+        status: undefined,
+        statusOptions: undefined,
+        errorMsg: undefined,
+      };
+
+      static childContextTypes = {
+        textProps: PropTypes.shape(textPropTypes),
+        ...statusPropTypes,
+        // status,
+        // statusOptions,
+        // errorMsg,
+      };
+
+      getChildContext() {
+        const { status, statusOptions, errorMsg } = this.props;
+        const textProps = this.getTextProps();
+
+        return {
+          status,
+          statusOptions,
+          errorMsg,
+          // for <TextInput>
+          textProps,
         };
+      }
 
-        static defaultProps = {
-          minified: defaultMinified,
+      getTextProps() {
+        const {
+          align,
+          verticalOrder,
+          icon,
+          basic,
+          aside,
+          tag,
+          bold,
+          asideControlClickableOnDisabled,
+          disabled,
+        } = this.props;
 
-          align: defaultAlign,
-          verticalOrder: defaultVerticalOrder,
-          icon: null,
-          basic: null,
-          avatar: null,
-          aside: null,
-          tag: null,
-          bold: false,
-          asideControlClickableOnDisabled: false,
+        const textLayoutProps = getTextLayoutProps(align, !!icon);
+        const asideControlClickableProps = (
+          (asideControlClickableOnDisabled && disabled)
+            ? {
+              onClick: (event) => { event.stopPropagation(); },
+            }
+            : undefined
+        );
 
-          active: false,
-          highlight: false,
-          disabled: false,
-          muted: false,
-
-          status: undefined,
-          statusOptions: undefined,
-          errorMsg: undefined,
+        return {
+          verticalOrder,
+          basic,
+          aside,
+          tag,
+          bold,
+          ...asideControlClickableProps,
+          ...textLayoutProps,
         };
+      }
 
-        static childContextTypes = {
-          textProps: PropTypes.shape(textPropTypes),
-          ...statusPropTypes,
-          // status,
-          // statusOptions,
-          // errorMsg,
-        };
+      renderIconElement() {
+        const { icon } = this.props;
 
-        getChildContext() {
-          const { status, statusOptions, errorMsg } = this.props;
-          const textProps = this.getTextProps();
-
-          return {
-            status,
-            statusOptions,
-            errorMsg,
-            // for <TextInput>
-            textProps,
-          };
+        if (!icon) {
+          return null;
         }
 
-        getTextProps() {
-          const {
-            align,
-            verticalOrder,
-            icon,
-            basic,
-            aside,
-            tag,
-            bold,
-            asideControlClickableOnDisabled,
-            disabled,
-          } = this.props;
+        return isValidElement(icon)
+          ? cloneElement(icon, { key: 'comp-icon' })
+          : <Icon key="comp-icon" type={icon} />;
+      }
 
-          const textLayoutProps = getTextLayoutProps(align, !!icon);
-          const asideControlClickableProps = (
-            (asideControlClickableOnDisabled && disabled)
-              ? {
-                onClick: (event) => { event.stopPropagation(); },
-              }
-              : undefined
-          );
+      renderContent() {
+        const iconElement = this.renderIconElement();
+        const textProps = this.getTextProps();
 
-          return {
-            verticalOrder,
-            basic,
-            aside,
-            tag,
-            bold,
-            ...asideControlClickableProps,
-            ...textLayoutProps,
-          };
-        }
+        return [
+          iconElement,
+          <Text key="comp-text" {...textProps} />,
+        ];
+      }
 
-        renderIconElement() {
-          const { icon } = this.props;
+      render() {
+        const {
+          minified,
+          avatar,
+          align,
+          verticalOrder,
+          icon,
+          basic,
+          aside,
+          tag,
+          bold,
+          asideControlClickableOnDisabled,
 
-          if (!icon) {
-            return null;
-          }
+          active,
+          highlight,
+          disabled,
+          muted,
 
-          return isValidElement(icon)
-            ? cloneElement(icon, { key: 'comp-icon' })
-            : <Icon key="comp-icon" type={icon} />;
-        }
+          status,
+          statusOptions,
+          errorMsg,
 
-        renderContent() {
-          const iconElement = this.renderIconElement();
-          const textProps = this.getTextProps();
+          // React props
+          className,
+          children,
 
-          return [
-            iconElement,
-            <Text key="comp-text" {...textProps} />,
-          ];
-        }
+          ...otherProps
+        } = this.props;
 
-        render() {
-          const {
-            minified,
-            avatar,
-            align,
-            verticalOrder,
-            icon,
-            basic,
-            aside,
-            tag,
-            bold,
-            asideControlClickableOnDisabled,
+        const bemClass = ROOT_BEM
+          .modifier('minified', minified)
+          .modifier(align)
+          .modifier('aside-control-clickable', asideControlClickableOnDisabled);
 
-            active,
-            highlight,
-            disabled,
-            muted,
+        const stateClassNames = getStateClassnames({
+          active,
+          highlight,
+          disabled,
+          muted,
+          error: status === STATUS_CODE.ERROR,
+          untouchable: status === STATUS_CODE.LOADING,
+        });
+        const wrapperClassName = classNames(className, stateClassNames, `${bemClass}`);
 
-            status,
-            statusOptions,
-            errorMsg,
-
-            // React props
-            className,
-            children,
-
-            ...otherProps
-          } = this.props;
-
-          const bemClass = ROOT_BEM
-            .modifier('minified', minified)
-            .modifier(align)
-            .modifier('aside-control-clickable', asideControlClickableOnDisabled);
-
-          const stateClassNames = getStateClassnames({
-            active,
-            highlight,
-            disabled,
-            muted,
-            error: status === STATUS_CODE.ERROR,
-            untouchable: status === STATUS_CODE.LOADING,
-          });
-          const wrapperClassName = classNames(className, stateClassNames, `${bemClass}`);
-
-          return (
-            <WrappedComponent className={wrapperClassName} {...otherProps}>
-              {avatar}
-              {children || this.renderContent()}
-            </WrappedComponent>
-          );
-        }
+        return (
+          <WrappedComponent className={wrapperClassName} {...otherProps} disabled={disabled}>
+            {avatar}
+            {children || this.renderContent()}
+          </WrappedComponent>
+        );
+      }
   }
 
   return RowComp;
