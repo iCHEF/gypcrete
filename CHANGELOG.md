@@ -1,3 +1,17 @@
+# [7.1.0](https://github.com/iCHEF/gypcrete/compare/v7.0.1...v7.1.0) (2024-04-12)
+
+
+### Bug Fixes
+
+* pass down disabled prop in the rowComp Hoc ([723ba8b](https://github.com/iCHEF/gypcrete/commit/723ba8b31d1b7d0c7d901b2466a364b2a3616a76))
+
+
+### Features
+
+* remove opacity style of disabled html attribute ([c96eb64](https://github.com/iCHEF/gypcrete/commit/c96eb64447514efc79bcd0a33e9a3729fc854de3))
+
+
+
 ## [7.0.1](https://github.com/iCHEF/gypcrete/compare/v7.0.0...v7.0.1) (2024-02-02)
 
 
