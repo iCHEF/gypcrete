@@ -68,6 +68,7 @@
     "eslint-plugin-unicorn": "21.0",
     "jest": "^26.1.0",
     "lerna": "^3.22.1",
+    "lint-staged": "^9.2.0",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss-loader": "^7.3.3",
     "prop-types": "^15.6.2",
