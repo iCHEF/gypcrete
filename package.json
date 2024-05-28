@@ -93,5 +93,16 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --quiet",
+      "stylelint"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
