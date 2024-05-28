@@ -40,22 +40,13 @@ function Section({
       .toString(),
     className,
   );
-  const bodyClassName = BEM.body
-    .modifier('padded', bodySpacing)
-    .toString();
+  const bodyClassName = BEM.body.modifier('padded', bodySpacing).toString();
 
   // Conditional parts
   const titleArea = title && (
-    <div className={
-      BEM.title
-        .modifier(titleSize)
-        .toString()
-    }
-    >
+    <div className={BEM.title.modifier(titleSize).toString()}>
       {title}
-      {titleRightArea && (
-        <div className={BEM.titleRightArea.toString()}>{titleRightArea}</div>
-      )}
+      {titleRightArea && <div className={BEM.titleRightArea.toString()}>{titleRightArea}</div>}
     </div>
   );
 
@@ -69,11 +60,12 @@ function Section({
   );
 
   return (
-    <div className={rootClassName} {...wrapperProps}>
+    <div
+      className={rootClassName}
+      {...wrapperProps}
+    >
       {titleArea}
-      <div className={bodyClassName}>
-        {children}
-      </div>
+      <div className={bodyClassName}>{children}</div>
       {footer}
     </div>
   );

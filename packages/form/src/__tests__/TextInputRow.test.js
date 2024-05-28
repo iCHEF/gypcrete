@@ -30,12 +30,11 @@ describe('Pure <TextInputRow>', () => {
         readOnly={false}
         disabled={false}
         rowProps={mockedRowProps}
-      />
+      />,
     );
     expect(wrapper.is(ListRow));
     expect(wrapper.props()).toMatchObject(mockedRowProps);
   });
-
 
   it('renders an <TextInput> inside with readOnly/disable props', () => {
     const wrapper = shallow(
@@ -43,15 +42,17 @@ describe('Pure <TextInputRow>', () => {
         readOnly={false}
         disabled
         rowProps={{}}
-      />
+      />,
     );
 
-    expect(wrapper.containsMatchingElement(
-      <TextInput
-        readOnly={false}
-        disabled
-      />
-    )).toBeTruthy();
+    expect(
+      wrapper.containsMatchingElement(
+        <TextInput
+          readOnly={false}
+          disabled
+        />,
+      ),
+    ).toBeTruthy();
   });
 
   it('allows additional children', () => {
@@ -62,14 +63,10 @@ describe('Pure <TextInputRow>', () => {
         rowProps={{}}
       >
         <div data-target />
-      </PureTextInputRow>
+      </PureTextInputRow>,
     );
 
-    expect(
-      wrapper.children().containsMatchingElement(
-        <div data-target />
-      )
-    ).toBeTruthy();
+    expect(wrapper.children().containsMatchingElement(<div data-target />)).toBeTruthy();
   });
 
   it('forwards unknown props to <TextInput>', () => {
@@ -81,16 +78,18 @@ describe('Pure <TextInputRow>', () => {
         rowProps={{}}
         label="Foo"
         onChange={handleChange}
-      />
+      />,
     );
 
-    expect(wrapper.containsMatchingElement(
-      <TextInput
-        readOnly
-        disabled={false}
-        label="Foo"
-        onChange={handleChange}
-      />
-    )).toBeTruthy();
+    expect(
+      wrapper.containsMatchingElement(
+        <TextInput
+          readOnly
+          disabled={false}
+          label="Foo"
+          onChange={handleChange}
+        />,
+      ),
+    ).toBeTruthy();
   });
 });

@@ -14,7 +14,10 @@ export default function SvgDropdown(props) {
         fill="transparent"
         d="M-2148-4721h32v32h-32z"
       />
-      <path data-name="\u30D1\u30B9 5" d="M-2139-4709h14l-7 10z" />
+      <path
+        data-name="\u30D1\u30B9 5"
+        d="M-2139-4709h14l-7 10z"
+      />
     </svg>
   );
 }

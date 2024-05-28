@@ -21,7 +21,10 @@ export const basicUsage = () => (
 
 export const controlledInput = () => (
   <List>
-    <SwitchRow label="Switch row label" checked />
+    <SwitchRow
+      label="Switch row label"
+      checked
+    />
   </List>
 );
 controlledInput.story = {
@@ -34,7 +37,10 @@ controlledInput.story = {
 
 export const disabledRow = () => (
   <List>
-    <SwitchRow disabled label="Disabled row" />
+    <SwitchRow
+      disabled
+      label="Disabled row"
+    />
   </List>
 );
 

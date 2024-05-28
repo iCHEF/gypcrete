@@ -8,8 +8,14 @@ import RadioSelectOption from '../RadioSelectOption';
 it('renders without crashing', () => {
   const element = (
     <RadioSelectList>
-      <RadioSelectOption label="Foo" value="foo" />
-      <RadioSelectOption label="Bar" value="bar" />
+      <RadioSelectOption
+        label="Foo"
+        value="foo"
+      />
+      <RadioSelectOption
+        label="Bar"
+        value="bar"
+      />
     </RadioSelectList>
   );
 
@@ -17,9 +23,7 @@ it('renders without crashing', () => {
 });
 
 it('pass default props to SelectList', () => {
-  const wrapper = shallow(
-    <RadioSelectList />
-  );
+  const wrapper = shallow(<RadioSelectList />);
 
   expect(wrapper.props()).toEqual(
     expect.objectContaining({
@@ -27,7 +31,7 @@ it('pass default props to SelectList', () => {
       showCheckAll: false,
       checkAllLabel: null,
       minCheck: 0,
-    })
+    }),
   );
 });
 
@@ -40,7 +44,7 @@ it('pass all props to SelectList', () => {
       title="title"
       desc="desc"
       foo="foo"
-    />
+    />,
   );
 
   expect(wrapper.props()).toEqual(
@@ -50,6 +54,6 @@ it('pass all props to SelectList', () => {
       title: 'title',
       desc: 'desc',
       foo: 'foo',
-    })
+    }),
   );
 });

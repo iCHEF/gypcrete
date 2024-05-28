@@ -59,7 +59,11 @@ describe('<SearchInput />', () => {
 
   it('does not call onSearch with duplicate value when blockDuplicateValueSearch is true', () => {
     const onSearch = jest.fn();
-    const { input } = setup({ defaultValue: 'Initial value', onSearch, blockDuplicateValueSearch: true });
+    const { input } = setup({
+      defaultValue: 'Initial value',
+      onSearch,
+      blockDuplicateValueSearch: true,
+    });
     userEvent.type(input, '{enter}');
     userEvent.type(input, '{enter}');
     expect(onSearch).toHaveBeenCalledTimes(1);
@@ -109,14 +113,22 @@ describe('<SearchInput />', () => {
 
   it('does not call onSearch on change when blockDuplicateValueSearch is true and value is duplicate', () => {
     const onSearch = jest.fn();
-    const { input } = setup({ defaultValue: 'Initial value', onSearch, blockDuplicateValueSearch: true });
+    const { input } = setup({
+      defaultValue: 'Initial value',
+      onSearch,
+      blockDuplicateValueSearch: true,
+    });
     userEvent.type(input, 'Initial value');
     expect(onSearch).not.toHaveBeenCalled();
   });
 
   it('calls onSearch on change when blockDuplicateValueSearch is true and value is duplicate but different case', () => {
     const onSearch = jest.fn();
-    const { input } = setup({ defaultValue: 'Initial value', onSearch, blockDuplicateValueSearch: true });
+    const { input } = setup({
+      defaultValue: 'Initial value',
+      onSearch,
+      blockDuplicateValueSearch: true,
+    });
     userEvent.clear(input);
     userEvent.type(input, 'initial value');
     userEvent.type(input, '{enter}');

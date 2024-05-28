@@ -84,124 +84,118 @@ class Example extends React.Component {
  * @param {number} options.edgePadding - the number to be deducted when calculating “safe area”
  */
 
-const anchored = ({
-  defaultPlacement = PLACEMENT.BOTTOM,
-  edgePadding = 16,
-} = {}) => (WrappedComponent) => {
-  const componentName = getComponentName(WrappedComponent);
-  const defaultGetPositionState = memoize(getPositionState(edgePadding));
+const anchored =
+  ({ defaultPlacement = PLACEMENT.BOTTOM, edgePadding = 16 } = {}) =>
+  (WrappedComponent) => {
+    const componentName = getComponentName(WrappedComponent);
+    const defaultGetPositionState = memoize(getPositionState(edgePadding));
 
-  class Anchored extends Component {
-        static displayName = `anchored(${componentName})`;
+    class Anchored extends Component {
+      static displayName = `anchored(${componentName})`;
 
-        static propTypes = {
-          anchor: PropTypes.instanceOf(window.HTMLElement),
-          refreshOnWindowResize: PropTypes.bool,
-          distanceFromAnchor: PropTypes.number,
-          defaultPlacement: PropTypes.oneOf(Object.values(PLACEMENT)),
-        };
+      static propTypes = {
+        anchor: PropTypes.instanceOf(window.HTMLElement),
+        refreshOnWindowResize: PropTypes.bool,
+        distanceFromAnchor: PropTypes.number,
+        defaultPlacement: PropTypes.oneOf(Object.values(PLACEMENT)),
+      };
 
-        static defaultProps = {
-          anchor: null,
-          refreshOnWindowResize: false,
-          distanceFromAnchor: 0,
-          defaultPlacement,
-        };
+      static defaultProps = {
+        anchor: null,
+        refreshOnWindowResize: false,
+        distanceFromAnchor: 0,
+        defaultPlacement,
+      };
 
-        state = {
-          selfNode: null,
-        };
+      state = {
+        selfNode: null,
+      };
 
-        componentDidMount() {
-          const { refreshOnWindowResize } = this.props;
-          if (refreshOnWindowResize) {
-            this.resizeHandler = () => {
-              requestAnimationFrame(() => {
-                this.setState(({ rerenderFlag, ...otherState }) => ({
-                  flagForRerender: !rerenderFlag,
-                  ...otherState,
-                }));
-              });
-            };
+      componentDidMount() {
+        const { refreshOnWindowResize } = this.props;
+        if (refreshOnWindowResize) {
+          this.resizeHandler = () => {
+            requestAnimationFrame(() => {
+              this.setState(({ rerenderFlag, ...otherState }) => ({
+                flagForRerender: !rerenderFlag,
+                ...otherState,
+              }));
+            });
+          };
 
-            window.addEventListener('resize', this.resizeHandler);
-          }
+          window.addEventListener('resize', this.resizeHandler);
         }
+      }
 
-        componentWillUnmount() {
-          if (this.resizeHandler) {
-            window.removeEventListener('resize', this.resizeHandler);
-          }
+      componentWillUnmount() {
+        if (this.resizeHandler) {
+          window.removeEventListener('resize', this.resizeHandler);
         }
+      }
 
-        getPositions = (anchor, selfNode) => {
-          const { refreshOnWindowResize, distanceFromAnchor } = this.props;
-          if (!refreshOnWindowResize) {
-            return defaultGetPositionState(
-              this.props.defaultPlacement,
-              anchor,
-              selfNode,
-              distanceFromAnchor
-            );
-          }
-          return getPositionState(edgePadding)(
+      getPositions = (anchor, selfNode) => {
+        const { refreshOnWindowResize, distanceFromAnchor } = this.props;
+        if (!refreshOnWindowResize) {
+          return defaultGetPositionState(
             this.props.defaultPlacement,
             anchor,
             selfNode,
-            distanceFromAnchor
-          );
-        }
-
-        setSelfNode = (nodeRef) => {
-          this.setState({ selfNode: nodeRef });
-        }
-
-        render() {
-          const {
-            anchor,
-            style,
             distanceFromAnchor,
-            refreshOnWindowResize,
-            defaultPlacement: omittedDefaultPlacement,
-            ...otherProps
-          } = this.props;
-
-          const { selfNode } = this.state;
-
-          if (!anchor) {
-            return null;
-          }
-
-          const {
-            placement,
-            position,
-            arrowPosition,
-            remainingSpace,
-          } = this.getPositions(
-            filterDOMNode(anchor),
-            filterDOMNode(selfNode),
-          );
-
-          const mergedStyle = {
-            position: 'absolute',
-            ...position,
-            ...style,
-          };
-
-          return (
-            <WrappedComponent
-              {...otherProps}
-              placement={placement}
-              remainingSpace={remainingSpace}
-              arrowStyle={arrowPosition}
-              style={mergedStyle}
-              nodeRef={this.setSelfNode}
-            />
           );
         }
-  }
+        return getPositionState(edgePadding)(
+          this.props.defaultPlacement,
+          anchor,
+          selfNode,
+          distanceFromAnchor,
+        );
+      };
 
-  return Anchored;
-};
+      setSelfNode = (nodeRef) => {
+        this.setState({ selfNode: nodeRef });
+      };
+
+      render() {
+        const {
+          anchor,
+          style,
+          distanceFromAnchor,
+          refreshOnWindowResize,
+          defaultPlacement: omittedDefaultPlacement,
+          ...otherProps
+        } = this.props;
+
+        const { selfNode } = this.state;
+
+        if (!anchor) {
+          return null;
+        }
+
+        const { placement, position, arrowPosition, remainingSpace } = this.getPositions(
+          filterDOMNode(anchor),
+          filterDOMNode(selfNode),
+        );
+
+        const mergedStyle = {
+          position: 'absolute',
+          ...position,
+          ...style,
+        };
+
+        return (
+          <WrappedComponent
+            {...otherProps}
+            placement={placement}
+            remainingSpace={remainingSpace}
+            arrowStyle={arrowPosition}
+            style={mergedStyle}
+            nodeRef={this.setSelfNode}
+          />
+        );
+      }
+    }
+
+    return Anchored;
+  };
 
 export default anchored;

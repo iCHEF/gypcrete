@@ -25,79 +25,76 @@ export const BEM = {
 };
 
 class ListRow extends PureComponent {
-    static propTypes = {
-      highlight: PropTypes.bool,
-      nestedList: PropTypes.node,
-      desc: PropTypes.node,
+  static propTypes = {
+    highlight: PropTypes.bool,
+    nestedList: PropTypes.node,
+    desc: PropTypes.node,
 
-      ...statusPropTypes,
-      // status,
-      // statusOptions,
-      // errorMsg,
-    };
+    ...statusPropTypes,
+    // status,
+    // statusOptions,
+    // errorMsg,
+  };
 
-    static defaultProps = {
-      highlight: false,
-      nestedList: undefined,
-      desc: undefined,
-    };
+  static defaultProps = {
+    highlight: false,
+    nestedList: undefined,
+    desc: undefined,
+  };
 
-    renderFooter() {
-      const { desc, errorMsg } = this.props;
-      const hasFooter = desc || errorMsg;
+  renderFooter() {
+    const { desc, errorMsg } = this.props;
+    const hasFooter = desc || errorMsg;
 
-      if (!hasFooter) {
-        return null;
-      }
-
-      return (
-        <div className={BEM.footer.toString()}>
-          {errorMsg && wrapIfNotElement(errorMsg, { with: 'div' })}
-          {desc && wrapIfNotElement(desc, { with: 'div' })}
-        </div>
-      );
+    if (!hasFooter) {
+      return null;
     }
 
-    render() {
-      const {
-        highlight,
-        nestedList,
-        desc,
-        // status props
-        status,
-        statusOptions,
-        errorMsg,
-        // React props
-        className,
-        children,
-        ...wrapperProps
-      } = this.props;
+    return (
+      <div className={BEM.footer.toString()}>
+        {errorMsg && wrapIfNotElement(errorMsg, { with: 'div' })}
+        {desc && wrapIfNotElement(desc, { with: 'div' })}
+      </div>
+    );
+  }
 
-      const bemClass = BEM.root.modifier('highlight', highlight);
+  render() {
+    const {
+      highlight,
+      nestedList,
+      desc,
+      // status props
+      status,
+      statusOptions,
+      errorMsg,
+      // React props
+      className,
+      children,
+      ...wrapperProps
+    } = this.props;
 
-      const stateClass = getStateClassnames({
-        error: status === STATUS_CODE.ERROR,
-      });
-      const rootClassName = classNames(bemClass.toString(), stateClass, className);
+    const bemClass = BEM.root.modifier('highlight', highlight);
 
-      return (
-        <ListSpacingContext.Provider value={false}>
-          <li>
-            <div className={rootClassName} {...wrapperProps}>
-              <div className={BEM.body.toString()}>
-                {children}
-              </div>
-              {this.renderFooter()}
-            </div>
-            {nestedList && (
-              <div className={BEM.nestedListWrapper.toString()}>
-                {nestedList}
-              </div>
-            )}
-          </li>
-        </ListSpacingContext.Provider>
-      );
-    }
+    const stateClass = getStateClassnames({
+      error: status === STATUS_CODE.ERROR,
+    });
+    const rootClassName = classNames(bemClass.toString(), stateClass, className);
+
+    return (
+      <ListSpacingContext.Provider value={false}>
+        <li>
+          <div
+            className={rootClassName}
+            {...wrapperProps}
+          >
+            <div className={BEM.body.toString()}>{children}</div>
+            {this.renderFooter()}
+          </div>
+          {nestedList && <div className={BEM.nestedListWrapper.toString()}>{nestedList}</div>}
+        </li>
+      </ListSpacingContext.Provider>
+    );
+  }
 }
 
 export default ListRow;

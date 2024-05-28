@@ -46,13 +46,13 @@ it('passes unknown props to wrapper <Section>', () => {
     <List
       id="foo"
       verticalSpacing={false}
-    />
+    />,
   );
 
   expect(wrapper.find(Section).props()).toEqual(
     expect.objectContaining({
       id: 'foo',
       verticalSpacing: false,
-    })
+    }),
   );
 });

@@ -11,10 +11,22 @@ export default {
 };
 
 export const singleUncontrolled = () => (
-  <RadioSelectList defaultValue="1" onChange={action('change')}>
-    <RadioSelectOption label="Option A" value="1" />
-    <RadioSelectOption label="Option B" value="2" />
-    <RadioSelectOption label="Option C" value="3" />
+  <RadioSelectList
+    defaultValue="1"
+    onChange={action('change')}
+  >
+    <RadioSelectOption
+      label="Option A"
+      value="1"
+    />
+    <RadioSelectOption
+      label="Option B"
+      value="2"
+    />
+    <RadioSelectOption
+      label="Option C"
+      value="3"
+    />
   </RadioSelectList>
 );
 singleUncontrolled.story = {
@@ -22,10 +34,22 @@ singleUncontrolled.story = {
 };
 
 export const singleControlled = () => (
-  <RadioSelectList value="1" onChange={action('change')}>
-    <RadioSelectOption label="Option A" value="1" />
-    <RadioSelectOption label="Option B" value="2" />
-    <RadioSelectOption label="Option C" value="3" />
+  <RadioSelectList
+    value="1"
+    onChange={action('change')}
+  >
+    <RadioSelectOption
+      label="Option A"
+      value="1"
+    />
+    <RadioSelectOption
+      label="Option B"
+      value="2"
+    />
+    <RadioSelectOption
+      label="Option C"
+      value="3"
+    />
   </RadioSelectList>
 );
 singleControlled.story = {
@@ -42,9 +66,19 @@ export const multipleWithReadOnly = () => (
     value="1"
     onChange={action('change')}
   >
-    <RadioSelectOption label="Option A" value="1" readOnly />
-    <RadioSelectOption label="Option B" value="2" />
-    <RadioSelectOption label="Option C" value="3" />
+    <RadioSelectOption
+      label="Option A"
+      value="1"
+      readOnly
+    />
+    <RadioSelectOption
+      label="Option B"
+      value="2"
+    />
+    <RadioSelectOption
+      label="Option C"
+      value="3"
+    />
   </RadioSelectList>
 );
 multipleWithReadOnly.story = {

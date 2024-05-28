@@ -39,7 +39,12 @@ describe('pure <PureEditableText>', () => {
     const handleFocus = jest.fn();
     const handleBlur = jest.fn();
 
-    const wrapper = shallow(<PureEditableText onFocus={handleFocus} onBlur={handleBlur} />);
+    const wrapper = shallow(
+      <PureEditableText
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+      />,
+    );
     const rowWrapper = wrapper.find(PureText).dive().find(EditableBasicRow);
 
     expect(handleFocus).not.toHaveBeenCalled();
@@ -56,7 +61,12 @@ describe('pure <PureEditableText>', () => {
 
   it('strips status props from <PureText> when focused', () => {
     const mockedIcon = <span data-icon />;
-    const wrapper = shallow(<PureEditableText statusIcon={mockedIcon} errorMsg="Foo-Bar" />);
+    const wrapper = shallow(
+      <PureEditableText
+        statusIcon={mockedIcon}
+        errorMsg="Foo-Bar"
+      />,
+    );
 
     expect(wrapper.prop('statusIcon')).toEqual(mockedIcon);
     expect(wrapper.prop('errorMsg')).toBe('Foo-Bar');
@@ -87,7 +97,13 @@ describe('pure <PureEditableText>', () => {
   });
 
   it('passes unknown props to <EditableBasicRow>', () => {
-    const wrapper = shallow(<PureEditableText noGrow foo bar="Bar" />);
+    const wrapper = shallow(
+      <PureEditableText
+        noGrow
+        foo
+        bar="Bar"
+      />,
+    );
     const rowWrapper = wrapper.find(PureText).dive().find(EditableBasicRow);
 
     // Known prop for <PureText>

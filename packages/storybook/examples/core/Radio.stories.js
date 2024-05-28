@@ -23,7 +23,10 @@ export function BasicUsage() {
   return (
     <div>
       <DebugBox>
-        <Radio basic="Checked Radio" checked />
+        <Radio
+          basic="Checked Radio"
+          checked
+        />
       </DebugBox>
 
       <DebugBox>

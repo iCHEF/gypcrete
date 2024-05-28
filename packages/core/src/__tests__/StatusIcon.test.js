@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  render,
-  act,
-  cleanup,
-  waitFor,
-  screen,
-} from '@testing-library/react';
+import { render, act, cleanup, waitFor, screen } from '@testing-library/react';
 import StatusIcon, { STATUS_CODE } from '../StatusIcon';
 
 // Mocking setTimeout and clearTimeout
@@ -42,7 +36,12 @@ describe('<StatusIcon />', () => {
   });
 
   it('does not auto-hide the success icon when autohide prop is false', () => {
-    render(<StatusIcon status={STATUS_CODE.SUCCESS} autohide={false} />);
+    render(
+      <StatusIcon
+        status={STATUS_CODE.SUCCESS}
+        autohide={false}
+      />,
+    );
     act(() => {
       jest.advanceTimersByTime(2000);
     });
@@ -69,7 +68,12 @@ describe('<StatusIcon />', () => {
 
   it('show icon immediately when autohide is turned off', () => {
     const { rerender } = render(<StatusIcon status={STATUS_CODE.SUCCESS} />);
-    rerender(<StatusIcon status={STATUS_CODE.SUCCESS} autohide={false} />);
+    rerender(
+      <StatusIcon
+        status={STATUS_CODE.SUCCESS}
+        autohide={false}
+      />,
+    );
     act(() => {
       jest.advanceTimersByTime(2000);
     });

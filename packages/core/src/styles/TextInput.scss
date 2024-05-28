@@ -1,4 +1,4 @@
-@import "./mixins";
+@import './mixins';
 
 .#{$prefix}-text-input {
   ::placeholder {
@@ -20,7 +20,7 @@
   }
 
   &__postfix {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
     justify-content: flex-end;
     align-self: flex-end;
     font-weight: 700;

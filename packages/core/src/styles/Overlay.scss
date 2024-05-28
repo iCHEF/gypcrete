@@ -1,4 +1,4 @@
-@import "./mixins";
+@import './mixins';
 
 .#{$prefix}-overlay {
   display: block;
@@ -11,5 +11,5 @@
 
   // Active animation
   opacity: 0;
-  animation: anim-fade-in .3s forwards;
+  animation: anim-fade-in 0.3s forwards;
 }

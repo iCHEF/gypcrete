@@ -48,102 +48,91 @@ export const VERTICAL_ORDER = {
 };
 
 class Text extends PureComponent {
-    static propTypes = {
-      align: PropTypes.oneOf([LEFT, CENTER, RIGHT]),
-      verticalOrder: PropTypes.oneOf([
-        VERTICAL_ORDER.NORMAL,
-        VERTICAL_ORDER.REVERSE,
-      ]),
-      aside: PropTypes.node,
-      basicRow: PropTypes.element,
-      noGrow: PropTypes.bool,
-      bold: PropTypes.bool,
+  static propTypes = {
+    align: PropTypes.oneOf([LEFT, CENTER, RIGHT]),
+    verticalOrder: PropTypes.oneOf([VERTICAL_ORDER.NORMAL, VERTICAL_ORDER.REVERSE]),
+    aside: PropTypes.node,
+    basicRow: PropTypes.element,
+    noGrow: PropTypes.bool,
+    bold: PropTypes.bool,
 
-      ...withStatusPropTypes,
-      // errorMsg: string,
-      // statusIcon: node,
+    ...withStatusPropTypes,
+    // errorMsg: string,
+    // statusIcon: node,
 
-      ...BasicRow.propTypes,
-      // basic: node,
-      // tag: node,
-      // statusIcon: node,
+    ...BasicRow.propTypes,
+    // basic: node,
+    // tag: node,
+    // statusIcon: node,
+  };
+
+  static defaultProps = {
+    align: LEFT,
+    verticalOrder: VERTICAL_ORDER.NORMAL,
+    aside: undefined,
+    basicRow: <BasicRow />,
+    noGrow: false,
+    bold: false,
+    errorMsg: undefined,
+    statusIcon: undefined,
+    ...BasicRow.defaultProps,
+    // basic,
+    // tag,
+    // statusIcon,
+  };
+
+  renderBasicRow() {
+    const { basicRow, basic, tag, statusIcon } = this.props;
+    const basicRowProps = {
+      basic,
+      tag,
+      statusIcon,
+      className: classNames(BEM.row.toString(), BEM.basic.toString()),
     };
 
-    static defaultProps = {
-      align: LEFT,
-      verticalOrder: VERTICAL_ORDER.NORMAL,
-      aside: undefined,
-      basicRow: <BasicRow />,
-      noGrow: false,
-      bold: false,
-      errorMsg: undefined,
-      statusIcon: undefined,
-      ...BasicRow.defaultProps,
-      // basic,
-      // tag,
-      // statusIcon,
-    };
+    if (basicRow && React.isValidElement(basicRow)) {
+      // Inject { basic, tag, statusIcon } to default or custom row.
+      return React.cloneElement(basicRow, basicRowProps);
+    }
 
-    renderBasicRow() {
-      const { basicRow, basic, tag, statusIcon } = this.props;
-      const basicRowProps = {
-        basic,
-        tag,
-        statusIcon,
-        className: classNames(
-          BEM.row.toString(),
-          BEM.basic.toString()
-        ),
-      };
+    return null;
+  }
 
-      if (basicRow && React.isValidElement(basicRow)) {
-        // Inject { basic, tag, statusIcon } to default or custom row.
-        return React.cloneElement(basicRow, basicRowProps);
-      }
+  renderAsideRow() {
+    const { aside, errorMsg } = this.props;
+    const displayText = errorMsg || aside;
 
+    if (!displayText) {
       return null;
     }
 
-    renderAsideRow() {
-      const { aside, errorMsg } = this.props;
-      const displayText = errorMsg || aside;
+    return (
+      <div className={classNames(BEM.row.toString(), BEM.aside.toString())}>{displayText}</div>
+    );
+  }
 
-      if (!displayText) {
-        return null;
-      }
+  render() {
+    const { align, verticalOrder, noGrow, bold, className } = this.props;
+    const wrapperProps = getRemainingProps(this.props, Text.propTypes);
 
-      return (
-        <div className={classNames(BEM.row.toString(), BEM.aside.toString())}>
-          {displayText}
-        </div>
-      );
-    }
+    const bemClass = BEM.root
+      .modifier(align)
+      .modifier(`v-${verticalOrder}`)
+      .modifier('no-grow', noGrow)
+      .modifier('bold', bold);
 
-    render() {
-      const {
-        align,
-        verticalOrder,
-        noGrow,
-        bold,
-        className,
-      } = this.props;
-      const wrapperProps = getRemainingProps(this.props, Text.propTypes);
+    const rootClassName = classNames(bemClass.toString(), className);
 
-      const bemClass = BEM.root
-        .modifier(align)
-        .modifier(`v-${verticalOrder}`)
-        .modifier('no-grow', noGrow)
-        .modifier('bold', bold);
-
-      const rootClassName = classNames(bemClass.toString(), className);
-
-      return (
-        <div className={rootClassName} {...wrapperProps}>
-          {this.renderBasicRow()}
-          {this.renderAsideRow()}
-        </div>
-      );
-    }
+    return (
+      <div
+        className={rootClassName}
+        {...wrapperProps}
+      >
+        {this.renderBasicRow()}
+        {this.renderAsideRow()}
+      </div>
+    );
+  }
 }
 
 export default withStatus()(Text);

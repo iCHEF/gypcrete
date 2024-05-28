@@ -11,13 +11,13 @@ import getElementTypeSymbol from './getElementTypeSymbol';
  * @returns {array}
  */
 export default function parseSelectOptions(children) {
-  const childArray = Array.isArray(children) ? children : [children].filter(item => item);
+  const childArray = Array.isArray(children) ? children : [children].filter((item) => item);
 
   const results = childArray.map((child) => {
     const elementTypeSymbol = getElementTypeSymbol(child);
     if (
-      elementTypeSymbol === CHECKBOX_OPTION_TYPE_SYMBOL
-      || elementTypeSymbol === RADIO_OPTION_TYPE_SYMBOL
+      elementTypeSymbol === CHECKBOX_OPTION_TYPE_SYMBOL ||
+      elementTypeSymbol === RADIO_OPTION_TYPE_SYMBOL
     ) {
       return child.props;
     }
@@ -29,5 +29,5 @@ export default function parseSelectOptions(children) {
     return null;
   });
 
-  return results.flat().filter(item => item);
+  return results.flat().filter((item) => item);
 }

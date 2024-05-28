@@ -24,15 +24,16 @@ function Button({
   children,
   ...otherProps
 }) {
-  const bemClass = ROOT_BEM
-    .modifier(color)
-    .modifier('solid', solid);
+  const bemClass = ROOT_BEM.modifier(color).modifier('solid', solid);
 
   const rootClassName = classNames(className, `${bemClass}`);
 
   // #TODO: Restore wrapper to <button> after Safari 11 goes mainstream
   return (
-    <ButtonTag className={rootClassName} {...otherProps}>
+    <ButtonTag
+      className={rootClassName}
+      {...otherProps}
+    >
       {children}
     </ButtonTag>
   );

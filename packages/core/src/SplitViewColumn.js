@@ -16,7 +16,10 @@ function SplitViewColumn({
   const columnClassName = classNames(columnBEM.toString(), className);
 
   return (
-    <div className={columnClassName} {...otherProps}>
+    <div
+      className={columnClassName}
+      {...otherProps}
+    >
       {children}
     </div>
   );

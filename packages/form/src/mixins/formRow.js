@@ -9,70 +9,70 @@ export const rowPropTypes = PropTypes.shape({
   ...statusPropTypes,
 });
 
-const formRow = ({
-  withRef = false,
-} = {}) => (WrappedComponent) => {
-  class FormRow extends PureComponent {
-        static displayName = `formRow(${getComponentName(WrappedComponent)})`;
+const formRow =
+  ({ withRef = false } = {}) =>
+  (WrappedComponent) => {
+    class FormRow extends PureComponent {
+      static displayName = `formRow(${getComponentName(WrappedComponent)})`;
 
-        static propTypes = {
-          disabled: PropTypes.bool,
-          readOnly: PropTypes.bool,
-          desc: PropTypes.node,
-          ...statusPropTypes,
-          // status
-          // statusOptions
-          // errorMsg
-        };
+      static propTypes = {
+        disabled: PropTypes.bool,
+        readOnly: PropTypes.bool,
+        desc: PropTypes.node,
+        ...statusPropTypes,
+        // status
+        // statusOptions
+        // errorMsg
+      };
 
-        static defaultProps = {
-          disabled: false,
-          readOnly: false,
-          desc: undefined,
-        };
+      static defaultProps = {
+        disabled: false,
+        readOnly: false,
+        desc: undefined,
+      };
 
-        getWrappedComponent() {
-          return this.componentRef;
-        }
+      getWrappedComponent() {
+        return this.componentRef;
+      }
 
-        handleRef = (ref) => {
-          this.componentRef = ref;
-        }
+      handleRef = (ref) => {
+        this.componentRef = ref;
+      };
 
-        render() {
-          const {
-            disabled,
-            readOnly,
-            desc,
-            status,
-            statusOptions,
-            errorMsg,
-            rowProps,
-            ...otherProps
-          } = this.props;
+      render() {
+        const {
+          disabled,
+          readOnly,
+          desc,
+          status,
+          statusOptions,
+          errorMsg,
+          rowProps,
+          ...otherProps
+        } = this.props;
 
-          const ineditable = disabled || readOnly;
+        const ineditable = disabled || readOnly;
 
-          return (
-            <WrappedComponent
-              ref={withRef ? this.handleRef : undefined}
-              ineditable={ineditable}
-              disabled={disabled}
-              readOnly={readOnly}
-              rowProps={{
-                desc,
-                status,
-                statusOptions,
-                errorMsg,
-                ...rowProps,
-              }}
-              {...otherProps}
-            />
-          );
-        }
-  }
+        return (
+          <WrappedComponent
+            ref={withRef ? this.handleRef : undefined}
+            ineditable={ineditable}
+            disabled={disabled}
+            readOnly={readOnly}
+            rowProps={{
+              desc,
+              status,
+              statusOptions,
+              errorMsg,
+              ...rowProps,
+            }}
+            {...otherProps}
+          />
+        );
+      }
+    }
 
-  return FormRow;
-};
+    return FormRow;
+  };
 
 export default formRow;

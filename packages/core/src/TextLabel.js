@@ -10,7 +10,10 @@ function TextLabel({ className, children, ...otherProps }) {
   const rootClassName = classNames(className, COMPONENT_NAME);
 
   return (
-    <div className={rootClassName} {...otherProps}>
+    <div
+      className={rootClassName}
+      {...otherProps}
+    >
       {children}
     </div>
   );

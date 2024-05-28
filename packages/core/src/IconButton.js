@@ -33,17 +33,17 @@ function IconButton({
   const rootClass = classNames(bemClass, className);
 
   return (
-    <Button className={rootClass} {...buttonProps}>
+    <Button
+      className={rootClass}
+      {...buttonProps}
+    >
       <IconLayout icon={icon} />
     </Button>
   );
 }
 
 IconButton.propTypes = {
-  icon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]).isRequired,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   tinted: PropTypes.bool,
   color: EnhancedPropTypes.isEmpty,
   solid: EnhancedPropTypes.isEmpty,

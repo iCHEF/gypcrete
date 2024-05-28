@@ -1,4 +1,4 @@
-@import "./mixins";
+@import './mixins';
 
 $component-name: #{$prefix}-section;
 
@@ -34,9 +34,9 @@ $component-name: #{$prefix}-section;
     }
 
     &:before {
-      content: "\25a0";
+      content: '\25a0';
       display: inline-block;
-      margin-right: .25em;
+      margin-right: 0.25em;
     }
   }
 

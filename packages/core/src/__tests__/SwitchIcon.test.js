@@ -9,7 +9,6 @@ it('renders without crashing', () => {
   render(element);
 });
 
-
 it('can be turned on or off', () => {
   const wrapper = shallow(<SwitchIcon state="on" />);
   expect(wrapper.hasClass('gyp-switch-icon--on')).toBeTruthy();

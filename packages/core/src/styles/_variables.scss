@@ -1,4 +1,4 @@
-@import "./colors";
+@import './colors';
 
 $prefix: 'gyp';
 $prefix-state: 'gyp-state';
@@ -7,11 +7,11 @@ $prefix-state: 'gyp-state';
 //  Common typography
 // ----------------------
 $font-size-large: 16px;
-$font-size-base:  14px;
+$font-size-base: 14px;
 $font-size-small: 12px;
 
 $line-height-large: 18px;
-$line-height-base:  16px;
+$line-height-base: 16px;
 $line-height-small: 14px;
 
 // ----------------------
@@ -41,7 +41,7 @@ $basic-text-font-size: $font-size-large;
 $basic-text-line-height: $line-height-large;
 $aside-text-font-size: $font-size-base;
 $aside-text-line-height: $line-height-base;
-$aside-text-opacity: .7;
+$aside-text-opacity: 0.7;
 
 $tag-font-size: $font-size-small;
 $tag-border-radius: 6px;
@@ -107,18 +107,18 @@ $popover-bottom-padding: 16px;
 $popover-border-radius: 8px;
 $popover-drop-shadow: 0 2px 3px hsba(0, 0, 0, 40);
 
-$modal-width:      720px;
-$modal-max-width:  90%;
-$modal-height:     480px;
+$modal-width: 720px;
+$modal-max-width: 90%;
+$modal-height: 480px;
 $modal-max-height: 90%;
-$modal-border-radius:    $popover-border-radius;
-$modal-box-shadow:       $popup-box-shadow;
+$modal-border-radius: $popover-border-radius;
+$modal-box-shadow: $popup-box-shadow;
 $modal-indent-layer-max: 7;
 $modal-indent: 16px;
 
 $splitview-narrow-min-width: 240px;
 $splitview-narrow-max-width: 400px;
-$splitview-wide-min-width:   320px;
+$splitview-wide-min-width: 320px;
 
 // -------------------------------------
 // Timing Functions
@@ -127,5 +127,5 @@ $splitview-wide-min-width:   320px;
 // License granted on webpage.
 // -------------------------------------
 
-$ease-out-quad: cubic-bezier(.25, .46, .45, .94);
-$ease-out-cubic: cubic-bezier(.215, .61, .355, 1);
+$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);

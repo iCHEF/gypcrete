@@ -10,8 +10,8 @@ export default {
 
 export function BasicUsage() {
   /**
-     * In the following example the `<InfiniteScroll>` placed in a fixed height container'.
-     */
+   * In the following example the `<InfiniteScroll>` placed in a fixed height container'.
+   */
   const defaultItemsCount = 50;
 
   const rootContainerStyle = {
@@ -87,14 +87,11 @@ export function BasicUsage() {
         showMoreButton="Show more"
         noNewestButton="All items displayed"
       >
-        <ul>
-          {renderListItems()}
-        </ul>
+        <ul>{renderListItems()}</ul>
       </InfiniteScroll>
     </div>
   );
 }
-
 
 export function PageAsScrollContainer() {
   const defaultItemsCount = 20;
@@ -166,9 +163,7 @@ export function PageAsScrollContainer() {
       showMoreButton="Show more"
       noNewestButton="All items displayed"
     >
-      <ul>
-        {renderListItems()}
-      </ul>
+      <ul>{renderListItems()}</ul>
     </InfiniteScroll>
   );
 }

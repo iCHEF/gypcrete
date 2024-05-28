@@ -6,7 +6,8 @@ import PopupButton from '@ichef/gypcrete/src/PopupButton';
 
 import Checkbox from '@ichef/gypcrete/src/Checkbox';
 
-const reactLogoImg = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K';
+const reactLogoImg =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K';
 
 export default {
   title: 'gypcrete/Popup',
@@ -28,12 +29,18 @@ export function BasicMessage() {
       icon="error"
       iconColor="red"
       message="You have unsaved changes. Click “Confirm” to abandon changes."
-      buttons={(
+      buttons={
         <>
-          <PopupButton basic="Cancel" onClick={action('cancel')} />
-          <PopupButton basic="Confirm" onClick={action('confirm')} />
+          <PopupButton
+            basic="Cancel"
+            onClick={action('cancel')}
+          />
+          <PopupButton
+            basic="Confirm"
+            onClick={action('confirm')}
+          />
         </>
-      )}
+      }
     />
   );
 }
@@ -45,9 +52,12 @@ export function MessageWithTitle() {
       iconColor="red"
       title="Invalid inputs"
       message="Please check value of each fields."
-      buttons={(
-        <PopupButton basic="Confirm" onClick={action('confirm')} />
-      )}
+      buttons={
+        <PopupButton
+          basic="Confirm"
+          onClick={action('confirm')}
+        />
+      }
     />
   );
 }
@@ -60,12 +70,18 @@ export function LargePopup() {
       iconColor="red"
       title="A very important notice"
       message="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      buttons={(
+      buttons={
         <>
-          <PopupButton basic="Learn more" onClick={action('learn')} />
-          <PopupButton basic="Close" onClick={action('close')} />
+          <PopupButton
+            basic="Learn more"
+            onClick={action('learn')}
+          />
+          <PopupButton
+            basic="Close"
+            onClick={action('close')}
+          />
         </>
-      )}
+      }
     />
   );
 }
@@ -84,15 +100,24 @@ export function CustomContentBelowMessage() {
       iconColor="green"
       title="Website updated"
       message="We have added lots of new features!"
-      messageBottomArea={(
-        <Checkbox align="center" basic="Do not show again" />
-      )}
-      buttons={(
+      messageBottomArea={
+        <Checkbox
+          align="center"
+          basic="Do not show again"
+        />
+      }
+      buttons={
         <>
-          <PopupButton basic="Learn more" onClick={action('learn')} />
-          <PopupButton basic="Close" onClick={action('close')} />
+          <PopupButton
+            basic="Learn more"
+            onClick={action('learn')}
+          />
+          <PopupButton
+            basic="Close"
+            onClick={action('close')}
+          />
         </>
-      )}
+      }
     />
   );
 }
@@ -105,7 +130,13 @@ CustomContentBelowMessage.story = {
 };
 
 export function CustomIcon() {
-  const customIcon = <img src={reactLogoImg} alt="" width="48" />;
+  const customIcon = (
+    <img
+      src={reactLogoImg}
+      alt=""
+      width="48"
+    />
+  );
   return (
     <Popup
       icon={customIcon}
@@ -119,9 +150,12 @@ export function NoIcon() {
     <Popup
       title="Website updated"
       message="We have added lots of new features!"
-      buttons={(
-        <PopupButton basic="Close" onClick={action('close')} />
-      )}
+      buttons={
+        <PopupButton
+          basic="Close"
+          onClick={action('close')}
+        />
+      }
     />
   );
 }
@@ -156,9 +190,12 @@ export function VeryLongMessage() {
       icon="error"
       iconColor="red"
       message={MESSAGE}
-      buttons={(
-        <PopupButton basic="Confirm" onClick={action('confirm')} />
-      )}
+      buttons={
+        <PopupButton
+          basic="Confirm"
+          onClick={action('confirm')}
+        />
+      }
     />
   );
 }

@@ -1,5 +1,5 @@
-@import "./mixins";
-@import "./states";
+@import './mixins';
+@import './states';
 
 .#{$prefix}-row-comp {
   font-size: rem($basic-text-font-size);
@@ -45,11 +45,11 @@
       opacity: 1 !important;
 
       .#{$prefix}-text__basic {
-        opacity: .3 !important;
+        opacity: 0.3 !important;
       }
 
       .#{$prefix}-icon {
-        opacity: .3 !important;
+        opacity: 0.3 !important;
       }
 
       .#{$prefix}-text__aside {

@@ -11,10 +11,22 @@ export default {
 };
 
 export const singleUncontrolled = () => (
-  <SelectList defaultValue="1" onChange={action('change')}>
-    <SelectOption label="Option A" value="1" />
-    <SelectOption label="Option B" value="2" />
-    <SelectOption label="Option C" value="3" />
+  <SelectList
+    defaultValue="1"
+    onChange={action('change')}
+  >
+    <SelectOption
+      label="Option A"
+      value="1"
+    />
+    <SelectOption
+      label="Option B"
+      value="2"
+    />
+    <SelectOption
+      label="Option C"
+      value="3"
+    />
   </SelectList>
 );
 singleUncontrolled.story = {
@@ -22,10 +34,22 @@ singleUncontrolled.story = {
 };
 
 export const singleControlled = () => (
-  <SelectList value="1" onChange={action('change')}>
-    <SelectOption label="Option A" value="1" />
-    <SelectOption label="Option B" value="2" />
-    <SelectOption label="Option C" value="3" />
+  <SelectList
+    value="1"
+    onChange={action('change')}
+  >
+    <SelectOption
+      label="Option A"
+      value="1"
+    />
+    <SelectOption
+      label="Option B"
+      value="2"
+    />
+    <SelectOption
+      label="Option C"
+      value="3"
+    />
   </SelectList>
 );
 singleControlled.story = {
@@ -43,9 +67,18 @@ export const multipleUncontrolled = () => (
     defaultValue={['1']}
     onChange={action('change')}
   >
-    <SelectOption label="Option A" value="1" />
-    <SelectOption label="Option B" value="2" />
-    <SelectOption label="Option C" value="3" />
+    <SelectOption
+      label="Option A"
+      value="1"
+    />
+    <SelectOption
+      label="Option B"
+      value="2"
+    />
+    <SelectOption
+      label="Option C"
+      value="3"
+    />
   </SelectList>
 );
 multipleUncontrolled.story = {
@@ -58,9 +91,18 @@ export const multipleControlled = () => (
     value={['1', '2']}
     onChange={action('change')}
   >
-    <SelectOption label="Option A" value="1" />
-    <SelectOption label="Option B" value="2" />
-    <SelectOption label="Option C" value="3" />
+    <SelectOption
+      label="Option A"
+      value="1"
+    />
+    <SelectOption
+      label="Option B"
+      value="2"
+    />
+    <SelectOption
+      label="Option C"
+      value="3"
+    />
   </SelectList>
 );
 multipleControlled.story = {
@@ -79,9 +121,18 @@ export const multipleWithoutCheckAll = () => (
     defaultValue={['1']}
     onChange={action('change')}
   >
-    <SelectOption label="Option A" value="1" />
-    <SelectOption label="Option B" value="2" />
-    <SelectOption label="Option C" value="3" />
+    <SelectOption
+      label="Option A"
+      value="1"
+    />
+    <SelectOption
+      label="Option B"
+      value="2"
+    />
+    <SelectOption
+      label="Option C"
+      value="3"
+    />
   </SelectList>
 );
 multipleWithoutCheckAll.story = {
@@ -94,9 +145,19 @@ export const multipleWithReadOnly = () => (
     defaultValue={['1']}
     onChange={action('change')}
   >
-    <SelectOption label="Option A" value="1" readOnly />
-    <SelectOption label="Option B" value="2" />
-    <SelectOption label="Option C" value="3" />
+    <SelectOption
+      label="Option A"
+      value="1"
+      readOnly
+    />
+    <SelectOption
+      label="Option B"
+      value="2"
+    />
+    <SelectOption
+      label="Option C"
+      value="3"
+    />
   </SelectList>
 );
 multipleWithReadOnly.story = {
@@ -110,9 +171,18 @@ export const minimumChecksRequired = () => (
     defaultValue={['1']}
     onChange={action('change')}
   >
-    <SelectOption label="Option A" value="1" />
-    <SelectOption label="Option B" value="2" />
-    <SelectOption label="Option C" value="3" />
+    <SelectOption
+      label="Option A"
+      value="1"
+    />
+    <SelectOption
+      label="Option B"
+      value="2"
+    />
+    <SelectOption
+      label="Option C"
+      value="3"
+    />
   </SelectList>
 );
 minimumChecksRequired.story = {

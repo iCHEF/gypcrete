@@ -21,127 +21,125 @@ const ESCAPE = 'Escape';
  *
  * Formerlly `escapable()`.
  */
-const closable = ({
-  onEscape = true,
-  onClickOutside = false,
-  onClickInside = false,
-  stopEventPropagation = true,
-} = {}) => (WrappedComponent) => {
-  const componentName = getComponentName(WrappedComponent);
+const closable =
+  ({
+    onEscape = true,
+    onClickOutside = false,
+    onClickInside = false,
+    stopEventPropagation = true,
+  } = {}) =>
+  (WrappedComponent) => {
+    const componentName = getComponentName(WrappedComponent);
 
-  const mixinConfigs = {
-    onEscape,
-    onClickOutside,
-    onClickInside,
-    stopEventPropagation,
-  };
-
-  class Closable extends PureComponent {
-    static displayName = `closable(${componentName})`;
-
-    static propTypes = {
-      onClose: PropTypes.func,
-      closable: PropTypes.shape({
-        onEscape: PropTypes.bool,
-        onClickOutside: PropTypes.bool,
-        onClickInside: PropTypes.bool,
-        stopEventPropagation: PropTypes.bool,
-        skip: PropTypes.bool,
-      }),
+    const mixinConfigs = {
+      onEscape,
+      onClickOutside,
+      onClickInside,
+      stopEventPropagation,
     };
 
-    static defaultProps = {
-      onClose: () => {},
-      closable: mixinConfigs,
-    };
+    class Closable extends PureComponent {
+      static displayName = `closable(${componentName})`;
 
-    componentDidMount() {
-      if (!this.props.closable.skip) {
-        document.addEventListener('keyup', this.handleDocumentKeyup);
-      }
-    }
-
-    componentWillUnmount() {
-      if (!this.props.closable.skip) {
-        document.removeEventListener('keyup', this.handleDocumentKeyup);
-      }
-    }
-
-    getOptions() {
-      const { closable: runtimeOptions } = this.props;
-
-      /** @type {typeof mixinDefaults} */
-      const actualOptions = {
-        ...mixinConfigs,
-        ...runtimeOptions,
+      static propTypes = {
+        onClose: PropTypes.func,
+        closable: PropTypes.shape({
+          onEscape: PropTypes.bool,
+          onClickOutside: PropTypes.bool,
+          onClickInside: PropTypes.bool,
+          stopEventPropagation: PropTypes.bool,
+          skip: PropTypes.bool,
+        }),
       };
 
-      return actualOptions;
-    }
+      static defaultProps = {
+        onClose: () => {},
+        closable: mixinConfigs,
+      };
 
-    /**
-     * @param {KeyboardEvent} event
-     */
-    handleDocumentKeyup = (event) => {
-      const options = this.getOptions();
-
-      if (options.onEscape && event.keyCode === keycode(ESCAPE)) {
-        this.props.onClose(event);
-      }
-    }
-
-    /**
-     * @param {React.MouseEvent} event
-     */
-    handleOuterLayerClick = (event) => {
-      const options = this.getOptions();
-
-      if (options.stopEventPropagation) {
-        event.stopPropagation();
+      componentDidMount() {
+        if (!this.props.closable.skip) {
+          document.addEventListener('keyup', this.handleDocumentKeyup);
+        }
       }
 
-      if (options.onClickOutside) {
-        this.props.onClose(event);
+      componentWillUnmount() {
+        if (!this.props.closable.skip) {
+          document.removeEventListener('keyup', this.handleDocumentKeyup);
+        }
       }
-    }
 
-    /**
-     * @param {React.MouseEvent} event
-     */
-    handleInsideClick = (event) => {
-      const options = this.getOptions();
+      getOptions() {
+        const { closable: runtimeOptions } = this.props;
 
-      if (options.onClickInside) {
-        this.props.onClose(event);
+        /** @type {typeof mixinDefaults} */
+        const actualOptions = {
+          ...mixinConfigs,
+          ...runtimeOptions,
+        };
+
+        return actualOptions;
       }
-    }
 
-    render() {
-      const {
-        onClose,
-        closable: runtimeOptions,
-        ...otherProps
-      } = this.props;
+      /**
+       * @param {KeyboardEvent} event
+       */
+      handleDocumentKeyup = (event) => {
+        const options = this.getOptions();
 
-      return (
-        <>
-          {!runtimeOptions.skip && (
-            <div
-              role="presentation"
-              className={ROOT_BEM.toString()}
-              onClick={this.handleOuterLayerClick}
+        if (options.onEscape && event.keyCode === keycode(ESCAPE)) {
+          this.props.onClose(event);
+        }
+      };
+
+      /**
+       * @param {React.MouseEvent} event
+       */
+      handleOuterLayerClick = (event) => {
+        const options = this.getOptions();
+
+        if (options.stopEventPropagation) {
+          event.stopPropagation();
+        }
+
+        if (options.onClickOutside) {
+          this.props.onClose(event);
+        }
+      };
+
+      /**
+       * @param {React.MouseEvent} event
+       */
+      handleInsideClick = (event) => {
+        const options = this.getOptions();
+
+        if (options.onClickInside) {
+          this.props.onClose(event);
+        }
+      };
+
+      render() {
+        const { onClose, closable: runtimeOptions, ...otherProps } = this.props;
+
+        return (
+          <>
+            {!runtimeOptions.skip && (
+              <div
+                role="presentation"
+                className={ROOT_BEM.toString()}
+                onClick={this.handleOuterLayerClick}
+              />
+            )}
+            <WrappedComponent
+              onInsideClick={this.handleInsideClick}
+              {...otherProps}
             />
-          )}
-          <WrappedComponent
-            onInsideClick={this.handleInsideClick}
-            {...otherProps}
-          />
-        </>
-      );
+          </>
+        );
+      }
     }
-  }
 
-  return Closable;
-};
+    return Closable;
+  };
 
 export default closable;

@@ -81,21 +81,20 @@ export class BEMFactory {
   }
 
   /**
-     * Render BEM chain as full class name string
-     *
-     * @param {Bool} stripBlock - Should remove Block from output.
-     * @return {String}
-     */
+   * Render BEM chain as full class name string
+   *
+   * @param {Bool} stripBlock - Should remove Block from output.
+   * @return {String}
+   */
   toString({ stripBlock = false } = {}) {
     const { _block, _element, _modifiers, _nonBemClasses } = this;
 
-    const baseClass = (typeof _element !== 'undefined')
-      ? `${_block}${ELEMENT_SEPARATOR}${_element}`
-      : _block;
+    const baseClass =
+      typeof _element !== 'undefined' ? `${_block}${ELEMENT_SEPARATOR}${_element}` : _block;
 
     const classes = [
       baseClass,
-      ..._modifiers.map(modifier => `${baseClass}${MODIFIER_SEPARATOR}${modifier}`),
+      ..._modifiers.map((modifier) => `${baseClass}${MODIFIER_SEPARATOR}${modifier}`),
       ..._nonBemClasses,
     ];
 
@@ -105,10 +104,10 @@ export class BEMFactory {
   }
 
   /**
-     * Export internal properties to a new Hash
-     *
-     * @return {Hash}
-     */
+   * Export internal properties to a new Hash
+   *
+   * @return {Hash}
+   */
   toHash() {
     return {
       block: this._block,

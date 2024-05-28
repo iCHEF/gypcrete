@@ -59,15 +59,9 @@ function List({
             verticalSpacing={spacing || !!title}
             {...otherProps}
           >
-            {topArea && (
-              <div className={BEM.topArea.toString()}>
-                {topArea}
-              </div>
-            )}
+            {topArea && <div className={BEM.topArea.toString()}>{topArea}</div>}
 
-            <ul className={BEM.body.toString()}>
-              {children}
-            </ul>
+            <ul className={BEM.body.toString()}>{children}</ul>
           </Section>
         );
       }}

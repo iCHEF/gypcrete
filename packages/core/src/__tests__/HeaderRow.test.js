@@ -5,7 +5,13 @@ import { shallow } from 'enzyme';
 import HeaderRow, { HeaderArea } from '../HeaderRow';
 
 it('renders without crashing', () => {
-  const element = <HeaderRow left="Left" center="Title" right="Right" />;
+  const element = (
+    <HeaderRow
+      left="Left"
+      center="Title"
+      right="Right"
+    />
+  );
 
   render(element);
 });
@@ -36,21 +42,22 @@ describe('<HeaderRow>', () => {
         left={mockedLeft}
         center={mockedCenter}
         right={mockedRight}
-      />
+      />,
     );
-    expect(wrapper.containsAllMatchingElements([
-      <HeaderArea content={mockedLeft} />,
-      <HeaderArea content={mockedCenter} />,
-      <HeaderArea content={mockedRight} />,
-    ])).toBeTruthy();
+    expect(
+      wrapper.containsAllMatchingElements([
+        <HeaderArea content={mockedLeft} />,
+        <HeaderArea content={mockedCenter} />,
+        <HeaderArea content={mockedRight} />,
+      ]),
+    ).toBeTruthy();
   });
-
 
   it('renders optional children besides 3 defined areas', () => {
     const wrapper = shallow(
       <HeaderRow>
         <div data-target>Hello World</div>
-      </HeaderRow>
+      </HeaderRow>,
     );
     expect(wrapper.find('div[data-target]').exists()).toBeTruthy();
   });

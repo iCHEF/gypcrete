@@ -13,31 +13,59 @@ describe('SelectRow', () => {
 
   it('should render selected option with controlled value correctly', () => {
     const { rerender } = render(
-      <SelectRow label="Test Label" value="no" onChange={mockFn}>
-        <SelectOption label="Yes" value="yes" />
-        <SelectOption label="No" value="no" />
-      </SelectRow>
+      <SelectRow
+        label="Test Label"
+        value="no"
+        onChange={mockFn}
+      >
+        <SelectOption
+          label="Yes"
+          value="yes"
+        />
+        <SelectOption
+          label="No"
+          value="no"
+        />
+      </SelectRow>,
     );
 
     expect(screen.getByText('No')).toBeInTheDocument();
 
     rerender(
-      <SelectRow label="Test Label" value="yes" onChange={mockFn}>
-        <SelectOption label="Yes" value="yes" />
-        <SelectOption label="No" value="no" />
-      </SelectRow>
+      <SelectRow
+        label="Test Label"
+        value="yes"
+        onChange={mockFn}
+      >
+        <SelectOption
+          label="Yes"
+          value="yes"
+        />
+        <SelectOption
+          label="No"
+          value="no"
+        />
+      </SelectRow>,
     );
 
     expect(screen.getByText('Yes')).toBeInTheDocument();
   });
 
-
   it('handle onChange event in single mode', () => {
     render(
-      <SelectRow label="Test Label" onChange={mockFn}>
-        <SelectOption label="Yes" value="yes" />
-        <SelectOption label="No" value="no" />
-      </SelectRow>
+      <SelectRow
+        label="Test Label"
+        onChange={mockFn}
+      >
+        <SelectOption
+          label="Yes"
+          value="yes"
+        />
+        <SelectOption
+          label="No"
+          value="no"
+        />
+      </SelectRow>,
     );
 
     const dropdownButton = screen.getByRole('presentation');
@@ -64,10 +92,19 @@ describe('SelectRow', () => {
         defaultValue={['option1', 'option2']}
         onChange={mockFn}
       >
-        <SelectOption label="Option 1" value="option1" />
-        <SelectOption label="Option 2" value="option2" />
-        <SelectOption label="Option 3" value="option3" />
-      </SelectRow>
+        <SelectOption
+          label="Option 1"
+          value="option1"
+        />
+        <SelectOption
+          label="Option 2"
+          value="option2"
+        />
+        <SelectOption
+          label="Option 3"
+          value="option3"
+        />
+      </SelectRow>,
     );
 
     expect(screen.getByText('Option 1, Option 2')).toBeInTheDocument();
@@ -89,10 +126,19 @@ describe('SelectRow', () => {
         multiple
         onChange={mockFn}
       >
-        <SelectOption label="Option 1" value="option1" />
-        <SelectOption label="Option 2" value="option2" />
-        <SelectOption label="Option 3" value="option3" />
-      </SelectRow>
+        <SelectOption
+          label="Option 1"
+          value="option1"
+        />
+        <SelectOption
+          label="Option 2"
+          value="option2"
+        />
+        <SelectOption
+          label="Option 3"
+          value="option3"
+        />
+      </SelectRow>,
     );
 
     expect(screen.getByText('(Unset)')).toBeInTheDocument();
@@ -101,10 +147,19 @@ describe('SelectRow', () => {
   // 測試禁用情境
   it('dropdown icon should not be clickable when disabled', () => {
     render(
-      <SelectRow disabled label="Disabled row">
-        <SelectOption label="Yes" value="yes" />
-        <SelectOption label="No" value="no" />
-      </SelectRow>
+      <SelectRow
+        disabled
+        label="Disabled row"
+      >
+        <SelectOption
+          label="Yes"
+          value="yes"
+        />
+        <SelectOption
+          label="No"
+          value="no"
+        />
+      </SelectRow>,
     );
 
     const dropdownButton = screen.getByRole('presentation');
@@ -125,8 +180,11 @@ describe('SelectRow', () => {
         value="test"
         onChange={mockFn}
       >
-        <SelectOption label="Test" value="test" />
-      </SelectRow>
+        <SelectOption
+          label="Test"
+          value="test"
+        />
+      </SelectRow>,
     );
 
     expect(screen.getByText('error message')).toBeInTheDocument();
@@ -142,10 +200,19 @@ describe('SelectRow', () => {
         defaultValue={['option1', 'option2', 'option3']}
         onChange={mockFn}
       >
-        <SelectOption label="Option 1" value="option1" />
-        <SelectOption label="Option 2" value="option2" />
-        <SelectOption label="Option 3" value="option3" />
-      </SelectRow>
+        <SelectOption
+          label="Option 1"
+          value="option1"
+        />
+        <SelectOption
+          label="Option 2"
+          value="option2"
+        />
+        <SelectOption
+          label="Option 3"
+          value="option3"
+        />
+      </SelectRow>,
     );
 
     expect(screen.getByText('ALL SELECTED')).toBeInTheDocument();
@@ -162,10 +229,19 @@ describe('SelectRow', () => {
         defaultValue={['option1', 'option2']}
         onChange={mockFn}
       >
-        <SelectOption label="Option 1" value="option1" />
-        <SelectOption label="Option 2" value="option2" />
-        <SelectOption label="Option 3" value="option3" />
-      </SelectRow>
+        <SelectOption
+          label="Option 1"
+          value="option1"
+        />
+        <SelectOption
+          label="Option 2"
+          value="option2"
+        />
+        <SelectOption
+          label="Option 3"
+          value="option3"
+        />
+      </SelectRow>,
     );
 
     expect(screen.getByText('Option 1 + Option 2')).toBeInTheDocument();
@@ -179,8 +255,11 @@ describe('SelectRow', () => {
         value="test"
         onChange={mockFn}
       >
-        <SelectOption label="Test" value="test" />
-      </SelectRow>
+        <SelectOption
+          label="Test"
+          value="test"
+        />
+      </SelectRow>,
     );
 
     expect(screen.getByText('Custom RenderRowValueLabel')).toBeInTheDocument();
@@ -197,10 +276,19 @@ describe('SelectRow', () => {
         defaultValue={['option1', 'option2']}
         onChange={mockFn}
       >
-        <SelectOption label="Option 1" value="option1" />
-        <SelectOption label="Option 2" value="option2" />
-        <SelectOption label="Option 3" value="option3" />
-      </SelectRow>
+        <SelectOption
+          label="Option 1"
+          value="option1"
+        />
+        <SelectOption
+          label="Option 2"
+          value="option2"
+        />
+        <SelectOption
+          label="Option 3"
+          value="option3"
+        />
+      </SelectRow>,
     );
 
     rerender(
@@ -210,14 +298,23 @@ describe('SelectRow', () => {
         defaultValue="option1"
         onChange={mockFn}
       >
-        <SelectOption label="Option 1" value="option1" />
-        <SelectOption label="Option 2" value="option2" />
-        <SelectOption label="Option 3" value="option3" />
-      </SelectRow>
+        <SelectOption
+          label="Option 1"
+          value="option1"
+        />
+        <SelectOption
+          label="Option 2"
+          value="option2"
+        />
+        <SelectOption
+          label="Option 3"
+          value="option3"
+        />
+      </SelectRow>,
     );
 
     expect(mockConsoleError).toHaveBeenCalledWith(
-      'Warning: <SelectRow>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.'
+      'Warning: <SelectRow>: you should not change `multiple` prop while it is uncontrolled. Its value will be reset now.',
     );
   });
 });

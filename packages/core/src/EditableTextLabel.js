@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-} from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 
@@ -37,146 +32,138 @@ const TOUCH_TIMEOUT_MS = 250;
  * It does not offer direct control to the `<input>` inside.
  */
 
-const EditableTextLabel = React.memo(({
-  inEdit: inEditProp, // not used here
-  onDblClick, // also not used here
-  onEditEnd,
-  status,
-  ...labelProps
-}) => {
-  const [inEdit, setInEdit] = useState(inEditProp || false);
-  // For simulating double-touch
-  const touchCountRef = useRef(0);
-  const touchTimeoutRef = useRef(null);
+const EditableTextLabel = React.memo(
+  ({
+    inEdit: inEditProp, // not used here
+    onDblClick, // also not used here
+    onEditEnd,
+    status,
+    ...labelProps
+  }) => {
+    const [inEdit, setInEdit] = useState(inEditProp || false);
+    // For simulating double-touch
+    const touchCountRef = useRef(0);
+    const touchTimeoutRef = useRef(null);
 
-  const getEditabilityControlled = useCallback(
-    () => inEditProp !== undefined,
-    [inEditProp]
-  );
+    const getEditabilityControlled = useCallback(() => inEditProp !== undefined, [inEditProp]);
 
-  const resetDblTouchSimulation = () => {
-    touchCountRef.current = 0;
-    touchTimeoutRef.current = null;
-  };
+    const resetDblTouchSimulation = () => {
+      touchCountRef.current = 0;
+      touchTimeoutRef.current = null;
+    };
 
-  useEffect(
-    () => {
+    useEffect(() => {
       if (getEditabilityControlled()) {
         setInEdit(inEditProp);
       }
-    },
-    [getEditabilityControlled, inEditProp]
-  );
+    }, [getEditabilityControlled, inEditProp]);
 
-  useEffect(
-    () => () => {
-      if (touchTimeoutRef.current) {
-        clearTimeout(touchTimeoutRef.current);
-      }
-    },
-    []
-  );
-
-  const leaveEditModeIfNotControlled = () => {
-    if (!getEditabilityControlled()) {
-      setInEdit(false);
-    }
-  };
-
-  const handleDoubleClick = (event) => {
-    /**
-     * If `inEdit` isn't controlled, this component by default
-     * goes into edit mode on double click/touch.
-     */
-    if (!getEditabilityControlled()) {
-      setInEdit(true);
-    }
-
-    onDblClick(event);
-  };
-
-  const handleTouchEnd = (event) => {
-    const currentCount = touchCountRef.current + 1;
-
-    if (currentCount === 2) {
-      // Simulates “double touch”
-      handleDoubleClick(event);
-      resetDblTouchSimulation();
-      return;
-    }
-
-    /**
-     * Clears prev timeout to keep touch counts, and then
-     * create new timeout to reset touch counts.
-     */
-    global.clearTimeout(touchTimeoutRef.current);
-    const resetTimeout = global.setTimeout(
-      resetDblTouchSimulation,
-      TOUCH_TIMEOUT_MS
+    useEffect(
+      () => () => {
+        if (touchTimeoutRef.current) {
+          clearTimeout(touchTimeoutRef.current);
+        }
+      },
+      [],
     );
 
-    touchCountRef.current = currentCount;
-    touchTimeoutRef.current = resetTimeout;
-  };
-
-  const handleInputBlur = (event) => {
-    leaveEditModeIfNotControlled();
-    onEditEnd({
-      value: event.currentTarget.value,
-      event,
-    });
-  };
-
-  const handleInputKeyDown = (event) => {
-    switch (event.keyCode) {
-      case keycode('Enter'):
-        // Blur the input, and trigger `onEditEnd` in blur handler
-        event.currentTarget.blur();
-        break;
-      case keycode('Escape'): {
-        leaveEditModeIfNotControlled();
-        onEditEnd({
-          value: null,
-          event,
-        });
-        break;
+    const leaveEditModeIfNotControlled = () => {
+      if (!getEditabilityControlled()) {
+        setInEdit(false);
       }
-      default:
-        break;
+    };
+
+    const handleDoubleClick = (event) => {
+      /**
+       * If `inEdit` isn't controlled, this component by default
+       * goes into edit mode on double click/touch.
+       */
+      if (!getEditabilityControlled()) {
+        setInEdit(true);
+      }
+
+      onDblClick(event);
+    };
+
+    const handleTouchEnd = (event) => {
+      const currentCount = touchCountRef.current + 1;
+
+      if (currentCount === 2) {
+        // Simulates “double touch”
+        handleDoubleClick(event);
+        resetDblTouchSimulation();
+        return;
+      }
+
+      /**
+       * Clears prev timeout to keep touch counts, and then
+       * create new timeout to reset touch counts.
+       */
+      global.clearTimeout(touchTimeoutRef.current);
+      const resetTimeout = global.setTimeout(resetDblTouchSimulation, TOUCH_TIMEOUT_MS);
+
+      touchCountRef.current = currentCount;
+      touchTimeoutRef.current = resetTimeout;
+    };
+
+    const handleInputBlur = (event) => {
+      leaveEditModeIfNotControlled();
+      onEditEnd({
+        value: event.currentTarget.value,
+        event,
+      });
+    };
+
+    const handleInputKeyDown = (event) => {
+      switch (event.keyCode) {
+        case keycode('Enter'):
+          // Blur the input, and trigger `onEditEnd` in blur handler
+          event.currentTarget.blur();
+          break;
+        case keycode('Escape'): {
+          leaveEditModeIfNotControlled();
+          onEditEnd({
+            value: null,
+            event,
+          });
+          break;
+        }
+        default:
+          break;
+      }
+    };
+
+    const { icon, basic, align } = labelProps;
+
+    if (!inEdit && status !== STATUS.LOADING) {
+      return (
+        <TextLabel
+          status={status}
+          onDoubleClick={handleDoubleClick}
+          onTouchEnd={handleTouchEnd}
+          {...labelProps}
+        />
+      );
     }
-  };
 
+    const layoutProps = getTextLayoutProps(align, !!icon); // { align, noGrow }
+    const labelIcon = icon && wrapIfNotElement(icon, { with: Icon, via: 'type' });
 
-  const { icon, basic, align } = labelProps;
-
-  if (!inEdit && status !== STATUS.LOADING) {
     return (
-      <TextLabel
-        status={status}
-        onDoubleClick={handleDoubleClick}
-        onTouchEnd={handleTouchEnd}
-        {...labelProps}
-      />
+      <TextLabel {...labelProps}>
+        {labelIcon}
+
+        <EditableText
+          defaultValue={basic}
+          autoFocus={inEdit}
+          onBlur={handleInputBlur}
+          onKeyDown={handleInputKeyDown}
+          {...layoutProps}
+        />
+      </TextLabel>
     );
-  }
-
-  const layoutProps = getTextLayoutProps(align, !!icon); // { align, noGrow }
-  const labelIcon = icon && wrapIfNotElement(icon, { with: Icon, via: 'type' });
-
-  return (
-    <TextLabel {...labelProps}>
-      {labelIcon}
-
-      <EditableText
-        defaultValue={basic}
-        autoFocus={inEdit}
-        onBlur={handleInputBlur}
-        onKeyDown={handleInputKeyDown}
-        {...layoutProps}
-      />
-    </TextLabel>
-  );
-});
+  },
+);
 
 EditableTextLabel.propTypes = {
   inEdit: PropTypes.bool,

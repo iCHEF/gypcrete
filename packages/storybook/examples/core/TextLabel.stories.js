@@ -104,13 +104,19 @@ export function TextLabelWithTextExample() {
     <div>
       <DebugBox>
         <TextLabel>
-          <Text basic="foo" tag="Tag" />
+          <Text
+            basic="foo"
+            tag="Tag"
+          />
         </TextLabel>
       </DebugBox>
 
       <DebugBox>
         <TextLabel status="loading">
-          <Text basic="foo" aside="loading..." />
+          <Text
+            basic="foo"
+            aside="loading..."
+          />
         </TextLabel>
       </DebugBox>
     </div>

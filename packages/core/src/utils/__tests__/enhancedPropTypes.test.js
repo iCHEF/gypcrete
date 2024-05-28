@@ -22,7 +22,7 @@ describe('EnhancedPropTypes: empty', () => {
 
   it('valid if foo prop is null or non-exist', () => {
     const props1 = { foo: null };
-    const props2 = { };
+    const props2 = {};
 
     expect(validatePropTypes(propTypes, props1)).toBeTruthy();
     expect(validatePropTypes(propTypes, props2)).toBeTruthy();

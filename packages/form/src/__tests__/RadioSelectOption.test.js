@@ -7,7 +7,10 @@ import RadioSelectOption from '../RadioSelectOption';
 
 it('renders without crashing', () => {
   const element = (
-    <RadioSelectOption label="foo" value="bar" />
+    <RadioSelectOption
+      label="foo"
+      value="bar"
+    />
   );
 
   render(element);
@@ -15,7 +18,12 @@ it('renders without crashing', () => {
 
 it('renders <Radio> inside', () => {
   const wrapper = mount(
-    <RadioSelectOption label="foo" value="bar" checked readOnly />
+    <RadioSelectOption
+      label="foo"
+      value="bar"
+      checked
+      readOnly
+    />,
   );
 
   expect(wrapper.find(Radio).props()).toMatchObject({
@@ -28,7 +36,11 @@ it('renders <Radio> inside', () => {
 it('passes new checked state via onChange()', () => {
   const handleChange = jest.fn();
   const wrapper = mount(
-    <RadioSelectOption label="foo" value="bar" onChange={handleChange} />
+    <RadioSelectOption
+      label="foo"
+      value="bar"
+      onChange={handleChange}
+    />,
   );
 
   wrapper.find('input').simulate('change', { target: { checked: true } });
@@ -37,7 +49,10 @@ it('passes new checked state via onChange()', () => {
 
 it('does not break when without explicit onChange', () => {
   const wrapper = mount(
-    <RadioSelectOption label="foo" value="bar" />
+    <RadioSelectOption
+      label="foo"
+      value="bar"
+    />,
   );
 
   wrapper.find('input').simulate('change', { target: { checked: true } });
@@ -45,7 +60,11 @@ it('does not break when without explicit onChange', () => {
 
 it('accepts unknown props and passes to <Radio> inside', () => {
   const wrapper = mount(
-    <RadioSelectOption label="foo" value="bar" bold />
+    <RadioSelectOption
+      label="foo"
+      value="bar"
+      bold
+    />,
   );
   expect(wrapper.find(Radio).prop('bold')).toBeTruthy();
 });

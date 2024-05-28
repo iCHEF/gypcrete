@@ -11,7 +11,6 @@ export default {
   },
 };
 
-
 export function BasicUsage() {
   const rdAvatar = (
     <Avatar
@@ -75,9 +74,9 @@ export function CheckboxWithIndeterminateExample() {
     });
   };
 
-  const handleItemCheck = item => (event) => {
+  const handleItemCheck = (item) => (event) => {
     const { checked } = event.target;
-    setItems(prevState => ({
+    setItems((prevState) => ({
       ...prevState,
       [item]: checked,
     }));
@@ -87,10 +86,7 @@ export function CheckboxWithIndeterminateExample() {
     <div>
       <Checkbox
         basic="Check all"
-        indeterminate={
-          (item1Checked || item2Checked)
-                    && !(item1Checked && item2Checked)
-        }
+        indeterminate={(item1Checked || item2Checked) && !(item1Checked && item2Checked)}
         checked={item1Checked && item2Checked}
         onChange={handleCheckAll}
       />
@@ -113,7 +109,8 @@ export function CheckboxWithIndeterminateExample() {
 CheckboxWithIndeterminateExample.story = {
   parameters: {
     docs: {
-      storyDescription: '`Check all` indeterminate state is interacting with `item 1` and `item 2`.',
+      storyDescription:
+        '`Check all` indeterminate state is interacting with `item 1` and `item 2`.',
     },
   },
 };

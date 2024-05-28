@@ -7,10 +7,7 @@ import ListSpacingContext from './contexts/listSpacing';
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 
-import anchored, {
-  anchoredPropTypes,
-  ANCHORED_PLACEMENT,
-} from './mixins/anchored';
+import anchored, { anchoredPropTypes, ANCHORED_PLACEMENT } from './mixins/anchored';
 import closable from './mixins/closable';
 import renderToLayer from './mixins/renderToLayer';
 
@@ -49,11 +46,10 @@ function Popover({
    * The `maxHeight` is for `BEM.container`, which doesn't include root class padding.
    * So we need to minus POPOVER_PADDING here.
    */
-  const maxHeight = (
-    (remainingSpace && verticalPlacements.includes(placement))
+  const maxHeight =
+    remainingSpace && verticalPlacements.includes(placement)
       ? remainingSpace - POPOVER_PADDING
-      : undefined
-  );
+      : undefined;
 
   const handleWrapperClick = (event) => {
     onInsideClick(event);
@@ -69,7 +65,10 @@ function Popover({
         onClick={handleWrapperClick}
         {...otherProps}
       >
-        <span className={BEM.arrow} style={arrowStyle} />
+        <span
+          className={BEM.arrow}
+          style={arrowStyle}
+        />
         <div
           className={BEM.container}
           style={{ maxHeight }}
@@ -105,7 +104,5 @@ export default renderToLayer(
     onEscape: true,
     onClickOutside: true,
     onClickInside: true,
-  })(
-    anchored()(Popover)
-  )
+  })(anchored()(Popover)),
 );

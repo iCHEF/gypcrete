@@ -12,7 +12,11 @@ describe('rowComp(Button)', () => {
   });
 
   it('is minified by default', () => {
-    const wrapper = shallow(<div><Button basic="label" /></div>);
+    const wrapper = shallow(
+      <div>
+        <Button basic="label" />
+      </div>,
+    );
 
     expect(wrapper.find(Button).prop('minified')).toBeTruthy();
   });
@@ -52,9 +56,12 @@ describe('Pure <Button>', () => {
 
   it('passes unknown props to its wrapper', () => {
     const wrapper = shallow(
-      <PureButton id="foo-bar" data-test>
+      <PureButton
+        id="foo-bar"
+        data-test
+      >
         Label
-      </PureButton>
+      </PureButton>,
     );
 
     expect(wrapper.prop('id')).toBe('foo-bar');

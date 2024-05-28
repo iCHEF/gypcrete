@@ -16,22 +16,12 @@ function DebugBox({ width, height, style, children }) {
     ...style,
   };
 
-  return (
-    <div style={boxStyle}>
-      {children}
-    </div>
-  );
+  return <div style={boxStyle}>{children}</div>;
 }
 
 DebugBox.propTypes = {
-  width: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
-  height: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 

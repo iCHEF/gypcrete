@@ -1,16 +1,9 @@
 {
-    "compilerOptions": {
-        "lib": [
-            "dom",
-            "es2018",
-        ]
-    },
-    "exclude": [
-      "node_modules"
-    ],
-    "typeAcquisition": {
-        "include": [
-            "jest"
-        ]
-    }
+  "compilerOptions": {
+    "lib": ["dom", "es2018"]
+  },
+  "exclude": ["node_modules"],
+  "typeAcquisition": {
+    "include": ["jest"]
+  }
 }

@@ -40,7 +40,12 @@ it('renders footer when has desc or error msg', () => {
 
 it('renders errorMsg before desc when both exist', () => {
   const wrapper = shallow(
-    <ListRow desc="foo" errorMsg="bar">Foo</ListRow>
+    <ListRow
+      desc="foo"
+      errorMsg="bar"
+    >
+      Foo
+    </ListRow>,
   );
 
   expect(wrapper.find(`.${ROW_BEM.footer}`)).toHaveLength(1);
@@ -56,11 +61,7 @@ it('handles highlight modifier', () => {
 });
 
 it('renders nested item inside <li> but outside of body wrapper', () => {
-  const wrapper = shallow(
-    <ListRow nestedList={<span data-test="bar" />}>
-      Foo
-    </ListRow>
-  );
+  const wrapper = shallow(<ListRow nestedList={<span data-test="bar" />}>Foo</ListRow>);
 
   expect(wrapper.find('span[data-test]')).toHaveLength(1);
   expect(wrapper.find(`.${ROW_BEM.body}`).find('span[data-test]').exists()).toBeFalsy();

@@ -29,16 +29,12 @@ describe('Pure <Checkbox>', () => {
   });
 
   it('renders <input type=checkbox> along with rowComp parts inside <RowCompBody>', () => {
-    const wrapper = shallow(
-      <PureCheckbox>Foo children</PureCheckbox>
-    );
+    const wrapper = shallow(<PureCheckbox>Foo children</PureCheckbox>);
     expect(wrapper.containsMatchingElement(<input type="checkbox" />)).toBeTruthy();
   });
 
   it('renders <input> in icon wrapper before rowComp parts', () => {
-    const wrapper = shallow(
-      <PureCheckbox>Foo children</PureCheckbox>
-    );
+    const wrapper = shallow(<PureCheckbox>Foo children</PureCheckbox>);
     expect(wrapper.childAt(0).hasClass('gyp-checkbox__icon-wrapper')).toBeTruthy();
     expect(wrapper.childAt(0).find('input').exists()).toBeTruthy();
   });
@@ -46,9 +42,14 @@ describe('Pure <Checkbox>', () => {
   it('passes whitelisted props to <input>', () => {
     const handleChange = jest.fn();
     const wrapper = shallow(
-      <PureCheckbox checked defaultChecked disabled onChange={handleChange}>
+      <PureCheckbox
+        checked
+        defaultChecked
+        disabled
+        onChange={handleChange}
+      >
         Foo children
-      </PureCheckbox>
+      </PureCheckbox>,
     );
     const inputWrapper = wrapper.find('input');
 
@@ -60,9 +61,7 @@ describe('Pure <Checkbox>', () => {
 
   it('passes every props to <input> from the input prop', () => {
     const wrapper = shallow(
-      <PureCheckbox input={{ readonly: true, id: 'foo-checkbox' }}>
-        Foo children
-      </PureCheckbox>
+      <PureCheckbox input={{ readonly: true, id: 'foo-checkbox' }}>Foo children</PureCheckbox>,
     );
     const inputWrapper = wrapper.find('input');
 
@@ -72,9 +71,7 @@ describe('Pure <Checkbox>', () => {
 
   it('can override checkbox button via overrideButton prop', () => {
     const wrapper = shallow(
-      <PureCheckbox overrideButton={<BarButton />}>
-        Foo children
-      </PureCheckbox>
+      <PureCheckbox overrideButton={<BarButton />}>Foo children</PureCheckbox>,
     );
 
     expect(wrapper.find(BarButton).exists()).toBeTruthy();
@@ -84,9 +81,7 @@ describe('Pure <Checkbox>', () => {
 
 describe('DOM Node operation', () => {
   it('updates indeterminate prop on <input type=checkbox>', () => {
-    const wrapper = mount(
-      <PureCheckbox>Foo children</PureCheckbox>
-    );
+    const wrapper = mount(<PureCheckbox>Foo children</PureCheckbox>);
     expect(wrapper.find('input').instance().indeterminate).toBeFalsy();
 
     wrapper.setProps({ indeterminate: true });
@@ -94,9 +89,7 @@ describe('DOM Node operation', () => {
   });
 
   it('should not touch input.indeterminate when prop not changed', () => {
-    const wrapper = mount(
-      <PureCheckbox indeterminate>Foo children</PureCheckbox>
-    );
+    const wrapper = mount(<PureCheckbox indeterminate>Foo children</PureCheckbox>);
     expect(wrapper.find('input').instance().indeterminate).toBeTruthy();
 
     wrapper.setProps({ disabled: true });

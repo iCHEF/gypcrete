@@ -45,7 +45,10 @@ export function BasicSearchInputExample() {
       </DebugBox>
 
       <DebugBox>
-        <SearchInput defaultValue="Monkey King" status="loading" />
+        <SearchInput
+          defaultValue="Monkey King"
+          status="loading"
+        />
       </DebugBox>
     </div>
   );

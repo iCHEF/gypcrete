@@ -14,16 +14,12 @@ describe('rowComp(Radio)', () => {
 
 describe('Pure <Radio>', () => {
   it('renders <input type=radio> along with rowComp parts inside <RowCompBody>', () => {
-    const wrapper = shallow(
-      <PureRadio>Foo children</PureRadio>
-    );
+    const wrapper = shallow(<PureRadio>Foo children</PureRadio>);
     expect(wrapper.containsMatchingElement(<input type="radio" />)).toBeTruthy();
   });
 
   it('renders <input> in icon wrapper before rowComp parts', () => {
-    const wrapper = shallow(
-      <PureRadio>Foo children</PureRadio>
-    );
+    const wrapper = shallow(<PureRadio>Foo children</PureRadio>);
     expect(wrapper.childAt(0).hasClass('gyp-radio__icon-wrapper')).toBeTruthy();
     expect(wrapper.childAt(0).find('input').exists()).toBeTruthy();
   });
@@ -31,9 +27,14 @@ describe('Pure <Radio>', () => {
   it('passes whitelisted props to <input>', () => {
     const handleChange = jest.fn();
     const wrapper = shallow(
-      <PureRadio checked defaultChecked disabled onChange={handleChange}>
+      <PureRadio
+        checked
+        defaultChecked
+        disabled
+        onChange={handleChange}
+      >
         Foo children
-      </PureRadio>
+      </PureRadio>,
     );
     const inputWrapper = wrapper.find('input');
 
@@ -45,9 +46,7 @@ describe('Pure <Radio>', () => {
 
   it('passes every props to <input> from the input prop', () => {
     const wrapper = shallow(
-      <PureRadio input={{ readonly: true, id: 'foo-radio' }}>
-        Foo children
-      </PureRadio>
+      <PureRadio input={{ readonly: true, id: 'foo-radio' }}>Foo children</PureRadio>,
     );
     const inputWrapper = wrapper.find('input');
 

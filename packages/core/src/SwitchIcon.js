@@ -28,7 +28,10 @@ function SwitchIcon({ state, className, ...otherProps }) {
   const rootClassName = classNames(className, `${bemClass}`);
 
   return (
-    <span className={rootClassName} {...otherProps}>
+    <span
+      className={rootClassName}
+      {...otherProps}
+    >
       <span className={BEM.inner} />
     </span>
   );

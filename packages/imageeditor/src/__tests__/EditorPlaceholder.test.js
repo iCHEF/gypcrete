@@ -15,15 +15,11 @@ describe('<EditorPlaceholder>', () => {
   it('shows an icon inside for normal mode or loading mode', () => {
     const wrapper = shallow(<EditorPlaceholder canvasHeight={200} />);
 
-    expect(wrapper.containsMatchingElement(
-      <CenterIcon type="picture" />
-    )).toBeTruthy();
+    expect(wrapper.containsMatchingElement(<CenterIcon type="picture" />)).toBeTruthy();
 
     wrapper.setProps({ loading: true });
 
-    expect(wrapper.containsMatchingElement(
-      <CenterIcon type="loading" />
-    )).toBeTruthy();
+    expect(wrapper.containsMatchingElement(<CenterIcon type="loading" />)).toBeTruthy();
   });
 
   it('adjusts icon size to a maximum of 96px', () => {
@@ -41,16 +37,19 @@ describe('<EditorPlaceholder>', () => {
 describe('<CenterIcon>', () => {
   it('renders an gypcrete Icon inside', () => {
     const wrapper = shallow(<CenterIcon type="picture" />);
-    expect(
-      wrapper.containsMatchingElement(<Icon type="picture" />)
-    ).toBeTruthy();
+    expect(wrapper.containsMatchingElement(<Icon type="picture" />)).toBeTruthy();
   });
 
   it('spins for loading icon', () => {
     const wrapper = shallow(<CenterIcon type="loading" />);
 
     expect(
-      wrapper.containsMatchingElement(<Icon type="loading" spinning />)
+      wrapper.containsMatchingElement(
+        <Icon
+          type="loading"
+          spinning
+        />,
+      ),
     ).toBeTruthy();
   });
 });

@@ -17,7 +17,7 @@ function getScaleFromCropRect(initCropRect) {
   const { width: widthRatio, height: heightRatio } = initCropRect;
   const isWidthBasedScale = widthRatio > heightRatio;
 
-  const inferredScale = isWidthBasedScale ? (1 / widthRatio) : (1 / heightRatio);
+  const inferredScale = isWidthBasedScale ? 1 / widthRatio : 1 / heightRatio;
 
   if (Number.isNaN(inferredScale)) return null;
 

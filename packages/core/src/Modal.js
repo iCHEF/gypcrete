@@ -29,20 +29,23 @@ export const BEM = {
 //  Helpers
 // -----------------
 
-const createHandleOverlayClick = memoize(
-  onClose => (event) => {
-    // Prevent onClick events being propagated to outer modals
-    event.stopPropagation();
-    onClose();
-  }
-);
+const createHandleOverlayClick = memoize((onClose) => (event) => {
+  // Prevent onClick events being propagated to outer modals
+  event.stopPropagation();
+  onClose();
+});
 
 // -----------------
 //  Sub-component
 // -----------------
 
 export function DefaultHeader({ title }) {
-  const label = <TextLabel align="center" basic={title} />;
+  const label = (
+    <TextLabel
+      align="center"
+      basic={title}
+    />
+  );
 
   return <HeaderRow center={label} />;
 }
@@ -67,21 +70,24 @@ function Modal({
   children,
   ...wrapperProps
 }) {
-  const rootBem = BEM.root
-    .modifier('centered', centered)
-    .toString();
+  const rootBem = BEM.root.modifier('centered', centered).toString();
 
   const rootClassName = classNames(rootBem, className);
 
-  const headerRow = header && wrapIfNotElement(header, {
-    with: DefaultHeader,
-    via: 'title',
-  });
+  const headerRow =
+    header &&
+    wrapIfNotElement(header, {
+      with: DefaultHeader,
+      via: 'title',
+    });
 
   const handleOverlayClick = createHandleOverlayClick(onClose);
 
   return (
-    <div className={rootClassName} {...wrapperProps}>
+    <div
+      className={rootClassName}
+      {...wrapperProps}
+    >
       <Overlay onClick={handleOverlayClick} />
 
       <ColumnView
@@ -101,12 +107,12 @@ Modal.propTypes = {
   centered: PropTypes.bool,
   onClose: PropTypes.func,
   /**
-     *  See `<ColumnView>` props table.
-     */
+   *  See `<ColumnView>` props table.
+   */
   flexBody: ColumnView.propTypes.flexBody,
   /**
-     *  See `<ColumnView>` props table.
-     */
+   *  See `<ColumnView>` props table.
+   */
   bodyPadding: ColumnView.propTypes.bodyPadding,
 };
 

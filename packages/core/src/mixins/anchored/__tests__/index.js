@@ -3,14 +3,11 @@ import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 import memoize from 'memoize-one';
 
-import anchored, {
-  anchoredPropTypes,
-  ANCHORED_PLACEMENT,
-} from '../index';
+import anchored, { anchoredPropTypes, ANCHORED_PLACEMENT } from '../index';
 
 import getPositionState from '../getPositionState';
 
-jest.mock('memoize-one', () => jest.fn(func => func));
+jest.mock('memoize-one', () => jest.fn((func) => func));
 jest.mock('../getPositionState');
 
 const MOCKED_POSITION_CONFIG = {
@@ -70,42 +67,50 @@ it('has default configs for placement and edge-padding', () => {
 
 it('passed anchor and self nodes to getter function for position config', () => {
   /**
-     * Enzyme weirdly passes an instance of `WrapperComponent` to React ref
-     * when you directly mounts:
-     * ```js
-     * mount(<div ref={(ref) => { console.log(ref); }} />);
-     * // console prints: WrapperComponent
-     * ```
-     *
-     * But if you wrap the ref-target element with another layer of wrapper,
-     * if receives correct HTMLDivElement.
-     */
+   * Enzyme weirdly passes an instance of `WrapperComponent` to React ref
+   * when you directly mounts:
+   * ```js
+   * mount(<div ref={(ref) => { console.log(ref); }} />);
+   * // console prints: WrapperComponent
+   * ```
+   *
+   * But if you wrap the ref-target element with another layer of wrapper,
+   * if receives correct HTMLDivElement.
+   */
   const anchorRef = React.createRef();
-  mount(<><div ref={anchorRef} /></>);
+  mount(
+    <>
+      <div ref={anchorRef} />
+    </>,
+  );
 
   const wrapper = mount(<AnchoredBox anchor={anchorRef.current} />);
   expect(mockedGetterFunc).toHaveBeenCalledWith(
     ANCHORED_PLACEMENT.TOP,
     anchorRef.current,
     wrapper.state().selfNode,
-    0
+    0,
   );
 });
 
 it('can pass defaultPlacement through anchored component to getter function for position config', () => {
   const anchorRef = React.createRef();
-  mount(<><div ref={anchorRef} /></>);
+  mount(
+    <>
+      <div ref={anchorRef} />
+    </>,
+  );
 
   const wrapper = mount(
     <AnchoredBox
       defaultPlacement={ANCHORED_PLACEMENT.BOTTOM}
       anchor={anchorRef.current}
-    />
+    />,
   );
   expect(mockedGetterFunc).toHaveBeenCalledWith(
     ANCHORED_PLACEMENT.BOTTOM,
     anchorRef.current,
     wrapper.state().selfNode,
-    0
+    0,
   );
 });

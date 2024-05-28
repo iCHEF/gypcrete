@@ -3,11 +3,11 @@ extends: stylelint-config-standard
 configBasedir: ../
 
 rules:
-    indentation: 2
-    number-leading-zero: never
-    selector-pseudo-element-colon-notation: single
+  indentation: 2
+  number-leading-zero: never
+  selector-pseudo-element-colon-notation: single
 
 ignoreFiles:
-    - node_modules/
-    - coverage/
-    - dist/
+  - node_modules/
+  - coverage/
+  - dist/
