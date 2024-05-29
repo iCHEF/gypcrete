@@ -22,6 +22,7 @@
       background-color: $c-switch-knob;
       border-radius: 50%;
       display: block;
+      /* stylelint-disable-next-line number-leading-zero */
       box-shadow: 0 rem(3px) rem(9px) rgba(0, 0, 0, 0.3);
       will-change: transform;
       transition: transform 300ms $ease-out-cubic;

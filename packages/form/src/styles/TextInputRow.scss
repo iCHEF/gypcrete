@@ -25,6 +25,7 @@ $font-weight-bold: 700;
 
 .#{$component-name} {
   ::placeholder {
+    /* stylelint-disable-next-line number-leading-zero */
     color: rgba(0, 0, 0, 0.5);
   }
 

@@ -20,6 +20,7 @@
   }
 
   &__postfix {
+    /* stylelint-disable-next-line number-leading-zero */
     margin-left: 0.5rem;
     justify-content: flex-end;
     align-self: flex-end;

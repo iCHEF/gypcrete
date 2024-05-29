@@ -12,7 +12,9 @@ $component: #{$prefix}-list;
   }
 
   &__top-area {
-    margin: rem($list-top-area-margin-top) rem($section-horizontal-padding)
+    margin:
+      rem($list-top-area-margin-top)
+      rem($section-horizontal-padding)
       rem($list-top-area-margin-bottom);
   }
 

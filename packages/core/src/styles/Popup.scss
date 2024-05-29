@@ -31,11 +31,13 @@ $component: #{$prefix}-popup;
     box-shadow: $popup-box-shadow;
     position: relative;
     overflow: hidden;
+    /* stylelint-disable-next-line number-leading-zero */
     transition: width 0.15s;
     display: flex;
     flex-direction: column;
 
     // Active animation
+    /* stylelint-disable-next-line number-leading-zero */
     animation: anim-bounce-in 0.6s forwards;
 
     .#{$component}--large & {
@@ -74,6 +76,7 @@ $component: #{$prefix}-popup;
   &__message-desc--with-title {
     font-size: rem(14px);
     line-height: rem(20px);
+    /* stylelint-disable-next-line number-leading-zero */
     color: rgba(0, 0, 0, 0.7);
     margin-top: rem(8px);
   }

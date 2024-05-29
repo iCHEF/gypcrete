@@ -118,6 +118,7 @@
 
 .#{$prefix}-button--tinted {
   .#{$prefix}-icon {
+    /* stylelint-disable-next-line number-leading-zero */
     opacity: 0.5;
   }
 }

@@ -45,10 +45,12 @@
       opacity: 1 !important;
 
       .#{$prefix}-text__basic {
+        /* stylelint-disable-next-line number-leading-zero */
         opacity: 0.3 !important;
       }
 
       .#{$prefix}-icon {
+        /* stylelint-disable-next-line number-leading-zero */
         opacity: 0.3 !important;
       }
 

@@ -20,11 +20,13 @@
 }
 
 .#{$prefix-state}-disabled {
+  /* stylelint-disable-next-line number-leading-zero */
   opacity: 0.3 !important;
   pointer-events: none !important;
 }
 
 .#{$prefix-state}-muted {
+  /* stylelint-disable-next-line number-leading-zero */
   opacity: 0.3 !important;
 }
 

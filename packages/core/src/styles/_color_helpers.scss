@@ -26,6 +26,7 @@
   $ss: $s * $v;
   $ll: (2 - $s) * $v;
 
+  /* stylelint-disable  block-closing-brace-newline-after, at-rule-empty-line-before */
   @if ($ll == 2 or $ll == 0) {
     $ss: 0;
   } @else if $ll <= 1 {

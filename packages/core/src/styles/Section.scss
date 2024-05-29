@@ -36,6 +36,7 @@ $component-name: #{$prefix}-section;
     &:before {
       content: '\25a0';
       display: inline-block;
+      /* stylelint-disable-next-line number-leading-zero */
       margin-right: 0.25em;
     }
   }

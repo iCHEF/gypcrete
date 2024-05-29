@@ -1,5 +1,6 @@
 @import '~@ichef/gypcrete/src/styles/mixins';
 
+/* stylelint-disable number-leading-zero */
 $component-name: '#{$prefix}-image-editor';
 $placeholder-icon-color: rgba(0, 0, 0, 0.3);
 $placeholder-border-color: rgba(0, 0, 0, 0.1);

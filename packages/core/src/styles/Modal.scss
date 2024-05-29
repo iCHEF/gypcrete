@@ -36,6 +36,7 @@ $component: #{$prefix}-modal;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+    /* stylelint-disable-next-line number-leading-zero */
     animation: anim-slide-down 0.4s forwards;
   }
 }
