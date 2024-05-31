@@ -3,7 +3,6 @@ import React from 'react';
 import Switch, { PureSwitch } from '@ichef/gypcrete/src/Switch';
 import DebugBox from 'utils/DebugBox';
 
-
 export default {
   title: 'gypcrete/Switch',
   component: PureSwitch,

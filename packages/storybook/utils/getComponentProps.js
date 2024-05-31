@@ -15,19 +15,16 @@ export default function getComponentProps(component) {
   const extractedProps = extractProps(component).rows;
 
   if (!extractedProps.length) {
-    const inferredProps = Object.keys(component.propTypes || {})
-      .map((propName) => {
-        const required = !(typeof component.propTypes[propName].isRequired === 'function');
-        const defaultValue = formatValue((component.defaultProps || {})[propName]);
+    const inferredProps = Object.keys(component.propTypes || {}).map((propName) => {
+      const required = !(typeof component.propTypes[propName].isRequired === 'function');
+      const defaultValue = formatValue((component.defaultProps || {})[propName]);
 
-        return {
-          name: propName,
-          required,
-          defaultValue: (
-            defaultValue === undefined ? undefined : { summary: defaultValue }
-          ),
-        };
-      });
+      return {
+        name: propName,
+        required,
+        defaultValue: defaultValue === undefined ? undefined : { summary: defaultValue },
+      };
+    });
 
     return {
       sections: {

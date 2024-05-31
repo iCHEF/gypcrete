@@ -33,7 +33,12 @@ describe('SwitchRow', () => {
   });
 
   it('does not update switch state when it is controlled', () => {
-    render(<SwitchRow {...defaultProps} checked={false} />);
+    render(
+      <SwitchRow
+        {...defaultProps}
+        checked={false}
+      />,
+    );
     const switchElement = screen.getByRole('checkbox');
     userEvent.click(switchElement);
     expect(mockOnChange).toHaveBeenCalledTimes(1);
@@ -44,7 +49,7 @@ describe('SwitchRow', () => {
     render(
       <SwitchRow {...defaultProps}>
         <div>Test Children</div>
-      </SwitchRow>
+      </SwitchRow>,
     );
     expect(screen.getByText('Test Children')).toBeInTheDocument();
   });

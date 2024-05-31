@@ -5,21 +5,21 @@ import getComponentName from '../getComponentName';
 
 /* eslint-disable */
 class Foo extends Component {
-    render() {
-        return <div />;
-    }
+  render() {
+    return <div />;
+  }
 }
 
 function Bar() {
-    return <div />;
+  return <div />;
 }
 
 class FooRev extends Component {
-    static displayName = 'Rev(Foo)';
+  static displayName = 'Rev(Foo)';
 
-    render() {
-        return <span />;
-    }
+  render() {
+    return <span />;
+  }
 }
 /* eslint-enable */
 

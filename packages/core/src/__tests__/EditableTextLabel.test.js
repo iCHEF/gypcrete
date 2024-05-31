@@ -64,40 +64,50 @@ describe('EditableTextLabel', () => {
     userEvent.type(input, 'new text');
     userEvent.tab();
 
-    await waitFor(() => expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
-      value: 'new text',
-      event: expect.any(Object),
-    }));
+    await waitFor(() =>
+      expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
+        value: 'new text',
+        event: expect.any(Object),
+      }),
+    );
 
     expect(screen.getByText(defaultProps.basic)).toBeInTheDocument();
   });
 
   it('inEdit is controlled: call onEditEnd with input value and change the value when it blurs', async () => {
-    render(<EditableTextLabel {...defaultProps} inEdit />);
+    render(
+      <EditableTextLabel
+        {...defaultProps}
+        inEdit
+      />,
+    );
 
     const input = screen.getByRole('textbox');
     userEvent.clear(input);
     userEvent.type(input, 'new text');
     userEvent.tab();
 
-    await waitFor(() => expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
-      value: 'new text',
-      event: expect.any(Object),
-    }));
+    await waitFor(() =>
+      expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
+        value: 'new text',
+        event: expect.any(Object),
+      }),
+    );
 
     expect(screen.getByText('new text')).toBeInTheDocument();
   });
-
 
   it('calls onEditEnd with null when escape key is pressed', async () => {
     render(<EditableTextLabel {...defaultProps} />);
     userEvent.dblClick(screen.getByText(defaultProps.basic));
     const input = screen.getByRole('textbox');
     userEvent.type(input, '{esc}');
-    await waitFor(() => expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
-      value: null,
-      event: expect.any(Object),
-    }));
+    await waitFor(() =>
+      expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
+        value: null,
+        event: expect.any(Object),
+      }),
+    );
   });
 
   it('calls onEditEnd with input value when enter key is pressed', async () => {
@@ -108,12 +118,13 @@ describe('EditableTextLabel', () => {
     userEvent.clear(input);
     userEvent.type(input, 'new text{enter}');
 
-    await waitFor(() => expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
-      value: 'new text',
-      event: expect.any(Object),
-    }));
+    await waitFor(() =>
+      expect(defaultProps.onEditEnd).toHaveBeenCalledWith({
+        value: 'new text',
+        event: expect.any(Object),
+      }),
+    );
   });
-
 
   it('do not call onDblClick when only touched once', () => {
     render(<EditableTextLabel {...defaultProps} />);

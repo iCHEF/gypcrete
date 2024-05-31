@@ -54,7 +54,7 @@ it('passes a collected rowProps prop to wrapped component', () => {
       status="error"
       statusOptions={{ autoHide: false }}
       errorMsg="bar"
-    />
+    />,
   );
   const fooProps = wrapper.find(Foo).props();
 
@@ -71,7 +71,6 @@ it('passes a collected rowProps prop to wrapped component', () => {
   });
 });
 
-
 it('passes a custom rowProps prop to wrapped component', () => {
   const wrapper = shallow(
     <FormRowFoo
@@ -81,7 +80,7 @@ it('passes a custom rowProps prop to wrapped component', () => {
       }}
       status="error"
       errorMsg="bar"
-    />
+    />,
   );
   const fooProps = wrapper.find(Foo).props();
 
@@ -95,7 +94,6 @@ it('passes a custom rowProps prop to wrapped component', () => {
     errorMsg: 'bar',
   });
 });
-
 
 it('can optionally keep a ref to wrapped component', () => {
   const wrapper = mount(<FormRowBarWithRef />);

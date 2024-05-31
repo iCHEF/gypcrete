@@ -8,24 +8,18 @@ export default {
 };
 
 export function BasicTagExample() {
-  return (
-    <Tag>tag</Tag>
-  );
+  return <Tag>tag</Tag>;
 }
 
 export function WithParentColor() {
   return (
     <div>
       <span style={{ color: 'blue' }}>
-        Blue text
-        {' '}
-        <Tag>Tag</Tag>
+        Blue text <Tag>Tag</Tag>
       </span>
 
       <span style={{ color: 'red' }}>
-        Red text
-        {' '}
-        <Tag>Tag</Tag>
+        Red text <Tag>Tag</Tag>
       </span>
     </div>
   );

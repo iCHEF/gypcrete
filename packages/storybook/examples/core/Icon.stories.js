@@ -11,18 +11,18 @@ export default {
 
 export function BasicUsage() {
   /**
-     * Show all icons, ordering from a to z.
-     */
+   * Show all icons, ordering from a to z.
+   */
   return (
     <>
-      {
-        Object.keys(iconMap).sort().map(iconType => (
+      {Object.keys(iconMap)
+        .sort()
+        .map((iconType) => (
           <Icon
             type={iconType}
             spinning={iconType.includes('loading')}
           />
-        ))
-      }
+        ))}
     </>
   );
 }
@@ -49,10 +49,22 @@ export function CRMIconsSet() {
 export function ColorOptions() {
   return (
     <div>
-      <Icon type="drag" color="gray" />
-      <Icon type="edit" color="blue" />
-      <Icon type="trashcan" color="red" />
-      <Icon type="add" style={{ color: '#78c878' }} />
+      <Icon
+        type="drag"
+        color="gray"
+      />
+      <Icon
+        type="edit"
+        color="blue"
+      />
+      <Icon
+        type="trashcan"
+        color="red"
+      />
+      <Icon
+        type="add"
+        style={{ color: '#78c878' }}
+      />
     </div>
   );
 }
@@ -84,9 +96,21 @@ export function InventoryIconsSet() {
 export function LargeSizeOptions() {
   return (
     <div>
-      <Icon type="loading" large spinning />
-      <Icon type="success" large color="blue" />
-      <Icon type="error" large color="red" />
+      <Icon
+        type="loading"
+        large
+        spinning
+      />
+      <Icon
+        type="success"
+        large
+        color="blue"
+      />
+      <Icon
+        type="error"
+        large
+        color="red"
+      />
     </div>
   );
 }

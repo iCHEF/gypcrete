@@ -1,16 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Checkbox,
-  ListRow,
-} from '@ichef/gypcrete';
+import { Checkbox, ListRow } from '@ichef/gypcrete';
 
-export const valueType = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number,
-  PropTypes.bool,
-]);
+export const valueType = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]);
 
 export const TYPE_SYMBOL = Symbol('SelectOption');
 

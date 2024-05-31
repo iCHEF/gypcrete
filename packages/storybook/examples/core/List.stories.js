@@ -22,14 +22,24 @@ export default {
 export function NormalList() {
   return (
     <DebugBox width="30rem">
-      <List variant="normal" title="List title" desc="Help text here">
+      <List
+        variant="normal"
+        title="List title"
+        desc="Help text here"
+      >
         <ListRow>
-          <Avatar alt="iCHEF" src="https://api.adorable.io/avatars/285/hello@ichef.tw" />
+          <Avatar
+            alt="iCHEF"
+            src="https://api.adorable.io/avatars/285/hello@ichef.tw"
+          />
           <TextLabel basic="Hello World" />
         </ListRow>
 
         <ListRow>
-          <TextLabel icon="tickets" basic="Hello World" />
+          <TextLabel
+            icon="tickets"
+            basic="Hello World"
+          />
         </ListRow>
 
         <ListRow
@@ -45,7 +55,10 @@ export function NormalList() {
             status={null}
           />
           <IconButton icon="edit" />
-          <IconButton tinted icon="drag" />
+          <IconButton
+            tinted
+            icon="drag"
+          />
         </ListRow>
 
         <ListRow highlight>
@@ -55,12 +68,21 @@ export function NormalList() {
             aside="Component aside"
           />
           <IconButton icon="edit" />
-          <IconButton tinted icon="drag" />
+          <IconButton
+            tinted
+            icon="drag"
+          />
         </ListRow>
         <ListRow>
-          <TextLabel icon="tickets" basic="Row 3" />
+          <TextLabel
+            icon="tickets"
+            basic="Row 3"
+          />
           <IconButton icon="edit" />
-          <IconButton tinted icon="drag" />
+          <IconButton
+            tinted
+            icon="drag"
+          />
         </ListRow>
         <ListRow>
           <Button
@@ -76,7 +98,11 @@ export function NormalList() {
 export function SettingList() {
   return (
     <DebugBox width="30rem">
-      <List variant="setting" title="List title" desc="Help text here">
+      <List
+        variant="setting"
+        title="List title"
+        desc="Help text here"
+      >
         <ListRow>
           <TextLabel basic="Hello World" />
         </ListRow>
@@ -100,13 +126,22 @@ export function NestedList() {
   const nestedList2nd = (
     <List>
       <ListRow>
-        <TextLabel icon="inventory-item" basic="Nested A" />
+        <TextLabel
+          icon="inventory-item"
+          basic="Nested A"
+        />
       </ListRow>
       <ListRow>
-        <TextLabel icon="inventory-item" basic="Nested B" />
+        <TextLabel
+          icon="inventory-item"
+          basic="Nested B"
+        />
       </ListRow>
       <ListRow>
-        <TextLabel icon="inventory-item" basic="Nested C" />
+        <TextLabel
+          icon="inventory-item"
+          basic="Nested C"
+        />
       </ListRow>
     </List>
   );
@@ -114,28 +149,50 @@ export function NestedList() {
   const nestedList1st = (
     <List>
       <ListRow>
-        <TextLabel icon="printer" basic="3rd nested I" />
+        <TextLabel
+          icon="printer"
+          basic="3rd nested I"
+        />
       </ListRow>
       <ListRow nestedList={nestedList2nd}>
-        <TextLabel icon="printer" basic="3rd nested II" />
+        <TextLabel
+          icon="printer"
+          basic="3rd nested II"
+        />
       </ListRow>
       <ListRow>
-        <TextLabel icon="printer" basic="3rd nested III" />
+        <TextLabel
+          icon="printer"
+          basic="3rd nested III"
+        />
       </ListRow>
     </List>
   );
 
   return (
     <DebugBox width="30rem">
-      <List variant="normal" title="List title" desc="Help text here">
+      <List
+        variant="normal"
+        title="List title"
+        desc="Help text here"
+      >
         <ListRow>
-          <TextLabel icon="tickets" basic="Hello World" />
+          <TextLabel
+            icon="tickets"
+            basic="Hello World"
+          />
         </ListRow>
         <ListRow nestedList={nestedList1st}>
-          <TextLabel icon="tickets" basic="Row 2" />
+          <TextLabel
+            icon="tickets"
+            basic="Row 2"
+          />
         </ListRow>
         <ListRow>
-          <TextLabel icon="tickets" basic="Row 3" />
+          <TextLabel
+            icon="tickets"
+            basic="Row 3"
+          />
         </ListRow>
       </List>
     </DebugBox>
@@ -146,13 +203,22 @@ export function NestedListWithTitle() {
   const nestedList2nd = (
     <List title="List Title 2">
       <ListRow>
-        <TextLabel icon="inventory-item" basic="Nested A" />
+        <TextLabel
+          icon="inventory-item"
+          basic="Nested A"
+        />
       </ListRow>
       <ListRow>
-        <TextLabel icon="inventory-item" basic="Nested B" />
+        <TextLabel
+          icon="inventory-item"
+          basic="Nested B"
+        />
       </ListRow>
       <ListRow>
-        <TextLabel icon="inventory-item" basic="Nested C" />
+        <TextLabel
+          icon="inventory-item"
+          basic="Nested C"
+        />
       </ListRow>
     </List>
   );
@@ -160,22 +226,37 @@ export function NestedListWithTitle() {
   const nestedList1st = (
     <List title="List Title">
       <ListRow>
-        <TextLabel icon="printer" basic="3rd nested I" />
+        <TextLabel
+          icon="printer"
+          basic="3rd nested I"
+        />
       </ListRow>
       <ListRow nestedList={nestedList2nd}>
-        <TextLabel icon="printer" basic="3rd nested II" />
+        <TextLabel
+          icon="printer"
+          basic="3rd nested II"
+        />
       </ListRow>
     </List>
   );
 
   return (
     <DebugBox width="30rem">
-      <List variant="normal" title="List title">
+      <List
+        variant="normal"
+        title="List title"
+      >
         <ListRow>
-          <TextLabel icon="tickets" basic="Hello World" />
+          <TextLabel
+            icon="tickets"
+            basic="Hello World"
+          />
         </ListRow>
         <ListRow nestedList={nestedList1st}>
-          <TextLabel icon="tickets" basic="Row 2" />
+          <TextLabel
+            icon="tickets"
+            basic="Row 2"
+          />
         </ListRow>
       </List>
     </DebugBox>
@@ -184,12 +265,23 @@ export function NestedListWithTitle() {
 
 export function ListWithTitleRightButton() {
   const button = (
-    <Button solid color="red" basic="I am a button" />
+    <Button
+      solid
+      color="red"
+      basic="I am a button"
+    />
   );
   return (
-    <List title="List title" desc="Help text here" titleRightArea={button}>
+    <List
+      title="List title"
+      desc="Help text here"
+      titleRightArea={button}
+    >
       <ListRow>
-        <Avatar alt="iCHEF" src="https://api.adorable.io/avatars/285/hello@ichef.tw" />
+        <Avatar
+          alt="iCHEF"
+          src="https://api.adorable.io/avatars/285/hello@ichef.tw"
+        />
         <TextLabel basic="Hello World" />
       </ListRow>
     </List>
@@ -198,13 +290,24 @@ export function ListWithTitleRightButton() {
 
 export function ListWithLongTextAndTitleRightButton() {
   const button = (
-    <Button solid color="red" basic="I am a button" />
+    <Button
+      solid
+      color="red"
+      basic="I am a button"
+    />
   );
-  const longText = '臣亮言：先帝創業未半，而中道崩殂。今天下三分，益州疲敝，此誠危急存亡之秋也！然侍衞之臣，不懈於內；忠志之士，忘身於外者，蓋追先帝之殊遇，欲報之於陛下也。誠宜開張聖聽，以光先帝遺德，恢弘志士之氣；不宜妄自菲薄，引喻失義，以塞忠諫之路也。';
+  const longText =
+    '臣亮言：先帝創業未半，而中道崩殂。今天下三分，益州疲敝，此誠危急存亡之秋也！然侍衞之臣，不懈於內；忠志之士，忘身於外者，蓋追先帝之殊遇，欲報之於陛下也。誠宜開張聖聽，以光先帝遺德，恢弘志士之氣；不宜妄自菲薄，引喻失義，以塞忠諫之路也。';
   return (
-    <List title={longText} titleRightArea={button}>
+    <List
+      title={longText}
+      titleRightArea={button}
+    >
       <ListRow>
-        <Avatar alt="iCHEF" src="https://api.adorable.io/avatars/285/hello@ichef.tw" />
+        <Avatar
+          alt="iCHEF"
+          src="https://api.adorable.io/avatars/285/hello@ichef.tw"
+        />
         <TextLabel basic="Hello World" />
       </ListRow>
     </List>
@@ -212,11 +315,7 @@ export function ListWithLongTextAndTitleRightButton() {
 }
 
 export function ListWithTopArea() {
-  const topAreaContent = (
-    <div>
-      Tips: this list has a top area for free content.
-    </div>
-  );
+  const topAreaContent = <div>Tips: this list has a top area for free content.</div>;
 
   return (
     <List

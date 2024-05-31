@@ -1,4 +1,4 @@
-@import "./mixins";
+@import './mixins';
 
 $component: #{$prefix}-modal;
 
@@ -36,7 +36,8 @@ $component: #{$prefix}-modal;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
-    animation: anim-slide-down .4s forwards;
+    /* stylelint-disable-next-line number-leading-zero */
+    animation: anim-slide-down 0.4s forwards;
   }
 }
 

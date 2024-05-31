@@ -12,10 +12,8 @@ export default {
   subcomponents: { 'withStatus()': Text },
 };
 
-const LONG_LABEL = (
-  `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-     Proin at pellentesque dui. Vivamus non egestas ante. Integer a egestas dui.`
-);
+const LONG_LABEL = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+     Proin at pellentesque dui. Vivamus non egestas ante. Integer a egestas dui.`;
 
 export function BasicUsage() {
   return (
@@ -110,7 +108,12 @@ export function WithStatusIcon() {
           basic="Basic Text"
           aside="I am center-aligned"
           tag="Tag"
-          statusIcon={<StatusIcon status="success" autohide={false} />}
+          statusIcon={
+            <StatusIcon
+              status="success"
+              autohide={false}
+            />
+          }
         />
       </DebugBox>
 

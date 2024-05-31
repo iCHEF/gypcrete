@@ -12,7 +12,10 @@ function Tag({ className, children, ...wrapperProps }) {
   const rootClass = classNames(`${ROOT_BEM.toString()}`, className);
 
   return (
-    <span className={rootClass} {...wrapperProps}>
+    <span
+      className={rootClass}
+      {...wrapperProps}
+    >
       <span>{children}</span>
     </span>
   );

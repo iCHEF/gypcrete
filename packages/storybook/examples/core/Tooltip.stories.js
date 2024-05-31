@@ -17,15 +17,11 @@ export function BasicUsage() {
 
       <div style={{ height: 30 }} />
 
-      <PureTooltip placement="bottom">
-        placed at bottom of target
-      </PureTooltip>
+      <PureTooltip placement="bottom">placed at bottom of target</PureTooltip>
 
       <div style={{ height: 30 }} />
 
-      <PureTooltip arrowStyle={{ left: '12px' }}>
-        custom arrow style
-      </PureTooltip>
+      <PureTooltip arrowStyle={{ left: '12px' }}>custom arrow style</PureTooltip>
     </div>
   );
 }
@@ -57,12 +53,9 @@ export function AnchoredTooltip() {
         Hover on me
       </span>
 
-      {(shouldShowTooltip && textRef.current)
-                && (
-                  <Tooltip anchor={textRef.current}>
-                    Yo, I am a tooltip.
-                  </Tooltip>
-                )}
+      {shouldShowTooltip && textRef.current && (
+        <Tooltip anchor={textRef.current}>Yo, I am a tooltip.</Tooltip>
+      )}
     </div>
   );
 }

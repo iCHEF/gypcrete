@@ -12,19 +12,31 @@ it('should render without crashing', () => {
 });
 
 it('returns a pre-configured <Button> extending given props', () => {
-  const wrapper = shallow(<PopupButton basic="foo" aside="bar" />);
-  expect(wrapper.matchesElement(
-    <Button
-      minified={false}
-      align="center"
+  const wrapper = shallow(
+    <PopupButton
       basic="foo"
       aside="bar"
-    />
-  )).toBeTruthy();
+    />,
+  );
+  expect(
+    wrapper.matchesElement(
+      <Button
+        minified={false}
+        align="center"
+        basic="foo"
+        aside="bar"
+      />,
+    ),
+  ).toBeTruthy();
 });
 
 it('mixes className with own class name', () => {
-  const wrapper = shallow(<PopupButton basic="foo" className="bar" />);
+  const wrapper = shallow(
+    <PopupButton
+      basic="foo"
+      className="bar"
+    />,
+  );
 
   expect(wrapper.hasClass(COMPONENT_NAME));
   expect(wrapper.hasClass('bar'));

@@ -1,8 +1,9 @@
-@import "~@ichef/gypcrete/src/styles/mixins";
+@import '~@ichef/gypcrete/src/styles/mixins';
 
-$component-name: "#{$prefix}-image-editor";
-$placeholder-icon-color: rgba(0, 0, 0, .3);
-$placeholder-border-color: rgba(0, 0, 0, .1);
+/* stylelint-disable number-leading-zero */
+$component-name: '#{$prefix}-image-editor';
+$placeholder-icon-color: rgba(0, 0, 0, 0.3);
+$placeholder-border-color: rgba(0, 0, 0, 0.1);
 
 .#{$component-name} {
   canvas {

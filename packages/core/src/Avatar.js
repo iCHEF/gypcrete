@@ -14,20 +14,20 @@ const SQUARE = 'square';
 const ROUNDED = 'rounded';
 const CIRCLE = 'circle';
 
-function Avatar({
-  className,
-  src,
-  alt,
-  type,
-  ...otherProps
-}) {
+function Avatar({ className, src, alt, type, ...otherProps }) {
   const bemClass = ROOT_BEM.modifier(type);
 
   const rootClassName = classNames(className, `${bemClass}`);
 
   return (
-    <div className={rootClassName} {...otherProps}>
-      <img alt={alt} src={src} />
+    <div
+      className={rootClassName}
+      {...otherProps}
+    >
+      <img
+        alt={alt}
+        src={src}
+      />
     </div>
   );
 }

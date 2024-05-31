@@ -23,7 +23,7 @@ describe('<EditableBasicRow />', () => {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-      />
+      />,
     );
 
     const input = screen.getByRole('textbox');
@@ -37,7 +37,7 @@ describe('<EditableBasicRow />', () => {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-      />
+      />,
     );
 
     const input = screen.getByRole('textbox');
@@ -52,7 +52,7 @@ describe('<EditableBasicRow />', () => {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-      />
+      />,
     );
 
     const input = screen.getByRole('textbox');
@@ -68,7 +68,7 @@ describe('<EditableBasicRow />', () => {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-      />
+      />,
     );
 
     const input = screen.getByRole('textbox');
@@ -87,7 +87,7 @@ describe('<EditableBasicRow />', () => {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-      />
+      />,
     );
 
     const textarea = screen.getByRole('textbox');
@@ -101,7 +101,7 @@ describe('<EditableBasicRow />', () => {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-      />
+      />,
     );
 
     const input = screen.getByPlaceholderText('Unset');
@@ -116,7 +116,7 @@ describe('<EditableBasicRow />', () => {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-      />
+      />,
     );
 
     const input = screen.getByRole('textbox');
@@ -131,7 +131,7 @@ describe('<EditableBasicRow />', () => {
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-      />
+      />,
     );
 
     const input = screen.getByRole('textbox');

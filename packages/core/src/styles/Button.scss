@@ -1,4 +1,4 @@
-@import "./mixins";
+@import './mixins';
 
 @mixin solid-button($color) {
   background-color: $color;
@@ -118,7 +118,8 @@
 
 .#{$prefix}-button--tinted {
   .#{$prefix}-icon {
-    opacity: .5;
+    /* stylelint-disable-next-line number-leading-zero */
+    opacity: 0.5;
   }
 }
 

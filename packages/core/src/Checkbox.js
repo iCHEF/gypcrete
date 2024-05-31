@@ -17,102 +17,112 @@ export const BEM = {
   iconWrapper: ROOT_BEM.element('icon-wrapper'),
 };
 
-export const CHECKBOX_BUTTON = <Icon type="empty" className={`${BEM.button}`} />;
+export const CHECKBOX_BUTTON = (
+  <Icon
+    type="empty"
+    className={`${BEM.button}`}
+  />
+);
 
 class Checkbox extends PureComponent {
-    static propTypes = {
-      /**
-         * Use this to inject props to the underlying `<input />`
-         */
-      input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-      indeterminate: PropTypes.bool,
-      overrideButton: PropTypes.element,
+  static propTypes = {
+    /**
+     * Use this to inject props to the underlying `<input />`
+     */
+    input: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    indeterminate: PropTypes.bool,
+    overrideButton: PropTypes.element,
 
-      // <input type="checkbox" /> props
-      checked: PropTypes.bool,
-      defaultChecked: PropTypes.bool,
-      disabled: PropTypes.bool,
-      onChange: PropTypes.func,
-    };
+    // <input type="checkbox" /> props
+    checked: PropTypes.bool,
+    defaultChecked: PropTypes.bool,
+    disabled: PropTypes.bool,
+    onChange: PropTypes.func,
+  };
 
-    static defaultProps = {
-      input: {},
-      indeterminate: false,
-      overrideButton: null,
+  static defaultProps = {
+    input: {},
+    indeterminate: false,
+    overrideButton: null,
 
-      checked: undefined,
-      defaultChecked: undefined,
-      disabled: false,
-      onChange: undefined,
-    };
+    checked: undefined,
+    defaultChecked: undefined,
+    disabled: false,
+    onChange: undefined,
+  };
 
-    componentDidMount() {
+  componentDidMount() {
+    this.updateInputIndeterminate();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.indeterminate !== this.props.indeterminate) {
       this.updateInputIndeterminate();
     }
+  }
 
-    componentDidUpdate(prevProps) {
-      if (prevProps.indeterminate !== this.props.indeterminate) {
-        this.updateInputIndeterminate();
-      }
-    }
+  getInputRef() {
+    return this.inputRef;
+  }
 
-    getInputRef() {
-      return this.inputRef;
-    }
+  updateInputIndeterminate() {
+    const inputNode = this.getInputRef();
+    inputNode.indeterminate = this.props.indeterminate;
+  }
 
-    updateInputIndeterminate() {
-      const inputNode = this.getInputRef();
-      inputNode.indeterminate = this.props.indeterminate;
-    }
+  renderCheckboxInput(inputProps, overrideButton) {
+    return (
+      <span className={BEM.iconWrapper}>
+        <input
+          ref={(ref) => {
+            this.inputRef = ref;
+          }}
+          type="checkbox"
+          className={BEM.input}
+          {...inputProps}
+        />
 
-    renderCheckboxInput(inputProps, overrideButton) {
-      return (
-        <span className={BEM.iconWrapper}>
-          <input
-            ref={(ref) => { this.inputRef = ref; }}
-            type="checkbox"
-            className={BEM.input}
-            {...inputProps}
-          />
+        {overrideButton || CHECKBOX_BUTTON}
+      </span>
+    );
+  }
 
-          {overrideButton || CHECKBOX_BUTTON}
-        </span>
-      );
-    }
+  render() {
+    const {
+      input,
+      indeterminate,
+      overrideButton,
+      // <input> props
+      checked,
+      defaultChecked,
+      disabled,
+      onChange,
+      // React props
+      className,
+      children,
+      ...otherProps
+    } = this.props;
 
-    render() {
-      const {
-        input,
-        indeterminate,
-        overrideButton,
-        // <input> props
-        checked,
-        defaultChecked,
-        disabled,
-        onChange,
-        // React props
-        className,
-        children,
-        ...otherProps
-      } = this.props;
+    const inputProps = {
+      checked,
+      defaultChecked,
+      disabled,
+      onChange,
+      ...input,
+    };
 
-      const inputProps = {
-        checked,
-        defaultChecked,
-        disabled,
-        onChange,
-        ...input,
-      };
+    const rootClassName = classNames(className, COMPONENT_NAME);
 
-      const rootClassName = classNames(className, COMPONENT_NAME);
-
-      return (
-        <div className={rootClassName} {...otherProps}>
-          {this.renderCheckboxInput(inputProps, overrideButton)}
-          {children}
-        </div>
-      );
-    }
+    return (
+      <div
+        className={rootClassName}
+        {...otherProps}
+      >
+        {this.renderCheckboxInput(inputProps, overrideButton)}
+        {children}
+      </div>
+    );
+  }
 }
 
 export default rowComp()(Checkbox);

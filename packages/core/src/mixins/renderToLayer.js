@@ -38,54 +38,51 @@ function renderToLayer(WrappedComponent) {
   const componentName = getComponentName(WrappedComponent);
 
   class RenderToLayer extends Component {
-        static displayName = `renderToLayer(${componentName})`;
+    static displayName = `renderToLayer(${componentName})`;
 
-        static propTypes = {
-          ...WrappedComponent.propTypes,
-          zIndex: PropTypes.number,
-        }
+    static propTypes = {
+      ...WrappedComponent.propTypes,
+      zIndex: PropTypes.number,
+    };
 
-        static defaultProps = {
-          ...WrappedComponent.defaultProps,
-          zIndex: undefined,
-        }
+    static defaultProps = {
+      ...WrappedComponent.defaultProps,
+      zIndex: undefined,
+    };
 
-        state = {
-          inDOM: false,
-        };
+    state = {
+      inDOM: false,
+    };
 
-        constructor(props) {
-          super(props);
-          this.baseLayer = createLayer({ zIndex: props.zIndex });
-        }
+    constructor(props) {
+      super(props);
+      this.baseLayer = createLayer({ zIndex: props.zIndex });
+    }
 
-        componentDidMount() {
-          document.body.appendChild(this.baseLayer);
+    componentDidMount() {
+      document.body.appendChild(this.baseLayer);
 
-          /**
-             * Render null before base layer is put in DOM for 'renderToLayer()' mixin.
-             *
-             * This is the current behavior of v1.x.
-             * It prevents an issue with 'anchored()' mixin where it can retrieve
-             * incorrect rects from self DOM node when calculating its own position,
-             * due to its parent node (the layer) isn't inserted to DOM yet.
-             */
-          this.setState({ inDOM: true });
-        }
+      /**
+       * Render null before base layer is put in DOM for 'renderToLayer()' mixin.
+       *
+       * This is the current behavior of v1.x.
+       * It prevents an issue with 'anchored()' mixin where it can retrieve
+       * incorrect rects from self DOM node when calculating its own position,
+       * due to its parent node (the layer) isn't inserted to DOM yet.
+       */
+      this.setState({ inDOM: true });
+    }
 
-        componentWillUnmount() {
-          document.body.removeChild(this.baseLayer);
-        }
+    componentWillUnmount() {
+      document.body.removeChild(this.baseLayer);
+    }
 
-        render() {
-          const { inDOM } = this.state;
-          const childrenProps = omit(this.props, ['zIndex']);
+    render() {
+      const { inDOM } = this.state;
+      const childrenProps = omit(this.props, ['zIndex']);
 
-          return inDOM && createPortal(
-            <WrappedComponent {...childrenProps} />,
-            this.baseLayer,
-          );
-        }
+      return inDOM && createPortal(<WrappedComponent {...childrenProps} />, this.baseLayer);
+    }
   }
 
   return RenderToLayer;

@@ -18,19 +18,8 @@ const BLUE = 'blue';
 const RED = 'red';
 const GREEN = 'green';
 
-
-function Icon({
-  type,
-  color,
-  large,
-  spinning,
-  className,
-  svgProps,
-  ...otherProps
-}) {
-  let bemClass = ROOT_BEM
-    .modifier('large', large)
-    .modifier('spin', spinning);
+function Icon({ type, color, large, spinning, className, svgProps, ...otherProps }) {
+  let bemClass = ROOT_BEM.modifier('large', large).modifier('spin', spinning);
 
   if (color) {
     bemClass = bemClass.modifier(color);
@@ -40,11 +29,11 @@ function Icon({
     className,
     bemClass.toString(),
     /**
-         * For backward compatibility.
-         * For inline-svg implementaion we don't need this class name.
-         * But we had used this with icon font implementation.
-         */
-    `gyp-icon-${type}`
+     * For backward compatibility.
+     * For inline-svg implementaion we don't need this class name.
+     * But we had used this with icon font implementation.
+     */
+    `gyp-icon-${type}`,
   );
 
   const SvgComponent = SvgMap[type];
@@ -56,7 +45,10 @@ function Icon({
       {...otherProps}
     >
       {SvgComponent && (
-        <SvgComponent fill="currentColor" {...svgProps} />
+        <SvgComponent
+          fill="currentColor"
+          {...svgProps}
+        />
       )}
     </span>
   );

@@ -23,16 +23,28 @@ export const basicUsage = () => (
       defaultValue="no"
       onChange={action('change')}
     >
-      <SelectOption label="Yes" value="yes" />
-      <SelectOption label="No" value="no" />
+      <SelectOption
+        label="Yes"
+        value="yes"
+      />
+      <SelectOption
+        label="No"
+        value="no"
+      />
     </SelectRow>
 
     <SelectRow
       disabled
       label="Disabled row"
     >
-      <SelectOption label="Yes" value="yes" />
-      <SelectOption label="No" value="no" />
+      <SelectOption
+        label="Yes"
+        value="yes"
+      />
+      <SelectOption
+        label="No"
+        value="no"
+      />
     </SelectRow>
 
     <SelectRow
@@ -42,8 +54,14 @@ export const basicUsage = () => (
       errorMsg="Cannot declare a war."
       value="peace"
     >
-      <SelectOption label="Peace" value="peace" />
-      <SelectOption label="War" value="war" />
+      <SelectOption
+        label="Peace"
+        value="peace"
+      />
+      <SelectOption
+        label="War"
+        value="war"
+      />
     </SelectRow>
   </List>
 );
@@ -55,11 +73,26 @@ export const multipleValues = () => (
       label="Enabled modules"
       onChange={action('change')}
     >
-      <SelectOption label="Module 1" value="mod1" />
-      <SelectOption label="Module 2" value="mod2" />
-      <SelectOption label="Module 3" value="mod3" />
-      <SelectOption label="Module 4" value="mod4" />
-      <SelectOption label="Module 5" value="mod5" />
+      <SelectOption
+        label="Module 1"
+        value="mod1"
+      />
+      <SelectOption
+        label="Module 2"
+        value="mod2"
+      />
+      <SelectOption
+        label="Module 3"
+        value="mod3"
+      />
+      <SelectOption
+        label="Module 4"
+        value="mod4"
+      />
+      <SelectOption
+        label="Module 5"
+        value="mod5"
+      />
     </SelectRow>
 
     <SelectRow
@@ -69,11 +102,26 @@ export const multipleValues = () => (
       defaultValue={['opt-c', 'opt-d']}
       onChange={action('change')}
     >
-      <SelectOption label="Option A" value="opt-a" />
-      <SelectOption label="Option B" value="opt-b" />
-      <SelectOption label="Option C" value="opt-c" />
-      <SelectOption label="Option D" value="opt-d" />
-      <SelectOption label="Option E" value="opt-e" />
+      <SelectOption
+        label="Option A"
+        value="opt-a"
+      />
+      <SelectOption
+        label="Option B"
+        value="opt-b"
+      />
+      <SelectOption
+        label="Option C"
+        value="opt-c"
+      />
+      <SelectOption
+        label="Option D"
+        value="opt-d"
+      />
+      <SelectOption
+        label="Option E"
+        value="opt-e"
+      />
     </SelectRow>
 
     <SelectRow
@@ -84,9 +132,24 @@ export const multipleValues = () => (
 );
 
 export const withAvatar = () => {
-  const loveAvatar = <Avatar alt="Love" src="https://api.adorable.io/avatars/285/love@ichef.tw" />;
-  const trumpsAvatar = <Avatar alt="Trumps" src="https://api.adorable.io/avatars/285/trumps@ichef.tw" />;
-  const hateAvatar = <Avatar alt="Hate" src="https://api.adorable.io/avatars/285/hate@ichef.tw" />;
+  const loveAvatar = (
+    <Avatar
+      alt="Love"
+      src="https://api.adorable.io/avatars/285/love@ichef.tw"
+    />
+  );
+  const trumpsAvatar = (
+    <Avatar
+      alt="Trumps"
+      src="https://api.adorable.io/avatars/285/trumps@ichef.tw"
+    />
+  );
+  const hateAvatar = (
+    <Avatar
+      alt="Hate"
+      src="https://api.adorable.io/avatars/285/hate@ichef.tw"
+    />
+  );
 
   return (
     <List title="Switch rows">
@@ -96,9 +159,21 @@ export const withAvatar = () => {
         defaultValue="Love"
         onChange={action('change')}
       >
-        <SelectOption label="Love" value="Love" avatar={loveAvatar} />
-        <SelectOption label="Trumps" value="Trumps" avatar={trumpsAvatar} />
-        <SelectOption label="Hate" value="Hate" avatar={hateAvatar} />
+        <SelectOption
+          label="Love"
+          value="Love"
+          avatar={loveAvatar}
+        />
+        <SelectOption
+          label="Trumps"
+          value="Trumps"
+          avatar={trumpsAvatar}
+        />
+        <SelectOption
+          label="Hate"
+          value="Hate"
+          avatar={hateAvatar}
+        />
       </SelectRow>
     </List>
   );
@@ -112,9 +187,18 @@ export const customizedLabels = () => (
       asideAllLabel="EVERYHTING SELECTED"
       defaultValue={['opt-a', 'opt-b', 'opt-c']}
     >
-      <SelectOption label="Option A" value="opt-a" />
-      <SelectOption label="Option B" value="opt-b" />
-      <SelectOption label="Option C" value="opt-c" />
+      <SelectOption
+        label="Option A"
+        value="opt-a"
+      />
+      <SelectOption
+        label="Option B"
+        value="opt-b"
+      />
+      <SelectOption
+        label="Option C"
+        value="opt-c"
+      />
     </SelectRow>
 
     <SelectRow
@@ -123,9 +207,18 @@ export const customizedLabels = () => (
       asideAllLabel={false}
       defaultValue={['opt-a', 'opt-b', 'opt-c']}
     >
-      <SelectOption label="Option A" value="opt-a" />
-      <SelectOption label="Option B" value="opt-b" />
-      <SelectOption label="Option C" value="opt-c" />
+      <SelectOption
+        label="Option A"
+        value="opt-a"
+      />
+      <SelectOption
+        label="Option B"
+        value="opt-b"
+      />
+      <SelectOption
+        label="Option C"
+        value="opt-c"
+      />
     </SelectRow>
 
     <SelectRow
@@ -133,9 +226,18 @@ export const customizedLabels = () => (
       label="Custom 'None' label"
       asideNoneLabel="Nothing"
     >
-      <SelectOption label="Option A" value="opt-a" />
-      <SelectOption label="Option B" value="opt-b" />
-      <SelectOption label="Option C" value="opt-c" />
+      <SelectOption
+        label="Option A"
+        value="opt-a"
+      />
+      <SelectOption
+        label="Option B"
+        value="opt-b"
+      />
+      <SelectOption
+        label="Option C"
+        value="opt-c"
+      />
     </SelectRow>
 
     <SelectRow
@@ -145,9 +247,18 @@ export const customizedLabels = () => (
       asideSeparator=" + "
       defaultValue={['opt-a', 'opt-b', 'opt-c']}
     >
-      <SelectOption label="Option A" value="opt-a" />
-      <SelectOption label="Option B" value="opt-b" />
-      <SelectOption label="Option C" value="opt-c" />
+      <SelectOption
+        label="Option A"
+        value="opt-a"
+      />
+      <SelectOption
+        label="Option B"
+        value="opt-b"
+      />
+      <SelectOption
+        label="Option C"
+        value="opt-c"
+      />
     </SelectRow>
   </List>
 );

@@ -11,10 +11,7 @@ export { STATUS_CODE };
 export const statusPropTypes = {
   status: PropTypes.oneOf(Object.values(STATUS_CODE)),
   statusOptions: PropTypes.object,
-  errorMsg: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  errorMsg: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 // prop types for what's going to set on wrapped component
@@ -24,66 +21,68 @@ export const withStatusPropTypes = {
   errorMsg: statusPropTypes.errorMsg,
 };
 
-const withStatus = ({
-  withRef = false,
-  withRawStatus = false,
-  ...defaultStatusOptions
-} = {}) => (WrappedComponent) => {
-  const componentName = getComponentName(WrappedComponent);
+const withStatus =
+  ({ withRef = false, withRawStatus = false, ...defaultStatusOptions } = {}) =>
+  (WrappedComponent) => {
+    const componentName = getComponentName(WrappedComponent);
 
-  class WithStatus extends Component {
-        static displayName = `withStatus(${componentName})`;
+    class WithStatus extends Component {
+      static displayName = `withStatus(${componentName})`;
 
-        static contextTypes = {
-          ...statusPropTypes,
-          // status,
-          // statusOptions,
-          // errorMsg,
-        };
+      static contextTypes = {
+        ...statusPropTypes,
+        // status,
+        // statusOptions,
+        // errorMsg,
+      };
 
-        getRenderedComponent() {
-          return this.renderedComponentRef;
+      getRenderedComponent() {
+        return this.renderedComponentRef;
+      }
+
+      getOptionalProps() {
+        const props = {};
+
+        if (withRawStatus) {
+          props.status = this.context.status;
         }
 
-        getOptionalProps() {
-          const props = {};
+        return props;
+      }
 
-          if (withRawStatus) {
-            props.status = this.context.status;
-          }
+      render() {
+        const { status, statusOptions = {}, errorMsg } = this.context;
 
-          return props;
-        }
+        const statusIcon = status && (
+          <StatusIcon
+            status={status}
+            {...defaultStatusOptions}
+            {...statusOptions}
+          />
+        );
 
-        render() {
-          const { status, statusOptions = {}, errorMsg } = this.context;
+        const refProps = !withRef
+          ? {}
+          : {
+              ref: (ref) => {
+                this.renderedComponentRef = ref;
+              },
+            };
+        const optionalProps = this.getOptionalProps();
 
-          const statusIcon = status && (
-            <StatusIcon
-              status={status}
-              {...defaultStatusOptions}
-              {...statusOptions}
-            />
-          );
+        return (
+          <WrappedComponent
+            {...refProps}
+            {...this.props}
+            {...optionalProps}
+            statusIcon={statusIcon}
+            errorMsg={errorMsg}
+          />
+        );
+      }
+    }
 
-          const refProps = !withRef ? {} : {
-            ref: (ref) => { this.renderedComponentRef = ref; },
-          };
-          const optionalProps = this.getOptionalProps();
-
-          return (
-            <WrappedComponent
-              {...refProps}
-              {...this.props}
-              {...optionalProps}
-              statusIcon={statusIcon}
-              errorMsg={errorMsg}
-            />
-          );
-        }
-  }
-
-  return WithStatus;
-};
+    return WithStatus;
+  };
 
 export default withStatus;

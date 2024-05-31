@@ -16,7 +16,10 @@ export function BasicUsage() {
   return (
     <div>
       <DebugBox>
-        <TextInput label="Label" onChange={action('change')} />
+        <TextInput
+          label="Label"
+          onChange={action('change')}
+        />
       </DebugBox>
 
       <DebugBox>
@@ -98,8 +101,11 @@ export function CustomRendering() {
       <TextInput
         label="Pick a color"
         defaultValue="#d94e41"
-        renderInput={inputProps => (
-          <input type="color" {...inputProps} />
+        renderInput={(inputProps) => (
+          <input
+            type="color"
+            {...inputProps}
+          />
         )}
         onChange={action('change')}
       />

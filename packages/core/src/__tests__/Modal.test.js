@@ -13,7 +13,10 @@ describe('<DefaultHeader>', () => {
 
     expect(wrapper.is(HeaderRow)).toBeTruthy();
     expect(wrapper.prop('center')).toMatchObject(
-      <TextLabel align="center" basic="Foo" />
+      <TextLabel
+        align="center"
+        basic="Foo"
+      />,
     );
   });
 });
@@ -51,11 +54,7 @@ describe('Rendering', () => {
     const header = <HeaderRow />;
     const children = <div data-target />;
 
-    const wrapper = shallow(
-      <PureModal header={header}>
-        {children}
-      </PureModal>
-    );
+    const wrapper = shallow(<PureModal header={header}>{children}</PureModal>);
     const columnViewWrapper = wrapper.find(ColumnView);
 
     expect(columnViewWrapper.exists()).toBeTruthy();
@@ -67,20 +66,19 @@ describe('Rendering', () => {
   });
 
   it('renders a basic <DefaultHeader> if only given String', () => {
-    const wrapper = shallow(
-      <PureModal header="Foo">Bar</PureModal>
-    );
+    const wrapper = shallow(<PureModal header="Foo">Bar</PureModal>);
 
-    expect(wrapper.find(ColumnView).prop('header')).toMatchObject(
-      <DefaultHeader title="Foo" />
-    );
+    expect(wrapper.find(ColumnView).prop('header')).toMatchObject(<DefaultHeader title="Foo" />);
   });
 
   it("passes 'flexBody' and 'bodyPadding' props to <ColumnView>", () => {
     const wrapper = shallow(
-      <PureModal flexBody bodyPadding={{ bottom: 0 }}>
+      <PureModal
+        flexBody
+        bodyPadding={{ bottom: 0 }}
+      >
         <div>Foo</div>
-      </PureModal>
+      </PureModal>,
     );
 
     expect(wrapper.find(ColumnView).props()).toMatchObject({

@@ -38,27 +38,26 @@ export function getPositionSetForArrowSidePlacementImpl(
   const anchorCenterCoordXOnViewPort = anchorRectLeft + anchorHalfWidth;
 
   const hasSpaceOnLeftOfAnchorCenter = anchorCenterCoordXOnViewPort >= selfHalfWidth;
-  const hasSpaceOnRightOfAnchorCenter = (
-    (window.innerWidth - anchorCenterCoordXOnViewPort) >= selfHalfWidth
-  );
+  const hasSpaceOnRightOfAnchorCenter =
+    window.innerWidth - anchorCenterCoordXOnViewPort >= selfHalfWidth;
 
   let selfLeft = 0;
   let arrowLeft = 0;
 
   switch (true) {
     // Center-aligned
-    case (hasSpaceOnLeftOfAnchorCenter && hasSpaceOnRightOfAnchorCenter):
-      selfLeft = (anchorOffsetLeft + anchorHalfWidth) - selfHalfWidth;
+    case hasSpaceOnLeftOfAnchorCenter && hasSpaceOnRightOfAnchorCenter:
+      selfLeft = anchorOffsetLeft + anchorHalfWidth - selfHalfWidth;
       arrowLeft = selfHalfWidth;
       break;
 
-      // Right-align to the anchor
-    case (hasSpaceOnLeftOfAnchorCenter && !hasSpaceOnRightOfAnchorCenter):
-      selfLeft = (anchorOffsetLeft + anchorWidth) - selfWidth;
+    // Right-align to the anchor
+    case hasSpaceOnLeftOfAnchorCenter && !hasSpaceOnRightOfAnchorCenter:
+      selfLeft = anchorOffsetLeft + anchorWidth - selfWidth;
       arrowLeft = selfWidth - anchorHalfWidth;
       break;
 
-      // Left-align to the anchor
+    // Left-align to the anchor
     default:
       selfLeft = anchorOffsetLeft;
       arrowLeft = anchorHalfWidth;
@@ -69,10 +68,7 @@ export function getPositionSetForArrowSidePlacementImpl(
   const arrowLeftMin = edgePadding;
   const arrowLeftMax = selfWidth - edgePadding;
 
-  arrowLeft = Math.max(
-    arrowLeftMin,
-    Math.min(arrowLeft, arrowLeftMax)
-  );
+  arrowLeft = Math.max(arrowLeftMin, Math.min(arrowLeft, arrowLeftMax));
 
   return {
     selfLeft,
@@ -116,13 +112,8 @@ function getPositionSetForArrowSidePlacement({
   };
 }
 
-
 export const topPlacementStrategy = {
-  canPlace: ({
-    anchorRect,
-    selfRect,
-    distanceFromAnchor,
-  }) => ({
+  canPlace: ({ anchorRect, selfRect, distanceFromAnchor }) => ({
     canPlace: anchorRect.top >= selfRect.height + distanceFromAnchor,
     remainingSpace: anchorRect.top,
   }),
@@ -149,19 +140,10 @@ export const topPlacementStrategy = {
 };
 
 export const bottomPlacementStrategy = {
-  canPlace: ({
-    anchorRect,
-    selfRect,
-    distanceFromAnchor,
-  }) => ({
-    canPlace: (
-      (
-        anchorRect.top
-        + anchorRect.height
-        + selfRect.height
-        + distanceFromAnchor
-      ) <= window.innerHeight
-    ),
+  canPlace: ({ anchorRect, selfRect, distanceFromAnchor }) => ({
+    canPlace:
+      anchorRect.top + anchorRect.height + selfRect.height + distanceFromAnchor <=
+      window.innerHeight,
     remainingSpace: window.innerHeight - anchorRect.top - anchorRect.height,
   }),
 
@@ -187,19 +169,9 @@ export const bottomPlacementStrategy = {
 };
 
 const rightPlacementStrategy = {
-  canPlace: ({
-    anchorRect,
-    selfRect,
-    distanceFromAnchor,
-  }) => ({
-    canPlace: (
-      (
-        anchorRect.left
-        + anchorRect.width
-        + selfRect.width
-        + distanceFromAnchor
-      ) <= window.innerWidth
-    ),
+  canPlace: ({ anchorRect, selfRect, distanceFromAnchor }) => ({
+    canPlace:
+      anchorRect.left + anchorRect.width + selfRect.width + distanceFromAnchor <= window.innerWidth,
     remainingSpace: window.innerWidth - anchorRect.left - anchorRect.width,
   }),
   getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {
@@ -223,17 +195,8 @@ const rightPlacementStrategy = {
 };
 
 const leftPlacementStrategy = {
-  canPlace: ({
-    anchorRect,
-    selfRect,
-    distanceFromAnchor,
-  }) => ({
-    canPlace: (
-      (
-        selfRect.width
-        + distanceFromAnchor
-      ) <= anchorRect.left
-    ),
+  canPlace: ({ anchorRect, selfRect, distanceFromAnchor }) => ({
+    canPlace: selfRect.width + distanceFromAnchor <= anchorRect.left,
     remainingSpace: anchorRect.left,
   }),
   getPosition: ({ anchorRect, anchorOffset, selfRect, distanceFromAnchor, edgePadding }) => {

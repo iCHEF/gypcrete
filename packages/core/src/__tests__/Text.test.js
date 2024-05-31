@@ -21,10 +21,9 @@ describe('<withStatus(Text)>', () => {
   });
 
   it('works with withStatus() mixin', () => {
-    const wrapper = shallow(
-      <Text basic="Foo" />,
-      { context: { status: 'error', errorMsg: 'bar' } }
-    );
+    const wrapper = shallow(<Text basic="Foo" />, {
+      context: { status: 'error', errorMsg: 'bar' },
+    });
 
     expect(wrapper.prop('statusIcon').type).toBe(StatusIcon);
     expect(wrapper.prop('errorMsg')).toBe('bar');
@@ -49,7 +48,7 @@ describe('Pure <Text>', () => {
         basic="Basic text"
         tag="Tag"
         statusIcon={icon}
-      />
+      />,
     );
     const rowWrapper = wrapper.find(BasicRow);
 
@@ -70,7 +69,7 @@ describe('Pure <Text>', () => {
         tag="Tag"
         statusIcon={icon}
         basicRow={customRow}
-      />
+      />,
     );
     const rowWrapper = wrapper.find(FooRow);
 
@@ -86,7 +85,12 @@ describe('Pure <Text>', () => {
   });
 
   it('renders aside text', () => {
-    const wrapper = shallow(<PureText basic="Basic" aside="Aside" />);
+    const wrapper = shallow(
+      <PureText
+        basic="Basic"
+        aside="Aside"
+      />,
+    );
 
     expect(wrapper.children()).toHaveLength(2);
     expect(wrapper.childAt(1).hasClass('gyp-text__aside')).toBeTruthy();
@@ -104,7 +108,12 @@ describe('Pure <Text>', () => {
   });
 
   it('can render in bold mode', () => {
-    const wrapper = shallow(<PureText bold basic="foo" />);
+    const wrapper = shallow(
+      <PureText
+        bold
+        basic="foo"
+      />,
+    );
 
     expect(wrapper.hasClass('gyp-text--bold')).toBeTruthy();
   });

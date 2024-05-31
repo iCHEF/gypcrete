@@ -54,9 +54,7 @@ export const customizeScaleRange = () => (
   />
 );
 
-export const imagePlaceholder = () => (
-  <ImageEditor control />
-);
+export const imagePlaceholder = () => <ImageEditor control />;
 
 export const loadingMode = () => (
   <ImageEditor

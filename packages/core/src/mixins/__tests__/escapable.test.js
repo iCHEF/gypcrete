@@ -5,9 +5,7 @@ import keycode from 'keycode';
 
 import escapable from '../escapable';
 
-const Foo = () => (
-  <div>Foo</div>
-);
+const Foo = () => <div>Foo</div>;
 
 const EscapableFoo = escapable(Foo);
 

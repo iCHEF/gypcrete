@@ -16,14 +16,23 @@ export default {
 };
 
 export function BasicUsage() {
-  const leftBtn = <Button icon="prev" basic="Back" />;
-  const rightBtn = <Button align="reverse" icon="row-padding" basic="Save" />;
+  const leftBtn = (
+    <Button
+      icon="prev"
+      basic="Back"
+    />
+  );
+  const rightBtn = (
+    <Button
+      align="reverse"
+      icon="row-padding"
+      basic="Save"
+    />
+  );
   const centerLabel = (
     <TextLabel
       align="center"
-      basic={
-        <TextEllipsis>Lorem ipsum a slightly longer title</TextEllipsis>
-      }
+      basic={<TextEllipsis>Lorem ipsum a slightly longer title</TextEllipsis>}
     />
   );
 
@@ -39,7 +48,13 @@ export function BasicUsage() {
 }
 
 export function OptionalArea() {
-  const rightBtn = <Button align="reverse" icon="row-padding" basic="Save" />;
+  const rightBtn = (
+    <Button
+      align="reverse"
+      icon="row-padding"
+      basic="Save"
+    />
+  );
   const centerLabel = <TextLabel basic="Header Title" />;
 
   return (

@@ -24,165 +24,177 @@ export const BEM = {
 
 // a React.Component ensures it can be re-rendered when context changes
 class SearchInput extends Component {
-    static propTypes = {
-      /**
-         * Use this to inject props to the underlying `<input>`.
-         */
-      inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-      placeholder: PropTypes.string,
-      defaultValue: PropTypes.string,
-      value: PropTypes.string,
-      onChange: PropTypes.func,
-      onSearch: PropTypes.func,
-      onReset: PropTypes.func,
-      searchOnInputChange: PropTypes.bool,
-      searchOnInputBlur: PropTypes.bool,
-      blockDuplicateValueSearch: PropTypes.bool,
-      blockEmptyValueSearch: PropTypes.bool,
-    };
+  static propTypes = {
+    /**
+     * Use this to inject props to the underlying `<input>`.
+     */
+    inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    placeholder: PropTypes.string,
+    defaultValue: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+    onSearch: PropTypes.func,
+    onReset: PropTypes.func,
+    searchOnInputChange: PropTypes.bool,
+    searchOnInputBlur: PropTypes.bool,
+    blockDuplicateValueSearch: PropTypes.bool,
+    blockEmptyValueSearch: PropTypes.bool,
+  };
 
-    static defaultProps = {
-      inputProps: {},
-      placeholder: 'Search',
-      value: undefined,
-      defaultValue: '',
-      onChange: () => {},
-      onSearch: () => {},
-      onReset: () => {},
-      searchOnInputChange: false,
-      searchOnInputBlur: false,
-      blockDuplicateValueSearch: false,
-      blockEmptyValueSearch: false,
-    };
+  static defaultProps = {
+    inputProps: {},
+    placeholder: 'Search',
+    value: undefined,
+    defaultValue: '',
+    onChange: () => {},
+    onSearch: () => {},
+    onReset: () => {},
+    searchOnInputChange: false,
+    searchOnInputBlur: false,
+    blockDuplicateValueSearch: false,
+    blockEmptyValueSearch: false,
+  };
 
-    static contextTypes = {
-      status: PropTypes.oneOf(Object.values(STATUS_CODE)),
-    };
+  static contextTypes = {
+    status: PropTypes.oneOf(Object.values(STATUS_CODE)),
+  };
 
-    state = {
-      innerValue: this.props.defaultValue,
-    };
+  state = {
+    innerValue: this.props.defaultValue,
+  };
 
-    inputRef = React.createRef();
+  inputRef = React.createRef();
 
-    cachedValue = null;
+  cachedValue = null;
 
-    isControlled = () => (typeof this.props.value) !== 'undefined';
+  isControlled = () => typeof this.props.value !== 'undefined';
 
-    handleInputChange = (event) => {
-      const { searchOnInputChange, blockEmptyValueSearch, onChange, onSearch } = this.props;
-      const newValue = event.target.value;
+  handleInputChange = (event) => {
+    const { searchOnInputChange, blockEmptyValueSearch, onChange, onSearch } = this.props;
+    const newValue = event.target.value;
 
-      if (this.isControlled()) {
-        onChange(event);
-      } else {
-        this.setState({ innerValue: newValue });
-      }
-
-      if (searchOnInputChange) {
-        if (blockEmptyValueSearch && newValue === '') {
-          return;
-        }
-
-        this.cachedValue = newValue;
-        onSearch(newValue);
-      }
+    if (this.isControlled()) {
+      onChange(event);
+    } else {
+      this.setState({ innerValue: newValue });
     }
 
-    handleResetButtonClick = () => {
-      this.inputRef.current.focus();
-      const { onReset, value } = this.props;
-      const { innerValue } = this.state;
-
-      if (this.isControlled()) {
-        onReset(value);
-      } else {
-        onReset(innerValue);
-        this.setState({ innerValue: '' });
-      }
-    }
-
-    handleSearch = () => {
-      const { onSearch, value, blockDuplicateValueSearch, blockEmptyValueSearch } = this.props;
-      const { innerValue } = this.state;
-      const newValue = this.isControlled() ? value : innerValue;
-
-      if (blockDuplicateValueSearch && (newValue === this.cachedValue)) {
-        return;
-      }
-
-      this.cachedValue = newValue;
-
-
+    if (searchOnInputChange) {
       if (blockEmptyValueSearch && newValue === '') {
         return;
       }
 
+      this.cachedValue = newValue;
       onSearch(newValue);
     }
+  };
 
-    handleInputBlur = () => {
-      const { searchOnInputBlur } = this.props;
-      if (searchOnInputBlur) {
-        // Prevent triggering `onSearch` when reset button clicked.
-        setTimeout(() => {
-          if (document.activeElement !== this.inputRef.current) {
-            this.handleSearch();
-          }
-        }, 100);
-      }
+  handleResetButtonClick = () => {
+    this.inputRef.current.focus();
+    const { onReset, value } = this.props;
+    const { innerValue } = this.state;
+
+    if (this.isControlled()) {
+      onReset(value);
+    } else {
+      onReset(innerValue);
+      this.setState({ innerValue: '' });
+    }
+  };
+
+  handleSearch = () => {
+    const { onSearch, value, blockDuplicateValueSearch, blockEmptyValueSearch } = this.props;
+    const { innerValue } = this.state;
+    const newValue = this.isControlled() ? value : innerValue;
+
+    if (blockDuplicateValueSearch && newValue === this.cachedValue) {
+      return;
     }
 
-    handleInputKeyup = (event) => {
-      if (event.key === 'Enter') {
-        this.handleSearch();
-      }
+    this.cachedValue = newValue;
+
+    if (blockEmptyValueSearch && newValue === '') {
+      return;
     }
 
-    render() {
-      const { inputProps, value, placeholder, className } = this.props;
-      const { innerValue } = this.state;
+    onSearch(newValue);
+  };
 
-      const inputValue = this.isControlled() ? value : innerValue;
-      const isLoading = this.context.status === STATUS_CODE.LOADING;
-      const rootClassName = classNames(className, `${BEM.root}`);
+  handleInputBlur = () => {
+    const { searchOnInputBlur } = this.props;
+    if (searchOnInputBlur) {
+      // Prevent triggering `onSearch` when reset button clicked.
+      setTimeout(() => {
+        if (document.activeElement !== this.inputRef.current) {
+          this.handleSearch();
+        }
+      }, 100);
+    }
+  };
 
-      const wrapperProps = getRemainingProps(this.props, SearchInput.propTypes);
+  handleInputKeyup = (event) => {
+    if (event.key === 'Enter') {
+      this.handleSearch();
+    }
+  };
 
-      return (
-        <div className={rootClassName} {...wrapperProps}>
-          <div className={BEM.inputWrapper}>
-            <Icon type="search" />
+  render() {
+    const { inputProps, value, placeholder, className } = this.props;
+    const { innerValue } = this.state;
 
-            <input
-              {...inputProps}
-              type="text"
-              className={`${BEM.input}`}
-              placeholder={placeholder}
-              value={inputValue}
-              onChange={this.handleInputChange}
-              onBlur={this.handleInputBlur}
-              onKeyUp={this.handleInputKeyup}
-              ref={this.inputRef}
+    const inputValue = this.isControlled() ? value : innerValue;
+    const isLoading = this.context.status === STATUS_CODE.LOADING;
+    const rootClassName = classNames(className, `${BEM.root}`);
+
+    const wrapperProps = getRemainingProps(this.props, SearchInput.propTypes);
+
+    return (
+      <div
+        className={rootClassName}
+        {...wrapperProps}
+      >
+        <div className={BEM.inputWrapper}>
+          <Icon type="search" />
+
+          <input
+            {...inputProps}
+            type="text"
+            className={`${BEM.input}`}
+            placeholder={placeholder}
+            value={inputValue}
+            onChange={this.handleInputChange}
+            onBlur={this.handleInputBlur}
+            onKeyUp={this.handleInputKeyup}
+            ref={this.inputRef}
+          />
+
+          {isLoading && (
+            <Icon
+              type="loading"
+              spinning
+              color="gray"
             />
+          )}
 
-            {isLoading && <Icon type="loading" spinning color="gray" />}
-
-            {(inputValue && !isLoading) && (
-              <button
-                type="button"
-                className={`${BEM.resetBtn}`}
-                aria-label="Reset"
-                tabIndex="-1"
-                onClick={this.handleResetButtonClick}
-              >
-                <Icon type="delete" color="gray" className={`${BEM.icon}`} />
-              </button>
-            )}
-          </div>
+          {inputValue && !isLoading && (
+            <button
+              type="button"
+              className={`${BEM.resetBtn}`}
+              aria-label="Reset"
+              tabIndex="-1"
+              onClick={this.handleResetButtonClick}
+            >
+              <Icon
+                type="delete"
+                color="gray"
+                className={`${BEM.icon}`}
+              />
+            </button>
+          )}
         </div>
-      );
-    }
+      </div>
+    );
+  }
 }
 
 export default rowComp()(SearchInput);

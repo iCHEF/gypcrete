@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 // Styles for shared states
 
@@ -20,12 +20,14 @@
 }
 
 .#{$prefix-state}-disabled {
-  opacity: .3 !important;
+  /* stylelint-disable-next-line number-leading-zero */
+  opacity: 0.3 !important;
   pointer-events: none !important;
 }
 
 .#{$prefix-state}-muted {
-  opacity: .3 !important;
+  /* stylelint-disable-next-line number-leading-zero */
+  opacity: 0.3 !important;
 }
 
 [hidden],

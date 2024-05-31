@@ -19,9 +19,7 @@ it('renders with BEM class as column of <SplitView>', () => {
 
 it('adds wide modifier to class names when specified', () => {
   const wrapper = shallow(<SplitViewColumn wide />);
-  const expectedClassName = BEM.column
-    .modifier('wide')
-    .toString({ stripBlock: true });
+  const expectedClassName = BEM.column.modifier('wide').toString({ stripBlock: true });
 
   expect(wrapper.hasClass(expectedClassName)).toBeTruthy();
 });

@@ -10,27 +10,24 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 function FlexCell({ shrink, grow, basis, children }) {
   const flexStyles = {
-    flexShrink: Number(shrink),
-    flexGrow: Number(grow),
-    flexBasis: basis,
+    flexShrink: Number(shrink), // stylelint-disable-line function-name-case
+    flexGrow: Number(grow), // stylelint-disable-line function-name-case
+    flexBasis: basis, // stylelint-disable-line declaration-block-no-redundant-longhand-properties
   };
 
   return (
-    <div className={ROOT_BEM} style={flexStyles}>
+    <div
+      className={ROOT_BEM}
+      style={flexStyles}
+    >
       {children}
     </div>
   );
 }
 
 FlexCell.propTypes = {
-  shrink: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.number,
-  ]),
-  grow: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.number,
-  ]),
+  shrink: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+  grow: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
   basis: PropTypes.string,
 };
 
