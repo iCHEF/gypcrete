@@ -16,3 +16,19 @@ parserOptions:
 
 rules:
   ichef/place-hooks-arguments-in-new-line: 'warn'
+
+overrides:
+  - files:
+      - '*.test.js'
+      - '*.test.jsx'
+    extends:
+      - 'plugin:testing-library/react'
+      - 'plugin:jest-dom/recommended'
+    rules:
+      # TODO: remove this when we upgrade @testing-library/react >=13.1.0
+      react-hooks/rules-of-hooks: off
+      testing-library/no-render-in-setup: warn
+      testing-library/no-node-access: warn
+      jest-dom/prefer-to-have-text-content: warn
+      testing-library/render-result-naming-convention: warn
+      testing-library/no-unnecessary-act: warn
