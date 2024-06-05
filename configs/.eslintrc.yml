@@ -13,3 +13,6 @@ settings:
 
 parserOptions:
   sourceType: module
+
+rules:
+  ichef/place-hooks-arguments-in-new-line: 'warn'
