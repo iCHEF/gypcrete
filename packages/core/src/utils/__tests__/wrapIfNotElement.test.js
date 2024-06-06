@@ -1,4 +1,3 @@
-import React from 'react';
 import wrapIfNotElement from '../wrapIfNotElement';
 
 function Bar({ children }) {

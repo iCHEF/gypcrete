@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Checkbox, { PureCheckbox } from '@ichef/gypcrete/src/Checkbox';
 import Avatar from '@ichef/gypcrete/src/Avatar';
 import DebugBox from 'utils/DebugBox';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Section from '@ichef/gypcrete/src/Section';
 
 import DebugBox from 'utils/DebugBox';

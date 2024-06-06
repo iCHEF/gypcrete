@@ -1,5 +1,3 @@
-import React from 'react';
-
 import List from '@ichef/gypcrete/src/List';
 import ListRow from '@ichef/gypcrete/src/ListRow';
 

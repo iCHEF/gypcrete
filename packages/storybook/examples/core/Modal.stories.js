@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import Modal, { PureModal } from '@ichef/gypcrete/src/Modal';

@@ -1,4 +1,3 @@
-import React from 'react';
 import Checkbox from '@ichef/gypcrete/src/Checkbox';
 import IconCheckbox from '@ichef/gypcrete/src/IconCheckbox';
 

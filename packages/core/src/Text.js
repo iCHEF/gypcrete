@@ -15,7 +15,7 @@
  * └╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┘
  */
 
-import React, { PureComponent } from 'react';
+import { isValidElement, cloneElement, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -90,9 +90,9 @@ class Text extends PureComponent {
       className: classNames(BEM.row.toString(), BEM.basic.toString()),
     };
 
-    if (basicRow && React.isValidElement(basicRow)) {
+    if (basicRow && isValidElement(basicRow)) {
       // Inject { basic, tag, statusIcon } to default or custom row.
-      return React.cloneElement(basicRow, basicRowProps);
+      return cloneElement(basicRow, basicRowProps);
     }
 
     return null;

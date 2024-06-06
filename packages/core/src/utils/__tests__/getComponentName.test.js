@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import getComponentName from '../getComponentName';
 

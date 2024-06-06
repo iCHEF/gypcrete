@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import { shallow } from 'enzyme';
 import * as ReactIs from 'react-is';

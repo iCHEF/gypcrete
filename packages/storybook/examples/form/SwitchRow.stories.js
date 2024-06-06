@@ -1,5 +1,3 @@
-import React from 'react';
-
 import List from '@ichef/gypcrete/src/List';
 import { PureSwitch } from '@ichef/gypcrete/src/Switch';
 import SwitchRow, { PureSwitchRow } from '@ichef/gypcrete-form/src/SwitchRow';

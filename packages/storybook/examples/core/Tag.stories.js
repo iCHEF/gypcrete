@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Tag from '@ichef/gypcrete/src/Tag';
 
 export default {

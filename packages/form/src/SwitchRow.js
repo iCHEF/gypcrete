@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { memo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { ListRow, Switch, TextLabel } from '@ichef/gypcrete';
@@ -11,7 +11,7 @@ import formRow, { rowPropTypes } from './mixins/formRow';
  *
  * All unknown props should go to the `<Switch>` from `@ichef/gypcrete` core package.
  */
-const SwitchRow = React.memo(
+const SwitchRow = memo(
   ({
     label,
     asideOn,

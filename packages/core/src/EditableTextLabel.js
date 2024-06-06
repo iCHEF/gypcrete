@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { memo, useState, useEffect, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import keycode from 'keycode';
 
@@ -32,7 +32,7 @@ const TOUCH_TIMEOUT_MS = 250;
  * It does not offer direct control to the `<input>` inside.
  */
 
-const EditableTextLabel = React.memo(
+const EditableTextLabel = memo(
   ({
     inEdit: inEditProp, // not used here
     onDblClick, // also not used here

@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, act, cleanup, waitFor, screen } from '@testing-library/react';
 import StatusIcon, { STATUS_CODE } from '../StatusIcon';
 

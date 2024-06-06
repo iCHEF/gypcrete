@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { memo, Children, cloneElement, Fragment, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import warning from 'warning';
 
@@ -26,7 +26,7 @@ function getInitialCheckedState(selectedValue, multiple = true) {
  * It can be in either **single** or **multiple** response mode.
  */
 
-const SelectList = React.memo(
+const SelectList = memo(
   ({
     multiple,
     showCheckAll,
@@ -150,19 +150,19 @@ const SelectList = React.memo(
     };
 
     const renderOptions = (childrenToRender) =>
-      React.Children.map(childrenToRender, (child) => {
+      Children.map(childrenToRender, (child) => {
         const elementTypeSymbol = getElementTypeSymbol(child);
         if (
           elementTypeSymbol === CHECKBOX_OPTION_TYPE_SYMBOL ||
           elementTypeSymbol === RADIO_OPTION_TYPE_SYMBOL
         ) {
-          return React.cloneElement(child, {
+          return cloneElement(child, {
             checked: checkedState.get(child.props.value),
             onChange: handleOptionChange,
           });
         }
 
-        if (child && child.type === React.Fragment) {
+        if (child && child.type === Fragment) {
           return renderOptions(child.props.children);
         }
 

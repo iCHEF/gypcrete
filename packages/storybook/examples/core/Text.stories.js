@@ -1,5 +1,3 @@
-import React from 'react';
-
 import StatusIcon from '@ichef/gypcrete/src/StatusIcon';
 import Text, { PureText } from '@ichef/gypcrete/src/Text';
 import TextEllipsis from '@ichef/gypcrete/src/TextEllipsis';

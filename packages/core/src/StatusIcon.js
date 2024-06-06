@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { memo, useState, useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import icBEM from './utils/icBEM';
@@ -21,7 +21,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 const ICON_HIDE_TIMEOUT = 2 * 1000;
 
-const StatusIcon = React.memo(({ status, position, autohide, ...wrapperProps }) => {
+const StatusIcon = memo(({ status, position, autohide, ...wrapperProps }) => {
   const [hideIcon, setHideIcon] = useState(false);
   const hideIconTimeout = useRef(null);
 

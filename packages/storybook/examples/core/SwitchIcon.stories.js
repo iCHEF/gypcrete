@@ -1,4 +1,3 @@
-import React from 'react';
 import SwitchIcon from '@ichef/gypcrete/src/SwitchIcon';
 
 export default {

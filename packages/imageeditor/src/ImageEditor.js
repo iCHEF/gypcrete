@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import { createRef, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -100,7 +100,7 @@ class ImageEditor extends PureComponent {
     position: getInitPosition(this.props.initCropRect) || DEFAULT_POSITION,
   };
 
-  editorRef = React.createRef();
+  editorRef = createRef();
 
   componentDidUpdate(prevProps) {
     const { image } = this.props;
