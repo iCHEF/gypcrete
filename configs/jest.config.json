@@ -6,6 +6,9 @@
     "<rootDir>/packages/\\w+/lib/",
     "<rootDir>/packages/core/src/icons/components/"
   ],
+  "transform": {
+    "^.+\\.[t|j]sx?$": "babel-jest"
+  },
   "moduleNameMapper": {
     "\\.(css|scss|sass|md|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|)$": "<rootDir>/__mocks__/fileMock.js"
   },
