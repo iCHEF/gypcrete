@@ -1,5 +1,3 @@
-import React from 'react';
-
 import ImageEditor, { AvatarEditor } from '@ichef/gypcrete-imageeditor/src/index';
 
 import handleLoadSuccess from './utils/handleLoadSuccess';

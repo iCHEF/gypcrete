@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { memo, Fragment, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import warning from 'warning';
@@ -59,7 +59,7 @@ function getValueToLabelAvatarMap(fromChildren = []) {
   return resultMap;
 }
 
-const SelectRow = React.memo(
+const SelectRow = memo(
   ({
     label,
     asideAllLabel,
@@ -196,7 +196,7 @@ const SelectRow = React.memo(
     const renderAvatar = () =>
       cacheValueArray.map((_value) => {
         const valueMap = valueLabelMap.get(_value) || {};
-        return <React.Fragment key={_value}>{valueMap.avatar}</React.Fragment>;
+        return <Fragment key={_value}>{valueMap.avatar}</Fragment>;
       });
 
     const wrapperClassName = classNames(COMPONENT_NAME, className);

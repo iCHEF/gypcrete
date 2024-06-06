@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function SvgDuplicate(props) {
   return (
     <svg

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Button from '@ichef/gypcrete/src/Button';
 import IconButton from '@ichef/gypcrete/src/IconButton';
 import FlexRow from 'utils/FlexRow';

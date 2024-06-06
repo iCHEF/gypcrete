@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function SvgCtbcDirect(props) {
   return (
     <svg

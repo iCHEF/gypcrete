@@ -1,5 +1,3 @@
-import React from 'react';
-
 const flexRowStyle = {
   display: 'flex',
   marginBottom: 10,

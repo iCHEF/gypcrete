@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import Popover, { PurePopover } from '@ichef/gypcrete/src/Popover';

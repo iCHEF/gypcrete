@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Icon from '@ichef/gypcrete/src/Icon';
 
 import iconMap from '@ichef/gypcrete/src/icons/components';

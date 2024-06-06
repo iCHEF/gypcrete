@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function SvgCrmPhoneLand(props) {
   return (
     <svg

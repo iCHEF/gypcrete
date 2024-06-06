@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Avatar from '@ichef/gypcrete/src/Avatar';
 import FlexRow from 'utils/FlexRow';
 

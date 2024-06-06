@@ -1,4 +1,4 @@
-import React from 'react';
+import { createRef } from 'react';
 import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 import memoize from 'memoize-one';
@@ -77,7 +77,7 @@ it('passed anchor and self nodes to getter function for position config', () => 
    * But if you wrap the ref-target element with another layer of wrapper,
    * if receives correct HTMLDivElement.
    */
-  const anchorRef = React.createRef();
+  const anchorRef = createRef();
   mount(
     <>
       <div ref={anchorRef} />
@@ -94,7 +94,7 @@ it('passed anchor and self nodes to getter function for position config', () => 
 });
 
 it('can pass defaultPlacement through anchored component to getter function for position config', () => {
-  const anchorRef = React.createRef();
+  const anchorRef = createRef();
   mount(
     <>
       <div ref={anchorRef} />

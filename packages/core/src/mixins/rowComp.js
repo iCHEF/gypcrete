@@ -29,7 +29,7 @@
  *
  */
 
-import React, { PureComponent, isValidElement, cloneElement } from 'react';
+import { PureComponent, isValidElement, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import '../styles/RowComp.scss';

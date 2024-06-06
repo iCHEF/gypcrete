@@ -1,4 +1,3 @@
-import React from 'react';
 import Radio, { PureRadio } from '@ichef/gypcrete/src/Radio';
 import Avatar from '@ichef/gypcrete/src/Avatar';
 import DebugBox from 'utils/DebugBox';

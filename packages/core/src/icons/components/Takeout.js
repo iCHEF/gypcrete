@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function SvgTakeout(props) {
   return (
     <svg

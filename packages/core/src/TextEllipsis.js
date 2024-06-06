@@ -1,4 +1,3 @@
-import React from 'react';
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 import './styles/TextEllipsis.scss';

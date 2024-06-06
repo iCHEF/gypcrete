@@ -1,5 +1,3 @@
-import React from 'react';
-
 import IconLayout from './IconLayout';
 import Checkbox, { CHECKBOX_BUTTON } from './Checkbox';
 

@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import { useReducer } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import InfiniteScroll from '@ichef/gypcrete/src/InfiniteScroll';

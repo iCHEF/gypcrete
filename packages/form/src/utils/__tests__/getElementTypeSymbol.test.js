@@ -1,4 +1,3 @@
-import React from 'react';
 import getElementTypeSymbol from '../getElementTypeSymbol';
 
 const SYMBOL = Symbol('foo');

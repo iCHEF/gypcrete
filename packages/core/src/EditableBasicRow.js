@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { memo, useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './styles/EditableBasicRow.scss';
@@ -57,7 +57,7 @@ export const ROW_INPUT_TAGS = {
  * ```
  */
 
-const EditableBasicRow = React.memo(
+const EditableBasicRow = memo(
   ({
     inputTag: InputTag,
     // <input> props

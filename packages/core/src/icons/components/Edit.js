@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function SvgEdit(props) {
   return (
     <svg

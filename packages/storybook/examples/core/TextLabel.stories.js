@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { action, decorateAction } from '@storybook/addon-actions';
 
 import EditableTextLabel from '@ichef/gypcrete/src/EditableTextLabel';

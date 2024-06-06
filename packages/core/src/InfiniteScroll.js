@@ -1,4 +1,4 @@
-import React, { PureComponent, isValidElement } from 'react';
+import { PureComponent, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import documentOffset from 'document-offset';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import SplitView from '@ichef/gypcrete/src/SplitView';
 import SplitViewColumn from '@ichef/gypcrete/src/SplitViewColumn';
 

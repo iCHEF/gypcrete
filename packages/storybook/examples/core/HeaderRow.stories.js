@@ -1,5 +1,3 @@
-import React from 'react';
-
 import HeaderRow, { HeaderArea } from '@ichef/gypcrete/src/HeaderRow';
 import Button from '@ichef/gypcrete/src/Button';
 import TextLabel from '@ichef/gypcrete/src/TextLabel';

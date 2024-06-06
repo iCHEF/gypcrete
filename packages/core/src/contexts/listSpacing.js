@@ -1,5 +1,5 @@
-import React from 'react';
+import { createContext } from 'react';
 
-const ListSpacingContext = React.createContext(true);
+const ListSpacingContext = createContext(true);
 
 export default ListSpacingContext;
