@@ -6,9 +6,9 @@ rules:
   indentation: 2
   number-leading-zero: never
   selector-pseudo-element-colon-notation: single
+  declaration-block-trailing-semicolon: never
 
 ignoreFiles:
   - node_modules/
   - coverage/
   - dist/
-  - packages/core/src/icons/components/
