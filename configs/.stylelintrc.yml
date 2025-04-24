@@ -11,3 +11,4 @@ ignoreFiles:
   - node_modules/
   - coverage/
   - dist/
+  - packages/core/src/icons/components/

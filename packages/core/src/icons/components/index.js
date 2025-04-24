@@ -3,6 +3,9 @@ import AddLocation from './AddLocation';
 import AddMultiItems from './AddMultiItems';
 import Add from './Add';
 import Announce from './Announce';
+import Bedtime from './Bedtime';
+import BusinessCenter from './BusinessCenter';
+import Camping from './Camping';
 import Cash from './Cash';
 import CheckboxEmpty from './CheckboxEmpty';
 import CheckboxHalf from './CheckboxHalf';
@@ -29,11 +32,16 @@ import Drag from './Drag';
 import Dropdown from './Dropdown';
 import Duplicate from './Duplicate';
 import Edit from './Edit';
+import Envelope from './Envelope';
 import Error from './Error';
+import FaceMan from './FaceMan';
+import FaceWoman from './FaceWoman';
+import Favorite from './Favorite';
 import FirstPage from './FirstPage';
 import Fold from './Fold';
 import Folder from './Folder';
 import Gear from './Gear';
+import Gift from './Gift';
 import HeaderNext from './HeaderNext';
 import HeaderPrev from './HeaderPrev';
 import Import from './Import';
@@ -45,11 +53,13 @@ import InlineQuestion from './InlineQuestion';
 import InlineSuccess from './InlineSuccess';
 import InventoryCategory from './InventoryCategory';
 import InventoryItem from './InventoryItem';
+import KebabDining from './KebabDining';
 import LastPage from './LastPage';
 import Loading from './Loading';
 import Location from './Location';
 import Lock from './Lock';
 import Mapping from './Mapping';
+import MenuBook from './MenuBook';
 import MinusOne from './MinusOne';
 import More from './More';
 import NextPage from './NextPage';
@@ -64,6 +74,7 @@ import PlusOne from './PlusOne';
 import PrevPage from './PrevPage';
 import Prev from './Prev';
 import Printer from './Printer';
+import Pumpkin from './Pumpkin';
 import Question from './Question';
 import RadioEmpty from './RadioEmpty';
 import RadioSelected from './RadioSelected';
@@ -87,6 +98,9 @@ export default {
   'add-multi-items': AddMultiItems,
   add: Add,
   announce: Announce,
+  bedtime: Bedtime,
+  'business-center': BusinessCenter,
+  camping: Camping,
   cash: Cash,
   'checkbox-empty': CheckboxEmpty,
   'checkbox-half': CheckboxHalf,
@@ -113,11 +127,16 @@ export default {
   dropdown: Dropdown,
   duplicate: Duplicate,
   edit: Edit,
+  envelope: Envelope,
   error: Error,
+  'face-man': FaceMan,
+  'face-woman': FaceWoman,
+  favorite: Favorite,
   'first-page': FirstPage,
   fold: Fold,
   folder: Folder,
   gear: Gear,
+  gift: Gift,
   'header-next': HeaderNext,
   'header-prev': HeaderPrev,
   import: Import,
@@ -129,11 +148,13 @@ export default {
   'inline-success': InlineSuccess,
   'inventory-category': InventoryCategory,
   'inventory-item': InventoryItem,
+  'kebab-dining': KebabDining,
   'last-page': LastPage,
   loading: Loading,
   location: Location,
   lock: Lock,
   mapping: Mapping,
+  'menu-book': MenuBook,
   'minus-one': MinusOne,
   more: More,
   'next-page': NextPage,
@@ -148,6 +169,7 @@ export default {
   'prev-page': PrevPage,
   prev: Prev,
   printer: Printer,
+  pumpkin: Pumpkin,
   question: Question,
   'radio-empty': RadioEmpty,
   'radio-selected': RadioSelected,
