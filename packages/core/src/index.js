@@ -44,6 +44,7 @@ import Popup from './Popup';
 import PopupButton from './PopupButton';
 import Popover from './Popover';
 import Modal from './Modal';
+import CardLayout from './CardLayout';
 
 export {
   BasicRow,
@@ -83,4 +84,5 @@ export {
   PopupButton,
   Popover,
   Modal,
+  CardLayout,
 };

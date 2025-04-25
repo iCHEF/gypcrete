@@ -1,0 +1,29 @@
+@import './mixins';
+@import './variables';
+
+.#{$prefix}-card-layout {
+  display: flex;
+  gap: 16px;
+
+  &--row {
+    flex-direction: row;
+
+    .#{$prefix}-card {
+      flex: 1;
+      height: 100%;
+    }
+  }
+
+  &--column {
+    flex-direction: column;
+  }
+
+  &--grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+
+    .#{$prefix}-card {
+      height: 100%;
+    }
+  }
+}
