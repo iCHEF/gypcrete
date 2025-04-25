@@ -113,3 +113,11 @@ $c-popover-background: $c-white;
 // Modal colors
 /* stylelint-disable-next-line number-leading-zero */
 $c-backdrop: rgba($c-black, 0.6);
+
+// Card colors
+$card-bg-default: #F2F2F2;
+$card-bg-hover: #E6E6E6;
+$card-bg-pressed: #D5D5D5;
+$card-border-color: rgba(0, 0, 0, 0.3);
+$card-title-color: #000000;
+$card-description-color: #3B3B3B;
