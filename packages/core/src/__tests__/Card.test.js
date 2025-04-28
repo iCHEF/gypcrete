@@ -53,8 +53,10 @@ describe('Card', () => {
       <Card
         iconType="test-icon"
         title="Test Title"
-        data-fe-test-id="test-card"
-        aria-label="test card"
+        cardProps={{
+          'data-fe-test-id': 'test-card',
+          'aria-label': 'test card',
+        }}
       />,
     );
 
