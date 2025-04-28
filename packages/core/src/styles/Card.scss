@@ -1,0 +1,70 @@
+@import './mixins';
+@import './variables';
+
+.#{$prefix}-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: $card-bg-default;
+  border: 1px solid $card-border-color;
+  transition: background-color .2s ease, border-color .2s ease;
+  cursor: pointer;
+  height: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: $card-bg-hover;
+  }
+
+  &:active {
+    background-color: $card-bg-pressed;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    font-size: 24px;
+  }
+
+  &__text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+    height: 100%;
+    justify-content: center;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 18px;
+    color: $card-title-color;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+  }
+
+  &__description-box {
+    flex: 1;
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: $card-description-color;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

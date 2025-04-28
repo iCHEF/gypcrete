@@ -11,6 +11,7 @@ import Text from './Text';
 import EditableText from './EditableText';
 import Tooltip from './Tooltip';
 import SwitchIcon from './SwitchIcon';
+import Card from './Card';
 
 // Layout helpers
 import FlexCell from './FlexCell';
@@ -55,6 +56,7 @@ export {
   EditableText,
   Tooltip,
   SwitchIcon,
+  Card,
   FlexCell,
   IconLayout,
   TextEllipsis,
