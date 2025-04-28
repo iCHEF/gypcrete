@@ -15,17 +15,17 @@ export function GridLayout() {
       <Card
         iconType="business-center"
         title="Business Workshop"
-        description="Enhance professional skills with practical workshops designed for busy professionals. Learn essential techniques and strategies to improve workplace productivity."
+        desc="Enhance professional skills with practical workshops designed for busy professionals. Learn essential techniques and strategies to improve workplace productivity."
       />
       <Card
         iconType="bedtime"
         title="Evening Activities"
-        description="Focus on quality experiences suitable for dates and gatherings."
+        desc="Focus on quality experiences suitable for dates and gatherings."
       />
       <Card
         iconType="camping"
         title="Weekend Events"
-        description="Perfect for family and leisure needs, with special package options."
+        desc="Perfect for family and leisure needs, with special package options."
       />
       <Card
         iconType="bedtime"
@@ -80,17 +80,17 @@ export function ColumnLayout() {
       <Card
         iconType="business-center"
         title="Business Workshop"
-        description="Enhance professional skills with practical sessions"
+        desc="Enhance professional skills with practical sessions"
       />
       <Card
         iconType="bedtime"
         title="Evening Activities"
-        description="Quality experiences for gatherings and events"
+        desc="Quality experiences for gatherings and events"
       />
       <Card
         iconType="camping"
         title="Weekend Events"
-        description="Family-friendly options for leisure time"
+        desc="Family-friendly options for leisure time"
       />
     </CardLayout>
   );
