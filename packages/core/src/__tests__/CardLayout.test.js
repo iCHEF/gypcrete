@@ -22,4 +22,26 @@ describe('CardLayout', () => {
     expect(screen.getByText('Column Layout')).toBeInTheDocument();
     expect(columnContainer.firstChild).toHaveClass('gyp-card-layout gyp-card-layout--column');
   });
+
+  it('should pass through cardLayoutProps to the root element', () => {
+    const { container } = render(
+      <CardLayout
+        cardLayoutProps={{
+          'data-fe-test-id': 'test-card-layout',
+        }}
+      >
+        <div>Test Content</div>
+      </CardLayout>,
+    );
+    expect(container.firstChild).toHaveAttribute('data-fe-test-id', 'test-card-layout');
+  });
+
+  it('should render children correctly', () => {
+    const { container } = render(
+      <CardLayout>
+        <div>Test Content</div>
+      </CardLayout>,
+    );
+    expect(container.firstChild).toHaveTextContent('Test Content');
+  });
 });

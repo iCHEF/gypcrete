@@ -11,10 +11,10 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 function CardLayout({
   layout,
+  cardLayoutProps,
   // React props
   className,
   children,
-  ...otherProps
 }) {
   const bemClass = ROOT_BEM.modifier(layout);
 
@@ -23,7 +23,7 @@ function CardLayout({
   return (
     <div
       className={rootClassName}
-      {...otherProps}
+      {...cardLayoutProps}
     >
       {children}
     </div>
@@ -32,10 +32,12 @@ function CardLayout({
 
 CardLayout.propTypes = {
   layout: PropTypes.oneOf(['grid', 'row', 'column']),
+  cardLayoutProps: PropTypes.objectOf(PropTypes.any),
 };
 
 CardLayout.defaultProps = {
   layout: 'grid',
+  cardLayoutProps: undefined,
 };
 
 export default CardLayout;
