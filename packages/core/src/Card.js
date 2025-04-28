@@ -26,8 +26,7 @@ function Card({
   onClick = undefined,
   // React props
   className,
-  children,
-  ...otherProps
+  cardProps = undefined,
 }) {
   const rootClassName = classNames(className, COMPONENT_NAME);
   const iconClassName = `${BEM.icon}`;
@@ -40,7 +39,7 @@ function Card({
     <div
       className={rootClassName}
       onClick={onClick}
-      {...otherProps}
+      {...cardProps}
     >
       {iconType && (
         <Icon
@@ -65,11 +64,13 @@ Card.propTypes = {
   title: PropTypes.node.isRequired,
   description: PropTypes.node,
   onClick: PropTypes.func,
+  cardProps: PropTypes.objectOf(PropTypes.any),
 };
 
 Card.defaultProps = {
   description: undefined,
   onClick: undefined,
+  cardProps: undefined,
 };
 
 export default Card;
