@@ -24,9 +24,9 @@ function Card({
   title,
   desc = undefined,
   onClick = undefined,
+  cardProps = undefined,
   // React props
   className,
-  cardProps = undefined,
 }) {
   const rootClassName = classNames(className, COMPONENT_NAME);
   const iconClassName = `${BEM.icon}`;
