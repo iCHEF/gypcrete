@@ -27,7 +27,7 @@ describe('Card', () => {
       <Card
         iconType="test-icon"
         title="Test Title"
-        description="Test Description"
+        desc="Test Description"
       />,
     );
 

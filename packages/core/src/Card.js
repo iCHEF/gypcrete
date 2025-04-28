@@ -22,7 +22,7 @@ export const BEM = {
 function Card({
   iconType,
   title,
-  description = undefined,
+  desc = undefined,
   onClick = undefined,
   // React props
   className,
@@ -49,9 +49,9 @@ function Card({
       )}
       <div className={textContainerClassName}>
         <p className={titleClassName}>{title}</p>
-        {description && (
+        {desc && (
           <div className={descriptionBoxClassName}>
-            <p className={descriptionClassName}>{description}</p>
+            <p className={descriptionClassName}>{desc}</p>
           </div>
         )}
       </div>
@@ -62,13 +62,13 @@ function Card({
 Card.propTypes = {
   iconType: PropTypes.string.isRequired,
   title: PropTypes.node.isRequired,
-  description: PropTypes.node,
+  desc: PropTypes.node,
   onClick: PropTypes.func,
   cardProps: PropTypes.objectOf(PropTypes.any),
 };
 
 Card.defaultProps = {
-  description: undefined,
+  desc: undefined,
   onClick: undefined,
   cardProps: undefined,
 };

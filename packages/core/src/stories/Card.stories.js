@@ -20,13 +20,17 @@ export default {
       control: 'text',
       description: 'The title text of the card',
     },
-    description: {
+    desc: {
       control: 'text',
       description: 'Optional description text',
     },
     onClick: {
       action: 'clicked',
       description: 'Optional click handler',
+    },
+    cardProps: {
+      control: 'object',
+      description: 'Optional props for the card element',
     },
   },
 };
@@ -43,13 +47,13 @@ export const WithDescription = Template.bind({});
 WithDescription.args = {
   iconType: 'info',
   title: '卡片標題',
-  description: '這是一段卡片描述文字',
+  desc: '這是一段卡片描述文字',
 };
 
 export const Clickable = Template.bind({});
 Clickable.args = {
   iconType: 'info',
   title: '可點擊的卡片',
-  description: '點擊這張卡片會觸發事件',
+  desc: '點擊這張卡片會觸發事件',
   onClick: () => {},
 };
