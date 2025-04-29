@@ -47,17 +47,14 @@ export function GridLayout() {
 export function RowLayoutTwoCards() {
   return (
     <div>
-      <CardLayout
-        layout="row"
-        style={{ maxWidth: '900px' }}
-      >
+      <CardLayout layout="row">
         <Card
-          iconType="business_center"
+          iconType="business-center"
           title="Card Title Card Title Card Title"
           description="Description text for this card example."
         />
         <Card
-          iconType="time"
+          iconType="bedtime"
           title="Card Title"
           description="This is a longer description text that demonstrates how the cards handle different content lengths while maintaining consistent heights. The layout should adjust appropriately to accommodate various content sizes."
         />
