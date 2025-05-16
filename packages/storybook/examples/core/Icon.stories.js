@@ -147,3 +147,21 @@ export function PaymentIconsSet() {
     </div>
   );
 }
+
+export function CardIconsSet() {
+  return (
+    <div>
+      <Icon type="business-center" />
+      <Icon type="bedtime" />
+      <Icon type="camping" />
+      <Icon type="menu-book" />
+      <Icon type="favorite" />
+      <Icon type="face-woman" />
+      <Icon type="face-man" />
+      <Icon type="kebab-dining" />
+      <Icon type="gift" />
+      <Icon type="envelope" />
+      <Icon type="pumpkin" />
+    </div>
+  );
+}
