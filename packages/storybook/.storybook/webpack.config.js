@@ -7,9 +7,7 @@ const excludePath = /node_modules/;
 
 module.exports = ({ config, mode }) => {
   // Resolve modules in /storybook
-  config.resolve.modules.push(
-    path.join(__dirname, '..')
-  );
+  config.resolve.modules.push(path.join(__dirname, '..'));
 
   // By default storybook will minify js with default terser plugin
   // https://webpack.js.org/configuration/optimization/#optimizationminimize
@@ -20,12 +18,14 @@ module.exports = ({ config, mode }) => {
   // Consider storybook is for developer this should be fine.
   if (config.optimization && mode === 'PRODUCTION') {
     // eslint-disable-next-line no-param-reassign
-    config.optimization.minimizer = [new TerserPlugin({
-      parallel: true,
-      terserOptions: {
-        mangle: false,
-      },
-    })];
+    config.optimization.minimizer = [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          mangle: false,
+        },
+      }),
+    ];
   }
 
   // Ref: Storybook webpack dev config https://git.io/fpJ6h

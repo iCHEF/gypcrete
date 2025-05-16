@@ -1,4 +1,4 @@
-@import "./mixins";
+@import './mixins';
 
 .#{$prefix}-switch-icon {
   display: inline-block;
@@ -16,13 +16,14 @@
     &:before {
       $knob-size: ($switch-icon-height - $switch-icon-border-width * 2);
 
-      content: "";
+      content: '';
       width: rem($knob-size);
       height: rem($knob-size);
       background-color: $c-switch-knob;
       border-radius: 50%;
       display: block;
-      box-shadow: 0 rem(3px) rem(9px) rgba(0, 0, 0, .3);
+      /* stylelint-disable-next-line number-leading-zero */
+      box-shadow: 0 rem(3px) rem(9px) rgba(0, 0, 0, 0.3);
       will-change: transform;
       transition: transform 300ms $ease-out-cubic;
     }
@@ -30,7 +31,7 @@
 
   &--on &__inner,
   input:checked ~ & &__inner,
-  input:checked ~ .#{$prefix}-iconlayout &__inner, {
+  input:checked ~ .#{$prefix}-iconlayout &__inner {
     background-color: $c-switch-bg-on;
 
     &:before {

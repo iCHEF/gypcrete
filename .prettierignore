@@ -1,0 +1,8 @@
+# Ignore artifacts:
+coverage
+patches
+locales
+node_modules
+.yarn
+.github
+.vscode

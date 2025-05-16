@@ -1,11 +1,11 @@
-@import "./mixins";
+@import './mixins';
 
 @font-face {
-  font-family: "gyp-icon";
-  src: url("../fonts/gyp-icon.woff?97318047");
+  font-family: 'gyp-icon';
+  src: url('../fonts/gyp-icon.woff?97318047');
   src:
-    url("../fonts/gyp-icon.woff2?97318047") format("woff2"),
-    url("../fonts/gyp-icon.woff?97318047") format("woff");
+    url('../fonts/gyp-icon.woff2?97318047') format('woff2'),
+    url('../fonts/gyp-icon.woff?97318047') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,13 +14,13 @@
 // Icons shared style
 // -------------------------------------
 .#{$prefix}-icon,
-[class^="#{$prefix}-icon-"],
-[class*=" #{$prefix}-icon-"] {
+[class^='#{$prefix}-icon-'],
+[class*=' #{$prefix}-icon-'] {
   width: 1em;
   height: 1em;
   line-height: 1em;
   font-size: rem($icon-base-size);
-  font-family: "gyp-icon";
+  font-family: 'gyp-icon';
   font-style: normal;
   font-weight: normal;
   text-align: center;

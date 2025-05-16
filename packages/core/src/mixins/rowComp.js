@@ -29,11 +29,7 @@
  *
  */
 
-import React, {
-  PureComponent,
-  isValidElement,
-  cloneElement,
-} from 'react';
+import React, { PureComponent, isValidElement, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import '../styles/RowComp.scss';
@@ -104,14 +100,16 @@ export function getTextLayoutProps(compAlign, hasIcon) {
   };
 }
 
-const rowComp = ({
-  defaultMinified = false,
-  defaultAlign = LEFT,
-  defaultVerticalOrder = VERTICAL_ORDER.NORMAL,
-} = {}) => (WrappedComponent) => {
-  const componentName = getComponentName(WrappedComponent);
+const rowComp =
+  ({
+    defaultMinified = false,
+    defaultAlign = LEFT,
+    defaultVerticalOrder = VERTICAL_ORDER.NORMAL,
+  } = {}) =>
+  (WrappedComponent) => {
+    const componentName = getComponentName(WrappedComponent);
 
-  class RowComp extends PureComponent {
+    class RowComp extends PureComponent {
       static displayName = `rowComp(${componentName})`;
 
       static propTypes = {
@@ -124,14 +122,8 @@ const rowComp = ({
           ROW_COMP_ALIGN.RIGHT,
           ROW_COMP_ALIGN.REVERSE,
         ]),
-        verticalOrder: PropTypes.oneOf([
-          VERTICAL_ORDER.NORMAL,
-          VERTICAL_ORDER.REVERSE,
-        ]),
-        icon: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.element,
-        ]),
+        verticalOrder: PropTypes.oneOf([VERTICAL_ORDER.NORMAL, VERTICAL_ORDER.REVERSE]),
+        icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
         basic: PropTypes.node,
         avatar: PropTypes.node,
         aside: PropTypes.node,
@@ -209,13 +201,14 @@ const rowComp = ({
         } = this.props;
 
         const textLayoutProps = getTextLayoutProps(align, !!icon);
-        const asideControlClickableProps = (
-          (asideControlClickableOnDisabled && disabled)
+        const asideControlClickableProps =
+          asideControlClickableOnDisabled && disabled
             ? {
-              onClick: (event) => { event.stopPropagation(); },
-            }
-            : undefined
-        );
+                onClick: (event) => {
+                  event.stopPropagation();
+                },
+              }
+            : undefined;
 
         return {
           verticalOrder,
@@ -235,9 +228,14 @@ const rowComp = ({
           return null;
         }
 
-        return isValidElement(icon)
-          ? cloneElement(icon, { key: 'comp-icon' })
-          : <Icon key="comp-icon" type={icon} />;
+        return isValidElement(icon) ? (
+          cloneElement(icon, { key: 'comp-icon' })
+        ) : (
+          <Icon
+            key="comp-icon"
+            type={icon}
+          />
+        );
       }
 
       renderContent() {
@@ -246,7 +244,10 @@ const rowComp = ({
 
         return [
           iconElement,
-          <Text key="comp-text" {...textProps} />,
+          <Text
+            key="comp-text"
+            {...textProps}
+          />,
         ];
       }
 
@@ -279,8 +280,7 @@ const rowComp = ({
           ...otherProps
         } = this.props;
 
-        const bemClass = ROOT_BEM
-          .modifier('minified', minified)
+        const bemClass = ROOT_BEM.modifier('minified', minified)
           .modifier(align)
           .modifier('aside-control-clickable', asideControlClickableOnDisabled);
 
@@ -295,15 +295,19 @@ const rowComp = ({
         const wrapperClassName = classNames(className, stateClassNames, `${bemClass}`);
 
         return (
-          <WrappedComponent className={wrapperClassName} {...otherProps} disabled={disabled}>
+          <WrappedComponent
+            className={wrapperClassName}
+            {...otherProps}
+            disabled={disabled}
+          >
             {avatar}
             {children || this.renderContent()}
           </WrappedComponent>
         );
       }
-  }
+    }
 
-  return RowComp;
-};
+    return RowComp;
+  };
 
 export default rowComp;

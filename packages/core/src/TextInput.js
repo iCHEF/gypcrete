@@ -19,17 +19,12 @@ export const BEM = {
   postfix: ROOT_BEM.element('postfix'),
 };
 
-
 // --------------------
 //  Helper components
 // --------------------
 
 export function TextInputBasicRow({ basic, className }) {
-  return (
-    <div className={className}>
-      {basic}
-    </div>
-  );
+  return <div className={className}>{basic}</div>;
 }
 
 TextInputBasicRow.propTypes = {
@@ -40,13 +35,7 @@ TextInputBasicRow.defaultProps = {
   basic: undefined,
 };
 
-export function InnerInput({
-  multiLine,
-  minRows,
-  maxRows,
-  renderInput,
-  inputProps,
-}) {
+export function InnerInput({ multiLine, minRows, maxRows, renderInput, inputProps }) {
   if (renderInput) {
     return renderInput(inputProps);
   }
@@ -97,21 +86,24 @@ InnerInput.defaultProps = {
  *   2. It doesn't support status icons, error message nor tags.
  */
 
-function TextInput({
-  label,
-  readOnly,
-  disabled,
-  postfix,
-  // <InnerInput> props
-  renderInput,
-  multiLine,
-  minRows,
-  maxRows,
-  // React props
-  className,
-  children,
-  ...inputProps
-}, context) {
+function TextInput(
+  {
+    label,
+    readOnly,
+    disabled,
+    postfix,
+    // <InnerInput> props
+    renderInput,
+    multiLine,
+    minRows,
+    maxRows,
+    // React props
+    className,
+    children,
+    ...inputProps
+  },
+  context,
+) {
   const rootClassName = classNames(className, COMPONENT_NAME);
   const { textProps } = context;
 

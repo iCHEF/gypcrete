@@ -6,13 +6,7 @@ import Tag from './Tag';
 
 import wrapIfNotElement from './utils/wrapIfNotElement';
 
-function BasicRow({
-  basic,
-  tag,
-  statusIcon,
-  children,
-  ...otherProps
-}) {
+function BasicRow({ basic, tag, statusIcon, children, ...otherProps }) {
   if (!basic) {
     return null;
   }

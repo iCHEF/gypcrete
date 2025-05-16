@@ -18,7 +18,6 @@ function Foo() {
 
 const LayerFoo = renderToLayer(Foo);
 
-
 // --------------------
 //  Test cases
 // --------------------
@@ -35,7 +34,7 @@ it('creates a layer with unique ID on creation', () => {
   const wrapper = shallow(<LayerFoo />);
 
   expect(randId).toHaveBeenCalled();
-  expect(wrapper.instance().baseLayer.id = 'MOCKED_ID');
+  expect((wrapper.instance().baseLayer.id = 'MOCKED_ID'));
 });
 
 it('append layer to body on mount and removes on unmount', () => {

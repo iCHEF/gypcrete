@@ -15,10 +15,9 @@ describe('<withStatus(IconLayout)>', () => {
   });
 
   it('receives props from withStatus() mixin', () => {
-    const wrapper = shallow(
-      <IconLayout icon="pritner" />,
-      { context: { status: 'error', errorMsg: 'bar' } }
-    );
+    const wrapper = shallow(<IconLayout icon="pritner" />, {
+      context: { status: 'error', errorMsg: 'bar' },
+    });
 
     expect(wrapper.prop('statusIcon').type).toBe(StatusIcon);
     expect(wrapper.prop('errorMsg')).toBe('bar');
@@ -43,14 +42,24 @@ describe('Pure <IconLayout>', () => {
 
   it('renders statusIcon without touch', () => {
     const statusIcon = <StatusIcon status="loading" />;
-    const wrapper = shallow(<PureIconLayout icon="add" statusIcon={statusIcon} />);
+    const wrapper = shallow(
+      <PureIconLayout
+        icon="add"
+        statusIcon={statusIcon}
+      />,
+    );
 
     expect(wrapper.find(StatusIcon).exists()).toBeTruthy();
     expect(wrapper.find(StatusIcon).prop('status')).toBe('loading');
   });
 
   it('renders errorMsg inside <Tooltip> on mouse hover', () => {
-    const wrapper = shallow(<PureIconLayout icon="add" errorMsg="Error: foo bar" />);
+    const wrapper = shallow(
+      <PureIconLayout
+        icon="add"
+        errorMsg="Error: foo bar"
+      />,
+    );
     expect(wrapper.find(Tooltip).exists()).toBeFalsy();
 
     wrapper.simulate('mouseenter');
@@ -70,7 +79,12 @@ describe('Pure <IconLayout>', () => {
   });
 
   it('renders no tooltip if explicitly turned off', () => {
-    const wrapper = shallow(<PureIconLayout icon="add" tooltip={false} />);
+    const wrapper = shallow(
+      <PureIconLayout
+        icon="add"
+        tooltip={false}
+      />,
+    );
     expect(wrapper.find(Tooltip).exists()).toBeFalsy();
 
     wrapper.simulate('mouseenter');

@@ -8,9 +8,8 @@ const fullPackageName = process.env.npm_package_name || process.env.GPT_PKG_NAME
 const packageName = fullPackageName.replace(/@ichef\//, '');
 
 function toCamelCase(str) {
-  return str.replace(/([-_]\w)/g, g => g[1].toUpperCase());
+  return str.replace(/([-_]\w)/g, (g) => g[1].toUpperCase());
 }
-
 
 module.exports = {
   mode: 'production',
@@ -32,9 +31,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        include: [
-          path.resolve(packageDirname, 'src'),
-        ],
+        include: [path.resolve(packageDirname, 'src')],
         use: [
           {
             loader: 'babel-loader',
@@ -46,9 +43,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        include: [
-          path.resolve(packageDirname, 'src'),
-        ],
+        include: [path.resolve(packageDirname, 'src')],
         use: [
           {
             loader: MiniCssExtractPlugin.loader,

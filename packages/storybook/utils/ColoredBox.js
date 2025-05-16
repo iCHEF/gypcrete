@@ -7,22 +7,12 @@ function ColoredBox({ width, height, color, children }) {
     width,
     height,
   };
-  return (
-    <div style={style}>
-      {children}
-    </div>
-  );
+  return <div style={style}>{children}</div>;
 }
 
 ColoredBox.propTypes = {
-  width: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
-  height: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   color: PropTypes.string,
 };
 

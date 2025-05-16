@@ -1,13 +1,8 @@
 import documentOffset from 'document-offset';
 
-import getPositionState, {
-  getPlacementAndRemainingSpace,
-  PLACEMENT,
-} from '../getPositionState';
+import getPositionState, { getPlacementAndRemainingSpace, PLACEMENT } from '../getPositionState';
 
-jest.mock('document-offset', () => (
-  jest.fn(() => ({ left: 0, top: 0 }))
-));
+jest.mock('document-offset', () => jest.fn(() => ({ left: 0, top: 0 })));
 
 /**
  * Test scenario
@@ -58,18 +53,18 @@ describe('getPlacement()', () => {
       });
       expect(result.placement).toBe(expected);
       expect(result.remainingSpace).toBe(remainingSpace);
-    }
+    },
   );
 
   it.each`
     expected | defaultPlacement | situation                                              | anchorLeft | anchorWidth | selfWidth | remainingSpace | distanceFromAnchor
-    ${LEFT}  | ${LEFT}          | ${'enough'}                                            | ${120}    | ${30}        | ${100}     | ${120}         | ${0}
-    ${RIGHT} | ${LEFT}          | ${'not enough for left'}                               | ${90}     | ${30}        | ${100}     | ${904}         | ${0}
-    ${RIGHT} | ${LEFT}          | ${'not enough for left consider distance from anchor'} | ${100}    | ${30}        | ${100}     | ${894}         | ${10}
-    ${LEFT}  | ${RIGHT}         | ${'not enough for right'}                              | ${800}    | ${100}       | ${400}     | ${800}         | ${0}
-    ${RIGHT} | ${RIGHT}         | ${'enough'}                                            | ${800}    | ${100}       | ${100}     | ${124}         | ${0}
-    ${RIGHT} | ${RIGHT}         | ${'not enough for both, but right is larger'}          | ${300}    | ${100}       | ${400}     | ${624}         | ${0}
-    ${LEFT}  | ${RIGHT}         | ${'not enough for both, but left is larger'}           | ${600}    | ${100}       | ${700}     | ${600}         | ${0}
+    ${LEFT}  | ${LEFT}          | ${'enough'}                                            | ${120}     | ${30}       | ${100}    | ${120}         | ${0}
+    ${RIGHT} | ${LEFT}          | ${'not enough for left'}                               | ${90}      | ${30}       | ${100}    | ${904}         | ${0}
+    ${RIGHT} | ${LEFT}          | ${'not enough for left consider distance from anchor'} | ${100}     | ${30}       | ${100}    | ${894}         | ${10}
+    ${LEFT}  | ${RIGHT}         | ${'not enough for right'}                              | ${800}     | ${100}      | ${400}    | ${800}         | ${0}
+    ${RIGHT} | ${RIGHT}         | ${'enough'}                                            | ${800}     | ${100}      | ${100}    | ${124}         | ${0}
+    ${RIGHT} | ${RIGHT}         | ${'not enough for both, but right is larger'}          | ${300}     | ${100}      | ${400}    | ${624}         | ${0}
+    ${LEFT}  | ${RIGHT}         | ${'not enough for both, but left is larger'}           | ${600}     | ${100}      | ${700}    | ${600}         | ${0}
   `(
     'returns $expected when default is $defaultVal, and the space is $situation',
     ({
@@ -91,7 +86,7 @@ describe('getPlacement()', () => {
       });
       expect(result.placement).toBe(expected);
       expect(result.remainingSpace).toBe(remainingSpace);
-    }
+    },
   );
 });
 
@@ -109,13 +104,13 @@ describe('getPositionState()', () => {
       arrowPosition: {},
     };
 
-    expect(
-      getterFunc(PLACEMENT.TOP, document.createElement('div'), null)
-    ).toMatchObject(expectedFallback);
+    expect(getterFunc(PLACEMENT.TOP, document.createElement('div'), null)).toMatchObject(
+      expectedFallback,
+    );
 
-    expect(
-      getterFunc(PLACEMENT.TOP, null, document.createElement('div'))
-    ).toMatchObject(expectedFallback);
+    expect(getterFunc(PLACEMENT.TOP, null, document.createElement('div'))).toMatchObject(
+      expectedFallback,
+    );
   });
 
   it('getterFunc gathers measurements for anchorNode and selfNode to determine position', () => {

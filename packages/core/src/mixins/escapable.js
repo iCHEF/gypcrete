@@ -4,7 +4,7 @@ import keycode from 'keycode';
 
 import getComponentName from '../utils/getComponentName';
 
-const createEscapeListener = callback => (event) => {
+const createEscapeListener = (callback) => (event) => {
   if (event.keyCode === keycode('Escape')) {
     callback(event);
   }
@@ -14,34 +14,33 @@ function escapable(WrappedComponent) {
   const componentName = getComponentName(WrappedComponent);
 
   return class extends Component {
-        static displayName = `escapable(${componentName})`;
+    static displayName = `escapable(${componentName})`;
 
-        static propTypes = {
-          onEscape: PropTypes.func,
-        };
+    static propTypes = {
+      onEscape: PropTypes.func,
+    };
 
-        static defaultProps = {
-          onEscape: () => {},
-        };
+    static defaultProps = {
+      onEscape: () => {},
+    };
 
+    componentDidMount() {
+      this.keyUpListener = createEscapeListener(this.props.onEscape);
+      document.addEventListener('keyup', this.keyUpListener);
+      // #DEPRECATED: remove in next major release
+      console.warn("'escapable()' is deprecated. Use 'closable({ onEscape: true })()' instead.");
+    }
 
-        componentDidMount() {
-          this.keyUpListener = createEscapeListener(this.props.onEscape);
-          document.addEventListener('keyup', this.keyUpListener);
-          // #DEPRECATED: remove in next major release
-          console.warn("'escapable()' is deprecated. Use 'closable({ onEscape: true })()' instead.");
-        }
+    componentWillUnmount() {
+      document.removeEventListener('keyup', this.keyUpListener);
+    }
 
-        componentWillUnmount() {
-          document.removeEventListener('keyup', this.keyUpListener);
-        }
-
-        render() {
-          // Stripe callback prop from <WrappedComponent>
-          // eslint-disable-next-line no-unused-vars
-          const { onEscape, ...otherProps } = this.props;
-          return <WrappedComponent {...otherProps} />;
-        }
+    render() {
+      // Stripe callback prop from <WrappedComponent>
+      // eslint-disable-next-line no-unused-vars
+      const { onEscape, ...otherProps } = this.props;
+      return <WrappedComponent {...otherProps} />;
+    }
   };
 }
 

@@ -14,35 +14,25 @@ describe('icBEM() helper', () => {
   });
 
   it('only takes the latest element string', () => {
-    const bem = icBEM('ic-comp')
-      .element('body')
-      .element('header');
+    const bem = icBEM('ic-comp').element('body').element('header');
 
     expect(bem.toString()).toBe('ic-comp__header');
   });
 
   it('takes multiple modifier strings for block-only BEM', () => {
-    const bem = icBEM('ic-comp')
-      .modifier('large')
-      .modifier('black');
+    const bem = icBEM('ic-comp').modifier('large').modifier('black');
 
     expect(bem.toString()).toBe('ic-comp ic-comp--large ic-comp--black');
   });
 
   it('takes multiple modifier strings for block+element BEM', () => {
-    const bem = icBEM('ic-comp')
-      .element('body')
-      .modifier('large')
-      .modifier('black');
+    const bem = icBEM('ic-comp').element('body').modifier('large').modifier('black');
 
-    expect(bem.toString())
-      .toBe('ic-comp__body ic-comp__body--large ic-comp__body--black');
+    expect(bem.toString()).toBe('ic-comp__body ic-comp__body--large ic-comp__body--black');
   });
 
   it('can toggle certain modifier on or off', () => {
-    const bem = icBEM('ic-comp')
-      .modifier('large', true)
-      .modifier('black', false);
+    const bem = icBEM('ic-comp').modifier('large', true).modifier('black', false);
 
     expect(bem.toString()).toBe('ic-comp ic-comp--large');
   });
@@ -51,15 +41,10 @@ describe('icBEM() helper', () => {
     let bem = icBEM('ic-comp').add('foo-bar');
     expect(bem.toString()).toBe('ic-comp foo-bar');
 
-    bem = icBEM('ic-comp')
-      .element('body')
-      .add('foo-bar');
+    bem = icBEM('ic-comp').element('body').add('foo-bar');
     expect(bem.toString()).toBe('ic-comp__body foo-bar');
 
-    bem = icBEM('ic-comp')
-      .element('body')
-      .modifier('large')
-      .add('foo-bar');
+    bem = icBEM('ic-comp').element('body').modifier('large').add('foo-bar');
     expect(bem.toString()).toBe('ic-comp__body ic-comp__body--large foo-bar');
   });
 
@@ -69,19 +54,14 @@ describe('icBEM() helper', () => {
 
     expect(output).toBe('ic-comp--foo');
 
-    bem = icBEM('ic-comp')
-      .element('body')
-      .modifier('bar');
+    bem = icBEM('ic-comp').element('body').modifier('bar');
     output = bem.toString({ stripBlock: true });
 
     expect(output).toBe('ic-comp__body--bar');
   });
 
   it('ignores empty mutation calls', () => {
-    const bem = icBEM('ic-comp')
-      .element()
-      .modifier()
-      .add();
+    const bem = icBEM('ic-comp').element().modifier().add();
 
     expect(bem.toString()).toBe('ic-comp');
   });

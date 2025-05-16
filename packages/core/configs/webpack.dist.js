@@ -11,9 +11,7 @@ module.exports = webpackMerge(defaultConfigs, {
     rules: [
       {
         test: /\.(woff|woff2|otf|ttf|eot)$/,
-        include: [
-          path.resolve(packageDirname, 'src/fonts'),
-        ],
+        include: [path.resolve(packageDirname, 'src/fonts')],
         type: 'asset/resource',
         generator: {
           filename: 'fonts/[name]-[hash:6][ext]',

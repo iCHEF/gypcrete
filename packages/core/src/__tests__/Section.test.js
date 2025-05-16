@@ -47,14 +47,10 @@ it('renders children in a section body', () => {
 it("removes class to discard padding for section body when 'bodySpacing' is false", () => {
   const wrapper = shallow(<Section />);
   const expectedClassName = SECTION_BEM.body.modifier('padded').toString();
-  expect(
-    wrapper.find(`.${SECTION_BEM.body}`).hasClass(expectedClassName)
-  ).toBeTruthy();
+  expect(wrapper.find(`.${SECTION_BEM.body}`).hasClass(expectedClassName)).toBeTruthy();
 
   wrapper.setProps({ bodySpacing: false });
-  expect(
-    wrapper.find(`.${SECTION_BEM.body}`).hasClass(expectedClassName)
-  ).toBeFalsy();
+  expect(wrapper.find(`.${SECTION_BEM.body}`).hasClass(expectedClassName)).toBeFalsy();
 });
 
 it("adds class to remove vertical margin when 'verticalSpacing' is false", () => {

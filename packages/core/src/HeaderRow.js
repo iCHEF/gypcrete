@@ -27,10 +27,7 @@ export function HeaderArea({ content, ...props }) {
 }
 
 HeaderArea.propTypes = {
-  content: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.oneOf([false]),
-  ]),
+  content: PropTypes.oneOfType([PropTypes.node, PropTypes.oneOf([false])]),
 };
 
 HeaderArea.defaultProps = {
@@ -50,16 +47,25 @@ function HeaderRow({
   children,
   ...otherProps
 }) {
-  const rootClassName = classNames(
-    BEM.root.toString(),
-    className,
-  );
+  const rootClassName = classNames(BEM.root.toString(), className);
 
   return (
-    <div className={rootClassName} {...otherProps}>
-      <HeaderArea content={left} className={BEM.left} />
-      <HeaderArea content={center} className={BEM.center} />
-      <HeaderArea content={right} className={BEM.right} />
+    <div
+      className={rootClassName}
+      {...otherProps}
+    >
+      <HeaderArea
+        content={left}
+        className={BEM.left}
+      />
+      <HeaderArea
+        content={center}
+        className={BEM.center}
+      />
+      <HeaderArea
+        content={right}
+        className={BEM.right}
+      />
       {children}
     </div>
   );

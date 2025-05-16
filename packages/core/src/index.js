@@ -55,11 +55,9 @@ export {
   EditableText,
   Tooltip,
   SwitchIcon,
-
   FlexCell,
   IconLayout,
   TextEllipsis,
-
   TextLabel,
   EditableTextLabel,
   Button,
@@ -70,7 +68,6 @@ export {
   TextInput,
   SearchInput,
   Radio,
-
   InfiniteScroll,
   HeaderRow,
   Section,

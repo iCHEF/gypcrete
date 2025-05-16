@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useCallback,
-  useEffect,
-} from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import icBEM from './utils/icBEM';
@@ -26,12 +21,7 @@ const ROOT_BEM = icBEM(COMPONENT_NAME);
 
 const ICON_HIDE_TIMEOUT = 2 * 1000;
 
-const StatusIcon = React.memo(({
-  status,
-  position,
-  autohide,
-  ...wrapperProps
-}) => {
+const StatusIcon = React.memo(({ status, position, autohide, ...wrapperProps }) => {
   const [hideIcon, setHideIcon] = useState(false);
   const hideIconTimeout = useRef(null);
 
@@ -47,73 +37,84 @@ const StatusIcon = React.memo(({
    *
    * @param {String} status - current or next 'status'
    */
-  const autoToggleStatusIcon = useCallback(
-    () => {
+  const autoToggleStatusIcon = useCallback(() => {
     // Ignore if autohide === false
-      if (!autohide) {
-        return;
-      }
+    if (!autohide) {
+      return;
+    }
 
-      // LOADING|ERROR|null -> SUCCESS
-      if (status === SUCCESS) {
-        hideIconTimeout.current = setTimeout(() => {
-          setHideIcon(true);
-          hideIconTimeout.current = null;
-        }, ICON_HIDE_TIMEOUT);
+    // LOADING|ERROR|null -> SUCCESS
+    if (status === SUCCESS) {
+      hideIconTimeout.current = setTimeout(() => {
+        setHideIcon(true);
+        hideIconTimeout.current = null;
+      }, ICON_HIDE_TIMEOUT);
 
-        return;
-      }
+      return;
+    }
 
-      // SUCCESS -> LOADING|ERROR|null
-      clearTimeout(hideIconTimeout.current);
+    // SUCCESS -> LOADING|ERROR|null
+    clearTimeout(hideIconTimeout.current);
+    setHideIcon(false);
+  }, [autohide, status]);
+
+  useEffect(() => () => clearTimeout(hideIconTimeout.current), []);
+
+  useEffect(() => {
+    autoToggleStatusIcon();
+
+    // If 'autohide' is turned off, make icon visible immediately
+    if (!autohide && hideIcon) {
       setHideIcon(false);
-    },
-    [autohide, status]
-  );
-
-  useEffect(
-    () => () => clearTimeout(hideIconTimeout.current),
-    []
-  );
-
-  useEffect(
-    () => {
-      autoToggleStatusIcon();
-
-      // If 'autohide' is turned off, make icon visible immediately
-      if (!autohide && hideIcon) {
-        setHideIcon(false);
-      }
-    },
-    [status, autohide, hideIcon, autoToggleStatusIcon]
-  );
+    }
+  }, [status, autohide, hideIcon, autoToggleStatusIcon]);
 
   const rootClassName = ROOT_BEM.modifier(position);
   let icon = null;
 
   switch (status) {
     case LOADING:
-      icon = <Icon type="inline-loading" color="gray" spinning />;
+      icon = (
+        <Icon
+          type="inline-loading"
+          color="gray"
+          spinning
+        />
+      );
       break;
     case SUCCESS:
       if (!hideIcon) {
-        icon = <Icon type="inline-success" color="blue" />;
+        icon = (
+          <Icon
+            type="inline-success"
+            color="blue"
+          />
+        );
       }
       break;
     case ERROR:
-      icon = <Icon type="inline-error" color="red" />;
+      icon = (
+        <Icon
+          type="inline-error"
+          color="red"
+        />
+      );
       break;
     default:
       break;
   }
 
-  return (icon && (
-    <span className={rootClassName} {...wrapperProps}>
-      {icon}
-    </span>
-  ));
+  return (
+    icon && (
+      <span
+        className={rootClassName}
+        {...wrapperProps}
+      >
+        {icon}
+      </span>
+    )
+  );
 });
-
 
 StatusIcon.propTypes = {
   status: PropTypes.oneOf([LOADING, SUCCESS, ERROR]),
@@ -130,6 +131,5 @@ StatusIcon.defaultProps = {
   position: INLINE,
   autohide: true,
 };
-
 
 export default StatusIcon;

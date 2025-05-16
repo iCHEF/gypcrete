@@ -15,7 +15,10 @@ export function BasicStatusIcon() {
   return (
     <div>
       <StatusIcon status="loading" />
-      <StatusIcon status="success" autohide={false} />
+      <StatusIcon
+        status="success"
+        autohide={false}
+      />
       <StatusIcon status="error" />
     </div>
   );
@@ -24,14 +27,33 @@ export function BasicStatusIcon() {
 export function StatusIconInCorner() {
   return (
     <div>
-      <DebugBox width={32} height={32}>
-        <StatusIcon status="loading" position="corner" />
+      <DebugBox
+        width={32}
+        height={32}
+      >
+        <StatusIcon
+          status="loading"
+          position="corner"
+        />
       </DebugBox>
-      <DebugBox width={32} height={32}>
-        <StatusIcon status="success" position="corner" autohide={false} />
+      <DebugBox
+        width={32}
+        height={32}
+      >
+        <StatusIcon
+          status="success"
+          position="corner"
+          autohide={false}
+        />
       </DebugBox>
-      <DebugBox width={32} height={32}>
-        <StatusIcon status="error" position="corner" />
+      <DebugBox
+        width={32}
+        height={32}
+      >
+        <StatusIcon
+          status="error"
+          position="corner"
+        />
       </DebugBox>
     </div>
   );
@@ -64,8 +86,9 @@ export function AutoHideSuccessIcon() {
 AutoHideSuccessIcon.story = {
   parameters: {
     docs: {
-      // eslint-disable-next-line no-multi-str
-      storyDescription: 'In this example, prop `autohide` is `true`, \
+      storyDescription:
+        // eslint-disable-next-line no-multi-str
+        'In this example, prop `autohide` is `true`, \
             initially <StatusIcon> is loading; \
             When make it success, after a while(~2s) it will hide; \
             Then if you make it error it shows again.',

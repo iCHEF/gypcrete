@@ -18,11 +18,7 @@ const FAKE_LIST = (
 
 describe('InfiniteScroll', () => {
   it('renders without crashing', () => {
-    const element = (
-      <InfiniteScroll onLoadMore={() => {}}>
-        {FAKE_LIST}
-      </InfiniteScroll>
-    );
+    const element = <InfiniteScroll onLoadMore={() => {}}>{FAKE_LIST}</InfiniteScroll>;
 
     render(element);
   });
@@ -36,7 +32,7 @@ describe('InfiniteScroll', () => {
       <InfiniteScroll
         isLoading
         onLoadMore={() => {}}
-      />
+      />,
     );
 
     // show loading icon in default
@@ -48,7 +44,7 @@ describe('InfiniteScroll', () => {
     expect(wrapper.find(footerClassName).find(TextLabel).prop('basic')).toBe('loading...');
 
     // loadingLabel as element
-    const CustomLoadingLabel = () => (<div>Loading...</div>);
+    const CustomLoadingLabel = () => <div>Loading...</div>;
     wrapper.setProps({ loadingLabel: <CustomLoadingLabel /> });
     expect(wrapper.find(footerClassName).find(CustomLoadingLabel).exists()).toBeTruthy();
   });
@@ -58,14 +54,14 @@ describe('InfiniteScroll', () => {
       <InfiniteScroll
         showMoreButton="show more"
         onLoadMore={() => {}}
-      />
+      />,
     );
 
     // showMoreButton as string
     expect(wrapper.find(footerClassName).find(Button).prop('basic')).toBe('show more');
 
     // showMoreButton as element
-    const CustomShowMoreButton = () => (<div>show more</div>);
+    const CustomShowMoreButton = () => <div>show more</div>;
     wrapper.setProps({ showMoreButton: <CustomShowMoreButton /> });
     expect(wrapper.find(footerClassName).find(CustomShowMoreButton).exists()).toBeTruthy();
 
@@ -80,7 +76,7 @@ describe('InfiniteScroll', () => {
         showMoreButton="show more"
         noNewestButton="all displayed"
         onLoadMore={() => {}}
-      />
+      />,
     );
 
     // Render showMoreButton if hasMore is true
@@ -91,7 +87,7 @@ describe('InfiniteScroll', () => {
     expect(wrapper.find(footerClassName).find(Button).prop('basic')).toBe('all displayed');
 
     // noNewestButton as element
-    const CustomNoNewestButton = () => (<div>all displayed</div>);
+    const CustomNoNewestButton = () => <div>all displayed</div>;
     wrapper.setProps({ noNewestButton: <CustomNoNewestButton /> });
     expect(wrapper.find(footerClassName).find(CustomNoNewestButton).exists()).toBeTruthy();
 
@@ -123,12 +119,8 @@ describe('InfiniteScroll', () => {
     const onLoadMore = jest.fn();
     const wrapperNode = mount(
       <div style={{ overflow: 'auto', height: 300 }}>
-        <InfiniteScroll
-          onLoadMore={onLoadMore}
-        >
-          {FAKE_LIST}
-        </InfiniteScroll>
-      </div>
+        <InfiniteScroll onLoadMore={onLoadMore}>{FAKE_LIST}</InfiniteScroll>
+      </div>,
     ).getDOMNode();
 
     // Before trigger scroll event
@@ -148,7 +140,7 @@ describe('InfiniteScroll', () => {
         onLoadMore={onLoadMore}
       >
         {FAKE_LIST}
-      </InfiniteScroll>
+      </InfiniteScroll>,
     );
 
     // Before trigger scroll event
@@ -169,7 +161,7 @@ describe('InfiniteScroll', () => {
         onLoadMore={onLoadMore}
       >
         {FAKE_LIST}
-      </InfiniteScroll>
+      </InfiniteScroll>,
     );
 
     expect(onLoadMore).toHaveBeenCalledTimes(1);

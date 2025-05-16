@@ -5,7 +5,7 @@ import Code from './Code';
 
 addParameters({
   docs: {
-    extractProps: component => getComponentProps(component),
+    extractProps: (component) => getComponentProps(component),
   },
 
   // legacy addon

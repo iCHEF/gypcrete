@@ -37,15 +37,12 @@ it('renders without crashing', () => {
 });
 
 it('renders <StatusIcon> from context and passes to wrapped component', () => {
-  const wrapper = shallow(
-    <FooWithStatus />,
-    {
-      context: {
-        status: 'loading',
-        statusOptions: { position: 'corner' },
-      },
-    }
-  );
+  const wrapper = shallow(<FooWithStatus />, {
+    context: {
+      status: 'loading',
+      statusOptions: { position: 'corner' },
+    },
+  });
   const iconWrapper = wrapper.find(Foo).shallow().find(StatusIcon);
 
   expect(iconWrapper.exists()).toBeTruthy();
@@ -54,10 +51,7 @@ it('renders <StatusIcon> from context and passes to wrapped component', () => {
 });
 
 it('renders <StatusIcon> with default options', () => {
-  const wrapper = shallow(
-    <FooWithStatusOptions />,
-    { context: { status: 'success' } }
-  );
+  const wrapper = shallow(<FooWithStatusOptions />, { context: { status: 'success' } });
   const iconWrapper = wrapper.find(Foo).shallow().find(StatusIcon);
 
   expect(iconWrapper.exists()).toBeTruthy();
@@ -66,10 +60,9 @@ it('renders <StatusIcon> with default options', () => {
 });
 
 it('passes down "errorMsg" to wrapped component', () => {
-  const wrapper = shallow(
-    <FooWithStatus />,
-    { context: { status: 'error', errorMsg: 'Just error' } }
-  );
+  const wrapper = shallow(<FooWithStatus />, {
+    context: { status: 'error', errorMsg: 'Just error' },
+  });
 
   const iconWrapper = wrapper.find(Foo).shallow().find(StatusIcon);
   expect(iconWrapper.prop('status')).toBe('error');
@@ -77,10 +70,7 @@ it('passes down "errorMsg" to wrapped component', () => {
 });
 
 it('passes down other props to wrapped component', () => {
-  const wrapper = shallow(
-    <FooWithStatus bar />,
-    { context: {} }
-  );
+  const wrapper = shallow(<FooWithStatus bar />, { context: {} });
 
   expect(wrapper.find(Foo).prop('bar')).toBeTruthy();
 });
@@ -94,10 +84,7 @@ it('can hold ref to the rendered component, and can be retrieved', () => {
 });
 
 it('can optionally pass down raw status string from context to component', () => {
-  const wrapper = shallow(
-    <FooWithRawStatus />,
-    { context: { status: 'loading' } },
-  );
+  const wrapper = shallow(<FooWithRawStatus />, { context: { status: 'loading' } });
 
   expect(wrapper.find(Foo).prop('status')).toBe('loading');
 });

@@ -39,10 +39,10 @@ function indexTemplate(iconComponentFileAbsPaths) {
   const exportStatements = iconComponentFileAbsPaths.map((filePath) => {
     const componentFileNameWithoutExt = path.basename(filePath, path.extname(filePath));
     /**
-         * icon type on <Icon /> is kebab case.
-         * svgr will transform it to upper camel case(pascal case) for component.
-         * Here we just transform it back.
-         */
+     * icon type on <Icon /> is kebab case.
+     * svgr will transform it to upper camel case(pascal case) for component.
+     * Here we just transform it back.
+     */
     const originalSvgName = upperCamelCaseToKebabCase(componentFileNameWithoutExt);
     const keyString = originalSvgName.includes('-') ? `'${originalSvgName}'` : originalSvgName;
     return `${keyString}: ${componentFileNameWithoutExt},`;
@@ -50,7 +50,7 @@ function indexTemplate(iconComponentFileAbsPaths) {
   return `${importStatements.join('\n')}
 
 export default {
-${exportStatements.map(s => `  ${s}`).join('\n')}
+${exportStatements.map((s) => `  ${s}`).join('\n')}
 };
 `;
 }

@@ -10,7 +10,10 @@ export default function SvgInlineDropdown(props) {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path d="M0 0l28 16L0 32V0z" fill="currentColor" />
+      <path
+        d="M0 0l28 16L0 32V0z"
+        fill="currentColor"
+      />
     </svg>
   );
 }

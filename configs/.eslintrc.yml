@@ -1,13 +1,15 @@
-extends: ichef
+extends:
+  - ichef
+  - prettier
 
 env:
-    browser: true
-    es6: true
-    jest: true
+  browser: true
+  es6: true
+  jest: true
 
 settings:
-    import/resolver:
-        babel-module: {}
+  import/resolver:
+    babel-module: {}
 
 parserOptions:
-    sourceType: module
+  sourceType: module

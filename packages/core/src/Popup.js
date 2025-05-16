@@ -39,18 +39,20 @@ export function PopupIcon({ icon, color }) {
 
   return (
     <div className={BEM.icon}>
-      {(isValidElement(icon)
-        ? icon
-        : <Icon large type={icon} color={color} />
+      {isValidElement(icon) ? (
+        icon
+      ) : (
+        <Icon
+          large
+          type={icon}
+          color={color}
+        />
       )}
     </div>
   );
 }
 PopupIcon.propTypes = {
-  icon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-  ]),
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   color: PropTypes.string,
 };
 PopupIcon.defaultProps = {
@@ -70,9 +72,7 @@ export function PopupMessage({ title, message }) {
   }
 
   // variant: simple message
-  return (
-    <div className={BEM.messageDesc}>{message}</div>
-  );
+  return <div className={BEM.messageDesc}>{message}</div>;
 }
 PopupMessage.propTypes = {
   title: PropTypes.node,
@@ -97,32 +97,34 @@ function Popup({
   const rootClassName = classNames(rootBEM, className);
 
   return (
-    <div className={rootClassName} {...popupProps}>
+    <div
+      className={rootClassName}
+      {...popupProps}
+    >
       <Overlay />
 
       <div className={BEM.container}>
-        <PopupIcon icon={icon} color={iconColor} />
+        <PopupIcon
+          icon={icon}
+          color={iconColor}
+        />
 
         <div className={BEM.body}>
-          <PopupMessage title={title} message={message} />
+          <PopupMessage
+            title={title}
+            message={message}
+          />
           {messageBottomArea}
         </div>
 
-        {buttons && (
-          <div className={BEM.buttonsGroup}>
-            {buttons}
-          </div>
-        )}
+        {buttons && <div className={BEM.buttonsGroup}>{buttons}</div>}
       </div>
     </div>
   );
 }
 
 Popup.propTypes = {
-  size: PropTypes.oneOf([
-    POPUP_SIZE.SMALL,
-    POPUP_SIZE.LARGE,
-  ]),
+  size: PropTypes.oneOf([POPUP_SIZE.SMALL, POPUP_SIZE.LARGE]),
   icon: PopupIcon.propTypes.icon,
   iconColor: PopupIcon.propTypes.color,
   title: PopupMessage.propTypes.title,

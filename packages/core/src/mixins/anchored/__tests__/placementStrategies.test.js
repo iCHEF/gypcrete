@@ -131,23 +131,16 @@ describe('getPositionSetForArrowSidePlacementImpl()', () => {
   });
 });
 
-
 describe('TOP placement strategy', () => {
   const topPlacementStrategy = placementStrategies[PLACEMENT.TOP];
   describe('getPosition', () => {
     it.each`
-      resultTop  | anchorTop | anchorHeight | selfHeight | distanceFromAnchor
-      ${20}      | ${120}    | ${30}        | ${100}     | ${0}
-      ${10}      | ${120}    | ${30}        | ${100}     | ${10}
+      resultTop | anchorTop | anchorHeight | selfHeight | distanceFromAnchor
+      ${20}     | ${120}    | ${30}        | ${100}     | ${0}
+      ${10}     | ${120}    | ${30}        | ${100}     | ${10}
     `(
       'top value should be $resultTop when placed on TOP of anchor (y=$anchorTop, h=$anchorHeight)',
-      ({
-        resultTop,
-        anchorTop,
-        anchorHeight,
-        selfHeight,
-        distanceFromAnchor,
-      }) => {
+      ({ resultTop, anchorTop, anchorHeight, selfHeight, distanceFromAnchor }) => {
         const anchorRect = {
           top: anchorTop,
           left: 0,
@@ -170,7 +163,7 @@ describe('TOP placement strategy', () => {
           edgePadding: 10,
         });
         expect(position.top).toEqual(resultTop);
-      }
+      },
     );
   });
 });
@@ -183,13 +176,7 @@ describe('BOTTOM placement strategy', () => {
       ${400}    | ${300}    | ${100}       | ${100}     | ${0}
     `(
       'top value should be $resultTop when placed on TOP of anchor (y=$anchorTop, h=$anchorHeight)',
-      ({
-        resultTop,
-        anchorTop,
-        anchorHeight,
-        selfHeight,
-        distanceFromAnchor,
-      }) => {
+      ({ resultTop, anchorTop, anchorHeight, selfHeight, distanceFromAnchor }) => {
         const anchorRect = {
           top: anchorTop,
           left: 0,
@@ -212,7 +199,7 @@ describe('BOTTOM placement strategy', () => {
           edgePadding: 10,
         });
         expect(position.top).toEqual(resultTop);
-      }
+      },
     );
   });
 });
@@ -221,18 +208,12 @@ describe('left placement strategy', () => {
   const leftPlacementStrategy = placementStrategies[PLACEMENT.LEFT];
   describe('getPosition', () => {
     it.each`
-      resultLeft | anchorLeft | anchorWidth  | selfWidth  | distanceFromAnchor
-      ${20}      | ${120}     | ${30}        | ${100}     | ${0}
-      ${10}      | ${120}     | ${30}        | ${100}     | ${10}
+      resultLeft | anchorLeft | anchorWidth | selfWidth | distanceFromAnchor
+      ${20}      | ${120}     | ${30}       | ${100}    | ${0}
+      ${10}      | ${120}     | ${30}       | ${100}    | ${10}
     `(
       'left value should be $resultLeft when placed on LEFT of anchor (y=$anchorLeft, h=$anchorWidth)',
-      ({
-        resultLeft,
-        anchorLeft,
-        anchorWidth,
-        selfWidth,
-        distanceFromAnchor,
-      }) => {
+      ({ resultLeft, anchorLeft, anchorWidth, selfWidth, distanceFromAnchor }) => {
         const anchorRect = {
           left: anchorLeft,
           top: 0,
@@ -255,7 +236,7 @@ describe('left placement strategy', () => {
           edgePadding: 10,
         });
         expect(position.left).toEqual(resultLeft);
-      }
+      },
     );
   });
 });
@@ -264,18 +245,12 @@ describe('right placement strategy', () => {
   const rightPlacementStrategy = placementStrategies[PLACEMENT.RIGHT];
   describe('getPosition', () => {
     it.each`
-      resultLeft | anchorLeft | anchorWidth  | selfWidth  | distanceFromAnchor
-      ${150}     | ${120}     | ${30}        | ${200}     | ${0}
-      ${160}     | ${120}     | ${30}        | ${200}     | ${10}
+      resultLeft | anchorLeft | anchorWidth | selfWidth | distanceFromAnchor
+      ${150}     | ${120}     | ${30}       | ${200}    | ${0}
+      ${160}     | ${120}     | ${30}       | ${200}    | ${10}
     `(
       'left value should be $resultLeft when placed on LEFT of anchor (y=$anchorLeft, h=$anchorWidth)',
-      ({
-        resultLeft,
-        anchorLeft,
-        anchorWidth,
-        selfWidth,
-        distanceFromAnchor,
-      }) => {
+      ({ resultLeft, anchorLeft, anchorWidth, selfWidth, distanceFromAnchor }) => {
         const anchorRect = {
           left: anchorLeft,
           top: 0,
@@ -298,7 +273,7 @@ describe('right placement strategy', () => {
           edgePadding: 10,
         });
         expect(position.left).toEqual(resultLeft);
-      }
+      },
     );
   });
 });

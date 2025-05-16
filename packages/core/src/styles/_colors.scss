@@ -1,4 +1,4 @@
-@import "./color_helpers";
+@import './color_helpers';
 
 // ---------------
 //  v3 colors
@@ -6,30 +6,30 @@
 
 // Background color
 $c-bg-light: hsba(0, 0, 95, 100);
-$c-bg-dark:  hsba(0, 0, 15, 100);
+$c-bg-dark: hsba(0, 0, 15, 100);
 
 // Content color
-$c-black-5:   hsba(0, 0, 0, 5);
-$c-black-10:  hsba(0, 0, 0, 10);
-$c-black-30:  hsba(0, 0, 0, 30);
-$c-black-50:  hsba(0, 0, 0, 50);
-$c-black-70:  hsba(0, 0, 0, 70);
+$c-black-5: hsba(0, 0, 0, 5);
+$c-black-10: hsba(0, 0, 0, 10);
+$c-black-30: hsba(0, 0, 0, 30);
+$c-black-50: hsba(0, 0, 0, 50);
+$c-black-70: hsba(0, 0, 0, 70);
 $c-black-100: hsba(0, 0, 0, 100);
 
-$c-white-5:   hsba(0, 0, 100, 5);
-$c-white-10:  hsba(0, 0, 100, 10);
-$c-white-30:  hsba(0, 0, 100, 30);
-$c-white-50:  hsba(0, 0, 100, 50);
-$c-white-70:  hsba(0, 0, 100, 70);
+$c-white-5: hsba(0, 0, 100, 5);
+$c-white-10: hsba(0, 0, 100, 10);
+$c-white-30: hsba(0, 0, 100, 30);
+$c-white-50: hsba(0, 0, 100, 50);
+$c-white-70: hsba(0, 0, 100, 70);
 $c-white-100: hsba(0, 0, 100, 100);
 
-$c-red-50:  hsba(5, 70, 85, 50);
+$c-red-50: hsba(5, 70, 85, 50);
 $c-red-100: hsba(5, 70, 85, 100);
 
-$c-blue-50:  hsba(200, 70, 90, 50);
+$c-blue-50: hsba(200, 70, 90, 50);
 $c-blue-100: hsba(200, 70, 90, 100);
 
-$c-green-50:  hsba(130, 70, 90, 50);
+$c-green-50: hsba(130, 70, 90, 50);
 $c-green-100: hsba(130, 70, 90, 100);
 
 // ---------------
@@ -39,15 +39,15 @@ $c-green-100: hsba(130, 70, 90, 100);
 // Basic colors
 $c-white: $c-white-100;
 $c-black: $c-black-100;
-$c-gray:  $c-black-70;
-$c-red:   $c-red-100;
-$c-blue:  $c-blue-100;
+$c-gray: $c-black-70;
+$c-red: $c-red-100;
+$c-blue: $c-blue-100;
 $c-green: $c-green-100;
 
 // Text colors
-$c-text-normal:   $c-black;
+$c-text-normal: $c-black;
 $c-text-inverted: $c-white;
-$c-text-error:    $c-red;
+$c-text-error: $c-red;
 $c-text-editable: $c-blue;
 $c-text-disabled: hsba(0, 0, 0, 30);
 $c-text-readonly: $c-gray;
@@ -55,41 +55,41 @@ $c-text-placeholder: hsba(0, 0, 0, 30);
 
 // Icon-only buttons
 $c-icon-header: $c-black;
-$c-icon-row:    $c-gray;
+$c-icon-row: $c-gray;
 
 // Column background
 $c-column-bg: hsba(0, 0, 95, 100);
 
 // Header backgrounds
-$c-header-bg:           hsba(0, 0, 100, 100);
-$c-header-bg-hover:     hsba(0, 0, 90, 100);
-$c-header-bg-active:    hsba(0, 0, 80, 100);
+$c-header-bg: hsba(0, 0, 100, 100);
+$c-header-bg-hover: hsba(0, 0, 90, 100);
+$c-header-bg-active: hsba(0, 0, 80, 100);
 $c-header-bg-highlight: $c-blue;
 
 // Section colors
 $c-section-divider: $c-black-100;
 
 // ListRow colors
-$c-row-bg-hover:     $c-black-5;
+$c-row-bg-hover: $c-black-5;
 $c-row-bg-highlight: $c-black-10;
 $c-row-divider: $c-black-30;
 $c-row-divider-highlight: $c-black-100;
 
 // Component backgrounds
-$c-comp-bg-hover:  $c-black-5;
+$c-comp-bg-hover: $c-black-5;
 $c-comp-bg-active: $c-black-10;
 
 // Divider lines
-$c-divider-row:             hsba(0, 0, 0, 30);
-$c-divider-row-disabled:    hsba(0, 0, 0, 33);
-$c-divider-header:          hsba(0, 0, 0, 100);
+$c-divider-row: hsba(0, 0, 0, 30);
+$c-divider-row-disabled: hsba(0, 0, 0, 33);
+$c-divider-header: hsba(0, 0, 0, 100);
 $c-divider-header-disabled: hsba(0, 0, 0, 1);
-$c-divider-splitview:       $c-divider-row;
+$c-divider-splitview: $c-divider-row;
 
 // Switch colors
-$c-switch-bg-on:  $c-green;
+$c-switch-bg-on: $c-green;
 $c-switch-bg-off: $c-gray;
-$c-switch-knob:   $c-white;
+$c-switch-knob: $c-white;
 
 // Slider colors
 $c-slider-track: hsba(0, 0, 0, 30);
@@ -111,4 +111,5 @@ $c-modal-border: $c-popup-button-border;
 $c-popover-background: $c-white;
 
 // Modal colors
-$c-backdrop:                  rgba($c-black, .6);
+/* stylelint-disable-next-line number-leading-zero */
+$c-backdrop: rgba($c-black, 0.6);

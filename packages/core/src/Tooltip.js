@@ -4,10 +4,7 @@ import classNames from 'classnames';
 import icBEM from './utils/icBEM';
 import prefixClass from './utils/prefixClass';
 
-import anchored, {
-  anchoredPropTypes,
-  ANCHORED_PLACEMENT,
-} from './mixins/anchored';
+import anchored, { anchoredPropTypes, ANCHORED_PLACEMENT } from './mixins/anchored';
 import renderToLayer from './mixins/renderToLayer';
 import './styles/Tooltip.scss';
 
@@ -36,9 +33,16 @@ function Tooltip({
   const rootClassName = classNames(className, `${bemClass}`);
 
   return (
-    <span className={rootClassName} ref={nodeRef} {...otherProps}>
+    <span
+      className={rootClassName}
+      ref={nodeRef}
+      {...otherProps}
+    >
       {children}
-      <span className={BEM.arrow} style={arrowStyle} />
+      <span
+        className={BEM.arrow}
+        style={arrowStyle}
+      />
     </span>
   );
 }
@@ -61,5 +65,5 @@ export default renderToLayer(
   anchored({
     defaultPlacement: ANCHORED_PLACEMENT.TOP,
     edgePadding: 3,
-  })(Tooltip)
+  })(Tooltip),
 );

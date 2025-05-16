@@ -13,15 +13,14 @@ export const BEM = {
   column: ROOT_BEM.element('column'),
 };
 
-function SplitView({
-  className,
-  children,
-  ...otherProps
-}) {
+function SplitView({ className, children, ...otherProps }) {
   const rootClassName = classNames(ROOT_BEM.toString(), className);
 
   return (
-    <div className={rootClassName} {...otherProps}>
+    <div
+      className={rootClassName}
+      {...otherProps}
+    >
       {children}
     </div>
   );

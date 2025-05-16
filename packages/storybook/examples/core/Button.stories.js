@@ -185,12 +185,18 @@ export function AsideControlClickableOnDisabledButton() {
       bold
       color="Black"
       basic="Black"
-      aside={(
+      aside={
         <>
           Some text
-          <a target="_blank" rel="noreferrer" href="https://www.google.com">Click me</a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.google.com"
+          >
+            Click me
+          </a>
         </>
-      )}
+      }
       asideControlClickableOnDisabled
       disabled
       // eslint-disable-next-line no-alert

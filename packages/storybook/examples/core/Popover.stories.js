@@ -29,11 +29,24 @@ export function BasicExample() {
   function DemoList() {
     return (
       <List>
-        <ButtonRow basic="Row 1" onClick={action('click.1')} />
-        <ButtonRow basic="Row 2" onClick={action('click.2')} />
-        <ButtonRow basic="Row 3" onClick={action('click.3')} />
+        <ButtonRow
+          basic="Row 1"
+          onClick={action('click.1')}
+        />
+        <ButtonRow
+          basic="Row 2"
+          onClick={action('click.2')}
+        />
+        <ButtonRow
+          basic="Row 3"
+          onClick={action('click.3')}
+        />
 
-        <ButtonRow basic="Link row" tagName="a" href="https://apple.com" />
+        <ButtonRow
+          basic="Link row"
+          tagName="a"
+          href="https://apple.com"
+        />
       </List>
     );
   }
@@ -68,11 +81,24 @@ export function AnchoredPopover(popoverProps) {
   function DemoList() {
     return (
       <List>
-        <ButtonRow basic="Row 1" onClick={action('click.1')} />
-        <ButtonRow basic="Row 2" onClick={action('click.2')} />
-        <ButtonRow basic="Row 3" onClick={action('click.3')} />
+        <ButtonRow
+          basic="Row 1"
+          onClick={action('click.1')}
+        />
+        <ButtonRow
+          basic="Row 2"
+          onClick={action('click.2')}
+        />
+        <ButtonRow
+          basic="Row 3"
+          onClick={action('click.3')}
+        />
 
-        <ButtonRow basic="Link row" tagName="a" href="https://apple.com" />
+        <ButtonRow
+          basic="Link row"
+          tagName="a"
+          href="https://apple.com"
+        />
       </List>
     );
   }
@@ -92,7 +118,7 @@ export function AnchoredPopover(popoverProps) {
   const anchorStyle = {
     display: 'inline-block',
   };
-  const showPopover = popoverOpen && (btnRef.current);
+  const showPopover = popoverOpen && btnRef.current;
 
   return (
     <div>

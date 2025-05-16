@@ -34,7 +34,7 @@ export default function ColumnView({
     paddingTop: bodyPadding.top,
     paddingBottom: bodyPadding.bottom,
     paddingLeft: bodyPadding.left,
-    paddingRight: bodyPadding.right,
+    paddingRight: bodyPadding.right, // stylelint-disable-line declaration-block-no-redundant-longhand-properties
   };
 
   return (
@@ -70,7 +70,6 @@ export default function ColumnView({
     </div>
   );
 }
-
 
 ColumnView.propTypes = {
   header: PropTypes.node,

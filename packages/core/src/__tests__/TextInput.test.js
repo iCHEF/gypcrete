@@ -5,12 +5,7 @@ import { shallow } from 'enzyme';
 import AutoSizeTextarea from 'react-textarea-autosize';
 
 import { PureText } from '../Text';
-import TextInput, {
-  PureTextInput,
-  TextInputBasicRow,
-  InnerInput,
-  BEM,
-} from '../TextInput';
+import TextInput, { PureTextInput, TextInputBasicRow, InnerInput, BEM } from '../TextInput';
 
 describe('<TextInputBasicRow> helper component', () => {
   it('renders "basic" with a simple wrapper', () => {
@@ -18,7 +13,7 @@ describe('<TextInputBasicRow> helper component', () => {
       <TextInputBasicRow
         basic={<div data-target />}
         className="foo-row"
-      />
+      />,
     );
 
     expect(wrapper.hasClass('foo-row')).toBeTruthy();
@@ -30,26 +25,35 @@ describe('<InnerInput> helper component', () => {
   it('renders an <input type="text"> by default, with inputProps', () => {
     const wrapper = shallow(<InnerInput inputProps={{ foo: 'bar' }} />);
 
-    expect(wrapper.matchesElement(
-      <input type="text" foo="bar" />
-    )).toBeTruthy();
+    expect(
+      wrapper.matchesElement(
+        <input
+          type="text"
+          foo="bar"
+        />,
+      ),
+    ).toBeTruthy();
   });
 
   it('renders an <AutoSizeTextarea> with defaults in multi-line mode, with inputProps', () => {
     const wrapper = shallow(<InnerInput multiLine />);
 
-    expect(wrapper.matchesElement(
-      <AutoSizeTextarea minRows={2} />
-    )).toBeTruthy();
+    expect(wrapper.matchesElement(<AutoSizeTextarea minRows={2} />)).toBeTruthy();
 
     wrapper.setProps({
       minRows: 5,
       maxRows: 9,
       inputProps: { foo: 'bar' },
     });
-    expect(wrapper.matchesElement(
-      <AutoSizeTextarea minRows={5} maxRows={9} foo="bar" />
-    )).toBeTruthy();
+    expect(
+      wrapper.matchesElement(
+        <AutoSizeTextarea
+          minRows={5}
+          maxRows={9}
+          foo="bar"
+        />,
+      ),
+    ).toBeTruthy();
   });
 
   it('allows custom input rendering via "renderInput" prop', () => {
@@ -58,7 +62,7 @@ describe('<InnerInput> helper component', () => {
       <InnerInput
         inputProps={{ foo: 'bar' }}
         renderInput={mockedRenderer}
-      />
+      />,
     );
 
     expect(mockedRenderer).toHaveBeenLastCalledWith({ foo: 'bar' });
@@ -73,7 +77,11 @@ describe('rowComp(TextInput)', () => {
   });
 
   it('has reversed vertical order by default', () => {
-    const wrapper = shallow(<div><TextInput /></div>);
+    const wrapper = shallow(
+      <div>
+        <TextInput />
+      </div>,
+    );
 
     expect(wrapper.childAt(0).prop('verticalOrder')).toBe('reverse');
   });
@@ -89,10 +97,7 @@ describe('pure <TextInput>', () => {
 
   it('sets props for <PureText> from context', () => {
     const mockedTextProps = { foo: 'bar' };
-    const wrapper = shallow(
-      <PureTextInput />,
-      { context: { textProps: mockedTextProps } },
-    );
+    const wrapper = shallow(<PureTextInput />, { context: { textProps: mockedTextProps } });
     expect(wrapper.find(PureText).prop('foo')).toBe('bar');
   });
 
@@ -120,7 +125,7 @@ describe('pure <TextInput>', () => {
         minRows={5}
         maxRows={9}
         renderInput={mockedRenderer}
-      />
+      />,
     );
 
     expect(wrapper.find(PureText).prop('basic')).toMatchObject(
@@ -135,7 +140,7 @@ describe('pure <TextInput>', () => {
           readOnly: true,
           disabled: false,
         }}
-      />
+      />,
     );
 
     wrapper.setProps({
@@ -159,7 +164,7 @@ describe('pure <TextInput>', () => {
       <PureTextInput
         foo="bar"
         onChange={handleChange}
-      />
+      />,
     );
 
     expect(wrapper.find(PureText).prop('basic').props).toMatchObject({

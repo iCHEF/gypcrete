@@ -17,7 +17,12 @@ export const BEM = {
   button: ROOT_BEM.element('button'),
 };
 
-export const RADIO_BUTTON = <Icon type="empty" className={`${BEM.button}`} />;
+export const RADIO_BUTTON = (
+  <Icon
+    type="empty"
+    className={`${BEM.button}`}
+  />
+);
 
 function Radio({
   input,
@@ -40,7 +45,10 @@ function Radio({
   };
   const rootClassName = classNames(className, COMPONENT_NAME);
   return (
-    <div className={rootClassName} {...otherProps}>
+    <div
+      className={rootClassName}
+      {...otherProps}
+    >
       <span className={BEM.iconWrapper}>
         <input
           type="radio"

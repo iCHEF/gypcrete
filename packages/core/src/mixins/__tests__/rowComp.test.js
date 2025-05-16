@@ -27,7 +27,7 @@ it('renders <Text> into wrapped component', () => {
       basic="Basic text"
       tag="Tag"
       aside="Aside text"
-    />
+    />,
   );
   const textWrapper = wrapper.find(Foo).shallow().find(Text);
 
@@ -43,7 +43,10 @@ it('renders <Text> into wrapped component', () => {
 
 it('renders <Icon> and <Text> into wrapped component', () => {
   const wrapper = shallow(
-    <RowCompFoo icon="printer" basic="Basic" />
+    <RowCompFoo
+      icon="printer"
+      basic="Basic"
+    />,
   );
   const fooWrapper = wrapper.find(Foo).shallow();
 
@@ -56,7 +59,12 @@ it('renders <Icon> and <Text> into wrapped component', () => {
 
 it('takes a React Element as icon', () => {
   const icon = <span data-foo="bar" />;
-  const wrapper = shallow(<RowCompFoo icon={icon} basic="Basic" />);
+  const wrapper = shallow(
+    <RowCompFoo
+      icon={icon}
+      basic="Basic"
+    />,
+  );
   const fooWrapper = wrapper.find(Foo).shallow();
 
   expect(fooWrapper.find(Icon).exists()).toBeFalsy();
@@ -65,7 +73,12 @@ it('takes a React Element as icon', () => {
 
 describe('it renders <Text> with adjusted alignment', () => {
   test('left-aligned', () => {
-    const wrapper = shallow(<RowCompFoo align="left" basic="Basic" />);
+    const wrapper = shallow(
+      <RowCompFoo
+        align="left"
+        basic="Basic"
+      />,
+    );
     expect(wrapper.find(Text).props()).toMatchObject({
       align: 'left',
       noGrow: false,
@@ -73,7 +86,12 @@ describe('it renders <Text> with adjusted alignment', () => {
   });
 
   test('center-aligned', () => {
-    const wrapper = shallow(<RowCompFoo align="center" basic="Basic" />);
+    const wrapper = shallow(
+      <RowCompFoo
+        align="center"
+        basic="Basic"
+      />,
+    );
     expect(wrapper.find(Text).props()).toMatchObject({
       align: 'center',
       noGrow: true,
@@ -81,7 +99,13 @@ describe('it renders <Text> with adjusted alignment', () => {
   });
 
   test('center-aligned with Icon', () => {
-    const wrapper = shallow(<RowCompFoo align="center" icon="add" basic="Basic" />);
+    const wrapper = shallow(
+      <RowCompFoo
+        align="center"
+        icon="add"
+        basic="Basic"
+      />,
+    );
     expect(wrapper.find(Text).props()).toMatchObject({
       align: 'left',
       noGrow: true,
@@ -89,7 +113,12 @@ describe('it renders <Text> with adjusted alignment', () => {
   });
 
   test('right-aligned', () => {
-    const wrapper = shallow(<RowCompFoo align="right" basic="Basic" />);
+    const wrapper = shallow(
+      <RowCompFoo
+        align="right"
+        basic="Basic"
+      />,
+    );
     expect(wrapper.find(Text).props()).toMatchObject({
       align: 'right',
       noGrow: false,
@@ -97,7 +126,12 @@ describe('it renders <Text> with adjusted alignment', () => {
   });
 
   test('reverse-aligned', () => {
-    const wrapper = shallow(<RowCompFoo align="reverse" basic="Basic" />);
+    const wrapper = shallow(
+      <RowCompFoo
+        align="reverse"
+        basic="Basic"
+      />,
+    );
     expect(wrapper.find(Text).props()).toMatchObject({
       align: 'right',
       noGrow: false,
@@ -107,7 +141,10 @@ describe('it renders <Text> with adjusted alignment', () => {
 
 it('passes down other props to wrapped component', () => {
   const wrapper = shallow(
-    <RowCompFoo basic="Basic" bar />
+    <RowCompFoo
+      basic="Basic"
+      bar
+    />,
   );
 
   expect(wrapper.find(Foo).prop('bar')).toBeTruthy();
@@ -120,7 +157,7 @@ it('holds context for children components', () => {
       status="success"
       statusOptions={{ autoHide: true }}
       errorMsg="foo-bar"
-    />
+    />,
   );
   const context = wrapper.instance().getChildContext();
 

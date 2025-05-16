@@ -12,7 +12,6 @@ export {
   TextInputRow,
   SwitchRow,
   SelectRow,
-
   SelectList,
   SelectOption,
   parseSelectOptions,

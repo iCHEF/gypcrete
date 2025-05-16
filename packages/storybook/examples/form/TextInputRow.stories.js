@@ -115,7 +115,6 @@ Donec vitae nibh sem.
         value={EXAMPLE_TEXT}
       />
 
-
       <TextInputRow
         multiLine
         label="Secret code"

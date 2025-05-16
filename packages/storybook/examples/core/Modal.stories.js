@@ -39,9 +39,26 @@ export function ClosableModal({
   // However, in real use case you may want to extract this out.
 
   const ModalHeader = ({ onCancel, labelText }) => {
-    const cancelBtn = <Button color="black" basic="Cancel" onClick={onCancel} />;
-    const filterBtn = <Button bold basic="Filter" onClick={action('filter')} />;
-    const label = <TextLabel align="center" basic={labelText} />;
+    const cancelBtn = (
+      <Button
+        color="black"
+        basic="Cancel"
+        onClick={onCancel}
+      />
+    );
+    const filterBtn = (
+      <Button
+        bold
+        basic="Filter"
+        onClick={action('filter')}
+      />
+    );
+    const label = (
+      <TextLabel
+        align="center"
+        basic={labelText}
+      />
+    );
 
     return (
       <HeaderRow
@@ -75,6 +92,7 @@ export function ClosableModal({
           solid
           color="blue"
           onClick={handleModalOpen}
+          // stylelint-disable-line declaration-block-trailing-semicolon
           style={{ display: 'inline-block' }}
         >
           Open Modal
@@ -98,11 +116,14 @@ ClosableModal.propTypes = {
   title: PropTypes.string,
 };
 
-
 export function SplitViewModal() {
   return (
-  /* See the Closable Modal example */
-    <ClosableModal title="With <SplitView>" flexBody bodyPadding={{ bottom: 0 }}>
+    /* See the Closable Modal example */
+    <ClosableModal
+      title="With <SplitView>"
+      flexBody
+      bodyPadding={{ bottom: 0 }}
+    >
       {/* See <SplitView> => `contains <ColumnView>` doc for <ContainsColumnView> */}
       <ContainsColumnView />
     </ClosableModal>
@@ -115,8 +136,11 @@ SplitViewModal.story = {
 
 export function CenteredModal() {
   return (
-  /* See the Closable Modal example */
-    <ClosableModal title="Vertically-centered modal" centered>
+    /* See the Closable Modal example */
+    <ClosableModal
+      title="Vertically-centered modal"
+      centered
+    >
       Hello World!
     </ClosableModal>
   );
@@ -130,16 +154,16 @@ export function MultilpleLayerModal() {
     }
     const currentLayer = maxDepth - depth + 1;
     return (
-    /* See the Closable Modal example */
+      /* See the Closable Modal example */
       <ClosableModal title={`Modal ${currentLayer}`}>
-        {currentLayer !== maxDepth
-          ? (
-            <div>
-              Click Open Modal to open Modal
-              {currentLayer + 1}
-            </div>
-          )
-          : 'This is the last modal.'}
+        {currentLayer !== maxDepth ? (
+          <div>
+            Click Open Modal to open Modal
+            {currentLayer + 1}
+          </div>
+        ) : (
+          'This is the last modal.'
+        )}
         <MulitpleClosableModalExample depth={depth - 1} />
       </ClosableModal>
     );
@@ -154,7 +178,8 @@ export function MultilpleLayerModal() {
 MultilpleLayerModal.story = {
   parameters: {
     docs: {
-      storyDescription: 'Indented with 32px from each side for each layer. When number of layer > 7 we won\'t indent it',
+      storyDescription:
+        "Indented with 32px from each side for each layer. When number of layer > 7 we won't indent it",
     },
   },
 };

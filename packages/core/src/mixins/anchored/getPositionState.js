@@ -38,11 +38,9 @@ export function getPlacementAndRemainingSpace({
   selfRect,
   distanceFromAnchor,
 }) {
-  const possiblePlacements = (
-    verticalPlacements.includes(defaultPlacement)
-      ? verticalPlacements
-      : horizontalPlacements
-  );
+  const possiblePlacements = verticalPlacements.includes(defaultPlacement)
+    ? verticalPlacements
+    : horizontalPlacements;
   const defaultPlacementResult = placementStrategies[defaultPlacement].canPlace({
     anchorRect,
     selfRect,
@@ -54,24 +52,22 @@ export function getPlacementAndRemainingSpace({
       remainingSpace: defaultPlacementResult.remainingSpace,
     };
   }
-  const oppositePlacement = possiblePlacements.find(placement => placement !== defaultPlacement);
+  const oppositePlacement = possiblePlacements.find((placement) => placement !== defaultPlacement);
   const oppositePlacementResult = placementStrategies[oppositePlacement].canPlace({
     anchorRect,
     selfRect,
     distanceFromAnchor,
   });
-  const placement = (
+  const placement =
     defaultPlacementResult.remainingSpace >= oppositePlacementResult.remainingSpace
       ? defaultPlacement
-      : oppositePlacement
-  );
+      : oppositePlacement;
   return {
     placement,
-    remainingSpace: (
+    remainingSpace:
       placement === defaultPlacement
         ? defaultPlacementResult.remainingSpace
-        : oppositePlacementResult.remainingSpace
-    ),
+        : oppositePlacementResult.remainingSpace,
   };
 }
 
@@ -94,54 +90,51 @@ export function getPlacementAndRemainingSpace({
  * ) => ResultState}
  */
 
-const getPositionState = edgePadding => (
-  defaultPlacement,
-  anchorNode,
-  selfNode,
-  distanceFromAnchor = 0,
-) => {
-  if (!anchorNode || !selfNode) {
+const getPositionState =
+  (edgePadding) =>
+  (defaultPlacement, anchorNode, selfNode, distanceFromAnchor = 0) => {
+    if (!anchorNode || !selfNode) {
+      return {
+        placement: defaultPlacement,
+        position: {},
+        arrowPosition: {},
+      };
+    }
+
+    // -------------------------------------
+    //   Measuring anchor and self
+    // -------------------------------------
+
+    /** @type {DocumentOffset} */
+    const anchorOffset = documentOffset(anchorNode);
+    const anchorRect = anchorNode.getBoundingClientRect();
+    const selfRect = selfNode.getBoundingClientRect();
+
+    // -------------------------------------
+    //   Determine position
+    // -------------------------------------
+
+    const { placement, remainingSpace } = getPlacementAndRemainingSpace({
+      defaultPlacement,
+      anchorRect,
+      selfRect,
+      distanceFromAnchor,
+    });
+
+    const { arrowPosition, position } = placementStrategies[placement].getPosition({
+      anchorRect,
+      anchorOffset,
+      selfRect,
+      distanceFromAnchor,
+      edgePadding,
+    });
+
     return {
-      placement: defaultPlacement,
-      position: {},
-      arrowPosition: {},
+      placement,
+      remainingSpace,
+      position,
+      arrowPosition,
     };
-  }
-
-  // -------------------------------------
-  //   Measuring anchor and self
-  // -------------------------------------
-
-  /** @type {DocumentOffset} */
-  const anchorOffset = documentOffset(anchorNode);
-  const anchorRect = anchorNode.getBoundingClientRect();
-  const selfRect = selfNode.getBoundingClientRect();
-
-  // -------------------------------------
-  //   Determine position
-  // -------------------------------------
-
-  const { placement, remainingSpace } = getPlacementAndRemainingSpace({
-    defaultPlacement,
-    anchorRect,
-    selfRect,
-    distanceFromAnchor,
-  });
-
-  const { arrowPosition, position } = placementStrategies[placement].getPosition({
-    anchorRect,
-    anchorOffset,
-    selfRect,
-    distanceFromAnchor,
-    edgePadding,
-  });
-
-  return {
-    placement,
-    remainingSpace,
-    position,
-    arrowPosition,
   };
-};
 
 export default getPositionState;

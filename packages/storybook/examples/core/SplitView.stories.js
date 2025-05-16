@@ -10,12 +10,14 @@ import TextLabel from '@ichef/gypcrete/src/TextLabel';
 import ColoredBox from 'utils/ColoredBox';
 import DebugBox from 'utils/DebugBox';
 
-const debugDecorator = storyFn => (
-  <DebugBox width="40rem" height="24rem">
+const debugDecorator = (storyFn) => (
+  <DebugBox
+    width="40rem"
+    height="24rem"
+  >
     {storyFn()}
   </DebugBox>
 );
-
 
 function ColumnHeader() {
   const label = (
@@ -25,16 +27,17 @@ function ColumnHeader() {
     />
   );
 
-  return (
-    <HeaderRow center={label} />
-  );
+  return <HeaderRow center={label} />;
 }
 
 const HEADER = <ColumnHeader />;
 
 function DemoColumnView({ children, ...props }) {
   return (
-    <ColumnView header={HEADER} {...props}>
+    <ColumnView
+      header={HEADER}
+      {...props}
+    >
       {children}
     </ColumnView>
   );
@@ -72,7 +75,6 @@ export function BasicUsage() {
     </SplitView>
   );
 }
-
 
 export function ContainsColumnView() {
   return (

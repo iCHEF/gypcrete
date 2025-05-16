@@ -11,12 +11,9 @@ import getScaleFromCropRect from '../utils/getScaleFromCropRect';
 import getInitPosition from '../utils/getInitPosition';
 
 // from: https://css-tricks.com/snippets/html/base64-encode-of-1x1px-transparent-gif/
-const TRANSPARENT_IMAGE = (
-  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-);
-const BLACK_IMAGE = (
-  'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs='
-);
+const TRANSPARENT_IMAGE =
+  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+const BLACK_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
 
 it('renders without crashing', () => {
   const element = <ImageEditor />;
@@ -28,23 +25,25 @@ it('shows placeholder with canvas height when image not specified', () => {
   const wrapper = shallow(<ImageEditor />);
 
   expect(wrapper.find(AvatarEditor).exists()).toBeFalsy();
-  expect(wrapper.containsMatchingElement(
-    <EditorPlaceholder
-      canvasHeight={ImageEditor.defaultProps.height}
-    />
-  )).toBeTruthy();
+  expect(
+    wrapper.containsMatchingElement(
+      <EditorPlaceholder canvasHeight={ImageEditor.defaultProps.height} />,
+    ),
+  ).toBeTruthy();
 });
 
 it('shows loading placeholder with canvas height when set as loading', () => {
   const wrapper = shallow(<ImageEditor loading />);
 
   expect(wrapper.find(AvatarEditor).exists()).toBeFalsy();
-  expect(wrapper.containsMatchingElement(
-    <EditorPlaceholder
-      loading
-      canvasHeight={ImageEditor.defaultProps.height}
-    />
-  )).toBeTruthy();
+  expect(
+    wrapper.containsMatchingElement(
+      <EditorPlaceholder
+        loading
+        canvasHeight={ImageEditor.defaultProps.height}
+      />,
+    ),
+  ).toBeTruthy();
 });
 
 it('shows to <AvatarEditor> for cropping given image', () => {
@@ -63,7 +62,12 @@ it('shows scale slider when control is true', () => {
 });
 
 it('controls scale of <AvatarEditor> with slider while not read-only', () => {
-  const wrapper = shallow(<ImageEditor control image={TRANSPARENT_IMAGE} />);
+  const wrapper = shallow(
+    <ImageEditor
+      control
+      image={TRANSPARENT_IMAGE}
+    />,
+  );
   expect(wrapper.find(AvatarEditor).prop('scale')).toBe(DEFAULT_SCALE);
 
   wrapper.find('input[type="range"]').simulate('change', {
@@ -89,7 +93,7 @@ it('blocks changes to <AvatarEditor> while in read-only mode', () => {
       readOnly
       control
       image={TRANSPARENT_IMAGE}
-    />
+    />,
   );
   expect(wrapper.find('input[type="range"]').prop('disabled')).toBeTruthy();
   expect(wrapper.find(AvatarEditor).prop('position')).toEqual(DEFAULT_POSITION);
@@ -108,7 +112,7 @@ it('notifies new cropping rect whenever <AvatarEditor> think it changes', () => 
     <ImageEditor
       image={TRANSPARENT_IMAGE}
       onCropChange={handleCropChange}
-    />
+    />,
   );
 
   // mock <AvatarEditor> instance API
@@ -125,9 +129,7 @@ it('notifies new cropping rect whenever <AvatarEditor> think it changes', () => 
 
   // should not break even when `onCropChange` isn't provided
   wrapper.setProps({ readOnly: false, onCropChange: undefined });
-  expect(
-    () => wrapper.find(AvatarEditor).simulate('imageChange')
-  ).not.toThrow();
+  expect(() => wrapper.find(AvatarEditor).simulate('imageChange')).not.toThrow();
 });
 
 it('notifies imgInfo and cropping rect when image successfully loaded', () => {
@@ -147,7 +149,7 @@ it('notifies imgInfo and cropping rect when image successfully loaded', () => {
     <ImageEditor
       image={TRANSPARENT_IMAGE}
       onLoadSuccess={handleLoadSuccess}
-    />
+    />,
   );
 
   // mock <AvatarEditor> instance API
@@ -158,9 +160,7 @@ it('notifies imgInfo and cropping rect when image successfully loaded', () => {
 
   // should not break even when 'onLoadSuccess' not specified
   wrapper.setProps({ onLoadSuccess: undefined });
-  expect(
-    () => wrapper.find(AvatarEditor).simulate('loadSuccess', MOCKED_IMG_INFO)
-  ).not.toThrow();
+  expect(() => wrapper.find(AvatarEditor).simulate('loadSuccess', MOCKED_IMG_INFO)).not.toThrow();
 });
 
 it('takes an initial cropping rect to set scale and position', () => {
@@ -174,13 +174,11 @@ it('takes an initial cropping rect to set scale and position', () => {
     <ImageEditor
       image={TRANSPARENT_IMAGE}
       initCropRect={cropRect}
-    />
+    />,
   );
 
-  expect(wrapper.find(AvatarEditor).prop('scale'))
-    .toEqual(getScaleFromCropRect(cropRect));
-  expect(wrapper.find(AvatarEditor).prop('position'))
-    .toEqual(getInitPosition(cropRect));
+  expect(wrapper.find(AvatarEditor).prop('scale')).toEqual(getScaleFromCropRect(cropRect));
+  expect(wrapper.find(AvatarEditor).prop('position')).toEqual(getInitPosition(cropRect));
 });
 
 it('resets cached scale and position when image changes', () => {
@@ -194,7 +192,7 @@ it('resets cached scale and position when image changes', () => {
     <ImageEditor
       image={TRANSPARENT_IMAGE}
       initCropRect={cropRect}
-    />
+    />,
   );
 
   expect(wrapper.find(AvatarEditor).prop('scale')).not.toBe(DEFAULT_SCALE);
@@ -237,7 +235,7 @@ it('can be controlled by "scale" & "onScaleChange" props', () => {
       image={TRANSPARENT_IMAGE}
       scale={0.87}
       onScaleChange={mockedHandleScaleChange}
-    />
+    />,
   );
 
   expect(wrapper.find(AvatarEditor).prop('scale')).toBe(0.87);

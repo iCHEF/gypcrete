@@ -2,7 +2,8 @@ $componenet-name: gyp-form-select;
 
 .#{$componenet-name} {
   &__placeholder {
-    color: rgba(0, 0, 0, .5);
+    /* stylelint-disable-next-line number-leading-zero */
+    color: rgba(0, 0, 0, 0.5);
   }
 
   &__popover {

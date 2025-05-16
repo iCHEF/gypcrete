@@ -11,12 +11,13 @@ export default {
 
 function DemoContent() {
   return (
-    <div style={{
-      width: '100%',
-      lineHeight: '200px',
-      textAlign: 'center',
-      background: '#eee',
-    }}
+    <div
+      style={{
+        width: '100%',
+        lineHeight: '200px',
+        textAlign: 'center',
+        background: '#eee',
+      }}
     >
       Section Content
     </div>
@@ -43,7 +44,10 @@ PlainSection.story = {
 export function WithTitleAndDesc() {
   return (
     <DebugBox>
-      <Section title="Section title" desc="Description text">
+      <Section
+        title="Section title"
+        desc="Description text"
+      >
         <DemoContent />
       </Section>
     </DebugBox>

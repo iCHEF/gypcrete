@@ -22,9 +22,9 @@ describe('<ColumnView>', () => {
     const wrapper = shallow(<ColumnView flexBody>Foo bar</ColumnView>);
 
     expect(
-      wrapper.find(`.${COLUMN_BEM.body}`).hasClass(
-        COLUMN_BEM.body.modifier('flex').toString({ stripBlock: true })
-      )
+      wrapper
+        .find(`.${COLUMN_BEM.body}`)
+        .hasClass(COLUMN_BEM.body.modifier('flex').toString({ stripBlock: true })),
     ).toBeTruthy();
   });
 
@@ -35,11 +35,7 @@ describe('<ColumnView>', () => {
       left: 3,
       right: 4,
     };
-    const wrapper = shallow(
-      <ColumnView bodyPadding={padding}>
-        Foo bar
-      </ColumnView>
-    );
+    const wrapper = shallow(<ColumnView bodyPadding={padding}>Foo bar</ColumnView>);
     expect(wrapper.find(`.${COLUMN_BEM.body}`).prop('style')).toEqual({
       paddingTop: 1,
       paddingBottom: 2,
@@ -49,26 +45,18 @@ describe('<ColumnView>', () => {
   });
 
   it('renders header area if "header" prop is given', () => {
-    const wrapper = shallow(
-      <ColumnView header={<span data-test="header" />} />
-    );
+    const wrapper = shallow(<ColumnView header={<span data-test="header" />} />);
     expect(wrapper.find(`.${COLUMN_BEM.header}`)).toHaveLength(1);
     expect(
-      wrapper
-        .find(`.${COLUMN_BEM.header}`)
-        .containsMatchingElement(<span data-test="header" />)
+      wrapper.find(`.${COLUMN_BEM.header}`).containsMatchingElement(<span data-test="header" />),
     ).toBeTruthy();
   });
 
   it('renders footer area if "footer" prop is given', () => {
-    const wrapper = shallow(
-      <ColumnView footer={<span data-test="footer" />} />
-    );
+    const wrapper = shallow(<ColumnView footer={<span data-test="footer" />} />);
     expect(wrapper.find(`.${COLUMN_BEM.footer}`)).toHaveLength(1);
     expect(
-      wrapper
-        .find(`.${COLUMN_BEM.footer}`)
-        .containsMatchingElement(<span data-test="footer" />)
+      wrapper.find(`.${COLUMN_BEM.footer}`).containsMatchingElement(<span data-test="footer" />),
     ).toBeTruthy();
   });
 });

@@ -19,11 +19,7 @@ CenterIcon.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-function EditorPlaceholder({
-  canvasHeight,
-  loading,
-  ...wrapperProps
-}) {
+function EditorPlaceholder({ canvasHeight, loading, ...wrapperProps }) {
   const wrapperStyle = {
     height: canvasHeight,
   };
@@ -31,11 +27,15 @@ function EditorPlaceholder({
   const iconType = loading ? LOADING : PICTURE;
   const iconStyle = {
     // 8 for total border size (4+4)
+    // stylelint-disable-next-line function-name-case
     fontSize: Math.min(canvasHeight - 8, 96),
   };
 
   return (
-    <div style={wrapperStyle} {...wrapperProps}>
+    <div
+      style={wrapperStyle}
+      {...wrapperProps}
+    >
       <CenterIcon
         type={iconType}
         style={iconStyle}

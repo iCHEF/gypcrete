@@ -8,13 +8,23 @@ import IconLayout from '../IconLayout';
 
 describe('<IconButton>', () => {
   it('renders without crashing', () => {
-    const element = <IconButton icon="printer" status="loading" />;
+    const element = (
+      <IconButton
+        icon="printer"
+        status="loading"
+      />
+    );
 
     render(element);
   });
 
   it('renders as a custom-configured variant of <Button>', () => {
-    const wrapper = shallow(<IconButton icon="printer" status="loading" />);
+    const wrapper = shallow(
+      <IconButton
+        icon="printer"
+        status="loading"
+      />,
+    );
 
     expect(wrapper.children()).toHaveLength(1);
     expect(wrapper.find(Button).exists()).toBeTruthy();
@@ -35,7 +45,7 @@ describe('<IconButton>', () => {
         tinted
         icon="printer"
         className="other-custom-class"
-      />
+      />,
     );
 
     expect(wrapper.hasClass('gyp-button--icon-only')).toBeTruthy();
