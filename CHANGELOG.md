@@ -1,3 +1,17 @@
+# [7.2.0](https://github.com/iCHEF/gypcrete/compare/v7.1.0...v7.2.0) (2025-05-16)
+
+
+### Bug Fixes
+
+* add ignore stylelint command ([596e46f](https://github.com/iCHEF/gypcrete/commit/596e46f305098490bbbc381707203db6f6f3830a))
+
+
+### Features
+
+* add Visibility icon component ([2442693](https://github.com/iCHEF/gypcrete/commit/2442693c2ae1e760c4f3334fcf10dc4d962b8527))
+
+
+
 # [7.1.0](https://github.com/iCHEF/gypcrete/compare/v7.0.1...v7.1.0) (2024-04-12)
 
 ### Bug Fixes
