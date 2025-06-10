@@ -189,7 +189,7 @@ class InfiniteScroll extends PureComponent {
     const { usePageAsContainer } = this.props;
     this.scrollContainer = usePageAsContainer
       ? window
-      : this.scrollNode && this.scrollNode.parentNode;
+      : this.scrollNode?.parentNode;
 
     if (this.scrollContainer) {
       this.scrollContainer.addEventListener('scroll', this.handleScrollListener);
