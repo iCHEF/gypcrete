@@ -8,7 +8,7 @@ function getComponentName(Component) {
   if (!Component) {
     throw new Error('Cannot read name. Please pass in a valid React Component.');
   }
-  const componentName = Component.displayName || Component.name || 'Component';
+  const componentName = Component?.displayName || Component?.name || 'Component';
 
   return componentName;
 }

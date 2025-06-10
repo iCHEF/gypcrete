@@ -10,5 +10,5 @@
     "\\.(css|scss|sass|md|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|)$": "<rootDir>/__mocks__/fileMock.js"
   },
   "transformIgnorePatterns": ["<rootDir>/node_modules/(?!@ichef/)"],
-  "setupTestFrameworkScriptFile": "<rootDir>/configs/jestSetup.js"
+  "setupFilesAfterEnv": ["<rootDir>/configs/jestSetup.js"]
 }

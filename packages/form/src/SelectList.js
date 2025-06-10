@@ -162,7 +162,7 @@ const SelectList = React.memo(
           });
         }
 
-        if (child && child.type === React.Fragment) {
+        if (child?.type === React.Fragment) {
           return renderOptions(child.props.children);
         }
 

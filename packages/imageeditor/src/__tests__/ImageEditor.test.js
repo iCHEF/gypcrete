@@ -1,8 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { shallow } from 'enzyme';
+import { shallow, configure } from 'enzyme';
+import Adapter from '@cfaester/enzyme-adapter-react-18';
 
 import AvatarEditor from 'react-avatar-editor';
+
+configure({ adapter: new Adapter() });
 
 import ImageEditor, { DEFAULT_SCALE, DEFAULT_POSITION } from '../ImageEditor';
 import EditorPlaceholder from '../EditorPlaceholder';

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import SelectOption from 'src/SelectOption';
-import RadioSelectOption from 'src/RadioSelectOption';
+import SelectOption from '../../SelectOption';
+import RadioSelectOption from '../../RadioSelectOption';
 import parseSelectOptions from '../parseSelectOptions';
 
 it('reads options from React children of <SelectOption>s', () => {

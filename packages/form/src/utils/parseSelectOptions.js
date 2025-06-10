@@ -22,7 +22,7 @@ export default function parseSelectOptions(children) {
       return child.props;
     }
 
-    if (child && child.type === Fragment) {
+    if (child?.type === Fragment) {
       return parseSelectOptions(child.props.children);
     }
 

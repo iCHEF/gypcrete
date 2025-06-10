@@ -13,7 +13,9 @@ module.exports = {
       'babel-plugin-module-resolver',
       {
         root: ['./'],
-        cwd: 'packagejson',
+        alias: {
+            '@ichef/gypcrete': './packages/core/src',
+        },
       },
     ],
   ],

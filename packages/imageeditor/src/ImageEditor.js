@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import icBEM from '@ichef/gypcrete/lib/utils/icBEM';
-import prefixClass from '@ichef/gypcrete/lib/utils/prefixClass';
+import icBEM from '@ichef/gypcrete/utils/icBEM';
+import prefixClass from '@ichef/gypcrete/utils/prefixClass';
 
 import AvatarEditor from 'react-avatar-editor';
 import EditorPlaceholder from './EditorPlaceholder';
@@ -146,7 +146,7 @@ class ImageEditor extends PureComponent {
 
   handleCanvasImageChange = () => {
     if (!this.props.readOnly) {
-      const newCropRect = this.editorRef.current && this.editorRef.current.getCroppingRect();
+      const newCropRect = this.editorRef.current?.getCroppingRect();
       this.props.onCropChange(newCropRect);
     }
 
@@ -155,7 +155,7 @@ class ImageEditor extends PureComponent {
   };
 
   handleCanvasLoadSuccess = (imgInfo) => {
-    const cropRect = this.editorRef.current && this.editorRef.current.getCroppingRect();
+    const cropRect = this.editorRef.current?.getCroppingRect();
 
     this.props.onLoadSuccess(imgInfo, cropRect);
   };

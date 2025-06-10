@@ -112,5 +112,8 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "@ichef/gypcrete": "^7.2.0"
   }
 }
