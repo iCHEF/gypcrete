@@ -91,6 +91,7 @@ import Trashcan from './Trashcan';
 import Unfold from './Unfold';
 import Unlock from './Unlock';
 import Upload from './Upload';
+import Visibility from './Visibility';
 
 export default {
   'add-item': AddItem,
@@ -186,4 +187,5 @@ export default {
   unfold: Unfold,
   unlock: Unlock,
   upload: Upload,
+  visibility: Visibility,
 };
