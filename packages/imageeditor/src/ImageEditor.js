@@ -146,7 +146,7 @@ class ImageEditor extends PureComponent {
 
   handleCanvasImageChange = () => {
     if (!this.props.readOnly) {
-      const newCropRect = this.editorRef.current && this.editorRef.current.getCroppingRect();
+      const newCropRect = this.editorRef.current?.getCroppingRect();
       this.props.onCropChange(newCropRect);
     }
 
@@ -155,7 +155,7 @@ class ImageEditor extends PureComponent {
   };
 
   handleCanvasLoadSuccess = (imgInfo) => {
-    const cropRect = this.editorRef.current && this.editorRef.current.getCroppingRect();
+    const cropRect = this.editorRef.current?.getCroppingRect();
 
     this.props.onLoadSuccess(imgInfo, cropRect);
   };
