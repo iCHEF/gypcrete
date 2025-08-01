@@ -11,6 +11,7 @@ import Text from './Text';
 import EditableText from './EditableText';
 import Tooltip from './Tooltip';
 import SwitchIcon from './SwitchIcon';
+import Card from './Card';
 
 // Layout helpers
 import FlexCell from './FlexCell';
@@ -43,6 +44,7 @@ import Popup from './Popup';
 import PopupButton from './PopupButton';
 import Popover from './Popover';
 import Modal from './Modal';
+import CardLayout from './CardLayout';
 
 export {
   BasicRow,
@@ -55,6 +57,7 @@ export {
   EditableText,
   Tooltip,
   SwitchIcon,
+  Card,
   FlexCell,
   IconLayout,
   TextEllipsis,
@@ -81,4 +84,5 @@ export {
   PopupButton,
   Popover,
   Modal,
+  CardLayout,
 };
