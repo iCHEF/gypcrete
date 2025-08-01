@@ -1,3 +1,22 @@
+# [7.3.0](https://github.com/iCHEF/gypcrete/compare/v7.2.0...v7.3.0) (2025-08-01)
+
+
+### Bug Fixes
+
+* correct cardProps declaration position in Card component ([2920446](https://github.com/iCHEF/gypcrete/commit/2920446f610d506ce1a86bdf6cf4cd57a93af818))
+* update gap of card layout ([fff4453](https://github.com/iCHEF/gypcrete/commit/fff4453e63b57cd01cc5ef0da2fbae63d33b709c))
+
+
+### Features
+
+* add CardContainer component with styles and Storybook examples ([e1865f4](https://github.com/iCHEF/gypcrete/commit/e1865f40b88aab9c258c653a317d26f8efa743e1))
+* add cardLayoutProps to CardLayout for passing additional attributes ([123ed3f](https://github.com/iCHEF/gypcrete/commit/123ed3f010f82062e5bc37c0be3779c675434fdc))
+* add new SVG icons for Card component ([7e94bfa](https://github.com/iCHEF/gypcrete/commit/7e94bfa00dbc3eae87b2ed8ab87248f6f0c5bf24))
+* generate various Icon components from svg ([4b83ac7](https://github.com/iCHEF/gypcrete/commit/4b83ac75e537dd585fc05f717168a81be863c14a))
+* implement Card component with styles and tests ([3e31ce6](https://github.com/iCHEF/gypcrete/commit/3e31ce68f99589c5e36ee4e34e88bb14e8af85b3))
+
+
+
 # [7.2.0](https://github.com/iCHEF/gypcrete/compare/v7.1.0...v7.2.0) (2025-05-16)
 
 
