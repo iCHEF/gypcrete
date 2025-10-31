@@ -28,13 +28,13 @@ function Card({
   // React props
   className,
 }) {
+  console.log('Hello World');
   const rootClassName = classNames(className, COMPONENT_NAME);
   const iconClassName = `${BEM.icon}`;
   const textContainerClassName = `${BEM.textContainer}`;
   const titleClassName = `${BEM.title}`;
   const descriptionBoxClassName = `${BEM.descriptionBox}`;
   const descriptionClassName = `${BEM.description}`;
-
   return (
     <div
       className={rootClassName}
