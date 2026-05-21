@@ -23,9 +23,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0 # Chromatic needs the full Git history to keep track of changes
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version: "26"
           registry-url: "https://registry.npmjs.org"
       - name: Install packages with cache
         uses: iCHEF/npm-install-with-cache-action@v1
