@@ -26,6 +26,8 @@ jobs:
       with:
         engine: yarn
         args: --frozen-lockfile
+    - name: Build packages
+      run: yarn prepublish
     - name: Run linter
       run: yarn lint
     - name: Run tests
