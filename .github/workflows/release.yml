@@ -27,7 +27,8 @@ jobs:
       - name: Install packages with cache
         uses: iCHEF/npm-install-with-cache-action@v4
         with:
-          is-monorepo: true
+          engine: yarn
+          args: --frozen-lockfile
       - name: Update package version
         run: |
           git config user.name github-actions

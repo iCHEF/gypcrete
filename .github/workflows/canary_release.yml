@@ -25,7 +25,8 @@ jobs:
       - name: Install packages with cache
         uses: iCHEF/npm-install-with-cache-action@v4
         with:
-          is-monorepo: true
+          engine: yarn
+          args: --frozen-lockfile
 
       - name: start deployment
         uses: bobheadxi/deployments@v1

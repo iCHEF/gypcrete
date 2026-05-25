@@ -24,7 +24,8 @@ jobs:
     - name: Install packages with cache
       uses: iCHEF/npm-install-with-cache-action@v4
       with:
-        is-monorepo: true
+        engine: yarn
+        args: --frozen-lockfile
     - name: Run linter
       run: yarn lint
     - name: Run tests
