@@ -20,7 +20,7 @@ jobs:
       github.event.pull_request.draft == false &&
       !contains(github.event.pull_request.labels.*.name, 'skip storybook')
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0 # Chromatic needs the full Git history to keep track of changes
       - uses: actions/setup-node@v6
@@ -28,7 +28,7 @@ jobs:
           node-version: "26"
           registry-url: "https://registry.npmjs.org"
       - name: Install packages with cache
-        uses: iCHEF/npm-install-with-cache-action@v1
+        uses: iCHEF/npm-install-with-cache-action@v4
         with:
           is-monorepo: true
       - name: Build
@@ -37,7 +37,7 @@ jobs:
       - name: "Build storybook"
         run: cd packages/storybook && yarn build:storybook --quiet --loglevel error
       - name: "Push storybook to Chromatic"
-        uses: chromaui/action@v1
+        uses: chromaui/action@v17
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
