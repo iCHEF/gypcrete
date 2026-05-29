@@ -15,19 +15,20 @@ jobs:
         env:
           BRANCH_NAME: ${{ github.head_ref }}
         run: echo "RELEASE_VERSION=${BRANCH_NAME/release\/}" >> $GITHUB_ENV
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: master
           token: ${{ secrets.ICHEF_BOT_TOKEN }}
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v6
         with:
-          node-version: '20.x'
+          node-version: '26.x'
           registry-url: 'https://registry.npmjs.org'
       - name: Install packages with cache
-        uses: iCHEF/npm-install-with-cache-action@v1
+        uses: iCHEF/npm-install-with-cache-action@v4
         with:
-          is-monorepo: true
+          engine: yarn
+          args: --frozen-lockfile
       - name: Update package version
         run: |
           git config user.name github-actions
@@ -42,8 +43,9 @@ jobs:
         run: echo "LATEST_COMMIT=$(git rev-parse HEAD)" > $GITHUB_ENV
       - name: Retrieve package version
         uses: nyaa8/package-version@v1
+
       - name: start deployment
-        uses: bobheadxi/deployments@v0.4.3
+        uses: bobheadxi/deployments@v1
         id: deployment
         with:
           step: start
@@ -55,19 +57,18 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.FE_NPM_WRITE_TOKEN }}
         run: yarn lerna publish from-git --yes
       - name: update deployment status
-        uses: bobheadxi/deployments@v0.4.3
+        uses: bobheadxi/deployments@v1
         if: always()
         with:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
+          env: production
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: ${{ format('https://www.npmjs.com/package/@ichef/gypcrete/v/{0}', env.PACKAGE_VERSION) }}
       - name: Create Github release
         id: create_github_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: release-drafter/release-drafter@v5
+        uses: release-drafter/release-drafter@v7
         with:
           version: ${{ env.PACKAGE_VERSION }}
           publish: true

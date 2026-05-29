@@ -14,21 +14,22 @@ jobs:
   canary-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v6
         with:
-          node-version: '20.x'
+          node-version: '26.x'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install packages with cache
-        uses: iCHEF/npm-install-with-cache-action@v1
+        uses: iCHEF/npm-install-with-cache-action@v4
         with:
-          is-monorepo: true
+          engine: yarn
+          args: --frozen-lockfile
 
       - name: start deployment
-        uses: bobheadxi/deployments@v0.4.3
+        uses: bobheadxi/deployments@v1
         id: deployment
         with:
           step: start
@@ -59,11 +60,12 @@ jobs:
         run: echo "CANARY_VERSION=$PACKAGE_VERSION" | cut -d "+" -f 1 > $GITHUB_ENV
 
       - name: update deployment status
-        uses: bobheadxi/deployments@v0.4.3
+        uses: bobheadxi/deployments@v1
         if: always()
         with:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
+          env: canary
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: ${{ format('https://www.npmjs.com/package/@ichef/gypcrete/v/{0}', env.CANARY_VERSION) }}

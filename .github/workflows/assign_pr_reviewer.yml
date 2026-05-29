@@ -10,7 +10,7 @@ jobs:
   add-reviews:
     runs-on: ubuntu-latest
     steps:
-      - uses: iCHEF/action-request-review@v1
+      - uses: iCHEF/action-request-review@v3
         with:
           token: ${{ secrets.ICHEF_BOT_TOKEN }}
           config_gist_id: 91ffd6e7318cdf5a02353af0a15e2bcf
