@@ -39,15 +39,15 @@ jobs:
 
       - name: "NPM Identity"
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.FE_NPM_WRITE_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
           echo "#always-auth=true" >> .npmrc
 
       - name: Publish canary build
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.FE_NPM_WRITE_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.FE_NPM_WRITE_TOKEN }}
           RUN_NUMBER: ${{ github.run_number }}
         run: yarn release:canary --yes --preid="alpha.${RUN_NUMBER}" --no-git-reset --dist-tag="alpha"
 

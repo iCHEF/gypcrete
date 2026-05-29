@@ -54,7 +54,7 @@ jobs:
           ref: ${{ env.LATEST_COMMIT }}
       - name: Publish packages
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.FE_NPM_WRITE_TOKEN }}
         run: yarn lerna publish from-git --yes
       - name: update deployment status
         uses: bobheadxi/deployments@v1
